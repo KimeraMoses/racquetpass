@@ -1,0 +1,70 @@
+.homeContainer {
+  background: linear-gradient(180deg, #044794 0%, #1883e7 100%);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  .homeSignInButtonContainer {
+    display: flex;
+    justify-content: flex-end;
+    .signInButton {
+      margin-top: 40px;
+      margin-right: 20px;
+      border-radius: 12px;
+      border: none;
+      width: 86px;
+      height: 48px;
+      font-family: Poppins;
+      font-weight: 600;
+      font-size: 14px;
+      line-height: 21px;
+      text-align: center;
+      color: #333333;
+    }
+  }
+  .homeBannerSection {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-top: 47px;
+    .bannerHeading {
+      font-family: Poppins;
+      font-weight: 600;
+      font-size: 24px;
+      line-height: 36px;
+      color: #ffffff;
+      margin-bottom: 16px;
+    }
+    .bannerDescription {
+      font-family: Poppins;
+      font-size: 18px;
+      line-height: 27px;
+      text-align: center;
+      margin-bottom: 65px;
+
+      color: #ffffff;
+    }
+  }
+  .homeImageContainer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    .homeImage {
+      position: absolute;
+      bottom: 0px;
+    }
+  }
+  .homeFooterContainer {
+    display: flex;
+    justify-content: space-around;
+    .linkText {
+      padding-bottom: 15px;
+      font-family: Poppins;
+      font-size: 18px;
+      line-height: 27px;
+      color: #ffffff;
+      text-decoration: none;
+    }
+  }
+}
