@@ -1,6 +1,6 @@
 import './Button.styles.scss';
 
-export const Button = ({ text, isDark }) => {
+export const Button = ({ isDark, children }) => {
   return (
     <div className="buttonContainer">
       <button
@@ -8,7 +8,7 @@ export const Button = ({ text, isDark }) => {
       ${isDark ? 'buttonDark' : 'buttonLight'}
       `}
       >
-        {text}
+        {children}
       </button>
     </div>
   );

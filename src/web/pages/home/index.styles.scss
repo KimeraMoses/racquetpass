@@ -1,13 +1,15 @@
-.homeContainer {
+.home-container {
   background: linear-gradient(180deg, #044794 0%, #1883e7 100%);
   min-height: 100vh;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  .homeSignInButtonContainer {
+  // Button Container Styles
+  &__button-container {
     display: flex;
     justify-content: flex-end;
-    .signInButton {
+    // Button Styles
+    &-signin {
       margin-top: 40px;
       margin-right: 20px;
       border-radius: 12px;
@@ -22,13 +24,13 @@
       color: #333333;
     }
   }
-  .homeBannerSection {
+  .banner-container {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     margin-top: 47px;
-    .bannerHeading {
+    &__heading {
       font-family: Poppins;
       font-weight: 600;
       font-size: 24px;
@@ -36,7 +38,7 @@
       color: #ffffff;
       margin-bottom: 16px;
     }
-    .bannerDescription {
+    &__text {
       font-family: Poppins;
       font-size: 18px;
       line-height: 27px;
@@ -46,25 +48,25 @@
       color: #ffffff;
     }
   }
-  .homeImageContainer {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    .homeImage {
-      position: absolute;
-      bottom: 0px;
-    }
-  }
-  .homeFooterContainer {
+  .footer-container {
     display: flex;
     justify-content: space-around;
-    .linkText {
+    &__link-text {
       padding-bottom: 15px;
       font-family: Poppins;
       font-size: 18px;
       line-height: 27px;
       color: #ffffff;
       text-decoration: none;
+    }
+  }
+  .image-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    &__image {
+      position: absolute;
+      bottom: 0px;
     }
   }
 }
