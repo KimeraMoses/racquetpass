@@ -2,10 +2,10 @@ import './Button.styles.scss';
 
 export const Button = ({ isDark, children }) => {
   return (
-    <div className="buttonContainer">
+    <div className="button-container">
       <button
         className={`button
-      ${isDark ? 'buttonDark' : 'buttonLight'}
+      ${isDark ? 'button-dark' : 'button-light'}
       `}
       >
         {children}

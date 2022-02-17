@@ -1,0 +1,51 @@
+.phone-section {
+  &__heading {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    &-text {
+      max-width: 300px;
+    }
+  }
+  &__form-container {
+    margin-top: 45px;
+    font-family: Poppins;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 12px;
+    line-height: 18px;
+    color: #969696;
+    margin-bottom: 20px;
+    div {
+      input {
+        padding: 45px;
+        text-align: center;
+        font-size: 18px;
+      }
+    }
+  }
+  &__text-container {
+    &-text {
+      font-family: Poppins;
+      font-weight: 500;
+      font-size: 14px;
+      line-height: 21px;
+      color: #333333;
+      text-align: center;
+    }
+
+    &-rescan {
+      margin-top: 20px;
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: Poppins;
+      font-weight: 500;
+      font-size: 14px;
+      line-height: 21px;
+      color: #304ffe;
+      margin-bottom: 10px;
+    }
+  }
+}

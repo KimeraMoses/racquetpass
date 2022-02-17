@@ -1,4 +1,4 @@
-import React from 'react';
+
 import { Link } from 'react-router-dom';
 import { withNamespaces } from 'react-i18next';
 
@@ -23,7 +23,7 @@ function Home({ t }) {
             <h1 className="banner-container__heading">{t('homeHeading')}</h1>
             <p className="banner-container__text">{t('homeDesc')}</p>
           </div>
-          <div className="button-container">
+          <div className="banner-button-container">
             <Button isDark>{t('homeDarkBtn')}</Button>
             <Button>{t('homeLightBtn')}</Button>
           </div>

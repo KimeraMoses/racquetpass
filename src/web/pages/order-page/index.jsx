@@ -1,7 +1,20 @@
 import { useState } from 'react';
 import { withNamespaces } from 'react-i18next';
 import { reduxForm } from 'redux-form';
-import { ScanSection } from './sections/ScanSection.section';
+import { StepButton, SubmitButton } from 'web/components';
+import {
+  ScanSection,
+  ScanSuccess,
+  ScanDetails,
+  SelectShop,
+  ShopSearchResults,
+  FindShop,
+  Contact,
+  VerifyPhone,
+  AboutRacquet,
+  BrandSearchResults,
+  SelectString,
+} from './sections';
 
 import './order.styles.scss';
 
@@ -11,28 +24,47 @@ let OrderPage = ({ t, handleSubmit }) => {
   const innerBarCN = `order-page__progress-bar-inner-step${step}`;
   return (
     <div className="order-page">
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} className="order-page__form">
         {/* Progress Bar */}
-        <div className="order-page__progress-bar">
-          <div className={`order-page__progress-bar-inner ${innerBarCN}`}></div>
+        <div>
+          <div className="order-page__progress-bar">
+            <div
+              className={`order-page__progress-bar-inner ${innerBarCN}`}
+            ></div>
+          </div>
+
+          {/* <ScanSection t={t} /> */}
+          {/* <ScanSuccess t={t} /> */}
+          {/* <ScanDetails t={t} /> */}
+          {/* <SelectShop t={t} /> */}
+          {/* <ShopSearchResults t={t} /> */}
+          {/* <FindShop t={t} /> */}
+          {/* <Contact t={t} /> */}
+          {/* <VerifyPhone t={t} /> */}
+          {/* <AboutRacquet t={t} /> */}
+          {/* <BrandSearchResults t={t} /> */}
+          <SelectString t={t} />
         </div>
-        <ScanSection t={t} />
-        <button
-          onClick={() => {
-            setStep((step) => step - 1);
-          }}
-          disabled={step === 1}
-        >
-          Prev
-        </button>
-        <button
-          onClick={() => {
-            setStep((step) => step + 1);
-          }}
-          disabled={step === 8}
-        >
-          Next
-        </button>
+        <div className="order-page__button-container">
+          <StepButton
+            onClick={() => {
+              setStep((step) => step - 1);
+            }}
+            disabled={step === 1}
+            outlined
+          >
+            Go Back
+          </StepButton>{' '}
+          <StepButton
+            onClick={() => {
+              setStep((step) => step + 1);
+            }}
+            disabled={step === 8}
+          >
+            Next
+          </StepButton>
+          {/* <SubmitButton>Submit Form</SubmitButton> */}
+        </div>
       </form>
     </div>
   );

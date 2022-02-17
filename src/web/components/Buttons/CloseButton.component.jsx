@@ -1,4 +1,3 @@
-import { React } from 'react';
 import './CloseButton.styles.scss';
 
 export function CloseButton() {

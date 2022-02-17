@@ -1,1 +1,11 @@
 export { ScanSection } from './ScanSection.section';
+export { ScanSuccess } from './ScanSuccess.section';
+export { ScanDetails } from './ScanDetails.section';
+export { SelectShop } from './SelectShop.section';
+export { ShopSearchResults } from './ShopSearchResults.section';
+export { FindShop } from './FindShop.section';
+export { Contact } from './Contact.section';
+export { VerifyPhone } from './VerifyPhone.section';
+export { AboutRacquet } from './AboutRacquet.section';
+export { BrandSearchResults } from './BrandSearchResults.section';
+export { SelectString } from './SelectString.section';

@@ -30,9 +30,11 @@
   "odrShopHeading": "Select a shop",
   "odrShopDesc": "Get started by telling us where you’re shopping from.",
   "odrSrch": "Search By Name, City Or State",
-  "odrAccount": "Already have an account? Order faster by signing in.",
+  "odrAccount": "Already have an account? Order faster by",
+  "odrSignIn": " signing in.",
 
-  "odrproShop": "Don’t see your pro shop? Let us know.",
+  "odrSearchNF": "Don’t see your pro shop?",
+  "odrSearchLK": "Let us know.",
 
   "odrShop": "Don’t see your shop?",
   "odrShopText": "Let us know what pro shop you normally go to. We’d love to help equip them with the magic of RacquetPass!",
@@ -48,7 +50,6 @@
   "odrPhon": "Phone Number",
 
   "odrPhonHeading": "Verify your phone number",
-  "odrVerify": "Varification Code",
   "odrphnDesc": "Please enter the 6 digit verification code that Racquet Pass texted to your phone number (phone number)",
   "odrResendCode": "Resend Code",
 

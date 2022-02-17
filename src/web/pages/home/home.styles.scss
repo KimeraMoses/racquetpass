@@ -48,6 +48,13 @@
       color: #ffffff;
     }
   }
+  .banner-button-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+  }
   .footer-container {
     display: flex;
     justify-content: space-around;

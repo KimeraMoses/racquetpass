@@ -1,5 +1,5 @@
-import React from 'react';
+import './atom.styles.scss';
 
-export function Description({ children }) {
-  return <h1 className="description">{children}</h1>;
+export function Description({ children, customClass = '' }) {
+  return <p className={`description ${customClass}`}>{children}</p>;
 }

@@ -1,5 +1,5 @@
-import React from 'react';
+import './atom.styles.scss';
 
-export function SubHeading({ children }) {
-  return <h1 className="sub-heading">{children}</h1>;
+export function SubHeading({ children, customClass = '' }) {
+  return <h1 className={`sub-heading ${customClass}`}>{children}</h1>;
 }
