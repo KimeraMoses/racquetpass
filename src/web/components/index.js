@@ -1,1 +1,3 @@
-export * from './Button/Button.component';
+export * from './Buttons';
+export * from './CustomInput/CustomInput.component';
+export * from './atoms';

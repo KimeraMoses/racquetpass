@@ -1,0 +1,18 @@
+.close-button {
+  .close-button__btn {
+    display: inline-block;
+    border: none;
+    margin: 0;
+    text-decoration: none;
+    background: transparent;
+    border: 1px solid #e8e8e8;
+    border-radius: 15px;
+    line-height: 1;
+    cursor: pointer;
+    text-align: center;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    display: flex;
+    align-items: center;
+  }
+}

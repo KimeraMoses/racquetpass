@@ -10,7 +10,6 @@ function App() {
     <ErrorBoundary
       render={() => <Routers />}
       renderError={({ error }) => {
-        console.log(error);
         return <ErrorPage />;
       }}
     >

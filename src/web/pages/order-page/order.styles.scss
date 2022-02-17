@@ -1,0 +1,38 @@
+.order-page {
+  padding: 0px 20px;
+  &__progress-bar {
+    margin-top: 46px;
+    margin-bottom: 33px;
+    height: 5px;
+    background: #f1f1f1;
+    border-radius: 5px;
+    &-inner {
+      height: 5px;
+      border-radius: 5px;
+      background: #304ffe;
+      width: 12.5%;
+      transition: all 0.2s ease-in;
+    }
+    &-inner-step2 {
+      width: 25%;
+    }
+    &-inner-step3 {
+      width: 37.5%;
+    }
+    &-inner-step4 {
+      width: 50%;
+    }
+    &-inner-step5 {
+      width: 62.5%;
+    }
+    &-inner-step6 {
+      width: 75%;
+    }
+    &-inner-step7 {
+      width: 87.5%;
+    }
+    &-inner-step8 {
+      width: 100%;
+    }
+  }
+}

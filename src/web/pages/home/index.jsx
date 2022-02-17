@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { withNamespaces } from 'react-i18next';
 
 import { Button } from 'web/components';
-import './index.styles.scss';
+import './home.styles.scss';
 
 function Home({ t }) {
   const links = [

@@ -12,6 +12,7 @@ function Routers() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/login" element={<Login />} />
+          <Route path="/order" element={<Order />} />
           <Route path="*" element={<Page404 />} />
         </Routes>
       </Router>
