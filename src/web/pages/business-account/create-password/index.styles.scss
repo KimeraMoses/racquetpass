@@ -1,0 +1,139 @@
+.create-password-container{
+	padding: 40px 20px;
+	min-height: 100vh;
+	.header-row{
+		display: flex;
+		align-items: center;
+		padding-bottom: 28px;
+		&-heading{
+			font-family: Poppins;
+			font-style: normal;
+			font-weight: bold;
+			font-size: 24px;
+			line-height: 36px;
+			flex-grow: 1;
+		}
+	}
+	.create-password-description{
+		font-family: Poppins;
+		font-style: normal;
+		font-weight: normal;
+		font-size: 18px;
+		line-height: 27px;
+	}
+	.create-password-body{
+		max-width: 450px;
+		margin: auto;
+		.create-password-form{
+			padding-top: 22px;
+			min-height: calc(100vh - 183px);
+			display: flex;
+			flex-direction: column;
+			justify-content: space-between;
+			.input-container{
+				position: relative;
+				padding-bottom: 15px;
+				.input-label{
+					display: flex;
+					justify-content: space-between;
+					font-family: Poppins;
+					font-style: normal;
+					font-weight: 600;
+					font-size: 12px;
+					line-height: 18px;	
+					color: #969696;
+					padding-bottom: 12px;
+					.link{
+						color: #304FFE;
+					}
+				}
+				.form-input{
+					background: #FFFFFF;
+					border: 1px solid #E8E8E8;
+					box-sizing: border-box;
+					border-radius: 12px;
+					width: 100%;
+					height: 59px;
+					font-family: Poppins;
+					font-style: normal;
+					font-weight: normal;
+					font-size: 18px;
+					line-height: 27px;
+					color: #333;
+					padding: 16px;
+					&::placeholder{
+						color: #333;
+					}
+				}
+				.password-strength{
+					display: inline-block;
+					position: absolute;
+					right: 22px;
+					bottom: 34px;
+					font-family: Poppins;
+					font-style: normal;
+					font-weight: 500;
+					font-size: 14px;
+					line-height: 21px;
+					&-weak{
+						color: #D61E1E;
+					}
+					&-average{
+						color: #EFAC00;
+					}
+					&-strong{
+						color: #19AA41;
+					}
+				}
+			}
+			.password-strength-status{
+				height: 5px;
+				border-radius: 5px;
+				background-color: #f1f1f1;
+				width: 100%;
+				.current-status{
+					height: 5px;
+					border-radius: 5px;
+				}
+				.weak{
+					background-color: #D61E1E;
+					width: 33%;
+				}
+				.average{
+					background-color: #EFAC00;
+					width: 66%;
+				}
+				.strong{
+					background-color: #19AA41;
+					width: 100%;
+				}
+			}
+			.password-recommendations{
+				padding-top: 40px;
+				font-family: Poppins;
+				font-style: normal;
+				font-weight: normal;
+				font-size: 14px;
+				line-height: 21px;
+				/* identical to box height */				
+				color: #545454;
+				&-title{
+					padding-bottom: 9px;
+				}
+				&-row{
+					display: flex;
+					padding-bottom: 7px;
+					.icon{
+						padding-right: 12px;
+					}
+				}
+				.unfulfilled{
+					opacity: 0.5;
+				}
+			}
+			.btn-container{
+				padding-top: 40px;
+			}
+		}		
+	}
+}

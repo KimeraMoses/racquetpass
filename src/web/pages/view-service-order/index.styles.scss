@@ -1,0 +1,103 @@
+.view-service-order-container{
+  padding: 40px 20px;
+  min-height: 100vh;	
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+  .header-row{
+    display: flex;
+    align-items: center;
+		padding-bottom: 12px;
+    &-heading{
+      font-family: Poppins;
+      font-style: normal;
+      font-weight: bold;
+      font-size: 24px;
+      line-height: 36px;
+      flex-grow: 1;
+    }
+  }
+	.status-container{
+		padding: 13px 0 40px 0;
+		font-family: Poppins;
+		font-style: normal;
+		font-weight: 500;
+		font-size: 18px;
+		line-height: 27px;
+		.icon{
+			padding-right: 9.3px;
+		}
+	}
+	.detail-body-container{
+		max-width: 450px;
+		margin: auto;
+		.racquet-info{
+			width: 100%;
+			display: flex;
+			.img{
+				height: 120px;
+				width: 120px;
+				border-radius: 12px;
+			}
+			.brand{
+				display: flex;
+				flex-wrap: wrap;
+				flex-direction: column;
+				justify-content: space-between;
+				padding-left: 15px;
+				align-items: flex-start;
+				button{
+					width: 131px;
+				}
+				.model{
+					font-family: Poppins;
+					font-style: normal;
+					font-weight: 600;
+					font-size: 12px;
+					line-height: 18px;
+					color: #8E8E8E;
+				}
+				.title{
+					font-family: Poppins;
+					font-style: normal;
+					font-weight: 600;
+					font-size: 24px;
+					line-height: 36px;
+					width: 250px;
+					overflow: hidden;
+					display: -webkit-box;
+					-webkit-line-clamp: 1;
+					-webkit-box-orient: vertical;
+				}
+			}
+		}
+		.racquet-details{
+			padding: 40px 0 20px 0;
+			.title{
+				font-family: Poppins;
+				font-style: normal;
+				font-weight: 600;
+				font-size: 24px;
+				line-height: 36px;
+				padding-bottom: 9px;
+			}
+			.racquet-label{
+				font-family: Poppins;
+				font-style: normal;
+				font-weight: 600;
+				font-size: 12px;
+				line-height: 18px;				
+				color: #8E8E8E;
+				padding-bottom: 4px;
+			}
+			.racquet-desc{
+				font-family: Poppins;
+				font-style: normal;
+				font-weight: 500;
+				font-size: 18px;
+				line-height: 27px;
+				padding-bottom: 22px;
+			}
+		}
+	}
+}

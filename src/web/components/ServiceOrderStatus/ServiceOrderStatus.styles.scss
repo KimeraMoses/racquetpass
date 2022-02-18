@@ -1,0 +1,59 @@
+.service-order-status{
+	font-family: Poppins;
+	font-style: normal;
+	font-weight: 500;
+	font-size: 18px;
+	line-height: 27px;
+	.state-half{
+		min-width: max-content;
+		padding: 0 19px;
+		height: 48px;
+		border-radius: 12px;
+		display: inline-flex;
+		justify-content: center;
+		align-items: center;
+	}
+	.icon{
+		padding-right: 9.3px;
+	}
+	.completed{
+		border-radius: 12px;
+		color: #008D3B;
+		background-color: #E5FAEE;
+		svg{
+			path{
+				stroke: #008D3B;
+			}
+		}
+	}
+	.uncompleted{
+		border-radius: 12px;
+		color: #D78700;
+		background-color: #FFF6E5;
+		svg{
+			path{
+				stroke: #D78700;
+			}
+		}
+	}
+	.state-full{
+		width: 100%;
+		padding: 19px;
+		.row{
+			display: flex;
+			justify-content: space-between;
+			padding-bottom: 6px;
+		}
+		.msg{
+			max-width: 260px;
+			font-family: Poppins;
+			font-style: normal;
+			font-weight: normal;
+			font-size: 14px;
+			line-height: 21px;
+			b{
+				font-weight: bold;
+			}
+		}
+	}
+}
