@@ -1,0 +1,34 @@
+.payment-button {
+  border: none;
+  margin: 0;
+  text-decoration: none;
+  background: transparent;
+  border: 1px solid #e8e8e8;
+  color: #333;
+  border-radius: 12px;
+  padding: 16px;
+  cursor: pointer;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  font-family: Poppins;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 27px;
+}
+
+.payment-button.payment-button-active {
+  background: #eaedff;
+  color: #304ffe;
+  border-color: #304ffe;
+}
+
+.payment-button.payment-button-dark {
+  background: #333333;
+  color: #fff;
+  border: none;
+}

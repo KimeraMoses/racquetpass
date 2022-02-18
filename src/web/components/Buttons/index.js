@@ -4,3 +4,4 @@ export { StepButton } from './StepButton.componet';
 export { BackButton } from './BackButton.component';
 export { SubmitButton } from './SubmitButton.component';
 export { InfoButton } from './InfoButton.component';
+export { PaymentButton } from './PaymentButton.component';
