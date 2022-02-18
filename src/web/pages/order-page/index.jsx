@@ -16,6 +16,7 @@ import {
   SelectString,
   SelectStringWithMainCross,
   ReviewOrder,
+  Done,
 } from './sections';
 
 import './order.styles.scss';
@@ -23,17 +24,23 @@ import './order.styles.scss';
 let OrderPage = ({ t, handleSubmit }) => {
   const [step, setStep] = useState(1);
 
+  const done = true;
+
   const innerBarCN = `order-page__progress-bar-inner-step${step}`;
   return (
-    <div className="order-page">
+    <div className={`order-page ${done ? 'order-page-done' : ''}`}>
       <form onSubmit={handleSubmit} className="order-page__form">
-        {/* Progress Bar */}
         <div>
-          <div className="order-page__progress-bar">
-            <div
-              className={`order-page__progress-bar-inner ${innerBarCN}`}
-            ></div>
-          </div>
+          {/* Progress Bar */}
+          {done ? (
+            <></>
+          ) : (
+            <div className="order-page__progress-bar">
+              <div
+                className={`order-page__progress-bar-inner ${innerBarCN}`}
+              ></div>
+            </div>
+          )}
 
           {/* <ScanSection t={t} /> */}
           {/* <ScanSuccess t={t} /> */}
@@ -47,28 +54,33 @@ let OrderPage = ({ t, handleSubmit }) => {
           {/* <BrandSearchResults t={t} /> */}
           {/* <SelectStringWithMainCross t={t} /> */}
           {/* <AboutRacquet t={t} /> */}
-          <ReviewOrder t={t} />
+          {/* <ReviewOrder t={t} /> */}
+          <Done t={t} />
         </div>
-        <div className="order-page__button-container">
-          <StepButton
-            onClick={() => {
-              setStep((step) => step - 1);
-            }}
-            disabled={step === 1}
-            outlined
-          >
-            Go Back
-          </StepButton>{' '}
-          <StepButton
-            onClick={() => {
-              setStep((step) => step + 1);
-            }}
-            disabled={step === 8}
-          >
-            Next
-          </StepButton>
-          {/* <SubmitButton>Submit Form</SubmitButton> */}
-        </div>
+        {done ? (
+          <></>
+        ) : (
+          <div className="order-page__button-container">
+            <StepButton
+              onClick={() => {
+                setStep((step) => step - 1);
+              }}
+              disabled={step === 1}
+              outlined
+            >
+              Go Back
+            </StepButton>{' '}
+            <StepButton
+              onClick={() => {
+                setStep((step) => step + 1);
+              }}
+              disabled={step === 8}
+            >
+              Next
+            </StepButton>
+            {/* <SubmitButton>Submit Form</SubmitButton> */}
+          </div>
+        )}
       </form>
     </div>
   );

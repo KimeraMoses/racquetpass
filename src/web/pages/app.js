@@ -4,6 +4,7 @@ import Home from './home';
 import Login from './login';
 import Page404 from './page-404';
 import Order from './order-page';
+import CreateAccount from './account-page';
 
 function Routers() {
   return (
@@ -13,6 +14,7 @@ function Routers() {
           <Route path="/" element={<Home />} />
           <Route path="/login" element={<Login />} />
           <Route path="/order" element={<Order />} />
+          <Route path="/create-account" element={<CreateAccount />} />
           <Route path="*" element={<Page404 />} />
         </Routes>
       </Router>

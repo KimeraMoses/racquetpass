@@ -88,9 +88,13 @@
   "odrList3": "Check on your orders in browser",
   "odrPassword": "Password",
   "odrCreateBtn": "Create Account",
-  "odrCreateWith": "Or Create With",
+  "odrCreateWith": "Or Continue With",
+  "odrContineWith": "Or Create With",
   "odrCreateFB": "Create with Facebook",
   "odrCreateGoogle": "Create with Google",
   "odrCreateApple": "Create with Apple",
-  "odrPivacyText": "By clicking Create Account, Continue Using Facebook, Continue Using Google or Continue Using Apple, you agree to our Terms & Conditions and Privacy Statement."
+  "odrPivacyText": "By clicking Create Account, Continue Using Facebook, Continue Using Google or Continue Using Apple, you agree to our .",
+  "odrPrivacyAnd": "and",
+  "odrTermsBold": "Terms & Conditions",
+  "odrPrivacyBold": "Privacy Statement."
 }

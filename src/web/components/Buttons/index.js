@@ -5,3 +5,4 @@ export { BackButton } from './BackButton.component';
 export { SubmitButton } from './SubmitButton.component';
 export { InfoButton } from './InfoButton.component';
 export { PaymentButton } from './PaymentButton.component';
+export { AccountButton } from './AccountButton.component';
