@@ -6,7 +6,7 @@ import {
   Heading,
   SubHeading,
   Description,
-  CloseButton,
+  HeadingButton,
   CustomInput,
 } from 'web/components';
 
@@ -21,7 +21,7 @@ export function VerifyPhone({ t }) {
           <Heading customClass="phone-section__heading-text">
             {t('odrPhonHeading')}
           </Heading>
-          <CloseButton />
+          <HeadingButton close />
         </div>
         <div className="phone-section__form-container">
           <Field

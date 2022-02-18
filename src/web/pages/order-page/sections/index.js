@@ -7,5 +7,7 @@ export { FindShop } from './FindShop.section';
 export { Contact } from './Contact.section';
 export { VerifyPhone } from './VerifyPhone.section';
 export { AboutRacquet } from './AboutRacquet.section';
-export { BrandSearchResults } from './BrandSearchResults.section';
 export { SelectString } from './SelectString.section';
+export { BrandSearchResults } from './BrandSearchResults.section';
+export { SelectStringWithMainCross } from './SelectStringWithMainCross.section';
+export { ReviewOrder } from './ReviewOrder.section';

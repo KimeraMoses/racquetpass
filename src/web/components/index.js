@@ -1,4 +1,4 @@
 export * from './Buttons';
-export * from './CustomInput/CustomInput.component';
+export * from './formFields';
 export * from './atoms';
 export * from './SearchCard/SearchCard.component';

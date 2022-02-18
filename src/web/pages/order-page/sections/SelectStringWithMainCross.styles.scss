@@ -1,4 +1,4 @@
-.select-string {
+.select-string-mc {
   &__heading {
     display: flex;
     align-items: center;
@@ -15,6 +15,17 @@
   }
   &__main-info {
     margin-top: 44px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    &-heading {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+  }
+  &__crosses-info {
+    margin-top: 70px;
     display: flex;
     flex-direction: column;
     gap: 20px;

@@ -1,0 +1,58 @@
+.review-order {
+  &__heading {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    &-text {
+      max-width: 300px;
+    }
+  }
+  &__text-container {
+    margin-top: 20px;
+    &-text {
+    }
+  }
+  &__shop {
+    &-heading {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-top: 45px;
+      &-text {
+        max-width: 300px;
+      }
+    }
+    &-card {
+      margin-top: 20px;
+    }
+  }
+  &__raquet {
+    &-heading {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-top: 45px;
+      &-text {
+        max-width: 300px;
+      }
+    }
+    &-card {
+      margin-top: 20px;
+    }
+  }
+  &__form-container {
+    margin-top: 30px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    margin-top: 35px;
+    font-family: Poppins;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 12px;
+    line-height: 18px;
+    color: #969696;
+    margin-bottom: 20px;
+  }
+}

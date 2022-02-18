@@ -1,5 +1,10 @@
 // Custom Components
-import { Heading, SubHeading, Description, CloseButton } from 'web/components';
+import {
+  Heading,
+  SubHeading,
+  Description,
+  HeadingButton,
+} from 'web/components';
 
 // Styles
 import './ScanSection.styles.scss';
@@ -10,7 +15,7 @@ export function ScanSection({ t }) {
       <div className="scan-section">
         <div className="scan-section__heading">
           <Heading>{t('odrHeading')}</Heading>
-          <CloseButton />
+          <HeadingButton close />
         </div>
         <div className="scan-section__text-container">
           <SubHeading>{t('odrHT')}</SubHeading>

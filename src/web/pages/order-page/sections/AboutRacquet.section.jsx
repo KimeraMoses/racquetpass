@@ -1,7 +1,12 @@
 import { Field } from 'redux-form';
 
 // Custom Components
-import { Heading, Description, CloseButton, CustomInput } from 'web/components';
+import {
+  Heading,
+  Description,
+  HeadingButton,
+  CustomInput,
+} from 'web/components';
 
 // Styles
 import './AboutRacquet.styles.scss';
@@ -14,7 +19,7 @@ export function AboutRacquet({ t }) {
           <Heading customClass="about-section__heading-text">
             {t('odrAboutHeading')}
           </Heading>
-          <CloseButton />
+          <HeadingButton close />
         </div>
         <div className="about-section__text-container">
           <Description customClass="about-section__text-container-text">

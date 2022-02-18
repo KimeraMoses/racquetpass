@@ -1,7 +1,12 @@
 import { Link } from 'react-router-dom';
 
 // Custom Components
-import { Heading, SubHeading, Description, CloseButton } from 'web/components';
+import {
+  Heading,
+  SubHeading,
+  Description,
+  HeadingButton,
+} from 'web/components';
 
 // Styles
 import './ScanDetails.styles.scss';
@@ -12,7 +17,7 @@ export function ScanDetails({ t }) {
       <div className="scan-details">
         <div className="scan-details__heading">
           <Heading>{t('odrHeading')}</Heading>
-          <CloseButton />
+          <HeadingButton close />
         </div>
         <div className="scan-details__text-container">
           <Description customClass="scan-details__text-container-text">

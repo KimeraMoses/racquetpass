@@ -14,6 +14,8 @@ import {
   AboutRacquet,
   BrandSearchResults,
   SelectString,
+  SelectStringWithMainCross,
+  ReviewOrder,
 } from './sections';
 
 import './order.styles.scss';
@@ -41,9 +43,11 @@ let OrderPage = ({ t, handleSubmit }) => {
           {/* <FindShop t={t} /> */}
           {/* <Contact t={t} /> */}
           {/* <VerifyPhone t={t} /> */}
-          {/* <AboutRacquet t={t} /> */}
+          {/* <SelectString t={t} /> */}
           {/* <BrandSearchResults t={t} /> */}
-          <SelectString t={t} />
+          {/* <SelectStringWithMainCross t={t} /> */}
+          {/* <AboutRacquet t={t} /> */}
+          <ReviewOrder t={t} />
         </div>
         <div className="order-page__button-container">
           <StepButton
@@ -77,7 +81,7 @@ const onSubmit = (values, dispatch) => {
 
 OrderPage = reduxForm({
   // a unique name for the form
-  form: 'contact',
+  form: 'signup',
   onSubmit,
 })(OrderPage);
 

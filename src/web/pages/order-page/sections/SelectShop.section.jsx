@@ -1,7 +1,11 @@
 import { Link } from 'react-router-dom';
-
 // Custom Components
-import { Heading, Description, CloseButton, CustomInput } from 'web/components';
+import {
+  Heading,
+  Description,
+  HeadingButton,
+  CustomInput,
+} from 'web/components';
 
 // Styles
 import './SelectShop.styles.scss';
@@ -12,7 +16,7 @@ export function SelectShop({ t }) {
       <div className="shop-section">
         <div className="shop-section__heading">
           <Heading>{t('odrShopHeading')}</Heading>
-          <CloseButton />
+          <HeadingButton close />
         </div>
         <div className="shop-section__text-container">
           <Description customClass="shop-section__text-container-text">

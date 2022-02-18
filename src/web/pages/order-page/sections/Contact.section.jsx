@@ -5,7 +5,7 @@ import {
   Heading,
   SubHeading,
   Description,
-  CloseButton,
+  HeadingButton,
   CustomInput,
 } from 'web/components';
 
@@ -20,7 +20,7 @@ export function Contact({ t }) {
           <Heading customClass="contact-section__heading-text">
             {t('odrStayHeading')}
           </Heading>
-          <CloseButton />
+          <HeadingButton close />
         </div>
         <div className="contact-section__text-container">
           <Description customClass="contact-section__text-container-text">

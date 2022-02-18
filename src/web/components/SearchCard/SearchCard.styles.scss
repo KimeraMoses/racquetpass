@@ -17,7 +17,7 @@
       display: flex;
       justify-content: space-between;
       gap: 12px;
-      padding: 16px;
+      padding: 16px 0px;
       align-items: center;
       &-img {
         display: flex;
@@ -27,6 +27,21 @@
         font-weight: 600;
         font-size: 14px;
         line-height: 18px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        &-text {
+          font-family: Poppins;
+          font-weight: 600;
+          font-size: 14px;
+          line-height: 18px;
+        }
+        &-connect {
+          background: rgba(48, 79, 254, 0.2);
+          border-radius: 10.5px;
+          padding: 3px 10px;
+          margin-right: 10px;
+        }
       }
       &-text {
         font-family: Poppins;
@@ -34,6 +49,12 @@
         font-size: 12px;
         line-height: 16px;
         color: #8e8e8e;
+      }
+    }
+    .search__card-container-content.search__card-container-content-raquet {
+      width: 100%;
+      .search__card-container-content-txt {
+        width: 100%;
       }
     }
   }

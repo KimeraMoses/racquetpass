@@ -1,11 +1,9 @@
-.close-button {
-  .close-button__btn {
-    display: inline-block;
+.info-button {
+  .info-button__btn {
     border: none;
     margin: 0;
     text-decoration: none;
-    background: transparent;
-    border: 1px solid #e8e8e8;
+    background: #f8f8f8;
     border-radius: 15px;
     line-height: 1;
     cursor: pointer;
@@ -13,6 +11,9 @@
     -webkit-appearance: none;
     -moz-appearance: none;
     display: flex;
+    justify-content: center;
     align-items: center;
+    height: 36px;
+    width: 36px;
   }
 }

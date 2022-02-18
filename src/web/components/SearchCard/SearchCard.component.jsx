@@ -4,14 +4,18 @@ import { SubHeading, Description } from 'web/components';
 // Styles
 import './SearchCard.styles.scss';
 
-export function SearchCard({ shop, brand }) {
+export function SearchCard({ shop, brand, raquet }) {
   return (
     <>
       <div className="search">
         <div className="search__card-container">
           <div className="search__card-container-divider"></div>
-          <div className="search__card-container-content">
-            {!brand ? (
+          <div
+            className={`search__card-container-content ${
+              raquet && 'search__card-container-content-raquet'
+            }`}
+          >
+            {shop ? (
               <>
                 <div className="search__card-container-content-img">
                   <img src="/img/orderpage/shop.png" alt="shop" />
@@ -25,17 +29,35 @@ export function SearchCard({ shop, brand }) {
                   </Description>
                 </div>
               </>
-            ) : (
+            ) : brand ? (
               <>
                 <div className="search__card-container-content-txt">
                   <div>
                     <SubHeading customClass="search__card-container-content-heading">
                       {brand?.name}
                     </SubHeading>
-                    <SubHeading>{brand.price}</SubHeading>
+                    <SubHeading>{brand?.price}</SubHeading>
                   </div>
                   <Description customClass="search__card-container-content-text">
                     {brand?.address}
+                  </Description>
+                </div>
+              </>
+            ) : (
+              <>
+                <div className="search__card-container-content-txt">
+                  <div className="search__card-container-content-heading">
+                    <SubHeading customClass="search__card-container-content-heading-text">
+                      {raquet?.name}
+                    </SubHeading>
+                    {raquet?.qrConnected && (
+                      <div className="search__card-container-content-heading-connect">
+                        Connected with QR
+                      </div>
+                    )}
+                  </div>
+                  <Description customClass="search__card-container-content-text">
+                    {raquet?.model}
                   </Description>
                 </div>
               </>
