@@ -1,17 +1,64 @@
 import { reduxForm } from 'redux-form';
+import { useNavigate } from 'react-router-dom';
 import { withNamespaces } from 'react-i18next';
 import { SelectAccount, AccountDetails, CreatePassword } from './sections';
 
 import './accountPage.styles.scss';
+import { useState } from 'react';
 
-let CreateAccount = ({ t }) => {
+let CreateAccount = ({ t, handleSubmit, change }) => {
+  const [step, setStep] = useState(1);
+
+  const navigate = useNavigate();
+
+  const nextStep = () => {
+    setStep((step) => step + 1);
+  };
+
+  const prevStep = () => {
+    setStep((step) => step - 1);
+  };
+
+  const firstStepBack = () => {
+    navigate('/');
+  };
+
+  const moveToLogin = () => {
+    navigate('/login');
+  };
+
+  const getActiveScreen = () => {
+    switch (step) {
+      case 1:
+        return (
+          <SelectAccount
+            t={t}
+            back={firstStepBack}
+            forward={nextStep}
+            change={change}
+            moveToLogin={moveToLogin}
+          />
+        );
+      case 2:
+        return (
+          <AccountDetails
+            t={t}
+            back={prevStep}
+            forward={nextStep}
+            moveToLogin={moveToLogin}
+          />
+        );
+      case 3:
+        return <CreatePassword t={t} moveToLogin={moveToLogin} />;
+      default:
+        return <>Step not detected</>;
+    }
+  };
   return (
     <>
-      <div className="create-account">
-        <SelectAccount t={t} />
-        {/* <AccountDetails t={t} /> */}
-        {/* <CreatePassword t={t} /> */}
-      </div>
+      <form onSubmit={handleSubmit} className="create-account">
+        {getActiveScreen()}
+      </form>
     </>
   );
 };

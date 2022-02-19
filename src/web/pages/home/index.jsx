@@ -30,7 +30,9 @@ function Home({ t }) {
             >
               {t('homeDarkBtn')}
             </Button>
-            <Button>{t('homeLightBtn')}</Button>
+            <Button onClick={() => navigate('/create-account')}>
+              {t('homeLightBtn')}
+            </Button>
           </div>
         </div>
         <div>

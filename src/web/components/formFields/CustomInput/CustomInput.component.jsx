@@ -2,17 +2,26 @@ import './CustomInput.styles.scss';
 
 export const CustomInput = (props) => {
   console.log(props);
+
+  const { visited, error } = props.meta;
   return (
     <div className="custom-input">
-      {props.noLabel ? (
-        <></>
-      ) : (
-        <div className="custom-input__label">{props.label}</div>
-      )}
+      <div className="custom-input__header">
+        {props.noLabel ? (
+          <></>
+        ) : (
+          <div className="custom-input__header-label">{props.label}</div>
+        )}
+        {visited && error && (
+          <div className="custom-input__header-error">{error}</div>
+        )}
+      </div>
       <input
         {...props.input}
         placeholder={props.placeholder ? props.placeholder : props.label}
-        className="custom-input__input"
+        className={`custom-input__input ${
+          visited && error ? 'custom-input__input-error' : ''
+        }`}
         onBlur={props.onBlur}
         onClick={props.onClick}
         ref={(input) => {
@@ -30,11 +39,9 @@ export const CustomInput = (props) => {
             : {}
         }
       />
-      {props.meta &&
-        props.meta.error &&
-        props.meta.touched(
-          <div className="custom-input__error">{props.meta.error}</div>
-        )}
+      {/* {props.meta.error && props.meta.visited && (
+        <div className="custom-input__error">{props.meta.error}</div>
+      )} */}
     </div>
   );
 };
