@@ -7,7 +7,7 @@ import './accountPage.styles.scss';
 import { useState } from 'react';
 
 let CreateAccount = ({ t, handleSubmit, change }) => {
-  const [step, setStep] = useState(3);
+  const [step, setStep] = useState(1);
 
   const navigate = useNavigate();
 

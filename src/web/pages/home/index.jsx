@@ -15,7 +15,13 @@ function Home({ t }) {
       <div className="home-container">
         <div>
           <div className="home-container__button-container">
-            <button className="home-container__button-container-signin">
+            <button
+              className="home-container__button-container-signin"
+              type="button"
+              onClick={() => {
+                navigate('/login');
+              }}
+            >
               {t('homeSignin')}
             </button>
           </div>

@@ -1,4 +1,6 @@
+import { useState } from 'react';
 import { reduxForm, Field } from 'redux-form';
+import { useNavigate } from 'react-router-dom';
 import { withNamespaces } from 'react-i18next';
 import { Link } from 'react-router-dom';
 import {
@@ -9,20 +11,45 @@ import {
   CustomInput,
   SubmitButton,
 } from 'web/components';
-
 import './Login.styles.scss';
-function Login({ t }) {
+
+const required = (value) => (value ? undefined : 'Email is required');
+const email = (value) => {
+  if (
+    /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i.test(
+      value
+    )
+  ) {
+    return undefined;
+  } else {
+    return 'Please enter a valid email';
+  }
+};
+
+function Login({ t, handleSubmit }) {
+  const navigate = useNavigate();
+  const [passwordFieldType, setPasswordFieldType] = useState('password');
   return (
     <>
-      <div className="signin">
+      <form onSubmit={handleSubmit} className="signin">
         <div>
           <div className="signin__header">
             <div className="signin__header-heading">
-              <BackButton />
+              <BackButton
+                onClick={() => {
+                  navigate('/');
+                }}
+              />
               <Heading>{t('homeSignin')}</Heading>
             </div>
             <div className="signin__button">
-              <button className="signin__button-btn">
+              <button
+                className="signin__button-btn"
+                type="button"
+                onClick={() => {
+                  navigate('/create-account');
+                }}
+              >
                 {t('odrCreateBtn')}
               </button>
             </div>
@@ -33,12 +60,23 @@ function Login({ t }) {
               label="Email Address"
               type="email"
               component={CustomInput}
+              validate={[required, email]}
             />
             <Field
               name="password"
               label="Password"
-              type="text"
+              placeholder="&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;"
               component={CustomInput}
+              switchPasswordShow={() => {
+                if (passwordFieldType === 'password') {
+                  setPasswordFieldType('text');
+                } else {
+                  setPasswordFieldType('password');
+                }
+              }}
+              type={passwordFieldType}
+              isPasswordField
+              // Validate with Backend
             />
           </div>
           <div className="signin__form-buttons">
@@ -67,7 +105,7 @@ function Login({ t }) {
             <AccountButton apple />
           </div>
         </div>
-      </div>
+      </form>
     </>
   );
 }

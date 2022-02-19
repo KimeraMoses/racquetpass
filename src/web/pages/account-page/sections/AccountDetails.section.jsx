@@ -11,7 +11,6 @@ import {
 } from 'web/components';
 import './AccountDetails.styles.scss';
 import { Description } from 'web/components/atoms/Description.atom';
-import { useEffect } from 'react';
 
 const required = (value) => (value ? undefined : 'This field is required');
 // Phone Validation
