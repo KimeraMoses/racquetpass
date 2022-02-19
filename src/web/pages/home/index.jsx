@@ -1,11 +1,11 @@
-
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { withNamespaces } from 'react-i18next';
 
 import { Button } from 'web/components';
 import './home.styles.scss';
 
 function Home({ t }) {
+  const navigate = useNavigate();
   const links = [
     { path: '#', title: t('homePP') },
     { path: '#', title: t('homeCU') },
@@ -24,7 +24,12 @@ function Home({ t }) {
             <p className="banner-container__text">{t('homeDesc')}</p>
           </div>
           <div className="banner-button-container">
-            <Button isDark>{t('homeDarkBtn')}</Button>
+            <Button
+              isDark
+              onClick={() => navigate('/order', { replace: true })}
+            >
+              {t('homeDarkBtn')}
+            </Button>
             <Button>{t('homeLightBtn')}</Button>
           </div>
         </div>

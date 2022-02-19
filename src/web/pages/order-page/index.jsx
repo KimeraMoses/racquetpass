@@ -22,9 +22,8 @@ import {
 import './order.styles.scss';
 
 let OrderPage = ({ t, handleSubmit, change }) => {
-  const [step, setStep] = useState(5);
-  // TODO: Change this to initial when done
-  const [scan, setScan] = useState({ current: 'notFound' });
+  const [step, setStep] = useState(1);
+  const [scan, setScan] = useState({ current: 'initial' });
   const [shop, setShop] = useState({ current: 'initial' });
   const [strings, setStrings] = useState({ current: 'initial' });
   const [done, setDone] = useState(false);
