@@ -96,5 +96,15 @@
   "odrPivacyText": "By clicking Create Account, Continue Using Facebook, Continue Using Google or Continue Using Apple, you agree to our .",
   "odrPrivacyAnd": "and",
   "odrTermsBold": "Terms & Conditions",
-  "odrPrivacyBold": "Privacy Statement."
+  "odrPrivacyBold": "Privacy Statement.",
+  "odrForgetPass": "Forgot Password?",
+
+  "accPassword": "Make a password",
+  "accPasstxt": "A little pain for a lot of security.",
+  "accPassRecommend": "Recommendations",
+  "accPassitem1": "At least eight characters long",
+  "accPassitem2": "One lowercase letter",
+  "accPassitem3": "One uppercase letter",
+  "accPassitem4": "One number",
+  "accPassitem5": "No text from email/name"
 }

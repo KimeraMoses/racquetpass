@@ -1,6 +1,6 @@
 import { reduxForm } from 'redux-form';
 import { withNamespaces } from 'react-i18next';
-import { SelectAccount, AccountDetails } from './sections';
+import { SelectAccount, AccountDetails, CreatePassword } from './sections';
 
 import './accountPage.styles.scss';
 
@@ -8,8 +8,9 @@ let CreateAccount = ({ t }) => {
   return (
     <>
       <div className="create-account">
-        {/* <SelectAccount t={t} /> */}
-        <AccountDetails t={t} />
+        <SelectAccount t={t} />
+        {/* <AccountDetails t={t} /> */}
+        {/* <CreatePassword t={t} /> */}
       </div>
     </>
   );

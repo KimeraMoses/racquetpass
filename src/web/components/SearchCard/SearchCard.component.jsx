@@ -31,15 +31,17 @@ export function SearchCard({ shop, brand, raquet }) {
               </>
             ) : brand ? (
               <>
-                <div className="search__card-container-content-txt">
+                <div className="search__brand-card-container-content-txt">
                   <div>
-                    <SubHeading customClass="search__card-container-content-heading">
+                    <SubHeading customClass="search__brand-card-container-content-txt-heading">
                       {brand?.name}
                     </SubHeading>
-                    <SubHeading>{brand?.price}</SubHeading>
+                    <SubHeading customClass="search__brand-card-container-content-txt-subheading">
+                      {brand?.description}
+                    </SubHeading>
                   </div>
-                  <Description customClass="search__card-container-content-text">
-                    {brand?.address}
+                  <Description customClass="search__brand-card-container-content-txt-text">
+                    {brand?.price}
                   </Description>
                 </div>
               </>

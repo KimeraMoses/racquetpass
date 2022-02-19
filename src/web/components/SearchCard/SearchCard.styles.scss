@@ -1,4 +1,37 @@
 .search {
+  // Brand Card Styles
+  &__brand-card {
+    &-container-content-txt {
+      display: flex;
+      justify-content: space-between;
+      width: 100%;
+      &-heading {
+        font-family: Poppins;
+        font-style: normal;
+        font-weight: 600;
+        font-size: 14px;
+        line-height: 21px;
+        color: #333333;
+      }
+      &-subheading {
+        font-family: Poppins;
+        font-style: normal;
+        font-weight: 500;
+        font-size: 12px;
+        line-height: 18px;
+        color: #8e8e8e;
+      }
+      &-text {
+        margin-right: 12px;
+        font-family: Poppins;
+        font-style: normal;
+        font-weight: 500;
+        font-size: 12px;
+        line-height: 18px;
+        color: #8e8e8e;
+      }
+    }
+  }
   &__card-container {
     width: 100%;
     display: flex;

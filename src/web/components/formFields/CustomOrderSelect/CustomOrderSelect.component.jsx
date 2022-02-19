@@ -14,6 +14,7 @@ export const CustomOrderSelect = (props) => {
           {...props.input}
           placeholder={props.placeholder ? props.placeholder : props.label}
           className="custom-select__input"
+          onClick={props.onSelectClick}
           style={
             props.icon
               ? {
@@ -24,7 +25,9 @@ export const CustomOrderSelect = (props) => {
               : {}
           }
         />
-        <Link to="#">Select</Link>
+        <Link to="#" onClick={props.onSelectClick}>
+          {props.link}
+        </Link>
       </div>
       {props.meta &&
         props.meta.error &&

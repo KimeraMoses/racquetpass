@@ -15,7 +15,7 @@ import {
 // Styles
 import './SelectString.styles.scss';
 
-export function SelectString({ t }) {
+export function SelectString({ t, backward, setStringsCurrent }) {
   return (
     <>
       <div className="select-string">
@@ -23,7 +23,7 @@ export function SelectString({ t }) {
           <Heading customClass="select-string__heading-text">
             {t('odrSelect')}
           </Heading>
-          <HeadingButton close />
+          <HeadingButton close onClick={backward} />
         </div>
         <div className="select-string__text-container">
           <Description customClass="select-string__text-container-text">
@@ -32,7 +32,11 @@ export function SelectString({ t }) {
         </div>
         <div className="select-string__main-info">
           <div className="select-string__main-info-select">
-            <CustomOrderSelect label="String Type" />
+            <CustomOrderSelect
+              label="String Type"
+              link="Select"
+              onSelectClick={() => setStringsCurrent('search')}
+            />
           </div>
           <div className="select-string__main-info-number">
             <Field

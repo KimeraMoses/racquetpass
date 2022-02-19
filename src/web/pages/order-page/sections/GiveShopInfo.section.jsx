@@ -10,14 +10,14 @@ import {
 } from 'web/components';
 
 // Styles
-import './FindShop.styles.scss';
+import './GiveShopInfo.styles.scss';
 
-export function FindShop({ t }) {
+export function GiveShopInfo({ t, setShopCurrent }) {
   return (
     <>
       <div className="find-shop-section">
         <div className="find-shop-section__heading">
-          <BackButton />
+          <BackButton onClick={() => setShopCurrent('search')} />
           <Heading customClass="phone-section__heading-text">
             {t('odrShop')}
           </Heading>

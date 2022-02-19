@@ -1,6 +1,7 @@
 import './CustomInput.styles.scss';
 
 export const CustomInput = (props) => {
+  console.log(props);
   return (
     <div className="custom-input">
       {props.noLabel ? (
@@ -12,6 +13,13 @@ export const CustomInput = (props) => {
         {...props.input}
         placeholder={props.placeholder ? props.placeholder : props.label}
         className="custom-input__input"
+        onBlur={props.onBlur}
+        onClick={props.onClick}
+        ref={(input) => {
+          if (props.setFieldToBeFocused) {
+            props.setFieldToBeFocused(input);
+          }
+        }}
         style={
           props.icon
             ? {

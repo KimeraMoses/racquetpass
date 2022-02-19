@@ -1,3 +1,4 @@
+import { useEffect, useRef } from 'react';
 import { Field } from 'redux-form';
 import { Link } from 'react-router-dom';
 
@@ -7,7 +8,11 @@ import { SearchCard, CustomInput } from 'web/components';
 // Styles
 import './BrandSearchResults.styles.scss';
 
-export function BrandSearchResults({ t }) {
+export function BrandSearchResults({ t, setStringsCurrent }) {
+  let inputEl = useRef(null);
+  useEffect(() => {
+    inputEl.focus();
+  }, [inputEl]);
   return (
     <>
       <div className="brand-result">
@@ -19,8 +24,11 @@ export function BrandSearchResults({ t }) {
             label="Search By Name, City Or State"
             noLabel
             component={CustomInput}
+            setFieldToBeFocused={(input) => {
+              inputEl = input;
+            }}
           />
-          <Link to="#">
+          <Link to="#" onClick={() => setStringsCurrent('initial')}>
             <span className="brand-result__search-container-link">Cancel</span>
           </Link>
         </div>
@@ -28,8 +36,15 @@ export function BrandSearchResults({ t }) {
           <SearchCard
             brand={{
               name: 'Brnad Name',
-              price: '$12.50',
-              address: 'Brand Address',
+              description: 'Brand Address',
+              price: 'price',
+            }}
+          />
+          <SearchCard
+            brand={{
+              name: 'Brnad Name',
+              description: 'Brand Address',
+              price: 'price',
             }}
           />
         </div>

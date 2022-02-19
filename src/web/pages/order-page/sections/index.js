@@ -1,9 +1,9 @@
 export { ScanSection } from './ScanSection.section';
+export { ScanNotFound } from './ScanNotFound.section';
 export { ScanSuccess } from './ScanSuccess.section';
-export { ScanDetails } from './ScanDetails.section';
 export { SelectShop } from './SelectShop.section';
 export { ShopSearchResults } from './ShopSearchResults.section';
-export { FindShop } from './FindShop.section';
+export { GiveShopInfo } from './GiveShopInfo.section';
 export { Contact } from './Contact.section';
 export { VerifyPhone } from './VerifyPhone.section';
 export { AboutRacquet } from './AboutRacquet.section';

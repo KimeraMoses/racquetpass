@@ -1,15 +1,14 @@
 import {
-  PaymentButton,
+  AccountButton,
   SubHeading,
   BackButton,
   Heading,
   CustomInput,
+  SubmitButton,
 } from 'web/components';
 import { Field } from 'redux-form';
-import './AccountDetail.styles.scss';
+import './AccountDetails.styles.scss';
 import { Description } from 'web/components/atoms/Description.atom';
-// import { } from 'web/components/atoms/SubHeading.atom';
-// import {  } from 'web/components/Buttons/PaymentButton.component';
 
 export function AccountDetails({ t }) {
   return (
@@ -47,6 +46,14 @@ export function AccountDetails({ t }) {
               component={CustomInput}
             />
           </div>
+          <div className="account-details__form-button">
+            <SubmitButton
+              type="submit"
+              className="account-details__form-button-btn"
+            >
+              {t('odrCreateBtn')}
+            </SubmitButton>
+          </div>
           <div className="account-details__option-container">
             <div className="account-details__option-container-line"></div>
             <div>
@@ -56,27 +63,24 @@ export function AccountDetails({ t }) {
             </div>
             <div className="account-details__option-container-line"></div>
           </div>
-          <div className="account-details__btn-container">
-            <PaymentButton isDark>
-              Continue With Apple &nbsp;{' '}
-              <img src="/img/button/apple.png" alt="apple-pay" />
-            </PaymentButton>
-            <PaymentButton isDark>
-              Continue With Apple &nbsp;{' '}
-              <img src="/img/button/apple.png" alt="apple-pay" />
-            </PaymentButton>
-            <PaymentButton isDark>
-              Continue With Apple &nbsp;{' '}
-              <img src="/img/button/apple.png" alt="apple-pay" />
-            </PaymentButton>
+          <div className="account-details__buttons">
+            <AccountButton facebook />
+            <AccountButton google />
+            <AccountButton apple />
           </div>
         </div>
         <div>
-          <div className="account-details__statement-container">
-            <Description customClass="account-details__statement-container-txt">
+          <div className="account-details__statement">
+            <Description customClass="account-details__statement-txt">
               {t('odrPivacyText')}
-              <span className="account-details__statement-container-txt-bold">
+              <span className="account-details__statement-txt-bold">
                 {t('odrTermsBold')}
+              </span>
+              &nbsp;
+              {t('odrPrivacyAnd')}
+              &nbsp;
+              <span className="account-details__statement-txt-bold">
+                {t('odrPrivacyBold')}
               </span>
             </Description>
           </div>

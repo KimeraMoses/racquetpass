@@ -1,3 +1,4 @@
+import { useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { Field } from 'redux-form';
 // Custom Components
@@ -6,7 +7,11 @@ import { Description, CustomInput, SearchCard } from 'web/components';
 // Styles
 import './ShopSearchResults.styles.scss';
 
-export function ShopSearchResults({ t }) {
+export function ShopSearchResults({ t, setShopCurrent }) {
+  let inputEl = useRef(null);
+  useEffect(() => {
+    inputEl.focus();
+  }, [inputEl]);
   return (
     <>
       <div className="shop-result">
@@ -17,9 +22,12 @@ export function ShopSearchResults({ t }) {
             icon="/img/orderpage/search.png"
             label="Search By Name, City Or State"
             noLabel
+            setFieldToBeFocused={(input) => {
+              inputEl = input;
+            }}
             component={CustomInput}
           />
-          <Link to="#">
+          <Link to="#" onClick={() => setShopCurrent('initial')}>
             <span className="shop-result__search-container-link">Cancel</span>
           </Link>
         </div>
@@ -40,7 +48,7 @@ export function ShopSearchResults({ t }) {
         <div className="shop-result__account-container">
           <Description customClass="shop-result__account-container-text">
             {t('odrSearchNF')} &nbsp;
-            <Link to="#">
+            <Link to="#" onClick={() => setShopCurrent('find')}>
               <span className="shop-result__accound-container-text-span">
                 {t('odrSearchLK')}
               </span>

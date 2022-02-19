@@ -10,13 +10,19 @@ import {
 // Styles
 import './SelectShop.styles.scss';
 
-export function SelectShop({ t }) {
+export function SelectShop({ t, setShopCurrent, backward }) {
   return (
     <>
       <div className="shop-section">
         <div className="shop-section__heading">
           <Heading>{t('odrShopHeading')}</Heading>
-          <HeadingButton close />
+          <HeadingButton
+            close
+            onClick={() => {
+              setShopCurrent('initial');
+              backward();
+            }}
+          />
         </div>
         <div className="shop-section__text-container">
           <Description customClass="shop-section__text-container-text">
@@ -28,6 +34,9 @@ export function SelectShop({ t }) {
             icon="/img/orderpage/search.png"
             label="Search By Name, City Or State"
             noLabel
+            onClick={() => {
+              setShopCurrent('search');
+            }}
           />
         </div>
         <div className="shop-section__account-container">

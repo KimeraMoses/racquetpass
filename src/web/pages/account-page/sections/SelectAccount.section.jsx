@@ -1,6 +1,4 @@
 import { BackButton, Heading, AccountCard } from 'web/components';
-// import {} from 'web/components';
-// import { } from 'web/components/atoms/Heading.atom';
 
 import './SelectAccount.styles.scss';
 

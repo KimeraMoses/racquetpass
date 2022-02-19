@@ -59,14 +59,23 @@
       color: #202020;
     }
   }
-  &__btn-container {
-    margin-top: 40px;
+
+  &__form-button {
+    margin-top: 80px;
+    margin-bottom: 40px;
+  }
+  &__buttons {
     display: flex;
     flex-direction: column;
-    gap: 12px;
+    gap: 15px;
+    margin-top: 40px;
   }
-  &__statement-container {
-    margin-top: 20px;
+
+  &__statement {
+    margin-top: 40px;
+    margin-bottom: 50px;
+    display: flex;
+    justify-content: center;
     &-txt {
       font-weight: 500;
       font-size: 14px;
