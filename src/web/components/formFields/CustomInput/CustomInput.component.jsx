@@ -1,7 +1,9 @@
 import './CustomInput.styles.scss';
 
 export const CustomInput = (props) => {
-  const { visited, error } = props.meta;
+  const { visited, error } = props?.meta
+    ? props?.meta
+    : { visited: false, error: false };
   return (
     <div className="custom-input">
       <div className="custom-input__header">

@@ -4,15 +4,15 @@ import { SubHeading, Description } from 'web/components';
 // Styles
 import './SearchCard.styles.scss';
 
-export function SearchCard({ shop, brand, raquet }) {
+export function SearchCard({ shop, brand, raquet, onClick = () => {} }) {
   return (
     <>
-      <div className="search">
+      <div className="search" onClick={onClick}>
         <div className="search__card-container">
           <div className="search__card-container-divider"></div>
           <div
             className={`search__card-container-content ${
-              raquet && 'search__card-container-content-raquet'
+              (raquet || brand) && 'search__card-container-content-raquet'
             }`}
           >
             {shop ? (

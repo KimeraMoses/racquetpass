@@ -22,7 +22,7 @@ import {
 import './order.styles.scss';
 
 let OrderPage = ({ t, handleSubmit, change }) => {
-  const [step, setStep] = useState(1);
+  const [step, setStep] = useState(5);
   const [scan, setScan] = useState({ current: 'initial' });
   const [shop, setShop] = useState({ current: 'initial' });
   const [strings, setStrings] = useState({ current: 'initial' });
@@ -90,7 +90,13 @@ let OrderPage = ({ t, handleSubmit, change }) => {
           />
         );
       case 'search':
-        return <ShopSearchResults t={t} setShopCurrent={setShopCurrent} />;
+        return (
+          <ShopSearchResults
+            t={t}
+            setShopCurrent={setShopCurrent}
+            forward={forward}
+          />
+        );
       case 'find':
         return <GiveShopInfo t={t} setShopCurrent={setShopCurrent} />;
     }

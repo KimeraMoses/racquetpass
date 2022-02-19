@@ -7,7 +7,7 @@ import { Description, CustomInput, SearchCard } from 'web/components';
 // Styles
 import './ShopSearchResults.styles.scss';
 
-export function ShopSearchResults({ t, setShopCurrent }) {
+export function ShopSearchResults({ t, setShopCurrent, forward }) {
   let inputEl = useRef(null);
   useEffect(() => {
     inputEl.focus();
@@ -37,11 +37,29 @@ export function ShopSearchResults({ t, setShopCurrent }) {
               name: 'Joe’s Tennis Pro',
               address: '123 Main Street, City, State',
             }}
+            onClick={() => {
+              setShopCurrent('initial');
+              forward();
+            }}
           />
           <SearchCard
             shop={{
               name: 'Joe’s Tennis Pro',
               address: '123 Main Street, City, State',
+            }}
+            onClick={() => {
+              setShopCurrent('initial');
+              forward();
+            }}
+          />
+          <SearchCard
+            shop={{
+              name: 'Joe’s Tennis Pro',
+              address: '123 Main Street, City, State',
+            }}
+            onClick={() => {
+              setShopCurrent('initial');
+              forward();
             }}
           />
         </div>

@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { withNamespaces } from 'react-i18next';
 import { Field } from 'redux-form';
@@ -14,6 +15,8 @@ import {
 import './Done.styles.scss';
 
 export function Done({ t }) {
+  const [passwordFieldType, setPasswordFieldType] = useState('password');
+
   const links = [
     { path: '#', title: t('homePP') },
     { path: '#', title: t('homeCU') },
@@ -47,8 +50,18 @@ export function Done({ t }) {
             <Field
               name="password"
               label="Password"
-              type="password"
+              placeholder="&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;"
               component={CustomInput}
+              switchPasswordShow={() => {
+                if (passwordFieldType === 'password') {
+                  setPasswordFieldType('text');
+                } else {
+                  setPasswordFieldType('password');
+                }
+              }}
+              type={passwordFieldType}
+              isPasswordField
+              // Validate with Backend
             />
             <SubmitButton type="submit" className="done__form-submit-btn">
               {t('odrCreateBtn')}
