@@ -18,8 +18,10 @@ function OrderDetails({ t }) {
           <h1 className='header-row-heading'>{t('orderOpenedHeading')}</h1>
         </div>
         <div className='status-container'>
-          <ServiceOrderStatus state="partial" status={true} t={t}>
-            <img alt="Menu Icon" src="../svg/calender.svg" />
+          <ServiceOrderStatus state="partial" status={true} t={t}>     
+            <svg xmlns="http://www.w3.org/2000/svg" width="13" height="9" viewBox="0 0 13 9" fill="none">
+              <path d="M1.3645 4.49966L4.78408 7.91924L11.6353 1.08008" stroke="#304FFE" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+            </svg>
           </ServiceOrderStatus>
         </div>
         <div className='pickup'>{t('orderOpenedPickup')} <b>{t('orderOpenedPickupName')}</b></div>

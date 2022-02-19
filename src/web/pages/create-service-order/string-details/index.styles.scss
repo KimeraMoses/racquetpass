@@ -1,0 +1,118 @@
+.string-details-container{
+	position: relative;
+	padding: 40px 20px;
+	min-height: 100vh;
+	.bg-image{
+		position: absolute;
+		bottom: 0;
+		left: 50%;
+		transform: translateX(-50%);
+		z-index: -1;
+	}
+	.header-row{
+		display: flex;
+		align-items: center;
+		padding-bottom: 10px;
+		&-heading{
+			font-family: Poppins;
+			font-style: normal;
+			font-weight: bold;
+			font-size: 24px;
+			line-height: 36px;
+			flex-grow: 1;
+		}
+	}
+	.string-details-body{
+		max-width: 450px;
+		margin: auto;
+		.string-account-form{
+			padding-top: 35px;
+			min-height: calc(100vh - 140px);
+			display: flex;
+			flex-direction: column;
+			justify-content: space-between;
+			.input-container{
+				padding-bottom: 20px;
+				position: relative;
+				.label-text{	
+					position: absolute;
+					bottom: 39px;
+					right: 16px;				
+					font-family: Poppins;
+					font-style: normal;
+					font-weight: 600;
+					font-size: 14px;
+					line-height: 21px;
+					color: #304FFE;
+				}
+				.input-label{
+					display: block;
+					font-family: Poppins;
+					font-style: normal;
+					font-weight: 600;
+					font-size: 12px;
+					line-height: 18px;	
+					color: #969696;
+					padding-bottom: 12px;
+					display: flex;
+					justify-content: space-between;
+					p{
+						padding-left: 15px;
+						color: #304FFE;
+					}
+				}
+				.form-input{
+					background: #FFFFFF;
+					border: 1px solid #E8E8E8;
+					box-sizing: border-box;
+					border-radius: 12px;
+					width: 100%;
+					height: 59px;
+					font-family: Poppins;
+					font-style: normal;
+					font-weight: normal;
+					font-size: 18px;
+					line-height: 27px;
+					color: #9A9A9A;
+					padding: 16px;
+					&::placeholder{
+						color: #333;
+					}
+				}
+			}
+			.hybrid-row{
+				display: flex;
+				justify-content: space-between;
+				padding-bottom: 40px;
+				font-family: Poppins;
+				font-style: normal;
+				font-weight: normal;
+				font-size: 14px;
+				line-height: 21px;
+				display: flex;
+				align-items: center;
+				color: #000;
+			}
+			.price-row{
+				.label{
+					font-family: Poppins;
+					font-style: normal;
+					font-weight: 600;
+					font-size: 12px;
+					line-height: 18px;
+					color: #969696;
+				}
+				.desc{
+					font-family: Poppins;
+					font-style: normal;
+					font-weight: 500;
+					font-size: 18px;
+					line-height: 27px;
+				}
+			}
+			.btn-container{
+				padding-top: 40px;
+			}
+		}		
+	}
+}

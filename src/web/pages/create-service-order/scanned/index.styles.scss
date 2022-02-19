@@ -1,4 +1,4 @@
-.order-scanned-container{
+.scanned-order-container{
   padding: 40px 20px;
   min-height: 100vh;	
 	display: flex;
@@ -6,6 +6,7 @@
 	justify-content: space-between;
   .header-row{
     display: flex;
+		align-items: center;
     &-heading{
       font-family: Poppins;
       font-style: normal;
@@ -15,6 +16,25 @@
       flex-grow: 1;
     }
   }
+	.heading-row{
+		padding: 40px 0;
+		.title{
+			font-family: Poppins;
+			font-style: normal;
+			font-weight: 600;
+			font-size: 24px;
+			line-height: 36px;
+			padding-bottom: 12px;
+		}
+		.desc{
+			font-family: Poppins;
+			font-style: normal;
+			font-weight: normal;
+			font-size: 18px;
+			line-height: 27px;
+			color: #545454;
+		}
+	}
 	.scanned-card{
 		max-width: 450px;
 		position: relative;
@@ -31,7 +51,7 @@
 			transform: translateY(-50%);
 			width: 3px;
 			height: calc(100% - 38px);
-			background-color: #0CD760;
+			background-color: #304ffe;
 			border-radius: 1.5px;
 		}
 		.title{

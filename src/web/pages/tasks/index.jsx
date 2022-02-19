@@ -16,36 +16,69 @@ function Tasks({ t }) {
         <CustomButton size='sm' btn='white'><a href='/Tasks/Scan'>{t('taskScan')}</a></CustomButton>
       </div>
       <div className='tasks-body'>
-        <div className='task-row'>
-          <p className='title'>{t('taskTitle')}</p>
-          <a href="/" className='link'>{t('taskShowCompleted')}</a>
+        <div id='due-tasks'>
+          <div className='task-row'>
+            <p className='title'>{t('taskTitle')}</p>
+            <a className='link' onClick={showCompletedTasks}>{t('taskShowCompleted')}</a>
+          </div>
+          <div className='task-row'>
+            <p className='tasks-info'>{t('taskDueToday')}</p>
+            <div className='badge'>3</div>
+          </div>
+          <div className='cards-container'>
+            <TaskCard title={t('taskCardHeading')} desc={t('taskCardDesc')}></TaskCard>
+            <TaskCard title={t('taskCardHeading')} desc={t('taskCardDesc')}></TaskCard>
+            <TaskCard title={t('taskCardHeading')} desc={t('taskCardDesc')}></TaskCard>
+          </div>
+          <div className='task-row'>
+            <p className='tasks-info'>{t('taskDueWeek')}</p>
+            <div className='badge'>8</div>
+          </div>
+          <div className='cards-container'>
+            <TaskCard title={t('taskCardHeading')} desc={t('taskCardDesc')}></TaskCard>
+            <TaskCard title={t('taskCardHeading')} desc={t('taskCardDesc')}></TaskCard>
+            <TaskCard title={t('taskCardHeading')} desc={t('taskCardDesc')}></TaskCard>
+            <TaskCard title={t('taskCardHeading')} desc={t('taskCardDesc')}></TaskCard>
+            <TaskCard title={t('taskCardHeading')} desc={t('taskCardDesc')}></TaskCard>
+            <TaskCard title={t('taskCardHeading')} desc={t('taskCardDesc')}></TaskCard>
+            <TaskCard title={t('taskCardHeading')} desc={t('taskCardDesc')}></TaskCard>
+            <TaskCard title={t('taskCardHeading')} desc={t('taskCardDesc')}></TaskCard>
+          </div>
         </div>
-        <div className='task-row'>
-          <p className='tasks-info'>{t('taskDueToday')}</p>
-          <div className='badge'>3</div>
-        </div>
-        <div className='cards-container'>
-          <TaskCard title={t('taskCardHeading')} desc={t('taskCardDesc')}></TaskCard>
-          <TaskCard title={t('taskCardHeading')} desc={t('taskCardDesc')}></TaskCard>
-          <TaskCard title={t('taskCardHeading')} desc={t('taskCardDesc')}></TaskCard>
-        </div>
-        <div className='task-row'>
-          <p className='tasks-info'>{t('taskDueWeek')}</p>
-          <div className='badge'>8</div>
-        </div>
-        <div className='cards-container'>
-          <TaskCard title={t('taskCardHeading')} desc={t('taskCardDesc')}></TaskCard>
-          <TaskCard title={t('taskCardHeading')} desc={t('taskCardDesc')}></TaskCard>
-          <TaskCard title={t('taskCardHeading')} desc={t('taskCardDesc')}></TaskCard>
-          <TaskCard title={t('taskCardHeading')} desc={t('taskCardDesc')}></TaskCard>
-          <TaskCard title={t('taskCardHeading')} desc={t('taskCardDesc')}></TaskCard>
-          <TaskCard title={t('taskCardHeading')} desc={t('taskCardDesc')}></TaskCard>
-          <TaskCard title={t('taskCardHeading')} desc={t('taskCardDesc')}></TaskCard>
-          <TaskCard title={t('taskCardHeading')} desc={t('taskCardDesc')}></TaskCard>
+        <div id='completed-tasks' >
+          <div className='task-row'>
+            <p className='title'>{t('taskCompleted')}</p>
+            <a className='link' onClick={showDueTasks}>{t('taskHideCompleted')}</a>
+          </div>
+          <div className='task-row'>
+            <p className='tasks-info'>{t('taskDueWeek')}</p>
+            <div className='badge'>11</div>
+          </div>
+          <div className='cards-container'>
+            <TaskCard title={t('taskCardHeading')} desc={t('taskCardDesc')}></TaskCard>
+            <TaskCard title={t('taskCardHeading')} desc={t('taskCardDesc')}></TaskCard>
+            <TaskCard title={t('taskCardHeading')} desc={t('taskCardDesc')}></TaskCard>
+            <TaskCard title={t('taskCardHeading')} desc={t('taskCardDesc')}></TaskCard>
+            <TaskCard title={t('taskCardHeading')} desc={t('taskCardDesc')}></TaskCard>
+            <TaskCard title={t('taskCardHeading')} desc={t('taskCardDesc')}></TaskCard>
+            <TaskCard title={t('taskCardHeading')} desc={t('taskCardDesc')}></TaskCard>
+            <TaskCard title={t('taskCardHeading')} desc={t('taskCardDesc')}></TaskCard>
+            <TaskCard title={t('taskCardHeading')} desc={t('taskCardDesc')}></TaskCard>
+            <TaskCard title={t('taskCardHeading')} desc={t('taskCardDesc')}></TaskCard>
+            <TaskCard title={t('taskCardHeading')} desc={t('taskCardDesc')}></TaskCard>
+          </div>
         </div>
       </div>
     </div>
   );
+}
+function showCompletedTasks() {
+  document.getElementById("due-tasks").style.display = "none";
+  document.getElementById("completed-tasks").style.display = "block";
+}
+function showDueTasks() {
+  document.getElementById("due-tasks").style.display = "block";
+  document.getElementById("completed-tasks").style.display = "none";
 }
 
 export default withNamespaces()(Tasks);

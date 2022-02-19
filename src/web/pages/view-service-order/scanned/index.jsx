@@ -16,8 +16,10 @@ function OrderScanned({ t }) {
 					<div className='card-line'></div>
 					<div className='title'>{t('taskScannedTitle')}</div>
 					<div className='status-container'>
-						<ServiceOrderStatus state="partial" status={true} t={t}>
-							<img alt="Menu Icon" src="../svg/calender.svg" />
+						<ServiceOrderStatus state="partial" status={true} t={t}>     
+              <svg xmlns="http://www.w3.org/2000/svg" width="13" height="9" viewBox="0 0 13 9" fill="none">
+                <path d="M1.3645 4.49966L4.78408 7.91924L11.6353 1.08008" stroke="#304FFE" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+              </svg>
 						</ServiceOrderStatus>
 					</div>
 
@@ -30,10 +32,12 @@ function OrderScanned({ t }) {
           </div>
 
           <div className='racquet-details'>
-            <div className='racquet-label'>{t('taskScannedMainsHeading')}</div>
-            <div className='racquet-desc'>{t('taskScannedMainsDesc')}</div>
-            <div className='racquet-label'>{t('taskScannedCrossesHeading')}</div>
-            <div className='racquet-desc'>{t('taskScannedCrossesDesc')}</div>
+            <div className='racquet-label'>{t('taskScannedBrandHeading')}</div>
+            <div className='racquet-desc'>{t('taskScannedBrandDesc')}</div>
+            <div className='racquet-label'>{t('taskScannedModelHeading')}</div>
+            <div className='racquet-desc'>{t('taskScannedModelDesc')}</div>
+            <div className='racquet-label'>{t('taskScannedStringHeading')}</div>
+            <div className='racquet-desc'>{t('taskScannedStringDesc')}</div>
           </div>
 					<div className='scan-msg'>
 						{t('taskScannedMsg')}

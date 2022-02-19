@@ -4,6 +4,8 @@
 	font-weight: 500;
 	font-size: 18px;
 	line-height: 27px;
+	max-width: 450px;
+	margin: auto;
 	.state-half{
 		min-width: max-content;
 		padding: 0 19px;
@@ -14,6 +16,7 @@
 		align-items: center;
 	}
 	.icon{
+		display: flex;
 		padding-right: 9.3px;
 	}
 	.completed{
