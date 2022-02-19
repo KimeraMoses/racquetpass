@@ -49,14 +49,14 @@ export function AccountDetails({ t, back, forward, moveToLogin }) {
           </div>
           <div className="account-details__form-container">
             <Field
-              name="first-name"
+              name="firstName"
               label="First Name"
               type="text"
               component={CustomInput}
               validate={required}
             />
             <Field
-              name="last-name"
+              name="lastName"
               label="Last Name"
               type="text"
               component={CustomInput}

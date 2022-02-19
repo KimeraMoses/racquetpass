@@ -1,8 +1,6 @@
 import './CustomInput.styles.scss';
 
 export const CustomInput = (props) => {
-  console.log(props);
-
   const { visited, error } = props.meta;
   return (
     <div className="custom-input">
@@ -15,6 +13,17 @@ export const CustomInput = (props) => {
         {visited && error && (
           <div className="custom-input__header-error">{error}</div>
         )}
+        {props.isPasswordField && (
+          <button
+            className="custom-input__header-show"
+            type="button"
+            onClick={() => {
+              props.switchPasswordShow();
+            }}
+          >
+            {props.type === 'password' ? 'Show' : 'Hide'}
+          </button>
+        )}
       </div>
       <input
         {...props.input}
@@ -24,6 +33,7 @@ export const CustomInput = (props) => {
         }`}
         onBlur={props.onBlur}
         onClick={props.onClick}
+        type={props.type}
         ref={(input) => {
           if (props.setFieldToBeFocused) {
             props.setFieldToBeFocused(input);

@@ -12,12 +12,22 @@
       color: #969696;
       font-family: Poppins;
     }
-    &-error {
+    &-error,
+    &-show {
       font-weight: 600;
       font-size: 12px;
       line-height: 18px;
-      color: #e53935;
       font-family: Poppins;
+    }
+    &-error {
+      color: #e53935;
+    }
+    &-show {
+      color: #304ffe;
+      background: transparent;
+      border: none;
+      outline: none;
+      cursor: pointer;
     }
   }
   &__input {
