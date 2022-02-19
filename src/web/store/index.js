@@ -8,10 +8,15 @@ function configureState() {
   if (process.env.NODE_ENV === 'development') {
     middleware.push(createLogger({ collapsed: true }));
   }
-  const store = createStore(
-    reducer,
-    composeWithDevTools(applyMiddleware(...middleware))
-  );
+  let store;
+  if (process.env.NODE_ENV === 'development') {
+    store = createStore(
+      reducer,
+      composeWithDevTools(applyMiddleware(...middleware))
+    );
+  } else {
+    store = createStore(reducer, applyMiddleware(...middleware));
+  }
 
   return {
     ...store,
