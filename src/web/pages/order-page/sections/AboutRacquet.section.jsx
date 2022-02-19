@@ -1,5 +1,4 @@
 import { Field } from 'redux-form';
-
 // Custom Components
 import {
   Heading,
@@ -11,7 +10,7 @@ import {
 // Styles
 import './AboutRacquet.styles.scss';
 
-export function AboutRacquet({ t }) {
+export function AboutRacquet({ t, backward }) {
   return (
     <>
       <div className="about-section">
@@ -19,7 +18,7 @@ export function AboutRacquet({ t }) {
           <Heading customClass="about-section__heading-text">
             {t('odrAboutHeading')}
           </Heading>
-          <HeadingButton close />
+          <HeadingButton close onClick={backward} />
         </div>
         <div className="about-section__text-container">
           <Description customClass="about-section__text-container-text">

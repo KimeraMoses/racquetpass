@@ -22,7 +22,7 @@ import {
 import './order.styles.scss';
 
 let OrderPage = ({ t, handleSubmit, change }) => {
-  const [step, setStep] = useState(5);
+  const [step, setStep] = useState(1);
   const [scan, setScan] = useState({ current: 'initial' });
   const [shop, setShop] = useState({ current: 'initial' });
   const [strings, setStrings] = useState({ current: 'initial' });
@@ -126,17 +126,17 @@ let OrderPage = ({ t, handleSubmit, change }) => {
       case 2:
         return getCurrentShopScreen();
       case 3:
-        return <Contact t={t} />;
+        return <Contact t={t} backward={backward} />;
       case 4:
-        return <VerifyPhone t={t} />;
+        return <VerifyPhone t={t} backward={backward} />;
       case 5:
         return getCurrentStringsScreen();
       case 6:
-        return <SelectStringWithMainCross t={t} />;
+        return <SelectStringWithMainCross t={t} backward={backward} />;
       case 7:
-        return <AboutRacquet t={t} />;
+        return <AboutRacquet t={t} backward={backward} />;
       case 8:
-        return <ReviewOrder t={t} />;
+        return <ReviewOrder t={t} backward={backward} />;
       case 9:
         return <Done t={t} />;
       default:

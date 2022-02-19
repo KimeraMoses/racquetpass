@@ -1,5 +1,4 @@
 import { Field } from 'redux-form';
-
 // Custom Components
 import {
   Heading,
@@ -12,7 +11,7 @@ import {
 // Styles
 import './Contact.styles.scss';
 
-export function Contact({ t }) {
+export function Contact({ t, backward }) {
   return (
     <>
       <div className="contact-section">
@@ -20,7 +19,7 @@ export function Contact({ t }) {
           <Heading customClass="contact-section__heading-text">
             {t('odrStayHeading')}
           </Heading>
-          <HeadingButton close />
+          <HeadingButton close onClick={backward} />
         </div>
         <div className="contact-section__text-container">
           <Description customClass="contact-section__text-container-text">

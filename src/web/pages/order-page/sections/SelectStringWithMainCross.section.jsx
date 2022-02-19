@@ -14,7 +14,7 @@ import {
 // Styles
 import './SelectStringWithMainCross.styles.scss';
 
-export function SelectStringWithMainCross({ t }) {
+export function SelectStringWithMainCross({ t, backward }) {
   return (
     <>
       <div className="select-string-mc">
@@ -22,7 +22,7 @@ export function SelectStringWithMainCross({ t }) {
           <Heading customClass="select-string-mc__heading-text">
             {t('odrSelect')}
           </Heading>
-          <HeadingButton close />
+          <HeadingButton close onClick={backward} />
         </div>
         <div className="select-string-mc__text-container">
           <Description customClass="select-string-mc__text-container-text">

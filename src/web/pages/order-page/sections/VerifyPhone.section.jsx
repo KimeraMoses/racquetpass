@@ -13,7 +13,7 @@ import {
 // Styles
 import './VerifyPhone.styles.scss';
 
-export function VerifyPhone({ t }) {
+export function VerifyPhone({ t, backward }) {
   return (
     <>
       <div className="phone-section">
@@ -21,7 +21,7 @@ export function VerifyPhone({ t }) {
           <Heading customClass="phone-section__heading-text">
             {t('odrPhonHeading')}
           </Heading>
-          <HeadingButton close />
+          <HeadingButton close onClick={backward} />
         </div>
         <div className="phone-section__form-container">
           <Field

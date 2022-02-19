@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { withNamespaces } from 'react-i18next';
 import { Field } from 'redux-form';
+import { useNavigate } from 'react-router-dom';
 
 import {
   Button,
@@ -21,12 +22,18 @@ export function Done({ t }) {
     { path: '#', title: t('homePP') },
     { path: '#', title: t('homeCU') },
   ];
+  const navigate = useNavigate();
   return (
     <>
       <div className="done">
         <div>
           <div className="done__button">
-            <button className="done__button-btn">{t('homeSignin')}</button>
+            <button
+              className="done__button-btn"
+              onClick={() => navigate('/login')}
+            >
+              {t('homeSignin')}
+            </button>
           </div>
           <div className="done__banner">
             <Heading customClass="done__banner-heading">
