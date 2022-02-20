@@ -1,5 +1,6 @@
 .button-container {
   // margin-bottom: 10px;
+  width: 100%;
   .button-light {
     background: transparent;
     border: 1px solid #ffffff;
@@ -10,7 +11,7 @@
   }
   .button {
     border-radius: 12px;
-    width: 388px;
+    width: 100%;
     height: 59px;
     border-radius: 12px;
     font-family: Poppins;
