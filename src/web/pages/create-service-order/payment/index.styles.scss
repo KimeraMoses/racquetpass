@@ -27,6 +27,7 @@
 		margin: auto;
 		.payment-detail-row{
 			display: flex;
+			flex-wrap: wrap;
 			justify-content: space-between;
 			align-items: center;
 			padding-bottom: 12px;

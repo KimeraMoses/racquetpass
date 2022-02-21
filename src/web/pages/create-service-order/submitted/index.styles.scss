@@ -72,7 +72,7 @@
 					font-weight: 600;
 					font-size: 24px;
 					line-height: 36px;
-					width: 250px;
+					max-width: 250px;
 					overflow: hidden;
 					display: -webkit-box;
 					-webkit-line-clamp: 3;
@@ -164,12 +164,13 @@
 		max-width: 450px;
 		margin: auto;
 		.state-half{
-			min-width: max-content;
+			min-width: fit-content;
 			padding: 0 19px;
-			height: 48px;
+			min-height: 48px;
 			border-radius: 12px;
 			display: inline-flex;
-			justify-content: center;
+			flex-wrap: wrap;
+			justify-content: flex-start;
 			align-items: center;
 		}
 		.icon{

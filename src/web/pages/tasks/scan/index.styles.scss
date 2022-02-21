@@ -44,6 +44,7 @@
 			justify-content: center;
 			align-items: center;
 			.img-container{
+				padding: 10px;
 				background-color: white;
 				border-radius: 12px;
 				height: 320px;
@@ -51,6 +52,10 @@
 				display: flex;
 				justify-content: center;
 				align-items: center;
+				img{
+					width: 100%;
+					max-width: 254px;
+				}
 			}
 		}
 	}

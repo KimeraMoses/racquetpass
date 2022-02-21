@@ -139,6 +139,10 @@
   "taskScannedComplete": "Complete Task",
   "taskScannedMsg": "Successfully scanned QR code!",
   "taskRescan": "Rescan",
+  "taskScannedMainsHeading": "Mains",
+  "taskScannedMainsDesc": "Luxilon Alu Rough 1.6 G @ 42 lbs",
+  "taskScannedCrossesHeading": "Crosses",
+  "taskScannedCrossesDesc": "Luxilon Alu Rough 1.6 G @ 24 lbs",
 
   
   "accountCreate": "Create Account",
