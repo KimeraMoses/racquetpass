@@ -1,11 +1,69 @@
-import React from "react"
+import { Link, useNavigate } from 'react-router-dom';
+import { withNamespaces } from 'react-i18next';
 
-function Home() {
-    return (
+import { Button } from 'web/components';
+import './home.styles.scss';
+
+function Home({ t }) {
+  const navigate = useNavigate();
+  const links = [
+    { path: '#', title: t('homePP') },
+    { path: '#', title: t('homeCU') },
+  ];
+  return (
+    <>
+      <div className="home-container">
         <div>
-            Home page
+          <div className="home-container__button-container">
+            <button
+              className="home-container__button-container-signin"
+              type="button"
+              onClick={() => {
+                navigate('/login');
+              }}
+            >
+              {t('homeSignin')}
+            </button>
+          </div>
+          <div className="banner-container">
+            <h1 className="banner-container__heading">{t('homeHeading')}</h1>
+            <p className="banner-container__text">{t('homeDesc')}</p>
+          </div>
+          <div className="banner-button-container">
+            <Button
+              isDark
+              onClick={() => navigate('/order', { replace: true })}
+            >
+              {t('homeDarkBtn')}
+            </Button>
+            <Button onClick={() => navigate('/create-account')}>
+              {t('homeLightBtn')}
+            </Button>
+          </div>
         </div>
-    )
+        <div>
+          <div className="footer-container">
+            {links.map((link, index) => (
+              <Link
+                className="footer-container__link-text"
+                key={index}
+                to={link.path}
+              >
+                {link.title}
+              </Link>
+            ))}
+          </div>
+          <div className="image-container">
+            <img
+              className="image-container__image"
+              src="img/homepage/racquet.png"
+              alt="racquet"
+            />
+          </div>
+        </div>
+      </div>
+    </>
+  );
 }
 
-export default Home
+export default withNamespaces()(Home);

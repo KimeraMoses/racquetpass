@@ -1,0 +1,35 @@
+.button-container {
+  .button-unfilled {
+    color: #333333;
+    border: 1px solid #e8e8e8;
+    background: transparent;
+  }
+  .button-filled {
+    background: #304ffe;
+    color: #ffffff;
+    border: none;
+  }
+
+  .button-step {
+    border-radius: 12px;
+    width: 188px;
+    height: 59px;
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 27px;
+    display: inline-block;
+    padding: 1rem 2rem;
+    margin: 0;
+    text-decoration: none;
+    cursor: pointer;
+    text-align: center;
+    transition: background 250ms ease-in-out, transform 150ms ease;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    font-family: Poppins;
+    &:disabled {
+      opacity: 0.3;
+      cursor: auto;
+    }
+  }
+}

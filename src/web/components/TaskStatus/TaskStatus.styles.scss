@@ -1,0 +1,18 @@
+.task-status{
+	.state{
+		width: 162px;
+		height: 48px;
+		border-radius: 12px;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+	}
+	.completed{
+		color: #304FFE;
+		background-color: #EAEDFF;
+	}
+	.uncompleted{
+		color: #4A4A4A;
+		background-color: #f2f2f2;
+	}
+}

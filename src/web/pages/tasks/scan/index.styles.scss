@@ -1,0 +1,62 @@
+.scan-task-container{
+	padding: 40px 20px;
+	min-height: 100vh;
+	.header-row{
+		display: flex;
+		align-items: center;
+		&-heading{
+			font-family: Poppins;
+			font-style: normal;
+			font-weight: bold;
+			font-size: 24px;
+			line-height: 36px;
+			flex-grow: 1;
+		}
+	}
+	.scan-task-body{
+		max-width: 450px;
+		margin: auto;
+		.heading-row{
+			padding: 40px 0;
+			.title{
+				font-family: Poppins;
+				font-style: normal;
+				font-weight: 600;
+				font-size: 24px;
+				line-height: 36px;
+				padding-bottom: 12px;
+			}
+			.desc{
+				font-family: Poppins;
+				font-style: normal;
+				font-weight: normal;
+				font-size: 18px;
+				line-height: 27px;
+				color: #545454;
+			}
+		}
+		.scan-qr-container{
+			height: 616px;
+			width: 100%;
+			background-color: #333333;
+			border-radius: 12px;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			.img-container{
+				padding: 10px;
+				background-color: white;
+				border-radius: 12px;
+				height: 320px;
+				width: calc(100% - 60px);
+				display: flex;
+				justify-content: center;
+				align-items: center;
+				img{
+					width: 100%;
+					max-width: 254px;
+				}
+			}
+		}
+	}
+}

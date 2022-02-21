@@ -1,0 +1,72 @@
+.tasks-container{
+  padding: 40px 20px;
+  min-height: 100vh;
+  .header-row{
+    display: flex;
+    align-items: center;
+    &-heading{
+      font-family: Poppins;
+      font-style: normal;
+      font-weight: bold;
+      font-size: 24px;
+      line-height: 36px;
+      flex-grow: 1;
+    }
+  }
+  .tasks-body{
+    max-width: 450px;
+    margin: auto;
+    .task-row{
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      &:first-child{
+        padding: 40px 0 20px 0;
+      }
+      .title{
+        font-family: Poppins;
+        font-style: normal;
+        font-weight: 600;
+        font-size: 24px;
+        line-height: 36px;
+      }
+      .link{
+        text-decoration: none;
+        font-family: Poppins;
+        font-style: normal;
+        font-weight: 600;
+        font-size: 12px;
+        line-height: 18px;
+        color: #304FFE;
+      }
+      .tasks-info{
+        font-family: Poppins;
+        font-style: normal;
+        font-weight: normal;
+        font-size: 18px;
+        line-height: 27px;
+      }
+      .badge{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 48px;
+        height: 28px;
+        background: rgba(48, 79, 254, 0.1);
+        border-radius: 18px;
+        font-family: Poppins;
+        font-style: normal;
+        font-weight: 600;
+        font-size: 18px;
+        line-height: 27px;
+        color: #304FFE;
+      }
+    }
+    .cards-container{
+      padding: 20px 0;
+    }
+    #completed-tasks{
+      display: none;
+    }
+  }
+}

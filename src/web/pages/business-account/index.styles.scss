@@ -1,0 +1,64 @@
+.business-account-container{
+	padding: 40px 20px;
+	min-height: 100vh;
+	.header-row{
+		display: flex;
+		align-items: center;
+		padding-bottom: 40px;
+		&-heading{
+			font-family: Poppins;
+			font-style: normal;
+			font-weight: bold;
+			font-size: 24px;
+			line-height: 36px;
+			flex-grow: 1;
+		}
+	}
+	.business-account-body{
+		max-width: 450px;
+		margin: auto;
+		.choose-account{
+			background: linear-gradient(180deg, #024CA1 0%, #0377E2 100%);
+			border-radius: 20px;
+			padding: 20px;
+			width: 100%;
+			min-height: 229px;
+			display: flex;
+			color: #fff;
+			margin-bottom: 20px;
+			.account-info{
+				display: flex;
+				flex-direction: column;
+				justify-content: space-between;
+				align-items: flex-start;
+				.card-title{
+					font-family: Poppins;
+					font-style: normal;
+					font-weight: 600;
+					font-size: 24px;
+					line-height: 36px;
+					padding-bottom: 12px;
+				}
+				.card-desc{
+					font-family: Poppins;
+					font-style: normal;
+					font-weight: normal;
+					font-size: 18px;
+					line-height: 27px;					
+					color: rgba(255, 255, 255, 0.8);
+					padding-bottom: 12px;
+				}
+				button{
+					min-width: 121px;
+				}
+			}
+			.img-container{
+				padding-left: 20px;
+				img{
+					border-radius: 12px;
+					width: 121px;
+				}
+			}
+		}
+	}
+}

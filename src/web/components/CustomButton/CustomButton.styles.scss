@@ -1,0 +1,58 @@
+.custom-button{
+	display: flex;
+	justify-content: center;
+	button{
+		position: relative;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		height: 59px;
+		border-radius: 12px;
+		border: unset;
+		font-family: Poppins;
+		font-style: normal;
+		font-weight: 500;
+		font-size: 18px;
+		line-height: 27px;
+		a{
+			text-decoration: none;
+			color: unset;
+			width: 100%;
+			height: 100%;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+		}
+	}
+	.btn-sm{
+		height: 48px;
+		width: 95px;
+		font-size: 14px;
+		line-height: 21px;
+	}
+	.btn-lg{
+		width: 388px;
+	}
+	.btn-primary{
+		background-color: #304FFE;
+		color: white;
+	}
+	.btn-secondary{
+		color: #304FFE;
+		background-color: #EAEDFF;
+	}
+	.btn-white{
+		color: #333333;
+		background-color: #ffffff;
+		border: 1px solid #e8e8e8;
+	}
+	.btn-danger{
+		color: #fff;
+		background-color: #EA5353;
+	}
+	.btn-disabled{
+		background-color: #304FFE;
+		color: white;
+		opacity: 0.3;
+	}
+}

@@ -1,0 +1,40 @@
+.task-card{
+	width: 100%;
+	border-radius: 12px;
+	background: #FFFFFF;
+	box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.15);
+	padding: 16px 12px;
+	display: flex;
+	margin-bottom: 7px;
+	text-decoration: none;
+	color: unset;
+	.row{
+		display: flex;
+		img{
+			width: 44px;
+			height: 44px;
+			border-radius: 20px;
+		}
+		.info{
+			display: flex;
+			flex-direction: column;
+			min-height: 44px;
+			padding-left: 10px;
+			justify-content: space-between;
+			.title{
+				font-family: Poppins;
+				font-style: normal;
+				font-weight: 600;
+				font-size: 14px;
+				line-height: 21px;
+			}
+			.sub-title{
+				font-family: Poppins;
+				font-style: normal;
+				font-weight: 500;
+				font-size: 12px;
+				line-height: 18px;				
+			}
+		}
+	}
+}

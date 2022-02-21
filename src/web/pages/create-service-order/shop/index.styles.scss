@@ -1,0 +1,70 @@
+.change-shop-container{
+	position: relative;
+	padding: 40px 20px;
+	min-height: 100vh;
+	.bg-image{
+		position: absolute;
+		bottom: 0;
+		left: 50%;
+		transform: translateX(-50%);
+		z-index: -1;
+		display: flex;
+	}
+	.header-row{
+		display: flex;
+		align-items: center;
+		padding-bottom: 40px;
+		&-heading{
+			font-family: Poppins;
+			font-style: normal;
+			font-weight: bold;
+			font-size: 24px;
+			line-height: 36px;
+			flex-grow: 1;
+		}
+	}
+	.shop-details-body{
+		max-width: 450px;
+		margin: auto;
+		.shop-title{
+			padding-bottom: 15px;
+			font-family: Poppins;
+			font-style: normal;
+			font-weight: 600;
+			font-size: 24px;
+			line-height: 36px;
+		}
+		.search-shop-form{
+			display: flex;
+			flex-direction: column;
+			justify-content: space-between;
+			.input-container{
+				padding-bottom: 20px;
+				position: relative;
+				img{
+					position: absolute;
+					top:11px;
+					left:13px;
+				}
+				.form-input{
+					background: #FFFFFF;
+					border: 1px solid #E8E8E8;
+					box-sizing: border-box;
+					border-radius: 12px;
+					width: 100%;
+					height: 42px;
+					font-family: Poppins;
+					font-style: normal;
+					font-weight: normal;
+					font-size: 14px;
+					line-height: 21px;
+					color: #9A9A9A;
+					padding: 16px 16px 16px 46px;
+					&::placeholder{
+						color: #C1C1C1;
+					}
+				}
+			}
+		}		
+	}
+}
