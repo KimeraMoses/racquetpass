@@ -27,6 +27,7 @@ import StringDetails from './create-service-order/string-details';
 import Shop from './create-service-order/shop';
 import ShopSearching from './create-service-order/shop-searching';
 import OrderSubmitted from './create-service-order/submitted';
+import CreateAccount from './account-page';
 
 function Routers() {
   return (
@@ -35,6 +36,8 @@ function Routers() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/login" element={<Login />} />
+          <Route path="/order" element={<Order />} />
+          <Route path="/create-account" element={<CreateAccount />} />
           <Route path="*" element={<Page404 />} />
           <Route path="/Tasks" element={<Tasks />} />
           <Route path="/Tasks/Scan" element={<Scan />} />

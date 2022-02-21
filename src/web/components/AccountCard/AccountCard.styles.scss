@@ -1,0 +1,43 @@
+.account-card {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: linear-gradient(180deg, #054895 0%, #1576d4 100%);
+  border-radius: 20px;
+  &__text-container {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    max-width: 300px;
+    &-heading {
+      font-weight: 600;
+      font-size: 24px;
+      line-height: 36px;
+      color: #ffffff;
+    }
+    &-txt {
+      font-size: 18px;
+      line-height: 27px;
+      color: #ffffff;
+      opacity: 0.8;
+    }
+    &-btn {
+      width: 121px;
+      height: 48px;
+      background: #ffffff;
+      border-radius: 12px;
+      border: none;
+      font-weight: 500;
+      font-size: 14px;
+      line-height: 21px;
+      // text-align: center;
+      color: #333333;
+      font-family: Poppins;
+      cursor: pointer;
+    }
+  }
+  &__Image {
+    padding: 20px 20px 20px 0px;
+  }
+}

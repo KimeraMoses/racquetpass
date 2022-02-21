@@ -1,0 +1,27 @@
+.shop-section {
+  &__heading {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  &__text-container {
+    &-text {
+      margin-top: 25px;
+    }
+  }
+  &__search-container {
+    margin-top: 20px;
+  }
+  &__account-container {
+    &-text {
+      margin-top: 35px;
+      font-family: Poppins;
+      font-size: 14px;
+      line-height: 21px;
+      display: flex;
+      align-items: center;
+      text-align: center;
+      color: #333333;
+    }
+  }
+}

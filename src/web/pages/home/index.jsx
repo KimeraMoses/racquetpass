@@ -1,11 +1,11 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { withNamespaces } from 'react-i18next';
 
 import { Button } from 'web/components';
-import './index.styles.scss';
+import './home.styles.scss';
 
 function Home({ t }) {
+  const navigate = useNavigate();
   const links = [
     { path: '#', title: t('homePP') },
     { path: '#', title: t('homeCU') },
@@ -15,7 +15,13 @@ function Home({ t }) {
       <div className="home-container">
         <div>
           <div className="home-container__button-container">
-            <button className="home-container__button-container-signin">
+            <button
+              className="home-container__button-container-signin"
+              type="button"
+              onClick={() => {
+                navigate('/login');
+              }}
+            >
               {t('homeSignin')}
             </button>
           </div>
@@ -23,9 +29,16 @@ function Home({ t }) {
             <h1 className="banner-container__heading">{t('homeHeading')}</h1>
             <p className="banner-container__text">{t('homeDesc')}</p>
           </div>
-          <div className="button-container">
-            <Button isDark>{t('homeDarkBtn')}</Button>
-            <Button>{t('homeLightBtn')}</Button>
+          <div className="banner-button-container">
+            <Button
+              isDark
+              onClick={() => navigate('/order', { replace: true })}
+            >
+              {t('homeDarkBtn')}
+            </Button>
+            <Button onClick={() => navigate('/create-account')}>
+              {t('homeLightBtn')}
+            </Button>
           </div>
         </div>
         <div>

@@ -1,0 +1,56 @@
+.custom-input {
+  width: 100%;
+  &__header {
+    margin-bottom: 12px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    &-label {
+      font-weight: 600;
+      font-size: 12px;
+      line-height: 18px;
+      color: #969696;
+      font-family: Poppins;
+    }
+    &-error,
+    &-show {
+      font-weight: 600;
+      font-size: 12px;
+      line-height: 18px;
+      font-family: Poppins;
+    }
+    &-error {
+      color: #e53935;
+    }
+    &-show {
+      color: #304ffe;
+      background: transparent;
+      border: none;
+      outline: none;
+      cursor: pointer;
+    }
+  }
+  &__input {
+    background: #ffffff;
+    border: 1px solid #e8e8e8;
+    box-sizing: border-box;
+    border-radius: 12px;
+    padding: 16px;
+    width: 100%;
+    font-family: Poppins;
+    &::placeholder {
+      font-family: Poppins;
+      font-size: 15px;
+      line-height: 27px;
+      color: #bababa;
+    }
+  }
+  .custom-input__input.custom-input__input-error {
+    background: #fcebeb;
+    border-color: #e53935;
+    &:focus-visible {
+      outline: none;
+      border-color: #e53935;
+    }
+  }
+}

@@ -1,9 +1,12 @@
 .home-container {
   background: linear-gradient(180deg, #044794 0%, #1883e7 100%);
   min-height: 100vh;
+  // gap: 350px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  padding: 0px 22px;
+  position: relative;
   // Button Container Styles
   &__button-container {
     display: flex;
@@ -22,6 +25,7 @@
       line-height: 21px;
       text-align: center;
       color: #333333;
+      cursor: pointer;
     }
   }
   .banner-container {
@@ -37,6 +41,7 @@
       line-height: 36px;
       color: #ffffff;
       margin-bottom: 16px;
+      text-align: center;
     }
     &__text {
       font-family: Poppins;
@@ -44,13 +49,23 @@
       line-height: 27px;
       text-align: center;
       margin-bottom: 65px;
-
+      text-align: center;
       color: #ffffff;
     }
   }
+  .banner-button-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+  }
   .footer-container {
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
+    position: relative;
+    z-index: 2;
+    margin-top: 435px;
     &__link-text {
       padding-bottom: 15px;
       font-family: Poppins;
@@ -64,9 +79,18 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    position: absolute;
+    min-height: 315px;
+    min-width: 203px;
+    margin-top: 20px;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
     &__image {
       position: absolute;
       bottom: 0px;
+      z-index: 1;
+      filter: drop-shadow(0px 0px 100px #fff);
     }
   }
 }
