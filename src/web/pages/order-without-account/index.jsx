@@ -3,8 +3,8 @@ import { withNamespaces } from 'react-i18next';
 import { reduxForm } from 'redux-form';
 import { StepButton, SubmitButton } from 'web/components';
 import {
-  ScanDetails,
-  RacquetDetails,
+  RacquetFound,
+  RacquetNotFound,
   SelectShop,
   Contact,
   VerifyPhone,
@@ -16,12 +16,12 @@ import './orderWithoutAccount.styles.scss';
 let OrderWithoutAccount = ({ t }) => {
   return (
     <div className="without-account">
-      {/* <ScanDetails t={t} /> */}
-      {/* <RacquetDetails t={t} /> */}
+      <RacquetFound t={t} />
+      {/* <RacquetNotFound t={t} /> */}
       {/* <SelectShop t={t} /> */}
       {/* <Contact t={t} /> */}
       {/* <VerifyPhone t={t} /> */}
-      <ReviewOrder t={t} />
+      {/* <ReviewOrder t={t} /> */}
     </div>
   );
 };

@@ -1,5 +1,5 @@
-export { ScanDetails } from './ScanDetails.section';
-export { RacquetDetails } from './RacquetDetails.component';
+export { RacquetFound } from './RacquetFound.section';
+export { RacquetNotFound } from './RacquetNotFound.section';
 export { SelectShop } from './SelectShop.section';
 export { Contact } from './Contact.section';
 export { VerifyPhone } from './VerifyPhone.section';

@@ -4,9 +4,9 @@ import { Link } from 'react-router-dom';
 import { Heading, SubHeading, Description, SubmitButton } from 'web/components';
 
 // Styles
-import './RacquetDetails.styles.scss';
+import './RacquetNotFound.styles.scss';
 
-export function RacquetDetails({ t }) {
+export function RacquetNotFound({ t }) {
   return (
     <>
       <div className="racquet-details">

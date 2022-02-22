@@ -29,6 +29,7 @@ import ShopSearching from './create-service-order/shop-searching';
 import OrderSubmitted from './create-service-order/submitted';
 import CreateAccount from './account-page';
 import OrderWithoutAccount from './order-without-account';
+import PlayerTabs from './player-tabs';
 
 function Routers() {
   return (
@@ -91,6 +92,7 @@ function Routers() {
             path="/order-without-account"
             element={<OrderWithoutAccount />}
           />
+          <Route path='/player-tabs' element={<PlayerTabs />} />
         </Routes>
       </Router>
     </>
