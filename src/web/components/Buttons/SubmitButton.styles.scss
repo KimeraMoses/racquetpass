@@ -1,4 +1,15 @@
 .submit-button {
+  .button-unfilled {
+    color: #304ffe;
+
+    border: none;
+    background: rgba(48, 79, 254, 0.1);
+  }
+  .button-filled {
+    background: #304ffe;
+    color: #ffffff;
+    border: none;
+  }
   &__btn {
     border-radius: 12px;
     width: 100%;

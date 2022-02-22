@@ -147,13 +147,12 @@
   "taskScannedCrossesHeading": "Crosses",
   "taskScannedCrossesDesc": "Luxilon Alu Rough 1.6 G @ 24 lbs",
 
-  
   "accountCreate": "Create Account",
   "accountSignIn": "Sign In",
   "accountPlayer": "I’m a Player",
-  "accountPlayerDescription":"Get started with a new account as a player.",
+  "accountPlayerDescription": "Get started with a new account as a player.",
   "accountStringer": "I’m a Stringer",
-  "accountStringerDescription":"Get started with a new account as a stringer.",
+  "accountStringerDescription": "Get started with a new account as a stringer.",
   "accountGetStarted": "Get Started",
 
   "createBusinessAccountHeading": "Create Business Account",
@@ -180,7 +179,7 @@
   "verifyBusinessAccountPhoneCodeDescription": "Please enter the 6 digit verification code that Racquet Pass texted to your phone number (phone number)",
   "verifyBusinessAccountPhoneCodeResend": "Resend Code",
   "verifyBusinessAccountPhoneNextBtn": "Next",
-  
+
   "businessAccountDetailHeading": "Where is your business located?",
   "businessAccountDetailDescription": "Almost there! Just just one more step after this and you’re officially a RacquetPass stringer.",
   "businessAccountDetailStreetLabel": "Street Address",
@@ -192,7 +191,7 @@
   "businessAccountDetailZipLabel": "ZIP Code",
   "businessAccountDetailZipPlaceHolder": "ZIP",
   "businessAccountDetailNextBtn": "Next",
-  
+
   "businessAccountPasswordHeading": "Make a password",
   "businessAccountPasswordDescription": "A little pain for a lot of security.",
   "businessAccountPasswordLabel": "Password",
@@ -210,7 +209,7 @@
   "businessAccountPasswordRecommendationFour": "One number",
   "businessAccountPasswordRecommendationFive": "No text from email/name",
   "businessAccountPasswordCreateBtn": "Create Account",
-  
+
   "verifyBusinessAccountBusinessHeading": "Verify your business",
   "verifyBusinessAccountBusinessDescription": "Verifying your business is the final step until you can show your customers the magic of RacquetPass. However, you still have access to all other features of RacquetPass.",
   "verifyBusinessAccountBusinessCodeLabel": "Verification Code",
@@ -259,7 +258,6 @@
   "orderOpenedShopAddress1": " Seattle, WA 12345",
   "orderReopenedPickup": "Pickup",
 
-  
   "orderScannedHeading": "We found a racquet associated with this QR code!",
   "orderScannedDetailTitle": "Racquet Details",
   "orderScannedNameLabel": "Nickname",
@@ -300,7 +298,7 @@
   "orderScannedStringHeading": "String Type",
   "orderScannedStringDesc": "Luxilon Alu Rough 1.6 G @ 24 lbs",
   "orderScannedComplete": "Place a service order",
-  
+
   "createOrderHeading": "Ole Reliable",
   "createOrderEdit": "Edit Racquet",
   "createOrderRacquetNameHeading": "Nickname",
@@ -364,8 +362,7 @@
   "OrderSubmittedInfoProgress": "in Progress",
   "OrderSubmittedInfoConfirmation": "You should recieve a confirmation text shortly.",
   "OrderSubmittedBack": "Back to RacquetPass",
-  
-  "odrPivacyText": "By clicking Create Account, Continue Using Facebook, Continue Using Google or Continue Using Apple, you agree to our .",
+
   "odrPrivacyAnd": "and",
   "odrTermsBold": "Terms & Conditions",
   "odrPrivacyBold": "Privacy Statement.",
