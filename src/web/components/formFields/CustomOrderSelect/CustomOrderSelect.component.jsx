@@ -3,17 +3,17 @@ import './CustomOrderSelect.styles.scss';
 
 export const CustomOrderSelect = (props) => {
   return (
-    <div className="custom-select">
+    <div className="custom-order-select">
       {props.noLabel ? (
         <></>
       ) : (
-        <div className="custom-select__label">{props.label}</div>
+        <div className="custom-order-select__label">{props.label}</div>
       )}
-      <div className="custom-select__container">
+      <div className="custom-order-select__container">
         <input
           {...props.input}
           placeholder={props.placeholder ? props.placeholder : props.label}
-          className="custom-select__input"
+          className="custom-order-select__input"
           onClick={props.onSelectClick}
           style={
             props.icon
@@ -32,7 +32,7 @@ export const CustomOrderSelect = (props) => {
       {props.meta &&
         props.meta.error &&
         props.meta.touched(
-          <div className="custom-select__error">{props.meta.error}</div>
+          <div className="custom-order-select__error">{props.meta.error}</div>
         )}
     </div>
   );
