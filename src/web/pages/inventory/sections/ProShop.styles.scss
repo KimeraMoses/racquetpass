@@ -1,0 +1,76 @@
+.shop {
+  &__header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    &-headings {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      gap: 12px;
+    }
+    &-button {
+      &-btn {
+        background: #ffffff;
+        border: 1px solid #e8e8e8;
+        box-sizing: border-box;
+        border-radius: 12px;
+        width: 86px;
+        height: 48px;
+        font-family: Poppins;
+        font-weight: 600;
+        font-size: 14px;
+        line-height: 21px;
+        color: #333333;
+        cursor: pointer;
+      }
+    }
+  }
+  &__contact-heading {
+    margin-top: 45px;
+  }
+  &__contact-info {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    &-inner {
+      &-heading {
+        font-weight: 600;
+        font-size: 12px;
+        line-height: 18px;
+        color: #8e8e8e;
+      }
+      &-txt {
+        font-weight: 500;
+        font-size: 18px;
+        line-height: 27px;
+        color: #333333;
+      }
+    }
+  }
+  &__services-heading {
+    margin-top: 80px;
+  }
+  &__services-inner {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    &-text {
+      &-heading {
+        font-weight: 600;
+        font-size: 12px;
+        line-height: 18px;
+        color: #8e8e8e;
+      }
+      &-txt {
+        font-weight: 500;
+        font-size: 18px;
+        line-height: 27px;
+        color: #333333;
+      }
+    }
+  }
+}

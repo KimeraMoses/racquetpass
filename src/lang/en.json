@@ -375,5 +375,42 @@
   "accPassitem2": "One lowercase letter",
   "accPassitem3": "One uppercase letter",
   "accPassitem4": "One number",
-  "accPassitem5": "No text from email/name"
+  "accPassitem5": "No text from email/name",
+
+  "profileString": "Strings",
+  "profileButtonCSV": "Upload CSV",
+  "profileButtonAddNew": "Add New Item",
+  "profileFormEdit": "Edit Item",
+  "profileItemDelete": "Delete Item",
+  "profileButtonSave": "Save Changes",
+
+  "shopProHeading": "My Pro Shop",
+  "ShopContactHeading": "Contact Info",
+  "shopButtonEdit": "Edit",
+  "shopEmailHeading": "Email",
+  "shopEmail": "awesome_pro_racquets@gmail.com",
+  "shopPhone": "(123) 4567-8910",
+  "shopAddress": "123 NE Street St Seattle, WA 98101",
+  "shopServiceHeading": "Service Details",
+  "shopDeliveryTime": "Estimated delivery time",
+  "ShopDeliveryTimeDay": "3d",
+  "shopLaborPriceHeading": "Labor price",
+  "shopLaborPrice": "$19.99",
+
+  "editShopHeading": "Edit My Pro Shop",
+  "editNameRequest": "Request Name change",
+  "editAddressRequest": "Request address change",
+  "editServicesText": "This is how much you charge for the labor of restringing. It will be added to the cost of strings to determine the price of a service order.",
+  "modifyRequest": "Modify or cancel request",
+  "modifyRequestText": "Request to change to “Andre’s Even More Awesome Racquets” pending",
+  "modifyAddressRequest": "Request to change to “654 SW Street St / New York City, NY 12345” pending",
+
+  "editText": "We will reach out to you soon to confirm that this change is legitimate.",
+  "submitRequest": "Submit Request",
+  "changeName": "Name Change Request",
+  "requestPending": "This request is currently pending.",
+  "cancelRequest": "Cancel Request",
+  "cancelAddressHeading": "Address Change Request",
+  "RequestAddressChnage": "Request Address Change",
+  "RequestAddressText": "After submitting this form, we will reach out to you to confirm that this change is legitimate."
 }

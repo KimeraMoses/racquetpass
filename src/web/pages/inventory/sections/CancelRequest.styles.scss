@@ -1,0 +1,31 @@
+.change {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  &__header {
+    display: flex;
+    flex-direction: row;
+    gap: 12px;
+    align-items: center;
+  }
+  &__text {
+    margin-top: 25px;
+    &-txt {
+      color: #545454;
+    }
+  }
+
+  &__form {
+    margin-top: 30px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+  &__button {
+    margin-top: 50px;
+    &-btn {
+      background: #ea5353 !important;
+    }
+  }
+}

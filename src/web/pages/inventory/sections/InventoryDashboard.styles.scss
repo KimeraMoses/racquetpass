@@ -1,0 +1,34 @@
+.inventory-dashboard {
+  // padding: 40px 20px;
+  &__header {
+    display: flex;
+    justify-content: space-between;
+    &-image {
+      transform: translateX(15%);
+      border: 2px solid #304ffe;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      &-img {
+        padding: 7px;
+      }
+    }
+  }
+  &__heading {
+    margin-top: 20px;
+    text-align: center;
+    // display: flex;
+    // justify-content: center;
+    // align-items: center;
+  }
+  &__list {
+    margin-top: 5px;
+    list-style: none;
+    &-item {
+      border-top: 1px solid #e8e8e8;
+      display: flex;
+      gap: 22px;
+      padding: 22px 0px;
+    }
+  }
+}
