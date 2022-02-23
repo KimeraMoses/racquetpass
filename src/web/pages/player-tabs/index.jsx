@@ -3,7 +3,14 @@ import { reduxForm } from 'redux-form';
 import { useNavigate } from 'react-router-dom';
 import { withNamespaces } from 'react-i18next';
 import './player-tabs.styles.scss';
-import { Locker, Drawer, PlayerProfile, EditProfile } from './sections';
+import {
+  Locker,
+  Drawer,
+  PlayerProfile,
+  EditProfile,
+  // AccountDetails,
+  EditAccountDetails,
+} from './sections';
 
 function PlayerTabs({ t, handleSubmit }) {
   const navigate = useNavigate();
@@ -14,7 +21,9 @@ function PlayerTabs({ t, handleSubmit }) {
           {/* <Locker t={t} /> */}
           {/* <Drawer t={t} /> */}
           {/* <PlayerProfile t={t} /> */}
-          <EditProfile t={t} />
+          {/* <EditProfile t={t} /> */}
+          {/* <AccountDetails t={t} /> */}
+          <EditAccountDetails t={t} />
         </div>
       </form>
     </>
