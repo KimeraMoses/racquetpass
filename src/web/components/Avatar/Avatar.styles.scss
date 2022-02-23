@@ -1,0 +1,12 @@
+.avatar {
+  border: 2px solid #304ffe;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  padding: 5px;
+  img {
+    width: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+  }
+}

@@ -11,3 +11,4 @@ export * from './SummaryCard/SummaryCard.component';
 export * from './AccountCard/AccountCard.component';
 export * from './Tabs/Tabs.component';
 export * from './OrderCard/OrderCard.component';
+export * from './Avatar/Avatar.component';

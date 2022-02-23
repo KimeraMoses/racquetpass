@@ -1,6 +1,6 @@
 import { React } from 'react';
 import { Link } from 'react-router-dom';
-import { HeadingButton, Heading, Tabs } from 'web/components';
+import { Avatar, HeadingButton, Heading, Tabs } from 'web/components';
 
 import './Drawer.styles.scss';
 
@@ -11,9 +11,7 @@ export const Drawer = () => {
         <div></div>
 
         <div className="drawer__profile-avatar">
-          <div className="drawer__profile-avatar-img">
-            <img src="/img/player/1.png" alt="player" />
-          </div>
+          <Avatar height={102} width={102} img="/img/player/1.png" />
           <div className="drawer__profile-avatar-text">
             <Heading customClass="drawer__profile-avatar-text-heading">
               Mannan Cheema
