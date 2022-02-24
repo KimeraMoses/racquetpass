@@ -18,12 +18,12 @@ let Inventory = ({ t }) => {
   return (
     <div className="inventory">
       <form className="inventory-form">
-        {/* <InventoryDashboard t={t} /> */}
+        <InventoryDashboard t={t} />
         {/* <SearchInventory t={t} /> */}
         {/* <ItemForm t={t} /> */}
         {/* <ProShop t={t} /> */}
         {/* <EditShop t={t} /> */}
-        <RequestChange t={t} />
+        {/* <RequestChange t={t} /> */}
         {/* <CancelRequest t={t} /> */}
       </form>
     </div>

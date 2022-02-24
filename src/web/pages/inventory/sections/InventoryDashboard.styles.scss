@@ -1,34 +1,35 @@
 .inventory-dashboard {
-  // padding: 40px 20px;
-  &__header {
+  .inventory-dashboard__profile {
     display: flex;
-    justify-content: space-between;
-    &-image {
-      transform: translateX(15%);
-      border: 2px solid #304ffe;
-      border-radius: 50%;
+    justify-content: center;
+    position: relative;
+    padding: 0px 20px;
+    &-avatar {
       display: flex;
+      gap: 20px;
+      flex-direction: column;
       align-items: center;
-      &-img {
-        padding: 7px;
+      &-text {
+        text-align: center;
+        &-heading {
+          font-family: Poppins;
+          font-style: normal;
+          font-weight: bold;
+          font-size: 24px;
+          line-height: 36px;
+          text-align: center;
+          color: #333333;
+        }
       }
     }
-  }
-  &__heading {
-    margin-top: 20px;
-    text-align: center;
-    // display: flex;
-    // justify-content: center;
-    // align-items: center;
-  }
-  &__list {
-    margin-top: 5px;
-    list-style: none;
-    &-item {
-      border-top: 1px solid #e8e8e8;
-      display: flex;
-      gap: 22px;
-      padding: 22px 0px;
+    &-close {
+      position: absolute;
+      top: 0;
+      right: 20px;
     }
+  }
+
+  .inventory-dashboard__menu {
+    margin-top: 10px;
   }
 }

@@ -1,18 +1,27 @@
 import './HeadingButton.styles.scss';
 
-export function HeadingButton({ drawer, close, text, onClick, add }) {
+export function HeadingButton({
+  drawer,
+  close,
+  text,
+  onClick,
+  add,
+  height,
+  width,
+}) {
   return (
     <div
       className={`heading-button ${text ? 'heading-button-text' : ''} ${
         add ? 'heading-button-add' : ''
       }`}
+      style={{ height, width }}
     >
-      <button className="heading-button__btn" onClick={onClick}>
-        {close ? (
-          <img src="/img/button/close.png" />
-        ) : (
-          <img src="/img/button/menu.png" />
-        )}
+      <button
+        className="heading-button__btn"
+        onClick={onClick}
+        style={{ height, width }}
+      >
+        {close ? <img src="/img/button/close.png" /> : <></>}
         {text ? text : <></>}
         {drawer ? (
           <img src="/img/button/drawer.png" onClick={onClick} />

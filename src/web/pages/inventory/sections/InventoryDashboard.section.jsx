@@ -1,64 +1,35 @@
-import { HeadingButton, Heading, Description } from 'web/components';
+import { React } from 'react';
+import { Link } from 'react-router-dom';
+import { Avatar, HeadingButton, Heading, Tabs } from 'web/components';
+
 import './InventoryDashboard.styles.scss';
 
-export function InventoryDashboard({ t }) {
-  const profilelist = [
-    {
-      icon: '/img/inventory/shop.png',
-      text: `{t('businessAccountDetailsShop')}`,
-    },
-    {
-      icon: '/img/inventory/box.png',
-      text: `{t('businessAccountDetailsInventory')}`,
-    },
-    {
-      icon: '/img/inventory/logout.png',
-      text: `{t('businessAccountDetailsLogout')}`,
-    },
-  ];
+export const InventoryDashboard = () => {
   return (
-    <>
-      <div className="inventory-dashboard">
-        <div className="inventory-dashboard__header">
-          <div className="inventory-dashboard__header-placeholder"></div>
-          <div className="inventory-dashboard__header-image">
-            <img
-              src="/img/inventory/profile-pic.png"
-              alt="profile-picture"
-              className="inventory-dashboard__header-image-img"
-            />
-          </div>
-          <div className="inventory-dashboard__header-button">
-            <HeadingButton close />
+    <div className="inventory-dashboard">
+      <div className="inventory-dashboard__profile">
+        <div className="inventory-dashboard__profile-avatar">
+          <Avatar height={102} width={102} img="/img/player/1.png" />
+          <div className="inventory-dashboard__profile-avatar-text">
+            <Heading customClass="inventory-dashboard__profile-avatar-text-heading">
+              Andre’s Awesome Pro Racquets
+            </Heading>
           </div>
         </div>
-        <div className="inventory-dashboard__heading">
-          <Heading>{t('businessAccountDetailsHeading')}</Heading>
+        <div className="inventory-dashboard__profile-close">
+          <HeadingButton close height="48px" width="48px" />
         </div>
-        {/* <ul className="inventory-dashboard__list">
-          {profilelist.map(({ icon, text }) => (
-            <li key={icon} className="inventory-dashboard__list-item">
-              <img src={icon} alt="icon" />
-              <Description>{text}</Description>
-            </li>
-          ))}
-        </ul> */}
-
-        <ul className="inventory-dashboard__list">
-          <li className="inventory-dashboard__list-item">
-            <img src="/img/inventory/shop.png" alt="icon" />
-            <Description>{t('businessAccountDetailsShop')}</Description>
-          </li>
-          <li className="inventory-dashboard__list-item">
-            <img src="/img/inventory/box.png" alt="icon" />
-            <Description>{t('businessAccountDetailsInventory')}</Description>
-          </li>
-          <li className="inventory-dashboard__list-item">
-            <img src="/img/inventory/logout.png" alt="icon" />
-            <Description>{t('businessAccountDetailsLogout')}</Description>
-          </li>
-        </ul>
       </div>
-    </>
+
+      <div className="inventory-dashboard__menu">
+        <Tabs
+          tabs={[
+            { title: 'My Pro Shop', icon: '/img/drawer/shop.png' },
+            { title: 'Inventory', icon: '/img/drawer/orders.png' },
+            { title: 'Logout', icon: '/img/drawer/logout.png' },
+          ]}
+        />
+      </div>
+    </div>
   );
-}
+};
