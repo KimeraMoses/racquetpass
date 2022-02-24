@@ -10,7 +10,7 @@ import {
 } from 'web/components';
 import './AboutRacquet.styles.scss';
 
-export function AboutRacquet({ t, setStep }) {
+export function AboutRacquet({ t, setStep, change }) {
   return (
     <>
       <div className="about">
@@ -28,6 +28,7 @@ export function AboutRacquet({ t, setStep }) {
             type="file"
             accept="image/*"
             component={FileInput}
+            change={change}
           />
         </div>
         <div className="about__form">

@@ -11,7 +11,7 @@ import {
 } from 'web/components';
 import './EditRacquetInfo.styles.scss';
 
-export function EditRacquetInfo({ t, setStep, setStrings }) {
+export function EditRacquetInfo({ t, setStep, setStrings, change }) {
   return (
     <>
       <div className="edit-racquet">
@@ -40,6 +40,7 @@ export function EditRacquetInfo({ t, setStep, setStrings }) {
             accept="image/*"
             background={'/img/orderWithoutAccount/racquet.png'}
             component={FileInput}
+            change={change}
           />
         </div>
         <div className="edit-racquet__form">

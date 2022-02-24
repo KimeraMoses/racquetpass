@@ -1,13 +1,16 @@
+import { useState } from 'react';
 import './CustomFileInput.styles.scss';
 
 export const FileInput = (props) => {
-  const {
-    input: { onChange, value },
-  } = props;
+  const [image, setImage] = useState();
 
   const handleChange = (e) => {
-    onChange(e.target.files[0]);
+    console.log(e.target.files[0]);
+    if (props.change) {
+      props.change('image', e.target.files[0]);
+    }
   };
+
   return (
     <div className="file-input">
       <div className="file-input__header">
@@ -15,7 +18,7 @@ export const FileInput = (props) => {
       </div>
       <label
         className="file-input__label"
-        for="upload-photo"
+        htmlFor="upload-photo"
         style={{
           background: `url(${
             props.background
@@ -28,7 +31,6 @@ export const FileInput = (props) => {
         id="upload-photo"
         className="file-input__handle"
         type="file"
-        value={value}
         onChange={handleChange}
         accept={props.accept}
       />

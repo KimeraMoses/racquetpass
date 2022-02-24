@@ -45,7 +45,11 @@ function ConfigureRacquet({ t, handleSubmit, change }) {
         )}
         {step === 1 ? <Locker t={t} setStep={setStep} /> : <></>}
         {step === 2 ? <Scan t={t} setStep={setStep} change={change} /> : <></>}
-        {step === 3 ? <AboutRacquet t={t} setStep={setStep} /> : <></>}
+        {step === 3 ? (
+          <AboutRacquet t={t} setStep={setStep} change={change} />
+        ) : (
+          <></>
+        )}
         {step === 4 && !hybrid ? (
           <StringDetails
             t={t}
@@ -74,7 +78,12 @@ function ConfigureRacquet({ t, handleSubmit, change }) {
           <></>
         )}
         {step === 6 && strings ? (
-          <EditStringInfo t={t} setStrings={setStrings} setStep={setStep} />
+          <EditStringInfo
+            t={t}
+            setStrings={setStrings}
+            setStep={setStep}
+            change={change}
+          />
         ) : (
           <></>
         )}
