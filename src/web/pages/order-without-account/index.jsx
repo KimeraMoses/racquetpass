@@ -20,7 +20,7 @@ let OrderWithoutAccount = ({ t }) => {
 
   const [step, setStep] = useState(1);
   const innerBarCN = `without-account__progress-bar-inner-step${step}`;
-  const racquetFound = false;
+  const racquetFound = true;
   return (
     <div className="without-account">
       <div className="without-account__sections">
@@ -91,7 +91,7 @@ const onSubmit = (values, dispatch) => {
 
 OrderWithoutAccount = reduxForm({
   // a unique name for the form
-  form: '',
+  form: 'order-without-account',
   onSubmit,
 })(OrderWithoutAccount);
 
