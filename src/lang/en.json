@@ -375,5 +375,18 @@
   "accPassitem2": "One lowercase letter",
   "accPassitem3": "One uppercase letter",
   "accPassitem4": "One number",
-  "accPassitem5": "No text from email/name"
+  "accPassitem5": "No text from email/name",
+
+  "configHeading": "Tell us about this racquet",
+  "configQR": "QR Code",
+  "configWhatLink": "What's This?",
+  "configQRText": "Don’t have a QR Code?",
+  "configQRText1": "  No worries, you can add it later.",
+  "configStringHeading": "What strings do you use with this racquet?",
+  "configMains": "Mains & Crosses",
+  "configStringSwitch": "Use different strings for mains and crosses",
+  "configButtonRacquet": "Create Racquet",
+  "configStringHead": "What strings do you use?",
+
+  "editRacquetInfo": "Edit Racquet Settings"
 }

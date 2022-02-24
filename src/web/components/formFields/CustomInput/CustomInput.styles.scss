@@ -12,6 +12,16 @@
       color: #969696;
       font-family: Poppins;
     }
+    &-link {
+      &-lnk {
+        text-decoration: none;
+        font-family: Poppins;
+        font-weight: 600;
+        font-size: 12px;
+        line-height: 18px;
+        color: #304ffe !important;
+      }
+    }
     &-error,
     &-show {
       font-weight: 600;

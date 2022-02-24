@@ -21,9 +21,9 @@ function PlayerTabs({ t, handleSubmit }) {
           {/* <Locker t={t} /> */}
           {/* <Drawer t={t} /> */}
           {/* <PlayerProfile t={t} /> */}
-          {/* <EditProfile t={t} /> */}
+          <EditProfile t={t} />
           {/* <AccountDetails t={t} /> */}
-          <EditAccountDetails t={t} />
+          {/* <EditAccountDetails t={t} /> */}
         </div>
       </form>
     </>

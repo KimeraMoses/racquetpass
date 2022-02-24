@@ -1,0 +1,47 @@
+.string {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  &__header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+  }
+  &__info {
+    margin-top: 40px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
+  &__form {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+  &__swtich {
+    margin-top: 35px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    &-text {
+      font-size: 14px;
+      line-height: 21px;
+      display: flex;
+      align-items: center;
+      color: #000000;
+    }
+  }
+  &__buttons {
+    margin-top: 50px;
+    display: flex;
+    flex-direction: row;
+    gap: 12px;
+    // justify-content: space-between;
+    &-btn {
+      font-size: 14px !important;
+    }
+  }
+}
