@@ -30,6 +30,8 @@ import OrderSubmitted from './create-service-order/submitted';
 import CreateAccount from './account-page';
 import OrderWithoutAccount from './order-without-account';
 import Inventory from './inventory';
+import PlayerTabs from './player-tabs';
+import ConfigureRacquet from './configure-racquet';
 
 function Routers() {
   return (
@@ -93,6 +95,8 @@ function Routers() {
             element={<OrderWithoutAccount />}
           />
           <Route path="/inventory" element={<Inventory />} />
+          <Route path="/player-tabs" element={<PlayerTabs />} />
+          <Route path="/configure-racquet" element={<ConfigureRacquet />} />
         </Routes>
       </Router>
     </>

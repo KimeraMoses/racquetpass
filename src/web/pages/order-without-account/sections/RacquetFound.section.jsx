@@ -4,9 +4,9 @@ import { Link } from 'react-router-dom';
 import { Heading, SubHeading, Description, SubmitButton } from 'web/components';
 
 // Styles
-import './ScanDetails.styles.scss';
+import './RacquetFound.styles.scss';
 
-export function ScanDetails({ t }) {
+export function RacquetFound({ t }) {
   return (
     <>
       <div className="scan-details">

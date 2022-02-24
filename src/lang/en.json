@@ -412,5 +412,18 @@
   "cancelRequest": "Cancel Request",
   "cancelAddressHeading": "Address Change Request",
   "RequestAddressChnage": "Request Address Change",
-  "RequestAddressText": "After submitting this form, we will reach out to you to confirm that this change is legitimate."
+  "RequestAddressText": "After submitting this form, we will reach out to you to confirm that this change is legitimate.",
+
+  "configHeading": "Tell us about this racquet",
+  "configQR": "QR Code",
+  "configWhatLink": "What's This?",
+  "configQRText": "Don’t have a QR Code?",
+  "configQRText1": "  No worries, you can add it later.",
+  "configStringHeading": "What strings do you use with this racquet?",
+  "configMains": "Mains & Crosses",
+  "configStringSwitch": "Use different strings for mains and crosses",
+  "configButtonRacquet": "Create Racquet",
+  "configStringHead": "What strings do you use?",
+
+  "editRacquetInfo": "Edit Racquet Settings"
 }

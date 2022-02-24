@@ -1,0 +1,81 @@
+.review {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: calc(100vh - 80px);
+  &__header {
+    display: flex;
+    flex-direction: row;
+    gap: 12px;
+    align-items: center;
+  }
+  &__racquet {
+    margin-top: 40px;
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+    &-details {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+      &-heading {
+        font-weight: 600;
+        font-size: 12px;
+        line-height: 18px;
+        color: #969696;
+      }
+      &-text {
+        margin-top: 5px;
+
+        font-weight: 600;
+        font-size: 24px;
+        line-height: 36px;
+        color: #333333;
+      }
+      &-button {
+        &-btn {
+          width: 140px !important;
+          height: 48px !important;
+          font-weight: 500 !important;
+          font-size: 14px !important;
+          line-height: 21px !important;
+          padding: 12px !important;
+        }
+      }
+    }
+  }
+  &__racquet-info {
+    margin-top: 35px;
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+    &-details {
+      &-heading {
+        font-weight: 600;
+        font-size: 12px;
+        line-height: 18px;
+        color: #969696;
+      }
+      &-text {
+        font-weight: 500;
+        font-size: 18px;
+        line-height: 27px;
+        color: #333333;
+      }
+    }
+  }
+  &__link {
+    margin-top: 46px;
+    &-text {
+      text-decoration: none;
+      font-family: Poppins;
+      font-weight: 500;
+      font-size: 18px;
+      line-height: 27px;
+      color: #ea5353;
+    }
+  }
+  &__button {
+    margin-top: 50px;
+  }
+}

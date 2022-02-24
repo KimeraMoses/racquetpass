@@ -1,0 +1,43 @@
+.edit-profile {
+  padding: 0px 20px;
+
+  &__heading {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 15px;
+    margin-bottom: 45px;
+  }
+
+  &__avatar {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    &-text {
+      &-name {
+      }
+      &-btn {
+        a {
+          font-family: Poppins;
+          font-style: normal;
+          font-weight: 500;
+          font-size: 14px;
+          line-height: 21px;
+          color: #304ffe;
+          text-decoration: none;
+        }
+      }
+    }
+  }
+
+  &__form {
+    margin-top: 35px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  &__btn {
+    margin-top: 40px;
+  }
+}

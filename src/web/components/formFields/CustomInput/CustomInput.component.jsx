@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import './CustomInput.styles.scss';
 
 export const CustomInput = (props) => {
@@ -11,6 +12,17 @@ export const CustomInput = (props) => {
           <></>
         ) : (
           <div className="custom-input__header-label">{props.label}</div>
+        )}
+        {props.link ? (
+          <>
+            <div className="custom-input__header-link">
+              <Link to="#" className="custom-input__header-link-lnk">
+                {props.link}
+              </Link>
+            </div>
+          </>
+        ) : (
+          <></>
         )}
         {visited && error && (
           <div className="custom-input__header-error">{error}</div>

@@ -1,0 +1,32 @@
+.custom-radio__container {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  .custom-radio__container-label {
+    .custom-radio__container-label-text {
+      font-family: Poppins;
+      font-style: normal;
+      font-weight: 600;
+      font-size: 12px;
+      line-height: 18px;
+      color: #969696;
+    }
+  }
+  .custom-radio__container-inner {
+    display: grid;
+    grid-template-columns: auto auto;
+    gap: 12px;
+    .custom-radio__container-inner-option {
+      background: #ffffff;
+      border: 1px solid #e8e8e8;
+      box-sizing: border-box;
+      border-radius: 12px;
+      padding: 16px;
+      cursor: pointer;
+    }
+    .custom-radio__container-inner-option.custom-radio__container-inner-option-active {
+      background: rgba(48, 79, 254, 0.1);
+      border: 1px solid #304ffe;
+    }
+  }
+}
