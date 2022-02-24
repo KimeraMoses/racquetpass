@@ -14,12 +14,12 @@ export function HeadingButton({
       className={`heading-button ${text ? 'heading-button-text' : ''} ${
         add ? 'heading-button-add' : ''
       }`}
-      style={{ height, width }}
+      style={close ? { height: '48px', width: '48px' } : { height, width }}
     >
       <button
         className="heading-button__btn"
         onClick={onClick}
-        style={{ height, width }}
+        style={close ? { height: '48px', width: '48px' } : { height, width }}
       >
         {close ? <img src="/img/button/close.png" /> : <></>}
         {text ? text : <></>}

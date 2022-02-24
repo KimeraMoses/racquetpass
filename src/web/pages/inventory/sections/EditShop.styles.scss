@@ -1,4 +1,5 @@
 .edit {
+  padding: 0px 20px;
   &__heading {
     display: flex;
     flex-direction: row;
@@ -15,7 +16,7 @@
     margin-top: 35px;
   }
   &__shop-details {
-    margin-top: 20px;
+    margin-top: 30px;
     &-header {
       display: flex;
       flex-direction: row;
@@ -34,6 +35,7 @@
         font-size: 12px;
         line-height: 18px;
         color: #304ffe;
+        cursor: pointer;
       }
     }
     &-text {
@@ -75,6 +77,7 @@
   font-size: 12px;
   line-height: 18px;
   color: #efac00;
+  cursor: pointer;
 }
 .edit__shop-details-text-modify-txt {
   margin-top: 8px;

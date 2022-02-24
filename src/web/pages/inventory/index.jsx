@@ -27,23 +27,34 @@ let Inventory = ({ t }) => {
       case 'edit':
         return <EditForm t={t} setCurrentScreen={setCurrentScreen} />;
       case 'proshop':
-        return <ProShop t={t} />;
+        return <ProShop t={t} setCurrentScreen={setCurrentScreen} />;
+      case 'editShop':
+        return <EditShop t={t} setCurrentScreen={setCurrentScreen} />;
+      case 'editShopName':
+        return <RequestChange t={t} setCurrentScreen={setCurrentScreen} />;
+      case 'editShopAddress':
+        return (
+          <RequestChange t={t} setCurrentScreen={setCurrentScreen} isAddress />
+        );
+      case 'modifyShopName':
+        return <CancelRequest t={t} setCurrentScreen={setCurrentScreen} />;
+      case 'modifyShopAddress':
+        return (
+          <CancelRequest t={t} setCurrentScreen={setCurrentScreen} isAddress />
+        );
       default:
         return <InventoryDashboard t={t} setCurrentScreen={setCurrentScreen} />;
     }
   };
-
+  console.log(currentScreen);
   return (
     <div className="inventory">
       <form className="inventory-form">
         {getCurrentScreen()}
-        {/* <SearchInventory t={t} /> */}
-        {/* <AddForm t={t} /> */}
-        {/* <EditForm t={t} /> */}
-        {/* <ProShop t={t} /> */}
+        {/* <ProShop t={t} setCurrentScreen={setCurrentScreen} /> */}
         {/* <EditShop t={t} /> */}
         {/* <RequestChange t={t} /> */}
-        {/* <CancelRequest t={t} /> */}
+        {/* <CancelRequest t={t} isAddress /> */}
       </form>
     </div>
   );

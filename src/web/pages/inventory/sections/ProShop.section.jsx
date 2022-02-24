@@ -1,21 +1,23 @@
-import { Heading, HeadingButton, SubHeading } from 'web/components';
+import { Heading, BackButton, SubHeading } from 'web/components';
+import { HeadingButton } from 'web/components/Buttons/HeadingButton.component';
 
 import './ProShop.styles.scss';
 
-export function ProShop({ t }) {
+export function ProShop({ t, setCurrentScreen }) {
   return (
     <>
       <div className="shop">
         <div className="shop__header">
           <div className="shop__header-headings">
-            <HeadingButton />
+            <BackButton onClick={() => setCurrentScreen('default')} />
             <Heading>{t('shopProHeading')}</Heading>
           </div>
-          <div className="shop__header-button">
-            <button className="shop__header-button-btn">
-              {t('shopButtonEdit')}
-            </button>
-          </div>
+          <HeadingButton
+            text={t('shopButtonEdit')}
+            onClick={() => {
+              setCurrentScreen('editShop');
+            }}
+          />
         </div>
         <div className="shop__contact-heading">
           <Heading>{t('ShopContactHeading')}</Heading>

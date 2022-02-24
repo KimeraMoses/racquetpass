@@ -12,13 +12,15 @@ import {
 import './EditShop.styles.scss';
 import { SubmitButton } from 'web/components/Buttons/SubmitButton.component';
 
-export function EditShop({ t }) {
+export function EditShop({ t, setCurrentScreen }) {
+  const shopNameEdited = true;
+  const shopAddressEdited = false;
   return (
     <>
       <div className="edit">
         <div className="edit__heading">
           <Heading>{t('odrHeading')}</Heading>
-          <HeadingButton close />
+          <HeadingButton close onClick={() => setCurrentScreen('proshop')} />
         </div>
         <div className="edit__contact-heading">
           <Heading>{t('ShopContactHeading')}</Heading>
@@ -42,21 +44,33 @@ export function EditShop({ t }) {
             <SubHeading customClass="edit__shop-details-header-heading">
               {t('odrShopName')}
             </SubHeading>
-            <Link to="#" className="edit__shop-details-header-link">
-              {t('editNameRequest')}
-            </Link>
-            {/* modify shop name */}
-            {/* <Link to="#" className="edit__shop-details-header-modify-link">
-              {t('modifyRequest')}
-            </Link> */}
+            {!shopNameEdited ? (
+              <div
+                className="edit__shop-details-header-link"
+                onClick={() => setCurrentScreen('editShopName')}
+              >
+                {t('editNameRequest')}
+              </div>
+            ) : (
+              <div
+                className="edit__shop-details-header-modify-link"
+                onClick={() => setCurrentScreen('modifyShopName')}
+              >
+                {t('modifyRequest')}
+              </div>
+            )}
           </div>
           <div className="edit__shop-details-text">
             <SubHeading customClass="edit__shop-details-text-txt">
               {t('businessAccountDetailsHeading')}
             </SubHeading>
-            {/* <SubHeading customClass="edit__shop-details-text-modify-txt">
-              {t('modifyRequestText')}
-            </SubHeading> */}
+            {!shopNameEdited ? (
+              <></>
+            ) : (
+              <SubHeading customClass="edit__shop-details-text-modify-txt">
+                {t('modifyRequestText')}
+              </SubHeading>
+            )}
           </div>
         </div>
         <div className="edit__shop-details">
@@ -64,13 +78,21 @@ export function EditShop({ t }) {
             <SubHeading customClass="edit__shop-details-header-heading">
               {t('orderOpenedShopAddressHeading')}
             </SubHeading>
-            {/* <Link to="#" className="edit__shop-details-header-link">
-              {t('editAddressRequest')}
-            </Link> */}
-            {/* // modify shop name */}
-            <Link to="#" className="edit__shop-details-header-modify-link">
-              {t('modifyRequest')}
-            </Link>
+            {!shopAddressEdited ? (
+              <div
+                className="edit__shop-details-header-link"
+                onClick={() => setCurrentScreen('editShopAddress')}
+              >
+                {t('editNameRequest')}
+              </div>
+            ) : (
+              <div
+                className="edit__shop-details-header-modify-link"
+                onClick={() => setCurrentScreen('modifyShopAddress')}
+              >
+                {t('modifyRequest')}
+              </div>
+            )}
           </div>
           <div className="edit__shop-details-text">
             <SubHeading customClass="edit__shop-details-text-txt">
@@ -79,10 +101,13 @@ export function EditShop({ t }) {
             <SubHeading customClass="edit__shop-details-text-txt">
               {t('orderOpenedShopAddress1')}
             </SubHeading>
-            {/* //modify shop text */}
-            <SubHeading customClass="edit__shop-details-text-modify-txt">
-              {t('modifyAddressRequest')}
-            </SubHeading>
+            {shopAddressEdited ? (
+              <SubHeading customClass="edit__shop-details-text-modify-txt">
+                {t('modifyAddressRequest')}
+              </SubHeading>
+            ) : (
+              <></>
+            )}
           </div>
         </div>
         <div className="edit__services-heading">
@@ -109,7 +134,9 @@ export function EditShop({ t }) {
           </Description>
         </div>
         <div className="edit__button">
-          <SubmitButton>{t('stringDetailsSave')}</SubmitButton>
+          <SubmitButton onClick={() => setCurrentScreen('proshop')}>
+            {t('stringDetailsSave')}
+          </SubmitButton>
         </div>
       </div>
     </>
