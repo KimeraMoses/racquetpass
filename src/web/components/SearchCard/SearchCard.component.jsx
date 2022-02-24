@@ -18,7 +18,7 @@ export function SearchCard({
           <div className="search__card-container-divider"></div>
           <div
             className={`search__card-container-content ${
-              (raquet || (brand && string)) &&
+              (raquet || brand || string) &&
               'search__card-container-content-raquet'
             }`}
           >
@@ -54,7 +54,7 @@ export function SearchCard({
               </>
             ) : string ? (
               <>
-                <div className="search__brand-card-container-content-txt">
+                <div className="search__brand-card-container-content-txt search__brand-card-container-content-txt-string">
                   <div>
                     <SubHeading customClass="search__brand-card-container-content-txt-heading">
                       {string?.name}

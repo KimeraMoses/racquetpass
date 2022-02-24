@@ -32,7 +32,11 @@ export const Tabs = ({
     <div className="tabs">
       {tabs.map((tab) => {
         return (
-          <Fragment key={tab?.title}>
+          <div
+            className="tabs-link"
+            key={tab?.title}
+            onClick={tab.title !== 'Orders' ? tab?.onClick : () => {}}
+          >
             {tab.title !== 'Orders' ? (
               <div className="tabs__tab">
                 <img src={tab.icon} alt={tab.title} />
@@ -45,7 +49,10 @@ export const Tabs = ({
                     <img src={tab.icon} alt={tab.title} />
                     <p className="tabs__tab-text">{tab.title}</p>
                   </div>
-                  <Link className="tabs__tab-link" to="#">
+                  <Link
+                    className="tabs__tab-link"
+                    onClick={tab.title === 'Orders' ? tab?.onClick : () => {}}
+                  >
                     View All
                   </Link>
                 </div>
@@ -62,7 +69,7 @@ export const Tabs = ({
                 </div>
               </div>
             )}
-          </Fragment>
+          </div>
         );
       })}
       {/* <div className="tabs__tab">

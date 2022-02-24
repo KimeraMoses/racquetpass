@@ -5,7 +5,8 @@ import { reduxForm } from 'redux-form';
 import {
   InventoryDashboard,
   SearchInventory,
-  ItemForm,
+  AddForm,
+  EditForm,
   ProShop,
   EditShop,
   RequestChange,
@@ -15,12 +16,30 @@ import {
 import './inventory.styles.scss';
 
 let Inventory = ({ t }) => {
+  const [currentScreen, setCurrentScreen] = useState('');
+
+  const getCurrentScreen = () => {
+    switch (currentScreen) {
+      case 'inventory':
+        return <SearchInventory t={t} setCurrentScreen={setCurrentScreen} />;
+      case 'add':
+        return <AddForm t={t} setCurrentScreen={setCurrentScreen} />;
+      case 'edit':
+        return <EditForm t={t} setCurrentScreen={setCurrentScreen} />;
+      case 'proshop':
+        return <ProShop t={t} />;
+      default:
+        return <InventoryDashboard t={t} setCurrentScreen={setCurrentScreen} />;
+    }
+  };
+
   return (
     <div className="inventory">
       <form className="inventory-form">
-        <InventoryDashboard t={t} />
+        {getCurrentScreen()}
         {/* <SearchInventory t={t} /> */}
-        {/* <ItemForm t={t} /> */}
+        {/* <AddForm t={t} /> */}
+        {/* <EditForm t={t} /> */}
         {/* <ProShop t={t} /> */}
         {/* <EditShop t={t} /> */}
         {/* <RequestChange t={t} /> */}
@@ -37,7 +56,7 @@ const onSubmit = (values, dispatch) => {
 
 Inventory = reduxForm({
   // a unique name for the form
-  form: '',
+  form: 'inventory',
   onSubmit,
 })(Inventory);
 

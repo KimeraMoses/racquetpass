@@ -1,4 +1,9 @@
-.item-form {
+.edit-form {
+  padding: 0px 20px;
+  min-height: calc(100vh - 80px);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
   &__header {
     display: flex;
     gap: 12px;
@@ -13,6 +18,7 @@
   &__delete-button {
     margin-top: 35px;
     &-btn {
+      cursor: pointer;
       border: none;
       background: transparent;
       font-family: Poppins;

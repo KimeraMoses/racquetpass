@@ -1,0 +1,33 @@
+.item-form {
+  padding: 0px 20px;
+  min-height: calc(100vh - 80px);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  &__header {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+  }
+  &__form {
+    margin-top: 40px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+  &__delete-button {
+    margin-top: 35px;
+    &-btn {
+      border: none;
+      background: transparent;
+      font-family: Poppins;
+      font-weight: 500;
+      font-size: 18px;
+      line-height: 27px;
+      color: #ea5353;
+    }
+  }
+  &__button {
+    margin-top: 50px;
+  }
+}
