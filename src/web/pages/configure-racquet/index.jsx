@@ -20,11 +20,14 @@ import { Modal } from 'web/components/index';
 function ConfigureRacquet({ t, handleSubmit, change }) {
   const [step, setStep] = useState(1);
   const [hybrid, setHybrid] = useState(false);
+  const [strings, setStrings] = useState(false);
   const [showModal, setShowModal] = useState(false);
 
   const handleShow = () => {
     setShowModal(!showModal);
   };
+
+  console.log(strings);
 
   const innerBarCN = `configure-racquet__progress-bar-inner-step${step}`;
   return (
@@ -64,9 +67,17 @@ function ConfigureRacquet({ t, handleSubmit, change }) {
         ) : (
           <></>
         )}
-        {step === 5 ? <ReviewRacquet t={t} /> : <></>}
-        {/* <EditRacquetInfo t={t} /> */}
-        {/* <EditStringInfo t={t} /> */}
+        {step === 5 ? <ReviewRacquet t={t} setStep={setStep} /> : <></>}
+        {step === 6 && !strings ? (
+          <EditRacquetInfo t={t} setStep={setStep} setStrings={setStrings} />
+        ) : (
+          <></>
+        )}
+        {step === 6 && strings ? (
+          <EditStringInfo t={t} setStrings={setStrings} setStep={setStep} />
+        ) : (
+          <></>
+        )}
       </form>
     </>
   );

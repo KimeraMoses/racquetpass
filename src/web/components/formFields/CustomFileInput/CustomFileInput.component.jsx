@@ -17,7 +17,11 @@ export const FileInput = (props) => {
         className="file-input__label"
         for="upload-photo"
         style={{
-          background: 'url(/img/configureRacquet/camera.png) no-repeat center',
+          background: `url(${
+            props.background
+              ? props.background
+              : '/img/configureRacquet/camera.png'
+          }) no-repeat center`,
         }}
       ></label>
       <input

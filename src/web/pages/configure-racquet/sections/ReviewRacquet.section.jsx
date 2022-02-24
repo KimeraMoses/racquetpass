@@ -11,13 +11,18 @@ import {
 
 import './ReviewRacquet.styles.scss';
 
-export function ReviewRacquet({ t }) {
+export function ReviewRacquet({ t, setStep }) {
   return (
     <>
       <div className="review">
         <div>
           <div className="review__header">
-            <BackButton back />
+            <BackButton
+              back
+              onClick={() => {
+                setStep(4);
+              }}
+            />
             <Heading>{t('orderOpenedBrandTitle')}</Heading>
           </div>
           <div className="review__racquet">
@@ -35,6 +40,7 @@ export function ReviewRacquet({ t }) {
                 <StepButton
                   outlined
                   className="review__racquet-details-button-btn"
+                  onClick={() => setStep(6)}
                 >
                   {t('viewOrderEdit')}
                 </StepButton>
@@ -76,13 +82,15 @@ export function ReviewRacquet({ t }) {
             </div>
           </div>
           <div className="review__link">
-            <Link to="#" className="review__link-text">
+            <div className="review__link-text" onClick={() => setStep(1)}>
               {t('createOrderDelete')}
-            </Link>
+            </div>
           </div>
         </div>
         <div className="review__button">
-          <SubmitButton>{t('orderScannedComplete')}</SubmitButton>
+          <SubmitButton onClick={() => setStep(1)}>
+            {t('orderScannedComplete')}
+          </SubmitButton>
         </div>
       </div>
     </>
