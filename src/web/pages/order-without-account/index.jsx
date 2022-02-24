@@ -1,7 +1,9 @@
 import { useState } from 'react';
 import { withNamespaces } from 'react-i18next';
 import { reduxForm } from 'redux-form';
-import { StepButton, SubmitButton } from 'web/components';
+import { StepButton } from 'web/components';
+import { useNavigate } from 'react-router-dom';
+
 import {
   RacquetFound,
   RacquetNotFound,
@@ -14,13 +16,16 @@ import {
 import './orderWithoutAccount.styles.scss';
 
 let OrderWithoutAccount = ({ t }) => {
-  const [step, setStep] = useState(6);
+  const navigate = useNavigate();
+
+  const [step, setStep] = useState(1);
   const innerBarCN = `without-account__progress-bar-inner-step${step}`;
+  const racquetFound = false;
   return (
     <div className="without-account">
       <div className="without-account__sections">
         <div className="without-account__progress">
-          {step === 1 || step === 2 ? (
+          {step === 1 ? (
             <></>
           ) : (
             <div className="without-account__progress-bar">
@@ -30,42 +35,47 @@ let OrderWithoutAccount = ({ t }) => {
             </div>
           )}
         </div>
-        {/* <RacquetFound t={t} /> */}
-        {/* <RacquetNotFound t={t} /> */}
-        {/* <SelectShop t={t} /> */}
-        {/* <Contact t={t} /> */}
-        {/* <VerifyPhone t={t} /> */}
-        <ReviewOrder t={t} />
+        {step === 1 ? (
+          racquetFound ? (
+            <RacquetFound t={t} setStep={setStep} />
+          ) : (
+            <RacquetNotFound t={t} setStep={setStep} />
+          )
+        ) : (
+          <></>
+        )}
+        {step === 2 ? <SelectShop t={t} setStep={setStep} /> : <></>}
+        {step === 3 ? <Contact t={t} setStep={setStep} /> : <></>}
+        {step === 4 ? <VerifyPhone t={t} setStep={setStep} /> : <></>}
+        {step === 5 ? <ReviewOrder t={t} setStep={setStep} /> : <></>}
       </div>
-      {step === 1 || step === 2 || step === 6 ? (
+      {step === 1 || step === 5 ? (
         <></>
       ) : (
         <div className="order-page__button-container">
           <StepButton
-            // onClick={backward}
-            // disabled={step === 1 && scan.current === 'initial'}
+            onClick={() => setStep((step) => step - 1)}
             outlined
             type="button"
           >
             Go Back
-          </StepButton>{' '}
+          </StepButton>
           <StepButton
-            // onClick={forward}
-            // disabled={scan.current === 'initial'}
+            onClick={() => setStep((step) => step + 1)}
+            disabled={step === 6}
             type="button"
           >
             Next
           </StepButton>
         </div>
       )}
-      {step === 6 && (
+      {step === 5 && (
         <StepButton
           type="submit"
           className="without-account__submit-btn"
-          // onClick={() => {
-          //   setDone(true);
-          //   forward();
-          // }}
+          onClick={() => {
+            navigate('/');
+          }}
         >
           Submit Order
         </StepButton>

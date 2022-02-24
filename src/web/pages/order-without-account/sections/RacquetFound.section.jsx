@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 // Custom Components
 import { Heading, SubHeading, Description, SubmitButton } from 'web/components';
@@ -6,7 +6,8 @@ import { Heading, SubHeading, Description, SubmitButton } from 'web/components';
 // Styles
 import './RacquetFound.styles.scss';
 
-export function RacquetFound({ t }) {
+export function RacquetFound({ t, setStep }) {
+  const navigate = useNavigate();
   return (
     <>
       <div className="scan-details">
@@ -58,8 +59,12 @@ export function RacquetFound({ t }) {
           </div>
         </div>
         <div className="scan-details__buttons">
-          <SubmitButton>{t('orderScannedComplete')}</SubmitButton>
-          <SubmitButton outlined>{t('orderScannedComplete')}</SubmitButton>
+          <SubmitButton onClick={() => setStep(2)}>
+            {t('orderScannedComplete')}
+          </SubmitButton>
+          <SubmitButton outlined onClick={() => navigate('/login')}>
+            {t('odrSigninEdit')}
+          </SubmitButton>
         </div>
       </div>
     </>

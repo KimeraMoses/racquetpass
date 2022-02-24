@@ -10,7 +10,7 @@ import {
 // Styles
 import './SelectShop.styles.scss';
 
-export function SelectShop({ t, setShopCurrent, backward }) {
+export function SelectShop({ t, setStep }) {
   return (
     <>
       <div className="shop-section">
@@ -19,8 +19,7 @@ export function SelectShop({ t, setShopCurrent, backward }) {
           <HeadingButton
             close
             onClick={() => {
-              setShopCurrent('initial');
-              backward();
+              setStep(1);
             }}
           />
         </div>
@@ -34,15 +33,12 @@ export function SelectShop({ t, setShopCurrent, backward }) {
             icon="/img/orderpage/search.png"
             label="Search By Name, City Or State"
             noLabel
-            onClick={() => {
-              setShopCurrent('search');
-            }}
           />
         </div>
         <div className="shop-section__account-container">
           <Description customClass="shop-section__account-container-text">
             {t('odrAccount')} &nbsp;
-            <Link to="#">
+            <Link to="/login">
               <span
                 style={{ textDecoration: 'none !important', color: '#304FFE' }}
               >
