@@ -35,13 +35,13 @@ export function StringDetails({ t, setStep, hybrid, setHybrid, handleShow }) {
           </div>
           <div className="string__form">
             <Field
-              name="string-type"
+              name="stringType"
               label="String Type"
               type="text"
               component={CustomInput}
             />
             <Field
-              name="tension"
+              name="stringTension"
               label="Tension"
               type="text"
               component={CustomInput}
@@ -55,10 +55,17 @@ export function StringDetails({ t, setStep, hybrid, setHybrid, handleShow }) {
           </div>
         </div>
         <div className="string__buttons">
-          <StepButton outlined className="string__buttons-btn" onClick={() => setStep(3)}>
+          <StepButton
+            outlined
+            className="string__buttons-btn"
+            onClick={() => setStep(3)}
+          >
             {t('odrBack')}
           </StepButton>
-          <StepButton className="string__buttons-btn" onClick={() => setStep(5)}>
+          <StepButton
+            className="string__buttons-btn"
+            onClick={() => setStep(5)}
+          >
             {t('configButtonRacquet')}
           </StepButton>
         </div>

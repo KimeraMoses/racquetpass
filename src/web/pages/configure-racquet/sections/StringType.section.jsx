@@ -32,13 +32,13 @@ export function StringType({ t, setStep, hybrid, setHybrid }) {
           </div>
           <div className="string-type__form">
             <Field
-              name="string-type"
+              name="stringType"
               label="String Type"
               type="text"
               component={CustomInput}
             />
             <Field
-              name="tension"
+              name="stringTension"
               label="Tension"
               type="text"
               link="Change Units"
@@ -50,13 +50,13 @@ export function StringType({ t, setStep, hybrid, setHybrid }) {
           </div>
           <div className="string-type__form">
             <Field
-              name="string-type"
+              name="crossStringType"
               label="String Type"
               type="text"
               component={CustomInput}
             />
             <Field
-              name="tension"
+              name="crossStringTension"
               label="Tension"
               type="text"
               link="Change Units"
