@@ -425,6 +425,5 @@
   "configStringSwitch": "Use different strings for mains and crosses",
   "configButtonRacquet": "Create Racquet",
   "configStringHead": "What strings do you use?",
-
   "editRacquetInfo": "Edit Racquet Settings"
 }

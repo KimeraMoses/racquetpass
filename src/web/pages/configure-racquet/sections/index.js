@@ -1,4 +1,5 @@
 export { Locker } from './Locker.section';
+export { Scan } from './Scan.section';
 export { AboutRacquet } from './AboutRacquet.section';
 export { StringDetails } from './StringDetails.section';
 export { StringType } from './StringType.section';

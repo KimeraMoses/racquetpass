@@ -4,3 +4,4 @@ export { CustomInputNumber } from './CustomInputNumber/CustomInputNumber.compone
 export { CustomSwitch } from './CustomSwitch/CustomSwitch.component';
 export { CustomSelect } from './CustomSelect/CustomSelect.component';
 export { CustomRadio } from './CustomRadio/CustomRadio.component';
+export { FileInput } from './CustomFileInput/CustomFileInput.component';

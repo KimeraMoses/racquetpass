@@ -1,4 +1,9 @@
 .string-type {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: calc(100vh - 120px);
+  padding: 0px 20px;
   &__header {
     display: flex;
     flex-direction: row;
@@ -32,7 +37,6 @@
     }
   }
   &__buttons {
-    margin-top: 50px;
     display: flex;
     flex-direction: row;
     gap: 12px;

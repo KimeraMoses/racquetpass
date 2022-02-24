@@ -1,7 +1,7 @@
 import { Heading, HeadingButton, Description } from 'web/components';
 import './Locker.styles.scss';
 
-export const Locker = ({ t }) => {
+export const Locker = ({ t, setStep }) => {
   return (
     <div className="locker">
       <div className="locker__menu-bar">
@@ -10,7 +10,7 @@ export const Locker = ({ t }) => {
           <Heading>My Locker</Heading>
         </div>
         <div className="locker__menu-bar-scan">
-          <HeadingButton text={'Scan QR'} />
+          <HeadingButton text={'Scan QR'} onClick={() => setStep(2)} />
         </div>
       </div>
       <div className="locker__text">
@@ -25,7 +25,7 @@ export const Locker = ({ t }) => {
         <div className="locker__image-border">
           <div></div>
           <div className="locker__image-border-btn">
-            <HeadingButton add />
+            <HeadingButton add onClick={() => setStep(3)} />
           </div>
           <div className="locker__image-border-racquet">
             <img

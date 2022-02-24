@@ -13,7 +13,11 @@ import {
 
 import './StringDetails.styles.scss';
 
-export function StringDetails({ t }) {
+export function StringDetails({ t, setStep, hybrid, setHybrid, handleShow }) {
+  const handleChange = (value) => {
+    setHybrid(value);
+  };
+
   return (
     <>
       <div className="string">
@@ -22,12 +26,12 @@ export function StringDetails({ t }) {
             <div className="string__header-heading">
               <Heading>{t('configStringHeading')}</Heading>
             </div>
-            <HeadingButton close />
+            <HeadingButton close onClick={() => setStep(3)} />
           </div>
           <div className="string__info">
             <SubHeading>{t('configMains')}</SubHeading>
 
-            <InfoButton />
+            <InfoButton onClick={handleShow} />
           </div>
           <div className="string__form">
             <Field
@@ -47,14 +51,14 @@ export function StringDetails({ t }) {
             <Description customClass="string__swtich-text">
               {t('configStringSwitch')}
             </Description>
-            <Field name="hybrid" component={CustomSwitch} />
+            <CustomSwitch handleChange={handleChange} checked={hybrid} />
           </div>
         </div>
         <div className="string__buttons">
-          <StepButton outlined className="string__buttons-btn">
+          <StepButton outlined className="string__buttons-btn" onClick={() => setStep(3)}>
             {t('odrBack')}
           </StepButton>
-          <StepButton className="string__buttons-btn">
+          <StepButton className="string__buttons-btn" onClick={() => setStep(5)}>
             {t('configButtonRacquet')}
           </StepButton>
         </div>
