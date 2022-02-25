@@ -17,21 +17,35 @@ import {
 } from './sections';
 
 function PlayerTabs({ t, handleSubmit }) {
-  const navigate = useNavigate();
+  const [current, setCurrent] = useState('drawer');
   return (
     <>
       <form onSubmit={handleSubmit} className="player-tabs">
         <div>
-          {/* <Locker t={t} /> */}
-          {/* <Drawer t={t} /> */}
-          {/* <PlayerProfile t={t} /> */}
-          {/* <EditProfile t={t} /> */}
-          {/* <AccountDetails t={t} /> */}
-          {/* <EditAccountDetails t={t} /> */}
-          {/* <OrderDetails t={t} /> */}
-          {/* <PaymentMethod t={t} /> */}
-          {/* <CardDetails t={t} /> */}
-          <AddCard t={t} />
+          {current === 'drawer' && <Drawer t={t} setCurrent={setCurrent} />}
+          {current === 'locker' && <Locker t={t} setCurrent={setCurrent} />}
+          {current === 'profile' && (
+            <PlayerProfile t={t} setCurrent={setCurrent} />
+          )}
+          {current === 'editProfile' && (
+            <EditProfile t={t} setCurrent={setCurrent} />
+          )}
+          {current === 'accountDetails' && (
+            <AccountDetails t={t} setCurrent={setCurrent} />
+          )}
+          {current === 'editAccount' && (
+            <EditAccountDetails t={t} setCurrent={setCurrent} />
+          )}
+          {current === 'orderDetails' && (
+            <OrderDetails t={t} setCurrent={setCurrent} />
+          )}
+          {current === 'payment' && (
+            <PaymentMethod t={t} setCurrent={setCurrent} />
+          )}
+          {current === 'cardDetails' && (
+            <CardDetails t={t} setCurrent={setCurrent} />
+          )}
+          {current === 'addCard' && <AddCard t={t} setCurrent={setCurrent} />}
         </div>
       </form>
     </>

@@ -1,12 +1,12 @@
 import { Heading, HeadingButton, Description } from 'web/components';
 import './Locker.styles.scss';
 
-export const Locker = ({ t }) => {
+export const Locker = ({ t, setCurrent }) => {
   return (
     <div className="locker">
       <div className="locker__menu-bar">
         <div className="locker__menu-bar-drawer-title">
-          <HeadingButton drawer />
+          <HeadingButton drawer onClick={() => setCurrent('drawer')} />
           <Heading>My Locker</Heading>
         </div>
         <div className="locker__menu-bar-scan">

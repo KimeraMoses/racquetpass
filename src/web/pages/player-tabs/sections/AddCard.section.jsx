@@ -5,14 +5,14 @@ import { SubmitButton } from 'web/components/Buttons/SubmitButton.component';
 
 import './AddCard.styles.scss';
 
-export function AddCard({ t }) {
+export function AddCard({ t, setCurrent }) {
   return (
     <>
       <div className="add-card">
         <div>
           <div className="add-card__header">
             <Heading>{t('addCardTitle')}</Heading>
-            <HeadingButton close />
+            <HeadingButton close onClick={() => setCurrent('cardDetails')} />
           </div>
           <div className="add-card__credit-cards">
             <img src="/img/orderpage/cards.png" alt="list-of-cards" />
@@ -61,7 +61,9 @@ export function AddCard({ t }) {
           </div>
         </div>
         <div className="add-card__button">
-          <SubmitButton>{t('addCardTitle')}</SubmitButton>
+          <SubmitButton onClick={() => setCurrent('cardDetails')}>
+            {t('addCardTitle')}
+          </SubmitButton>
         </div>
       </div>
     </>

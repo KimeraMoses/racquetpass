@@ -11,7 +11,7 @@ import { Link } from 'react-router-dom';
 import './EditProfile.styles.scss';
 import { Field } from 'redux-form';
 
-export const EditProfile = ({ t }) => {
+export const EditProfile = ({ t, setCurrent }) => {
   return (
     <div className="edit-profile">
       <div className="edit-profile__heading">
@@ -19,7 +19,7 @@ export const EditProfile = ({ t }) => {
           <Heading>Edit Player Profile</Heading>
         </div>
         <div className="edit-profile__heading-btn">
-          <HeadingButton close />
+          <HeadingButton close onClick={() => setCurrent('profile')} />
         </div>
       </div>
 
@@ -88,7 +88,9 @@ export const EditProfile = ({ t }) => {
       </div>
 
       <div className="edit-profile__btn">
-        <SubmitButton>Save Changes</SubmitButton>
+        <SubmitButton onClick={() => setCurrent('profile')}>
+          Save Changes
+        </SubmitButton>
       </div>
     </div>
   );

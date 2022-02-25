@@ -6,69 +6,69 @@ import {
 } from 'web/components';
 import './OrderDetails.styles.scss';
 
-const orders = {
-  liveOrders: [
-    {
-      title: 'Ole Reliable',
-      description: 'Pickup at Jimmy’s Pro Shop',
-      status: 'Ready for pickup',
-    },
-  ],
-  pastOrdersThisYear: [
-    {
-      title: 'Big Red',
-      description: 'Jan 1 - Jan 5',
-      price: '$37.58',
-      shop: `Jimmy's Pro Shop`,
-      status: 'previous',
-    },
-  ],
-  pastOrdersPreviousYear: [
-    {
-      title: 'Big Red',
-      description: 'Dec 10 - Dec 12',
-      price: '$37.58',
-      status: 'previous',
-    },
-    {
-      title: 'Big Red',
-      description: 'Dec 20 - Dec 25',
-      price: '$37.58',
-      status: 'previous',
-    },
-    {
-      title: 'Big Red',
-      description: 'Dec 10 - Dec 12',
-      price: '$37.58',
-      status: 'previous',
-    },
-    {
-      title: 'Big Red',
-      description: 'Dec 20 - Dec 25',
-      price: '$37.58',
-      status: 'previous',
-    },
-    {
-      title: 'Big Red',
-      description: 'Dec 20 - Dec 25',
-      price: '$37.58',
-      status: 'previous',
-    },
-    {
-      title: 'Big Red',
-      description: 'Dec 20 - Dec 25',
-      price: '$37.58',
-      status: 'previous',
-    },
-  ],
-};
+export function OrderDetails({ t, setCurrent }) {
+  const orders = {
+    liveOrders: [
+      {
+        title: 'Ole Reliable',
+        description: 'Pickup at Jimmy’s Pro Shop',
+        status: 'Ready for pickup',
+      },
+    ],
+    pastOrdersThisYear: [
+      {
+        title: 'Big Red',
+        description: 'Jan 1 - Jan 5',
+        price: '$37.58',
+        shop: `Jimmy's Pro Shop`,
+        status: 'previous',
+      },
+    ],
+    pastOrdersPreviousYear: [
+      {
+        title: 'Big Red',
+        description: 'Dec 10 - Dec 12',
+        price: '$37.58',
+        status: 'previous',
+      },
+      {
+        title: 'Big Red',
+        description: 'Dec 20 - Dec 25',
+        price: '$37.58',
+        status: 'previous',
+      },
+      {
+        title: 'Big Red',
+        description: 'Dec 10 - Dec 12',
+        price: '$37.58',
+        status: 'previous',
+      },
+      {
+        title: 'Big Red',
+        description: 'Dec 20 - Dec 25',
+        price: '$37.58',
+        status: 'previous',
+      },
+      {
+        title: 'Big Red',
+        description: 'Dec 20 - Dec 25',
+        price: '$37.58',
+        status: 'previous',
+      },
+      {
+        title: 'Big Red',
+        description: 'Dec 20 - Dec 25',
+        price: '$37.58',
+        status: 'previous',
+      },
+    ],
+  };
 
-export function OrderDetails({ t }) {
   return (
     <>
       <div className="orders">
         <div className="orders__header">
-          <HeadingButton drawer />
+          <HeadingButton drawer onClick={() => setCurrent('drawer')} />
           <Heading>{t('orderDetailHeading')}</Heading>
         </div>
         <div className="orders__live">

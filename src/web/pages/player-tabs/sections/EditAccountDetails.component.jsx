@@ -7,7 +7,7 @@ import {
 import { Field } from 'redux-form';
 import './EditAccountDetails.styles.scss';
 
-export const EditAccountDetails = ({ t }) => {
+export const EditAccountDetails = ({ t, setCurrent }) => {
   return (
     <div className="edit-account-details">
       <div>
@@ -16,7 +16,7 @@ export const EditAccountDetails = ({ t }) => {
             <Heading>Edit Account Details</Heading>
           </div>
           <div className="edit-account-details__menu-bar-scan">
-            <HeadingButton close />
+            <HeadingButton close onClick={() => setCurrent('accountDetails')} />
           </div>
         </div>
 
@@ -58,7 +58,9 @@ export const EditAccountDetails = ({ t }) => {
       </div>
 
       <div className="edit-account-details__btn">
-        <SubmitButton>Save Changes</SubmitButton>
+        <SubmitButton onClick={() => setCurrent('accountDetails')}>
+          Save Changes
+        </SubmitButton>
       </div>
     </div>
   );

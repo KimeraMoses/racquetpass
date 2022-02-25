@@ -1,17 +1,27 @@
 import { BackButton, HeadingButton, Heading } from 'web/components';
-
 import './CardDetails.styles.scss';
-export function CardDetails({ t, title = 'My tennis card', ending = '5432' }) {
+
+const cardDetails = {
+  title: 'My tennis card',
+  ending: '5432',
+  expiry: '08/2026',
+};
+
+export function CardDetails({ t, setCurrent }) {
+  const { title, ending, expiry } = cardDetails;
   return (
     <>
       <div className="card-detail">
         <div className="card-detail__header">
           <div className="card-detail__header-drawer-title">
-            <BackButton />
+            <BackButton onClick={() => setCurrent('payment')} />
             <Heading>{t('paymentDetailTitle')}</Heading>
           </div>
           <div className="card-detail__header-button ">
-            <HeadingButton text={'Edit'} />
+            <HeadingButton
+              text={'Edit'}
+              onClick={() => setCurrent('addCard')}
+            />
           </div>
         </div>
         <div className="card-detail__image">
@@ -22,18 +32,10 @@ export function CardDetails({ t, title = 'My tennis card', ending = '5432' }) {
           <div className="card-detail__text-heading">
             {t('paymentCardHeading')}
           </div>
-          <div className="card-detail__text-desc">
-            {/* {t('paymentDetailTitle')} */}
-            {title}
-          </div>
+          <div className="card-detail__text-desc">{title}</div>
           <div className="card-detail__text-heading">{t('paymentCardEnd')}</div>
-          <div className="card-detail__text-desc">
-            {/* {t('paymentDetailTitle')} */}
-            {ending}
-          </div>
-          <div className="card-detail__text-heading">
-            {t('paymentCardExpire')}
-          </div>
+          <div className="card-detail__text-desc">{ending}</div>
+          <div className="card-detail__text-heading">{expiry}</div>
           <div className="card-detail__text-desc">{t('paymentExpireDate')}</div>
         </div>
       </div>

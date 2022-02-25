@@ -1,6 +1,6 @@
 import './PaymentCard.styles.scss';
 
-export const PaymentCard = ({ cardType, title, ending, lastUsed }) => {
+export const PaymentCard = ({ cardType, title, ending, lastUsed, onClick }) => {
   let img;
   switch (cardType) {
     case 'visa':
@@ -20,7 +20,7 @@ export const PaymentCard = ({ cardType, title, ending, lastUsed }) => {
       break;
   }
   return (
-    <div className="payment-card">
+    <div className="payment-card" onClick={onClick}>
       <div className="payment-card__left">
         <div className="payment-card__left-image">
           <img src={img} alt={cardType} />

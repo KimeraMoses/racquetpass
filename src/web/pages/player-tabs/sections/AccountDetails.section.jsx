@@ -9,17 +9,20 @@ const playerDetails = [
   { title: 'Pro Playing Style Twin', value: 'Unspecified' },
 ];
 
-export const AccountDetails = ({ t }) => {
+export const AccountDetails = ({ t, setCurrent }) => {
   return (
     <div className="account-details">
       <div>
         <div className="account-details__menu-bar">
           <div className="account-details__menu-bar-drawer-title">
-            <HeadingButton drawer />
+            <HeadingButton drawer onClick={() => setCurrent('drawer')} />
             <Heading>Account Details</Heading>
           </div>
           <div className="account-details__menu-bar-scan">
-            <HeadingButton text={'Edit'} />
+            <HeadingButton
+              text={'Edit'}
+              onClick={() => setCurrent('editAccount')}
+            />
           </div>
         </div>
 
@@ -50,7 +53,9 @@ export const AccountDetails = ({ t }) => {
       </div>
 
       <div className="account-details__btn">
-        <SubmitButton>Save Changes</SubmitButton>
+        <SubmitButton onClick={() => setCurrent('drawer')}>
+          Save Changes
+        </SubmitButton>
       </div>
     </div>
   );

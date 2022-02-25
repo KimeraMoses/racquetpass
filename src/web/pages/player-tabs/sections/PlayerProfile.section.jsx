@@ -9,12 +9,12 @@ const playerDetails = [
   { title: 'Pro Playing Style Twin', value: 'Unspecified' },
 ];
 
-export const PlayerProfile = ({ t }) => {
+export const PlayerProfile = ({ t, setCurrent }) => {
   return (
     <div className="player-profile">
       <div className="player-profile__heading">
         <div className="player-profile__heading-btn">
-          <BackButton />
+          <BackButton onClick={() => setCurrent('drawer')} />
         </div>
         <div className="player-profile__heading-text">
           <Heading>Player Profile</Heading>
@@ -30,7 +30,10 @@ export const PlayerProfile = ({ t }) => {
             <Heading>Player Name</Heading>
           </div>
           <div className="player-profile__avatar-text-btn">
-            <HeadingButton text="Edit Profile" />
+            <HeadingButton
+              text="Edit Profile"
+              onClick={() => setCurrent('editProfile')}
+            />
           </div>
         </div>
       </div>

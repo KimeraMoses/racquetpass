@@ -49,12 +49,12 @@ export const Tabs = ({
                     <img src={tab.icon} alt={tab.title} />
                     <p className="tabs__tab-text">{tab.title}</p>
                   </div>
-                  <Link
+                  <div
                     className="tabs__tab-link"
                     onClick={tab.title === 'Orders' ? tab?.onClick : () => {}}
                   >
                     View All
-                  </Link>
+                  </div>
                 </div>
                 <div className="tabs__tab-order-orders">
                   {tab.orders.map((order) => {

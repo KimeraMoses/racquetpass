@@ -1,7 +1,14 @@
 import React from 'react';
 import './OrderCard.styles.scss';
 
-export const OrderCard = ({ title, description, status, price, shop }) => {
+export const OrderCard = ({
+  title,
+  description,
+  status,
+  price,
+  shop,
+  onClick,
+}) => {
   return (
     <div
       className={`order-card ${
@@ -11,6 +18,7 @@ export const OrderCard = ({ title, description, status, price, shop }) => {
           ? 'order-card-previous'
           : 'order-card-in-progress'
       }`}
+      onClick={onClick}
     >
       <div className="order-card__text">
         <div className="order-card__text-heading">{title}</div>
