@@ -1,0 +1,50 @@
+.payment-card {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  padding: 16px;
+  background: #ffffff;
+  box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.12);
+  border-radius: 12px;
+  .payment-card__left {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    &-image {
+      height: 35px;
+      width: 50px;
+    }
+    &-text {
+      &-heading {
+        font-family: Poppins;
+        font-style: normal;
+        font-weight: 600;
+        font-size: 14px;
+        line-height: 21px;
+        color: #3b3b3b;
+      }
+      &-desc {
+        font-family: Poppins;
+        font-style: normal;
+        font-weight: 500;
+        font-size: 12px;
+        line-height: 18px;
+        color: #8e8e8e;
+      }
+    }
+  }
+  .payment-card__right {
+    &-last {
+      background: rgba(0, 0, 0, 0.1);
+      border-radius: 10.5px;
+      font-family: Poppins;
+      font-style: normal;
+      font-weight: 500;
+      font-size: 10px;
+      line-height: 15px;
+      text-align: center;
+      color: #636363;
+      padding: 3px 8px;
+    }
+  }
+}

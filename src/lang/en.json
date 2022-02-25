@@ -425,5 +425,19 @@
   "configStringSwitch": "Use different strings for mains and crosses",
   "configButtonRacquet": "Create Racquet",
   "configStringHead": "What strings do you use?",
-  "editRacquetInfo": "Edit Racquet Settings"
+  "editRacquetInfo": "Edit Racquet Settings",
+
+  "orderDetailHeading": "Orders",
+  "orderLiveOrder": "Live orders",
+  "orderPastYear": "Past orders this year",
+  "orderPrevYear": "Past orders in 2021",
+  "orderButtonText": "Place a New Order",
+
+  "paymentHeading": "Payment Methods",
+  "paymentDetailTitle": "My tennis card",
+  "paymentCardHeading": "Name",
+  "paymentCardEnd": "Ends with",
+  "paymentCardExpire": "Expires",
+  "paymentExpireDate": "08/2026",
+  "addCardTitle": "Add Card"
 }

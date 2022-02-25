@@ -1,0 +1,42 @@
+.card-detail {
+  padding: 0px 20px;
+  &__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    &-drawer-title {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+  }
+  &__image {
+    margin-top: 25px;
+    img {
+      width: 90px;
+      height: 70px;
+    }
+  }
+  &__text {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    &-heading {
+      font-family: Poppins;
+      font-style: normal;
+      font-weight: 600;
+      font-size: 12px;
+      line-height: 18px;
+      color: #969696;
+    }
+    &-desc {
+      font-family: Poppins;
+      font-style: normal;
+      font-weight: 500;
+      font-size: 18px;
+      line-height: 27px;
+      color: #333333;
+    }
+  }
+}

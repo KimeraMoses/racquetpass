@@ -10,6 +10,10 @@ import {
   EditProfile,
   AccountDetails,
   EditAccountDetails,
+  OrderDetails,
+  PaymentMethod,
+  CardDetails,
+  AddCard,
 } from './sections';
 
 function PlayerTabs({ t, handleSubmit }) {
@@ -24,6 +28,10 @@ function PlayerTabs({ t, handleSubmit }) {
           {/* <EditProfile t={t} /> */}
           {/* <AccountDetails t={t} /> */}
           {/* <EditAccountDetails t={t} /> */}
+          {/* <OrderDetails t={t} /> */}
+          {/* <PaymentMethod t={t} /> */}
+          {/* <CardDetails t={t} /> */}
+          <AddCard t={t} />
         </div>
       </form>
     </>
