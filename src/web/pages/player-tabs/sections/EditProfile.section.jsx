@@ -11,7 +11,13 @@ import { Link } from 'react-router-dom';
 import './EditProfile.styles.scss';
 import { Field } from 'redux-form';
 
-export const EditProfile = ({ t, setCurrent }) => {
+export const EditProfile = ({ t, setCurrent, change }) => {
+  const handleChange = (e) => {
+    console.log(e.target.files[0]);
+    if (change) {
+      change('profile-image', e.target.files[0]);
+    }
+  };
   return (
     <div className="edit-profile">
       <div className="edit-profile__heading">
@@ -32,7 +38,20 @@ export const EditProfile = ({ t, setCurrent }) => {
             <Heading>Player Name</Heading>
           </div>
           <div className="edit-profile__avatar-text-btn">
-            <Link to="#">Change Photo</Link>
+            <label
+              className="edit-profile__avatar-text-btn-link"
+              htmlFor="upload-photo"
+            >
+              Change Photo
+            </label>
+            <input
+              id="upload-photo"
+              className="file-input__handle"
+              type="file"
+              onChange={handleChange}
+              accept="/*image"
+              accept="image/*"
+            />
           </div>
         </div>
       </div>

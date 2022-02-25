@@ -16,7 +16,7 @@ import {
   AddCard,
 } from './sections';
 
-function PlayerTabs({ t, handleSubmit }) {
+function PlayerTabs({ t, handleSubmit, change }) {
   const [current, setCurrent] = useState('drawer');
   return (
     <>
@@ -28,7 +28,7 @@ function PlayerTabs({ t, handleSubmit }) {
             <PlayerProfile t={t} setCurrent={setCurrent} />
           )}
           {current === 'editProfile' && (
-            <EditProfile t={t} setCurrent={setCurrent} />
+            <EditProfile t={t} setCurrent={setCurrent} change={change} />
           )}
           {current === 'accountDetails' && (
             <AccountDetails t={t} setCurrent={setCurrent} />
