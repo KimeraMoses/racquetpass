@@ -27,14 +27,14 @@ export function AboutRacquet({ t, backward }) {
         </div>
         <div className="about-section__form-container">
           <Field
-            name="brand"
+            name="racquetBrand"
             label="Brand (Optional)"
             placeholder="Brand"
             type="text"
             component={CustomInput}
           />
           <Field
-            name="model"
+            name="racquetModel"
             label="Model (Optional)"
             type="text"
             component={CustomInput}

@@ -80,7 +80,11 @@ function Login({ t, handleSubmit }) {
             />
           </div>
           <div className="signin__form-buttons">
-            <SubmitButton type="submit" className="signin__form-buttons-btn">
+            <SubmitButton
+              type="submit"
+              onClick={() => navigate('/player-tabs')}
+              className="signin__form-buttons-btn"
+            >
               {t('homeSignin')}
             </SubmitButton>
             <Link to="#" className="signin__form-buttons-link">

@@ -1,10 +1,11 @@
 import { React } from 'react';
-import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { Avatar, HeadingButton, Heading, Tabs } from 'web/components';
 
 import './Drawer.styles.scss';
 
 export const Drawer = ({ t, setCurrent }) => {
+  const navigate = useNavigate();
   const tabs = [
     {
       title: 'My Locker',
@@ -42,7 +43,7 @@ export const Drawer = ({ t, setCurrent }) => {
     {
       title: 'Logout',
       icon: '/img/drawer/logout.png',
-      onClick: () => setCurrent('drawer'),
+      onClick: () => navigate('/login'),
     },
   ];
 

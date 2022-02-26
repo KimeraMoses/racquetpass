@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { withNamespaces } from 'react-i18next';
 import { reduxForm } from 'redux-form';
+import { useNavigate } from 'react-router-dom';
 import { StepButton, SubmitButton } from 'web/components';
 import {
   ScanSection,
@@ -22,10 +23,9 @@ import {
 import './order.styles.scss';
 
 let OrderPage = ({ t, handleSubmit, change }) => {
-  const [step, setStep] = useState(3);
-  // TODO: Change this after testing
-  const [scan, setScan] = useState({ current: 'found' });
-  const [hybrid, setHybrid] = useState(false);
+  const [step, setStep] = useState(1);
+  const [continueWithAccount, setContinueWithAccount] = useState(false);
+  const [scan, setScan] = useState({ current: 'initial' });
   const [shop, setShop] = useState({ current: 'initial' });
   const [strings, setStrings] = useState({ current: 'initial' });
   const [mainCross, setMainCross] = useState({ current: 'initial' });
@@ -33,7 +33,7 @@ let OrderPage = ({ t, handleSubmit, change }) => {
   const [cross, setCross] = useState(false);
   const [done, setDone] = useState(false);
 
-  console.log(main, cross);
+  const navigate = useNavigate();
 
   // Function to move search forward
   const scanForward = (scan) => {
@@ -63,7 +63,11 @@ let OrderPage = ({ t, handleSubmit, change }) => {
   };
 
   const forward = () => {
-    setStep((step) => step + 1);
+    if (step === 4 && !continueWithAccount) {
+      setStep(8);
+    } else {
+      setStep((step) => step + 1);
+    }
   };
 
   const backward = () => {
@@ -79,9 +83,23 @@ let OrderPage = ({ t, handleSubmit, change }) => {
       case 'initial':
         return <ScanSection t={t} change={change} scanForward={scanForward} />;
       case 'found':
-        return <ScanSuccess t={t} backward={backward} />;
+        return (
+          <ScanSuccess
+            t={t}
+            backward={backward}
+            setStep={setStep}
+            setContinueWithAccount={setContinueWithAccount}
+          />
+        );
       case 'notFound':
-        return <ScanNotFound t={t} backward={backward} />;
+        return (
+          <ScanNotFound
+            t={t}
+            backward={backward}
+            setStep={setStep}
+            setContinueWithAccount={setContinueWithAccount}
+          />
+        );
     }
   };
 
@@ -105,7 +123,13 @@ let OrderPage = ({ t, handleSubmit, change }) => {
           />
         );
       case 'find':
-        return <GiveShopInfo t={t} setShopCurrent={setShopCurrent} />;
+        return (
+          <GiveShopInfo
+            t={t}
+            setShopCurrent={setShopCurrent}
+            setStep={setStep}
+          />
+        );
     }
   };
 
@@ -117,7 +141,6 @@ let OrderPage = ({ t, handleSubmit, change }) => {
             t={t}
             setStringsCurrent={setStringsCurrent}
             backward={backward}
-            hybrid={hybrid}
             setStep={setStep}
             step={step}
           />
@@ -215,6 +238,8 @@ let OrderPage = ({ t, handleSubmit, change }) => {
         shop.current === 'find' ||
         strings.current === 'search' ||
         mainCross.current === 'search' ||
+        (step === 1 && scan.current === 'found') ||
+        (step === 1 && scan.current === 'notFound') ||
         step === 8 ? (
           <></>
         ) : (
@@ -229,7 +254,7 @@ let OrderPage = ({ t, handleSubmit, change }) => {
             </StepButton>{' '}
             <StepButton
               onClick={forward}
-              disabled={scan.current === 'initial'}
+              disabled={scan.current === 'initial' || step === 2}
               type="button"
             >
               Next
@@ -242,8 +267,12 @@ let OrderPage = ({ t, handleSubmit, change }) => {
             type="submit"
             className="order-page__submit-btn"
             onClick={() => {
-              setDone(true);
-              forward();
+              if (!continueWithAccount) {
+                navigate('/');
+              } else {
+                setDone(true);
+                forward();
+              }
             }}
           >
             Submit Order
