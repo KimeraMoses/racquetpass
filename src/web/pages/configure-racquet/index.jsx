@@ -27,8 +27,6 @@ function ConfigureRacquet({ t, handleSubmit, change }) {
     setShowModal(!showModal);
   };
 
-  console.log(strings);
-
   const innerBarCN = `configure-racquet__progress-bar-inner-step${step}`;
   return (
     <>

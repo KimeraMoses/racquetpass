@@ -5,7 +5,6 @@ export const FileInput = (props) => {
   const [image, setImage] = useState();
 
   const handleChange = (e) => {
-    console.log(e.target.files[0]);
     if (props.change) {
       props.change('image', e.target.files[0]);
     }

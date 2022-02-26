@@ -16,8 +16,6 @@ export const CustomInputNumber = (props) => {
     setValue((value) => value - 1);
   };
 
-  console.log(props.link);
-
   const handleChange = () => {
     setValue(value);
   };

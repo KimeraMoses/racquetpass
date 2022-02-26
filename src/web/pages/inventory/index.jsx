@@ -46,7 +46,7 @@ let Inventory = ({ t }) => {
         return <InventoryDashboard t={t} setCurrentScreen={setCurrentScreen} />;
     }
   };
-  console.log(currentScreen);
+
   return (
     <div className="inventory">
       <form className="inventory-form">

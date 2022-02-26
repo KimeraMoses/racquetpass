@@ -13,7 +13,6 @@ import { Field } from 'redux-form';
 
 export const EditProfile = ({ t, setCurrent, change }) => {
   const handleChange = (e) => {
-    console.log(e.target.files[0]);
     if (change) {
       change('profile-image', e.target.files[0]);
     }
