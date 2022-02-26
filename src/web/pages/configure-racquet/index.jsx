@@ -18,7 +18,7 @@ import './configure-racquet.styles.scss';
 import { Modal } from 'web/components/index';
 
 function ConfigureRacquet({ t, handleSubmit, change }) {
-  const [step, setStep] = useState(1);
+  const [step, setStep] = useState(2);
   const [hybrid, setHybrid] = useState(false);
   const [strings, setStrings] = useState(false);
   const [showModal, setShowModal] = useState(false);

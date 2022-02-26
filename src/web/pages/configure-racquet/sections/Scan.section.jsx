@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Field } from 'redux-form';
+import { useNavigate } from 'react-router-dom';
 import BarcodeScannerComponent from 'react-qr-barcode-scanner';
 // Custom Components
 import {
@@ -23,12 +24,16 @@ export function Scan({ t, setStep, change }) {
     }
   }, [qrCode]);
 
+  const navigate = useNavigate();
   return (
     <>
       <div className="scan-configure">
         <div className="scan-configure__heading">
           <Heading>{t('odrHeading')}</Heading>
-          <HeadingButton close onClick={() => setStep(1)} />
+          <HeadingButton
+            close
+            onClick={() => navigate('/player-tabs?configBack=true')}
+          />
         </div>
         <div className="scan-configure__text-container">
           <SubHeading>{t('odrHT')}</SubHeading>

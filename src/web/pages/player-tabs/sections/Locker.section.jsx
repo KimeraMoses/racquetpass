@@ -1,7 +1,9 @@
 import { Heading, HeadingButton, Description } from 'web/components';
+import { useNavigate } from 'react-router-dom';
 import './Locker.styles.scss';
 
 export const Locker = ({ t, setCurrent }) => {
+  const navigate = useNavigate();
   return (
     <div className="locker">
       <div className="locker__menu-bar">
@@ -25,7 +27,7 @@ export const Locker = ({ t, setCurrent }) => {
         <div className="locker__image-border">
           <div></div>
           <div className="locker__image-border-btn">
-            <HeadingButton add />
+            <HeadingButton add onClick={() => navigate('/configure-racquet')} />
           </div>
           <div className="locker__image-border-racquet">
             <img

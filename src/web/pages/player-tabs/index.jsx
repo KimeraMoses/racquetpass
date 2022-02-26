@@ -1,6 +1,6 @@
-import { useState } from 'react';
+import { useState, useMemo } from 'react';
 import { reduxForm } from 'redux-form';
-import { useNavigate } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 import { withNamespaces } from 'react-i18next';
 import './player-tabs.styles.scss';
 import {
@@ -16,8 +16,16 @@ import {
   AddCard,
 } from './sections';
 
+function useQuery() {
+  const { search } = useLocation();
+  return useMemo(() => new URLSearchParams(search), [search]);
+}
+
 function PlayerTabs({ t, handleSubmit, change }) {
-  const [current, setCurrent] = useState('drawer');
+  let query = useQuery();
+  const backFromConfig = query.get('configBack');
+  const [current, setCurrent] = useState(backFromConfig ? 'locker' : 'drawer');
+
   return (
     <>
       <form onSubmit={handleSubmit} className="player-tabs">
