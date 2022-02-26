@@ -24,6 +24,7 @@ export const CustomOrderSelect = (props) => {
                 }
               : {}
           }
+          value={props.value}
         />
         <Link to="#" onClick={props.onSelectClick}>
           {props.link}

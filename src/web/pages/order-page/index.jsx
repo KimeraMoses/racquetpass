@@ -22,11 +22,18 @@ import {
 import './order.styles.scss';
 
 let OrderPage = ({ t, handleSubmit, change }) => {
-  const [step, setStep] = useState(1);
-  const [scan, setScan] = useState({ current: 'initial' });
+  const [step, setStep] = useState(3);
+  // TODO: Change this after testing
+  const [scan, setScan] = useState({ current: 'found' });
+  const [hybrid, setHybrid] = useState(false);
   const [shop, setShop] = useState({ current: 'initial' });
   const [strings, setStrings] = useState({ current: 'initial' });
+  const [mainCross, setMainCross] = useState({ current: 'initial' });
+  const [main, setMain] = useState(false);
+  const [cross, setCross] = useState(false);
   const [done, setDone] = useState(false);
+
+  console.log(main, cross);
 
   // Function to move search forward
   const scanForward = (scan) => {
@@ -50,7 +57,6 @@ let OrderPage = ({ t, handleSubmit, change }) => {
   };
 
   const setStringsCurrent = (current) => {
-    console.log('current');
     if (current) {
       setStrings({ current });
     }
@@ -95,6 +101,7 @@ let OrderPage = ({ t, handleSubmit, change }) => {
             t={t}
             setShopCurrent={setShopCurrent}
             forward={forward}
+            change={change}
           />
         );
       case 'find':
@@ -110,11 +117,53 @@ let OrderPage = ({ t, handleSubmit, change }) => {
             t={t}
             setStringsCurrent={setStringsCurrent}
             backward={backward}
+            hybrid={hybrid}
+            setStep={setStep}
+            step={step}
           />
         );
       case 'search':
         return (
-          <BrandSearchResults t={t} setStringsCurrent={setStringsCurrent} />
+          <BrandSearchResults
+            t={t}
+            main={main}
+            cross={cross}
+            setStringsCurrent={setStringsCurrent}
+            change={change}
+            strings={strings}
+            mainCross={mainCross}
+            setMainCross={setMainCross}
+          />
+        );
+    }
+  };
+  console.log(mainCross, strings);
+  const getCurrentMainCross = () => {
+    switch (mainCross.current) {
+      case 'initial':
+        return (
+          <SelectStringWithMainCross
+            t={t}
+            backward={backward}
+            setStep={setStep}
+            setMainCross={setMainCross}
+            setMain={setMain}
+            setCross={setCross}
+            step={step}
+          />
+        );
+      case 'search':
+        return (
+          <BrandSearchResults
+            t={t}
+            main={main}
+            cross={cross}
+            setStringsCurrent={setStringsCurrent}
+            change={change}
+            strings={strings}
+            mainCross={mainCross}
+            setMainCross={setMainCross}
+          />
         );
     }
   };
@@ -132,7 +181,7 @@ let OrderPage = ({ t, handleSubmit, change }) => {
       case 5:
         return getCurrentStringsScreen();
       case 6:
-        return <SelectStringWithMainCross t={t} backward={backward} />;
+        return getCurrentMainCross();
       case 7:
         return <AboutRacquet t={t} backward={backward} />;
       case 8:
@@ -165,12 +214,13 @@ let OrderPage = ({ t, handleSubmit, change }) => {
         shop.current === 'search' ||
         shop.current === 'find' ||
         strings.current === 'search' ||
+        mainCross.current === 'search' ||
         step === 8 ? (
           <></>
         ) : (
           <div className="order-page__button-container">
             <StepButton
-              onClick={backward}
+              onClick={step === 5 || step === 6 ? () => setStep(4) : backward}
               disabled={step === 1 && scan.current === 'initial'}
               outlined
               type="button"

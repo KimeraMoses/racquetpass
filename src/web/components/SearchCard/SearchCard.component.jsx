@@ -9,11 +9,30 @@ export function SearchCard({
   brand,
   raquet,
   string,
+  change,
+  main,
+  cross,
   onClick = () => {},
 }) {
+  const handleClick = () => {
+    if (shop) {
+      change('shop', shop);
+    } else if (string) {
+      change('string', string);
+    } else if (raquet) {
+      change('raquet', raquet);
+    } else if (main) {
+      change('main', brand);
+    } else if (cross) {
+      change('cross', brand);
+    } else if (brand) {
+      change('brand', brand);
+    }
+    onClick();
+  };
   return (
     <>
-      <div className="search" onClick={onClick}>
+      <div className="search" onClick={handleClick}>
         <div className="search__card-container">
           <div className="search__card-container-divider"></div>
           <div

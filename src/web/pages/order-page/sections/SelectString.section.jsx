@@ -1,6 +1,6 @@
 import { useRef, useState } from 'react';
 import { Field } from 'redux-form';
-
+import { useSelector } from 'react-redux';
 // Custom Components
 import {
   Heading,
@@ -15,7 +15,8 @@ import {
 // Styles
 import './SelectString.styles.scss';
 
-export function SelectString({ t, backward, setStringsCurrent }) {
+export function SelectString({ t, backward, setStringsCurrent, setStep }) {
+  const brand = useSelector((state) => state?.form?.signup?.values?.brand);
   return (
     <>
       <div className="select-string">
@@ -35,6 +36,7 @@ export function SelectString({ t, backward, setStringsCurrent }) {
             <CustomOrderSelect
               label="String Type"
               link="Select"
+              value={brand?.name}
               onSelectClick={() => setStringsCurrent('search')}
             />
           </div>
@@ -53,7 +55,14 @@ export function SelectString({ t, backward, setStringsCurrent }) {
             Use Hybrid Settings
           </div>
           <div className="select-string__hybrid-settings-switch">
-            <Field name="hybrid" component={CustomSwitch} />
+            <CustomSwitch
+              handleChange={() => {
+                setStep(6);
+                setStringsCurrent('initial');
+              }}
+              checked={false}
+            />
+            {/* <Field name="hybrid" component={CustomSwitch} /> */}
           </div>
         </div>
         <div className="select-string__total-price">
