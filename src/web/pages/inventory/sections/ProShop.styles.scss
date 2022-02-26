@@ -1,0 +1,61 @@
+.shop {
+  padding: 0px 20px;
+  &__header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    &-headings {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      gap: 12px;
+    }
+  }
+  &__contact-heading {
+    margin-top: 45px;
+  }
+  &__contact-info {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    &-inner {
+      &-heading {
+        font-weight: 600;
+        font-size: 12px;
+        line-height: 18px;
+        color: #8e8e8e;
+      }
+      &-txt {
+        font-weight: 500;
+        font-size: 18px;
+        line-height: 27px;
+        color: #333333;
+      }
+    }
+  }
+  &__services-heading {
+    margin-top: 80px;
+  }
+  &__services-inner {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    &-text {
+      &-heading {
+        font-weight: 600;
+        font-size: 12px;
+        line-height: 18px;
+        color: #8e8e8e;
+      }
+      &-txt {
+        font-weight: 500;
+        font-size: 18px;
+        line-height: 27px;
+        color: #333333;
+      }
+    }
+  }
+}

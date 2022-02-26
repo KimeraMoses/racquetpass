@@ -5,9 +5,9 @@ import Login from './login';
 import Page404 from './page-404';
 import Order from './order-page';
 import Tasks from './tasks';
-import Scan from './tasks/scan'
-import Details from './tasks/details'
-import Scanned from './tasks/scanned'
+import Scan from './tasks/scan';
+import Details from './tasks/details';
+import Scanned from './tasks/scanned';
 import BusinessAccount from './business-account';
 import CreateBusinessAccount from './business-account/create';
 import CreatePassword from './business-account/create-password';
@@ -28,6 +28,10 @@ import Shop from './create-service-order/shop';
 import ShopSearching from './create-service-order/shop-searching';
 import OrderSubmitted from './create-service-order/submitted';
 import CreateAccount from './account-page';
+import OrderWithoutAccount from './order-without-account';
+import Inventory from './inventory';
+import PlayerTabs from './player-tabs';
+import ConfigureRacquet from './configure-racquet';
 
 function Routers() {
   return (
@@ -44,12 +48,30 @@ function Routers() {
           <Route path="/Tasks/Scanned" element={<Scanned />} />
           <Route path="/Tasks/Details" element={<Details />} />
           <Route path="/BusinessAccount" element={<BusinessAccount />} />
-          <Route path="/BusinessAccount/Create" element={<CreateBusinessAccount />} />
-          <Route path="/BusinessAccount/CreatePassword" element={<CreatePassword />} />
-          <Route path="/BusinessAccount/VerifyPhone" element={<VerifyPhone />} />
-          <Route path="/BusinessAccount/VerifyBusiness" element={<VerifyBusiness />} />
-          <Route path="/BusinessAccount/BusinessDetails" element={<BusinessDetails />} />
-          <Route path="/BusinessAccount/ProfileInfo" element={<ProfileInfo />} />
+          <Route
+            path="/BusinessAccount/Create"
+            element={<CreateBusinessAccount />}
+          />
+          <Route
+            path="/BusinessAccount/CreatePassword"
+            element={<CreatePassword />}
+          />
+          <Route
+            path="/BusinessAccount/VerifyPhone"
+            element={<VerifyPhone />}
+          />
+          <Route
+            path="/BusinessAccount/VerifyBusiness"
+            element={<VerifyBusiness />}
+          />
+          <Route
+            path="/BusinessAccount/BusinessDetails"
+            element={<BusinessDetails />}
+          />
+          <Route
+            path="/BusinessAccount/ProfileInfo"
+            element={<ProfileInfo />}
+          />
           <Route path="/ServiceOrder/View" element={<ViewServiceOrder />} />
           <Route path="/ServiceOrder/Details" element={<OrderDetails />} />
           <Route path="/ServiceOrder/Scanned" element={<OrderScanned />} />
@@ -58,10 +80,23 @@ function Routers() {
           <Route path="/CreateOrder/Scanned" element={<ScannedOrder />} />
           <Route path="/CreateOrder/Details" element={<CreateOrderDetails />} />
           <Route path="/CreateOrder/Payment" element={<CreateOrderPayment />} />
-          <Route path="/CreateOrder/StringDetails" element={<StringDetails />} />
+          <Route
+            path="/CreateOrder/StringDetails"
+            element={<StringDetails />}
+          />
           <Route path="/CreateOrder/Shop" element={<Shop />} />
-          <Route path="/CreateOrder/ShopSearching" element={<ShopSearching />} />
+          <Route
+            path="/CreateOrder/ShopSearching"
+            element={<ShopSearching />}
+          />
           <Route path="/CreateOrder/Submitted" element={<OrderSubmitted />} />
+          <Route
+            path="/order-without-account"
+            element={<OrderWithoutAccount />}
+          />
+          <Route path="/inventory" element={<Inventory />} />
+          <Route path="/player-tabs" element={<PlayerTabs />} />
+          <Route path="/configure-racquet" element={<ConfigureRacquet />} />
         </Routes>
       </Router>
     </>

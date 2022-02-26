@@ -4,15 +4,41 @@ import { SubHeading, Description } from 'web/components';
 // Styles
 import './SearchCard.styles.scss';
 
-export function SearchCard({ shop, brand, raquet, onClick = () => {} }) {
+export function SearchCard({
+  shop,
+  brand,
+  raquet,
+  string,
+  change = () => {},
+  main,
+  cross,
+  onClick = () => {},
+}) {
+  const handleClick = () => {
+    if (shop) {
+      change('shop', shop);
+    } else if (string) {
+      change('string', string);
+    } else if (raquet) {
+      change('raquet', raquet);
+    } else if (main) {
+      change('main', brand);
+    } else if (cross) {
+      change('cross', brand);
+    } else if (brand) {
+      change('brand', brand);
+    }
+    onClick();
+  };
   return (
     <>
-      <div className="search" onClick={onClick}>
+      <div className="search" onClick={handleClick}>
         <div className="search__card-container">
           <div className="search__card-container-divider"></div>
           <div
             className={`search__card-container-content ${
-              (raquet || brand) && 'search__card-container-content-raquet'
+              (raquet || brand || string) &&
+              'search__card-container-content-raquet'
             }`}
           >
             {shop ? (
@@ -43,6 +69,27 @@ export function SearchCard({ shop, brand, raquet, onClick = () => {} }) {
                   <Description customClass="search__brand-card-container-content-txt-text">
                     {brand?.price}
                   </Description>
+                </div>
+              </>
+            ) : string ? (
+              <>
+                <div className="search__brand-card-container-content-txt search__brand-card-container-content-txt-string">
+                  <div>
+                    <SubHeading customClass="search__brand-card-container-content-txt-heading">
+                      {string?.name}
+                    </SubHeading>
+                    <SubHeading customClass="search__brand-card-container-content-txt-subheading">
+                      {string?.description}
+                    </SubHeading>
+                  </div>
+                  <div>
+                    <Description customClass="search__brand-card-container-content-txt-heading">
+                      {string?.size}
+                    </Description>
+                    <Description customClass="search__brand-card-container-content-txt-text">
+                      {string?.price}
+                    </Description>
+                  </div>
                 </div>
               </>
             ) : (

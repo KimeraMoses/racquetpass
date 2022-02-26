@@ -147,13 +147,12 @@
   "taskScannedCrossesHeading": "Crosses",
   "taskScannedCrossesDesc": "Luxilon Alu Rough 1.6 G @ 24 lbs",
 
-  
   "accountCreate": "Create Account",
   "accountSignIn": "Sign In",
   "accountPlayer": "I’m a Player",
-  "accountPlayerDescription":"Get started with a new account as a player.",
+  "accountPlayerDescription": "Get started with a new account as a player.",
   "accountStringer": "I’m a Stringer",
-  "accountStringerDescription":"Get started with a new account as a stringer.",
+  "accountStringerDescription": "Get started with a new account as a stringer.",
   "accountGetStarted": "Get Started",
 
   "createBusinessAccountHeading": "Create Business Account",
@@ -180,7 +179,7 @@
   "verifyBusinessAccountPhoneCodeDescription": "Please enter the 6 digit verification code that Racquet Pass texted to your phone number (phone number)",
   "verifyBusinessAccountPhoneCodeResend": "Resend Code",
   "verifyBusinessAccountPhoneNextBtn": "Next",
-  
+
   "businessAccountDetailHeading": "Where is your business located?",
   "businessAccountDetailDescription": "Almost there! Just just one more step after this and you’re officially a RacquetPass stringer.",
   "businessAccountDetailStreetLabel": "Street Address",
@@ -192,7 +191,7 @@
   "businessAccountDetailZipLabel": "ZIP Code",
   "businessAccountDetailZipPlaceHolder": "ZIP",
   "businessAccountDetailNextBtn": "Next",
-  
+
   "businessAccountPasswordHeading": "Make a password",
   "businessAccountPasswordDescription": "A little pain for a lot of security.",
   "businessAccountPasswordLabel": "Password",
@@ -210,7 +209,7 @@
   "businessAccountPasswordRecommendationFour": "One number",
   "businessAccountPasswordRecommendationFive": "No text from email/name",
   "businessAccountPasswordCreateBtn": "Create Account",
-  
+
   "verifyBusinessAccountBusinessHeading": "Verify your business",
   "verifyBusinessAccountBusinessDescription": "Verifying your business is the final step until you can show your customers the magic of RacquetPass. However, you still have access to all other features of RacquetPass.",
   "verifyBusinessAccountBusinessCodeLabel": "Verification Code",
@@ -259,7 +258,6 @@
   "orderOpenedShopAddress1": " Seattle, WA 12345",
   "orderReopenedPickup": "Pickup",
 
-  
   "orderScannedHeading": "We found a racquet associated with this QR code!",
   "orderScannedDetailTitle": "Racquet Details",
   "orderScannedNameLabel": "Nickname",
@@ -300,7 +298,8 @@
   "orderScannedStringHeading": "String Type",
   "orderScannedStringDesc": "Luxilon Alu Rough 1.6 G @ 24 lbs",
   "orderScannedComplete": "Place a service order",
-  
+  "odrSigninEdit": "Sign in to edit this",
+
   "createOrderHeading": "Ole Reliable",
   "createOrderEdit": "Edit Racquet",
   "createOrderRacquetNameHeading": "Nickname",
@@ -364,8 +363,7 @@
   "OrderSubmittedInfoProgress": "in Progress",
   "OrderSubmittedInfoConfirmation": "You should recieve a confirmation text shortly.",
   "OrderSubmittedBack": "Back to RacquetPass",
-  
-  "odrPivacyText": "By clicking Create Account, Continue Using Facebook, Continue Using Google or Continue Using Apple, you agree to our .",
+
   "odrPrivacyAnd": "and",
   "odrTermsBold": "Terms & Conditions",
   "odrPrivacyBold": "Privacy Statement.",
@@ -378,5 +376,68 @@
   "accPassitem2": "One lowercase letter",
   "accPassitem3": "One uppercase letter",
   "accPassitem4": "One number",
-  "accPassitem5": "No text from email/name"
+  "accPassitem5": "No text from email/name",
+
+  "profileString": "Strings",
+  "profileButtonCSV": "Upload CSV",
+  "profileButtonAddNew": "Add New Item",
+  "profileFormEdit": "Edit Item",
+  "profileItemDelete": "Delete Item",
+  "profileButtonSave": "Save Changes",
+
+  "shopProHeading": "My Pro Shop",
+  "ShopContactHeading": "Contact Info",
+  "shopButtonEdit": "Edit",
+  "shopEmailHeading": "Email",
+  "shopEmail": "awesome_pro_racquets@gmail.com",
+  "shopPhone": "(123) 4567-8910",
+  "shopAddress": "123 NE Street St Seattle, WA 98101",
+  "shopServiceHeading": "Service Details",
+  "shopDeliveryTime": "Estimated delivery time",
+  "shopDeliveryTimeDay": "3d",
+  "shopLaborPriceHeading": "Labor price",
+  "shopLaborPrice": "$19.99",
+
+  "editShopHeading": "Edit My Pro Shop",
+  "editNameRequest": "Request Name change",
+  "editAddressRequest": "Request address change",
+  "editServicesText": "This is how much you charge for the labor of restringing. It will be added to the cost of strings to determine the price of a service order.",
+  "modifyRequest": "Modify or cancel request",
+  "modifyRequestText": "Request to change name is pending",
+  "modifyAddressRequest": "Request to change address is pending",
+
+  "editText": "We will reach out to you soon to confirm that this change is legitimate.",
+  "submitRequest": "Submit Request",
+  "changeName": "Name Change Request",
+  "requestPending": "This request is currently pending.",
+  "cancelRequest": "Cancel Request",
+  "cancelAddressHeading": "Address Change Request",
+  "RequestAddressChnage": "Request Address Change",
+  "RequestAddressText": "After submitting this form, we will reach out to you to confirm that this change is legitimate.",
+
+  "configHeading": "Tell us about this racquet",
+  "configQR": "QR Code",
+  "configWhatLink": "What's This?",
+  "configQRText": "Don’t have a QR Code?",
+  "configQRText1": "  No worries, you can add it later.",
+  "configStringHeading": "What strings do you use with this racquet?",
+  "configMains": "Mains & Crosses",
+  "configStringSwitch": "Use different strings for mains and crosses",
+  "configButtonRacquet": "Create Racquet",
+  "configStringHead": "What strings do you use?",
+  "editRacquetInfo": "Edit Racquet Settings",
+
+  "orderDetailHeading": "Orders",
+  "orderLiveOrder": "Live orders",
+  "orderPastYear": "Past orders this year",
+  "orderPrevYear": "Past orders in 2021",
+  "orderButtonText": "Place a New Order",
+
+  "paymentHeading": "Payment Methods",
+  "paymentDetailTitle": "My tennis card",
+  "paymentCardHeading": "Name",
+  "paymentCardEnd": "Ends with",
+  "paymentCardExpire": "Expires",
+  "paymentExpireDate": "08/2026",
+  "addCardTitle": "Add Card"
 }

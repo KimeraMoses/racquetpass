@@ -1,0 +1,40 @@
+.drawer {
+  .drawer__profile {
+    display: flex;
+    justify-content: space-between;
+    padding: 0px 20px;
+    &-avatar {
+      display: flex;
+      gap: 20px;
+      flex-direction: column;
+      align-items: center;
+      &-text {
+        text-align: center;
+        &-heading {
+          font-family: Poppins;
+          font-style: normal;
+          font-weight: bold;
+          font-size: 24px;
+          line-height: 36px;
+          text-align: center;
+          color: #333333;
+        }
+        &-link {
+          font-family: Poppins;
+          font-style: normal;
+          font-weight: 500;
+          font-size: 14px;
+          line-height: 21px;
+          text-align: center;
+          color: #304ffe;
+          text-decoration: none;
+          cursor: pointer;
+        }
+      }
+    }
+  }
+
+  .drawer__menu {
+    margin-top: 30px;
+  }
+}

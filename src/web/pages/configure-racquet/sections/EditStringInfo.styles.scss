@@ -1,0 +1,42 @@
+.edit-strings {
+  padding: 0px 20px;
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+  min-height: calc(100vh - 80px);
+  &__header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    // align-items: center;
+    &-heading {
+      max-width: 300px;
+    }
+  }
+  &__info-buttons {
+    margin-top: 25px;
+  }
+  &__info-select {
+    margin-top: 50px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+  &__swtich {
+    margin-top: 35px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    &-text {
+      font-size: 14px;
+      line-height: 21px;
+      display: flex;
+      align-items: center;
+      color: #000000;
+    }
+  }
+  &__button {
+    margin-top: 50px;
+  }
+}

@@ -1,0 +1,109 @@
+.order-card.order-card-previous {
+  &::before {
+    border-left: 3px solid rgba(0, 0, 0, 0.2);
+    border-radius: 1.5px;
+  }
+  .order-card__status {
+    display: unset;
+    flex-direction: column;
+    height: unset;
+    padding: 0px;
+    &-text {
+      font-style: normal;
+      font-weight: normal;
+      font-size: 14px;
+      line-height: 21px;
+      color: #515151;
+      text-align: right;
+    }
+    &-shop {
+      font-family: Poppins;
+      font-style: normal;
+      font-weight: 500;
+      font-size: 12px;
+      line-height: 18px;
+      text-align: right;
+      color: #929292;
+    }
+  }
+}
+
+.order-card.order-card-ready {
+  &::before {
+    border-left: 3px solid #00c853;
+  }
+  .order-card__status {
+    background: #e5faee;
+    &-text {
+      color: #008d3b;
+    }
+  }
+}
+.order-card.order-card-in-progress {
+  &::before {
+    border-left: 3px solid #ffa000;
+  }
+  .order-card__status {
+    background: rgba(255, 160, 0, 0.1);
+    &-text {
+      color: #d78700;
+    }
+  }
+}
+
+.order-card {
+  cursor: pointer;
+  padding: 16px;
+  display: flex;
+  justify-content: space-between;
+  position: relative;
+  background: #ffffff;
+  box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.15);
+  border-radius: 12px;
+  &::before {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    height: 1px;
+    // width: 50%; /* or 100px */
+    height: 60%;
+    top: 50%;
+    transform: translateY(-50%);
+    border-radius: 1.5px;
+    content: '';
+  }
+  &__text {
+    &-heading {
+      font-family: Poppins;
+      font-style: normal;
+      font-weight: 600;
+      font-size: 14px;
+      line-height: 21px;
+      color: #333333;
+    }
+    &-description {
+      font-family: Poppins;
+      font-style: normal;
+      font-weight: 500;
+      font-size: 12px;
+      line-height: 18px;
+      color: #7d7d7d;
+      margin-top: 5px;
+    }
+  }
+  &__status {
+    border-radius: 10.5px;
+    padding: 10px;
+    height: 21px;
+    display: flex;
+    align-items: center;
+    &-text {
+      font-family: Poppins;
+      font-style: normal;
+      font-weight: 500;
+      font-size: 10px;
+      line-height: 15px;
+      text-align: center;
+    }
+  }
+}

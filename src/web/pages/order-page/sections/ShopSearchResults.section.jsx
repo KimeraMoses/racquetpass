@@ -7,7 +7,7 @@ import { Description, CustomInput, SearchCard } from 'web/components';
 // Styles
 import './ShopSearchResults.styles.scss';
 
-export function ShopSearchResults({ t, setShopCurrent, forward }) {
+export function ShopSearchResults({ t, setShopCurrent, forward, change }) {
   let inputEl = useRef(null);
   useEffect(() => {
     inputEl.focus();
@@ -41,6 +41,7 @@ export function ShopSearchResults({ t, setShopCurrent, forward }) {
               setShopCurrent('initial');
               forward();
             }}
+            change={change}
           />
           <SearchCard
             shop={{
@@ -51,6 +52,7 @@ export function ShopSearchResults({ t, setShopCurrent, forward }) {
               setShopCurrent('initial');
               forward();
             }}
+            change={change}
           />
           <SearchCard
             shop={{
@@ -61,6 +63,7 @@ export function ShopSearchResults({ t, setShopCurrent, forward }) {
               setShopCurrent('initial');
               forward();
             }}
+            change={change}
           />
         </div>
         <div className="shop-result__account-container">

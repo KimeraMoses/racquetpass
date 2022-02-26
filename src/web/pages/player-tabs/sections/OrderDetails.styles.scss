@@ -1,0 +1,49 @@
+.orders {
+  // position: relative;
+  padding: 0px 20px;
+  &__header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  &__live {
+    margin-top: 40px;
+    &-heading {
+      font-family: Poppins;
+      font-style: normal;
+      font-weight: 600;
+      font-size: 12px;
+      line-height: 18px;
+      color: #969696;
+      margin-bottom: 5px;
+    }
+  }
+  &__past {
+    margin-top: 60px;
+    margin-bottom: 30px;
+    &-heading {
+      font-family: Poppins;
+      font-style: normal;
+      font-weight: 600;
+      font-size: 12px;
+      line-height: 18px;
+      color: #969696;
+      margin-bottom: 5px;
+    }
+    &-cards {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+  }
+  &__button {
+    position: fixed;
+    width: 90%;
+    bottom: 40px;
+    // left: 20px;
+    &btn {
+      // position: absolute;
+      // bottom: 5rem;
+    }
+  }
+}

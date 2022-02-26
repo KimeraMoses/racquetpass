@@ -1,4 +1,8 @@
 .scan-details {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: calc(100vh - 97px);
   &__heading {
     display: flex;
     align-items: center;
@@ -67,6 +71,14 @@
         border: none;
         cursor: pointer;
       }
+    }
+  }
+  .scan-details__button-container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    &-btn {
+      width: 100%;
     }
   }
 }

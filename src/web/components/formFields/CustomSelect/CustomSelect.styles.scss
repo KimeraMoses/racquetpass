@@ -1,0 +1,114 @@
+.custom-select {
+  width: 100%;
+  &__header {
+    margin-bottom: 12px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    &-label {
+      font-weight: 600;
+      font-size: 12px;
+      line-height: 18px;
+      color: #969696;
+      font-family: Poppins;
+    }
+    &-error,
+    &-show {
+      font-weight: 600;
+      font-size: 12px;
+      line-height: 18px;
+      font-family: Poppins;
+    }
+    &-error {
+      color: #e53935;
+    }
+    &-show {
+      color: #304ffe;
+      background: transparent;
+      border: none;
+      outline: none;
+      cursor: pointer;
+    }
+  }
+  &__select {
+    .css-1pahdxg-control {
+      box-sizing: border-box;
+      padding: 16px;
+      width: 100%;
+      font-family: Poppins;
+      -webkit-appearance: none;
+      -moz-appearance: none;
+      appearance: none;
+      background: #ffffff;
+      border-radius: 12px;
+      border-color: #304ffe;
+      outline: none;
+      .css-qc6sy-singleValue {
+        font-family: Poppins;
+        font-size: 15px;
+        line-height: 27px;
+        color: #333333;
+      }
+      .css-1gtu0rj-indicatorContainer {
+        padding: 0px;
+      }
+      .css-319lph-ValueContainer {
+        padding: 0px;
+      }
+      .css-14el2xx-placeholder {
+        font-family: Poppins;
+        font-size: 15px;
+        line-height: 27px;
+        color: #bababa;
+      }
+      .css-1okebmr-indicatorSeparator {
+        display: none;
+      }
+    }
+    .css-1s2u09g-control {
+      box-sizing: border-box;
+      padding: 16px;
+      width: 100%;
+      font-family: Poppins;
+      -webkit-appearance: none;
+      -moz-appearance: none;
+      appearance: none;
+      background: #ffffff;
+      border: 1px solid #e8e8e8 !important;
+      border-radius: 12px;
+      outline: none;
+      .css-qc6sy-singleValue {
+        font-family: Poppins;
+        font-size: 15px;
+        line-height: 27px;
+        color: #333333;
+      }
+      .css-14el2xx-placeholder {
+        font-family: Poppins;
+        font-size: 15px;
+        line-height: 27px;
+        color: #bababa;
+      }
+      .css-319lph-ValueContainer {
+        padding: 0px;
+      }
+      .css-tlfecz-indicatorContainer {
+        padding: 0px;
+      }
+      .css-1okebmr-indicatorSeparator {
+        display: none;
+      }
+    }
+  }
+  &__arrow {
+    margin-right: 10px;
+  }
+  .custom-select__box.custom-select__box-error {
+    background: #fcebeb;
+    border-color: #e53935;
+    &:focus-visible {
+      outline: none;
+      border-color: #e53935;
+    }
+  }
+}

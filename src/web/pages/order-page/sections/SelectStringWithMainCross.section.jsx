@@ -1,5 +1,5 @@
 import { Field } from 'redux-form';
-
+import { useSelector } from 'react-redux';
 // Custom Components
 import {
   Heading,
@@ -14,7 +14,16 @@ import {
 // Styles
 import './SelectStringWithMainCross.styles.scss';
 
-export function SelectStringWithMainCross({ t, backward }) {
+export function SelectStringWithMainCross({
+  t,
+  backward,
+  setStep,
+  setMainCross,
+  setMain,
+  setCross,
+}) {
+  const main = useSelector((state) => state?.form?.signup?.values?.main);
+  const cross = useSelector((state) => state?.form?.signup?.values?.cross);
   return (
     <>
       <div className="select-string-mc">
@@ -35,7 +44,16 @@ export function SelectStringWithMainCross({ t, backward }) {
             <InfoButton />
           </div>
           <div className="select-string-mc__main-info-select">
-            <CustomOrderSelect label="String Type" />
+            <CustomOrderSelect
+              label="String Type"
+              link="Select"
+              value={main?.name}
+              onSelectClick={() => {
+                setMain(true);
+                setCross(false);
+                setMainCross({ current: 'search' });
+              }}
+            />
           </div>
           <div className="select-string-mc__main-info-number">
             <Field
@@ -53,7 +71,16 @@ export function SelectStringWithMainCross({ t, backward }) {
             <InfoButton />
           </div>
           <div className="select-string-mc__crosses-info-select">
-            <CustomOrderSelect label="String Type" />
+            <CustomOrderSelect
+              label="String Type"
+              link="Select"
+              value={cross?.name}
+              onSelectClick={() => {
+                setMain(false);
+                setCross(true);
+                setMainCross({ current: 'search' });
+              }}
+            />
           </div>
           <div className="select-string-mc__crosses-info-number">
             <Field
@@ -70,7 +97,14 @@ export function SelectStringWithMainCross({ t, backward }) {
             Use Hybrid Settings
           </div>
           <div className="select-string-mc__hybrid-settings-switch">
-            <Field name="hybrid" component={CustomSwitch} />
+            <CustomSwitch
+              handleChange={() => {
+                setMain(false);
+                setCross(false);
+                setStep(5);
+              }}
+              checked={true}
+            />
           </div>
         </div>
         <div className="select-string-mc__total-price">

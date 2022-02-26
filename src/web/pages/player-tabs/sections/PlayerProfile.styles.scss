@@ -1,0 +1,44 @@
+.player-profile {
+  padding: 0px 20px;
+
+  &__heading {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 45px;
+  }
+
+  &__avatar {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    &-text {
+      &-name {
+        margin-bottom: 10px;
+      }
+    }
+  }
+
+  &__details {
+    margin-top: 40px;
+    &-detail {
+      margin-bottom: 20px;
+      &-heading {
+        font-family: Poppins;
+        font-style: normal;
+        font-weight: 600;
+        font-size: 12px;
+        line-height: 18px;
+        color: #969696;
+      }
+      &-text {
+        font-family: Poppins;
+        font-style: normal;
+        font-weight: 500;
+        font-size: 18px;
+        line-height: 27px;
+        color: #333333;
+      }
+    }
+  }
+}

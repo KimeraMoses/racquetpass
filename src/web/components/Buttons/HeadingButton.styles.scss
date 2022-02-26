@@ -1,12 +1,14 @@
 .heading-button {
   .heading-button__btn {
-    display: inline-block;
     border: none;
     margin: 0;
     text-decoration: none;
     background: transparent;
     border: 1px solid #e8e8e8;
-    border-radius: 15px;
+    border-radius: 20px;
+    background: #ffffff;
+    border: 1px solid #e8e8e8;
+    box-sizing: border-box;
     line-height: 1;
     cursor: pointer;
     -webkit-appearance: none;
@@ -14,6 +16,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    padding: 12px;
   }
 }
 .heading-button.heading-button-text {
@@ -28,5 +31,17 @@
     line-height: 21px;
     text-align: center;
     color: #333333;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 12px;
+  }
+}
+
+.heading-button.heading-button-add {
+  .heading-button__btn {
+    background: #304ffe;
+    filter: drop-shadow(0px 20px 35px #304ffe);
+    border: none;
   }
 }

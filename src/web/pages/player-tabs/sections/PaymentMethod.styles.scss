@@ -1,0 +1,15 @@
+.payment {
+  padding: 0px 20px;
+
+  &__header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  &__cards {
+    margin-top: 50px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+}

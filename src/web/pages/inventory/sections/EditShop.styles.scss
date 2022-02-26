@@ -1,0 +1,89 @@
+.edit {
+  padding: 0px 20px;
+  &__heading {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
+  &__contact-heading {
+    margin-top: 45px;
+  }
+  &__contact-form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    margin-top: 35px;
+  }
+  &__shop-details {
+    margin-top: 30px;
+    &-header {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+      &-heading {
+        font-weight: 600;
+        font-size: 12px;
+        line-height: 18px;
+        color: #8e8e8e;
+      }
+      &-link {
+        text-decoration: none;
+        font-family: poppins;
+        font-weight: 600;
+        font-size: 12px;
+        line-height: 18px;
+        color: #304ffe;
+        cursor: pointer;
+      }
+    }
+    &-text {
+      margin-top: 6px;
+      &-txt {
+        font-weight: 500;
+        font-size: 18px;
+        line-height: 27px;
+        color: #333333;
+      }
+    }
+  }
+  &__services-heading {
+    margin-top: 50px;
+  }
+  &__services-form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    margin-top: 35px;
+  }
+  &__service-text {
+    margin-top: 12px;
+    &-txt {
+      font-weight: normal;
+      font-size: 10px;
+      line-height: 15px;
+      color: #8e8e8e;
+    }
+  }
+  &__button {
+    margin-top: 85px;
+  }
+}
+.edit__shop-details-header-modify-link {
+  text-decoration: none;
+  font-family: Poppins;
+  font-weight: 600;
+  font-size: 12px;
+  line-height: 18px;
+  color: #efac00;
+  cursor: pointer;
+}
+.edit__shop-details-text-modify-txt {
+  margin-top: 8px;
+  font-family: Poppins;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 21px;
+  color: #545454;
+}

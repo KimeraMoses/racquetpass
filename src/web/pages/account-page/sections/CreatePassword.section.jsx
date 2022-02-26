@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Field } from 'redux-form';
 import { useSelector } from 'react-redux';
 import {
@@ -24,7 +25,7 @@ const mediumStrength = new RegExp(
 
 export function CreatePassword({ t, back }) {
   const [passwordFieldType, setPasswordFieldType] = useState('password');
-
+  const navigate = useNavigate();
   const [password, setPassword] = useState('');
   const [passwordConditions, setPasswordConditions] = useState({
     moreThanEight: false,
@@ -275,6 +276,7 @@ export function CreatePassword({ t, back }) {
         <div>
           <div className="account-details__form-button">
             <SubmitButton
+              onClick={() => navigate('/player-tabs')}
               type="submit"
               className="account-details__form-button-btn"
             >
