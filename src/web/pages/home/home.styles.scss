@@ -10,22 +10,45 @@
   // Button Container Styles
   &__button-container {
     display: flex;
-    justify-content: flex-end;
-    // Button Styles
-    &-signin {
-      margin-top: 40px;
-      margin-right: 20px;
-      border-radius: 12px;
-      border: none;
-      width: 86px;
-      height: 48px;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 40px;
+    &-text {
       font-family: Poppins;
+      font-style: normal;
       font-weight: 600;
-      font-size: 14px;
-      line-height: 21px;
-      text-align: center;
-      color: #333333;
-      cursor: pointer;
+      font-size: 24px;
+      line-height: 36px;
+      color: #ffffff;
+    }
+    &-buttons {
+      &-btn {
+        border-radius: 12px;
+        border: none;
+        width: 86px;
+        height: 48px;
+        font-family: Poppins;
+        font-weight: 500;
+        font-size: 14px;
+        line-height: 21px;
+        text-align: center;
+        color: #333333;
+        cursor: pointer;
+      }
+      &-btn-trans {
+        background: transparent;
+        border-radius: 12px;
+        border: none;
+        width: 86px;
+        height: 48px;
+        font-family: Poppins;
+        font-weight: 500;
+        font-size: 14px;
+        line-height: 21px;
+        text-align: center;
+        color: #ffffff;
+        cursor: pointer;
+      }
     }
   }
   .banner-container {
@@ -33,15 +56,14 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    margin-top: 47px;
+    margin-top: 120px;
     &__heading {
       font-family: Poppins;
       font-weight: 600;
       font-size: 24px;
       line-height: 36px;
       color: #ffffff;
-      margin-bottom: 16px;
-      text-align: center;
+      margin-bottom: 20px;
     }
     &__text {
       font-family: Poppins;
@@ -58,14 +80,45 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    gap: 10px;
+    gap: 20px;
+    &__btn {
+      background: transparent;
+      outline: none;
+      border: none;
+      font-family: Poppins;
+      font-style: normal;
+      font-weight: bold;
+      font-size: 18px;
+      line-height: 27px;
+      display: flex;
+      align-items: center;
+      text-align: center;
+      color: #ffffff;
+      cursor: pointer;
+      margin-top: 20px;
+    }
+    &__text {
+      margin-top: 150px;
+      font-family: Poppins;
+      font-style: normal;
+      font-weight: normal;
+      font-size: 24px;
+      line-height: 36px;
+      text-align: center;
+      color: rgba(255, 255, 255, 0.8);
+
+      &-imp {
+        font-weight: bold;
+        cursor: pointer;
+      }
+    }
   }
   .footer-container {
     display: flex;
     justify-content: space-between;
     position: relative;
     z-index: 2;
-    margin-top: 435px;
+    margin-top: 350px;
     &__link-text {
       padding-bottom: 15px;
       font-family: Poppins;

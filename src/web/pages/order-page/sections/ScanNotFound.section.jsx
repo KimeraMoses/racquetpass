@@ -18,12 +18,11 @@ export function ScanNotFound({ t, backward, setContinueWithAccount, setStep }) {
       <div className="scan-success">
         <div>
           <div className="scan-success__heading">
-            <Heading>{t('odrHeading')}</Heading>
-            <HeadingButton close onClick={backward} />
+            <Heading>{t('orderQRText')}</Heading>
           </div>
           <div className="scan-succcess__text-container">
             <Description customClass="scan-success__text-container-text">
-              {t('odrAttachQR')}
+              {t('orderQRtxt')}
             </Description>
           </div>
           <div className="scan-success__card-continer">

@@ -59,4 +59,16 @@
       color: #333333;
     }
   }
+  &__recquet-heading {
+    margin-top: 60px;
+    p {
+      margin-top: 10px;
+    }
+  }
+  &__recquet-form {
+    margin-top: 30px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
 }

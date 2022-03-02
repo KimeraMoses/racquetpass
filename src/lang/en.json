@@ -1,7 +1,8 @@
 {
   "homeSignin": "Sign In",
-  "homeHeading": "Welcome to RacquetPass.",
-  "homeDesc": "Making stringing fun and easy for players and stingers.",
+  "homeSignup": "Sign Up",
+  "homeLogo": "RacquetPass",
+  "homeHeading": "String your racquet the easy way.",
   "homeDarkBtn": "String a racquet",
   "homeLightBtn": "Create a business account",
   "homePP": "Privacy Policy",
@@ -439,5 +440,11 @@
   "paymentCardEnd": "Ends with",
   "paymentCardExpire": "Expires",
   "paymentExpireDate": "08/2026",
-  "addCardTitle": "Add Card"
+  "addCardTitle": "Add Card",
+
+  "orderQRText": "Attach QR sticker",
+  "orderQRtxt": "Attach a QR sticker to the racquet that you want strung, and then scan it.",
+  "orderLinktxt": "Where do I attach the sticker?",
+  "orderSelectStringTxt": "Select the strings you want to restring your racquet with.",
+  "orderRecquetDesc": "This helps the shop identify and find your racquet."
 }
