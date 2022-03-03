@@ -4,7 +4,7 @@ import { Avatar, HeadingButton, Heading, Tabs } from 'web/components';
 
 import './InventoryDashboard.styles.scss';
 
-export const InventoryDashboard = ({setCurrentScreen, t}) => {
+export const InventoryDashboard = ({ setCurrentScreen, t }) => {
   return (
     <div className="inventory-dashboard">
       <div className="inventory-dashboard__profile">
@@ -25,6 +25,11 @@ export const InventoryDashboard = ({setCurrentScreen, t}) => {
         <Tabs
           tabs={[
             {
+              title: 'My  Tasks',
+              icon: '/img/drawer/tick-circle.png',
+              // onClick: () => setCurrentScreen('proshop'),
+            },
+            {
               title: 'My Pro Shop',
               icon: '/img/drawer/shop.png',
               onClick: () => setCurrentScreen('proshop'),
@@ -33,6 +38,11 @@ export const InventoryDashboard = ({setCurrentScreen, t}) => {
               title: 'Inventory',
               icon: '/img/drawer/orders.png',
               onClick: () => setCurrentScreen('inventory'),
+            },
+            {
+              title: 'Payment Methods',
+              icon: '/img/drawer/payment.png',
+              onClick: () => setCurrentScreen('payment'),
             },
             { title: 'Logout', icon: '/img/drawer/logout.png' },
           ]}

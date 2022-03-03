@@ -50,6 +50,11 @@
 
       color: #000000;
     }
+    &-switch {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
   }
   &__total-price {
     margin-top: 40px;

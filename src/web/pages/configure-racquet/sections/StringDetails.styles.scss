@@ -35,6 +35,11 @@
       align-items: center;
       color: #000000;
     }
+    &-right {
+      display: flex;
+      flex-direction: row;
+      gap: 20px;
+    }
   }
   &__buttons {
     display: flex;

@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { withNamespaces } from 'react-i18next';
 import { reduxForm } from 'redux-form';
 import { useNavigate } from 'react-router-dom';
-import { StepButton, SubmitButton } from 'web/components';
+import { StepButton } from 'web/components';
 import {
   ScanSection,
   ScanNotFound,
@@ -23,9 +23,9 @@ import {
 import './order.styles.scss';
 
 let OrderPage = ({ t, handleSubmit, change }) => {
-  const [step, setStep] = useState(1);
+  const [step, setStep] = useState(5);
   const [continueWithAccount, setContinueWithAccount] = useState(false);
-  const [scan, setScan] = useState({ current: 'initial' });
+  const [scan, setScan] = useState({ current: 'found' });
   const [shop, setShop] = useState({ current: 'initial' });
   const [strings, setStrings] = useState({ current: 'initial' });
   const [mainCross, setMainCross] = useState({ current: 'initial' });
@@ -47,12 +47,6 @@ let OrderPage = ({ t, handleSubmit, change }) => {
   const setShopCurrent = (current) => {
     if (current) {
       setShop({ current });
-    }
-  };
-
-  const setScanCurrent = (current) => {
-    if (current) {
-      setScanCurrent({ current });
     }
   };
 
@@ -100,6 +94,8 @@ let OrderPage = ({ t, handleSubmit, change }) => {
             setContinueWithAccount={setContinueWithAccount}
           />
         );
+      default:
+        return <>Check current scan</>;
     }
   };
 
@@ -130,6 +126,8 @@ let OrderPage = ({ t, handleSubmit, change }) => {
             setStep={setStep}
           />
         );
+      default:
+        return <>Check current shop</>;
     }
   };
 
@@ -158,6 +156,8 @@ let OrderPage = ({ t, handleSubmit, change }) => {
             setMainCross={setMainCross}
           />
         );
+      default:
+        return <>Check current string</>;
     }
   };
   console.log(mainCross, strings);
@@ -188,6 +188,8 @@ let OrderPage = ({ t, handleSubmit, change }) => {
             setMainCross={setMainCross}
           />
         );
+      default:
+        return <>Check current main cross</>;
     }
   };
 

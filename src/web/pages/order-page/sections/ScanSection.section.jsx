@@ -16,14 +16,14 @@ import './ScanSection.styles.scss';
 export function ScanSection({ t, scanForward, change }) {
   const [qrCode, setQrCode] = useState('');
   const [qrScanner, setQrScanner] = useState(false);
-  const [raquetFound, raquetNotFound] = useState(true);
+  const [raquetFound, setRacquetFound] = useState(true);
   useEffect(() => {
     if (qrCode) {
       change('raquet-details-from-qr', qrCode);
       // TODO: Update logic with RaquetWith with Backend
       scanForward(raquetFound);
     }
-  }, [qrCode]);
+  }, [qrCode, change, raquetFound, scanForward]);
 
   const navigate = useNavigate();
   return (

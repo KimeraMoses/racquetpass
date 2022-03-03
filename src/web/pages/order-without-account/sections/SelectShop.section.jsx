@@ -16,12 +16,6 @@ export function SelectShop({ t, setStep }) {
       <div className="shop-section">
         <div className="shop-section__heading">
           <Heading>{t('odrShopHeading')}</Heading>
-          <HeadingButton
-            close
-            onClick={() => {
-              setStep(1);
-            }}
-          />
         </div>
         <div className="shop-section__text-container">
           <Description customClass="shop-section__text-container-text">

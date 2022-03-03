@@ -9,6 +9,7 @@ import {
   InfoButton,
   CustomOrderSelect,
   CustomSwitch,
+  CustomInput,
 } from 'web/components';
 
 // Styles
@@ -41,7 +42,6 @@ export function SelectStringWithMainCross({
         <div className="select-string-mc__main-info">
           <div className="select-string-mc__main-info-heading">
             <Heading>{t('odrMain')}</Heading>
-            <InfoButton />
           </div>
           <div className="select-string-mc__main-info-select">
             <CustomOrderSelect
@@ -68,7 +68,6 @@ export function SelectStringWithMainCross({
         <div className="select-string-mc__crosses-info">
           <div className="select-string-mc__crosses-info-heading">
             <Heading>{t('odrcross')}</Heading>
-            <InfoButton />
           </div>
           <div className="select-string-mc__crosses-info-select">
             <CustomOrderSelect
@@ -105,11 +104,32 @@ export function SelectStringWithMainCross({
               }}
               checked={true}
             />
+            <InfoButton />
           </div>
         </div>
         <div className="select-string-mc__total-price">
           <h3 className="select-string-mc__total-price-heading">Total Price</h3>
           <p className="select-string-mc__total-price-value">$0</p>
+        </div>
+        <div className="select-string__recquet-heading">
+          <Heading>{t('odrdetailHeading')} (Optional)</Heading>
+          <Description>{t('odrAboutDesc')}</Description>
+        </div>
+        <div className="select-string__recquet-form">
+          <Field
+            name="brand"
+            label="Brand (Optional)"
+            placeholder="Brand"
+            type="text"
+            component={CustomInput}
+          />
+          <Field
+            name="model"
+            label="Model (Optional)"
+            placeholder="Model"
+            type="text"
+            component={CustomInput}
+          />
         </div>
       </div>
     </>

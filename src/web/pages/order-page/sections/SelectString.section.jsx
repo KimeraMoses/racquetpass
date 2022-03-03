@@ -1,29 +1,39 @@
-import { useRef, useState } from 'react';
+import { useState } from 'react';
 import { Field } from 'redux-form';
 import { useSelector } from 'react-redux';
 // Custom Components
 import {
   Heading,
   Description,
-  HeadingButton,
+  CustomSelect,
   CustomInputNumber,
   InfoButton,
   CustomOrderSelect,
   CustomSwitch,
   CustomInput,
+  Modal,
 } from 'web/components';
 
 // Styles
 import './SelectString.styles.scss';
 
 export function SelectString({ t, backward, setStringsCurrent, setStep }) {
+  const [modal, setModal] = useState(false);
+
+  const handleShow = () => {
+    setModal((modal) => !modal);
+  };
+  console.log(modal);
+
   const brand = useSelector((state) => state?.form?.signup?.values?.brand);
+
   return (
     <>
       <div className="select-string">
+        <Modal showModal={modal} handleShow={handleShow} />
         <div className="select-string__heading">
           <Heading customClass="select-string__heading-text">
-            {t('orderQRText')}
+            {t('odrSelect')}
           </Heading>
           {/* <HeadingButton close onClick={backward} /> */}
         </div>
@@ -63,7 +73,7 @@ export function SelectString({ t, backward, setStringsCurrent, setStep }) {
               }}
               checked={false}
             />
-            {/* <Field name="hybrid" component={CustomSwitch} /> */}
+            <InfoButton onClick={handleShow} />
           </div>
         </div>
         <div className="select-string__total-price">
