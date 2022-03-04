@@ -46,28 +46,6 @@ export function ScanNotFound({ t, backward, setContinueWithAccount, setStep }) {
             </div>
           </div>
         </div>
-        <div className="scan-success__button-container">
-          <StepButton
-            type="submit"
-            className="scan-success__button-container-btn"
-            onClick={() => {
-              setContinueWithAccount(true);
-              setStep(2);
-            }}
-          >
-            Continue with account creation
-          </StepButton>
-          <StepButton
-            outlined
-            className="scan-success__button-container-btn"
-            onClick={() => {
-              setContinueWithAccount(false);
-              setStep(2);
-            }}
-          >
-            Continue without account creation
-          </StepButton>
-        </div>
       </div>
     </>
   );

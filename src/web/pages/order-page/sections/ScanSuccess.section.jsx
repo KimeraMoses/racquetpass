@@ -65,27 +65,6 @@ export function ScanSuccess({ t, backward, setContinueWithAccount, setStep }) {
             </div>
           </div>
         </div>
-        <div className="scan-details__button-container">
-          <StepButton
-            className="scan-details__button-container-btn"
-            onClick={() => {
-              setStep(2);
-              setContinueWithAccount(true);
-            }}
-          >
-            Continue with account creation
-          </StepButton>
-          <StepButton
-            outlined
-            className="scan-details__button-container-btn"
-            onClick={() => {
-              setStep(2);
-              setContinueWithAccount(false);
-            }}
-          >
-            Continue without account creation
-          </StepButton>
-        </div>
       </div>
     </>
   );

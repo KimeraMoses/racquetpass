@@ -28,7 +28,7 @@ let OrderPage = ({ t, handleSubmit, change }) => {
     active: '',
     content: ['QR', 'Strings', 'Contact', 'Review'],
   });
-  const [scan, setScan] = useState({ current: 'initial' });
+  const [scan, setScan] = useState({ current: 'found' });
   const [shop, setShop] = useState({ current: 'search' });
   const [strings, setStrings] = useState({ current: 'initial' });
   const [mainCross, setMainCross] = useState({ current: 'initial' });
@@ -272,8 +272,6 @@ let OrderPage = ({ t, handleSubmit, change }) => {
           {done ||
           shop.current === 'find' ||
           mainCross.current === 'search' ||
-          (step === 1 && scan.current === 'found') ||
-          (step === 1 && scan.current === 'notFound') ||
           step === 6 ? (
             <></>
           ) : (
@@ -287,11 +285,7 @@ let OrderPage = ({ t, handleSubmit, change }) => {
               </StepButton>{' '}
               <StepButton
                 onClick={forward}
-                disabled={
-                  scan.current === 'initial' ||
-                  shop.current === 'search' ||
-                  step === 1
-                }
+                disabled={scan.current === 'initial' || step === 0}
                 type="button"
               >
                 {t('odrNext')}
