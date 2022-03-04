@@ -28,7 +28,7 @@ let OrderPage = ({ t, handleSubmit, change }) => {
     active: '',
     content: ['QR', 'Strings', 'Contact', 'Review'],
   });
-  const [scan, setScan] = useState({ current: 'found' });
+  const [scan, setScan] = useState({ current: 'initial' });
   const [shop, setShop] = useState({ current: 'search' });
   const [strings, setStrings] = useState({ current: 'initial' });
   const [mainCross, setMainCross] = useState({ current: 'initial' });
