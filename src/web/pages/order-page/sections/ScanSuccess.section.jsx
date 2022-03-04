@@ -1,18 +1,10 @@
-import { Link } from 'react-router-dom';
-
 // Custom Components
-import {
-  Heading,
-  SubHeading,
-  Description,
-  HeadingButton,
-} from 'web/components';
-import { StepButton } from 'web/components/Buttons/StepButton.componet';
+import { Heading, SubHeading, Description } from 'web/components';
 
 // Styles
 import './ScanSuccess.styles.scss';
 
-export function ScanSuccess({ t, backward, setContinueWithAccount, setStep }) {
+export function ScanSuccess({ t, backward }) {
   return (
     <>
       <div className="scan-details">

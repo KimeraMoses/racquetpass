@@ -1,18 +1,10 @@
-import { Link } from 'react-router-dom';
-
 // Custom Components
-import {
-  Heading,
-  SubHeading,
-  Description,
-  HeadingButton,
-} from 'web/components';
-import { StepButton } from 'web/components/Buttons/StepButton.componet';
+import { Heading, SubHeading, Description } from 'web/components';
 
 // Styles
 import './ScanNotFound.styles.scss';
 
-export function ScanNotFound({ t, backward, setContinueWithAccount, setStep }) {
+export function ScanNotFound({ t, backward }) {
   return (
     <>
       <div className="scan-success">

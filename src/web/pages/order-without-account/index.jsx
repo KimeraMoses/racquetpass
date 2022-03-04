@@ -23,7 +23,7 @@ import { SelectStringWithMainCross } from './sections/SelectStringWithMainCross.
 
 let OrderWithoutAccount = ({ t, change }) => {
   const navigate = useNavigate();
-  const [step, setStep] = useState(0);
+  const [step, setStep] = useState(4);
   const [main, setMain] = useState(false);
   const [cross, setCross] = useState(false);
   const [steps, setSteps] = useState({
@@ -155,13 +155,18 @@ let OrderWithoutAccount = ({ t, change }) => {
   return (
     <>
       {step === 0 || step === 1 ? <></> : <Progress steps={steps} />}
-      <div className="without-account">
+      <div
+        className={`without-account ${
+          step === 0 || step === 1 ? 'without-account-zero' : ''
+        }`}
+      >
         <div className="without-account__sections">
           {step === 0 ? (
             <ScanSection
               t={t}
               setRacquetFound={setRacquetFound}
               setStep={setStep}
+              change={change}
             />
           ) : (
             <></>
@@ -184,7 +189,12 @@ let OrderWithoutAccount = ({ t, change }) => {
           {step === 8 ? <VerifyPhone t={t} setStep={setStep} /> : <></>}
           {step === 9 ? <ReviewOrder t={t} setStep={setStep} /> : <></>}
         </div>
-        {step === 1 || step === 3 || step === 4 || step === 9 ? (
+        {step === 1 ||
+        step === 3 ||
+        step === 4 ||
+        step === 9 ||
+        strings.current === 'search' ||
+        mainCross.current === 'search' ? (
           <></>
         ) : (
           <div className="without-account__button-container">
@@ -239,7 +249,7 @@ const onSubmit = (values, dispatch) => {
 
 OrderWithoutAccount = reduxForm({
   // a unique name for the form
-  form: 'order-without-account',
+  form: 'orderWithoutAccount',
   onSubmit,
 })(OrderWithoutAccount);
 

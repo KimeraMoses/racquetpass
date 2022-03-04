@@ -3,13 +3,12 @@
   flex-direction: column;
   justify-content: space-between;
   padding: 0px 20px;
-  padding-top: 65px;
-  min-height: calc(100vh - 80px);
+  padding-top: 35px;
   &__form {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    min-height: calc(100vh - 80px);
+    min-height: calc(100vh - 175px);
   }
   &__button-container {
     display: grid;
@@ -27,4 +26,10 @@
 
 .order-page.order-page-done {
   padding: 0px;
+}
+
+.order-page.order-page-zero {
+  .order-page__form {
+    min-height: calc(100vh - 35px);
+  }
 }

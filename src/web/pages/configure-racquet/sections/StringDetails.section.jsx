@@ -13,7 +13,7 @@ import {
 
 import './StringDetails.styles.scss';
 
-export function StringDetails({ t, setStep, hybrid, setHybrid, handleShow }) {
+export function StringDetails({ t, hybrid, setHybrid, handleShow }) {
   const handleChange = (value) => {
     setHybrid(value);
   };
@@ -53,21 +53,6 @@ export function StringDetails({ t, setStep, hybrid, setHybrid, handleShow }) {
               <InfoButton onClick={handleShow} />
             </div>
           </div>
-        </div>
-        <div className="string__buttons">
-          <StepButton
-            outlined
-            className="string__buttons-btn"
-            onClick={() => setStep(3)}
-          >
-            {t('odrBack')}
-          </StepButton>
-          <StepButton
-            className="string__buttons-btn"
-            onClick={() => setStep(5)}
-          >
-            {t('configButtonRacquet')}
-          </StepButton>
         </div>
       </div>
     </>

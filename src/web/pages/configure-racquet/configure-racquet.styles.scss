@@ -1,21 +1,13 @@
 .configure-racquet {
   padding: 40px 0px;
-  &__progress-bar {
-    // margin-top: 46px;
-    margin: 0px 20px;
-    margin-bottom: 33px;
-    height: 5px;
-    background: #f1f1f1;
-    border-radius: 5px;
-    &-inner {
-      height: 5px;
-      border-radius: 5px;
-      background: #304ffe;
-      width: 50%;
-      transition: all 0.2s ease-in;
-    }
-    &-inner-step4 {
-      width: 100%;
-    }
+  &__button-container {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 10px;
+    padding: 40px 20px 40px 20px;
   }
+}
+
+.configure-racquet.configure-racquet-steps {
+  padding: 0px 0px;
 }

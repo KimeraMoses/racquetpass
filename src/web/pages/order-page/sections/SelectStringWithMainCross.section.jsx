@@ -10,6 +10,7 @@ import {
   CustomOrderSelect,
   CustomSwitch,
   CustomInput,
+  CustomSelect,
 } from 'web/components';
 
 // Styles
@@ -118,10 +119,25 @@ export function SelectStringWithMainCross({
         <div className="select-string__recquet-form">
           <Field
             name="brand"
-            label="Brand (Optional)"
-            placeholder="Brand"
-            type="text"
-            component={CustomInput}
+            label="Brand"
+            placeholder="Selec a racquet brand"
+            component={CustomSelect}
+            options={[
+              { label: 'Babolat', value: 'Babolat' },
+              { label: 'Wilson', value: 'Wilson' },
+              { label: 'Head', value: 'Head' },
+              { label: 'Prince', value: 'Prince' },
+              { label: 'Yonex', value: 'Yonex' },
+              { label: 'Volkl', value: 'Volkl' },
+              { label: 'Dunlop', value: 'Dunlop' },
+              { label: 'Technifibre', value: 'Technifibre' },
+              { label: 'Prokennex', value: 'Prokennex' },
+              { label: 'Solinco', value: 'Solinco' },
+              { label: 'Gamma', value: 'Gamma' },
+              { label: 'Lacoste', value: 'Lacoste' },
+              { label: 'Donnay', value: 'Donnay' },
+              { label: 'Other', value: 'Other' },
+            ]}
           />
           <Field
             name="model"

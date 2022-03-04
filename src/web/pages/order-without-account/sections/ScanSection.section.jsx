@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Field } from 'redux-form';
 import BarcodeScannerComponent from 'react-qr-barcode-scanner';
-import { useNavigate, Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 // Custom Components
 import { Heading, Description } from 'web/components';
 
@@ -17,11 +17,9 @@ export function ScanSection({ t, setRacquetFound, setStep, change }) {
       change('raquet-details-from-qr', qrCode);
       // TODO: setup with backend api if racquet not found
       setRacquetFound(true);
-      setStep(2);
+      setStep(1);
     }
   }, [qrCode, change, setStep, setRacquetFound]);
-
-  const navigate = useNavigate();
 
   return (
     <>

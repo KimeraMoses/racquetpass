@@ -7,7 +7,6 @@ import {
   CustomRadio,
   SubmitButton,
 } from 'web/components';
-import { Link } from 'react-router-dom';
 import './EditProfile.styles.scss';
 import { Field } from 'redux-form';
 
@@ -48,7 +47,6 @@ export const EditProfile = ({ t, setCurrent, change }) => {
               className="file-input__handle"
               type="file"
               onChange={handleChange}
-              accept="/*image"
               accept="image/*"
             />
           </div>

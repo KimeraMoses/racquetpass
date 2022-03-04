@@ -11,6 +11,7 @@ import {
   CustomSwitch,
   CustomInput,
   Modal,
+  CustomSelect,
 } from 'web/components';
 
 // Styles
@@ -24,7 +25,9 @@ export function SelectString({ t, setStringsCurrent, setStep }) {
   };
   console.log(modal);
 
-  const brand = useSelector((state) => state?.form?.signup?.values?.brand);
+  const brand = useSelector(
+    (state) => state?.form?.orderWithoutAccount?.values?.brand
+  );
 
   return (
     <>
@@ -83,11 +86,27 @@ export function SelectString({ t, setStringsCurrent, setStep }) {
           <Description>{t('orderRecquetDesc')}</Description>
         </div>
         <div className="select-string__recquet-form">
-          <CustomOrderSelect
-            label="String Type"
-            link="Select"
-            value={brand?.name}
-            onSelectClick={() => setStringsCurrent('search')}
+          <Field
+            name="brand"
+            label="Brand"
+            placeholder="Selec a racquet brand"
+            component={CustomSelect}
+            options={[
+              { label: 'Babolat', value: 'Babolat' },
+              { label: 'Wilson', value: 'Wilson' },
+              { label: 'Head', value: 'Head' },
+              { label: 'Prince', value: 'Prince' },
+              { label: 'Yonex', value: 'Yonex' },
+              { label: 'Volkl', value: 'Volkl' },
+              { label: 'Dunlop', value: 'Dunlop' },
+              { label: 'Technifibre', value: 'Technifibre' },
+              { label: 'Prokennex', value: 'Prokennex' },
+              { label: 'Solinco', value: 'Solinco' },
+              { label: 'Gamma', value: 'Gamma' },
+              { label: 'Lacoste', value: 'Lacoste' },
+              { label: 'Donnay', value: 'Donnay' },
+              { label: 'Other', value: 'Other' },
+            ]}
           />
           <Field
             name="model"

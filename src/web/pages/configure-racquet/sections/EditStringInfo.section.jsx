@@ -33,8 +33,6 @@ export function EditStringInfo({ t, setStrings, setStep }) {
               Strings
             </div>
           </div>
-
-          {/* <div className="select-string__main-info"> */}
           <div className="edit-strings__info-select">
             <CustomOrderSelect label="String Type" link="Select" />
             <Field

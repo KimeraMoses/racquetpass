@@ -1,9 +1,12 @@
 import './Progress.styles.scss';
 
 export const Progress = ({ steps }) => {
+  const small = steps?.content?.length <= 2;
   return (
-    <div className="progress">
+    <div className={`progress ${small ? 'progress-small' : ''}`}>
       {steps.content.map((step, index) => {
+        console.log(steps?.active);
+        console.log(step);
         return (
           <>
             <div
@@ -18,7 +21,10 @@ export const Progress = ({ steps }) => {
               <></>
             ) : (
               <div className="progress__step-dots">
-                <img src="/img/progress.png" alt="progress-dots" />
+                <img
+                  src={small ? '/img/progress-small.png' : '/img/progress.png'}
+                  alt="progress-dots"
+                />
               </div>
             )}
           </>

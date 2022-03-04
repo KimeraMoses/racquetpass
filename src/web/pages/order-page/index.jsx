@@ -23,7 +23,6 @@ import './order.styles.scss';
 
 let OrderPage = ({ t, handleSubmit, change }) => {
   const [step, setStep] = useState(0);
-  const [continueWithAccount, setContinueWithAccount] = useState(false);
   const [steps, setSteps] = useState({
     active: '',
     content: ['QR', 'Strings', 'Contact', 'Review'],
@@ -80,7 +79,7 @@ let OrderPage = ({ t, handleSubmit, change }) => {
       default:
         setSteps((steps) => steps);
     }
-  }, [continueWithAccount, step]);
+  }, [step]);
 
   // Function to move search forward
   const scanForward = (scan) => {
@@ -126,23 +125,9 @@ let OrderPage = ({ t, handleSubmit, change }) => {
       case 'initial':
         return <ScanSection t={t} change={change} scanForward={scanForward} />;
       case 'found':
-        return (
-          <ScanSuccess
-            t={t}
-            backward={backward}
-            setStep={setStep}
-            setContinueWithAccount={setContinueWithAccount}
-          />
-        );
+        return <ScanSuccess t={t} backward={backward} setStep={setStep} />;
       case 'notFound':
-        return (
-          <ScanNotFound
-            t={t}
-            backward={backward}
-            setStep={setStep}
-            setContinueWithAccount={setContinueWithAccount}
-          />
-        );
+        return <ScanNotFound t={t} backward={backward} setStep={setStep} />;
       default:
         return <>Check current scan</>;
     }
@@ -266,7 +251,7 @@ let OrderPage = ({ t, handleSubmit, change }) => {
   return (
     <>
       {step === 7 || step === 0 ? <></> : <Progress steps={steps} />}
-      <div className={`order-page ${done ? 'order-page-done' : ''}`}>
+      <div className={`order-page ${done ? 'order-page-done' : ''} ${step === 0 ? 'order-page-zero' : ''}`}>
         <form onSubmit={handleSubmit} className="order-page__form">
           <div>{getActiveSection()}</div>
           {done ||
@@ -297,12 +282,8 @@ let OrderPage = ({ t, handleSubmit, change }) => {
               type="submit"
               className="order-page__submit-btn"
               onClick={() => {
-                if (!continueWithAccount) {
-                  navigate('/');
-                } else {
-                  setDone(true);
-                  forward();
-                }
+                setDone(true);
+                forward();
               }}
             >
               Submit Order
