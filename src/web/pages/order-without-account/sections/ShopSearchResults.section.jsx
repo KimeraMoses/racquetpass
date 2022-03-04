@@ -7,7 +7,7 @@ import { Description, CustomInput, SearchCard } from 'web/components';
 // Styles
 import './ShopSearchResults.styles.scss';
 
-export function ShopSearchResults({ t, setShopCurrent, forward, change }) {
+export function ShopSearchResults({ t, setStep, change }) {
   const navigate = useNavigate();
   let inputEl = useRef(null);
   useEffect(() => {
@@ -28,7 +28,7 @@ export function ShopSearchResults({ t, setShopCurrent, forward, change }) {
             }}
             component={CustomInput}
           />
-          <div role="button" onClick={() => navigate('/')}>
+          <div role="button" onClick={() => setStep(2)}>
             <span className="shop-result__search-container-link">Cancel</span>
           </div>
         </div>
@@ -39,7 +39,7 @@ export function ShopSearchResults({ t, setShopCurrent, forward, change }) {
               address: '123 Main Street, City, State',
             }}
             onClick={() => {
-              forward();
+              setStep(5);
             }}
             change={change}
           />
@@ -49,7 +49,7 @@ export function ShopSearchResults({ t, setShopCurrent, forward, change }) {
               address: '123 Main Street, City, State',
             }}
             onClick={() => {
-              forward();
+              setStep(5);
             }}
             change={change}
           />
@@ -59,7 +59,7 @@ export function ShopSearchResults({ t, setShopCurrent, forward, change }) {
               address: '123 Main Street, City, State',
             }}
             onClick={() => {
-              forward();
+              setStep(5);
             }}
             change={change}
           />
@@ -67,7 +67,7 @@ export function ShopSearchResults({ t, setShopCurrent, forward, change }) {
         <div className="shop-result__account-container">
           <Description customClass="shop-result__account-container-text">
             {t('odrSearchNF')} &nbsp;
-            <Link to="#" onClick={() => setShopCurrent('find')}>
+            <Link to="#" onClick={() => setStep(4)}>
               <span className="shop-result__accound-container-text-span">
                 {t('odrSearchLK')}
               </span>

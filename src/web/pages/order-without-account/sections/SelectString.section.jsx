@@ -5,7 +5,6 @@ import { useSelector } from 'react-redux';
 import {
   Heading,
   Description,
-  CustomSelect,
   CustomInputNumber,
   InfoButton,
   CustomOrderSelect,
@@ -17,7 +16,7 @@ import {
 // Styles
 import './SelectString.styles.scss';
 
-export function SelectString({ t, backward, setStringsCurrent, setStep }) {
+export function SelectString({ t, setStringsCurrent, setStep }) {
   const [modal, setModal] = useState(false);
 
   const handleShow = () => {
@@ -35,7 +34,6 @@ export function SelectString({ t, backward, setStringsCurrent, setStep }) {
           <Heading customClass="select-string__heading-text">
             {t('odrSelect')}
           </Heading>
-          {/* <HeadingButton close onClick={backward} /> */}
         </div>
         <div className="select-string__text-container">
           <Description customClass="select-string__text-container-text">
@@ -68,7 +66,7 @@ export function SelectString({ t, backward, setStringsCurrent, setStep }) {
           <div className="select-string__hybrid-settings-switch">
             <CustomSwitch
               handleChange={() => {
-                setStep(3);
+                setStep(6);
                 setStringsCurrent('initial');
               }}
               checked={false}

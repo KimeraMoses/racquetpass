@@ -4,7 +4,6 @@ import { useSelector } from 'react-redux';
 import {
   Heading,
   Description,
-  HeadingButton,
   CustomInputNumber,
   InfoButton,
   CustomOrderSelect,
@@ -17,7 +16,6 @@ import './SelectStringWithMainCross.styles.scss';
 
 export function SelectStringWithMainCross({
   t,
-  backward,
   setStep,
   setMainCross,
   setMain,
@@ -32,7 +30,6 @@ export function SelectStringWithMainCross({
           <Heading customClass="select-string-mc__heading-text">
             {t('odrSelect')}
           </Heading>
-          <HeadingButton close onClick={backward} />
         </div>
         <div className="select-string-mc__text-container">
           <Description customClass="select-string-mc__text-container-text">
@@ -100,7 +97,7 @@ export function SelectStringWithMainCross({
               handleChange={() => {
                 setMain(false);
                 setCross(false);
-                setStep(2);
+                setStep(5);
               }}
               checked={true}
             />

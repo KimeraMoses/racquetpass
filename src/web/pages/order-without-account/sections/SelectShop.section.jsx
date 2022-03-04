@@ -27,6 +27,9 @@ export function SelectShop({ t, setStep }) {
             icon="/img/orderpage/search.png"
             label="Search By Name, City Or State"
             noLabel
+            onClick={() => {
+              setStep(3);
+            }}
           />
         </div>
         <div className="shop-section__account-container">

@@ -1,6 +1,12 @@
+export { ScanSection } from './ScanSection.section';
 export { RacquetFound } from './RacquetFound.section';
 export { RacquetNotFound } from './RacquetNotFound.section';
 export { SelectShop } from './SelectShop.section';
+export { ShopSearchResults } from './ShopSearchResults.section';
+export { GiveShopInfo } from './GiveShopInfo.section';
 export { Contact } from './Contact.section';
 export { VerifyPhone } from './VerifyPhone.section';
 export { ReviewOrder } from './ReviewOrder.section.jsx';
+export { SelectString } from './SelectString.section';
+export { SelectStringWithMainCross } from './SelectStringWithMainCross.section';
+export { BrandSearchResults } from './BrandSearchResults.section';

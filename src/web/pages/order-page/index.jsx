@@ -1,8 +1,8 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { withNamespaces } from 'react-i18next';
 import { reduxForm } from 'redux-form';
 import { useNavigate } from 'react-router-dom';
-import { StepButton } from 'web/components';
+import { StepButton, Progress } from 'web/components';
 import {
   ScanSection,
   ScanNotFound,
@@ -15,7 +15,6 @@ import {
   SelectString,
   BrandSearchResults,
   SelectStringWithMainCross,
-  AboutRacquet,
   ReviewOrder,
   Done,
 } from './sections';
@@ -23,10 +22,14 @@ import {
 import './order.styles.scss';
 
 let OrderPage = ({ t, handleSubmit, change }) => {
-  const [step, setStep] = useState(5);
+  const [step, setStep] = useState(0);
   const [continueWithAccount, setContinueWithAccount] = useState(false);
-  const [scan, setScan] = useState({ current: 'found' });
-  const [shop, setShop] = useState({ current: 'initial' });
+  const [steps, setSteps] = useState({
+    active: '',
+    content: ['QR', 'Strings', 'Contact', 'Review'],
+  });
+  const [scan, setScan] = useState({ current: 'initial' });
+  const [shop, setShop] = useState({ current: 'search' });
   const [strings, setStrings] = useState({ current: 'initial' });
   const [mainCross, setMainCross] = useState({ current: 'initial' });
   const [main, setMain] = useState(false);
@@ -34,6 +37,50 @@ let OrderPage = ({ t, handleSubmit, change }) => {
   const [done, setDone] = useState(false);
 
   const navigate = useNavigate();
+
+  console.log(steps);
+
+  useEffect(() => {
+    switch (step) {
+      case 1:
+        setSteps((s) => {
+          return { ...s, active: 'QR' };
+        });
+        break;
+      case 2:
+        setSteps((s) => {
+          return { ...s, active: 'Strings' };
+        });
+        break;
+      case 3:
+        setSteps((s) => {
+          return { ...s, active: 'Strings' };
+        });
+        break;
+      case 4:
+        setSteps((s) => {
+          return { ...s, active: 'Contact' };
+        });
+        break;
+      case 5:
+        setSteps((s) => {
+          return { ...s, active: 'Contact' };
+        });
+        break;
+      case 6:
+        setSteps((s) => {
+          return { ...s, active: 'Review' };
+        });
+        break;
+      case 7:
+        setSteps((s) => {
+          return { ...s, active: 'Review' };
+        });
+        break;
+      default:
+        setSteps((steps) => steps);
+    }
+  }, [continueWithAccount, step]);
 
   // Function to move search forward
   const scanForward = (scan) => {
@@ -57,8 +104,8 @@ let OrderPage = ({ t, handleSubmit, change }) => {
   };
 
   const forward = () => {
-    if (step === 4 && !continueWithAccount) {
-      setStep(8);
+    if (step === 2) {
+      setStep(4);
     } else {
       setStep((step) => step + 1);
     }
@@ -67,6 +114,8 @@ let OrderPage = ({ t, handleSubmit, change }) => {
   const backward = () => {
     if (step === 1 && scan.current !== 'initial') {
       setScan({ current: 'initial' });
+    } else if (step === 0) {
+      navigate('/');
     } else {
       setStep((step) => step - 1);
     }
@@ -160,7 +209,6 @@ let OrderPage = ({ t, handleSubmit, change }) => {
         return <>Check current string</>;
     }
   };
-  console.log(mainCross, strings);
   const getCurrentMainCross = () => {
     switch (mainCross.current) {
       case 'initial':
@@ -195,93 +243,80 @@ let OrderPage = ({ t, handleSubmit, change }) => {
 
   const getActiveSection = () => {
     switch (step) {
+      case 0:
+        return getCurrentShopScreen();
       case 1:
         return getCurrentScanScreen();
       case 2:
-        return getCurrentShopScreen();
-      case 3:
-        return <Contact t={t} backward={backward} />;
-      case 4:
-        return <VerifyPhone t={t} backward={backward} />;
-      case 5:
         return getCurrentStringsScreen();
-      case 6:
+      case 3:
         return getCurrentMainCross();
-      case 7:
-        return <AboutRacquet t={t} backward={backward} />;
-      case 8:
+      case 4:
+        return <Contact t={t} backward={backward} />;
+      case 5:
+        return <VerifyPhone t={t} backward={backward} />;
+      case 6:
         return <ReviewOrder t={t} backward={backward} />;
-      case 9:
+      case 7:
         return <Done t={t} />;
       default:
         return <>Undetected Step</>;
     }
   };
-
-  const innerBarCN = `order-page__progress-bar-inner-step${step}`;
   return (
-    <div className={`order-page ${done ? 'order-page-done' : ''}`}>
-      <form onSubmit={handleSubmit} className="order-page__form">
-        <div>
-          {/* Progress Bar */}
-          {done ? (
+    <>
+      {step === 7 || step === 0 ? <></> : <Progress steps={steps} />}
+      <div className={`order-page ${done ? 'order-page-done' : ''}`}>
+        <form onSubmit={handleSubmit} className="order-page__form">
+          <div>{getActiveSection()}</div>
+          {done ||
+          shop.current === 'find' ||
+          mainCross.current === 'search' ||
+          (step === 1 && scan.current === 'found') ||
+          (step === 1 && scan.current === 'notFound') ||
+          step === 6 ? (
             <></>
           ) : (
-            <div className="order-page__progress-bar">
-              <div
-                className={`order-page__progress-bar-inner ${innerBarCN}`}
-              ></div>
+            <div className="order-page__button-container">
+              <StepButton
+                onClick={step === 5 || step === 6 ? () => setStep(4) : backward}
+                outlined
+                type="button"
+              >
+                {t('odrBack')}
+              </StepButton>{' '}
+              <StepButton
+                onClick={forward}
+                disabled={
+                  scan.current === 'initial' ||
+                  shop.current === 'search' ||
+                  step === 1
+                }
+                type="button"
+              >
+                {t('odrNext')}
+              </StepButton>
             </div>
           )}
-          {getActiveSection()}
-        </div>
-        {done ||
-        shop.current === 'search' ||
-        shop.current === 'find' ||
-        strings.current === 'search' ||
-        mainCross.current === 'search' ||
-        (step === 1 && scan.current === 'found') ||
-        (step === 1 && scan.current === 'notFound') ||
-        step === 8 ? (
-          <></>
-        ) : (
-          <div className="order-page__button-container">
+          {step === 6 && (
             <StepButton
-              onClick={step === 5 || step === 6 ? () => setStep(4) : backward}
-              disabled={step === 1 && scan.current === 'initial'}
-              outlined
-              type="button"
+              type="submit"
+              className="order-page__submit-btn"
+              onClick={() => {
+                if (!continueWithAccount) {
+                  navigate('/');
+                } else {
+                  setDone(true);
+                  forward();
+                }
+              }}
             >
-              Go Back
-            </StepButton>{' '}
-            <StepButton
-              onClick={forward}
-              disabled={scan.current === 'initial' || step === 2}
-              type="button"
-            >
-              Next
+              Submit Order
             </StepButton>
-            {/* <SubmitButton>Submit Form</SubmitButton> */}
-          </div>
-        )}
-        {step === 8 && (
-          <StepButton
-            type="submit"
-            className="order-page__submit-btn"
-            onClick={() => {
-              if (!continueWithAccount) {
-                navigate('/');
-              } else {
-                setDone(true);
-                forward();
-              }
-            }}
-          >
-            Submit Order
-          </StepButton>
-        )}
-      </form>
-    </div>
+          )}
+        </form>
+      </div>
+    </>
   );
 };
 

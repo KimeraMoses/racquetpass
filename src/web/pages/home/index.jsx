@@ -22,7 +22,7 @@ function Home({ t }) {
                 className="home-container__button-container-buttons-btn-trans"
                 type="button"
                 onClick={() => {
-                  navigate('/login');
+                  navigate('/create-account');
                 }}
               >
                 {t('homeSignup')}
@@ -48,18 +48,31 @@ function Home({ t }) {
               noLabel
               onClick={() => {
                 // setShopCurrent('search');
+                navigate('/order');
               }}
               style={{ background: 'white' }}
             />
             <Button isDark onClick={() => navigate('/create-account')}>
               {t('homeLightBtn')}
             </Button>
-            <button className="banner-button-container__btn" type="button">
+            <button
+              className="banner-button-container__btn"
+              type="button"
+              onClick={() => {
+                navigate('/order-without-account');
+              }}
+            >
               Scan a QR Code
             </button>
             <div className="banner-button-container__text">
               Want to use RacquetPass at your club or shop?{' '}
-              <span role="button" className="banner-button-container__text-imp">
+              <span
+                role="button"
+                className="banner-button-container__text-imp"
+                onClick={() => {
+                  navigate('/BusinessAccount');
+                }}
+              >
                 Sign up now.
               </span>
             </div>
