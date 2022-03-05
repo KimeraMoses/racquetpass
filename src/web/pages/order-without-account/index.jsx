@@ -23,7 +23,7 @@ import { SelectStringWithMainCross } from './sections/SelectStringWithMainCross.
 
 let OrderWithoutAccount = ({ t, change }) => {
   const navigate = useNavigate();
-  const [step, setStep] = useState(4);
+  const [step, setStep] = useState(0);
   const [main, setMain] = useState(false);
   const [cross, setCross] = useState(false);
   const [steps, setSteps] = useState({

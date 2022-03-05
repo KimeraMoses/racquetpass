@@ -1,0 +1,13 @@
+.choose {
+  padding: 0px 20px;
+  &__header {
+    display: flex;
+    gap: 20px;
+  }
+  &__buttons {
+    margin-top: 40px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+}

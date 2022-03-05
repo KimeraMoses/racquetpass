@@ -2,9 +2,10 @@ import { Link } from 'react-router-dom';
 import './CustomInput.styles.scss';
 
 export const CustomInput = (props) => {
-  const { visited, error } = props?.meta
+  const { touched, error } = props?.meta
     ? props?.meta
-    : { visited: false, error: false };
+    : { touched: false, error: false };
+  console.log(props?.meta);
   return (
     <div className="custom-input">
       <div className="custom-input__header">
@@ -24,7 +25,7 @@ export const CustomInput = (props) => {
         ) : (
           <></>
         )}
-        {visited && error && (
+        {touched && error && (
           <div className="custom-input__header-error">{error}</div>
         )}
         {props.isPasswordField && (
@@ -43,9 +44,8 @@ export const CustomInput = (props) => {
         {...props.input}
         placeholder={props.placeholder ? props.placeholder : props.label}
         className={`custom-input__input ${
-          visited && error ? 'custom-input__input-error' : ''
+          touched && error ? 'custom-input__input-error' : ''
         }`}
-        onBlur={props.onBlur}
         onClick={props.onClick}
         type={props.type}
         ref={(input) => {
@@ -63,7 +63,7 @@ export const CustomInput = (props) => {
             : {}
         }
       />
-      {/* {props.meta.error && props.meta.visited && (
+      {/* {props.meta.error && props.meta.touched && (
         <div className="custom-input__error">{props.meta.error}</div>
       )} */}
     </div>

@@ -11,13 +11,18 @@ import {
   EditShop,
   RequestChange,
   CancelRequest,
+
+  // Payment Screens
+  SetupPayment,
+  Choose,
+  AddCard,
+  AddBank,
 } from './sections';
 
 import './inventory.styles.scss';
 
 let Inventory = ({ t }) => {
   const [currentScreen, setCurrentScreen] = useState('');
-
   const getCurrentScreen = () => {
     switch (currentScreen) {
       case 'inventory':
@@ -42,6 +47,14 @@ let Inventory = ({ t }) => {
         return (
           <CancelRequest t={t} setCurrentScreen={setCurrentScreen} isAddress />
         );
+      case 'payment':
+        return <SetupPayment t={t} setCurrentScreen={setCurrentScreen} />;
+      case 'choose':
+        return <Choose t={t} setCurrentScreen={setCurrentScreen} />;
+      case 'addCard':
+        return <AddCard t={t} setCurrentScreen={setCurrentScreen} />;
+      case 'addBank':
+        return <AddBank t={t} setCurrentScreen={setCurrentScreen} />;
       default:
         return <InventoryDashboard t={t} setCurrentScreen={setCurrentScreen} />;
     }
@@ -49,13 +62,7 @@ let Inventory = ({ t }) => {
 
   return (
     <div className="inventory">
-      <form className="inventory-form">
-        {getCurrentScreen()}
-        {/* <ProShop t={t} setCurrentScreen={setCurrentScreen} /> */}
-        {/* <EditShop t={t} /> */}
-        {/* <RequestChange t={t} /> */}
-        {/* <CancelRequest t={t} isAddress /> */}
-      </form>
+      <form className="inventory-form">{getCurrentScreen()}</form>
     </div>
   );
 };
