@@ -1,10 +1,17 @@
-import { React } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { React, useMemo } from 'react';
+import { useNavigate, useLocation } from 'react-router-dom';
 import { Avatar, HeadingButton, Heading, Tabs } from 'web/components';
 
 import './Drawer.styles.scss';
 
+function useQuery() {
+  const { search } = useLocation();
+  return useMemo(() => new URLSearchParams(search), [search]);
+}
+
 export const Drawer = ({ t, setCurrent }) => {
+  const backFrom = useQuery().get('backFrom');
+
   const navigate = useNavigate();
   const tabs = [
     {
@@ -68,7 +75,14 @@ export const Drawer = ({ t, setCurrent }) => {
         </div>
 
         <div className="drawer__close">
-          <HeadingButton close onClick={() => setCurrent('locker')} />
+          <HeadingButton
+            close
+            onClick={() =>
+              backFrom === 'CreateOrder'
+                ? navigate('/CreateOrder/Locker')
+                : setCurrent('locker')
+            }
+          />
         </div>
       </div>
 
