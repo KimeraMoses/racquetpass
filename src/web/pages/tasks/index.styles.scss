@@ -1,10 +1,11 @@
-.tasks-container{
+.tasks-container {
   padding: 40px 20px;
   min-height: 100vh;
-  .header-row{
+  .header-row {
     display: flex;
     align-items: center;
-    &-heading{
+    gap: 10px;
+    &-heading {
       font-family: Poppins;
       font-style: normal;
       font-weight: bold;
@@ -13,40 +14,41 @@
       flex-grow: 1;
     }
   }
-  .tasks-body{
+  .tasks-body {
     max-width: 450px;
     margin: auto;
-    .task-row{
+    .task-row {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      &:first-child{
+      &:first-child {
         padding: 40px 0 20px 0;
       }
-      .title{
+      .title {
         font-family: Poppins;
         font-style: normal;
         font-weight: 600;
         font-size: 24px;
         line-height: 36px;
       }
-      .link{
+      .link {
         text-decoration: none;
         font-family: Poppins;
         font-style: normal;
         font-weight: 600;
         font-size: 12px;
         line-height: 18px;
-        color: #304FFE;
+        color: #304ffe;
+        cursor: pointer;
       }
-      .tasks-info{
+      .tasks-info {
         font-family: Poppins;
         font-style: normal;
         font-weight: normal;
         font-size: 18px;
         line-height: 27px;
       }
-      .badge{
+      .badge {
         display: flex;
         justify-content: center;
         align-items: center;
@@ -59,13 +61,13 @@
         font-weight: 600;
         font-size: 18px;
         line-height: 27px;
-        color: #304FFE;
+        color: #304ffe;
       }
     }
-    .cards-container{
+    .cards-container {
       padding: 20px 0;
     }
-    #completed-tasks{
+    #completed-tasks {
       display: none;
     }
   }

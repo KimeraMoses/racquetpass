@@ -1,10 +1,19 @@
-import { React } from 'react';
-import { Link } from 'react-router-dom';
+import { React, useMemo } from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { Avatar, HeadingButton, Heading, Tabs } from 'web/components';
 
 import './InventoryDashboard.styles.scss';
 
+function useQuery() {
+  const { search } = useLocation();
+  return useMemo(() => new URLSearchParams(search), [search]);
+}
+
 export const InventoryDashboard = ({ setCurrentScreen, t }) => {
+  const navigate = useNavigate();
+  const query = useQuery();
+
+  const backFrom = query.get('backFrom');
   return (
     <div className="inventory-dashboard">
       <div className="inventory-dashboard__profile">
@@ -17,7 +26,19 @@ export const InventoryDashboard = ({ setCurrentScreen, t }) => {
           </div>
         </div>
         <div className="inventory-dashboard__profile-close">
-          <HeadingButton close height="48px" width="48px" />
+          <HeadingButton
+            close
+            height="48px"
+            width="48px"
+            onClick={() => {
+              console.log(backFrom);
+              if (backFrom === 'tasks') {
+                navigate('/tasks');
+              } else {
+                console.log('none');
+              }
+            }}
+          />
         </div>
       </div>
 
@@ -27,7 +48,7 @@ export const InventoryDashboard = ({ setCurrentScreen, t }) => {
             {
               title: 'My  Tasks',
               icon: '/img/drawer/tick-circle.png',
-              // onClick: () => setCurrentScreen('proshop'),
+              onClick: () => navigate('/tasks'),
             },
             {
               title: 'My Pro Shop',
