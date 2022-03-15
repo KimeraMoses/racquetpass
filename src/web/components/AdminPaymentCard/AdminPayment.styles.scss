@@ -1,0 +1,56 @@
+.admin-payment {
+  // cursor: pointer;
+  &__container {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    border-radius: 12px;
+    box-shadow: (0px 4px 14px rgba(0, 0, 0, 0.15));
+    &-divider {
+      width: 3px;
+      height: 43px;
+      background: #304ffe;
+      border-radius: 1.5px;
+      content: '';
+    }
+    &-content {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      gap: 20px;
+      justify-content: space-between;
+      padding: 16px 0px;
+      &-left {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        &-shop {
+          img {
+            padding: 10px;
+            border: 1px solid #e8e8e8;
+            border-radius: 16px;
+          }
+        }
+        &-text {
+          &-heading {
+            font-family: 'Poppins';
+            font-weight: 600;
+            font-size: 14px;
+            line-height: 21px;
+            color: #333333;
+          }
+          &-txt {
+            font-family: 'Poppins';
+            font-weight: 500;
+            font-size: 12px;
+            line-height: 18px;
+            color: #969696;
+          }
+        }
+      }
+      &-img {
+      }
+    }
+  }
+}

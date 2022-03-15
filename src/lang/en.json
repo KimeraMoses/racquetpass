@@ -439,5 +439,17 @@
   "paymentCardEnd": "Ends with",
   "paymentCardExpire": "Expires",
   "paymentExpireDate": "08/2026",
-  "addCardTitle": "Add Card"
+  "addCardTitle": "Add Card",
+
+  "adminRequestTitle": "Joe’s Tennis Pro",
+  "adminRequestMail": "joesTennisPro@gmail.com",
+  "adminRequestHeading": "Requests",
+  "adminSetupPayment": "Setup this payment method",
+  "adminPayments": "Payments",
+  "adminRecievePayment": "Recieve Payment",
+  "adminText": "You will recieve money in this account from businesses using RacquetPass.",
+  "adminIssue": "Payment Issues",
+  "adminInfo": "You aren’t recieving payments from this pro shop.",
+  "adminBankHeading": "Setup RacquetPass Payment",
+  "adminAddBank": "Add Bank Account"
 }
