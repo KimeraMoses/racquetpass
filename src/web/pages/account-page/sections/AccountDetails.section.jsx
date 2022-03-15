@@ -1,5 +1,6 @@
 import { Field } from 'redux-form';
 import { useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 
 import {
   AccountButton,
@@ -26,15 +27,21 @@ const phoneNumber = (value) => {
   }
 };
 
-export function AccountDetails({ t, back, forward, moveToLogin }) {
-  const errors = useSelector((state) => state.form.signup.syncErrors);
+export function AccountDetails({ t, forward, moveToLogin }) {
+  const navigate = useNavigate();
+
+  const errors = useSelector((state) => state?.form?.signup?.syncErrors);
   return (
     <>
       <div className="account-details">
         <div>
           <div className="account-details__header-container">
             <div className="account-details__header-container-heading">
-              <BackButton onClick={back} />
+              <BackButton
+                onClick={() => {
+                  navigate('/');
+                }}
+              />
               <Heading>{t('odrCreateBtn')}</Heading>
             </div>
             <div className="account-details__button-container">
