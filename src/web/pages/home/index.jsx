@@ -52,8 +52,8 @@ function Home({ t }) {
               }}
               style={{ background: 'white' }}
             />
-            <Button isDark onClick={() => navigate('/create-account')}>
-              {t('homeLightBtn')}
+            <Button isDark onClick={() => navigate('/order')}>
+              {t('homeNewBtnTxt')}
             </Button>
             <button
               className="banner-button-container__btn"
