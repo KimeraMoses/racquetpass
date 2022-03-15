@@ -1,29 +1,20 @@
-import { Link } from 'react-router-dom';
-
 // Custom Components
-import {
-  Heading,
-  SubHeading,
-  Description,
-  HeadingButton,
-} from 'web/components';
-import { StepButton } from 'web/components/Buttons/StepButton.componet';
+import { Heading, SubHeading, Description } from 'web/components';
 
 // Styles
 import './ScanSuccess.styles.scss';
 
-export function ScanSuccess({ t, backward, setContinueWithAccount, setStep }) {
+export function ScanSuccess({ t, backward }) {
   return (
     <>
       <div className="scan-details">
         <div>
           <div className="scan-details__heading">
-            <Heading>{t('odrHeading')}</Heading>
-            <HeadingButton close onClick={backward} />
+            <Heading>{t('orderQRText')}</Heading>
           </div>
           <div className="scan-details__text-container">
             <Description customClass="scan-details__text-container-text">
-              {t('odrAttachQR')}
+              {t('orderQRtxt')}
             </Description>
           </div>
           <div className="scan-details__card-continer">
@@ -65,27 +56,6 @@ export function ScanSuccess({ t, backward, setContinueWithAccount, setStep }) {
               </div>
             </div>
           </div>
-        </div>
-        <div className="scan-details__button-container">
-          <StepButton
-            className="scan-details__button-container-btn"
-            onClick={() => {
-              setStep(2);
-              setContinueWithAccount(true);
-            }}
-          >
-            Continue with account creation
-          </StepButton>
-          <StepButton
-            outlined
-            className="scan-details__button-container-btn"
-            onClick={() => {
-              setStep(2);
-              setContinueWithAccount(false);
-            }}
-          >
-            Continue without account creation
-          </StepButton>
         </div>
       </div>
     </>

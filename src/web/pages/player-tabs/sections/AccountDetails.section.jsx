@@ -11,14 +11,14 @@ const playerDetails = [
 
 export const AccountDetails = ({ t, setCurrent }) => {
   return (
-    <div className="account-details">
+    <div className="account-details-pt">
       <div>
-        <div className="account-details__menu-bar">
-          <div className="account-details__menu-bar-drawer-title">
+        <div className="account-details-pt__menu-bar">
+          <div className="account-details-pt__menu-bar-drawer-title">
             <HeadingButton drawer onClick={() => setCurrent('drawer')} />
             <Heading>Account Details</Heading>
           </div>
-          <div className="account-details__menu-bar-scan">
+          <div className="account-details-pt__menu-bar-scan">
             <HeadingButton
               text={'Edit'}
               onClick={() => setCurrent('editAccount')}
@@ -26,24 +26,24 @@ export const AccountDetails = ({ t, setCurrent }) => {
           </div>
         </div>
 
-        <div className="account-details__details">
+        <div className="account-details-pt__details">
           {playerDetails.map((detail) => {
             const { title, value } = detail;
             return (
-              <div className="account-details__details-detail">
-                <h4 className="account-details__details-detail-heading">
+              <div className="account-details-pt__details-detail">
+                <h4 className="account-details-pt__details-detail-heading">
                   {title}
                 </h4>
-                <p className="account-details__details-detail-text">{value}</p>
+                <p className="account-details-pt__details-detail-text">{value}</p>
               </div>
             );
           })}
-          <div className="account-details__details-detail">
-            <h4 className="account-details__details-detail-heading">
+          <div className="account-details-pt__details-detail">
+            <h4 className="account-details-pt__details-detail-heading">
               Password
             </h4>
-            <div className="account-details__details-detail-field">
-              <p className="account-details__details-detail-field-text">
+            <div className="account-details-pt__details-detail-field">
+              <p className="account-details-pt__details-detail-field-text">
                 ••••••••••••
               </p>
               <HeadingButton text={'Reset'} />
@@ -52,7 +52,7 @@ export const AccountDetails = ({ t, setCurrent }) => {
         </div>
       </div>
 
-      <div className="account-details__btn">
+      <div className="account-details-pt__btn">
         <SubmitButton onClick={() => setCurrent('drawer')}>
           Save Changes
         </SubmitButton>

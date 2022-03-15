@@ -1,3 +1,4 @@
+import { useNavigate } from 'react-router-dom';
 import {
   HeadingButton,
   OrderCard,
@@ -7,6 +8,7 @@ import {
 import './OrderDetails.styles.scss';
 
 export function OrderDetails({ t, setCurrent }) {
+  const navigate = useNavigate();
   const orders = {
     liveOrders: [
       {
@@ -98,7 +100,11 @@ export function OrderDetails({ t, setCurrent }) {
           </div>
         </div>
         <div className="orders__button">
-          <SubmitButton className="orders__button-btn">
+          <SubmitButton
+            type="button"
+            onClick={() => navigate('/CreateOrder/Locker')}
+            className="orders__button-btn"
+          >
             {t('orderButtonText')}
           </SubmitButton>
         </div>

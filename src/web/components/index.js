@@ -14,3 +14,4 @@ export * from './OrderCard/OrderCard.component';
 export * from './Avatar/Avatar.component';
 export * from './Modal/Modal.component';
 export * from './PaymentCard/PaymentCard.component';
+export * from './Progress/Progress.component.jsx';

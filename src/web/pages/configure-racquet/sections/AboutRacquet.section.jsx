@@ -18,7 +18,6 @@ export function AboutRacquet({ t, setStep, change }) {
           <div className="about__header-heading">
             <Heading>{t('configHeading')}</Heading>
           </div>
-          <HeadingButton close onClick={() => setStep(1)} />
         </div>
 
         <div className="about__image">
@@ -73,15 +72,6 @@ export function AboutRacquet({ t, setStep, change }) {
             <Description>{t('configQRText')}</Description>
             <Description>{t('configQRText1')}</Description>
           </div>
-        </div>
-        <div className="about__button">
-          <SubmitButton
-            onClick={() => {
-              setStep(4);
-            }}
-          >
-            {t('odrNext')}
-          </SubmitButton>
         </div>
       </div>
     </>

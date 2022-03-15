@@ -1,7 +1,6 @@
 import { Link, useNavigate } from 'react-router-dom';
 import { withNamespaces } from 'react-i18next';
-
-import { Button } from 'web/components';
+import { Button, CustomInput } from 'web/components';
 import './home.styles.scss';
 
 function Home({ t }) {
@@ -15,30 +14,68 @@ function Home({ t }) {
       <div className="home-container">
         <div>
           <div className="home-container__button-container">
-            <button
-              className="home-container__button-container-signin"
-              type="button"
-              onClick={() => {
-                navigate('/login');
-              }}
-            >
-              {t('homeSignin')}
-            </button>
+            <div className="home-container__button-container-text">
+              {t('homeLogo')}
+            </div>
+            <div className="home-container__button-container-buttons">
+              <button
+                className="home-container__button-container-buttons-btn-trans"
+                type="button"
+                onClick={() => {
+                  navigate('/create-account');
+                }}
+              >
+                {t('homeSignup')}
+              </button>
+              <button
+                className="home-container__button-container-buttons-btn"
+                type="button"
+                onClick={() => {
+                  navigate('/login');
+                }}
+              >
+                {t('homeSignin')}
+              </button>
+            </div>
           </div>
           <div className="banner-container">
             <h1 className="banner-container__heading">{t('homeHeading')}</h1>
-            <p className="banner-container__text">{t('homeDesc')}</p>
           </div>
           <div className="banner-button-container">
-            <Button
-              isDark
-              onClick={() => navigate('/order', { replace: true })}
-            >
-              {t('homeDarkBtn')}
-            </Button>
-            <Button onClick={() => navigate('/create-account')}>
+            <CustomInput
+              // icon="/img/orderpage/search.png"
+              label="Search By Name, City Or State"
+              noLabel
+              onClick={() => {
+                // setShopCurrent('search');
+                navigate('/order');
+              }}
+              style={{ background: 'white' }}
+            />
+            <Button isDark onClick={() => navigate('/create-account')}>
               {t('homeLightBtn')}
             </Button>
+            <button
+              className="banner-button-container__btn"
+              type="button"
+              onClick={() => {
+                navigate('/order-without-account');
+              }}
+            >
+              Scan a QR Code
+            </button>
+            <div className="banner-button-container__text">
+              Want to use RacquetPass at your club or shop?{' '}
+              <span
+                role="button"
+                className="banner-button-container__text-imp"
+                onClick={() => {
+                  navigate('/BusinessAccount');
+                }}
+              >
+                Sign up now.
+              </span>
+            </div>
           </div>
         </div>
         <div>

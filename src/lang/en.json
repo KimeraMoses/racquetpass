@@ -1,7 +1,8 @@
 {
   "homeSignin": "Sign In",
-  "homeHeading": "Welcome to RacquetPass.",
-  "homeDesc": "Making stringing fun and easy for players and stingers.",
+  "homeSignup": "Sign Up",
+  "homeLogo": "RacquetPass",
+  "homeHeading": "String your racquet the easy way.",
   "homeDarkBtn": "String a racquet",
   "homeLightBtn": "Create a business account",
   "homePP": "Privacy Policy",
@@ -11,7 +12,7 @@
   "odrHT": "How To",
   "odrDesc": "Please position your camera on top of the QR sticker to scan. Afix the sticker to your racquet after scanning.",
   "odrScan": "Scan",
-  "odrBack": "Go Back",
+  "odrBack": "Back",
   "odrNext": "Next",
 
   "odrAttachQR": "Attach a QR sticker to the racquet that you want strung. Point your camera directly above the sticker to scan it.",
@@ -415,7 +416,7 @@
   "RequestAddressChnage": "Request Address Change",
   "RequestAddressText": "After submitting this form, we will reach out to you to confirm that this change is legitimate.",
 
-  "configHeading": "Tell us about this racquet",
+  "configHeading": "Basic Info",
   "configQR": "QR Code",
   "configWhatLink": "What's This?",
   "configQRText": "Don’t have a QR Code?",
@@ -439,5 +440,11 @@
   "paymentCardEnd": "Ends with",
   "paymentCardExpire": "Expires",
   "paymentExpireDate": "08/2026",
-  "addCardTitle": "Add Card"
+  "addCardTitle": "Add Card",
+
+  "orderQRText": "Attach QR sticker",
+  "orderQRtxt": "Attach a QR sticker to the racquet that you want strung, and then scan it.",
+  "orderLinktxt": "Where do I attach the sticker?",
+  "orderSelectStringTxt": "Select the strings you want to restring your racquet with.",
+  "orderRecquetDesc": "This helps the shop identify and find your racquet."
 }

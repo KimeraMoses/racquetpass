@@ -1,5 +1,5 @@
 import { useEffect, useRef } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { Field } from 'redux-form';
 // Custom Components
 import { Description, CustomInput, SearchCard } from 'web/components';
@@ -8,6 +8,7 @@ import { Description, CustomInput, SearchCard } from 'web/components';
 import './ShopSearchResults.styles.scss';
 
 export function ShopSearchResults({ t, setShopCurrent, forward, change }) {
+  const navigate = useNavigate();
   let inputEl = useRef(null);
   useEffect(() => {
     inputEl.focus();
@@ -27,9 +28,9 @@ export function ShopSearchResults({ t, setShopCurrent, forward, change }) {
             }}
             component={CustomInput}
           />
-          <Link to="#" onClick={() => setShopCurrent('initial')}>
+          <div role="button" onClick={() => navigate('/')}>
             <span className="shop-result__search-container-link">Cancel</span>
-          </Link>
+          </div>
         </div>
         <div className="shop-result__results">
           <SearchCard
@@ -38,7 +39,6 @@ export function ShopSearchResults({ t, setShopCurrent, forward, change }) {
               address: '123 Main Street, City, State',
             }}
             onClick={() => {
-              setShopCurrent('initial');
               forward();
             }}
             change={change}
@@ -49,7 +49,6 @@ export function ShopSearchResults({ t, setShopCurrent, forward, change }) {
               address: '123 Main Street, City, State',
             }}
             onClick={() => {
-              setShopCurrent('initial');
               forward();
             }}
             change={change}
@@ -60,7 +59,6 @@ export function ShopSearchResults({ t, setShopCurrent, forward, change }) {
               address: '123 Main Street, City, State',
             }}
             onClick={() => {
-              setShopCurrent('initial');
               forward();
             }}
             change={change}

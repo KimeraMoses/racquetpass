@@ -1,6 +1,6 @@
 import { Fragment } from 'react';
 import {
-  BackButton,
+  HeadingButton,
   Heading,
   CustomInput,
   SubHeading,
@@ -55,7 +55,7 @@ export function SearchInventory({ t, setCurrentScreen }) {
       <div className="search-inventory">
         <div>
           <div className="search-inventory__header">
-            <BackButton onClick={() => setCurrentScreen('default')} />
+            <HeadingButton drawer onClick={() => setCurrentScreen('default')} />
             <Heading>{t('businessAccountDetailsInventory')}</Heading>
           </div>
 

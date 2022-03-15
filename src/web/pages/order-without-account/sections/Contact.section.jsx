@@ -20,7 +20,6 @@ export function Contact({ t, backward }) {
             <Heading customClass="contact-section__heading-text">
               {t('odrStayHeading')}
             </Heading>
-            <HeadingButton close onClick={backward} />
           </div>
           <div className="contact-section__text-container">
             <Description customClass="contact-section__text-container-text">
