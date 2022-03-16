@@ -6,7 +6,7 @@ import './Tabs.styles.scss';
 export const Tabs = ({
   tabs = [
     { title: 'My Locker', icon: '/img/drawer/locker.png' },
-    { title: 'Home Shop', icon: '/img/drawer/shop.png' },
+    { title: 'Pro Shop', icon: '/img/drawer/shop.png' },
     {
       title: 'Orders',
       icon: '/img/drawer/orders.png',
