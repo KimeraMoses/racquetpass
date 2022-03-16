@@ -21,7 +21,7 @@ const contactList = [
   },
 ];
 export function RemoveRequest({ t, setCurrentScreen }) {
-  const [show, setShow] = useState(true);
+  const [show, setShow] = useState(false);
 
   const handleShow = () => setShow(!show);
 
@@ -89,7 +89,9 @@ export function RemoveRequest({ t, setCurrentScreen }) {
           </div>
         </div>
         <div className="remove-req__buttons">
-          <StepButton danger>Remove Shop from RacquetPass</StepButton>
+          <StepButton danger onClick={handleShow}>
+            Remove Shop from RacquetPass
+          </StepButton>
         </div>
       </div>
     </>
