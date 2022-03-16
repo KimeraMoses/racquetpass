@@ -54,7 +54,7 @@ export function AdminContact({ t, setCurrentScreen }) {
         </div>
         <div className="admin-contact__buttons">
           <StepButton>Remove</StepButton>
-          <StepButton danger>deny</StepButton>
+          <StepButton danger>Deny</StepButton>
         </div>
       </div>
     </>
