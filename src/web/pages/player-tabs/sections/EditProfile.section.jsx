@@ -137,6 +137,26 @@ export const EditProfile = ({ t, setCurrent, change }) => {
           ]}
         />
         <Field
+          name="playinghand"
+          label="Playing Hand"
+          placeholder="Right"
+          component={CustomSelect}
+          options={[
+            { label: 'Right', value: 'Right' },
+            { label: 'Left', value: 'Left' },
+          ]}
+        />
+        <Field
+          name="playingstyle"
+          label="Playing Style"
+          placeholder="Select"
+          component={CustomSelect}
+          options={[
+            { label: 'Option 1', value: 'Option 1' },
+            { label: 'Option 2', value: 'Option 2' },
+          ]}
+        />
+        <Field
           name="proPlayerStyleTwin"
           label="Pro Player Style Twin"
           type="text"
