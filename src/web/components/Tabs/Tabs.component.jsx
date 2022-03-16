@@ -40,7 +40,12 @@ export const Tabs = ({
             {tab.title !== 'Orders' ? (
               <div className="tabs__tab">
                 <img src={tab.icon} alt={tab.title} />
-                <p className="tabs__tab-text">{tab.title}</p>
+                <p className="tabs__tab-text">
+                  {tab.title} <br />{' '}
+                  <span className="tabs__tab-text-description">
+                    {tab?.description}
+                  </span>
+                </p>
               </div>
             ) : (
               <div className="tabs__tab tabs__tab-order">

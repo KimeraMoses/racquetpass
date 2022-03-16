@@ -20,7 +20,7 @@ export const ProShop = ({ t, setCurrent }) => {
             <div className="proshop__header-btn">
               <HeadingButton
                 text={'Edit'}
-                onClick={() => setCurrent('editAccount')}
+                onClick={() => setCurrent('edit-shop')}
               />
             </div>
           </div>
@@ -29,11 +29,12 @@ export const ProShop = ({ t, setCurrent }) => {
               shop={{
                 name: 'Jimmy’s Pro Shop',
                 address: '123 Main Street, Seattle, WA',
+                homeShop: true,
               }}
             />
             <SearchCard
               shop={{
-                name: 'Jimmy’s Pro Shop',
+                name: 'Jimithy’s Pro Shop',
                 address: '123 Main Street, Seattle, WA',
               }}
             />
@@ -41,8 +42,8 @@ export const ProShop = ({ t, setCurrent }) => {
         </div>
 
         <div className="account-details-pt__btn">
-          <SubmitButton onClick={() => setCurrent('drawer')}>
-            Save Changes
+          <SubmitButton onClick={() => setCurrent('shop-search')}>
+            Add Pro Shop
           </SubmitButton>
         </div>
       </div>

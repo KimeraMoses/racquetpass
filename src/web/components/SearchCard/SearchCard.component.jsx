@@ -33,17 +33,39 @@ export function SearchCard({
   return (
     <>
       <div className="search" onClick={handleClick}>
-        <div className="search__card-container">
+        <div
+          className="search__card-container"
+          style={shop?.editPage ? { gap: '10px' } : {}}
+        >
           <div className="search__card-container-divider"></div>
           <div
             className={`search__card-container-content ${
-              (raquet || brand || string) &&
+              (raquet || brand || string || shop) &&
               'search__card-container-content-raquet'
             }`}
           >
             {shop ? (
               <>
-                <div className="search__card-container-content-img">
+                <div
+                  className="search__card-container-content-img"
+                  style={
+                    shop?.editPage
+                      ? { display: 'flex', alignItems: 'center', gap: '5px' }
+                      : {}
+                  }
+                >
+                  {shop?.editPage ? (
+                    <img
+                      src="/img/delete.png"
+                      alt="shop"
+                      style={{
+                        height: '24px',
+                        width: '24px',
+                      }}
+                    />
+                  ) : (
+                    <></>
+                  )}
                   <img src="/img/orderpage/shop.png" alt="shop" />
                 </div>
                 <div className="search__card-container-content-txt">
@@ -54,6 +76,20 @@ export function SearchCard({
                     {shop?.address}
                   </Description>
                 </div>
+                {shop?.homeShop ? (
+                  <div className="search__card-container-content-hs">
+                    Home Shop
+                  </div>
+                ) : shop?.editPage ? (
+                  <div
+                    className="search__card-container-content-seths"
+                    onClick={shop?.editOnClick}
+                  >
+                    Set to home shop
+                  </div>
+                ) : (
+                  <></>
+                )}
               </>
             ) : brand ? (
               <>

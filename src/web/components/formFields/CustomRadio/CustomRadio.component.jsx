@@ -2,7 +2,7 @@ import { useState } from 'react';
 import './CustomRadio.styles.scss';
 
 export const CustomRadio = ({ name, options, label }) => {
-  const [selected, setSelected] = useState('');
+  const [selected, setSelected] = useState(options[0].value);
   return (
     <div className="custom-radio__container">
       <div className="custom-radio__container-label">

@@ -27,7 +27,7 @@ function useQuery() {
 function PlayerTabs({ t, handleSubmit, change }) {
   let query = useQuery();
   const backFromConfig = query.get('configBack');
-  const [current, setCurrent] = useState(backFromConfig ? 'locker' : 'drawer');
+  const [current, setCurrent] = useState(backFromConfig ? 'locker' : 'shop');
 
   return (
     <>
@@ -36,6 +36,12 @@ function PlayerTabs({ t, handleSubmit, change }) {
           {current === 'drawer' && <Drawer t={t} setCurrent={setCurrent} />}
           {current === 'locker' && <Locker t={t} setCurrent={setCurrent} />}
           {current === 'shop' && <ProShop t={t} setCurrent={setCurrent} />}
+          {current === 'shop-search' && (
+            <SearchShop t={t} setCurrent={setCurrent} />
+          )}
+          {current === 'edit-shop' && (
+            <EditShop t={t} setCurrent={setCurrent} />
+          )}
           {current === 'profile' && (
             <PlayerProfile t={t} setCurrent={setCurrent} />
           )}

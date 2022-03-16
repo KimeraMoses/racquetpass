@@ -18,10 +18,7 @@ export const EditShop = ({ t, setCurrent }) => {
               <Heading>Edit Pro Shops</Heading>
             </div>
             <div className="proshop__header-btn">
-              <HeadingButton
-                text={'Done'}
-                onClick={() => setCurrent('editAccount')}
-              />
+              <HeadingButton text={'Done'} onClick={() => setCurrent('shop')} />
             </div>
           </div>
           <div className="proshop__content">
@@ -29,38 +26,48 @@ export const EditShop = ({ t, setCurrent }) => {
               shop={{
                 name: 'Jimmy’s Pro Shop',
                 address: '123 Main Street, Seattle, WA',
+                homeShop: true,
+                editPage: true,
               }}
             />
             <SearchCard
               shop={{
                 name: 'Jimmy’s Pro Shop',
                 address: '123 Main Street, Seattle, WA',
+                editPage: true,
+                editOnClick: () => setCurrent('shop'),
               }}
             />
             <SearchCard
               shop={{
                 name: 'Jimmy’s Pro Shop',
                 address: '123 Main Street, Seattle, WA',
+                editPage: true,
+                editOnClick: () => setCurrent('shop'),
               }}
             />
             <SearchCard
               shop={{
                 name: 'Jimmy’s Pro Shop',
                 address: '123 Main Street, Seattle, WA',
+                editPage: true,
+                editOnClick: () => setCurrent('shop'),
               }}
             />
             <SearchCard
               shop={{
                 name: 'Jimmy’s Pro Shop',
                 address: '123 Main Street, Seattle, WA',
+                editPage: true,
+                editOnClick: () => setCurrent('shop'),
               }}
             />
           </div>
         </div>
 
         <div className="account-details-pt__btn">
-          <SubmitButton onClick={() => setCurrent('drawer')}>
-            Save Changes
+          <SubmitButton onClick={() => setCurrent('shop-search')}>
+            Add Pro Shop
           </SubmitButton>
         </div>
       </div>

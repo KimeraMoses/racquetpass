@@ -20,7 +20,9 @@ export const Drawer = ({ t, setCurrent }) => {
       onClick: () => setCurrent('locker'),
     },
     {
-      title: 'Pro Shop',
+      title: 'Pro Shops',
+      description: 'Home Shop: Jimmy’s Pro Shop',
+      onClick: () => setCurrent('shop'),
       icon: '/img/drawer/shop.png',
     },
     {

@@ -152,13 +152,16 @@ export const EditProfile = ({ t, setCurrent, change }) => {
           placeholder="Select"
           component={CustomSelect}
           options={[
-            { label: 'Option 1', value: 'Option 1' },
-            { label: 'Option 2', value: 'Option 2' },
+            { label: 'Aggressive Baseliner', value: 'aggressive_baseliner' },
+            { label: 'Server & Volley', value: 'server_volley' },
+            { label: 'Defender', value: 'defender' },
+            { label: 'All Court', value: 'all_court' },
           ]}
         />
         <Field
           name="proPlayerStyleTwin"
           label="Pro Player Style Twin"
+          placeholder="Roger Federer, Serena Williams, Andre Aggasi"
           type="text"
           component={CustomInput}
         />

@@ -5,8 +5,8 @@ import './SearchShop.styles.scss';
 export const SearchShop = ({ t, setCurrent }) => {
   return (
     <>
-      <div className="search-shop">
-        <div className="search-shop__header">
+      <div className="pt-search-shop">
+        <div className="pt-search-shop__header">
           <CustomInput
             icon="/img/orderpage/search.png"
             label="Search By Name, City Or State"
@@ -15,13 +15,18 @@ export const SearchShop = ({ t, setCurrent }) => {
             //   setShopCurrent('search');
             // }}
           />
-          <div className="search-shop__header-link">
-            <Link className="search-shop__header-link-txt" to="#">
+          <div className="pt-search-shop__header-link">
+            <div
+              className="pt-search-shop__header-link-txt"
+              onClick={() => {
+                setCurrent('shop');
+              }}
+            >
               Cancel
-            </Link>
+            </div>
           </div>
         </div>
-        <div className="search-shop__content">
+        <div className="pt-search-shop__content">
           <SearchCard
             shop={{
               name: 'Jimmy’s Pro Shop',
