@@ -10,7 +10,7 @@ export const Choose = ({ t, setCurrentScreen }) => {
             setCurrentScreen('payment');
           }}
         />
-        <Heading>Setup RacquetPass Payment</Heading>
+        <Heading>Setup receive payment</Heading>
       </div>
 
       <div className="choose__buttons">
