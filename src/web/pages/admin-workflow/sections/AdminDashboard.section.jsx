@@ -1,7 +1,7 @@
 import { HeadingButton, Heading, Avatar, Tabs } from 'web/components';
 import './AdminDashboard.styles.scss';
 
-export function AdminDashboard() {
+export function AdminDashboard({ t, setCurrentScreen }) {
   return (
     <>
       <div className="admin-dashboard">
@@ -25,10 +25,12 @@ export function AdminDashboard() {
               {
                 title: 'Requests',
                 icon: '/img/drawer/tick.png',
+                onClick: () => setCurrentScreen('request'),
               },
               {
                 title: 'Payments',
                 icon: '/img/drawer/payment.png',
+                onClick: () => setCurrentScreen('payment'),
               },
               {
                 title: 'Export',

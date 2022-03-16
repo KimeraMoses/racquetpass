@@ -1,5 +1,4 @@
 .request-card {
-  cursor: pointer;
   &__container {
     width: 100%;
     display: flex;
@@ -15,10 +14,12 @@
       content: '';
     }
     &-content {
+      cursor: pointer;
       display: flex;
       flex-direction: row;
       align-items: center;
       justify-content: space-between;
+      width: 100%;
       gap: 20px;
       padding: 16px 0px;
       &-text {
@@ -40,7 +41,9 @@
       &-imgs {
         display: flex;
         align-items: center;
+        justify-content: flex-end;
         gap: 16px;
+        padding-right: 20px;
         img {
           width: 29px;
           height: 29px;

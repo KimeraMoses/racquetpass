@@ -20,13 +20,13 @@ const contactList = [
   },
 ];
 
-export function AdminContact({ t }) {
+export function AdminContact({ t, setCurrentScreen }) {
   return (
     <>
       <div className="admin-contact">
         <div>
           <div className="admin-contact__header">
-            <BackButton />
+            <BackButton onClick={() => setCurrentScreen('request')} />
             <Heading>{t('adminRequestTitle')}</Heading>
           </div>
           <div className="admin-contact__content">
@@ -53,7 +53,7 @@ export function AdminContact({ t }) {
           </div>
         </div>
         <div className="admin-contact__buttons">
-          <StepButton>next</StepButton>
+          <StepButton>Remove</StepButton>
           <StepButton danger>deny</StepButton>
         </div>
       </div>

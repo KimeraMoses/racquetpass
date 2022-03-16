@@ -1,18 +1,21 @@
 import './RequestCard.styles.scss';
 
-export function RequestCard({ t }) {
+export function RequestCard({ t, string, onClick = () => {} }) {
   return (
     <>
       <div className="request-card">
         <div className="request-card__container">
           <div className="request-card__container-divider"></div>
           <div className="request-card__container-content">
-            <div className="request-card__container-content-text">
+            <div
+              className="request-card__container-content-text"
+              onClick={onClick}
+            >
               <div className="request-card__container-content-text-heading">
-                {t('adminRequestTitle')}
+                {string.title}
               </div>
               <div className="request-card__container-content-text-txt">
-                {t('adminRequestMail')}
+                {string.text}
               </div>
             </div>
             <div className="request-card__container-content-imgs">

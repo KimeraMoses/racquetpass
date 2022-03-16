@@ -19,13 +19,13 @@ const contactList = [
     text: `123 NE Street St Seattle, WA 98101`,
   },
 ];
-export function RemoveRequest({ t }) {
+export function RemoveRequest({ t, setCurrentScreen }) {
   return (
     <>
       <div className="remove-req">
         <div>
           <div className="remove-req__header">
-            <BackButton />
+            <BackButton onClick={() => setCurrentScreen('payment')} />
             <Heading>{t('adminRequestTitle')}</Heading>
           </div>
           <div className="remove-req__content">

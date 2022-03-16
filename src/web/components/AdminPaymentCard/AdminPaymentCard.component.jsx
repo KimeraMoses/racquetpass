@@ -1,6 +1,6 @@
 import './AdminPayment.styles.scss';
 
-export function AdminPaymentCard({ t }) {
+export function AdminPaymentCard({ t, onClick = () => {} }) {
   return (
     <>
       <div className="admin-payment">
@@ -11,7 +11,10 @@ export function AdminPaymentCard({ t }) {
               <div className="admin-payment__container-content-left-shop">
                 <img src="/img/inventory/shop.png" alt="shop" />
               </div>
-              <div className="admin-payment__container-content-left-text">
+              <div
+                className="admin-payment__container-content-left-text"
+                onClick={onClick}
+              >
                 <div className="admin-payment__container-content-left-text-heading">
                   {t('adminRequestTitle')}
                 </div>

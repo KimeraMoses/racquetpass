@@ -1,4 +1,4 @@
-import { Field } from 'redux-form';
+import { Field, reduxForm } from 'redux-form';
 import {
   Heading,
   HeadingButton,
@@ -7,17 +7,17 @@ import {
 } from 'web/components';
 import './BankForm.styles.scss';
 
-export function BankForm({ t }) {
+export function BankForm({ t, setCurrentScreen }) {
   return (
     <>
       <div className="bank-form">
         <div>
           <div className="bank-form__header">
             <Heading>{t('adminAddBank')}</Heading>
-            <HeadingButton close />
+            <HeadingButton close onClick={() => setCurrentScreen('setup')} />
           </div>
-          <div className="bank-form-content">
-            {/* <Field
+          <div className="bank-form__content">
+            <Field
               name="routingnumber"
               label="Routing Number"
               type="text"
@@ -34,7 +34,7 @@ export function BankForm({ t }) {
               label="Conform Account Number"
               type="text"
               component={CustomInput}
-            /> */}
+            />
           </div>
         </div>
         <div className="bank-form__button">
@@ -44,3 +44,14 @@ export function BankForm({ t }) {
     </>
   );
 }
+
+const onSubmit = (values, dispatch) => {
+  // dispatch(    // your submit action //      );
+  console.log(values);
+};
+
+BankForm = reduxForm({
+  // a unique name for the form
+  form: 'bankform',
+  onSubmit,
+})(BankForm);
