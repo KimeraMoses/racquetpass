@@ -22,9 +22,13 @@ export const PaymentCard = ({ cardType, title, ending, lastUsed, onClick }) => {
   return (
     <div className="payment-card" onClick={onClick}>
       <div className="payment-card__left">
-        <div className="payment-card__left-image">
-          <img src={img} alt={cardType} />
-        </div>
+        {cardType ? (
+          <div className="payment-card__left-image">
+            <img src={img} alt={cardType} />
+          </div>
+        ) : (
+          <></>
+        )}
         <div className="payment-card__left-text">
           <div className="payment-card__left-text-heading">{title}</div>
           <div className="payment-card__left-text-desc">
@@ -34,7 +38,8 @@ export const PaymentCard = ({ cardType, title, ending, lastUsed, onClick }) => {
       </div>
       <div className="payment-card__right">
         {lastUsed ? (
-          <div className="payment-card__right-last">{lastUsed}</div>
+          // <div className="payment-card__right-last">{lastUsed}</div>
+          <></>
         ) : (
           <></>
         )}

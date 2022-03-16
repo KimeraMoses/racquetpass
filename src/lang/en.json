@@ -1,18 +1,21 @@
 {
   "homeSignin": "Sign In",
-  "homeHeading": "Welcome to RacquetPass.",
-  "homeDesc": "Making stringing fun and easy for players and stingers.",
+  "homeSignup": "Sign Up",
+  "homeLogo": "RacquetPass",
+  "homeHeading": "String your racquet the easy way.",
   "homeDarkBtn": "String a racquet",
   "homeLightBtn": "Create a business account",
   "homePP": "Privacy Policy",
   "homeCU": "Contact Us",
+  "homeNewBtnTxt": "Select shop",
 
   "odrHeading": "Scan your racquet",
   "odrHT": "How To",
   "odrDesc": "Please position your camera on top of the QR sticker to scan. Afix the sticker to your racquet after scanning.",
   "odrScan": "Scan",
-  "odrBack": "Go Back",
+  "odrBack": "Back",
   "odrNext": "Next",
+  "ordShop": "Edit My Pro Shop Info",
 
   "odrAttachQR": "Attach a QR sticker to the racquet that you want strung. Point your camera directly above the sticker to scan it.",
   "odrdetailHeading": "Racquet Details",
@@ -44,7 +47,7 @@
   "odrSubmitBtn": "Submit Form",
 
   "odrStayHeading": "Tell us how to stay in touch",
-  "odrStayDesc": "We’ll use this information to text you updates about the progres of your racquet.",
+  "odrStayDesc": "We’ll use this information to text you updates about the progress of your racquet.",
   "odrFName": "First Name",
   "odrLName": "Last Name",
   "odrPhon": "Phone Number",
@@ -415,7 +418,7 @@
   "RequestAddressChnage": "Request Address Change",
   "RequestAddressText": "After submitting this form, we will reach out to you to confirm that this change is legitimate.",
 
-  "configHeading": "Tell us about this racquet",
+  "configHeading": "Basic Info",
   "configQR": "QR Code",
   "configWhatLink": "What's This?",
   "configQRText": "Don’t have a QR Code?",
@@ -451,5 +454,11 @@
   "adminIssue": "Payment Issues",
   "adminInfo": "You aren’t recieving payments from this pro shop.",
   "adminBankHeading": "Setup RacquetPass Payment",
-  "adminAddBank": "Add Bank Account"
+  "adminAddBank": "Add Bank Account",
+
+  "orderQRText": "Attach QR sticker",
+  "orderQRtxt": "Attach a QR sticker to the racquet that you want strung, and then scan it.",
+  "orderLinktxt": "Where do I attach the sticker?",
+  "orderSelectStringTxt": "Select the strings you want to restring your racquet with.",
+  "orderRecquetDesc": "This helps the shop identify and find your racquet."
 }

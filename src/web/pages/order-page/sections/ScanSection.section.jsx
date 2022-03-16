@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Field } from 'redux-form';
 import BarcodeScannerComponent from 'react-qr-barcode-scanner';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 // Custom Components
 import {
   Heading,
@@ -16,28 +16,31 @@ import './ScanSection.styles.scss';
 export function ScanSection({ t, scanForward, change }) {
   const [qrCode, setQrCode] = useState('');
   const [qrScanner, setQrScanner] = useState(false);
-  const [raquetFound, raquetNotFound] = useState(true);
+  const [raquetFound, setRacquetFound] = useState(true);
   useEffect(() => {
     if (qrCode) {
       change('raquet-details-from-qr', qrCode);
       // TODO: Update logic with RaquetWith with Backend
       scanForward(raquetFound);
     }
-  }, [qrCode]);
+  }, [qrCode, change, raquetFound, scanForward]);
 
   const navigate = useNavigate();
   return (
     <>
       <div className="scan-section">
         <div className="scan-section__heading">
-          <Heading>{t('odrHeading')}</Heading>
-          <HeadingButton close onClick={() => navigate('/')} />
+          <Heading>{t('orderQRText')}</Heading>
         </div>
         <div className="scan-section__text-container">
-          <SubHeading>{t('odrHT')}</SubHeading>
           <Description customClass="scan-section__text-container-text">
-            {t('odrDesc')}
+            {t('orderQRtxt')}
           </Description>
+        </div>
+        <div className="scan-section__link">
+          <Link to="#" className="scan-section__link-txt">
+            {t('orderLinktxt')}
+          </Link>
         </div>
         <div className="scan-section__image-container">
           {qrScanner ? (

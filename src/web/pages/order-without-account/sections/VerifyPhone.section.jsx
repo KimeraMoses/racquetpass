@@ -21,7 +21,6 @@ export function VerifyPhone({ t, backward }) {
           <Heading customClass="phone-section__heading-text">
             {t('odrPhonHeading')}
           </Heading>
-          <HeadingButton close onClick={backward} />
         </div>
         <div className="phone-section__form-container">
           <Field
@@ -29,6 +28,7 @@ export function VerifyPhone({ t, backward }) {
             name="verfication-code"
             label="Varification Code"
             placeholder="112233"
+            type="number"
             component={CustomInput}
           />
         </div>

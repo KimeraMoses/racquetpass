@@ -1,11 +1,10 @@
 .shop-result {
   &__search-container {
-    margin-top: 24px;
     display: flex;
     gap: 14px;
     justify-content: space-between;
     align-items: center;
-    a {
+    div {
       text-decoration: none;
       font-family: Poppins;
       font-size: 14px;

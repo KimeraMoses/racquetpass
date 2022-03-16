@@ -6,3 +6,5 @@ export { ProShop } from './ProShop.section';
 export { EditShop } from './EditShop.section';
 export { RequestChange } from './RequestChange.section';
 export { CancelRequest } from './CancelRequest.section';
+
+export * from './Payment';

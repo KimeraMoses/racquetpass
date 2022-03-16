@@ -15,12 +15,7 @@ import { SearchCard } from 'web/components/index';
 // Styles
 import './ReviewOrder.styles.scss';
 
-export function ReviewOrder({ t }) {
-  const [active, setActive] = useState(false);
-
-  const handleClick = () => {
-    setActive((active) => !active);
-  };
+export function ReviewOrder({ t, active, handleClick }) {
   return (
     <>
       <div className="review-order">
@@ -28,7 +23,6 @@ export function ReviewOrder({ t }) {
           <Heading customClass="review-order__heading-text">
             {t('odrReviewHeading')}
           </Heading>
-          <HeadingButton close />
         </div>
         <div className="review-order__text-container">
           <Description customClass="review-order__text-container-text">
@@ -40,7 +34,7 @@ export function ReviewOrder({ t }) {
             <Heading customClass="review-order__shop-heading-text">
               {t('odrReviewShop')}
             </Heading>
-            <HeadingButton text="Choose" />
+            <HeadingButton text="Change Shop" />
           </div>
           <div className="review-order__shop-card">
             <SearchCard
@@ -56,7 +50,7 @@ export function ReviewOrder({ t }) {
             <Heading customClass="review-order__shop-heading-text">
               {t('odrRacquet')}
             </Heading>
-            <HeadingButton text="Choose" />
+            <HeadingButton text="Change Racquet" />
           </div>
           <div className="review-order__shop-card">
             <SearchCard
@@ -73,7 +67,7 @@ export function ReviewOrder({ t }) {
             <Heading customClass="review-order__summary-heading-text">
               {t('odrSummary')}
             </Heading>
-            <HeadingButton text="Edit String Settings" />
+            <HeadingButton text="Change Strings" />
           </div>
           <div className="review-order__summary-card">
             <SummaryCard />
@@ -87,6 +81,7 @@ export function ReviewOrder({ t }) {
             className="review-order__buttons-credit"
             handleClick={handleClick}
             active={active}
+            style={{ marginBottom: '40px' }}
           >
             Pay with Credit Card
           </PaymentButton>

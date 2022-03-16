@@ -1,5 +1,5 @@
 .done {
-  background: linear-gradient(180deg, #044794 0%, #1883e7 100%);
+  background: linear-gradient(180deg, #044794 0%, #409df3 100%);
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -96,6 +96,7 @@
     }
     &-submit-btn {
       margin-bottom: 40px;
+      background: #064a98 !important;
     }
   }
   &__option {

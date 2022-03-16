@@ -7,6 +7,7 @@ import {
   Description,
   SubmitButton,
   FileInput,
+  CustomSelect,
 } from 'web/components';
 import './AboutRacquet.styles.scss';
 
@@ -18,7 +19,6 @@ export function AboutRacquet({ t, setStep, change }) {
           <div className="about__header-heading">
             <Heading>{t('configHeading')}</Heading>
           </div>
-          <HeadingButton close onClick={() => setStep(1)} />
         </div>
 
         <div className="about__image">
@@ -35,8 +35,14 @@ export function AboutRacquet({ t, setStep, change }) {
           <Field
             name="brand"
             label="Brand"
-            type="text"
-            component={CustomInput}
+            placeholder="Select"
+            component={CustomSelect}
+            options={[
+              { label: 'Brand 1', value: 'b1' },
+              { label: 'Brand 2', value: 'b2' },
+              { label: 'Brand 3', value: 'b3' },
+              { label: 'Brand 4', value: 'b4' },
+            ]}
           />
           <Field
             name="model"
@@ -73,15 +79,6 @@ export function AboutRacquet({ t, setStep, change }) {
             <Description>{t('configQRText')}</Description>
             <Description>{t('configQRText1')}</Description>
           </div>
-        </div>
-        <div className="about__button">
-          <SubmitButton
-            onClick={() => {
-              setStep(4);
-            }}
-          >
-            {t('odrNext')}
-          </SubmitButton>
         </div>
       </div>
     </>

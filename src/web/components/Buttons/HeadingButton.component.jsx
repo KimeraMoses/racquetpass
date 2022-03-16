@@ -18,10 +18,11 @@ export function HeadingButton({
     >
       <button
         className="heading-button__btn"
+        type="button"
         onClick={onClick}
         style={close ? { height: '48px', width: '48px' } : { height, width }}
       >
-        {close ? <img src="/img/button/close.png" /> : <></>}
+        {close ? <img src="/img/button/close.png" onClick={onClick} /> : <></>}
         {text ? text : <></>}
         {drawer ? (
           <img src="/img/button/drawer.png" onClick={onClick} />

@@ -13,7 +13,7 @@ import {
 
 import './StringDetails.styles.scss';
 
-export function StringDetails({ t, setStep, hybrid, setHybrid, handleShow }) {
+export function StringDetails({ t, hybrid, setHybrid, handleShow }) {
   const handleChange = (value) => {
     setHybrid(value);
   };
@@ -26,12 +26,9 @@ export function StringDetails({ t, setStep, hybrid, setHybrid, handleShow }) {
             <div className="string__header-heading">
               <Heading>{t('configStringHeading')}</Heading>
             </div>
-            <HeadingButton close onClick={() => setStep(3)} />
           </div>
           <div className="string__info">
             <SubHeading>{t('configMains')}</SubHeading>
-
-            <InfoButton onClick={handleShow} />
           </div>
           <div className="string__form">
             <Field
@@ -49,25 +46,13 @@ export function StringDetails({ t, setStep, hybrid, setHybrid, handleShow }) {
           </div>
           <div className="string__swtich">
             <Description customClass="string__swtich-text">
-              {t('configStringSwitch')}
+              {t('odrHybrid')}
             </Description>
-            <CustomSwitch handleChange={handleChange} checked={hybrid} />
+            <div className="string__swtich-right">
+              <CustomSwitch handleChange={handleChange} checked={hybrid} />
+              <InfoButton onClick={handleShow} />
+            </div>
           </div>
-        </div>
-        <div className="string__buttons">
-          <StepButton
-            outlined
-            className="string__buttons-btn"
-            onClick={() => setStep(3)}
-          >
-            {t('odrBack')}
-          </StepButton>
-          <StepButton
-            className="string__buttons-btn"
-            onClick={() => setStep(5)}
-          >
-            {t('configButtonRacquet')}
-          </StepButton>
         </div>
       </div>
     </>

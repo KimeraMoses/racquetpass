@@ -1,0 +1,24 @@
+.editshop {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  padding: 0px 20px;
+  justify-content: space-between;
+  height: 91vh;
+  &__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    &-title {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+  }
+  &__content {
+    margin-top: 35px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+}

@@ -160,7 +160,7 @@ export function CreatePassword({ t, back }) {
             <Field
               name="password"
               label="Password"
-              placeholder="&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;"
+              placeholder="Passowrd"
               type={passwordFieldType}
               component={CustomInput}
               switchPasswordShow={() => {

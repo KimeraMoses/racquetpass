@@ -13,8 +13,8 @@
     }
   }
   .custom-radio__container-inner {
-    display: grid;
-    grid-template-columns: auto auto;
+    display: flex;
+    flex-direction: column;
     gap: 12px;
     .custom-radio__container-inner-option {
       background: #ffffff;
@@ -23,8 +23,25 @@
       border-radius: 12px;
       padding: 16px;
       cursor: pointer;
+      &-title {
+        font-family: 'Poppins';
+        font-weight: 400;
+        font-size: 18px;
+        line-height: 27px;
+        color: #333333;
+      }
+      &-txt {
+        font-family: 'Poppins';
+        font-weight: 400;
+        font-size: 14px;
+        line-height: 21px;
+        color: #333333;
+      }
     }
     .custom-radio__container-inner-option.custom-radio__container-inner-option-active {
+      div {
+        color: #304ffe;
+      }
       background: rgba(48, 79, 254, 0.1);
       border: 1px solid #304ffe;
     }

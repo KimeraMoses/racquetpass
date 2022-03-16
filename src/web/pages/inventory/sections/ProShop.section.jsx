@@ -1,5 +1,4 @@
-import { Heading, BackButton, SubHeading } from 'web/components';
-import { HeadingButton } from 'web/components/Buttons/HeadingButton.component';
+import { HeadingButton, Heading, SubHeading } from 'web/components';
 
 import './ProShop.styles.scss';
 
@@ -9,7 +8,7 @@ export function ProShop({ t, setCurrentScreen }) {
       <div className="shop">
         <div className="shop__header">
           <div className="shop__header-headings">
-            <BackButton onClick={() => setCurrentScreen('default')} />
+            <HeadingButton drawer onClick={() => setCurrentScreen('default')} />
             <Heading>{t('shopProHeading')}</Heading>
           </div>
           <HeadingButton
@@ -18,6 +17,33 @@ export function ProShop({ t, setCurrentScreen }) {
               setCurrentScreen('editShop');
             }}
           />
+        </div>
+
+        <div className="shop__services-card">
+          <div className="shop__services-card-divider"></div>
+          <div>
+            <div className="shop__services-card-inner">
+              <div className="shop__services-card-heading">
+                <Heading>{t('shopServiceHeading')}</Heading>
+              </div>
+              <div className="shop__services-card-inner-text">
+                <SubHeading customClass="shop__services-card-inner-text-heading">
+                  {t('shopDeliveryTime')}
+                </SubHeading>
+                <SubHeading customClass="shop__services-card-inner-text-txt">
+                  {t('shopDeliveryTimeDay')}
+                </SubHeading>
+              </div>
+              <div className="shop__services-card-inner-text">
+                <SubHeading customClass="shop__services-card-inner-text-heading">
+                  {t('shopLaborPriceHeading')}
+                </SubHeading>
+                <SubHeading customClass="shop__services-card-inner-text-txt">
+                  {t('shopLaborPrice')}
+                </SubHeading>
+              </div>
+            </div>
+          </div>
         </div>
         <div className="shop__contact-heading">
           <Heading>{t('ShopContactHeading')}</Heading>
@@ -56,28 +82,6 @@ export function ProShop({ t, setCurrentScreen }) {
             </SubHeading>
             <SubHeading customClass="shop__contact-info-inner-txt">
               {t('orderOpenedShopAddress1')}
-            </SubHeading>
-          </div>
-        </div>
-
-        <div className="shop__services-heading">
-          <Heading>{t('shopServiceHeading')}</Heading>
-        </div>
-        <div className="shop__services-inner">
-          <div className="shop__services-inner-text">
-            <SubHeading customClass="shop__services-inner-text-heading">
-              {t('shopDeliveryTime')}
-            </SubHeading>
-            <SubHeading customClass="shop__services-inner-text-txt">
-              {t('shopDeliveryTimeDay')}
-            </SubHeading>
-          </div>
-          <div className="shop__services-inner-text">
-            <SubHeading customClass="shop__services-inner-text-heading">
-              {t('shopLaborPriceHeading')}
-            </SubHeading>
-            <SubHeading customClass="shop__services-inner-text-txt">
-              {t('shopLaborPrice')}
             </SubHeading>
           </div>
         </div>

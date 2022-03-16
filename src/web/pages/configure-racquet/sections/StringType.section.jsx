@@ -6,12 +6,12 @@ import {
   CustomInput,
   Description,
   CustomSwitch,
-  StepButton,
+  InfoButton,
 } from 'web/components';
 
 import './StringType.styles.scss';
 
-export function StringType({ t, setStep, hybrid, setHybrid }) {
+export function StringType({ t, setStep, hybrid, setHybrid, handleShow }) {
   const handleChange = (hybrid) => {
     setHybrid(hybrid);
   };
@@ -25,7 +25,6 @@ export function StringType({ t, setStep, hybrid, setHybrid }) {
                 {t('configStringHead')}
               </Heading>
             </div>
-            <HeadingButton close onClick={() => setStep(3)} />
           </div>
           <div className="string-type__mains">
             <Heading>{t('odrMain')}</Heading>
@@ -67,23 +66,11 @@ export function StringType({ t, setStep, hybrid, setHybrid }) {
             <Description customClass="string-type__swtich-text">
               {t('stringDetailsHybrid')}
             </Description>
-            <CustomSwitch handleChange={handleChange} checked={hybrid} />
+            <div className="string__swtich-right">
+              <CustomSwitch handleChange={handleChange} checked={hybrid} />
+              <InfoButton onClick={handleShow} />
+            </div>
           </div>
-        </div>
-        <div className="string-type__buttons">
-          <StepButton
-            outlined
-            className="string-type__buttons-btn"
-            onClick={() => setStep(3)}
-          >
-            {t('odrBack')}
-          </StepButton>
-          <StepButton
-            className="string-type__buttons-btn"
-            onClick={() => setStep(5)}
-          >
-            {t('configButtonRacquet')}
-          </StepButton>
         </div>
       </div>
     </>

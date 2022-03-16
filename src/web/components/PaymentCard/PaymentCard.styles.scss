@@ -1,8 +1,9 @@
 .payment-card {
   display: flex;
-  align-items: flex-start;
+  align-items: center;
   justify-content: space-between;
-  padding: 16px;
+  padding: 0px 16px;
+  min-height: 75px;
   background: #ffffff;
   box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.12);
   border-radius: 12px;

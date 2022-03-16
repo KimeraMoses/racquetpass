@@ -62,13 +62,13 @@
       color: #304ffe;
     }
   }
-  &__option {
+  &__option-container {
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: space-between;
     gap: 20px;
     &-line {
-      width: 70px;
+      width: 100%;
       height: 1px;
       background: #e8e8e8;
       transform: matrix(1, 0, 0, -1, 0, 0);
@@ -79,6 +79,7 @@
       font-size: 18px;
       line-height: 27px;
       color: #202020;
+      min-width: 155px;
     }
   }
   &__buttons {

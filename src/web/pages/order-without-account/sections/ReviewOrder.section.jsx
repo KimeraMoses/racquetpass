@@ -28,7 +28,6 @@ export function ReviewOrder({ t }) {
           <Heading customClass="review-order__heading-text">
             {t('odrReviewHeading')}
           </Heading>
-          <HeadingButton close />
         </div>
         <div className="review-order__text-container">
           <Description customClass="review-order__text-container-text">

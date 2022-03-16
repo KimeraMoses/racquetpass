@@ -50,9 +50,11 @@
     font-family: Poppins;
     &::placeholder {
       font-family: Poppins;
-      font-size: 15px;
-      line-height: 27px;
-      color: #bababa;
+      font-style: normal;
+      font-weight: normal;
+      font-size: 14px;
+      line-height: 21px;
+      color: #858585;
     }
   }
   .custom-input__input.custom-input__input-error {
