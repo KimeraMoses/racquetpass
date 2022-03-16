@@ -89,10 +89,51 @@ export const EditProfile = ({ t, setCurrent, change }) => {
           name="playingStyle"
           label="Playing Style"
           options={[
-            { label: 'Style 1', value: '1' },
-            { label: 'Style 2', value: '2' },
-            { label: 'Style 3', value: '3' },
-            { label: 'Style 4', value: '4' },
+            {
+              label: [
+                {
+                  title: 'Just Started!',
+                  text: 'I’ve only played a few times.',
+                },
+              ],
+              value: '1',
+            },
+            {
+              label: [
+                {
+                  title: 'Beginner',
+                  text: 'I’m enthusiastically picking up the game!',
+                },
+              ],
+              value: '2',
+            },
+            {
+              label: [
+                {
+                  title: 'Intermediate',
+                  text: 'I’ve played in middle school or high school.',
+                },
+              ],
+              value: '3',
+            },
+            {
+              label: [
+                {
+                  title: 'Elite',
+                  text: 'I’ve played in regular tournaments or in college.',
+                },
+              ],
+              value: '4',
+            },
+            {
+              label: [
+                {
+                  title: 'Pro',
+                  text: 'I’ve played professionally.',
+                },
+              ],
+              value: '5',
+            },
           ]}
         />
         <Field
