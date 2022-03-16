@@ -1,4 +1,5 @@
-import { BackButton, Heading, StepButton } from 'web/components';
+import { useState } from 'react';
+import { BackButton, Heading, StepButton, Modal } from 'web/components';
 import './RemoveRequest.styles.scss';
 
 const contactList = [
@@ -20,8 +21,40 @@ const contactList = [
   },
 ];
 export function RemoveRequest({ t, setCurrentScreen }) {
+  const [show, setShow] = useState(true);
+
+  const handleShow = () => setShow(!show);
+
+  const ModalBottom = () => {
+    return (
+      <div
+        style={{
+          display: 'flex',
+          alignItems: 'center',
+          gap: '10px',
+          justifyContent: 'right',
+        }}
+      >
+        <div onClick={handleShow}>Cancel</div>
+        <div
+          onClick={() => setCurrentScreen('payment')}
+          style={{ color: '#EA5353' }}
+        >
+          Remove
+        </div>
+      </div>
+    );
+  };
+
   return (
     <>
+      <Modal
+        showModal={show}
+        handleShow={handleShow}
+        heading="Remove this shop?"
+        text="This will remove this shop from RacquetPass, preventing them from using the RacquetPass portal."
+        closeText={<ModalBottom />}
+      />
       <div className="remove-req">
         <div>
           <div className="remove-req__header">
