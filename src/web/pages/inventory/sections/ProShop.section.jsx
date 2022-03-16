@@ -18,6 +18,33 @@ export function ProShop({ t, setCurrentScreen }) {
             }}
           />
         </div>
+
+        <div className="shop__services-card">
+          <div className="shop__services-card-divider"></div>
+          <div>
+            <div className="shop__services-card-inner">
+              <div className="shop__services-card-heading">
+                <Heading>{t('shopServiceHeading')}</Heading>
+              </div>
+              <div className="shop__services-card-inner-text">
+                <SubHeading customClass="shop__services-card-inner-text-heading">
+                  {t('shopDeliveryTime')}
+                </SubHeading>
+                <SubHeading customClass="shop__services-card-inner-text-txt">
+                  {t('shopDeliveryTimeDay')}
+                </SubHeading>
+              </div>
+              <div className="shop__services-card-inner-text">
+                <SubHeading customClass="shop__services-card-inner-text-heading">
+                  {t('shopLaborPriceHeading')}
+                </SubHeading>
+                <SubHeading customClass="shop__services-card-inner-text-txt">
+                  {t('shopLaborPrice')}
+                </SubHeading>
+              </div>
+            </div>
+          </div>
+        </div>
         <div className="shop__contact-heading">
           <Heading>{t('ShopContactHeading')}</Heading>
         </div>
@@ -55,28 +82,6 @@ export function ProShop({ t, setCurrentScreen }) {
             </SubHeading>
             <SubHeading customClass="shop__contact-info-inner-txt">
               {t('orderOpenedShopAddress1')}
-            </SubHeading>
-          </div>
-        </div>
-
-        <div className="shop__services-heading">
-          <Heading>{t('shopServiceHeading')}</Heading>
-        </div>
-        <div className="shop__services-inner">
-          <div className="shop__services-inner-text">
-            <SubHeading customClass="shop__services-inner-text-heading">
-              {t('shopDeliveryTime')}
-            </SubHeading>
-            <SubHeading customClass="shop__services-inner-text-txt">
-              {t('shopDeliveryTimeDay')}
-            </SubHeading>
-          </div>
-          <div className="shop__services-inner-text">
-            <SubHeading customClass="shop__services-inner-text-heading">
-              {t('shopLaborPriceHeading')}
-            </SubHeading>
-            <SubHeading customClass="shop__services-inner-text-txt">
-              {t('shopLaborPrice')}
             </SubHeading>
           </div>
         </div>
