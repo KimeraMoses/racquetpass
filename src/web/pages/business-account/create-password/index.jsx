@@ -161,7 +161,7 @@ let CreatePassword = ({ t, back }) => {
             <Field
               name="password"
               label="Password"
-              placeholder="&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;"
+              placeholder="Password"
               type={passwordFieldType}
               component={CustomInput}
               switchPasswordShow={() => {

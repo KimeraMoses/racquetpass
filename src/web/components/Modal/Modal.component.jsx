@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import './Modal.styles.scss';
 
 export const Modal = ({
@@ -7,6 +8,16 @@ export const Modal = ({
   showModal,
   handleShow = () => {},
 }) => {
+  useEffect(() => {
+    if (showModal) {
+      document.body.style.overflow = 'hidden';
+
+      return () => {
+        document.body.style.overflow = 'auto';
+      };
+    }
+  }, [showModal]);
+
   return (
     <div className={`modal ${showModal ? 'modal-show' : ''}`}>
       <div className="modal__inner">

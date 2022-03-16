@@ -27,7 +27,7 @@ function useQuery() {
 function PlayerTabs({ t, handleSubmit, change }) {
   let query = useQuery();
   const backFromConfig = query.get('configBack');
-  const [current, setCurrent] = useState(backFromConfig ? 'locker' : 'shop');
+  const [current, setCurrent] = useState(backFromConfig ? 'locker' : 'drawer');
 
   return (
     <>

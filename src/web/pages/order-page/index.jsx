@@ -34,6 +34,11 @@ let OrderPage = ({ t, handleSubmit, change }) => {
   const [main, setMain] = useState(false);
   const [cross, setCross] = useState(false);
   const [done, setDone] = useState(false);
+  const [active, setActive] = useState(false);
+
+  const handleClick = () => {
+    setActive((active) => !active);
+  };
 
   const navigate = useNavigate();
 
@@ -241,7 +246,14 @@ let OrderPage = ({ t, handleSubmit, change }) => {
       case 5:
         return <VerifyPhone t={t} backward={backward} />;
       case 6:
-        return <ReviewOrder t={t} backward={backward} />;
+        return (
+          <ReviewOrder
+            t={t}
+            backward={backward}
+            active={active}
+            handleClick={handleClick}
+          />
+        );
       case 7:
         return <Done t={t} />;
       default:
@@ -251,7 +263,11 @@ let OrderPage = ({ t, handleSubmit, change }) => {
   return (
     <>
       {step === 7 || step === 0 ? <></> : <Progress steps={steps} />}
-      <div className={`order-page ${done ? 'order-page-done' : ''} ${step === 0 ? 'order-page-zero' : ''}`}>
+      <div
+        className={`order-page ${done ? 'order-page-done' : ''} ${
+          step === 0 ? 'order-page-zero' : ''
+        }`}
+      >
         <form onSubmit={handleSubmit} className="order-page__form">
           <div>{getActiveSection()}</div>
           {done ||
@@ -277,7 +293,7 @@ let OrderPage = ({ t, handleSubmit, change }) => {
               </StepButton>
             </div>
           )}
-          {step === 6 && (
+          {step === 6 && active && (
             <StepButton
               type="submit"
               className="order-page__submit-btn"

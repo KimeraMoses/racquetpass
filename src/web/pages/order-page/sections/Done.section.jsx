@@ -56,7 +56,7 @@ export function Done({ t }) {
             <Field
               name="password"
               label="Password"
-              placeholder="&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;"
+              placeholder="Password"
               component={CustomInput}
               switchPasswordShow={() => {
                 if (passwordFieldType === 'password') {

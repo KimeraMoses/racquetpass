@@ -23,6 +23,7 @@ import './inventory.styles.scss';
 
 let Inventory = ({ t }) => {
   const [currentScreen, setCurrentScreen] = useState('');
+  const [isReceive, setIsReceive] = useState(false);
   const getCurrentScreen = () => {
     switch (currentScreen) {
       case 'inventory':
@@ -48,9 +49,21 @@ let Inventory = ({ t }) => {
           <CancelRequest t={t} setCurrentScreen={setCurrentScreen} isAddress />
         );
       case 'payment':
-        return <SetupPayment t={t} setCurrentScreen={setCurrentScreen} />;
+        return (
+          <SetupPayment
+            t={t}
+            setCurrentScreen={setCurrentScreen}
+            setIsReceive={setIsReceive}
+          />
+        );
       case 'choose':
-        return <Choose t={t} setCurrentScreen={setCurrentScreen} />;
+        return (
+          <Choose
+            t={t}
+            setCurrentScreen={setCurrentScreen}
+            isReceive={isReceive}
+          />
+        );
       case 'addCard':
         return <AddCard t={t} setCurrentScreen={setCurrentScreen} />;
       case 'addBank':

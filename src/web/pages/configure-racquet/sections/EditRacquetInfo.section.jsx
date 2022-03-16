@@ -8,6 +8,7 @@ import {
   Description,
   SubmitButton,
   FileInput,
+  CustomSelect,
 } from 'web/components';
 import './EditRacquetInfo.styles.scss';
 
@@ -47,8 +48,14 @@ export function EditRacquetInfo({ t, setStep, setStrings, change }) {
           <Field
             name="brand"
             label="Brand"
-            type="text"
-            component={CustomInput}
+            placeholder="Select"
+            component={CustomSelect}
+            options={[
+              { label: 'Brand 1', value: 'b1' },
+              { label: 'Brand 2', value: 'b2' },
+              { label: 'Brand 3', value: 'b3' },
+              { label: 'Brand 4', value: 'b4' },
+            ]}
           />
           <Field
             name="model"

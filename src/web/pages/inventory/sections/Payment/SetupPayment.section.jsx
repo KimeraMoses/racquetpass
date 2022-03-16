@@ -9,8 +9,9 @@ const Card = ({
   method,
   methodDetails,
   setCurrentScreen,
+  setIsReceive,
 }) => {
-  const screen = method === 'bank' ? 'addBank' : 'addCard';
+  // const screen = method === 'bank' ? 'addBank' : 'addCard';
   return (
     <div className="setup-payment__card">
       <div className="setup-payment__card-heading">
@@ -19,7 +20,15 @@ const Card = ({
           <div
             className="setup-payment__card-heading-btn"
             role="button"
-            onClick={() => setCurrentScreen(screen)}
+            onClick={() => {
+              if (heading === 'Receive Payment') {
+                setCurrentScreen('choose');
+                setIsReceive(true);
+              } else {
+                setCurrentScreen('choose');
+                setIsReceive(false);
+              }
+            }}
           >
             Change
           </div>
@@ -46,7 +55,7 @@ const Card = ({
   );
 };
 
-export const SetupPayment = ({ t, setCurrentScreen }) => {
+export const SetupPayment = ({ t, setCurrentScreen, setIsReceive }) => {
   const cardData = [
     {
       heading: 'RacquetPass Payment',
@@ -54,6 +63,7 @@ export const SetupPayment = ({ t, setCurrentScreen }) => {
       description: 'This will be used to pay RacquetPass.',
       onClick: () => {
         setCurrentScreen('choose');
+        setIsReceive(false);
       },
       method: 'card',
       methodDetails: {
@@ -61,6 +71,7 @@ export const SetupPayment = ({ t, setCurrentScreen }) => {
         title: 'Visa Card',
         ending: '5432',
       },
+      setIsReceive,
     },
     {
       heading: 'Receive Payment',
@@ -69,7 +80,9 @@ export const SetupPayment = ({ t, setCurrentScreen }) => {
         'You will recieve money in this account when your customers place service orders.',
       onClick: () => {
         setCurrentScreen('choose');
+        setIsReceive(true);
       },
+      setIsReceive,
       // method: 'bank',
       // methodDetails: {
       //   title: 'Chase Banking',

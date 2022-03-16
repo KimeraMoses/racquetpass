@@ -79,7 +79,7 @@ export function EditShop({ t, setCurrentScreen }) {
             ) : (
               <div
                 className="edit__shop-details-header-modify-link"
-                onClick={() => setCurrentScreen('modifyShopName')}
+                // onClick={() => setCurrentScreen('modifyShopName')}
               >
                 {t('cancelRequest')}
               </div>
@@ -108,12 +108,12 @@ export function EditShop({ t, setCurrentScreen }) {
                 className="edit__shop-details-header-link"
                 onClick={() => setCurrentScreen('editShopAddress')}
               >
-                {t('editNameRequest')}
+                {t('editAddressRequest')}
               </div>
             ) : (
               <div
                 className="edit__shop-details-header-modify-link"
-                onClick={() => setCurrentScreen('modifyShopAddress')}
+                // onClick={() => setCurrentScreen('modifyShopAddress')}
               >
                 {t('cancelRequest')}
               </div>
