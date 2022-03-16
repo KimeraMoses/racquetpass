@@ -1,35 +1,80 @@
 import React from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import { reduxForm, Field } from 'redux-form';
 import { withNamespaces } from 'react-i18next';
-import { MenuButton } from 'web/components';
-import { CustomButton } from 'web/components';
-import './index.styles.scss';
 
-function VerifyPhone({ t }) {
+// Custom Components
+import {
+  Heading,
+  Description,
+  BackButton,
+  CustomInput,
+  CustomButton,
+} from 'web/components';
+
+import './index.styles.scss';
+import { useSelector } from 'react-redux';
+
+const required = (value) => (value ? undefined : 'This field is required');
+
+let VerifyPhone = ({ t }) => {
+  const errors = useSelector(
+    (state) => state?.form?.['create-business-account-2']?.syncErrors
+  );
+  const navigate = useNavigate();
   return (
-    <div className='verify-phone-container'>
-			<div>
-				<div className='header-row'>
-					<MenuButton>
-						<a href="/BusinessAccount/Create">
-							<img alt="Menu Icon" src="../svg/arrowLeft.svg" />
-						</a>
-					</MenuButton>
-					<h1 className='header-row-heading'>{t('verifyBusinessAccountPhoneHeading')}</h1>
-				</div>
-				<div className='verify-phone-body'>
-					<div className='phone-input-container'>
-						<label className='input-label'>{t('verifyBusinessAccountPhoneCodeLabel')}</label>
-						<input className='form-input' type="email" placeholder={t('verifyBusinessAccountPhoneCodePlaceHolder')} />
-					</div>
-					<div className='verify-desc'>{t('verifyBusinessAccountPhoneCodeDescription')}</div>
-					<a className='resend-link' href="/">{t('verifyBusinessAccountPhoneCodeResend')}</a>
-				</div>
-			</div>
-			<div className='btn-container'>
-				<CustomButton size='lg' btn='primary'><a href='/BusinessAccount/BusinessDetails'>{t('verifyBusinessAccountPhoneNextBtn')}</a></CustomButton>
-			</div>
+    <div className="verify-phone-container">
+      <div className="phone-section">
+        <div className="phone-section__heading">
+          <BackButton
+            onClick={() => {
+              navigate('/BusinessAccount/create');
+            }}
+          />
+          <Heading customClass="phone-section__heading-text">
+            {t('odrPhonHeading')}
+          </Heading>
+        </div>
+        <div className="phone-section__form-container">
+          <Field
+            CustomInputClass="phone-section__form-container-input"
+            name="verfication-code"
+            label="Varification Code"
+            placeholder="112233"
+            type="number"
+            component={CustomInput}
+            validate={required}
+          />
+        </div>
+        <div className="phone-section__text-container">
+          <Description customClass="phone-section__text-container-text">
+            {t('odrphnDesc')}
+          </Description>
+          <Link to="#" className="phone-section__text-container-rescan">
+            {t('odrResendCode')}
+          </Link>
+        </div>
+      </div>
+      <div className="btn-container">
+        <CustomButton size="lg" btn="primary" disabled={errors}>
+          <Link to="/BusinessAccount/BusinessDetails">
+            {t('verifyBusinessAccountPhoneNextBtn')}
+          </Link>
+        </CustomButton>
+      </div>
     </div>
   );
-}
+};
+
+const onSubmit = (values, dispatch) => {
+  // dispatch(    // your submit action //      );
+  console.log(values);
+};
+
+VerifyPhone = reduxForm({
+  // a unique name for the form
+  form: 'create-business-account-2',
+  onSubmit,
+})(VerifyPhone);
 
 export default withNamespaces()(VerifyPhone);

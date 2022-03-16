@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { withNamespaces } from 'react-i18next';
 import { Field, reduxForm } from 'redux-form';
 import { useSelector } from 'react-redux';
 import {
@@ -11,7 +12,6 @@ import {
 } from 'web/components';
 
 import './index.styles.scss';
-import { withNamespaces } from 'react-i18next';
 
 const length = new RegExp('^(?=.{8,})');
 const lowerCase = new RegExp('^(?=.*[a-z])');
@@ -24,7 +24,7 @@ const mediumStrength = new RegExp(
   '^(?=.*[a-z])(?=.*[A-Z])(?=.*[^A-Za-z0-9])(?=.{8,})'
 );
 
-function CreatePassword({ t, back }) {
+let CreatePassword = ({ t, back }) => {
   const [passwordFieldType, setPasswordFieldType] = useState('password');
   const navigate = useNavigate();
   const [password, setPassword] = useState('');
@@ -143,163 +143,152 @@ function CreatePassword({ t, back }) {
     }
   };
   return (
-    // /BusinessAccount/VerifyPhone
     <>
-      <form>
-        <div className="create-password">
-          <div>
-            <div className="create-password__header">
-              <div className="create-password__header-heading">
-                <BackButton
-                  onClick={() => {
-                    navigate('/BusinessAccount/BusinessDetails');
-                  }}
-                />
-                <Heading>{t('accPassword')}</Heading>
-              </div>
-            </div>
-            <div>
-              <Description customClass="create-password__desc">
-                {t('accPasstxt')}
-              </Description>
-            </div>
-            <div className="create-password__input-password">
-              <Field
-                name="password"
-                label="Password"
-                placeholder="&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;"
-                type={passwordFieldType}
-                component={CustomInput}
-                switchPasswordShow={() => {
-                  if (passwordFieldType === 'password') {
-                    setPasswordFieldType('text');
-                  } else {
-                    setPasswordFieldType('password');
-                  }
-                }}
-                isPasswordField
-                onChange={(e) => setPassword(e.target.value)}
-              />
-              <div
-                className={`create-password__input-password-strength ${
-                  passwordStrenght === 'weak'
-                    ? 'create-password__input-password-strength-weak'
-                    : ''
-                } ${
-                  passwordStrenght === 'medium'
-                    ? 'create-password__input-password-strength-medium'
-                    : ''
-                } ${
-                  passwordStrenght === 'strong'
-                    ? 'create-password__input-password-strength-strong'
-                    : ''
-                }`}
-              >
-                {passwordStrenght === 'strong'
-                  ? 'Strong'
-                  : passwordStrenght === 'medium'
-                  ? 'Medium'
-                  : 'Weak'}
-              </div>
-            </div>
-            <div className="create-password__progress">
-              <div
-                className={`create-password__progress-inner ${
-                  passwordStrenght === 'weak'
-                    ? 'create-password__progress-inner-weak'
-                    : ''
-                } ${
-                  passwordStrenght === 'medium'
-                    ? 'create-password__progress-inner-medium'
-                    : ''
-                } ${
-                  passwordStrenght === 'strong'
-                    ? 'create-password__progress-inner-strong'
-                    : ''
-                }`}
-              ></div>
-            </div>
-            <div className="create-password__password-list">
-              <Description>{t('accPassRecommend')}</Description>
-              <ul className="create-password__password-list-recommend">
-                <li>
-                  {renderBullet(passwordConditions.moreThanEight)}
-                  <p
-                    style={
-                      !passwordConditions.moreThanEight
-                        ? { color: '#a6a6a6' }
-                        : {}
-                    }
-                  >
-                    {t('accPassitem1')}
-                  </p>
-                </li>
-                <li>
-                  {renderBullet(passwordConditions.oneLowerCase)}
-                  <p
-                    style={
-                      !passwordConditions.oneLowerCase
-                        ? { color: '#a6a6a6' }
-                        : {}
-                    }
-                  >
-                    {t('accPassitem2')}
-                  </p>
-                </li>
-                <li>
-                  {renderBullet(passwordConditions.oneUpperCase)}
-                  <p
-                    style={
-                      !passwordConditions.oneUpperCase
-                        ? { color: '#a6a6a6' }
-                        : {}
-                    }
-                  >
-                    {t('accPassitem3')}
-                  </p>
-                </li>
-                <li>
-                  {renderBullet(passwordConditions.oneNumber)}
-                  <p
-                    style={
-                      !passwordConditions.oneNumber ? { color: '#a6a6a6' } : {}
-                    }
-                  >
-                    {t('accPassitem4')}
-                  </p>
-                </li>
-                <li>
-                  {renderBullet(passwordConditions.noTextFromNameEmail)}
-                  <p
-                    style={
-                      !passwordConditions.noTextFromNameEmail
-                        ? { color: '#a6a6a6' }
-                        : {}
-                    }
-                  >
-                    {t('accPassitem5')}
-                  </p>
-                </li>
-              </ul>
+      <div className="create-business-password">
+        <div>
+          <div className="create-business-password__header">
+            <div className="create-business-password__header-heading">
+              <BackButton onClick={back} />
+              <Heading>{t('accPassword')}</Heading>
             </div>
           </div>
-
           <div>
-            <div className="account-details__form-button">
-              <SubmitButton
-                onClick={() => navigate('/player-tabs')}
-                type="submit"
-                className="account-details__form-button-btn"
-              >
-                {t('odrCreateBtn')}
-              </SubmitButton>
+            <Description customClass="create-business-password__desc">
+              {t('accPasstxt')}
+            </Description>
+          </div>
+          <div className="create-business-password__input-password">
+            <Field
+              name="password"
+              label="Password"
+              placeholder="&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;"
+              type={passwordFieldType}
+              component={CustomInput}
+              switchPasswordShow={() => {
+                if (passwordFieldType === 'password') {
+                  setPasswordFieldType('text');
+                } else {
+                  setPasswordFieldType('password');
+                }
+              }}
+              isPasswordField
+              onChange={(e) => setPassword(e.target.value)}
+            />
+            <div
+              className={`create-business-password__input-password-strength ${
+                passwordStrenght === 'weak'
+                  ? 'create-business-password__input-password-strength-weak'
+                  : ''
+              } ${
+                passwordStrenght === 'medium'
+                  ? 'create-business-password__input-password-strength-medium'
+                  : ''
+              } ${
+                passwordStrenght === 'strong'
+                  ? 'create-business-password__input-password-strength-strong'
+                  : ''
+              }`}
+            >
+              {passwordStrenght === 'strong'
+                ? 'Strong'
+                : passwordStrenght === 'medium'
+                ? 'Medium'
+                : 'Weak'}
             </div>
+          </div>
+          <div className="create-business-password__progress">
+            <div
+              className={`create-business-password__progress-inner ${
+                passwordStrenght === 'weak'
+                  ? 'create-business-password__progress-inner-weak'
+                  : ''
+              } ${
+                passwordStrenght === 'medium'
+                  ? 'create-business-password__progress-inner-medium'
+                  : ''
+              } ${
+                passwordStrenght === 'strong'
+                  ? 'create-business-password__progress-inner-strong'
+                  : ''
+              }`}
+            ></div>
+          </div>
+          <div className="create-business-password__password-list">
+            <Description>{t('accPassRecommend')}</Description>
+            <ul className="create-business-password__password-list-recommend">
+              <li>
+                {renderBullet(passwordConditions.moreThanEight)}
+                <p
+                  style={
+                    !passwordConditions.moreThanEight
+                      ? { color: '#a6a6a6' }
+                      : {}
+                  }
+                >
+                  {t('accPassitem1')}
+                </p>
+              </li>
+              <li>
+                {renderBullet(passwordConditions.oneLowerCase)}
+                <p
+                  style={
+                    !passwordConditions.oneLowerCase ? { color: '#a6a6a6' } : {}
+                  }
+                >
+                  {t('accPassitem2')}
+                </p>
+              </li>
+              <li>
+                {renderBullet(passwordConditions.oneUpperCase)}
+                <p
+                  style={
+                    !passwordConditions.oneUpperCase ? { color: '#a6a6a6' } : {}
+                  }
+                >
+                  {t('accPassitem3')}
+                </p>
+              </li>
+              <li>
+                {renderBullet(passwordConditions.oneNumber)}
+                <p
+                  style={
+                    !passwordConditions.oneNumber ? { color: '#a6a6a6' } : {}
+                  }
+                >
+                  {t('accPassitem4')}
+                </p>
+              </li>
+              <li>
+                {renderBullet(passwordConditions.noTextFromNameEmail)}
+                <p
+                  style={
+                    !passwordConditions.noTextFromNameEmail
+                      ? { color: '#a6a6a6' }
+                      : {}
+                  }
+                >
+                  {t('accPassitem5')}
+                </p>
+              </li>
+            </ul>
           </div>
         </div>
-      </form>
+
+        <div>
+          <div className="account-details__form-button">
+            <SubmitButton
+              onClick={() => navigate('/BusinessAccount/VerifyBusiness')}
+              type="submit"
+              className="account-details__form-button-btn"
+            >
+              {t('odrCreateBtn')}
+            </SubmitButton>
+          </div>
+        </div>
+      </div>
     </>
   );
-}
+};
 
 const onSubmit = (values, dispatch) => {
   // dispatch(    // your submit action //      );
@@ -308,7 +297,7 @@ const onSubmit = (values, dispatch) => {
 
 CreatePassword = reduxForm({
   // a unique name for the form
-  form: 'signup',
+  form: 'create-business-account-4',
   onSubmit,
 })(CreatePassword);
 

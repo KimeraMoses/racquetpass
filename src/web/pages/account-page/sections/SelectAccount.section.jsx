@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Field } from 'redux-form';
+import { useNavigate } from 'react-router-dom';
 
 import { BackButton, Heading, AccountCard } from 'web/components';
 
@@ -7,6 +8,7 @@ import './SelectAccount.styles.scss';
 
 export function SelectAccount({ t, back, forward, change, moveToLogin }) {
   const [accountType, setAccountType] = useState('');
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (accountType) {
@@ -46,7 +48,7 @@ export function SelectAccount({ t, back, forward, change, moveToLogin }) {
             description="Get started with a new account as a stringer."
             img="/img/accountpage/stringer.png"
             onClick={() => {
-              setAccountType('stringer');
+              navigate('/BusinessAccount/create');
             }}
           />
         </div>

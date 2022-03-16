@@ -7,7 +7,7 @@ import './accountPage.styles.scss';
 import { useState } from 'react';
 
 let CreateAccount = ({ t, handleSubmit, change }) => {
-  const [step, setStep] = useState(2);
+  const [step, setStep] = useState(1);
 
   const navigate = useNavigate();
 
@@ -41,7 +41,12 @@ let CreateAccount = ({ t, handleSubmit, change }) => {
         );
       case 2:
         return (
-          <AccountDetails t={t} forward={nextStep} moveToLogin={moveToLogin} />
+          <AccountDetails
+            t={t}
+            forward={nextStep}
+            back={prevStep}
+            moveToLogin={moveToLogin}
+          />
         );
       case 3:
         return <CreatePassword t={t} back={prevStep} />;

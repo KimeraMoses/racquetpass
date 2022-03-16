@@ -1,9 +1,9 @@
-.create-password {
+.create-business-password {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  padding: 40px 20px;
-
+  min-height: 100vh;
+  padding: 0px 20px;
   &__header {
     display: flex;
     justify-content: space-between;
@@ -33,13 +33,13 @@
       right: 22px;
       transform: translateY(-75%);
     }
-    .create-password__input-password-strength.create-password__input-password-strength-weak {
+    .create-business-password__input-password-strength.create-business-password__input-password-strength-weak {
       color: #ef0000;
     }
-    .create-password__input-password-strength.create-password__input-password-strength-medium {
+    .create-business-password__input-password-strength.create-business-password__input-password-strength-medium {
       color: #efac00;
     }
-    .create-password__input-password-strength.create-password__input-password-strength-strong {
+    .create-business-password__input-password-strength.create-business-password__input-password-strength-strong {
       color: #30ef00;
     }
   }
@@ -53,15 +53,15 @@
       height: 5px;
       border-radius: 5px;
     }
-    .create-password__progress-inner.create-password__progress-inner-weak {
+    .create-business-password__progress-inner.create-business-password__progress-inner-weak {
       background: #ef0000;
       width: 33.3%;
     }
-    .create-password__progress-inner.create-password__progress-inner-medium {
+    .create-business-password__progress-inner.create-business-password__progress-inner-medium {
       background: #efac00;
       width: 66.6%;
     }
-    .create-password__progress-inner.create-password__progress-inner-strong {
+    .create-business-password__progress-inner.create-business-password__progress-inner-strong {
       background: #30ef00;
       width: 100%;
     }

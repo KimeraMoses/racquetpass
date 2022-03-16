@@ -43,11 +43,9 @@ function Home({ t }) {
           </div>
           <div className="banner-button-container">
             <CustomInput
-              // icon="/img/orderpage/search.png"
-              label="Search By Name, City Or State"
+              label="Find your Pro Shop by Name, City Or State"
               noLabel
               onClick={() => {
-                // setShopCurrent('search');
                 navigate('/order');
               }}
               style={{ background: 'white' }}
@@ -70,7 +68,7 @@ function Home({ t }) {
                 role="button"
                 className="banner-button-container__text-imp"
                 onClick={() => {
-                  navigate('/BusinessAccount');
+                  navigate('/BusinessAccount/create');
                 }}
               >
                 Sign up now.

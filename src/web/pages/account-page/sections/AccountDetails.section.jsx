@@ -27,7 +27,7 @@ const phoneNumber = (value) => {
   }
 };
 
-export function AccountDetails({ t, forward, moveToLogin }) {
+export function AccountDetails({ t, forward, back, moveToLogin }) {
   const navigate = useNavigate();
 
   const errors = useSelector((state) => state?.form?.signup?.syncErrors);
@@ -37,11 +37,7 @@ export function AccountDetails({ t, forward, moveToLogin }) {
         <div>
           <div className="account-details__header-container">
             <div className="account-details__header-container-heading">
-              <BackButton
-                onClick={() => {
-                  navigate('/');
-                }}
-              />
+              <BackButton onClick={back} />
               <Heading>{t('odrCreateBtn')}</Heading>
             </div>
             <div className="account-details__button-container">

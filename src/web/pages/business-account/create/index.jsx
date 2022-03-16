@@ -1,72 +1,136 @@
 import React from 'react';
 import { withNamespaces } from 'react-i18next';
-import { MenuButton } from 'web/components';
-import { CustomButton } from 'web/components';
+import { reduxForm, Field } from 'redux-form';
 import './index.styles.scss';
+import { AccountButton } from 'web/components/Buttons/AccountButton.component';
+import { SubHeading } from 'web/components/atoms/SubHeading.atom';
+import { SubmitButton } from 'web/components/Buttons/SubmitButton.component';
+import { CustomInput } from 'web/components/formFields/index';
+import { Heading } from 'web/components/atoms/Heading.atom';
+import { BackButton } from 'web/components/Buttons/BackButton.component';
+import { useNavigate } from '../../../../../node_modules/react-router-dom/index';
+import { useSelector } from 'react-redux';
+import { Description } from 'web/components/atoms/Description.atom';
 
-function Create({ t }) {
-  return (
-    <div className='create-account-container'>
-      <div className='header-row'>
-				<MenuButton>
-					<a href="/BusinessAccount">
-          	<img alt="Menu Icon" src="../svg/arrowLeft.svg" />
-					</a>
-        </MenuButton>
-        <h1 className='header-row-heading'>{t('createBusinessAccountHeading')}</h1>
-				<CustomButton size='sm' btn='white'><a href='/BusinessAccount'>{t('accountSignIn')}</a></CustomButton>
-      </div>
-			<div className='create-account-description'>{t('createBusinessAccountDescription')}</div>
-			<div className='create-account-body'>
-				<form className='business-account-form'>
-					<div className='input-container'>
-						<label className='input-label'>{t('createBusinessAccountShopLabel')}</label>
-						<input className='form-input' type="text" placeholder={t('createBusinessAccountShopPlaceholder')} />
-					</div>
-					<div className='input-container'>
-						<label className='input-label'>{t('createBusinessAccountPhoneLabel')}</label>
-						<input className='form-input' type="number" placeholder={t('createBusinessAccountPhonePlaceholder')} />
-					</div>
-					<div className='input-container'>
-						<label className='input-label'>{t('createBusinessAccountEmailLabel')}</label>
-						<input className='form-input' type="email" placeholder={t('createBusinessAccountEmailPlaceholder')} />
-					</div>
-					<div className='btn-container'>
-						<CustomButton size='lg' btn='primary'><a href='/BusinessAccount/VerifyPhone'>{t('createBusinessAccountContinueBtn')}</a></CustomButton>
-					</div>
-				</form>
-				<div className='other-options'>
-					<div className='line'></div>
-					<div className='text'>{t('createBusinessAccountContinueText')}</div>
-					<div className='line'></div>
-				</div>
-				<div className='facebook-btn'>
-					<CustomButton size='lg' btn='primary'>
-						{t('createBusinessAccountContinueWithFacebook')}
-						<img className='icon' alt="Menu Icon" src="../svg/facebook.svg" />
-					</CustomButton>
-				</div>
-				<div className='google-btn'>
-					<CustomButton size='lg' btn='primary'>
-						{t('createBusinessAccountContinueWithGoogle')}
-						<img className='icon' alt="Menu Icon" src="../svg/google.svg" />
-					</CustomButton>
-				</div>
-				<div className='apple-btn'>
-					<CustomButton size='lg' btn='primary'>
-						{t('createBusinessAccountContinueWithApple')}
-						<img className='icon' alt="Menu Icon" src="../svg/apple.svg" />
-					</CustomButton>
-				</div>
-				<div className='privacy-policy'>
-					{t('createBusinessAccountPolicyDescription')}
-					<span>{t('createBusinessAccountTerms')}</span>
-					{t('createBusinessAccountPolicySpace')}
-					<span>{t('createBusinessAccountPolicy')}</span>
-				</div>
-			</div>
-    </div>
+const required = (value) => (value ? undefined : 'This field is required');
+// Phone Validation
+const formats = '(999)999-9999|999-999-9999|9999999999';
+const r = RegExp(
+  '^(' + formats.replace(/([\(\)])/g, '\\$1').replace(/9/g, '\\d') + ')$'
+);
+const phoneNumber = (value) => {
+  if (r.test(value) === true) {
+    return undefined;
+  } else {
+    return 'Please enter a valid phone number.';
+  }
+};
+
+let Create = ({ t }) => {
+  const errors = useSelector(
+    (state) => state?.form?.['create-business-account-1']?.syncErrors
   );
-}
+  const navigate = useNavigate();
+  return (
+    <>
+      <div className="create-business-account">
+        <div>
+          <div className="create-business-account__header-container">
+            <div className="create-business-account__header-container-heading">
+              <BackButton
+                onClick={() => {
+                  navigate('/');
+                }}
+              />
+              <Heading>{t('odrCreateBtn')}</Heading>
+            </div>
+            <div className="create-business-account__button-container">
+              <button
+                className="create-business-account__button-container-btn"
+                onClick={() => {navigate('/login')}}
+              >
+                {t('homeSignin')}
+              </button>
+            </div>
+          </div>
+          <div className="create-business-account__form-container">
+            <Field
+              name="firstName"
+              label="First Name"
+              type="text"
+              component={CustomInput}
+              validate={required}
+            />
+            <Field
+              name="lastName"
+              label="Last Name"
+              type="text"
+              component={CustomInput}
+              validate={required}
+            />
+            <Field
+              name="phone-number"
+              label="Phone Number"
+              type="text"
+              component={CustomInput}
+              validate={[required, phoneNumber]}
+            />
+          </div>
+          <div className="create-business-account__form-button">
+            <SubmitButton
+              type="button"
+              className="create-business-account__form-button-btn"
+              disabled={errors}
+              onClick={() => {}}
+            >
+              {t('odrCreateBtn')}
+            </SubmitButton>
+          </div>
+          <div className="create-business-account__option-container">
+            <div className="create-business-account__option-container-line"></div>
+            <div>
+              <SubHeading customClass="create-business-account__option-container-txt">
+                {t('odrCreateWith')}
+              </SubHeading>
+            </div>
+            <div className="create-business-account__option-container-line"></div>
+          </div>
+          <div className="create-business-account__buttons">
+            <AccountButton facebook />
+            <AccountButton google />
+            <AccountButton apple />
+          </div>
+        </div>
+        <div>
+          <div className="create-business-account__statement">
+            <Description customClass="create-business-account__statement-txt">
+              {t('odrPivacyText')}
+              <span className="create-business-account__statement-txt-bold">
+                {t('odrTermsBold')}
+              </span>
+              &nbsp;
+              {t('odrPrivacyAnd')}
+              &nbsp;
+              <span className="create-business-account__statement-txt-bold">
+                {t('odrPrivacyBold')}
+              </span>
+            </Description>
+          </div>
+        </div>
+      </div>
+    </>
+  );
+};
+
+const onSubmit = (values, dispatch) => {
+  // dispatch(    // your submit action //      );
+  console.log(values);
+};
+
+Create = reduxForm({
+  // a unique name for the form
+  form: 'create-business-account-1',
+  onSubmit,
+})(Create);
 
 export default withNamespaces()(Create);
