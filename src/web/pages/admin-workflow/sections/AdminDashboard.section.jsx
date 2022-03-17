@@ -1,7 +1,29 @@
+import { useEffect, useState } from 'react';
 import { HeadingButton, Heading, Avatar, Tabs } from 'web/components';
+import { exportToExcel } from 'web/utils';
 import './AdminDashboard.styles.scss';
 
+const getData = () => {
+  let data = [];
+  for (let i = 0; i <= 25; i++) {
+    data.push({
+      firstName: `first${i}`,
+      lastName: `last${i}`,
+      email: `abc${i}@gmail.com`,
+      address: `000${i} street city, ST`,
+      zipcode: `0000${i}`,
+    });
+  }
+  return data;
+};
+
 export function AdminDashboard({ t, setCurrentScreen }) {
+  const [data, setData] = useState([{}]);
+
+  useEffect(() => {
+    setData(getData());
+  }, []);
+
   return (
     <>
       <div className="admin-dashboard">
@@ -35,6 +57,7 @@ export function AdminDashboard({ t, setCurrentScreen }) {
               {
                 title: 'Export',
                 icon: '/img/drawer/export.png',
+                onClick: () => exportToExcel(data, 'admin-data'),
               },
               { title: 'Logout', icon: '/img/drawer/logout.png' },
             ]}
