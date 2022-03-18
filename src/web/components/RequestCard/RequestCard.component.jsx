@@ -12,10 +12,10 @@ export function RequestCard({ t, string, onClick = () => {} }) {
               onClick={onClick}
             >
               <div className="request-card__container-content-text-heading">
-                {string.title}
+                {string.shopName}
               </div>
               <div className="request-card__container-content-text-txt">
-                {string.text}
+                {string.shopEmail}
               </div>
             </div>
             <div className="request-card__container-content-imgs">

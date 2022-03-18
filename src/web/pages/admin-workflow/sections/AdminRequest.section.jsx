@@ -6,20 +6,21 @@ import {
   HeadingButton,
   RequestCard,
 } from 'web/components';
+import { exportToExcel } from 'web/utils';
 import './AdminRequest.styles.scss';
 
 const requests = [
   {
-    title: `Joe's Tennis Pro`,
-    text: 'JoesTennisPro@gmail.com',
+    shopName: `Joe's Tennis Pro`,
+    shopEmail: 'JoesTennisPro@gmail.com',
   },
   {
-    title: `Joe's Tennis Pro`,
-    text: 'JoesTennisPro@gmail.com',
+    shopName: `Joe's Tennis Pro`,
+    shopEmail: 'JoesTennisPro@gmail.com',
   },
   {
-    title: `Joe's Tennis Pro`,
-    text: 'JoesTennisPro@gmail.com',
+    shopName: `Joe's Tennis Pro`,
+    shopEmail: 'JoesTennisPro@gmail.com',
   },
 ];
 
@@ -33,7 +34,12 @@ export function AdminRequest({ t, setCurrentScreen }) {
             <Heading>{t('adminRequestHeading')}</Heading>
           </div>
           <div>
-            <HeadingButton text="Export" />
+            <HeadingButton
+              text="Export"
+              onClick={() => {
+                exportToExcel(requests, 'admin-data');
+              }}
+            />
           </div>
         </div>
         <div className="admin-request__content">
