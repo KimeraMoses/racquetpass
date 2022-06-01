@@ -19,7 +19,7 @@ function Home({ t }) {
             </div>
             <div className="home-container__button-container-buttons">
               <button
-                className="home-container__button-container-buttons-btn-trans"
+                className="home-container__button-container-buttons-btn"
                 type="button"
                 onClick={() => {
                   navigate('/create-account');
@@ -27,22 +27,13 @@ function Home({ t }) {
               >
                 {t('homeSignup')}
               </button>
-              <button
-                className="home-container__button-container-buttons-btn"
-                type="button"
-                onClick={() => {
-                  navigate('/login');
-                }}
-              >
-                {t('homeSignin')}
-              </button>
             </div>
           </div>
           <div className="banner-container">
             <h1 className="banner-container__heading">{t('homeHeading')}</h1>
           </div>
           <div className="banner-button-container">
-            <CustomInput
+            {/* <CustomInput
               // icon="/img/orderpage/search.png"
               label="Search By Name, City Or State"
               noLabel
@@ -51,31 +42,10 @@ function Home({ t }) {
                 navigate('/order');
               }}
               style={{ background: 'white' }}
-            />
-            <Button isDark onClick={() => navigate('/create-account')}>
+            /> */}
+            <Button isDark onClick={() => navigate('/order')}>
               {t('homeLightBtn')}
             </Button>
-            <button
-              className="banner-button-container__btn"
-              type="button"
-              onClick={() => {
-                navigate('/order-without-account');
-              }}
-            >
-              Scan a QR Code
-            </button>
-            <div className="banner-button-container__text">
-              Want to use RacquetPass at your club or shop?{' '}
-              <span
-                role="button"
-                className="banner-button-container__text-imp"
-                onClick={() => {
-                  navigate('/BusinessAccount');
-                }}
-              >
-                Sign up now.
-              </span>
-            </div>
           </div>
         </div>
         <div>
