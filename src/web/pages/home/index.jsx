@@ -19,7 +19,7 @@ function Home({ t }) {
             </div>
             <div className="home-container__button-container-buttons">
               <button
-                className="home-container__button-container-buttons-btn"
+                className="home-container__button-container-buttons-btn bg-[#fff]"
                 type="button"
                 onClick={() => {
                   navigate('/create-account');

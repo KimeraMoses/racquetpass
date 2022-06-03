@@ -10,6 +10,7 @@ import {
   SelectShop,
   ShopSearchResults,
   GiveShopInfo,
+  Thanks,
   Contact,
   VerifyPhone,
   SelectString,
@@ -28,7 +29,7 @@ let OrderPage = ({ t, handleSubmit, change }) => {
     content: ['QR', 'Strings', 'Contact', 'Review'],
   });
   const [scan, setScan] = useState({ current: 'initial' });
-  const [shop, setShop] = useState({ current: 'search' });
+  const [shop, setShop] = useState({ current: 'initial' });
   const [strings, setStrings] = useState({ current: 'initial' });
   const [mainCross, setMainCross] = useState({ current: 'initial' });
   const [main, setMain] = useState(false);
@@ -160,6 +161,8 @@ let OrderPage = ({ t, handleSubmit, change }) => {
             setStep={setStep}
           />
         );
+      case 'thanks':
+        return <Thanks />;
       default:
         return <>Check current shop</>;
     }
@@ -251,13 +254,19 @@ let OrderPage = ({ t, handleSubmit, change }) => {
   return (
     <>
       {step === 7 || step === 0 ? <></> : <Progress steps={steps} />}
-      <div className={`order-page ${done ? 'order-page-done' : ''} ${step === 0 ? 'order-page-zero' : ''}`}>
+      <div
+        className={`order-page ${done ? 'order-page-done' : ''} ${
+          step === 0 ? 'order-page-zero' : ''
+        }`}
+      >
         <form onSubmit={handleSubmit} className="order-page__form">
           <div>{getActiveSection()}</div>
           {done ||
           shop.current === 'find' ||
+          shop.current === 'thanks' ||
           mainCross.current === 'search' ||
-          step === 6 ? (
+          step === 6 ||
+          step === 0 ? (
             <></>
           ) : (
             <div className="order-page__button-container">

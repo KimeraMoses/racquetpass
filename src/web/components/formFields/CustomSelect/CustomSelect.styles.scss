@@ -67,7 +67,8 @@
     }
     .css-1s2u09g-control {
       box-sizing: border-box;
-      padding: 16px;
+      padding: 0px 8px 0px 16px;
+      height: 52px;
       width: 100%;
       font-family: Poppins;
       -webkit-appearance: none;
@@ -85,9 +86,11 @@
       }
       .css-14el2xx-placeholder {
         font-family: Poppins;
-        font-size: 15px;
-        line-height: 27px;
-        color: #bababa;
+        font-style: normal;
+        font-weight: normal;
+        font-size: 14px;
+        line-height: 21px;
+        color: #858585;
       }
       .css-319lph-ValueContainer {
         padding: 0px;

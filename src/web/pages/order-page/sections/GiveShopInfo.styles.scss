@@ -1,8 +1,7 @@
 .find-shop-section {
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
-  min-height: calc(100vh - 97px);
+  gap: 50px;
   &__heading {
     display: flex;
     align-items: center;

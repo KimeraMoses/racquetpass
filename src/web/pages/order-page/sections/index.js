@@ -4,6 +4,7 @@ export { ScanSuccess } from './ScanSuccess.section';
 export { SelectShop } from './SelectShop.section';
 export { ShopSearchResults } from './ShopSearchResults.section';
 export { GiveShopInfo } from './GiveShopInfo.section';
+export { Thanks } from './Thanks.section';
 export { Contact } from './Contact.section';
 export { VerifyPhone } from './VerifyPhone.section';
 export { AboutRacquet } from './AboutRacquet.section';

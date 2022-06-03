@@ -41,7 +41,7 @@
   "odrShopText": "Let us know what pro shop you normally go to. We’d love to help equip them with the magic of RacquetPass!",
   "odrShopName": "Shop Name",
   "odrPhone": "Phone Number (optional)",
-  "odrMsg": "We’ll send a message to this number when this shop joins RacquetPass.",
+  "odrMsg": "We’ll use this number to text you when this shop joins RacquetPass.",
   "odrSubmitBtn": "Submit Form",
 
   "odrStayHeading": "Tell us how to stay in touch",
