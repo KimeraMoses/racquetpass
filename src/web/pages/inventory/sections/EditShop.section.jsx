@@ -19,9 +19,34 @@ export function EditShop({ t, setCurrentScreen }) {
     <>
       <div className="edit">
         <div className="edit__heading">
-          <Heading>{t('odrHeading')}</Heading>
+          <Heading>Edit My Pro Shop Info</Heading>
           <HeadingButton close onClick={() => setCurrentScreen('proshop')} />
         </div>
+
+        <div className="edit__services-heading">
+          <Heading>{t('shopServiceHeading')}</Heading>
+        </div>
+
+        <div className="edit__services-form">
+          <Field
+            name="delivery-time"
+            label="Estimated delivery time"
+            type="text"
+            component={CustomInput}
+          />
+          <Field
+            name="labor-price"
+            label="Labor price"
+            type="text"
+            component={CustomInput}
+          />
+        </div>
+        <div className="edit__service-text">
+          <Description customClass="edit__service-text-txt">
+            {t('editServicesText')}
+          </Description>
+        </div>
+
         <div className="edit__contact-heading">
           <Heading>{t('ShopContactHeading')}</Heading>
         </div>
@@ -54,9 +79,9 @@ export function EditShop({ t, setCurrentScreen }) {
             ) : (
               <div
                 className="edit__shop-details-header-modify-link"
-                onClick={() => setCurrentScreen('modifyShopName')}
+                // onClick={() => setCurrentScreen('modifyShopName')}
               >
-                {t('modifyRequest')}
+                {t('cancelRequest')}
               </div>
             )}
           </div>
@@ -83,14 +108,14 @@ export function EditShop({ t, setCurrentScreen }) {
                 className="edit__shop-details-header-link"
                 onClick={() => setCurrentScreen('editShopAddress')}
               >
-                {t('editNameRequest')}
+                {t('editAddressRequest')}
               </div>
             ) : (
               <div
                 className="edit__shop-details-header-modify-link"
-                onClick={() => setCurrentScreen('modifyShopAddress')}
+                // onClick={() => setCurrentScreen('modifyShopAddress')}
               >
-                {t('modifyRequest')}
+                {t('cancelRequest')}
               </div>
             )}
           </div>
@@ -110,29 +135,7 @@ export function EditShop({ t, setCurrentScreen }) {
             )}
           </div>
         </div>
-        <div className="edit__services-heading">
-          <Heading>{t('shopServiceHeading')}</Heading>
-        </div>
 
-        <div className="edit__services-form">
-          <Field
-            name="delivery-time"
-            label="Estimated delivery time"
-            type="text"
-            component={CustomInput}
-          />
-          <Field
-            name="labor-price"
-            label="Labor price"
-            type="text"
-            component={CustomInput}
-          />
-        </div>
-        <div className="edit__service-text">
-          <Description customClass="edit__service-text-txt">
-            {t('editServicesText')}
-          </Description>
-        </div>
         <div className="edit__button">
           <SubmitButton onClick={() => setCurrentScreen('proshop')}>
             {t('stringDetailsSave')}

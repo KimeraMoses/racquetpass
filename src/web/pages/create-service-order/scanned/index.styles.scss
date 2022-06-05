@@ -1,13 +1,13 @@
-.scanned-order-container{
+.scanned-order-container {
   padding: 40px 20px;
-  min-height: 100vh;	
-	display: flex;
-	flex-direction: column;
-	justify-content: space-between;
-  .header-row{
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  .header-row {
     display: flex;
-		align-items: center;
-    &-heading{
+    align-items: center;
+    &-heading {
       font-family: Poppins;
       font-style: normal;
       font-weight: bold;
@@ -16,134 +16,142 @@
       flex-grow: 1;
     }
   }
-	.heading-row{
-		padding: 40px 0;
-		.title{
-			font-family: Poppins;
-			font-style: normal;
-			font-weight: 600;
-			font-size: 24px;
-			line-height: 36px;
-			padding-bottom: 12px;
-		}
-		.desc{
-			font-family: Poppins;
-			font-style: normal;
-			font-weight: normal;
-			font-size: 18px;
-			line-height: 27px;
-			color: #545454;
-		}
-	}
-	.scanned-card{
-		max-width: 450px;
-		position: relative;
-		margin: 25px auto;
-		width: 100%;
-		border-radius: 12px;
-		background-color: #fff;
-		box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.15);
-		padding: 31px 25px 20px 25px;
-		.card-line{
-			position: absolute;
-			left: 0;
-			top: 50%;
-			transform: translateY(-50%);
-			width: 3px;
-			height: calc(100% - 38px);
-			background-color: #304ffe;
-			border-radius: 1.5px;
-		}
-		.title{
-			font-family: Poppins;
-			font-style: normal;
-			font-weight: 600;
-			font-size: 24px;
-			line-height: 36px;
-			padding-bottom: 9px;
-		}
-		.status-container{
-			padding-bottom: 40px;
-			.icon{
-				padding-right: 13px;
-			}
-		}
-		.racquet-info{
-			width: 100%;
-			display: flex;
-			.img{
-				height: 120px;
-				width: 120px;
-				border-radius: 12px;
-			}
-			.brand{
-				display: flex;
-				flex-wrap: wrap;
-				flex-direction: column;
-				justify-content: flex-start;
-				padding-left: 15px;
-				.model{
-					font-family: Poppins;
-					font-style: normal;
-					font-weight: 600;
-					font-size: 12px;
-					line-height: 18px;
-					color: #8E8E8E;
-				}
-				.brand-title{
-					font-family: Poppins;
-					font-style: normal;
-					font-weight: 600;
-					font-size: 24px;
-					line-height: 36px;
-					width: 220px;
-					overflow: hidden;
-					display: -webkit-box;
-					-webkit-line-clamp: 3;
-					-webkit-box-orient: vertical;
-				}
-			}
-		}
-		.racquet-details{
-			padding: 25px 0 22px 0;
-			.racquet-label{
-				font-family: Poppins;
-				font-style: normal;
-				font-weight: 600;
-				font-size: 12px;
-				line-height: 18px;				
-				color: #8E8E8E;
-				padding-bottom: 4px;
-			}
-			.racquet-desc{
-				font-family: Poppins;
-				font-style: normal;
-				font-weight: 500;
-				font-size: 18px;
-				line-height: 27px;
-				padding-bottom: 18px;
-			}
-		}
-		.scan-msg{			
-			display: flex;
-			flex-direction: column;
-			justify-content: center;
-			align-items: center;
-			font-family: Poppins;
-			font-style: normal;
-			font-weight: normal;
-			font-size: 14px;
-			line-height: 21px;
-			text-align: center;
-			.link{
-				color: #304FFE;
-				text-decoration: none;
-			}
-		}
-	}
-	.btn-container{
-		.custom-button:first-child{
-			margin-bottom: 9px;
-		}
-	}
+  .heading-row {
+    padding: 40px 0;
+    .title {
+      font-family: Poppins;
+      font-style: normal;
+      font-weight: 600;
+      font-size: 24px;
+      line-height: 36px;
+      padding-bottom: 12px;
+    }
+    .desc {
+      font-family: Poppins;
+      font-style: normal;
+      font-weight: normal;
+      font-size: 18px;
+      line-height: 27px;
+      color: #545454;
+    }
+  }
+  .scanned-card {
+    max-width: 450px;
+    position: relative;
+    margin: 25px auto;
+    width: 100%;
+    border-radius: 12px;
+    background-color: #fff;
+    box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.15);
+    padding: 31px 25px 20px 25px;
+    .card-line {
+      position: absolute;
+      left: 0;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 3px;
+      height: calc(100% - 38px);
+      background-color: #304ffe;
+      border-radius: 1.5px;
+    }
+    .title {
+      font-family: Poppins;
+      font-style: normal;
+      font-weight: 600;
+      font-size: 24px;
+      line-height: 36px;
+      padding-bottom: 9px;
+    }
+    .status-container {
+      padding-bottom: 40px;
+      .icon {
+        padding-right: 13px;
+      }
+    }
+    .racquet-info {
+      width: 100%;
+      display: flex;
+      .img {
+        height: 120px;
+        width: 120px;
+        border-radius: 12px;
+      }
+      .brand {
+        display: flex;
+        flex-wrap: wrap;
+        flex-direction: column;
+        justify-content: flex-start;
+        padding-left: 15px;
+        .model {
+          font-family: Poppins;
+          font-style: normal;
+          font-weight: 600;
+          font-size: 12px;
+          line-height: 18px;
+          color: #8e8e8e;
+        }
+        .brand-title {
+          font-family: Poppins;
+          font-style: normal;
+          font-weight: 600;
+          font-size: 24px;
+          line-height: 36px;
+          width: 220px;
+          overflow: hidden;
+          display: -webkit-box;
+          -webkit-line-clamp: 3;
+          -webkit-box-orient: vertical;
+        }
+      }
+    }
+    .racquet-details {
+      padding: 25px 0 22px 0;
+      &__paragraph {
+        font-family: 'Poppins';
+        font-style: normal;
+        font-weight: 400;
+        font-size: 14px;
+        line-height: 21px;
+        color: #474747;
+      }
+      .racquet-label {
+        font-family: Poppins;
+        font-style: normal;
+        font-weight: 600;
+        font-size: 12px;
+        line-height: 18px;
+        color: #8e8e8e;
+        padding-bottom: 4px;
+      }
+      .racquet-desc {
+        font-family: Poppins;
+        font-style: normal;
+        font-weight: 500;
+        font-size: 18px;
+        line-height: 27px;
+        padding-bottom: 18px;
+      }
+    }
+    .scan-msg {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      font-family: Poppins;
+      font-style: normal;
+      font-weight: normal;
+      font-size: 14px;
+      line-height: 21px;
+      text-align: center;
+      .link {
+        color: #304ffe;
+        text-decoration: none;
+      }
+    }
+  }
+  .btn-container {
+    .custom-button:first-child {
+      margin-bottom: 9px;
+    }
+  }
 }

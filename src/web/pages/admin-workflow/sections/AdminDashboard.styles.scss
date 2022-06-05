@@ -1,0 +1,35 @@
+.admin-dashboard {
+  .admin-dashboard__profile {
+    display: flex;
+    justify-content: center;
+    position: relative;
+    padding: 0px 20px;
+    &-avatar {
+      display: flex;
+      gap: 20px;
+      flex-direction: column;
+      align-items: center;
+      &-text {
+        text-align: center;
+        &-heading {
+          font-family: Poppins;
+          font-style: normal;
+          font-weight: bold;
+          font-size: 24px;
+          line-height: 36px;
+          text-align: center;
+          color: #333333;
+        }
+      }
+    }
+    &-close {
+      position: absolute;
+      top: 0;
+      right: 20px;
+    }
+  }
+
+  .admin-dashboard__menu {
+    margin-top: 10px;
+  }
+}

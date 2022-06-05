@@ -1,0 +1,10 @@
+.set-bank {
+  padding: 0px 20px;
+  &__header {
+    display: flex;
+    gap: 12px;
+  }
+  &__button {
+    margin-top: 45px;
+  }
+}

@@ -1,7 +1,7 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import { withNamespaces } from 'react-i18next';
-import { useNavigate } from 'react-router-dom';
-import { HeadingButton, CustomButton, TaskCard } from 'web/components';
+import { useNavigate, useLocation } from 'react-router-dom';
+import { HeadingButton, CustomButton } from 'web/components';
 import './index.styles.scss';
 
 function CreateOrder({ t }) {
@@ -30,7 +30,12 @@ function CreateOrder({ t }) {
             </div>
           </div>
 
-          <div className="card-locker">
+          <div
+            className="card-locker"
+            onClick={() => {
+              navigate('/CreateOrder/Scan');
+            }}
+          >
             <div className="img-container">
               <img alt="Racquet" src="../img/tasks/racquet.png" />
             </div>

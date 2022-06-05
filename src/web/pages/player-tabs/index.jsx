@@ -14,6 +14,9 @@ import {
   PaymentMethod,
   CardDetails,
   AddCard,
+  ProShop,
+  EditShop,
+  SearchShop,
 } from './sections';
 
 function useQuery() {
@@ -32,6 +35,13 @@ function PlayerTabs({ t, handleSubmit, change }) {
         <div>
           {current === 'drawer' && <Drawer t={t} setCurrent={setCurrent} />}
           {current === 'locker' && <Locker t={t} setCurrent={setCurrent} />}
+          {current === 'shop' && <ProShop t={t} setCurrent={setCurrent} />}
+          {current === 'shop-search' && (
+            <SearchShop t={t} setCurrent={setCurrent} />
+          )}
+          {current === 'edit-shop' && (
+            <EditShop t={t} setCurrent={setCurrent} />
+          )}
           {current === 'profile' && (
             <PlayerProfile t={t} setCurrent={setCurrent} />
           )}
@@ -55,6 +65,7 @@ function PlayerTabs({ t, handleSubmit, change }) {
           )}
           {current === 'addCard' && <AddCard t={t} setCurrent={setCurrent} />}
         </div>
+        {/* <SearchShop t={t} /> */}
       </form>
     </>
   );

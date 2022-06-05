@@ -6,7 +6,7 @@ import './Tabs.styles.scss';
 export const Tabs = ({
   tabs = [
     { title: 'My Locker', icon: '/img/drawer/locker.png' },
-    { title: 'Home Shop', icon: '/img/drawer/shop.png' },
+    { title: 'Pro Shop', icon: '/img/drawer/shop.png' },
     {
       title: 'Orders',
       icon: '/img/drawer/orders.png',
@@ -40,7 +40,12 @@ export const Tabs = ({
             {tab.title !== 'Orders' ? (
               <div className="tabs__tab">
                 <img src={tab.icon} alt={tab.title} />
-                <p className="tabs__tab-text">{tab.title}</p>
+                <p className="tabs__tab-text">
+                  {tab.title} <br />{' '}
+                  <span className="tabs__tab-text-description">
+                    {tab?.description}
+                  </span>
+                </p>
               </div>
             ) : (
               <div className="tabs__tab tabs__tab-order">

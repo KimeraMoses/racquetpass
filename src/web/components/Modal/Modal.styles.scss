@@ -22,6 +22,9 @@
     transform: translate(-50%, -50%);
     z-index: 999;
     padding: 25px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
     &-heading {
       font-family: Poppins;
       font-style: normal;

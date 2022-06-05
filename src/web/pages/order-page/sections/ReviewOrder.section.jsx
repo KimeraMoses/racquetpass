@@ -15,12 +15,7 @@ import { SearchCard } from 'web/components/index';
 // Styles
 import './ReviewOrder.styles.scss';
 
-export function ReviewOrder({ t }) {
-  const [active, setActive] = useState(false);
-
-  const handleClick = () => {
-    setActive((active) => !active);
-  };
+export function ReviewOrder({ t, active, handleClick }) {
   return (
     <>
       <div className="review-order">
@@ -86,6 +81,7 @@ export function ReviewOrder({ t }) {
             className="review-order__buttons-credit"
             handleClick={handleClick}
             active={active}
+            style={{ marginBottom: '40px' }}
           >
             Pay with Credit Card
           </PaymentButton>

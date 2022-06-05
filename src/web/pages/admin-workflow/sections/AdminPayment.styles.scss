@@ -1,0 +1,43 @@
+.payments {
+  padding: 0px 20px;
+  // display: flex;
+  &__header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  &__content {
+    margin-top: 50px;
+    &-heading-txt {
+      font-family: 'Poppins';
+      font-weight: 600;
+      font-size: 12px;
+      line-height: 18px;
+      color: #8e8e8e;
+    }
+    &-setup-card {
+      margin-top: 12px;
+    }
+    &-desc {
+      margin-top: 18px;
+      font-family: 'Poppins';
+      font-weight: 500;
+      font-size: 12px;
+      line-height: 18px;
+      color: #444444;
+    }
+    &-issue-heading {
+      margin-top: 50px;
+      font-family: 'Poppins';
+      font-weight: 600;
+      font-size: 24px;
+      line-height: 36px;
+      color: #333333;
+    }
+    &-cards {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+  }
+}

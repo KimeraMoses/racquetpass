@@ -7,6 +7,7 @@
   "homeLightBtn": "Create a business account",
   "homePP": "Privacy Policy",
   "homeCU": "Contact Us",
+  "homeNewBtnTxt": "Select shop",
 
   "odrHeading": "Scan your racquet",
   "odrHT": "How To",
@@ -14,6 +15,7 @@
   "odrScan": "Scan",
   "odrBack": "Back",
   "odrNext": "Next",
+  "ordShop": "Edit My Pro Shop Info",
 
   "odrAttachQR": "Attach a QR sticker to the racquet that you want strung. Point your camera directly above the sticker to scan it.",
   "odrdetailHeading": "Racquet Details",
@@ -45,7 +47,7 @@
   "odrSubmitBtn": "Submit Form",
 
   "odrStayHeading": "Tell us how to stay in touch",
-  "odrStayDesc": "We’ll use this information to text you updates about the progres of your racquet.",
+  "odrStayDesc": "We’ll use this information to text you updates about the progress of your racquet.",
   "odrFName": "First Name",
   "odrLName": "Last Name",
   "odrPhon": "Phone Number",
@@ -441,6 +443,18 @@
   "paymentCardExpire": "Expires",
   "paymentExpireDate": "08/2026",
   "addCardTitle": "Add Card",
+
+  "adminRequestTitle": "Joe’s Tennis Pro",
+  "adminRequestMail": "joesTennisPro@gmail.com",
+  "adminRequestHeading": "Requests",
+  "adminSetupPayment": "Setup this payment method",
+  "adminPayments": "Payments",
+  "adminRecievePayment": "Recieve Payment",
+  "adminText": "You will recieve money in this account from businesses using RacquetPass.",
+  "adminIssue": "Payment Issues",
+  "adminInfo": "You aren’t recieving payments from this pro shop.",
+  "adminBankHeading": "Setup RacquetPass Payment",
+  "adminAddBank": "Add Bank Account",
 
   "orderQRText": "Attach QR sticker",
   "orderQRtxt": "Attach a QR sticker to the racquet that you want strung, and then scan it.",

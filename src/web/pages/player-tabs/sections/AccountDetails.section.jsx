@@ -5,8 +5,6 @@ const playerDetails = [
   { title: 'Name', value: 'Naomi Osaki' },
   { title: 'Email Address', value: 'naomi.osaki@gmail.com' },
   { title: 'Phone', value: 'Unspecified' },
-  { title: 'Playing Style', value: 'Style 1' },
-  { title: 'Pro Playing Style Twin', value: 'Unspecified' },
 ];
 
 export const AccountDetails = ({ t, setCurrent }) => {
@@ -34,7 +32,9 @@ export const AccountDetails = ({ t, setCurrent }) => {
                 <h4 className="account-details-pt__details-detail-heading">
                   {title}
                 </h4>
-                <p className="account-details-pt__details-detail-text">{value}</p>
+                <p className="account-details-pt__details-detail-text">
+                  {value}
+                </p>
               </div>
             );
           })}
