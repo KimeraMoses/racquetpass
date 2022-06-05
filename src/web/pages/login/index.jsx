@@ -12,6 +12,7 @@ import {
   SubmitButton,
 } from 'web/components';
 import './Login.styles.scss';
+import { Description } from 'web/components/atoms/Description.atom';
 
 const required = (value) => (value ? undefined : 'Email is required');
 const email = (value) => {
@@ -40,7 +41,7 @@ function Login({ t, handleSubmit }) {
                   navigate('/');
                 }}
               />
-              <Heading>{t('homeSignin')}</Heading>
+              <Heading>{t('racquetLogIn')}</Heading>
             </div>
             <div className="signin__button">
               <button
@@ -50,7 +51,7 @@ function Login({ t, handleSubmit }) {
                   navigate('/create-account');
                 }}
               >
-                {t('odrCreateBtn')}
+                {t('racquetLogInBtn')}
               </button>
             </div>
           </div>
@@ -92,9 +93,13 @@ function Login({ t, handleSubmit }) {
             </Link>
           </div>
         </div>
-        <div className="sign__placeholder"></div>
-        <div>
-          <div className="signin__option">
+        <div className="signin__account-text">
+          <Description>{t('alreadyHaveAccount')}</Description>
+          <Link to="/signup">&nbsp;{t('signUpNow')}</Link>
+        </div>
+        {/* <div className="sign__placeholder"></div> */}
+        {/* <div> */}
+        {/* <div className="signin__option">
             <div className="signin__option-line"></div>
             <div>
               <SubHeading customClass="signin__option-txt">
@@ -102,13 +107,13 @@ function Login({ t, handleSubmit }) {
               </SubHeading>
             </div>
             <div className="signin__option-line"></div>
-          </div>
-          <div className="signin__buttons">
+          </div> */}
+        {/* <div className="signin__buttons">
             <AccountButton facebook />
             <AccountButton google />
             <AccountButton apple />
-          </div>
-        </div>
+          </div> */}
+        {/* </div> */}
       </form>
     </>
   );

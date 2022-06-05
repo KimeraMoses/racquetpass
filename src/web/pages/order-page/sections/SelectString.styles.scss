@@ -1,4 +1,4 @@
-.select-string {
+.select-string-odr {
   &__heading {
     display: flex;
     align-items: center;
@@ -71,5 +71,26 @@
     display: flex;
     flex-direction: column;
     gap: 20px;
+    &-pic-box {
+      h1.sub-heading {
+        font-family: 'Poppins';
+        font-style: normal;
+        font-weight: 600;
+        font-size: 12px;
+        line-height: 18px;
+        /* identical to box height */
+
+        color: #969696;
+      }
+      p.description {
+        font-family: 'Poppins';
+        font-style: normal;
+        font-weight: 500;
+        font-size: 12px;
+        line-height: 18px;
+
+        color: #545454;
+      }
+    }
   }
 }

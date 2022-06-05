@@ -15,6 +15,7 @@ import VerifyPhone from './business-account/verify-phone';
 import VerifyBusiness from './business-account/verify-business';
 import BusinessDetails from './business-account/business-details';
 import ProfileInfo from './business-account/profile-info';
+import ThankYou from './business-account/Thank-you/';
 import ViewServiceOrder from './view-service-order';
 import OrderDetails from './view-service-order/details';
 import OrderScanned from './view-service-order/scanned';
@@ -56,6 +57,7 @@ function Routers() {
             path="/BusinessAccount/CreatePassword"
             element={<CreatePassword />}
           />
+          <Route path="/BusinessAccount/Thanks" element={<ThankYou />} />
           <Route
             path="/BusinessAccount/VerifyPhone"
             element={<VerifyPhone />}

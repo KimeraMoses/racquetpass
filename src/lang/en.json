@@ -204,10 +204,10 @@
   "businessAccountPasswordAverage": "Average",
   "businessAccountPasswordStrong": "Strong",
   "businessAccountPasswordRecommendation": "Recommendations",
-  "businessAccountPasswordRecommendationOne": "At least eight characters long",
-  "businessAccountPasswordRecommendationTwo": "One lowercase letter",
-  "businessAccountPasswordRecommendationThree": "One uppercase letter",
-  "businessAccountPasswordRecommendationFour": "One number",
+  "businessAccountPasswordRecommendationOne": "At least 8 characters long",
+  "businessAccountPasswordRecommendationTwo": "1 lowercase letter",
+  "businessAccountPasswordRecommendationThree": "1 uppercase letter",
+  "businessAccountPasswordRecommendationFour": "1 number",
   "businessAccountPasswordRecommendationFive": "No text from email/name",
   "businessAccountPasswordCreateBtn": "Create Account",
 
@@ -455,5 +455,26 @@
 
   "scanSuccessHeading": "Successfully scanned your racquet!",
   "scanSuccessRacDesc": "Unconfigured Racquet",
-  "selectStringDesc": "Select the strings you want your racquet restrung with."
+  "selectStringDesc": "Select the strings you want your racquet restrung with.",
+  "scanSuccessTennis": "TENNIS RACQUET",
+  "scanSuccessRacName": "Wilson Hyper Prostaff 6.1",
+  "scanSuccessMains": "Last strung with (mains)",
+  "scanSuccessMainsTxt": "Luxilon Alu Rough 1.6 G",
+  "scanSuccessCrosses": "Last strung with (crosses)",
+  "scanSuccessCrossesTxt": "Solinco Hyper-G",
+  "scanSuccessOwner": "Racquet Owner",
+  "scanSuccessOwnerName": "Bryan Song",
+  "selectStringContact": "We will use this number to text you when we finish stringing your racquet.",
+
+  "reviewOdrName": "Name",
+
+  "businessprivacy": "By clicking on continue, you agree to our",
+  "businessaccountlogin": "Have an account?",
+
+  "racquetLogIn": "Log In",
+  "racquetLogInBtn": "Business Sign Up",
+  "alreadyHaveAccount": "Don’t have an account?",
+  "signUpNow": "Sign up now.",
+
+  "inventoryItemBtn": "Add Item"
 }

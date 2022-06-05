@@ -1,14 +1,14 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Field } from 'redux-form';
 import BarcodeScannerComponent from 'react-qr-barcode-scanner';
 import { useNavigate, Link } from 'react-router-dom';
-// Custom Components
 import {
-  Heading,
-  SubHeading,
-  Description,
-  HeadingButton,
-} from 'web/components';
+  disableBodyScroll,
+  enableBodyScroll,
+  clearAllBodyScrollLocks,
+} from 'body-scroll-lock';
+// Custom Components
+import { Heading, Description, Modal } from 'web/components';
 
 // Styles
 import './ScanSection.styles.scss';
@@ -24,6 +24,13 @@ export function ScanSection({
   const [qrCode, setQrCode] = useState('');
   const [qrScanner, setQrScanner] = useState(false);
   const [raquetFound, setRacquetFound] = useState(true);
+  const [showModal, setShowModal] = useState(false);
+
+  const handleShow = () => {
+    setShowModal((prev) => {
+      return !prev;
+    });
+  };
   useEffect(() => {
     if (qrCode) {
       change('raquet-details-from-qr', qrCode);
@@ -32,7 +39,6 @@ export function ScanSection({
     }
   }, [qrCode, change, raquetFound, scanForward]);
 
-  const navigate = useNavigate();
   return (
     <>
       <div className="scan-section">
@@ -46,7 +52,17 @@ export function ScanSection({
           </Description>
         </div>
         <div className="scan-section__link">
-          <Link to="#" className="scan-section__link-txt">
+          <Modal
+            showModal={showModal}
+            handleShow={handleShow}
+            heading="Don’t have a QR sticker?"
+            text="You can get QR stickers at any pro shop or club that uses RacquetPass. You can attach the sticker anywhere on your racquet - a good place is on the inside of the throat."
+          />
+          <Link
+            onClick={() => setShowModal(true)}
+            to="#"
+            className="scan-section__link-txt"
+          >
             {t('scanQRLinkTxt')}
           </Link>
         </div>
@@ -72,7 +88,7 @@ export function ScanSection({
           ) : (
             <>
               <div></div>
-              <img src="img/orderpage/card.png" alt="scan image" />
+              <img src="img/orderpage/card.png" alt="scan" />
               <div className="scan-section__image-container-button">
                 <button
                   className="scan-section__image-container-button-btn"

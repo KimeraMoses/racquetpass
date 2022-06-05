@@ -9,13 +9,15 @@ import {
   SummaryCard,
   PaymentButton,
   CustomInput,
+  SubHeading,
 } from 'web/components';
 import { SearchCard } from 'web/components/index';
 
 // Styles
 import './ReviewOrder.styles.scss';
+import { BackButton } from 'web/components/Buttons/BackButton.component';
 
-export function ReviewOrder({ t }) {
+export function ReviewOrder({ t, backward }) {
   const [active, setActive] = useState(false);
 
   const handleClick = () => {
@@ -23,25 +25,43 @@ export function ReviewOrder({ t }) {
   };
   return (
     <>
-      <div className="review-order">
-        <div className="review-order__heading">
-          <Heading customClass="review-order__heading-text">
+      <div className="review-order-odr">
+        <div className="review-order-odr__heading">
+          <BackButton onClick={backward} />
+          <Heading customClass="review-order-odr__heading-text">
             {t('odrReviewHeading')}
           </Heading>
         </div>
-        <div className="review-order__text-container">
-          <Description customClass="review-order__text-container-text">
+        <div className="review-order-odr__text-container">
+          <Description customClass="review-order-odr__text-container-text">
             {t('odrReviewDesc')}
           </Description>
         </div>
-        <div className="review-order__shop">
-          <div className="review-order__shop-heading">
-            <Heading customClass="review-order__shop-heading-text">
+        <div className="review-order-odr__shop-heading">
+          <Heading customClass="review-order-odr__shop-heading-text">
+            {t('ShopContactHeading')}
+          </Heading>
+          <HeadingButton text="Edit" />
+        </div>
+        <div className="review-order-odr__contact">
+          <div className="review-order-odr__contact-details">
+            <SubHeading>{t('reviewOdrName')}</SubHeading>
+            <Description>{t('scanSuccessOwnerName')}</Description>
+          </div>
+          <div className="review-order-odr__contact-details">
+            <SubHeading>{t('taskOpenedPlayerPhoneHeading')}</SubHeading>
+            <Description>{t('taskOpenedPlayerPhone')}</Description>
+          </div>
+        </div>
+
+        <div className="review-order-odr__shop">
+          <div className="review-order-odr__shop-heading">
+            <Heading customClass="review-order-odr__shop-heading-text">
               {t('odrReviewShop')}
             </Heading>
             <HeadingButton text="Change Shop" />
           </div>
-          <div className="review-order__shop-card">
+          <div className="review-order-odr__shop-card">
             <SearchCard
               shop={{
                 name: 'Jimmy’s Shop',
@@ -50,52 +70,52 @@ export function ReviewOrder({ t }) {
             />
           </div>
         </div>
-        <div className="review-order__raquet">
-          <div className="review-order__raquet-heading">
-            <Heading customClass="review-order__shop-heading-text">
+        <div className="review-order-odr__raquet">
+          <div className="review-order-odr__raquet-heading">
+            <Heading customClass="review-order-odr__shop-heading-text">
               {t('odrRacquet')}
             </Heading>
             <HeadingButton text="Change Racquet" />
           </div>
-          <div className="review-order__shop-card">
+          <div className="review-order-odr__shop-card">
             <SearchCard
-              raquet={{
-                name: 'No Name',
-                model: 'Model not specified',
-                qrConnected: true,
+              shop={{
+                img: '/img/orders/racquet-img.png',
+                name: 'Wilson Hyper Prostaff 6.1',
+                address: 'Tennis Racquet',
               }}
             />
           </div>
         </div>
-        <div className="review-order__summary">
-          <div className="review-order__summary-heading">
-            <Heading customClass="review-order__summary-heading-text">
+        <div className="review-order-odr__summary">
+          <div className="review-order-odr__summary-heading">
+            <Heading customClass="review-order-odr__summary-heading-text">
               {t('odrSummary')}
             </Heading>
             <HeadingButton text="Change Strings" />
           </div>
-          <div className="review-order__summary-card">
+          <div className="review-order-odr__summary-card">
             <SummaryCard />
           </div>
         </div>
-        <div className="review-order__buttons">
-          <PaymentButton isDark className="review-order__buttons-apple">
+        <div className="review-order-odr__buttons">
+          {/* <PaymentButton isDark className="review-order-odr__buttons-apple">
             Pay with &nbsp; <img src="/img/button/apple.png" alt="apple-pay" />
-          </PaymentButton>
+          </PaymentButton> */}
           <PaymentButton
-            className="review-order__buttons-credit"
+            className="review-order-odr__buttons-credit"
             handleClick={handleClick}
             active={active}
           >
-            Pay with Credit Card
+            Pay with Stripe
           </PaymentButton>
         </div>
         {active ? (
           <>
-            <div className="review-order__credit-cards">
+            <div className="review-order-odr__credit-cards">
               <img src="/img/orderpage/cards.png" alt="list-of-cards" />
             </div>
-            <div className="review-order__credit-card-input">
+            <div className="review-order-odr__credit-card-input">
               <Field
                 name="card-number"
                 label="Card Number"
@@ -104,7 +124,7 @@ export function ReviewOrder({ t }) {
                 component={CustomInput}
               />
             </div>
-            <div className="review-order__credit-card-input">
+            <div className="review-order-odr__credit-card-input">
               <Field
                 name="expiration-date"
                 label="Expiration Date"
@@ -113,7 +133,7 @@ export function ReviewOrder({ t }) {
                 component={CustomInput}
               />
             </div>
-            <div className="review-order__credit-card-input">
+            <div className="review-order-odr__credit-card-input">
               <Field
                 name="security-code"
                 label="Security Code"
@@ -122,7 +142,7 @@ export function ReviewOrder({ t }) {
                 component={CustomInput}
               />
             </div>
-            <div className="review-order__credit-card-input">
+            <div className="review-order-odr__credit-card-input">
               <Field
                 name="zip-code"
                 label="ZIP code"
@@ -130,17 +150,17 @@ export function ReviewOrder({ t }) {
                 component={CustomInput}
               />
             </div>
-            <div className="review-order__total-card">
-              <div className="review-order__total-card-text">
+            <div className="review-order-odr__total-card">
+              <div className="review-order-odr__total-card-text">
                 Replace Strings
               </div>
-              <div className="review-order__total-card-price">$62.47</div>
+              <div className="review-order-odr__total-card-price">$62.47</div>
             </div>
           </>
         ) : (
           <></>
         )}
-        {/* <div className="review-order__form-container">
+        {/* <div className="review-order-odr__form-container">
           <Field
             name="brand"
             label="Brand (Optional)"

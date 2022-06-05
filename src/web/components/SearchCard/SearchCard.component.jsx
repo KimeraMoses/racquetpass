@@ -44,7 +44,11 @@ export function SearchCard({
             {shop ? (
               <>
                 <div className="search__card-container-content-img">
-                  <img src="/img/orderpage/shop.png" alt="shop" />
+                  {shop.img ? (
+                    <img src={shop.img} alt="pic" />
+                  ) : (
+                    <img src="/img/orderpage/shop.png" alt="shop" />
+                  )}
                 </div>
                 <div className="search__card-container-content-txt">
                   <SubHeading customClass="search__card-container-content-heading">

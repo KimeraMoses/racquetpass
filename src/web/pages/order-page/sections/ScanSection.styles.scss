@@ -5,28 +5,26 @@
     gap: 16px;
   }
   &__text-container {
-    margin-top: 40px;
+    margin-top: 20px;
     &__heading {
     }
     &-text {
-      margin-top: 18px;
+      font-size: 18px;
     }
   }
   &__link {
-    margin-top: 16px;
+    margin-top: 30px;
     cursor: pointer;
     &-txt {
       font-family: Poppins;
       text-decoration: none;
-      // font-style: normal;
-      // font-weight: normal;
       font-size: 14px;
       line-height: 21px;
       color: #304ffe;
     }
   }
   &__image-container {
-    margin-top: 40px;
+    margin-top: 32px;
     margin-bottom: 20px;
     // position: relative;
     display: flex;
@@ -70,6 +68,6 @@
   }
   &__description {
     margin-top: 20px;
-    margin-bottom: 20px;
+    margin-bottom: 120px;
   }
 }

@@ -14,37 +14,37 @@ const search = [
   {
     name: 'Brand Name',
     description: 'Brand Description',
-    size: 'Size Description',
+    // size: 'Size Description',
     price: 'price',
   },
   {
     name: 'Brand Name',
     description: 'Brand Description',
-    size: 'Size Description',
+    // size: 'Size Description',
     price: 'price',
   },
   {
     name: 'Brand Name',
     description: 'Brand Description',
-    size: 'Size Description',
+    // size: 'Size Description',
     price: 'price',
   },
   {
     name: 'Brand Name',
     description: 'Brand Description',
-    size: 'Size Description',
+    // size: 'Size Description',
     price: 'price',
   },
   {
     name: 'Brand Name',
     description: 'Brand Description',
-    size: 'Size Description',
+    // size: 'Size Description',
     price: 'price',
   },
   {
     name: 'Brand Name',
     description: 'Brand Description',
-    size: 'Size Description',
+    // size: 'Size Description',
     price: 'price',
   },
 ];
@@ -87,13 +87,13 @@ export function SearchInventory({ t, setCurrentScreen }) {
           </div>
         </div>
         <div className="search-inventory__buttons">
-          <StepButton outlined>{t('profileButtonCSV')}</StepButton>
+          {/* <StepButton outlined>{t('profileButtonCSV')}</StepButton> */}
           <StepButton
             onClick={() => {
               setCurrentScreen('add');
             }}
           >
-            {t('profileButtonAddNew')}
+            {t('inventoryItemBtn')}
           </StepButton>
         </div>
       </div>

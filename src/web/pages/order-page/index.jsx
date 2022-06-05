@@ -23,12 +23,12 @@ import {
 import './order.styles.scss';
 
 let OrderPage = ({ t, handleSubmit, change }) => {
-  const [step, setStep] = useState(1);
+  const [step, setStep] = useState(0);
   const [steps, setSteps] = useState({
     active: '',
     content: ['QR', 'Strings', 'Contact', 'Review'],
   });
-  const [scan, setScan] = useState({ current: 'found' });
+  const [scan, setScan] = useState({ current: 'initial' });
   const [shop, setShop] = useState({ current: 'search' });
   const [strings, setStrings] = useState({ current: 'initial' });
   const [mainCross, setMainCross] = useState({ current: 'initial' });
@@ -37,8 +37,6 @@ let OrderPage = ({ t, handleSubmit, change }) => {
   const [done, setDone] = useState(false);
 
   const navigate = useNavigate();
-
-  console.log(steps);
 
   useEffect(() => {
     switch (step) {
@@ -272,19 +270,12 @@ let OrderPage = ({ t, handleSubmit, change }) => {
           shop.current === 'find' ||
           shop.current === 'thanks' ||
           mainCross.current === 'search' ||
+          scan.current === 'initial' ||
           step === 6 ||
-          step === 1 ||
           step === 0 ? (
             <></>
           ) : (
             <div className="order-page__button-container">
-              <StepButton
-                onClick={step === 5 || step === 6 ? () => setStep(4) : backward}
-                outlined
-                type="button"
-              >
-                {t('odrBack')}
-              </StepButton>{' '}
               <StepButton
                 onClick={forward}
                 disabled={scan.current === 'initial' || step === 0}

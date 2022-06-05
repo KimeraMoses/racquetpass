@@ -7,6 +7,7 @@ import {
   HeadingButton,
   CustomInput,
 } from 'web/components';
+import { BackButton } from 'web/components/Buttons/BackButton.component';
 
 // Styles
 import './Contact.styles.scss';
@@ -14,19 +15,20 @@ import './Contact.styles.scss';
 export function Contact({ t, backward }) {
   return (
     <>
-      <div className="contact-section">
-        <div className="contact-section__heading">
-          <Heading customClass="contact-section__heading-text">
+      <div className="contact-section-odr">
+        <div className="contact-section-odr__heading">
+          <BackButton onClick={backward} />
+          <Heading customClass="contact-section-odr__heading-text">
             {t('odrStayHeading')}
           </Heading>
-          <HeadingButton close onClick={backward} />
+          {/* <HeadingButton close onClick={backward} /> */}
         </div>
-        <div className="contact-section__text-container">
-          <Description customClass="contact-section__text-container-text">
+        <div className="contact-section-odr__text-container">
+          <Description customClass="contact-section-odr__text-container-text">
             {t('odrStayDesc')}
           </Description>
         </div>
-        <div className="contact-section__form-container">
+        <div className="contact-section-odr__form-container">
           <Field
             name="first-name"
             label="First Name"
@@ -45,6 +47,7 @@ export function Contact({ t, backward }) {
             type="text"
             component={CustomInput}
           />
+          <Description>{t('selectStringContact')}</Description>
         </div>
       </div>
     </>

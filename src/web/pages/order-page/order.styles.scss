@@ -1,18 +1,16 @@
 .order-page {
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
   padding: 0px 20px;
   padding-top: 35px;
   &__form {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    min-height: calc(100vh - 175px);
   }
   &__button-container {
     display: grid;
-    grid-template-columns: 1fr 2fr;
+    grid-template-columns: 1fr;
     gap: 12px;
     margin-bottom: 50px;
     margin-top: 40px;
@@ -30,6 +28,5 @@
 
 .order-page.order-page-zero {
   .order-page__form {
-    min-height: calc(100vh - 35px);
   }
 }
