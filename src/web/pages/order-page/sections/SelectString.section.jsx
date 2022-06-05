@@ -12,6 +12,7 @@ import {
   CustomSwitch,
   CustomInput,
   Modal,
+  BackButton,
 } from 'web/components';
 
 // Styles
@@ -32,14 +33,12 @@ export function SelectString({ t, backward, setStringsCurrent, setStep }) {
       <div className="select-string">
         <Modal showModal={modal} handleShow={handleShow} />
         <div className="select-string__heading">
-          <Heading customClass="select-string__heading-text">
-            {t('odrSelect')}
-          </Heading>
-          {/* <HeadingButton close onClick={backward} /> */}
+          <BackButton onClick={backward} />
+          <Heading>{t('odrSelect')}</Heading>
         </div>
         <div className="select-string__text-container">
           <Description customClass="select-string__text-container-text">
-            {t('orderSelectStringTxt')}
+            {t('selectStringDesc')}
           </Description>
         </div>
         <div className="select-string__main-info">

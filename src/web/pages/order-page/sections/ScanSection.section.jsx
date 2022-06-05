@@ -12,8 +12,15 @@ import {
 
 // Styles
 import './ScanSection.styles.scss';
+import { BackButton } from 'web/components/Buttons/BackButton.component';
 
-export function ScanSection({ t, scanForward, change }) {
+export function ScanSection({
+  t,
+  scanForward,
+  change,
+  setCurrentScreen,
+  backward,
+}) {
   const [qrCode, setQrCode] = useState('');
   const [qrScanner, setQrScanner] = useState(false);
   const [raquetFound, setRacquetFound] = useState(true);
@@ -30,16 +37,17 @@ export function ScanSection({ t, scanForward, change }) {
     <>
       <div className="scan-section">
         <div className="scan-section__heading">
-          <Heading>{t('orderQRText')}</Heading>
+          <BackButton onClick={backward} />
+          <Heading>{t('scanQRHeading')}</Heading>
         </div>
         <div className="scan-section__text-container">
           <Description customClass="scan-section__text-container-text">
-            {t('orderQRtxt')}
+            {t('scanQRText')}
           </Description>
         </div>
         <div className="scan-section__link">
           <Link to="#" className="scan-section__link-txt">
-            {t('orderLinktxt')}
+            {t('scanQRLinkTxt')}
           </Link>
         </div>
         <div className="scan-section__image-container">
@@ -77,6 +85,9 @@ export function ScanSection({ t, scanForward, change }) {
               </div>
             </>
           )}
+        </div>
+        <div className="scan-section__description">
+          <Description>{t('scanQRDesc')}</Description>
         </div>
       </div>
     </>

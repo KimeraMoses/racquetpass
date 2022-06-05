@@ -1,5 +1,11 @@
 // Custom Components
-import { Heading, SubHeading, Description } from 'web/components';
+import {
+  Heading,
+  SubHeading,
+  Description,
+  BackButton,
+  StepButton,
+} from 'web/components';
 
 // Styles
 import './ScanSuccess.styles.scss';
@@ -9,8 +15,10 @@ export function ScanSuccess({ t, backward }) {
     <>
       <div className="scan-details">
         <div>
+          {/* <BackButton /> */}
           <div className="scan-details__heading">
-            <Heading>{t('orderQRText')}</Heading>
+            <BackButton />
+            <Heading>{t('scanSuccessHeading')}</Heading>
           </div>
           <div className="scan-details__text-container">
             <Description customClass="scan-details__text-container-text">
@@ -18,44 +26,44 @@ export function ScanSuccess({ t, backward }) {
             </Description>
           </div>
           <div className="scan-details__card-continer">
-            <div className="scan-details__card-continer-divider"></div>
+            {/* <div className="scan-details__card-continer-divider"></div> */}
             <div className="scan-details__card-continer-content">
-              <SubHeading customClass="scan-details__card-continer-content-heading">
-                {t('odrdetailHeading')}
-              </SubHeading>
+              <div className="scan-details__card-continer-content-racquet">
+                <div className="scan-details__card-continer-content-racquet-inner">
+                  <img
+                    src="img/homepage/racquet.png"
+                    alt="racquet"
+                    className="scan-details__card-continer-content-racquet-img"
+                  />
+                  <div className="">
+                    <Description>{t('scanSuccessRacDesc')}</Description>
+                  </div>
+                </div>
+              </div>
               <div className="scan-details__card-continer-content-inner-card">
-                <SubHeading customClass="scan-details__card-continer-content-inner-card-heading">
-                  {t('odrBrnd')}
-                </SubHeading>
-                <SubHeading customClass="scan-details__card-continer-content-inner-card-text">
-                  {t('odrBrndDesc')}
-                </SubHeading>
-                <SubHeading customClass="scan-details__card-continer-content-inner-card-heading">
-                  {t('ordModel')}
-                </SubHeading>
-                <SubHeading customClass="scan-details__card-continer-content-inner-card-text">
-                  {t('ordModelDesc')}
-                </SubHeading>
-                <SubHeading customClass="scan-details__card-continer-content-inner-card-heading">
-                  {t('odrString')}
-                </SubHeading>
-                <SubHeading customClass="scan-details__card-continer-content-inner-card-text">
-                  {t('odrStirngDesc')}
-                </SubHeading>
+                <div className="scan-details__card-continer-content-inner-card-txt">
+                  <Description>
+                    It looks like this is the first time this racquet has been
+                    scanned.
+                  </Description>
+                </div>
               </div>
               <div>
-                <Description customClass="scan-details__card-continer-content-success">
+                {/* <Description customClass="scan-details__card-continer-content-success">
                   {t('odrsuccess')}
-                </Description>
-                <button
-                  className="scan-details__card-continer-content-rescan"
-                  onClick={backward}
-                >
-                  {t('ordRescan')}
-                </button>
+                </Description> */}
               </div>
             </div>
           </div>
+          <button
+            className="scan-details__card-continer-content-rescan"
+            onClick={backward}
+          >
+            {t('ordRescan')}
+          </button>
+        </div>
+        <div className="scan-details__btn">
+          <StepButton>Next</StepButton>
         </div>
       </div>
     </>

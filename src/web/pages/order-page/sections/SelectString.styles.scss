@@ -2,11 +2,7 @@
   &__heading {
     display: flex;
     align-items: center;
-    justify-content: space-between;
-
-    &-text {
-      max-width: 300px;
-    }
+    gap: 16px;
   }
   &__text-container {
     margin-top: 20px;

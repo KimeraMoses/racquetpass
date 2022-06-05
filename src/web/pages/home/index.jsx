@@ -1,6 +1,6 @@
 import { Link, useNavigate } from 'react-router-dom';
 import { withNamespaces } from 'react-i18next';
-import { Button, CustomInput } from 'web/components';
+import { Button, CustomInput, Description } from 'web/components';
 import './home.styles.scss';
 
 function Home({ t }) {

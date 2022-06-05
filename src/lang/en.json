@@ -446,5 +446,14 @@
   "orderQRtxt": "Attach a QR sticker to the racquet that you want strung, and then scan it.",
   "orderLinktxt": "Where do I attach the sticker?",
   "orderSelectStringTxt": "Select the strings you want to restring your racquet with.",
-  "orderRecquetDesc": "This helps the shop identify and find your racquet."
+  "orderRecquetDesc": "This helps the shop identify and find your racquet.",
+
+  "scanQRHeading": "Choose your racquet",
+  "scanQRText": "Choose your racquet by scanning its QR sticker.",
+  "scanQRLinkTxt": "Don’t have a QR sticker?",
+  "scanQRDesc": "To scan a QR code, move your camera so the QR code is in the frame. The QR code will be detected automatically.",
+
+  "scanSuccessHeading": "Successfully scanned your racquet!",
+  "scanSuccessRacDesc": "Unconfigured Racquet",
+  "selectStringDesc": "Select the strings you want your racquet restrung with."
 }

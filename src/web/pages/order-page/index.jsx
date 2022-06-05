@@ -23,13 +23,13 @@ import {
 import './order.styles.scss';
 
 let OrderPage = ({ t, handleSubmit, change }) => {
-  const [step, setStep] = useState(0);
+  const [step, setStep] = useState(1);
   const [steps, setSteps] = useState({
     active: '',
     content: ['QR', 'Strings', 'Contact', 'Review'],
   });
-  const [scan, setScan] = useState({ current: 'initial' });
-  const [shop, setShop] = useState({ current: 'initial' });
+  const [scan, setScan] = useState({ current: 'found' });
+  const [shop, setShop] = useState({ current: 'search' });
   const [strings, setStrings] = useState({ current: 'initial' });
   const [mainCross, setMainCross] = useState({ current: 'initial' });
   const [main, setMain] = useState(false);
@@ -124,7 +124,14 @@ let OrderPage = ({ t, handleSubmit, change }) => {
   const getCurrentScanScreen = () => {
     switch (scan.current) {
       case 'initial':
-        return <ScanSection t={t} change={change} scanForward={scanForward} />;
+        return (
+          <ScanSection
+            t={t}
+            change={change}
+            scanForward={scanForward}
+            backward={backward}
+          />
+        );
       case 'found':
         return <ScanSuccess t={t} backward={backward} setStep={setStep} />;
       case 'notFound':
@@ -266,6 +273,7 @@ let OrderPage = ({ t, handleSubmit, change }) => {
           shop.current === 'thanks' ||
           mainCross.current === 'search' ||
           step === 6 ||
+          step === 1 ||
           step === 0 ? (
             <></>
           ) : (
