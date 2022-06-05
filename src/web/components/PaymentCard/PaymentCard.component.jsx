@@ -38,7 +38,8 @@ export const PaymentCard = ({ cardType, title, ending, lastUsed, onClick }) => {
       </div>
       <div className="payment-card__right">
         {lastUsed ? (
-          <div className="payment-card__right-last">{lastUsed}</div>
+          // <div className="payment-card__right-last">{lastUsed}</div>
+          <></>
         ) : (
           <></>
         )}

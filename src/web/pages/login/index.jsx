@@ -1,6 +1,6 @@
-import { useState } from 'react';
+import { useState, useMemo } from 'react';
 import { reduxForm, Field } from 'redux-form';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import { withNamespaces } from 'react-i18next';
 import { Link } from 'react-router-dom';
 import {
@@ -27,7 +27,15 @@ const email = (value) => {
   }
 };
 
+function useQuery() {
+  const { search } = useLocation();
+  return useMemo(() => new URLSearchParams(search), [search]);
+}
+
 function Login({ t, handleSubmit }) {
+  const query = useQuery();
+  const missingQR = query.get('missingQR');
+
   const navigate = useNavigate();
   const [passwordFieldType, setPasswordFieldType] = useState('password');
   return (
@@ -83,7 +91,13 @@ function Login({ t, handleSubmit }) {
           <div className="signin__form-buttons">
             <SubmitButton
               type="submit"
-              onClick={() => navigate('/player-tabs')}
+              onClick={() => {
+                if (missingQR) {
+                  navigate('/CreateOrder/Locker');
+                } else {
+                  navigate('/player-tabs');
+                }
+              }}
               className="signin__form-buttons-btn"
             >
               {t('homeSignin')}

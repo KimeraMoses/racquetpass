@@ -43,8 +43,8 @@ let CreateAccount = ({ t, handleSubmit, change }) => {
         return (
           <AccountDetails
             t={t}
-            back={prevStep}
             forward={nextStep}
+            back={prevStep}
             moveToLogin={moveToLogin}
           />
         );

@@ -104,7 +104,7 @@ export function SelectString({ t, backward, setStringsCurrent, setStep }) {
           <Field
             name="brand"
             label="Brand"
-            placeholder="Selec a racquet brand"
+            placeholder="Select a racquet brand"
             component={CustomSelect}
             options={[
               { label: 'Babolat', value: 'Babolat' },

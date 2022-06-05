@@ -1,0 +1,27 @@
+.pt-search-shop {
+  padding: 0px 20px;
+  &__header {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    justify-content: space-between;
+    &-link {
+      padding-top: 10px;
+      cursor: pointer;
+      &-txt {
+        text-decoration: none;
+        font-family: 'Poppins';
+        font-weight: 400;
+        font-size: 14px;
+        line-height: 21px;
+        color: #4a65fe;
+      }
+    }
+  }
+  &__content {
+    margin-top: 42px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+}

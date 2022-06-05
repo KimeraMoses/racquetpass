@@ -109,7 +109,13 @@ function ConfigureRacquet({ t, handleSubmit, change }) {
         {step === 3 || step === 4 ? (
           <div className="configure-racquet__button-container">
             <StepButton
-              onClick={() => setStep((step) => step - 1)}
+              onClick={() => {
+                if (step === 3) {
+                  setStep(1);
+                } else {
+                  setStep((step) => step - 1);
+                }
+              }}
               outlined
               type="button"
             >

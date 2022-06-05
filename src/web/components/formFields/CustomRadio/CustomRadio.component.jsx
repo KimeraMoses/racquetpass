@@ -2,7 +2,7 @@ import { useState } from 'react';
 import './CustomRadio.styles.scss';
 
 export const CustomRadio = ({ name, options, label }) => {
-  const [selected, setSelected] = useState('');
+  const [selected, setSelected] = useState(options[0].value);
   return (
     <div className="custom-radio__container">
       <div className="custom-radio__container-label">
@@ -25,7 +25,16 @@ export const CustomRadio = ({ name, options, label }) => {
               }
             }}
           >
-            {option.label}
+            {option.label.map(({ title, text }) => (
+              <>
+                <div className="custom-radio__container-inner-option-active-title">
+                  {title}
+                </div>
+                <div className="custom-radio__container-inner-option-txt">
+                  {text}
+                </div>
+              </>
+            ))}
           </div>
         ))}
       </div>

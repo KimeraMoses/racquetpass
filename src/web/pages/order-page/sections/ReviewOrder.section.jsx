@@ -17,17 +17,12 @@ import { SearchCard } from 'web/components/index';
 import './ReviewOrder.styles.scss';
 import { BackButton } from 'web/components/Buttons/BackButton.component';
 
-export function ReviewOrder({ t, backward }) {
-  const [active, setActive] = useState(false);
-
-  const handleClick = () => {
-    setActive((active) => !active);
-  };
+export function ReviewOrder({ t, active, handleClick }) {
   return (
     <>
       <div className="review-order-odr">
         <div className="review-order-odr__heading">
-          <BackButton onClick={backward} />
+          <BackButton onClick={handleClick} />
           <Heading customClass="review-order-odr__heading-text">
             {t('odrReviewHeading')}
           </Heading>
@@ -106,6 +101,7 @@ export function ReviewOrder({ t, backward }) {
             className="review-order-odr__buttons-credit"
             handleClick={handleClick}
             active={active}
+            style={{ marginBottom: '40px' }}
           >
             Pay with Stripe
           </PaymentButton>

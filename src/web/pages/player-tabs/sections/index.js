@@ -8,3 +8,6 @@ export { OrderDetails } from './OrderDetails.section';
 export { PaymentMethod } from './PaymentMethod.section';
 export { CardDetails } from './CardDetails.section';
 export { AddCard } from './AddCard.section';
+export { ProShop } from './ProShop.section';
+export { EditShop } from './EditShop.section';
+export { SearchShop } from './SearchShop.section';

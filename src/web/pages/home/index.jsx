@@ -33,19 +33,38 @@ function Home({ t }) {
             <h1 className="banner-container__heading">{t('homeHeading')}</h1>
           </div>
           <div className="banner-button-container">
-            {/* <CustomInput
-              // icon="/img/orderpage/search.png"
-              label="Search By Name, City Or State"
+            <CustomInput
+              label="Find your Pro Shop by Name, City Or State"
               noLabel
               onClick={() => {
-                // setShopCurrent('search');
                 navigate('/order');
               }}
               style={{ background: 'white' }}
-            /> */}
+            />
             <Button isDark onClick={() => navigate('/order')}>
-              {t('homeLightBtn')}
+              {t('homeNewBtnTxt')}
             </Button>
+            <button
+              className="banner-button-container__btn"
+              type="button"
+              onClick={() => {
+                navigate('/order-without-account');
+              }}
+            >
+              Scan a QR Code
+            </button>
+            <div className="banner-button-container__text">
+              Want to use RacquetPass at your club or shop?{' '}
+              <span
+                role="button"
+                className="banner-button-container__text-imp"
+                onClick={() => {
+                  navigate('/BusinessAccount/create');
+                }}
+              >
+                Sign up now.
+              </span>
+            </div>
           </div>
         </div>
         <div>
