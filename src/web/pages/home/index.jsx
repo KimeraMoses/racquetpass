@@ -1,6 +1,6 @@
 import { Link, useNavigate } from 'react-router-dom';
 import { withNamespaces } from 'react-i18next';
-import { Button, CustomInput, Description } from 'web/components';
+import { Button } from 'web/components';
 import './home.styles.scss';
 
 function Home({ t }) {
@@ -33,18 +33,18 @@ function Home({ t }) {
             <h1 className="banner-container__heading">{t('homeHeading')}</h1>
           </div>
           <div className="banner-button-container">
-            <CustomInput
+            {/* <CustomInput
               label="Find your Pro Shop by Name, City Or State"
               noLabel
               onClick={() => {
                 navigate('/order');
               }}
               style={{ background: 'white' }}
-            />
+            /> */}
             <Button isDark onClick={() => navigate('/order')}>
               {t('homeNewBtnTxt')}
             </Button>
-            <button
+            {/* <button
               className="banner-button-container__btn"
               type="button"
               onClick={() => {
@@ -52,8 +52,8 @@ function Home({ t }) {
               }}
             >
               Scan a QR Code
-            </button>
-            <div className="banner-button-container__text">
+            </button> */}
+            {/* <div className="banner-button-container__text">
               Want to use RacquetPass at your club or shop?{' '}
               <span
                 role="button"
@@ -64,7 +64,7 @@ function Home({ t }) {
               >
                 Sign up now.
               </span>
-            </div>
+            </div> */}
           </div>
         </div>
         <div>
