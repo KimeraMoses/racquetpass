@@ -27,7 +27,7 @@
     .business-account-form {
       padding-top: 35px;
       //  min-height: calc(100vh - 250px);
-      min-height: calc(100vh - 250px);
+      // min-height: calc(100vh - 250px);
       display: flex;
       flex-direction: column;
       justify-content: space-between;
@@ -92,7 +92,7 @@
         }
       }
       .btn-container {
-        padding-top: 40px;
+        padding-top: 55px;
       }
     }
   }

@@ -23,7 +23,7 @@ let BusinessDetails = ({ t }) => {
           {t('businessAccountDetailHeading')}
         </h1>
       </div>
-      <div className="business-details-description">
+      <div className="business-details-description text-[#545454]">
         {t('businessAccountDetailDescription')}
       </div>
       <div className="business-details-body">
