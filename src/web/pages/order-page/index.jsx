@@ -18,12 +18,13 @@ import {
   SelectStringWithMainCross,
   ReviewOrder,
   Done,
+  OrderDetails,
 } from './sections';
 
 import './order.styles.scss';
 
 let OrderPage = ({ t, handleSubmit, change }) => {
-  const [step, setStep] = useState(6);
+  const [step, setStep] = useState(8);
   const [steps, setSteps] = useState({
     active: '',
     content: ['QR', 'Strings', 'Contact', 'Review'],
@@ -259,6 +260,8 @@ let OrderPage = ({ t, handleSubmit, change }) => {
         );
       case 7:
         return <Done t={t} />;
+      case 8:
+        return <OrderDetails t={t} />;
       default:
         return <>Undetected Step</>;
     }
@@ -267,6 +270,7 @@ let OrderPage = ({ t, handleSubmit, change }) => {
     <>
       {step === 7 ||
       step === 0 ||
+      step === 8 ||
       mainCross.current === 'search' ||
       strings.current === 'search' ? (
         <></>
@@ -286,7 +290,8 @@ let OrderPage = ({ t, handleSubmit, change }) => {
           mainCross.current === 'search' ||
           step === 6 ||
           step === 0 ||
-          (step === 1 && scan.current === 'initial') ? (
+          (step === 1 && scan.current === 'initial') ||
+          step === 8 ? (
             <></>
           ) : (
             <div className="order-page__button-container">

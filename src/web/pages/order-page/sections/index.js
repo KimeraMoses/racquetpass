@@ -13,3 +13,4 @@ export { BrandSearchResults } from './BrandSearchResults.section';
 export { SelectStringWithMainCross } from './SelectStringWithMainCross.section';
 export { ReviewOrder } from './ReviewOrder.section';
 export { Done } from './Done.section';
+export { OrderDetails } from './OrderDetails.section';
