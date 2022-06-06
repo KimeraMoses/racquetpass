@@ -24,7 +24,7 @@ const mediumStrength = new RegExp(
   '^(?=.*[a-z])(?=.*[A-Z])(?=.*[^A-Za-z0-9])(?=.{8,})'
 );
 
-let CreatePassword = ({ t, back }) => {
+let ResetPassword = ({ t, back }) => {
   const [passwordFieldType, setPasswordFieldType] = useState('password');
   const navigate = useNavigate();
   const [password, setPassword] = useState('');
@@ -156,20 +156,20 @@ let CreatePassword = ({ t, back }) => {
   };
   return (
     <>
-      <div className="create-business-password">
+      <div className="reset-password">
         <div>
-          <div className="create-business-password__header">
-            <div className="create-business-password__header-heading">
-              <BackButton onClick={back} />
-              <Heading>{t('accPassword')}</Heading>
+          <div className="reset-password__header">
+            <div className="reset-password__header-heading">
+              {/* <BackButton onClick={back} /> */}
+              <Heading>Reset Password</Heading>
             </div>
           </div>
           {/* <div>
-            <Description customClass="create-business-password__desc">
+            <Description customClass="reset-password__desc">
               {t('accPasstxt')}
             </Description>
           </div> */}
-          <div className="create-business-password__input-password">
+          <div className="reset-password__input-password">
             <Field
               name="password"
               label="Password"
@@ -187,17 +187,17 @@ let CreatePassword = ({ t, back }) => {
               onChange={(e) => setPassword(e.target.value)}
             />
             {/* <div
-              className={`create-business-password__input-password-strength ${
+              className={`reset-password__input-password-strength ${
                 passwordStrenght === 'weak'
-                  ? 'create-business-password__input-password-strength-weak'
+                  ? 'reset-password__input-password-strength-weak'
                   : ''
               } ${
                 passwordStrenght === 'medium'
-                  ? 'create-business-password__input-password-strength-medium'
+                  ? 'reset-password__input-password-strength-medium'
                   : ''
               } ${
                 passwordStrenght === 'strong'
-                  ? 'create-business-password__input-password-strength-strong'
+                  ? 'reset-password__input-password-strength-strong'
                   : ''
               }`}
             >
@@ -208,26 +208,26 @@ let CreatePassword = ({ t, back }) => {
                 : 'Weak'}
             </div> */}
           </div>
-          {/* <div className="create-business-password__progress">
+          {/* <div className="reset-password__progress">
             <div
-              className={`create-business-password__progress-inner ${
+              className={`reset-password__progress-inner ${
                 passwordStrenght === 'weak'
-                  ? 'create-business-password__progress-inner-weak'
+                  ? 'reset-password__progress-inner-weak'
                   : ''
               } ${
                 passwordStrenght === 'medium'
-                  ? 'create-business-password__progress-inner-medium'
+                  ? 'reset-password__progress-inner-medium'
                   : ''
               } ${
                 passwordStrenght === 'strong'
-                  ? 'create-business-password__progress-inner-strong'
+                  ? 'reset-password__progress-inner-strong'
                   : ''
               }`}
             ></div>
           </div> */}
-          <div className="create-business-password__password-list">
+          <div className="reset-password__password-list">
             {/* <Description>{t('accPassRecommend')}</Description> */}
-            <ul className="create-business-password__password-list-recommend">
+            <ul className="reset-password__password-list-recommend">
               <li>
                 {renderBullet(passwordConditions.moreThanEight)}
                 <p
@@ -291,9 +291,16 @@ let CreatePassword = ({ t, back }) => {
             <SubmitButton
               onClick={() => navigate('/BusinessAccount/VerifyBusiness')}
               type="submit"
+              disabled={
+                !passwordConditions.moreThanEight ||
+                !passwordConditions.oneLowerCase ||
+                !passwordConditions.oneUpperCase ||
+                !passwordConditions.oneNumber ||
+                !passwordConditions.noTextFromNameEmail
+              }
               className="account-details__form-button-btn"
             >
-              {t('odrCreateBtn')}
+              Reset Password
             </SubmitButton>
           </div>
         </div>
@@ -307,10 +314,10 @@ const onSubmit = (values, dispatch) => {
   console.log(values);
 };
 
-CreatePassword = reduxForm({
+ResetPassword = reduxForm({
   // a unique name for the form
   form: 'create-business-account-4',
   onSubmit,
-})(CreatePassword);
+})(ResetPassword);
 
-export default withNamespaces()(CreatePassword);
+export default withNamespaces()(ResetPassword);

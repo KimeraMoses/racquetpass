@@ -2,6 +2,8 @@ import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Home from './home';
 import Login from './login';
+import Forgot from './forgot';
+import ResetPassword from './reset-password';
 import Page404 from './page-404';
 import Order from './order-page';
 import Tasks from './tasks';
@@ -42,6 +44,8 @@ function Routers() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/login" element={<Login />} />
+          <Route path="/forgot" element={<Forgot />} />
+          <Route path="/reset-password" element={<ResetPassword />} />
           <Route path="/order" element={<Order />} />
           <Route path="/create-account" element={<CreateAccount />} />
           <Route path="*" element={<Page404 />} />
