@@ -2,22 +2,18 @@ import { Link } from 'react-router-dom';
 import { Field } from 'redux-form';
 
 // Custom Components
-import {
-  Heading,
-  SubHeading,
-  Description,
-  HeadingButton,
-  CustomInput,
-} from 'web/components';
+import { Heading, Description, CustomInput } from 'web/components';
+import { BackButton } from 'web/components/Buttons/BackButton.component';
 
 // Styles
 import './VerifyPhone.styles.scss';
 
-export function VerifyPhone({ t, backward }) {
+export function VerifyPhone({ t, setStep }) {
   return (
     <>
       <div className="phone-section">
-        <div className="phone-section__heading">
+        <div className="phone-section__heading flex justify-start items-center gap-[16px]">
+          <BackButton onClick={() => setStep(7)} />
           <Heading customClass="phone-section__heading-text">
             {t('odrPhonHeading')}
           </Heading>

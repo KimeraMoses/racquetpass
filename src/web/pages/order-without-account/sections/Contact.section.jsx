@@ -1,22 +1,17 @@
 import { Field } from 'redux-form';
 // Custom Components
-import {
-  Heading,
-  SubHeading,
-  Description,
-  HeadingButton,
-  CustomInput,
-} from 'web/components';
+import { Heading, Description, BackButton, CustomInput } from 'web/components';
 
 // Styles
 import './Contact.styles.scss';
 
-export function Contact({ t, backward }) {
+export function Contact({ t, setStep }) {
   return (
     <>
       <div className="contact-section">
         <div>
-          <div className="contact-section__heading">
+          <div className="contact-section__heading flex items-center justify-start gap-[16px]">
+            <BackButton onClick={() => setStep(5)} />
             <Heading customClass="contact-section__heading-text">
               {t('odrStayHeading')}
             </Heading>
@@ -47,7 +42,6 @@ export function Contact({ t, backward }) {
             />
           </div>
         </div>
-        <div className=" "></div>
       </div>
     </>
   );

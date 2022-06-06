@@ -1,6 +1,5 @@
 .brand-result {
   &__search-container {
-    margin-top: 24px;
     display: flex;
     gap: 14px;
     justify-content: space-between;
@@ -11,6 +10,9 @@
       font-size: 14px;
       line-height: 21px;
       color: #4a65fe;
+    }
+    .custom-input__header {
+      display: none;
     }
   }
   &__results {

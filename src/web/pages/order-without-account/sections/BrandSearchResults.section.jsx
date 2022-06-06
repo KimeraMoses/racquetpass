@@ -52,9 +52,9 @@ export function BrandSearchResults({
         <div className="brand-result__results">
           <SearchCard
             brand={{
-              name: 'Custom Name',
-              description: 'Brand Address',
-              price: 'price',
+              name: "I'm bringing my own strings",
+              description: ' ',
+              price: '$ 0',
             }}
             main={main}
             cross={cross}
@@ -63,9 +63,31 @@ export function BrandSearchResults({
           />
           <SearchCard
             brand={{
-              name: 'Brnad Name',
-              description: 'Brand Address',
-              price: 'price',
+              name: 'Wilson NXT 16',
+              description: 'In stock',
+              price: '$ 9.50',
+            }}
+            main={main}
+            cross={cross}
+            onClick={screenChange}
+            change={change}
+          />
+          <SearchCard
+            brand={{
+              name: 'Wilson NXT 16 (Packet)',
+              description: 'In stock',
+              price: '$ 18.99',
+            }}
+            main={main}
+            cross={cross}
+            onClick={screenChange}
+            change={change}
+          />
+          <SearchCard
+            brand={{
+              name: 'Silicon Cooliostrings (Packet)',
+              description: 'In stock',
+              price: '$ 17.99',
             }}
             main={main}
             cross={cross}

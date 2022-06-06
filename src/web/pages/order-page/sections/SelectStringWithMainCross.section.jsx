@@ -18,6 +18,7 @@ import './SelectStringWithMainCross.styles.scss';
 import { FileInput } from 'web/components/formFields/index';
 import { useState } from 'react';
 import { Modal } from 'web/components/index';
+import { BackButton } from 'web/components/Buttons/BackButton.component';
 
 export function SelectStringWithMainCross({
   t,
@@ -52,11 +53,11 @@ export function SelectStringWithMainCross({
         closeText="Got it"
       />
       <div className="select-string-mc">
-        <div className="select-string-mc__heading">
+        <div className="select-string-mc__heading justify-start gap-[16px]">
+          <BackButton onClick={backward} />
           <Heading customClass="select-string-mc__heading-text">
             {t('odrSelect')}
           </Heading>
-          <HeadingButton close onClick={backward} />
         </div>
         <div className="select-string-mc__text-container">
           <Description customClass="select-string-mc__text-container-text">
