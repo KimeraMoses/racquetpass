@@ -1,6 +1,3 @@
-import { useState } from 'react';
-import { Field } from 'redux-form';
-import { useNavigate } from 'react-router-dom';
 // Custom Components
 import {
   Heading,
@@ -8,7 +5,6 @@ import {
   HeadingButton,
   SummaryCard,
   PaymentButton,
-  CustomInput,
   SubHeading,
 } from 'web/components';
 import { SearchCard } from 'web/components/index';
@@ -17,12 +13,12 @@ import { SearchCard } from 'web/components/index';
 import './ReviewOrder.styles.scss';
 import { BackButton } from 'web/components/Buttons/BackButton.component';
 
-export function ReviewOrder({ t, active, handleClick }) {
+export function ReviewOrder({ t, setStep, setDone }) {
   return (
     <>
       <div className="review-order-odr">
         <div className="review-order-odr__heading">
-          <BackButton onClick={handleClick} />
+          <BackButton onClick={() => setStep(5)} />
           <Heading customClass="review-order-odr__heading-text">
             {t('odrReviewHeading')}
           </Heading>
@@ -99,14 +95,16 @@ export function ReviewOrder({ t, active, handleClick }) {
           </PaymentButton> */}
           <PaymentButton
             className="review-order-odr__buttons-credit"
-            handleClick={handleClick}
-            active={active}
+            handleClick={() => {
+              setStep(7);
+              setDone(true);
+            }}
             style={{ marginBottom: '40px' }}
           >
             Pay with Stripe
           </PaymentButton>
         </div>
-        {active ? (
+        {/* {active ? (
           <>
             <div className="review-order-odr__credit-cards">
               <img src="/img/orderpage/cards.png" alt="list-of-cards" />
@@ -155,7 +153,7 @@ export function ReviewOrder({ t, active, handleClick }) {
           </>
         ) : (
           <></>
-        )}
+        )} */}
         {/* <div className="review-order-odr__form-container">
           <Field
             name="brand"

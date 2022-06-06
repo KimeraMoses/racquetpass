@@ -1,12 +1,7 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Field } from 'redux-form';
 import BarcodeScannerComponent from 'react-qr-barcode-scanner';
-import { useNavigate, Link } from 'react-router-dom';
-import {
-  disableBodyScroll,
-  enableBodyScroll,
-  clearAllBodyScrollLocks,
-} from 'body-scroll-lock';
+import { Link } from 'react-router-dom';
 // Custom Components
 import { Heading, Description, Modal } from 'web/components';
 
@@ -55,8 +50,19 @@ export function ScanSection({
           <Modal
             showModal={showModal}
             handleShow={handleShow}
-            heading="Don’t have a QR sticker?"
-            text="You can get QR stickers at any pro shop or club that uses RacquetPass. You can attach the sticker anywhere on your racquet - a good place is on the inside of the throat."
+            heading="Don't have a QR sticker?"
+            text={
+              <div className="mt-[13px]">
+                <p className="text-[14px] text-[rgba(51,_51,_51,_0.8)]">
+                  You can get QR stickers at any pro shop or club that uses
+                  RacquetPass.
+                </p>
+                <p className="mt-[8px]">
+                  You can attach the sticker anywhere on your racquet - a good
+                  place is on the inside of the throat.
+                </p>
+              </div>
+            }
           />
           <Link
             onClick={() => setShowModal(true)}

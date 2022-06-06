@@ -23,7 +23,7 @@ import { SelectStringWithMainCross } from './sections/SelectStringWithMainCross.
 
 let OrderWithoutAccount = ({ t, change }) => {
   const navigate = useNavigate();
-  const [step, setStep] = useState(0);
+  const [step, setStep] = useState(5);
   const [main, setMain] = useState(false);
   const [cross, setCross] = useState(false);
   const [steps, setSteps] = useState({
@@ -198,7 +198,7 @@ let OrderWithoutAccount = ({ t, change }) => {
           <></>
         ) : (
           <div className="without-account__button-container">
-            <StepButton
+            {/* <StepButton
               onClick={() => {
                 if (step === 0) {
                   navigate('/');
@@ -223,7 +223,7 @@ let OrderWithoutAccount = ({ t, change }) => {
               type="button"
             >
               Next
-            </StepButton>
+            </StepButton> */}
           </div>
         )}
         {step === 9 && (

@@ -7,6 +7,8 @@ import {
   CustomInput,
   SubHeading,
   Description,
+  CustomSwitch,
+  CustomSelect,
 } from 'web/components';
 
 import './EditShop.styles.scss';
@@ -24,13 +26,13 @@ export function EditShop({ t, setCurrentScreen }) {
         </div>
 
         <div className="edit__services-heading">
-          <Heading>{t('shopServiceHeading')}</Heading>
+          <Heading>{t('orderOpenedHeading')}</Heading>
         </div>
 
         <div className="edit__services-form">
           <Field
             name="delivery-time"
-            label="Estimated delivery time"
+            label="Estimated delivery time (# od days)"
             type="text"
             component={CustomInput}
           />
@@ -46,11 +48,24 @@ export function EditShop({ t, setCurrentScreen }) {
             {t('editServicesText')}
           </Description>
         </div>
+        <div className="edit__service-switch flex justify-between mt-[26px]">
+          <Description>{t('shopString')}</Description>
+          <CustomSwitch handleChange={() => {}} checked={false} />
+        </div>
+        <div className="edit__sevice-string-txt">
+          <Description>{t('editShopNewTxt')}</Description>
+        </div>
 
         <div className="edit__contact-heading">
           <Heading>{t('ShopContactHeading')}</Heading>
         </div>
         <div className="edit__contact-form">
+          <Field
+            name="shop"
+            label="Shop Name"
+            type="text"
+            component={CustomInput}
+          />
           <Field
             name="email"
             label="Email"
@@ -64,7 +79,49 @@ export function EditShop({ t, setCurrentScreen }) {
             component={CustomInput}
           />
         </div>
-        <div className="edit__shop-details">
+        <div className="edit__address-heading">
+          <Heading>{t('orderOpenedShopAddressHeading')}</Heading>
+        </div>
+        <div className="edit__address-form">
+          <Field
+            name="address"
+            label="Street Address"
+            type="text"
+            component={CustomInput}
+          />
+          <Field
+            name="apt"
+            label="Apt, suite, etc (optional)"
+            type="email"
+            component={CustomInput}
+          />
+          <div className="edit__address-form-city">
+            <Field
+              name="shopcity"
+              label="Shop City"
+              type="text"
+              component={CustomInput}
+            />
+            <Field
+              name="shopstate"
+              label="Shop State"
+              placeholder="Select"
+              component={CustomSelect}
+              options={[
+                { label: 'Babolat', value: 'Babolat' },
+                { label: 'Wilson', value: 'Wilson' },
+              ]}
+            />
+          </div>
+          <Field
+            name="zip"
+            label="Zip Code"
+            placeholder="ZIP"
+            type="text"
+            component={CustomInput}
+          />
+        </div>
+        {/* <div className="edit__shop-details">
           <div className="edit__shop-details-header">
             <SubHeading customClass="edit__shop-details-header-heading">
               {t('odrShopName')}
@@ -97,8 +154,8 @@ export function EditShop({ t, setCurrentScreen }) {
               </SubHeading>
             )}
           </div>
-        </div>
-        <div className="edit__shop-details">
+        </div> */}
+        {/* <div className="edit__shop-details">
           <div className="edit__shop-details-header">
             <SubHeading customClass="edit__shop-details-header-heading">
               {t('orderOpenedShopAddressHeading')}
@@ -134,7 +191,7 @@ export function EditShop({ t, setCurrentScreen }) {
               <></>
             )}
           </div>
-        </div>
+        </div> */}
 
         <div className="edit__button">
           <SubmitButton onClick={() => setCurrentScreen('proshop')}>

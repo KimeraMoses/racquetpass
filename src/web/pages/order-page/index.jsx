@@ -23,23 +23,18 @@ import {
 import './order.styles.scss';
 
 let OrderPage = ({ t, handleSubmit, change }) => {
-  const [step, setStep] = useState(0);
+  const [step, setStep] = useState(6);
   const [steps, setSteps] = useState({
     active: '',
     content: ['QR', 'Strings', 'Contact', 'Review'],
   });
-  const [scan, setScan] = useState({ current: 'initial' });
   const [shop, setShop] = useState({ current: 'search' });
+  const [scan, setScan] = useState({ current: 'initial' });
   const [strings, setStrings] = useState({ current: 'initial' });
   const [mainCross, setMainCross] = useState({ current: 'initial' });
   const [main, setMain] = useState(false);
   const [cross, setCross] = useState(false);
   const [done, setDone] = useState(false);
-  const [active, setActive] = useState(false);
-
-  const handleClick = () => {
-    setActive((active) => !active);
-  };
 
   const navigate = useNavigate();
 
@@ -258,8 +253,8 @@ let OrderPage = ({ t, handleSubmit, change }) => {
           <ReviewOrder
             t={t}
             backward={backward}
-            active={active}
-            handleClick={handleClick}
+            setStep={setStep}
+            setDone={setDone}
           />
         );
       case 7:
@@ -270,7 +265,14 @@ let OrderPage = ({ t, handleSubmit, change }) => {
   };
   return (
     <>
-      {step === 7 || step === 0 ? <></> : <Progress steps={steps} />}
+      {step === 7 ||
+      step === 0 ||
+      mainCross.current === 'search' ||
+      strings.current === 'search' ? (
+        <></>
+      ) : (
+        <Progress steps={steps} />
+      )}
       <div
         className={`order-page ${done ? 'order-page-done' : ''} ${
           step === 0 ? 'order-page-zero' : ''
@@ -282,32 +284,16 @@ let OrderPage = ({ t, handleSubmit, change }) => {
           shop.current === 'find' ||
           shop.current === 'thanks' ||
           mainCross.current === 'search' ||
-          scan.current === 'initial' ||
           step === 6 ||
-          step === 0 ? (
+          step === 0 ||
+          (step === 1 && scan.current === 'initial') ? (
             <></>
           ) : (
             <div className="order-page__button-container">
-              <StepButton
-                onClick={forward}
-                disabled={scan.current === 'initial' || step === 0}
-                type="button"
-              >
+              <StepButton onClick={forward} disabled={step === 0} type="button">
                 {t('odrNext')}
               </StepButton>
             </div>
-          )}
-          {step === 6 && active && (
-            <StepButton
-              type="submit"
-              className="order-page__submit-btn"
-              onClick={() => {
-                setDone(true);
-                forward();
-              }}
-            >
-              Submit Order
-            </StepButton>
           )}
         </form>
       </div>

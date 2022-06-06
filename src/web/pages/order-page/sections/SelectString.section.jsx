@@ -13,11 +13,11 @@ import {
   CustomInput,
   Modal,
   BackButton,
+  FileInput,
 } from 'web/components';
 
 // Styles
 import './SelectString.styles.scss';
-import { SubHeading } from 'web/components/atoms/SubHeading.atom';
 
 export function SelectString({ t, backward, setStringsCurrent, setStep }) {
   const [modal, setModal] = useState(false);
@@ -25,14 +25,30 @@ export function SelectString({ t, backward, setStringsCurrent, setStep }) {
   const handleShow = () => {
     setModal((modal) => !modal);
   };
-  console.log(modal);
 
   const brand = useSelector((state) => state?.form?.signup?.values?.brand);
 
   return (
     <>
       <div className="select-string-odr">
-        <Modal showModal={modal} handleShow={handleShow} />
+        <Modal
+          showModal={modal}
+          handleShow={handleShow}
+          heading="Use hybrid strings for further customization"
+          text={
+            <div className="flex flex-col gap-[24px] mt-[18px]">
+              <p className="text-[rgba(51,51,51,0.8)] text-[14px]">
+                Enable “use hybrid strings” to use different strings for mains
+                and crosses.
+              </p>
+              <p className="text-[rgba(51,51,51,0.8)] text-[14px]">
+                Mains are the vertical strings and crosses are the horizontal
+                strings.
+              </p>
+            </div>
+          }
+          closeText="Got it"
+        />
         <div className="select-string-odr__heading">
           <BackButton onClick={backward} />
           <Heading>{t('odrSelect')}</Heading>
@@ -44,19 +60,12 @@ export function SelectString({ t, backward, setStringsCurrent, setStep }) {
         </div>
         <div className="select-string-odr__main-info">
           <div className="select-string-odr__main-info-select">
-            <Field
-              name="stingtype"
-              label="String Type"
-              placeholder="String Type"
-              component={CustomSelect}
-              options={[]}
-            />
-            {/* <CustomOrderSelect
+            <CustomOrderSelect
               label="String Type"
               link="Select"
               value={brand?.name}
               onSelectClick={() => setStringsCurrent('search')}
-            /> */}
+            />
           </div>
           <div className="select-string-odr__main-info-number">
             <Field
@@ -130,8 +139,11 @@ export function SelectString({ t, backward, setStringsCurrent, setStep }) {
             component={CustomInput}
           />
           <div className="select-string-odr__recquet-form-pic-box">
-            <SubHeading>Picture (optional)</SubHeading>
-            picture area
+            <Field
+              name="image"
+              label="Picture (optional)"
+              component={FileInput}
+            />
             <Description>
               Adding a picture makes it easy for your stringer to pick out your
               racquet from others.

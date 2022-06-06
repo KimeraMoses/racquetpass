@@ -25,18 +25,18 @@ export function ScanSection({ t, setRacquetFound, setStep, change }) {
     <>
       <div className="owa-scan-section">
         <div className="owa-scan-section__heading">
-          <Heading>{t('orderQRText')}</Heading>
+          <Heading>{t('taskScanHeading')}</Heading>
         </div>
-        <div className="owa-scan-section__text-container">
+        {/* <div className="owa-scan-section__text-container">
           <Description customClass="owa-scan-section__text-container-text">
             {t('orderQRtxt')}
           </Description>
-        </div>
-        <div className="owa-scan-section__link">
+        </div> */}
+        {/* <div className="owa-scan-section__link">
           <Link to="#" className="owa-scan-section__link-txt">
             {t('orderLinktxt')}
           </Link>
-        </div>
+        </div> */}
         <div className="owa-scan-section__image-container">
           {qrScanner ? (
             <>
@@ -72,6 +72,9 @@ export function ScanSection({ t, setRacquetFound, setStep, change }) {
               </div>
             </>
           )}
+        </div>
+        <div className="owa-scan-section__text">
+          <Description>{t('odrWithoutScanTxt')}</Description>
         </div>
       </div>
     </>

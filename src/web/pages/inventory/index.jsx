@@ -17,6 +17,7 @@ import {
   Choose,
   AddCard,
   AddBank,
+  ItemDetails,
 } from './sections';
 
 import './inventory.styles.scss';
@@ -32,6 +33,8 @@ let Inventory = ({ t }) => {
         return <AddForm t={t} setCurrentScreen={setCurrentScreen} />;
       case 'edit':
         return <EditForm t={t} setCurrentScreen={setCurrentScreen} />;
+      case 'detail':
+        return <ItemDetails t={t} setCurrentScreen={setCurrentScreen} />;
       case 'proshop':
         return <ProShop t={t} setCurrentScreen={setCurrentScreen} />;
       case 'editShop':

@@ -46,12 +46,12 @@ export const InventoryDashboard = ({ setCurrentScreen, t }) => {
         <Tabs
           tabs={[
             {
-              title: 'My  Tasks',
+              title: 'Your Orders',
               icon: '/img/drawer/tick-circle.png',
               onClick: () => navigate('/tasks'),
             },
             {
-              title: 'My Pro Shop',
+              title: 'Shop Settings',
               icon: '/img/drawer/shop.png',
               onClick: () => setCurrentScreen('proshop'),
             },

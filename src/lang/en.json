@@ -339,7 +339,7 @@
   "orderPaymentSummaryLabelCrosses": "Crosses (Luxilon Alu Rough 1.6 G @ 42 lbs)",
   "orderPaymentSummaryLabelLabour": "Labor",
   "orderPaymentSummaryLabelTax": "Tax",
-  "orderPaymentSummaryLabelPrice": "$16",
+  "orderPaymentSummaryLabelPrice": "$16.00",
   "orderPaymentApple": "Pay With ",
   "orderPaymentApplePay": "Pay",
   "orderPaymentCreditCard": "Pay with Credit Card",
@@ -388,7 +388,7 @@
   "profileItemDelete": "Delete Item",
   "profileButtonSave": "Save Changes",
 
-  "shopProHeading": "My Pro Shop",
+  "shopProHeading": "Shop Settings",
   "ShopContactHeading": "Contact Info",
   "shopButtonEdit": "Edit",
   "shopEmailHeading": "Email",
@@ -490,5 +490,27 @@
   "alreadyHaveAccount": "Don’t have an account?",
   "signUpNow": "Sign up now.",
 
-  "inventoryItemBtn": "Add Item"
+  "inventoryItemBtn": "Add Item",
+  "inventoryAddItemString": "Type (when hybrid stringing)",
+  "inventoryItemPrice": "Price",
+  "inventoryItemRSDetail": "($29.50 when hybrid)",
+  "inventoryType": "Type (when hybrid stringing)",
+  "inventoryTypeTxt": "Reel",
+  "inStock": "In Stock",
+  "inStockTxt": "Yes",
+
+  "shopString": "Allow players to bring their own strings",
+  "shopNo": "No",
+
+  "editShopNewTxt": "This will give players the option to bring their own strings instead of buying strings from your shop. If you select this option, make sure you have a way of storing the strings the player brings in alongside their racquet.",
+  "setupPayTxt": "We use Stripe to manage your payment methods:",
+  "setupPayList1p1": "1. How you",
+  "setupPayList1p2": "pay",
+  "setupPayList1p3": "RacquetPass",
+  "setupPayList2p1": "2. How you",
+  "setupPayList2p2": "recieve payments",
+  "setupPayList2p3": "from players",
+
+  "setupStripe": "Go to Stripe to manage payments",
+  "odrWithoutScanTxt": "To scan a QR code, move your camera so the QR code is in the frame and it will be automatically detected."
 }

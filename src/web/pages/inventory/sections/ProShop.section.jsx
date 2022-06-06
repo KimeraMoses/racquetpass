@@ -1,4 +1,10 @@
-import { HeadingButton, Heading, SubHeading } from 'web/components';
+import { Field } from 'redux-form';
+import {
+  HeadingButton,
+  Heading,
+  SubHeading,
+  CustomInput,
+} from 'web/components';
 
 import './ProShop.styles.scss';
 
@@ -42,6 +48,14 @@ export function ProShop({ t, setCurrentScreen }) {
                   {t('shopLaborPrice')}
                 </SubHeading>
               </div>
+              <div className="shop__services-card-inner-text">
+                <SubHeading customClass="shop__services-card-inner-text-heading">
+                  {t('shopString')}
+                </SubHeading>
+                <SubHeading customClass="shop__services-card-inner-text-txt">
+                  {t('shopNo')}
+                </SubHeading>
+              </div>
             </div>
           </div>
         </div>
@@ -49,22 +63,6 @@ export function ProShop({ t, setCurrentScreen }) {
           <Heading>{t('ShopContactHeading')}</Heading>
         </div>
         <div className="shop__contact-info">
-          <div className="shop__contact-info-inner">
-            <SubHeading customClass="shop__contact-info-inner-heading">
-              {t('shopEmailHeading')}
-            </SubHeading>
-            <SubHeading customClass="shop__contact-info-inner-txt">
-              {t('shopEmail')}
-            </SubHeading>
-          </div>
-          <div className="shop__contact-info-inner">
-            <SubHeading customClass="shop__contact-info-inner-heading">
-              {t('taskOpenedPlayerPhoneHeading')}
-            </SubHeading>
-            <SubHeading customClass="shop__contact-info-inner-txt">
-              {t('shopPhone')}
-            </SubHeading>
-          </div>
           <div className="shop__contact-info-inner">
             <SubHeading customClass="shop__contact-info-inner-heading">
               {t('odrShopName')}
@@ -75,6 +73,23 @@ export function ProShop({ t, setCurrentScreen }) {
           </div>
           <div className="shop__contact-info-inner">
             <SubHeading customClass="shop__contact-info-inner-heading">
+              {t('shopEmailHeading')}
+            </SubHeading>
+            <SubHeading customClass="shop__contact-info-inner-txt text-[#304FFE]">
+              {t('shopEmail')}
+            </SubHeading>
+          </div>
+          <div className="shop__contact-info-inner">
+            <SubHeading customClass="shop__contact-info-inner-heading">
+              {t('taskOpenedPlayerPhoneHeading')}
+            </SubHeading>
+            <SubHeading customClass="shop__contact-info-inner-txt text-[#304FFE]">
+              {t('shopPhone')}
+            </SubHeading>
+          </div>
+
+          <div className="shop__contact-info-inner">
+            <SubHeading customClass="shop__contact-info-inner-heading">
               {t('orderOpenedShopAddressHeading')}
             </SubHeading>
             <SubHeading customClass="shop__contact-info-inner-txt">
@@ -83,6 +98,16 @@ export function ProShop({ t, setCurrentScreen }) {
             <SubHeading customClass="shop__contact-info-inner-txt">
               {t('orderOpenedShopAddress1')}
             </SubHeading>
+          </div>
+          <div className="shop__contact-info-inner flex items-end">
+            <Field
+              name="password"
+              label="Password"
+              placeholder="Passowrd"
+              // type={passwordFieldType}
+              component={CustomInput}
+            />
+            <HeadingButton text="Reset" />
           </div>
         </div>
       </div>

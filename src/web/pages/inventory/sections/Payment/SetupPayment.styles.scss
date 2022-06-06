@@ -7,6 +7,18 @@
     align-items: center;
     gap: 12px;
   }
+  &__body {
+    margin-top: 27px;
+    p.description {
+      font-family: 'Poppins';
+      font-style: normal;
+      font-weight: 400;
+      font-size: 18px;
+      line-height: 27px;
+
+      color: #545454;
+    }
+  }
 
   &__card {
     margin-top: 50px;
