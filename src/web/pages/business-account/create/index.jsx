@@ -1,13 +1,13 @@
 import React from 'react';
 import { withNamespaces } from 'react-i18next';
-import { MenuButton } from 'web/components';
-import { CustomButton } from 'web/components';
+// import { MenuButton } from 'web/components';
+// import { CustomButton } from 'web/components';
 import { Description } from 'web/components/atoms/Description.atom';
 import { Link } from 'react-router-dom';
 import { reduxForm, Field } from 'redux-form';
 import './index.styles.scss';
-import { AccountButton } from 'web/components/Buttons/AccountButton.component';
-import { SubHeading } from 'web/components/atoms/SubHeading.atom';
+// import { AccountButton } from 'web/components/Buttons/AccountButton.component';
+// import { SubHeading } from 'web/components/atoms/SubHeading.atom';
 import { SubmitButton } from 'web/components/Buttons/SubmitButton.component';
 import { CustomInput } from 'web/components/formFields/index';
 import { Heading } from 'web/components/atoms/Heading.atom';
@@ -58,6 +58,10 @@ let Create = ({ t }) => {
               </button>
             </div>
           </div>
+          <div className="text-[#545454] text-[18px]">
+            We' re so excited for your business to join RacquetPass! Signing up
+            will only take a few minutes.
+          </div>
           <div className="create-business-account__form-container">
             <Field
               name="firstName"
@@ -81,6 +85,22 @@ let Create = ({ t }) => {
               validate={[required, phoneNumber]}
             />
           </div>
+          <div>
+            <div className="create-business-account__statement">
+              <Description customClass="create-business-account__statement-txt">
+                {t('odrPivacyText')}
+                <span className="create-business-account__statement-txt-bold">
+                  {t('odrTermsBold')}
+                </span>
+                &nbsp;
+                {t('odrPrivacyAnd')}
+                &nbsp;
+                <span className="create-business-account__statement-txt-bold">
+                  {t('odrPrivacyBold')}
+                </span>
+              </Description>
+            </div>
+          </div>
           <div className="create-business-account__form-button">
             <SubmitButton
               type="button"
@@ -91,7 +111,13 @@ let Create = ({ t }) => {
               {t('odrCreateBtn')}
             </SubmitButton>
           </div>
-          <div className="create-business-account__option-container">
+          <div className="text-center text-[16px]">
+            Have an account?{' '}
+            <Link to="/" className="text-[16px] text-[#304FFE]">
+              Log in.
+            </Link>
+          </div>
+          {/* <div className="create-business-account__option-container">
             <div className="create-business-account__option-container-line"></div>
             <div>
               <SubHeading customClass="create-business-account__option-container-txt">
@@ -99,28 +125,12 @@ let Create = ({ t }) => {
               </SubHeading>
             </div>
             <div className="create-business-account__option-container-line"></div>
-          </div>
-          <div className="create-business-account__buttons">
+          </div> */}
+          {/* <div className="create-business-account__buttons">
             <AccountButton facebook />
             <AccountButton google />
             <AccountButton apple />
-          </div>
-        </div>
-        <div>
-          <div className="create-business-account__statement">
-            <Description customClass="create-business-account__statement-txt">
-              {t('odrPivacyText')}
-              <span className="create-business-account__statement-txt-bold">
-                {t('odrTermsBold')}
-              </span>
-              &nbsp;
-              {t('odrPrivacyAnd')}
-              &nbsp;
-              <span className="create-business-account__statement-txt-bold">
-                {t('odrPrivacyBold')}
-              </span>
-            </Description>
-          </div>
+          </div> */}
         </div>
       </div>
     </>
