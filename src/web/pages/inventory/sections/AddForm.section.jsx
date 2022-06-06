@@ -15,8 +15,18 @@ import './AddForm.styles.scss';
 
 export function AddForm({ t, setCurrentScreen }) {
   const [show, setShow] = useState(false);
+  // const [active, setActive] = useState(true);
+  const [check, setCheck] = useState(false);
+  const [activeIndex, setActiveIndex] = useState(0);
+
+  const handleOnClick = (index) => setActiveIndex(index);
+
+  const handleCheck = () => setCheck(!check);
+
+  // const handleActive = () => setActive(!active);
 
   const handleShow = () => setShow(!show);
+  const btns = ['Reel', 'Packet', 'Both'];
   return (
     <>
       <div className="item-form">
@@ -90,18 +100,28 @@ export function AddForm({ t, setCurrentScreen }) {
                 />
               </div>
               <div className="item-form__form-types-btns">
-                <button className="item-form__form-types-btns-btn item-form__form-types-btns-btn-active">
-                  Reel
-                </button>
-                <button className="item-form__form-types-btns-btn">
-                  Packet
-                </button>
-                <button className="item-form__form-types-btns-btn">Both</button>
+                {btns.map((el, index) => {
+                  return (
+                    <>
+                      <button
+                        key={index}
+                        onClick={() => handleOnClick(index)}
+                        className={
+                          activeIndex === index
+                            ? 'item-form__form-types-btns-btn-active'
+                            : 'item-form__form-types-btns-btn'
+                        }
+                      >
+                        {el}
+                      </button>
+                    </>
+                  );
+                })}
               </div>
             </div>
             <div className="item-form__form-switch">
               <Description>In Stock</Description>
-              <CustomSwitch handleChange={() => {}} checked={false} />
+              <CustomSwitch handleChange={handleCheck} checked={check} />
             </div>
           </div>
         </div>

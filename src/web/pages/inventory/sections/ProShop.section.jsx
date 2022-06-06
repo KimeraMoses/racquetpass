@@ -99,15 +99,14 @@ export function ProShop({ t, setCurrentScreen }) {
               {t('orderOpenedShopAddress1')}
             </SubHeading>
           </div>
-          <div className="shop__contact-info-inner flex items-end">
-            <Field
-              name="password"
-              label="Password"
-              placeholder="Passowrd"
-              // type={passwordFieldType}
-              component={CustomInput}
-            />
-            <HeadingButton text="Reset" />
+          <div className="shop__contact-info-inner">
+            <div className="text-[#969696] font-semibold text-[12px] mb-[12px]">
+              Password
+            </div>
+            <div className="bg-[#F8F8F8] border-[#E8E8E8] border-[1px] p-[6px] rounded-[12px] flex items-center justify-between">
+              <div className="p-[10px]">••••••••••••</div>
+              <HeadingButton text="Reset" />
+            </div>
           </div>
         </div>
       </div>

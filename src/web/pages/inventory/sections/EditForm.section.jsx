@@ -14,7 +14,14 @@ import {
 import './EditForm.styles.scss';
 
 export function EditForm({ t, setCurrentScreen }) {
+  const [check, setCheck] = useState(true);
+  const [activeIndex, setActiveIndex] = useState(0);
+
+  const handleOnClick = (index) => setActiveIndex(index);
+
+  const handleCheck = () => setCheck(!check);
   const [show, setShow] = useState(false);
+  const btns = ['Reel', 'Packet', 'Both'];
 
   const handleShow = () => setShow(!show);
   return (
@@ -60,18 +67,28 @@ export function EditForm({ t, setCurrentScreen }) {
                 <img src="/img/button/info-new.png" alt="info-button" />
               </div>
               <div className="edit-form__form-types-btns">
-                <button className="edit-form__form-types-btns-btn edit-form__form-types-btns-btn-active">
-                  Reel
-                </button>
-                <button className="edit-form__form-types-btns-btn">
-                  Packet
-                </button>
-                <button className="edit-form__form-types-btns-btn">Both</button>
+                {btns.map((el, index) => {
+                  return (
+                    <>
+                      <button
+                        key={index}
+                        onClick={() => handleOnClick(index)}
+                        className={
+                          activeIndex === index
+                            ? 'edit-form__form-types-btns-btn-active'
+                            : 'edit-form__form-types-btns-btn'
+                        }
+                      >
+                        {el}
+                      </button>
+                    </>
+                  );
+                })}
               </div>
             </div>
             <div className="edit-form__form-switch">
               <Description>In Stock</Description>
-              <CustomSwitch handleChange={() => {}} checked={true} />
+              <CustomSwitch handleChange={handleCheck} checked={check} />
             </div>
           </div>
           <div className="edit-form__delete-button flex justify-center">
