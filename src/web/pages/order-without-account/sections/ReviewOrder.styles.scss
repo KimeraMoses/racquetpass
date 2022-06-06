@@ -1,8 +1,8 @@
-.review-order {
+.review-order-owa {
   &__heading {
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    gap: 16px;
 
     &-text {
       max-width: 300px;
@@ -11,6 +11,37 @@
   &__text-container {
     margin-top: 20px;
     &-text {
+    }
+  }
+  &__contact {
+    margin-top: 22px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    &-details {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      h1.sub-heading {
+        font-family: 'Poppins';
+        font-style: normal;
+        font-weight: 600;
+        font-size: 12px;
+        line-height: 18px;
+        /* identical to box height */
+
+        color: #969696;
+      }
+      p.description {
+        font-family: 'Poppins';
+        font-style: normal;
+        font-weight: 500;
+        font-size: 18px;
+        line-height: 27px;
+        /* identical to box height */
+
+        color: #3c3c3c;
+      }
     }
   }
   &__shop {
@@ -57,9 +88,12 @@
     }
   }
   &__buttons {
-    margin-top: 100px;
+    margin-top: 50px;
     &-credit {
+      background: #304ffe;
+      border-radius: 12px;
       margin-top: 10px;
+      color: #ffffff;
     }
   }
   &__credit-cards {
