@@ -21,11 +21,15 @@ function Tasks({ t }) {
       <div className="tasks-body">
         <div id="due-tasks">
           <div className="task-row">
-            <p className="title">{t('taskTitle')}</p>
+            <p className="title">Your Orders</p>
             <p className="link" onClick={showCompletedTasks}>
               {t('taskShowCompleted')}
             </p>
           </div>
+          <p className="mb-[35px] text-[#545454] text-[18px]">
+            To complete an order or view its details, scan the racquet the order
+            is associated with.
+          </p>
           <div className="task-row">
             <p className="tasks-info">{t('taskDueToday')}</p>
             <div className="badge">3</div>
@@ -90,9 +94,13 @@ function Tasks({ t }) {
               {t('taskHideCompleted')}
             </a>
           </div>
+          <p className="mb-[35px] text-[#545454] text-[18px]">
+            To complete an order or view its details, scan the racquet the order
+            is associated with.
+          </p>
           <div className="task-row">
-            <p className="tasks-info">{t('taskDueWeek')}</p>
-            <div className="badge">11</div>
+            <p className="tasks-info">Completed</p>
+            <div className="badge">127</div>
           </div>
           <div className="cards-container">
             <TaskCard
