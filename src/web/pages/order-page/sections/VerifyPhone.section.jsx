@@ -9,6 +9,7 @@ import {
   HeadingButton,
   CustomInput,
 } from 'web/components';
+import { BackButton } from 'web/components/Buttons/BackButton.component';
 
 // Styles
 import './VerifyPhone.styles.scss';
@@ -17,11 +18,11 @@ export function VerifyPhone({ t, backward }) {
   return (
     <>
       <div className="phone-section">
-        <div className="phone-section__heading">
+        <div className="phone-section__heading flex justify-start gap-[12px]">
+          <BackButton onClick={backward} />
           <Heading customClass="phone-section__heading-text">
             {t('odrPhonHeading')}
           </Heading>
-          <HeadingButton close onClick={backward} />
         </div>
         <div className="phone-section__form-container">
           <Field
