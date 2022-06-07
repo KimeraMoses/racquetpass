@@ -46,7 +46,7 @@ function Login({ t, handleSubmit }) {
             <div className="signin__header-heading">
               <BackButton
                 onClick={() => {
-                  navigate('/');
+                  navigate('/BusinessAccount/Create');
                 }}
               />
               <Heading>{t('racquetLogIn')}</Heading>
@@ -56,7 +56,7 @@ function Login({ t, handleSubmit }) {
                 className="signin__button-btn"
                 type="button"
                 onClick={() => {
-                  navigate('/create-account');
+                  navigate('/BusinessAccount/Create');
                 }}
               >
                 {t('racquetLogInBtn')}
@@ -95,21 +95,21 @@ function Login({ t, handleSubmit }) {
                 if (missingQR) {
                   navigate('/CreateOrder/Locker');
                 } else {
-                  navigate('/player-tabs');
+                  navigate('/inventory?active=inventory');
                 }
               }}
               className="signin__form-buttons-btn"
             >
               {t('homeSignin')}
             </SubmitButton>
-            <Link to="#" className="signin__form-buttons-link">
+            <Link to="/forgot" className="signin__form-buttons-link">
               {t('odrForgetPass')}
             </Link>
           </div>
         </div>
         <div className="signin__account-text">
           <Description>{t('alreadyHaveAccount')}</Description>
-          <Link to="/signup">&nbsp;{t('signUpNow')}</Link>
+          <Link to="/BusinessAccount/Create">&nbsp;{t('signUpNow')}</Link>
         </div>
         {/* <div className="sign__placeholder"></div> */}
         {/* <div> */}

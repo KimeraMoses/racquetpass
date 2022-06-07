@@ -7,15 +7,25 @@ import {
   PaymentButton,
   SubHeading,
 } from 'web/components';
-import { SearchCard } from 'web/components/index';
+import { SearchCard, Survey } from 'web/components/index';
 
 // Styles
 import './ReviewOrder.styles.scss';
 import { BackButton } from 'web/components/Buttons/BackButton.component';
+import { useState } from 'react';
 
 export function ReviewOrder({ t, setStep, setDone }) {
+  const [showSurvey, setShowSurvey] = useState(false);
   return (
     <>
+      <Survey
+        show={showSurvey}
+        setShow={setShowSurvey}
+        onExit={() => {
+          setStep(7);
+          setDone(true);
+        }}
+      />
       <div className="review-order-odr">
         <div className="review-order-odr__heading">
           <BackButton onClick={() => setStep(5)} />
@@ -96,8 +106,7 @@ export function ReviewOrder({ t, setStep, setDone }) {
           <PaymentButton
             className="review-order-odr__buttons-credit"
             handleClick={() => {
-              setStep(7);
-              setDone(true);
+              setShowSurvey(true);
             }}
             style={{ marginBottom: '40px' }}
           >

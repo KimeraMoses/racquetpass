@@ -39,7 +39,7 @@ function Forgot({ t, handleSubmit }) {
             <div className="forgot__header-heading">
               <BackButton
                 onClick={() => {
-                  navigate('/');
+                  navigate('/login');
                 }}
               />
               <Heading>Forgot Password?</Heading>

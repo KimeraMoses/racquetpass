@@ -115,7 +115,7 @@ let Create = ({ t }) => {
           </div>
           <div className="text-center text-[16px]">
             Have an account?{' '}
-            <Link to="/" className="text-[16px] text-[#304FFE]">
+            <Link to="/login" className="text-[16px] text-[#304FFE]">
               Log in.
             </Link>
           </div>

@@ -24,7 +24,7 @@ import {
 import './order.styles.scss';
 
 let OrderPage = ({ t, handleSubmit, change }) => {
-  const [step, setStep] = useState(8);
+  const [step, setStep] = useState(6);
   const [steps, setSteps] = useState({
     active: '',
     content: ['QR', 'Strings', 'Contact', 'Review'],
@@ -259,9 +259,9 @@ let OrderPage = ({ t, handleSubmit, change }) => {
           />
         );
       case 7:
-        return <Done t={t} />;
+        return <Done t={t} setStep={setStep} setDone={setDone} />;
       case 8:
-        return <OrderDetails t={t} />;
+        return <OrderDetails t={t} setStep={setStep} setDone={setDone} />;
       default:
         return <>Undetected Step</>;
     }

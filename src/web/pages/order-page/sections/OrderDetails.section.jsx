@@ -2,9 +2,9 @@
 import {
   Heading,
   Description,
-  HeadingButton,
+  // HeadingButton,
   SummaryCard,
-  PaymentButton,
+  // PaymentButton,
   SubHeading,
   SearchCard,
 } from 'web/components';
@@ -14,8 +14,8 @@ import './ReviewOrder.styles.scss';
 import { BackButton } from 'web/components/Buttons/BackButton.component';
 
 const orderDetails = {
-  done: true,
-  // expectedPickup: 'Jan 7 - Jan 9',
+  // done: true,
+  expectedPickup: 'Jan 7 - Jan 9',
   shopName: `Jimmy's Pro Shop`,
   shopAddress: '123 Main Street, Seattle, Washington',
   orderDate: 'Jan 7, 2021',
@@ -32,7 +32,12 @@ export function OrderDetails({ t, setStep, setDone }) {
     <>
       <div className="review-order-odr">
         <div className="review-order-odr__heading">
-          <BackButton onClick={() => setStep(7)} />
+          <BackButton
+            onClick={() => {
+              setStep(7);
+              setDone(true);
+            }}
+          />
           <Heading customClass="review-order-odr__heading-text">
             Order Details
           </Heading>

@@ -13,7 +13,7 @@ import {
 } from 'web/components';
 import './Done.styles.scss';
 
-export const Done = ({ t }) => {
+export const Done = ({ t, setStep, setDone }) => {
   const links = [
     { path: '#', title: t('homePP') },
     { path: '#', title: t('homeCU') },
@@ -39,7 +39,10 @@ export const Done = ({ t }) => {
                 Back to Homepage
               </button>
               <button
-                onClick={() => navigate('/order-details')}
+                onClick={() => {
+                  setDone(false);
+                  setStep(8);
+                }}
                 className="bg-[rgba(255,255,255,0.21)] text-white text-[18px] w-full h-[59px] rounded-[12px]"
               >
                 View Order Details
