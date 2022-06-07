@@ -160,7 +160,9 @@ let CreatePassword = ({ t, back }) => {
         <div>
           <div className="create-business-password__header">
             <div className="create-business-password__header-heading">
-              <BackButton onClick={back} />
+              <BackButton
+                onClick={() => navigate('/BusinessAccount/BusinessDetails')}
+              />
               <Heading>{t('accPassword')}</Heading>
             </div>
           </div>
@@ -289,11 +291,18 @@ let CreatePassword = ({ t, back }) => {
         <div>
           <div className="mt-[40px]">
             <SubmitButton
-              onClick={() => navigate('/BusinessAccount/VerifyBusiness')}
+              onClick={() => navigate('/BusinessAccount/Thanks')}
               type="submit"
+              disabled={
+                !passwordConditions.moreThanEight ||
+                !passwordConditions.oneLowerCase ||
+                !passwordConditions.oneUpperCase ||
+                !passwordConditions.oneNumber ||
+                !passwordConditions.noTextFromNameEmail
+              }
               className="account-details__form-button-btn"
             >
-              {t('odrCreateBtn')}
+              Reset Password
             </SubmitButton>
           </div>
         </div>

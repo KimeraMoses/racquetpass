@@ -1,7 +1,7 @@
-import { useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { withNamespaces } from 'react-i18next';
 import { reduxForm } from 'redux-form';
-
+import { CustomDrawer } from 'web/components';
 import {
   InventoryDashboard,
   SearchInventory,
@@ -11,7 +11,6 @@ import {
   EditShop,
   RequestChange,
   CancelRequest,
-
   // Payment Screens
   SetupPayment,
   Choose,
@@ -21,14 +20,35 @@ import {
 } from './sections';
 
 import './inventory.styles.scss';
+import { useLocation } from '../../../../node_modules/react-router-dom/index';
+
+function useQuery() {
+  const { search } = useLocation();
+  return useMemo(() => new URLSearchParams(search), [search]);
+}
 
 let Inventory = ({ t }) => {
-  const [currentScreen, setCurrentScreen] = useState('');
+  const [showDrawer, setShowDrawer] = useState(false);
   const [isReceive, setIsReceive] = useState(false);
+
+  const query = useQuery();
+  const active = query.get('active');
+  const [currentScreen, setCurrentScreen] = useState(active);
+
+  useEffect(() => {
+    setCurrentScreen(active);
+  }, [active]);
+
   const getCurrentScreen = () => {
     switch (currentScreen) {
       case 'inventory':
-        return <SearchInventory t={t} setCurrentScreen={setCurrentScreen} />;
+        return (
+          <SearchInventory
+            t={t}
+            setCurrentScreen={setCurrentScreen}
+            setDrawer={setShowDrawer}
+          />
+        );
       case 'add':
         return <AddForm t={t} setCurrentScreen={setCurrentScreen} />;
       case 'edit':
@@ -36,7 +56,13 @@ let Inventory = ({ t }) => {
       case 'detail':
         return <ItemDetails t={t} setCurrentScreen={setCurrentScreen} />;
       case 'proshop':
-        return <ProShop t={t} setCurrentScreen={setCurrentScreen} />;
+        return (
+          <ProShop
+            t={t}
+            setCurrentScreen={setCurrentScreen}
+            setDrawer={setShowDrawer}
+          />
+        );
       case 'editShop':
         return <EditShop t={t} setCurrentScreen={setCurrentScreen} />;
       case 'editShopName':
@@ -56,6 +82,7 @@ let Inventory = ({ t }) => {
           <SetupPayment
             t={t}
             setCurrentScreen={setCurrentScreen}
+            setDrawer={setShowDrawer}
             setIsReceive={setIsReceive}
           />
         );
@@ -72,12 +99,24 @@ let Inventory = ({ t }) => {
       case 'addBank':
         return <AddBank t={t} setCurrentScreen={setCurrentScreen} />;
       default:
-        return <InventoryDashboard t={t} setCurrentScreen={setCurrentScreen} />;
+        return (
+          <SearchInventory
+            t={t}
+            setCurrentScreen={setCurrentScreen}
+            setDrawer={setShowDrawer}
+          />
+        );
     }
   };
 
   return (
     <div className="inventory">
+      <CustomDrawer
+        setShow={setShowDrawer}
+        show={showDrawer}
+        setCurrentScreen={setCurrentScreen}
+        activeLink={active}
+      />
       <form className="inventory-form">{getCurrentScreen()}</form>
     </div>
   );

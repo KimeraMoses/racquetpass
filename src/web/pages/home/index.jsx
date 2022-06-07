@@ -22,7 +22,7 @@ function Home({ t }) {
                 className="home-container__button-container-buttons-btn bg-[#fff]"
                 type="button"
                 onClick={() => {
-                  navigate('/create-account');
+                  navigate('/BusinessAccount/Create');
                 }}
               >
                 {t('homeSignup')}

@@ -16,7 +16,7 @@ function ThankYou() {
         <button
           className="bg-[#304ffe] rounded-[12px] w-full py-[16px] text-[#fff] text-[18px] font-medium"
           onClick={() => {
-            navigate('/login');
+            navigate('/inventory?active=inventory');
           }}
         >
           Go to your account

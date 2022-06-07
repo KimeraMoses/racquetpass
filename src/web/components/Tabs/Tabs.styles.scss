@@ -2,6 +2,12 @@
   text-decoration: none;
   cursor: pointer;
 }
+.tabs-link.tabs-link__active {
+  background: #ebeeff;
+  .tabs__tab-text {
+    color: #304ffe;
+  }
+}
 .tabs {
   &__tab {
     padding: 20px;

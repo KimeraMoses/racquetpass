@@ -104,6 +104,7 @@ export function AddForm({ t, setCurrentScreen }) {
                   return (
                     <>
                       <button
+                        type="button"
                         key={index}
                         onClick={() => handleOnClick(index)}
                         className={

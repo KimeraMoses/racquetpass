@@ -106,7 +106,9 @@ let Create = ({ t }) => {
               type="button"
               className="create-business-account__form-button-btn"
               disabled={errors}
-              onClick={() => {}}
+              onClick={() => {
+                navigate('/BusinessAccount/BusinessDetails');
+              }}
             >
               {t('odrCreateBtn')}
             </SubmitButton>

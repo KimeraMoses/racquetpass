@@ -1,18 +1,21 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { withNamespaces } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
-import { HeadingButton, CustomButton, TaskCard } from 'web/components';
+import {
+  HeadingButton,
+  CustomButton,
+  TaskCard,
+  CustomDrawer,
+} from 'web/components';
 import './index.styles.scss';
 
 function Tasks({ t }) {
-  const navigate = useNavigate();
+  const [showDrawer, setShowDrawer] = useState(false);
   return (
     <div className="tasks-container">
+      <CustomDrawer show={showDrawer} setShow={setShowDrawer} />
       <div className="header-row">
-        <HeadingButton
-          drawer
-          onClick={() => navigate('/inventory?backFrom=tasks')}
-        />
+        <HeadingButton drawer onClick={() => setShowDrawer(true)} />
         <h1 className="header-row-heading">{t('taskHeading')}</h1>
         <CustomButton size="sm" btn="white">
           <a href="/Tasks/Scan">{t('taskScan')}</a>

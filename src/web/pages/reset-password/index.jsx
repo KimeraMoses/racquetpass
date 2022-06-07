@@ -289,7 +289,7 @@ let ResetPassword = ({ t, back }) => {
         <div>
           <div className="mt-[40px]">
             <SubmitButton
-              onClick={() => navigate('/BusinessAccount/VerifyBusiness')}
+              onClick={() => navigate('/login')}
               type="submit"
               disabled={
                 !passwordConditions.moreThanEight ||

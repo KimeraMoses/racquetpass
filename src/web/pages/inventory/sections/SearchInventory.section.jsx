@@ -49,13 +49,13 @@ const search = [
   },
 ];
 
-export function SearchInventory({ t, setCurrentScreen }) {
+export function SearchInventory({ t, setCurrentScreen, setDrawer }) {
   return (
     <>
       <div className="search-inventory">
         <div>
           <div className="search-inventory__header">
-            <HeadingButton drawer onClick={() => setCurrentScreen('default')} />
+            <HeadingButton drawer onClick={() => setDrawer(true)} />
             <Heading>{t('businessAccountDetailsInventory')}</Heading>
           </div>
 

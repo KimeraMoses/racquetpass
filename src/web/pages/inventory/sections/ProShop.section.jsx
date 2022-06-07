@@ -1,20 +1,20 @@
-import { Field } from 'redux-form';
+// import { Field } from 'redux-form';
 import {
   HeadingButton,
   Heading,
   SubHeading,
-  CustomInput,
+  // CustomInput,
 } from 'web/components';
 
 import './ProShop.styles.scss';
 
-export function ProShop({ t, setCurrentScreen }) {
+export function ProShop({ t, setCurrentScreen, setDrawer }) {
   return (
     <>
       <div className="shop">
         <div className="shop__header">
           <div className="shop__header-headings">
-            <HeadingButton drawer onClick={() => setCurrentScreen('default')} />
+            <HeadingButton drawer onClick={() => setDrawer(true)} />
             <Heading>{t('shopProHeading')}</Heading>
           </div>
           <HeadingButton

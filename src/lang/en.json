@@ -504,10 +504,10 @@
 
   "editShopNewTxt": "This will give players the option to bring their own strings instead of buying strings from your shop. If you select this option, make sure you have a way of storing the strings the player brings in alongside their racquet.",
   "setupPayTxt": "We use Stripe to manage your payment methods:",
-  "setupPayList1p1": "1. How you",
+  "setupPayList1p1": "How you",
   "setupPayList1p2": "pay",
   "setupPayList1p3": "RacquetPass",
-  "setupPayList2p1": "2. How you",
+  "setupPayList2p1": "How you",
   "setupPayList2p2": "recieve payments",
   "setupPayList2p3": "from players",
 

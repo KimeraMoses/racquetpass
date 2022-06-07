@@ -73,6 +73,7 @@ export function EditForm({ t, setCurrentScreen }) {
                       <button
                         key={index}
                         onClick={() => handleOnClick(index)}
+                        type="button"
                         className={
                           activeIndex === index
                             ? 'edit-form__form-types-btns-btn-active'
@@ -110,8 +111,12 @@ export function EditForm({ t, setCurrentScreen }) {
               }
               closeText={
                 <div className="flex justify-end items-center gap-[24px]">
-                  <button>Cancel</button>
-                  <button className="text-[#EA5353]">Delete</button>
+                  <button onClick={handleShow} type="button">
+                    Cancel
+                  </button>
+                  <button className="text-[#EA5353]" type="button">
+                    Delete
+                  </button>
                 </div>
               }
             />

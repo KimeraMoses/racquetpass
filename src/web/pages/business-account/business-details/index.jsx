@@ -1,21 +1,29 @@
 import React from 'react';
 import { reduxForm, Field } from 'redux-form';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { withNamespaces } from 'react-i18next';
 import {
   MenuButton,
   CustomInput,
-  CustomButton,
+  // CustomButton,
   CustomSelect,
 } from 'web/components';
 import './index.styles.scss';
+import { SubmitButton } from 'web/components/Buttons/SubmitButton.component';
+import { useSelector } from 'react-redux';
 
-let BusinessDetails = ({ t }) => {
+const required = (value) => (value ? undefined : 'This field is required');
+
+let BusinessDetails = ({ t, change }) => {
+  const navigate = useNavigate();
+  const errors = useSelector(
+    (state) => state?.form?.['create-business-account-3']?.syncErrors
+  );
   return (
     <div className="business-details-container">
       <div className="header-row">
         <MenuButton>
-          <Link to="/BusinessAccount/VerifyPhone">
+          <Link to="/BusinessAccount/Create">
             <img alt="Menu Icon" src="../svg/arrowLeft.svg" />
           </Link>
         </MenuButton>
@@ -34,6 +42,7 @@ let BusinessDetails = ({ t }) => {
               label="Street"
               type="text"
               component={CustomInput}
+              validate={required}
             />
             <Field
               name="apt-suite"
@@ -41,6 +50,7 @@ let BusinessDetails = ({ t }) => {
               placeholder="Apt, suite, etc"
               type="text"
               component={CustomInput}
+              validate={required}
             />
             <div className="business-account-fields-cs">
               <Field
@@ -48,12 +58,15 @@ let BusinessDetails = ({ t }) => {
                 label="City"
                 type="text"
                 component={CustomInput}
+                validate={required}
               />
               <Field
                 name="state"
                 label="State"
                 placeholder="Select"
-                component={CustomSelect}
+                component={(props) => (
+                  <CustomSelect {...props} change={change} />
+                )}
                 options={[
                   { label: 'Option 1', value: 'Option 1' },
                   { label: 'Option 2', value: 'Option 2' },
@@ -65,15 +78,21 @@ let BusinessDetails = ({ t }) => {
               label="ZIP Code"
               placeholder="ZIP`"
               type="text"
+              validate={required}
               component={CustomInput}
             />
           </div>
           <div className="btn-container">
-            <CustomButton size="lg" btn="primary">
-              <Link to="/BusinessAccount/CreatePassword">
-                {t('businessAccountDetailNextBtn')}
-              </Link>
-            </CustomButton>
+            <SubmitButton
+              type="button"
+              className="create-business-account__form-button-btn"
+              disabled={errors}
+              onClick={() => {
+                navigate('/BusinessAccount/CreatePassword');
+              }}
+            >
+              {t('businessAccountDetailNextBtn')}
+            </SubmitButton>
           </div>
         </form>
       </div>
