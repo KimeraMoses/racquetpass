@@ -7,6 +7,7 @@ import {
   TaskCard,
   CustomDrawer,
 } from 'web/components';
+import { Link } from 'react-router-dom';
 import './index.styles.scss';
 
 function Tasks({ t }) {
@@ -18,7 +19,7 @@ function Tasks({ t }) {
         <HeadingButton drawer onClick={() => setShowDrawer(true)} />
         <h1 className="header-row-heading">{t('taskHeading')}</h1>
         <CustomButton size="sm" btn="white">
-          <a href="/Tasks/Scan">{t('taskScan')}</a>
+          <Link to="/Tasks/Scan">{t('taskScan')}</Link>
         </CustomButton>
       </div>
       <div className="tasks-body">

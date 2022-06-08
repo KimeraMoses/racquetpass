@@ -4,6 +4,7 @@ import { MenuButton } from 'web/components';
 import { TaskStatus } from 'web/components';
 import { SubmitButton } from 'web/components/Buttons/SubmitButton.component';
 import { Modal } from 'web/components/index';
+import { Link } from 'react-router-dom';
 import './index.styles.scss';
 
 const complete = false;
@@ -45,9 +46,9 @@ function Details({ t }) {
       <div>
         <div className="header-row">
           <MenuButton>
-            <a href="/tasks">
+            <Link to="/tasks/scanned">
               <img alt="Menu Icon" src="../svg/arrowLeft.svg" />
-            </a>
+            </Link>
           </MenuButton>
           <h1 className="header-row-heading">Order #312</h1>
         </div>

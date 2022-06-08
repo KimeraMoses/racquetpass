@@ -1,38 +1,33 @@
 import { useEffect, useState } from 'react';
 import { Field } from 'redux-form';
 import BarcodeScannerComponent from 'react-qr-barcode-scanner';
-import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { withNamespaces } from 'react-i18next';
 // Custom Components
-import { BackButton, Heading, Description, Modal } from 'web/components';
+import { BackButton, Heading, Description } from 'web/components';
 
 // Styles
 import './index.styles.scss';
 
-function Scan({ t, scanForward, change, setCurrentScreen, backward }) {
+function Scan({ t, setCurrentScreen, backward }) {
   const [qrCode, setQrCode] = useState('');
   const [qrScanner, setQrScanner] = useState(false);
-  const [raquetFound, setRacquetFound] = useState(true);
-  const [showModal, setShowModal] = useState(false);
 
-  const handleShow = () => {
-    setShowModal((prev) => {
-      return !prev;
-    });
-  };
+  const navigate = useNavigate();
   useEffect(() => {
     if (qrCode) {
-      change('raquet-details-from-qr', qrCode);
+      // change('raquet-details-from-qr', qrCode);
       // TODO: Update logic with RaquetWith with Backend
-      scanForward(raquetFound);
+      // scanForward(raquetFound);
+      navigate('/Tasks/Scanned');
     }
-  }, [qrCode, change, raquetFound, scanForward]);
+  }, [qrCode]);
 
   return (
     <>
       <div className="scan-section-td">
         <div className="scan-section-td__heading">
-          <BackButton onClick={backward} />
+          <BackButton onClick={() => navigate('/tasks')} />
           <Heading>Scan QR Code</Heading>
         </div>
         <div className="scan-section-td__image-container">
@@ -48,11 +43,11 @@ function Scan({ t, scanForward, change, setCurrentScreen, backward }) {
                   } else setQrCode('');
                 }}
               />
-              <Field
+              {/* <Field
                 name="raquet-details-from-qr"
                 style={{ visibility: 'hidden' }}
                 component="input"
-              />
+              /> */}
             </>
           ) : (
             <>

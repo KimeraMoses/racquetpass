@@ -1,13 +1,16 @@
 import React from 'react';
 import { withNamespaces } from 'react-i18next';
-import { MenuButton } from 'web/components';
-import { CustomButton } from 'web/components';
-import { TaskStatus } from 'web/components';
-import { StepButton } from 'web/components/Buttons/StepButton.componet';
-import { SubmitButton } from 'web/components/Buttons/SubmitButton.component';
+import { useNavigate } from 'react-router-dom';
+import {
+  TaskStatus,
+  CustomButton,
+  SubmitButton,
+  MenuButton,
+} from 'web/components';
 import './index.styles.scss';
 
 function Scanned({ t }) {
+  const navigate = useNavigate();
   return (
     <div className="task-scanned-container">
       <div>
@@ -76,7 +79,13 @@ function Scanned({ t }) {
       </div>
 
       <div>
-        <CustomButton size="lg" btn="primary">
+        <CustomButton
+          size="lg"
+          btn="primary"
+          onClick={() => {
+            navigate('/Tasks/Details');
+          }}
+        >
           View Details
         </CustomButton>
         <SubmitButton outlined className="mt-[12px]">
