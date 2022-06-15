@@ -53,7 +53,7 @@
   "odrPhon": "Phone Number",
 
   "odrPhonHeading": "Verify your phone number",
-  "odrphnDesc": "Please enter the 6 digit verification code that Racquet Pass texted to your phone number (phone number)",
+  "odrphnDesc": "Please enter the 6 digit verification code that RacquetPass texted to your phone number (phone number)",
   "odrResendCode": "Resend Code",
 
   "odrSelect": "Select strings",

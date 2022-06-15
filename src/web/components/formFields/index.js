@@ -1,4 +1,5 @@
 export { CustomInput } from './CustomInput/CustomInput.component';
+export { CustomPhoneInput } from './CustomPhoneInput/CustomPhoneInput.component';
 export { CustomOrderSelect } from './CustomOrderSelect/CustomOrderSelect.component';
 export { CustomInputNumber } from './CustomInputNumber/CustomInputNumber.component';
 export { CustomSwitch } from './CustomSwitch/CustomSwitch.component';

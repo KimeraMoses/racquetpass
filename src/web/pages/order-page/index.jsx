@@ -25,7 +25,7 @@ import './order.styles.scss';
 import { useSelector } from 'react-redux';
 
 let OrderPage = ({ t, handleSubmit, change }) => {
-  const [step, setStep] = useState(2);
+  const [step, setStep] = useState(4);
   const [steps, setSteps] = useState({
     active: '',
     content: ['QR', 'Strings', 'Contact', 'Review'],
@@ -252,7 +252,7 @@ let OrderPage = ({ t, handleSubmit, change }) => {
       case 3:
         return getCurrentMainCross();
       case 4:
-        return <Contact t={t} backward={backward} />;
+        return <Contact t={t} backward={backward} change={change} />;
       case 5:
         return <VerifyPhone t={t} backward={backward} />;
       case 6:

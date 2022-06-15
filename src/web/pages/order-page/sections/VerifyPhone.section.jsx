@@ -28,8 +28,8 @@ export function VerifyPhone({ t, backward }) {
           <Field
             CustomInputClass="phone-section__form-container-input"
             name="verfication-code"
-            label="Varification Code"
-            placeholder="112233"
+            label="Verification Code"
+            placeholder="- - - - - -"
             type="number"
             component={CustomInput}
           />

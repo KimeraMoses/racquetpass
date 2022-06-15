@@ -1,22 +1,29 @@
 import { Link } from 'react-router-dom';
-import './CustomInput.styles.scss';
+import PhoneInput, {
+  formatPhoneNumber,
+  formatPhoneNumberIntl,
+  isValidPhoneNumber,
+} from 'react-phone-number-input';
+import 'react-phone-number-input/style.css';
+import './CustomPhoneInput.styles.scss';
 
-export const CustomInput = (props) => {
+export const CustomPhoneInput = (props) => {
   const { touched, error } = props?.meta
     ? props?.meta
     : { touched: false, error: false };
+  console.log(props.input);
   return (
-    <div className="custom-input">
-      <div className="custom-input__header">
+    <div className="custom-phone-input">
+      <div className="custom-phone-input__header">
         {props.noLabel ? (
           <></>
         ) : (
-          <div className="custom-input__header-label">{props.label}</div>
+          <div className="custom-phone-input__header-label">{props.label}</div>
         )}
         {props.link ? (
           <>
-            <div className="custom-input__header-link">
-              <Link to="#" className="custom-input__header-link-lnk">
+            <div className="custom-phone-input__header-link">
+              <Link to="#" className="custom-phone-input__header-link-lnk">
                 {props.link}
               </Link>
             </div>
@@ -25,11 +32,11 @@ export const CustomInput = (props) => {
           <></>
         )}
         {touched && error && (
-          <div className="custom-input__header-error">{error}</div>
+          <div className="custom-phone-input__header-error">{error}</div>
         )}
         {props.isPasswordField && (
           <button
-            className="custom-input__header-show"
+            className="custom-phone-input__header-show"
             type="button"
             onClick={() => {
               props.switchPasswordShow();
@@ -39,11 +46,25 @@ export const CustomInput = (props) => {
           </button>
         )}
       </div>
-      <input
+      <PhoneInput
+        defaultCountry="US"
+        international={false}
+        placeholder="Enter phone number"
+        {...props.input}
+        className={`custom-phone-input__input ${
+          (touched && error) || isValidPhoneNumber(props?.input?.value)
+            ? 'custom-phone-input__input-error'
+            : ''
+        }`}
+        // value={value}
+        // onChange={setValue}
+        // error={value ? (isValidPhoneNumber(value) ? undefined : 'Invalid phone number') : 'Phone number required'}
+      />
+      {/* <input
         {...props.input}
         placeholder={props.placeholder ? props.placeholder : props.label}
-        className={`custom-input__input ${
-          touched && error ? 'custom-input__input-error' : ''
+        className={`custom-phone-input__input ${
+          touched && error ? 'custom-phone-input__input-error' : ''
         }`}
         onClick={props.onClick}
         type={props.type}
@@ -51,13 +72,6 @@ export const CustomInput = (props) => {
           props.input.onBlur(e);
           if (props?.customOnBlur) {
             props?.customOnBlur(e);
-          }
-        }}
-        onChange={(e) => {
-          if (props?.customOnChange) {
-            props?.customOnChange(e);
-          } else {
-            props?.input?.onChange(e);
           }
         }}
         ref={(input) => {
@@ -74,9 +88,9 @@ export const CustomInput = (props) => {
               }
             : {}
         }
-      />
+      /> */}
       {/* {props.meta.error && props.meta.touched && (
-        <div className="custom-input__error">{props.meta.error}</div>
+        <div className="custom-phone-input__error">{props.meta.error}</div>
       )} */}
     </div>
   );
