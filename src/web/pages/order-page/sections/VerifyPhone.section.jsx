@@ -14,6 +14,7 @@ import { BackButton } from 'web/components/Buttons/BackButton.component';
 // Styles
 import './VerifyPhone.styles.scss';
 
+const required = (value) => (value ? undefined : 'Required');
 export function VerifyPhone({ t, backward }) {
   return (
     <>
@@ -32,6 +33,7 @@ export function VerifyPhone({ t, backward }) {
             placeholder="- - - - - -"
             type="number"
             component={CustomInput}
+            validate={required}
           />
         </div>
         <div className="phone-section__text-container">

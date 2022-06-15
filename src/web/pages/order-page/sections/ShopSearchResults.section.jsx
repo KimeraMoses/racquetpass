@@ -7,7 +7,15 @@ import { Description, CustomInput, SearchCard } from 'web/components';
 // Styles
 import './ShopSearchResults.styles.scss';
 
-export function ShopSearchResults({ t, setShopCurrent, forward, change }) {
+export function ShopSearchResults({
+  t,
+  setShopCurrent,
+  setStep,
+  backFromReview,
+  setBackFromReview,
+  forward,
+  change,
+}) {
   const navigate = useNavigate();
   let inputEl = useRef(null);
   useEffect(() => {
@@ -39,7 +47,12 @@ export function ShopSearchResults({ t, setShopCurrent, forward, change }) {
               address: '123 Main Street, City, State',
             }}
             onClick={() => {
-              forward();
+              if (backFromReview) {
+                setStep(6);
+                setBackFromReview(false);
+              } else {
+                forward();
+              }
             }}
             change={change}
           />
@@ -49,7 +62,12 @@ export function ShopSearchResults({ t, setShopCurrent, forward, change }) {
               address: '123 Main Street, City, State',
             }}
             onClick={() => {
-              forward();
+              if (backFromReview) {
+                setStep(6);
+                setBackFromReview(false);
+              } else {
+                forward();
+              }
             }}
             change={change}
           />
@@ -59,7 +77,12 @@ export function ShopSearchResults({ t, setShopCurrent, forward, change }) {
               address: '123 Main Street, City, State',
             }}
             onClick={() => {
-              forward();
+              if (backFromReview) {
+                setStep(6);
+                setBackFromReview(false);
+              } else {
+                forward();
+              }
             }}
             change={change}
           />

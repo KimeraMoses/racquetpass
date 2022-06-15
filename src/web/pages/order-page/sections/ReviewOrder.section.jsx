@@ -14,7 +14,7 @@ import './ReviewOrder.styles.scss';
 import { BackButton } from 'web/components/Buttons/BackButton.component';
 import { useState } from 'react';
 
-export function ReviewOrder({ t, setStep, setDone }) {
+export function ReviewOrder({ t, setStep, setDone, setBackFromReview }) {
   const [showSurvey, setShowSurvey] = useState(false);
   return (
     <>
@@ -42,7 +42,13 @@ export function ReviewOrder({ t, setStep, setDone }) {
           <Heading customClass="review-order-odr__shop-heading-text">
             {t('ShopContactHeading')}
           </Heading>
-          <HeadingButton text="Edit" />
+          <HeadingButton
+            text="Edit"
+            onClick={() => {
+              setBackFromReview(true);
+              setStep(4);
+            }}
+          />
         </div>
         <div className="review-order-odr__contact">
           <div className="review-order-odr__contact-details">
@@ -60,7 +66,13 @@ export function ReviewOrder({ t, setStep, setDone }) {
             <Heading customClass="review-order-odr__shop-heading-text">
               {t('odrReviewShop')}
             </Heading>
-            <HeadingButton text="Change Shop" />
+            <HeadingButton
+              text="Change Shop"
+              onClick={() => {
+                setBackFromReview(true);
+                setStep(0);
+              }}
+            />
           </div>
           <div className="review-order-odr__shop-card">
             <SearchCard

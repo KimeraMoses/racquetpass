@@ -25,7 +25,7 @@ import './order.styles.scss';
 import { useSelector } from 'react-redux';
 
 let OrderPage = ({ t, handleSubmit, change }) => {
-  const [step, setStep] = useState(4);
+  const [step, setStep] = useState(6);
   const [steps, setSteps] = useState({
     active: '',
     content: ['QR', 'Strings', 'Contact', 'Review'],
@@ -37,6 +37,7 @@ let OrderPage = ({ t, handleSubmit, change }) => {
   const [main, setMain] = useState(false);
   const [cross, setCross] = useState(false);
   const [done, setDone] = useState(false);
+  const [backFromReview, setBackFromReview] = useState(false);
 
   const navigate = useNavigate();
 
@@ -158,6 +159,8 @@ let OrderPage = ({ t, handleSubmit, change }) => {
           <ShopSearchResults
             t={t}
             setShopCurrent={setShopCurrent}
+            setStep={setStep}
+            backFromReview={backFromReview}
             forward={forward}
             change={change}
           />
@@ -259,6 +262,7 @@ let OrderPage = ({ t, handleSubmit, change }) => {
         return (
           <ReviewOrder
             t={t}
+            setBackFromReview={setBackFromReview}
             backward={backward}
             setStep={setStep}
             setDone={setDone}
@@ -302,7 +306,14 @@ let OrderPage = ({ t, handleSubmit, change }) => {
           ) : (
             <div className="order-page__button-container">
               <StepButton
-                onClick={forward}
+                onClick={() => {
+                  if (backFromReview) {
+                    setStep(6);
+                    setBackFromReview(false);
+                  } else {
+                    forward();
+                  }
+                }}
                 disabled={step === 0 || errors}
                 type="button"
               >
