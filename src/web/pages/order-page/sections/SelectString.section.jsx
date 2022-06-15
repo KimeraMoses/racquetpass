@@ -19,7 +19,15 @@ import {
 // Styles
 import './SelectString.styles.scss';
 
-export function SelectString({ t, backward, setStringsCurrent, setStep }) {
+const required = (value) => (value ? undefined : 'Required');
+
+export function SelectString({
+  t,
+  backward,
+  setStringsCurrent,
+  setStep,
+  change,
+}) {
   const [modal, setModal] = useState(false);
 
   const handleShow = () => {
@@ -27,6 +35,19 @@ export function SelectString({ t, backward, setStringsCurrent, setStep }) {
   };
 
   const brand = useSelector((state) => state?.form?.signup?.values?.brand);
+
+  const [mainsTension, setMainsTension] = useState(150);
+
+  // useEffect(() => {
+  //   change('mains-tension', mainsTension);
+  // }, [mainsTension, change]);
+
+  const racquetSport = useSelector(
+    (state) => state?.form?.signup?.values?.racquetSport
+  );
+  const racquetBrand = useSelector(
+    (state) => state?.form?.signup?.values?.racquetBrand
+  );
 
   return (
     <>
@@ -62,19 +83,33 @@ export function SelectString({ t, backward, setStringsCurrent, setStep }) {
           <div className="select-string-odr__main-info-select">
             <CustomOrderSelect
               label="String Type"
-              link="Select"
+              placeholder="Select a String Type"
+              placeholderBold
+              link={
+                <img
+                  src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTciIGhlaWdodD0iMTciIHZpZXdCb3g9IjAgMCAxNyAxNyIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZD0iTTEzLjc4IDYuNDY2NjdMOS40MzMzIDEwLjgxMzNDOC45MTk5NyAxMS4zMjY3IDguMDc5OTcgMTEuMzI2NyA3LjU2NjY0IDEwLjgxMzNMMy4yMTk5NyA2LjQ2NjY3IiBzdHJva2U9IiMyOTJEMzIiIHN0cm9rZS13aWR0aD0iMS41IiBzdHJva2UtbWl0ZXJsaW1pdD0iMTAiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIvPgo8L3N2Zz4K"
+                  alt="down-arrow"
+                />
+              }
               value={brand?.name}
               onSelectClick={() => setStringsCurrent('search')}
             />
           </div>
           <div className="select-string-odr__main-info-number">
-            <Field
-              name="mains-tension"
+            <CustomInputNumber
+              // {...props}
               label="Tension"
+              value={mainsTension}
+              onChange={(e) => {
+                setMainsTension(e.target.value);
+              }}
+              link={{ text: 'Change units to kg', path: '#' }}
               type="number"
-              link={{ text: 'Change Units to kg', path: '#' }}
-              component={CustomInputNumber}
             />
+            {/* <Field
+              name="mains-tension"
+              component={(props) => (
+              )} /> */}
           </div>
         </div>
         <div className="select-string-odr__hybrid-settings">
@@ -104,17 +139,44 @@ export function SelectString({ t, backward, setStringsCurrent, setStep }) {
         </div>
         <div className="select-string-odr__recquet-form">
           <Field
-            name="sport"
+            name="racquetSport"
             label="Sport"
             placeholder="Select a sport"
-            component={CustomSelect}
-            options={[{ label: 'Babolat', value: 'Babolat' }]}
+            component={(props) => {
+              return (
+                <CustomSelect
+                  {...props}
+                  customOnChange={(option) => {
+                    change('racquetSport', option?.value);
+                  }}
+                  value={{ label: racquetSport, value: racquetSport }}
+                />
+              );
+            }}
+            validate={required}
+            options={[
+              { label: 'Tennis', value: 'Tennis' },
+              { label: 'Squash', value: 'Squash' },
+              { label: 'Bedminton', value: 'Bedminton' },
+              { label: 'Other', value: 'Other' },
+            ]}
           />
           <Field
-            name="brand"
+            name="racquetBrand"
             label="Brand"
             placeholder="Select a racquet brand"
-            component={CustomSelect}
+            validate={required}
+            component={(props) => {
+              return (
+                <CustomSelect
+                  {...props}
+                  customOnChange={(option) => {
+                    change('racquetBrand', option?.value);
+                  }}
+                  value={{ label: racquetBrand, value: racquetBrand }}
+                />
+              );
+            }}
             options={[
               { label: 'Babolat', value: 'Babolat' },
               { label: 'Wilson', value: 'Wilson' },
@@ -133,8 +195,9 @@ export function SelectString({ t, backward, setStringsCurrent, setStep }) {
             ]}
           />
           <Field
-            name="model"
+            name="racquetModel"
             label="Model"
+            validate={required}
             type="text"
             component={CustomInput}
           />

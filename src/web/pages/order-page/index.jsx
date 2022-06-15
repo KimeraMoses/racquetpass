@@ -22,9 +22,10 @@ import {
 } from './sections';
 
 import './order.styles.scss';
+import { useSelector } from 'react-redux';
 
 let OrderPage = ({ t, handleSubmit, change }) => {
-  const [step, setStep] = useState(0);
+  const [step, setStep] = useState(2);
   const [steps, setSteps] = useState({
     active: '',
     content: ['QR', 'Strings', 'Contact', 'Review'],
@@ -38,6 +39,8 @@ let OrderPage = ({ t, handleSubmit, change }) => {
   const [done, setDone] = useState(false);
 
   const navigate = useNavigate();
+
+  const errors = useSelector((state) => state?.form?.signup?.syncErrors);
 
   useEffect(() => {
     switch (step) {
@@ -165,6 +168,7 @@ let OrderPage = ({ t, handleSubmit, change }) => {
             t={t}
             setShopCurrent={setShopCurrent}
             setStep={setStep}
+            change={change}
           />
         );
       case 'thanks':
@@ -184,6 +188,7 @@ let OrderPage = ({ t, handleSubmit, change }) => {
             backward={backward}
             setStep={setStep}
             step={step}
+            change={change}
           />
         );
       case 'search':
@@ -215,6 +220,7 @@ let OrderPage = ({ t, handleSubmit, change }) => {
             setMain={setMain}
             setCross={setCross}
             step={step}
+            change={change}
           />
         );
       case 'search':
@@ -295,7 +301,11 @@ let OrderPage = ({ t, handleSubmit, change }) => {
             <></>
           ) : (
             <div className="order-page__button-container">
-              <StepButton onClick={forward} disabled={step === 0} type="button">
+              <StepButton
+                onClick={forward}
+                disabled={step === 0 || errors}
+                type="button"
+              >
                 {t('odrNext')}
               </StepButton>
             </div>
@@ -312,7 +322,6 @@ const onSubmit = (values, dispatch) => {
 };
 
 OrderPage = reduxForm({
-  // a unique name for the form
   form: 'signup',
   onSubmit,
 })(OrderPage);

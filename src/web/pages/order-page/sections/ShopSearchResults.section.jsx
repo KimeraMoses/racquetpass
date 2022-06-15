@@ -21,7 +21,7 @@ export function ShopSearchResults({ t, setShopCurrent, forward, change }) {
             name="shop-search"
             type="text"
             icon="/img/orderpage/search.png"
-            label="Search By Name, City Or State"
+            label="Find your pro shop or club by name, city, or state"
             noLabel
             setFieldToBeFocused={(input) => {
               inputEl = input;

@@ -11,7 +11,7 @@ export const CustomSelect = (props) => {
   return (
     <div className="custom-select">
       <div className="custom-select__header">
-        {props.noLabel ? (
+        {props?.noLabel ? (
           <></>
         ) : (
           <div className="custom-select__header-label">{props.label}</div>
@@ -24,8 +24,18 @@ export const CustomSelect = (props) => {
         {...props.input}
         options={props.options}
         placeholder={props.placeholder ? props.placeholder : props.label}
-        value={selectedOption}
-        onChange={setSelectedOption}
+        value={props?.value || selectedOption}
+        onBlur={() => {}}
+        onChange={(option) => {
+          if (props?.showInitials) {
+            setSelectedOption({ label: option?.value, value: option?.value });
+          } else {
+            setSelectedOption(option);
+          }
+          if (props?.customOnChange) {
+            props?.customOnChange(option);
+          }
+        }}
         isSearchable={false}
         className="custom-select__select"
       />

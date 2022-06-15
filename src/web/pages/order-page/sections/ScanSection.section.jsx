@@ -20,6 +20,7 @@ export function ScanSection({
   const [qrScanner, setQrScanner] = useState(false);
   const [raquetFound, setRacquetFound] = useState(true);
   const [showModal, setShowModal] = useState(false);
+  const [permissionsDenied, setPermissionsDenied] = useState(false);
 
   const handleShow = () => {
     setShowModal((prev) => {
@@ -33,6 +34,8 @@ export function ScanSection({
       scanForward(raquetFound);
     }
   }, [qrCode, change, raquetFound, scanForward]);
+
+  console.log(permissionsDenied);
 
   return (
     <>
@@ -72,17 +75,31 @@ export function ScanSection({
             {t('scanQRLinkTxt')}
           </Link>
         </div>
-        <div className="scan-section__image-container">
-          {qrScanner ? (
+        <div
+          className="scan-section__image-container"
+          onClick={() => {
+            setQrScanner((qrScanner) => !qrScanner);
+            setPermissionsDenied(false);
+          }}
+        >
+          {qrScanner && !permissionsDenied ? (
             <>
               <BarcodeScannerComponent
                 width={500}
                 height={500}
+                onError={(err) => {
+                  console.log(err?.name);
+                  if (err.name === 'NotAllowedError') {
+                    setPermissionsDenied(true);
+                  }
+                }}
                 onUpdate={(err, result) => {
                   if (result) {
                     setQrCode(result.text);
                     setQrScanner(false);
-                  } else setQrCode('');
+                  } else {
+                    setQrCode('');
+                  }
                 }}
               />
               <Field
@@ -94,16 +111,22 @@ export function ScanSection({
           ) : (
             <>
               <div></div>
-              <img src="img/orderpage/card.png" alt="scan" />
+              {permissionsDenied ? (
+                <div className="px-[30px] text-center text-white text-[24px] font-bold">
+                  Please allow camera permissions and scan again.
+                </div>
+              ) : (
+                <img src="img/orderpage/card.png" alt="scan" />
+              )}
               <div className="scan-section__image-container-button">
-                <button
+                {/* <button
                   className="scan-section__image-container-button-btn"
                   onClick={() => {
                     setQrScanner((qrScanner) => !qrScanner);
                   }}
-                >
-                  Scan
-                </button>
+                > */}
+                Scan
+                {/* </button> */}
               </div>
             </>
           )}

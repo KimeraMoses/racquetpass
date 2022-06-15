@@ -5,7 +5,6 @@ export const CustomInput = (props) => {
   const { touched, error } = props?.meta
     ? props?.meta
     : { touched: false, error: false };
-  console.log(props?.meta);
   return (
     <div className="custom-input">
       <div className="custom-input__header">

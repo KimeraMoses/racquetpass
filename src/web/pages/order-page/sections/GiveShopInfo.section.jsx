@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
 import { Field } from 'redux-form';
 
 // Custom Components
@@ -14,7 +15,18 @@ import { StepButton } from 'web/components/Buttons/StepButton.componet';
 // Styles
 import './GiveShopInfo.styles.scss';
 
-export function GiveShopInfo({ t, setShopCurrent, setStep }) {
+const required = (value) => (value ? undefined : 'Required');
+const r = /^\s*([A-Z]\w*\s*)*$/;
+const titleCase = (value) => {
+  if (r.test(value) === true) {
+    return undefined;
+  } else {
+    return 'Please enter shop name in title case';
+  }
+};
+//
+
+export function GiveShopInfo({ t, setShopCurrent, setStep, change }) {
   const [states, setStates] = useState([]);
 
   useEffect(() => {
@@ -23,6 +35,7 @@ export function GiveShopInfo({ t, setShopCurrent, setStep }) {
       .then((data) => setStates(data));
   }, []);
 
+  const errors = useSelector((state) => state?.form?.signup?.syncErrors);
   return (
     <>
       <div className="find-shop-section">
@@ -44,6 +57,7 @@ export function GiveShopInfo({ t, setShopCurrent, setStep }) {
               label="Shop Name"
               type="text"
               component={CustomInput}
+              validate={[required, titleCase]}
             />
             <div className="grid grid-cols-[3fr_1fr] items-center gap-[10px]">
               <Field
@@ -51,19 +65,29 @@ export function GiveShopInfo({ t, setShopCurrent, setStep }) {
                 label="Shop City"
                 type="text"
                 component={CustomInput}
+                validate={required}
               />
               <Field
                 name="shopState"
                 label="Shop State"
                 placeholder="Select"
-                component={CustomSelect}
+                validate={required}
+                component={(props) => (
+                  <CustomSelect
+                    {...props}
+                    customOnChange={(option) => {
+                      change('shopState', option?.value);
+                    }}
+                    showInitials
+                  />
+                )}
                 options={states}
               />
             </div>
             <Field
               name="phone-number"
-              label="Phone Number"
-              type="text"
+              label="Your Phone Number (Optional)"
+              type="number"
               component={CustomInput}
             />
           </div>
@@ -74,6 +98,7 @@ export function GiveShopInfo({ t, setShopCurrent, setStep }) {
         <div className="find-shop-section__button">
           <StepButton
             className="find-shop-section__button-btn"
+            disabled={errors}
             onClick={() => {
               setShopCurrent('thanks');
             }}

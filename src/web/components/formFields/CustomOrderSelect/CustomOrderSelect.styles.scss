@@ -1,3 +1,11 @@
+.custom-order-select.custom-order-select-bold {
+  .custom-order-select__input {
+    &::placeholder {
+      color: #3c3c3c;
+    }
+  }
+}
+
 .custom-order-select {
   width: 100%;
   &__label {
