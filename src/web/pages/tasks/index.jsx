@@ -9,14 +9,46 @@ import {
 } from 'web/components';
 import { Link } from 'react-router-dom';
 import './index.styles.scss';
+import { useDispatch } from 'react-redux';
+
+const dueToday = [];
+for (let i = 0; i <= 3; i++) {
+  dueToday.push({
+    title: `Order # 12${i}`,
+    description: `Wilson Prostaff 6.1`,
+    player: `Player ${i}`,
+  });
+}
+
+const dueThisWeek = [];
+for (let i = 4; i <= 9; i++) {
+  dueThisWeek.push({
+    title: `Order # 12${i}`,
+    description: `Wilson Prostaff 6.1`,
+    player: `Player ${i}`,
+  });
+}
+
+const completed = [];
+for (let i = 0; i <= 9; i++) {
+  completed.push({
+    title: `Order # 1${i}`,
+    description: `Wilson Prostaff 6.1`,
+    player: `Player ${i}`,
+  });
+}
 
 function Tasks({ t }) {
-  const [showDrawer, setShowDrawer] = useState(false);
+  // const [showDrawer, setShowDrawer] = useState(false);
+  const dispatch = useDispatch();
   return (
     <div className="tasks-container">
-      <CustomDrawer show={showDrawer} setShow={setShowDrawer} />
+      {/* <CustomDrawer show={showDrawer} setShow={setShowDrawer} /> */}
       <div className="header-row">
-        <HeadingButton drawer onClick={() => setShowDrawer(true)} />
+        <HeadingButton
+          drawer
+          onClick={() => dispatch({ type: 'SHOW_DRAWER' })}
+        />
         <h1 className="header-row-heading">{t('taskHeading')}</h1>
         <CustomButton size="sm" btn="white">
           <Link to="/Tasks/Scan">{t('taskScan')}</Link>
@@ -36,67 +68,41 @@ function Tasks({ t }) {
           </p>
           <div className="task-row">
             <p className="tasks-info">{t('taskDueToday')}</p>
-            <div className="badge">3</div>
+            <div className="badge">{dueToday?.length}</div>
           </div>
           <div className="cards-container">
-            <TaskCard
-              title={t('taskCardHeading')}
-              desc={t('taskCardDesc')}
-            ></TaskCard>
-            <TaskCard
-              title={t('taskCardHeading')}
-              desc={t('taskCardDesc')}
-            ></TaskCard>
-            <TaskCard
-              title={t('taskCardHeading')}
-              desc={t('taskCardDesc')}
-            ></TaskCard>
+            {dueToday?.map((task) => {
+              return (
+                <TaskCard
+                  title={task?.title}
+                  desc={task?.description}
+                  name={task?.player}
+                />
+              );
+            })}
           </div>
           <div className="task-row">
             <p className="tasks-info">{t('taskDueWeek')}</p>
-            <div className="badge">8</div>
+            <div className="badge">{dueThisWeek?.length}</div>
           </div>
           <div className="cards-container">
-            <TaskCard
-              title={t('taskCardHeading')}
-              desc={t('taskCardDesc')}
-            ></TaskCard>
-            <TaskCard
-              title={t('taskCardHeading')}
-              desc={t('taskCardDesc')}
-            ></TaskCard>
-            <TaskCard
-              title={t('taskCardHeading')}
-              desc={t('taskCardDesc')}
-            ></TaskCard>
-            <TaskCard
-              title={t('taskCardHeading')}
-              desc={t('taskCardDesc')}
-            ></TaskCard>
-            <TaskCard
-              title={t('taskCardHeading')}
-              desc={t('taskCardDesc')}
-            ></TaskCard>
-            <TaskCard
-              title={t('taskCardHeading')}
-              desc={t('taskCardDesc')}
-            ></TaskCard>
-            <TaskCard
-              title={t('taskCardHeading')}
-              desc={t('taskCardDesc')}
-            ></TaskCard>
-            <TaskCard
-              title={t('taskCardHeading')}
-              desc={t('taskCardDesc')}
-            ></TaskCard>
+            {dueThisWeek?.map((task) => {
+              return (
+                <TaskCard
+                  title={task?.title}
+                  desc={task?.description}
+                  name={task?.player}
+                />
+              );
+            })}
           </div>
         </div>
         <div id="completed-tasks">
           <div className="task-row">
             <p className="title">{t('taskCompleted')}</p>
-            <a className="link" onClick={showDueTasks}>
+            <div className="link" onClick={showDueTasks}>
               {t('taskHideCompleted')}
-            </a>
+            </div>
           </div>
           <p className="mb-[35px] text-[#545454] text-[18px]">
             To complete an order or view its details, scan the racquet the order
@@ -104,53 +110,18 @@ function Tasks({ t }) {
           </p>
           <div className="task-row">
             <p className="tasks-info">Completed</p>
-            <div className="badge">127</div>
+            <div className="badge">{completed?.length}</div>
           </div>
           <div className="cards-container">
-            <TaskCard
-              title={t('taskCardHeading')}
-              desc={t('taskCardDesc')}
-            ></TaskCard>
-            <TaskCard
-              title={t('taskCardHeading')}
-              desc={t('taskCardDesc')}
-            ></TaskCard>
-            <TaskCard
-              title={t('taskCardHeading')}
-              desc={t('taskCardDesc')}
-            ></TaskCard>
-            <TaskCard
-              title={t('taskCardHeading')}
-              desc={t('taskCardDesc')}
-            ></TaskCard>
-            <TaskCard
-              title={t('taskCardHeading')}
-              desc={t('taskCardDesc')}
-            ></TaskCard>
-            <TaskCard
-              title={t('taskCardHeading')}
-              desc={t('taskCardDesc')}
-            ></TaskCard>
-            <TaskCard
-              title={t('taskCardHeading')}
-              desc={t('taskCardDesc')}
-            ></TaskCard>
-            <TaskCard
-              title={t('taskCardHeading')}
-              desc={t('taskCardDesc')}
-            ></TaskCard>
-            <TaskCard
-              title={t('taskCardHeading')}
-              desc={t('taskCardDesc')}
-            ></TaskCard>
-            <TaskCard
-              title={t('taskCardHeading')}
-              desc={t('taskCardDesc')}
-            ></TaskCard>
-            <TaskCard
-              title={t('taskCardHeading')}
-              desc={t('taskCardDesc')}
-            ></TaskCard>
+            {completed?.map((task) => {
+              return (
+                <TaskCard
+                  title={task?.title}
+                  desc={task?.description}
+                  name={task?.player}
+                />
+              );
+            })}
           </div>
         </div>
       </div>

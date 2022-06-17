@@ -36,11 +36,15 @@ import Inventory from './inventory';
 import PlayerTabs from './player-tabs';
 import ConfigureRacquet from './configure-racquet';
 import AdminWorkflow from './admin-workflow';
+import { CustomDrawer } from 'web/components';
+import { useSelector } from 'react-redux';
 
 function Routers() {
+  const { show } = useSelector((state) => state?.drawer);
   return (
     <>
       <Router>
+        <CustomDrawer show={show} />
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/login" element={<Login />} />

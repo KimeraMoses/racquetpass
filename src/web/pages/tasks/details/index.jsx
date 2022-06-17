@@ -7,10 +7,10 @@ import { Modal } from 'web/components/index';
 import { Link } from 'react-router-dom';
 import './index.styles.scss';
 
-const complete = false;
-
 function Details({ t }) {
   const [show, setShow] = useState(false);
+  const [complete, setComplete] = useState(false);
+  const [justCompleted, setJustCompleted] = useState(false);
   return (
     <div className="task-detail-container">
       <Modal
@@ -37,7 +37,14 @@ function Details({ t }) {
             >
               Cancel
             </div>
-            <div className="text-[#304FFE] text-[18px] font-medium">
+            <div
+              className="text-[#304FFE] text-[18px] font-medium"
+              onClick={() => {
+                setShow(false);
+                setJustCompleted(false);
+                setComplete(false);
+              }}
+            >
               Reopen Task
             </div>
           </div>
@@ -46,7 +53,7 @@ function Details({ t }) {
       <div>
         <div className="header-row">
           <MenuButton>
-            <Link to="/tasks/scanned">
+            <Link to="/tasks/scan">
               <img alt="Menu Icon" src="../svg/arrowLeft.svg" />
             </Link>
           </MenuButton>
@@ -156,15 +163,38 @@ function Details({ t }) {
       </div>
 
       <div>
-        {complete ? (
+        {complete && !justCompleted ? (
           <div
-            className="text-[16px] text-[#304fee] font-semibold text-center mt-[20px]"
+            className="text-[16px] text-[#304fee] font-semibold text-center mt-[40px]"
             onClick={() => setShow(true)}
           >
             Tap here if you made a mistake stringing this racquet
           </div>
+        ) : complete && justCompleted ? (
+          <div className="just-completed-box flex items-center gap-[14px] mt-[40px]">
+            <div className="just-completed-box__text">
+              Completed task and notified Rafael Nadal
+            </div>
+            <div
+              className="just-completed-box__undo"
+              onClick={() => setComplete(false)}
+            >
+              Undo
+            </div>
+          </div>
         ) : (
-          <SubmitButton className="mt-[40px]">Submit Order</SubmitButton>
+          <SubmitButton
+            className="mt-[40px]"
+            onClick={() => {
+              setComplete(true);
+              setJustCompleted(true);
+              setTimeout(() => {
+                setJustCompleted(false);
+              }, 15000);
+            }}
+          >
+            Complete Order
+          </SubmitButton>
         )}
       </div>
     </div>

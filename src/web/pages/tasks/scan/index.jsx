@@ -1,80 +1,121 @@
 import { useEffect, useState } from 'react';
-import { Field } from 'redux-form';
+import { Field, reduxForm } from 'redux-form';
 import BarcodeScannerComponent from 'react-qr-barcode-scanner';
-import { useNavigate } from 'react-router-dom';
-import { withNamespaces } from 'react-i18next';
+import { Link } from 'react-router-dom';
 // Custom Components
-import { BackButton, Heading, Description } from 'web/components';
+import { Heading, Description, Modal } from 'web/components';
 
 // Styles
+import { BackButton } from 'web/components/Buttons/BackButton.component';
+import { withNamespaces } from 'react-i18next';
+import { useNavigate } from 'react-router-dom';
 import './index.styles.scss';
 
-function Scan({ t, setCurrentScreen, backward }) {
+let Scan = ({ t, scanForward, change, backward }) => {
   const [qrCode, setQrCode] = useState('');
   const [qrScanner, setQrScanner] = useState(false);
+  const [raquetFound, setRacquetFound] = useState(true);
+  const [showModal, setShowModal] = useState(false);
+  const [permissionsDenied, setPermissionsDenied] = useState(false);
 
   const navigate = useNavigate();
+
+  const handleShow = () => {
+    setShowModal((prev) => {
+      return !prev;
+    });
+  };
   useEffect(() => {
     if (qrCode) {
-      // change('raquet-details-from-qr', qrCode);
+      change('raquet-details-from-qr', qrCode);
       // TODO: Update logic with RaquetWith with Backend
       // scanForward(raquetFound);
-      navigate('/Tasks/Scanned');
+      navigate('/Tasks/Details');
     }
-  }, [qrCode]);
+  }, [qrCode, change, raquetFound, scanForward]);
+
+  console.log(permissionsDenied);
 
   return (
     <>
-      <div className="scan-section-td">
-        <div className="scan-section-td__heading">
+      <div className="scan-section">
+        <div className="scan-section__heading">
           <BackButton onClick={() => navigate('/tasks')} />
           <Heading>Scan QR Code</Heading>
         </div>
-        <div className="scan-section-td__image-container">
-          {qrScanner ? (
+        <div
+          className="scan-section__image-container"
+          onClick={() => {
+            setQrScanner((qrScanner) => !qrScanner);
+            setPermissionsDenied(false);
+          }}
+        >
+          {qrScanner && !permissionsDenied ? (
             <>
               <BarcodeScannerComponent
                 width={500}
                 height={500}
+                onError={(err) => {
+                  console.log(err?.name);
+                  if (err.name === 'NotAllowedError') {
+                    setPermissionsDenied(true);
+                  }
+                }}
                 onUpdate={(err, result) => {
                   if (result) {
                     setQrCode(result.text);
                     setQrScanner(false);
-                  } else setQrCode('');
+                  } else {
+                    setQrCode('');
+                  }
                 }}
               />
-              {/* <Field
+              <Field
                 name="raquet-details-from-qr"
                 style={{ visibility: 'hidden' }}
                 component="input"
-              /> */}
+              />
             </>
           ) : (
             <>
               <div></div>
-              <img src="/img/orderpage/card.png" alt="scan" />
-              <div className="scan-section-td__image-container-button">
-                <button
-                  className="scan-section-td__image-container-button-btn"
+              {permissionsDenied ? (
+                <div className="px-[30px] text-center text-white text-[24px] font-bold">
+                  Please allow camera permissions and scan again.
+                </div>
+              ) : (
+                <img src="/img/orderpage/card.png" alt="scan" />
+              )}
+              <div className="scan-section__image-container-button">
+                {/* <button
+                  className="scan-section__image-container-button-btn"
                   onClick={() => {
                     setQrScanner((qrScanner) => !qrScanner);
                   }}
-                >
-                  Scan
-                </button>
+                > */}
+                Scan
+                {/* </button> */}
               </div>
             </>
           )}
         </div>
-        <div className="scan-section-td__description">
-          <Description>
-            To scan a QR code, move your camera so the QR code is in the frame
-            and it will be automatically detected.
-          </Description>
+        <div className="scan-section__description">
+          <Description>{t('scanQRDesc')}</Description>
         </div>
       </div>
     </>
   );
-}
+};
+
+const onSubmit = (values, dispatch) => {
+  // dispatch(    // your submit action //      );
+  console.log(values);
+};
+
+Scan = reduxForm({
+  // a unique name for the form
+  form: 'task-scan',
+  onSubmit,
+})(Scan);
 
 export default withNamespaces()(Scan);

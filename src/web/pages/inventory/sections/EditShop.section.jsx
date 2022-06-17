@@ -1,28 +1,43 @@
 import { Field } from 'redux-form';
-import { Link } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
 import {
   Heading,
   HeadingButton,
   CustomInput,
-  SubHeading,
   Description,
   CustomSwitch,
   CustomSelect,
+  SubmitButton,
+  CustomPhoneInput,
 } from 'web/components';
-
 import './EditShop.styles.scss';
-import { SubmitButton } from 'web/components/Buttons/SubmitButton.component';
 
-export function EditShop({ t, setCurrentScreen }) {
-  const shopNameEdited = true;
-  const shopAddressEdited = false;
+const r = /^\s*([A-Z]\w*\s*)*$/;
+const titleCase = (value) => {
+  if (r.test(value) === true) {
+    return undefined;
+  } else {
+    return 'Please enter shop name in title case';
+  }
+};
+//
+
+export function EditShop({ t, setCurrentScreen, change }) {
+  // const shopNameEdited = true;
+  // const shopAddressEdited = false;
+  const phoneNumber = useSelector(
+    (state) => state?.form?.inventory?.values?.['phone-number']
+  );
   return (
     <>
       <div className="edit">
         <div className="edit__heading">
           <Heading>Edit My Pro Shop Info</Heading>
-          <HeadingButton close onClick={() => setCurrentScreen('proshop')} />
+          <HeadingButton
+            text="Close"
+            onClick={() => setCurrentScreen('proshop')}
+          />
         </div>
 
         <div className="edit__services-heading">
@@ -32,30 +47,29 @@ export function EditShop({ t, setCurrentScreen }) {
         <div className="edit__services-form">
           <Field
             name="delivery-time"
-            label="Estimated delivery time (# od days)"
-            type="text"
+            label="Estimated delivery time (# of days)"
+            type="number"
             component={CustomInput}
           />
           <Field
             name="labor-price"
             label="Labor price"
-            type="text"
+            type="number"
             component={CustomInput}
           />
         </div>
-        <div className="edit__service-text">
-          <Description customClass="edit__service-text-txt">
-            {t('editServicesText')}
-          </Description>
+        <div className="mt-[12px] text-[10px] text-[#838383] font-semibold">
+          This is how much you charge for the labor of restringing a racquet. It
+          will be added to the cost of strings to determine the price of a
+          service order.
         </div>
         <div className="edit__service-switch flex justify-between mt-[26px]">
           <Description>{t('shopString')}</Description>
           <CustomSwitch handleChange={() => {}} checked={false} />
         </div>
-        <div className="edit__sevice-string-txt">
-          <Description>{t('editShopNewTxt')}</Description>
+        <div className="mt-[6px] text-[10px] text-[#838383] font-semibold">
+          {t('editShopNewTxt')}
         </div>
-
         <div className="edit__contact-heading">
           <Heading>{t('ShopContactHeading')}</Heading>
         </div>
@@ -64,6 +78,7 @@ export function EditShop({ t, setCurrentScreen }) {
             name="shop"
             label="Shop Name"
             type="text"
+            validate={titleCase}
             component={CustomInput}
           />
           <Field
@@ -72,11 +87,11 @@ export function EditShop({ t, setCurrentScreen }) {
             type="email"
             component={CustomInput}
           />
-          <Field
+          <CustomPhoneInput
+            change={change}
             name="phone-number"
             label="Phone Number"
-            type="text"
-            component={CustomInput}
+            value={phoneNumber}
           />
         </div>
         <div className="edit__address-heading">

@@ -105,7 +105,7 @@ export const SetupPayment = ({
   return (
     <div className="setup-payment">
       <div className="setup-payment__header">
-        <HeadingButton drawer onClick={() => setDrawer(true)} />
+        <HeadingButton drawer onClick={() => setDrawer()} />
         <Heading>{t('paymentHeading')}</Heading>
       </div>
 

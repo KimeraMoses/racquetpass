@@ -1,17 +1,12 @@
-import { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useState, useEffect, useMemo } from 'react';
+import { useNavigate, useLocation } from 'react-router-dom';
 import { withNamespaces } from 'react-i18next';
 import { Field, reduxForm } from 'redux-form';
 import { useSelector } from 'react-redux';
-import {
-  BackButton,
-  Heading,
-  CustomInput,
-  SubmitButton,
-  Description,
-} from 'web/components';
+import { Heading, CustomInput, SubmitButton } from 'web/components';
 
 import './index.styles.scss';
+import { BackButton } from 'web/components/Buttons/BackButton.component';
 
 const length = new RegExp('^(?=.{8,})');
 const lowerCase = new RegExp('^(?=.*[a-z])');
@@ -23,6 +18,11 @@ const strongStrenght = new RegExp(
 const mediumStrength = new RegExp(
   '^(?=.*[a-z])(?=.*[A-Z])(?=.*[^A-Za-z0-9])(?=.{8,})'
 );
+
+function useQuery() {
+  const { search } = useLocation();
+  return useMemo(() => new URLSearchParams(search), [search]);
+}
 
 let ResetPassword = ({ t, back }) => {
   const [passwordFieldType, setPasswordFieldType] = useState('password');
@@ -36,6 +36,9 @@ let ResetPassword = ({ t, back }) => {
     noTextFromNameEmail: false,
   });
   const [passwordStrenght, setPasswordStrenght] = useState('weak');
+
+  const query = useQuery();
+  const comingFrom = query.get('comingFrom');
 
   const firstName = useSelector(
     (state) => state?.form?.signup?.values?.firstName
@@ -160,7 +163,15 @@ let ResetPassword = ({ t, back }) => {
         <div>
           <div className="reset-password__header">
             <div className="reset-password__header-heading">
-              {/* <BackButton onClick={back} /> */}
+              {comingFrom === 'shop' ? (
+                <BackButton
+                  onClick={() => {
+                    navigate('/inventory?active=proshop');
+                  }}
+                />
+              ) : (
+                <></>
+              )}
               <Heading>Reset Password</Heading>
             </div>
           </div>

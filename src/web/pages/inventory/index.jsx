@@ -21,23 +21,26 @@ import {
 
 import './inventory.styles.scss';
 import { useLocation } from '../../../../node_modules/react-router-dom/index';
+import { useDispatch } from 'react-redux';
 
 function useQuery() {
   const { search } = useLocation();
   return useMemo(() => new URLSearchParams(search), [search]);
 }
 
-let Inventory = ({ t }) => {
-  const [showDrawer, setShowDrawer] = useState(false);
+let Inventory = ({ t, change }) => {
+  // const [showDrawer, setShowDrawer] = useState(false);
   const [isReceive, setIsReceive] = useState(false);
-
   const query = useQuery();
   const active = query.get('active');
+
   const [currentScreen, setCurrentScreen] = useState(active);
 
   useEffect(() => {
     setCurrentScreen(active);
   }, [active]);
+
+  const dispatch = useDispatch();
 
   const getCurrentScreen = () => {
     switch (currentScreen) {
@@ -46,7 +49,7 @@ let Inventory = ({ t }) => {
           <SearchInventory
             t={t}
             setCurrentScreen={setCurrentScreen}
-            setDrawer={setShowDrawer}
+            setDrawer={() => dispatch({ type: 'SHOW_DRAWER' })}
           />
         );
       case 'add':
@@ -60,11 +63,13 @@ let Inventory = ({ t }) => {
           <ProShop
             t={t}
             setCurrentScreen={setCurrentScreen}
-            setDrawer={setShowDrawer}
+            setDrawer={() => dispatch({ type: 'SHOW_DRAWER' })}
           />
         );
       case 'editShop':
-        return <EditShop t={t} setCurrentScreen={setCurrentScreen} />;
+        return (
+          <EditShop t={t} setCurrentScreen={setCurrentScreen} change={change} />
+        );
       case 'editShopName':
         return <RequestChange t={t} setCurrentScreen={setCurrentScreen} />;
       case 'editShopAddress':
@@ -82,7 +87,7 @@ let Inventory = ({ t }) => {
           <SetupPayment
             t={t}
             setCurrentScreen={setCurrentScreen}
-            setDrawer={setShowDrawer}
+            setDrawer={() => dispatch({ type: 'SHOW_DRAWER' })}
             setIsReceive={setIsReceive}
           />
         );
@@ -103,7 +108,7 @@ let Inventory = ({ t }) => {
           <SearchInventory
             t={t}
             setCurrentScreen={setCurrentScreen}
-            setDrawer={setShowDrawer}
+            setDrawer={() => dispatch({ type: 'SHOW_DRAWER' })}
           />
         );
     }
@@ -111,12 +116,12 @@ let Inventory = ({ t }) => {
 
   return (
     <div className="inventory">
-      <CustomDrawer
+      {/* <CustomDrawer
         setShow={setShowDrawer}
         show={showDrawer}
         setCurrentScreen={setCurrentScreen}
         activeLink={active}
-      />
+      /> */}
       <form className="inventory-form">{getCurrentScreen()}</form>
     </div>
   );

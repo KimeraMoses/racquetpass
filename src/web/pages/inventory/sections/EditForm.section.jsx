@@ -29,7 +29,7 @@ export function EditForm({ t, setCurrentScreen }) {
       <div className="edit-form">
         <div>
           <div className="edit-form__header">
-            <BackButton onClick={() => setCurrentScreen('inventory')} />
+            <BackButton onClick={() => setCurrentScreen('detail')} />
             {/* <Heading>{t('profileButtonAddNew')}</Heading> */}
             <Heading>{t('profileFormEdit')}</Heading>
           </div>

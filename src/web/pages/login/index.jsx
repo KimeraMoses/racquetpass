@@ -95,7 +95,7 @@ function Login({ t, handleSubmit }) {
                 if (missingQR) {
                   navigate('/CreateOrder/Locker');
                 } else {
-                  navigate('/inventory?active=inventory');
+                  navigate('/tasks');
                 }
               }}
               className="signin__form-buttons-btn"

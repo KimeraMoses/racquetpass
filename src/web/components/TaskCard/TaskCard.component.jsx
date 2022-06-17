@@ -2,17 +2,20 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import './TaskCard.styles.scss';
 
-export const TaskCard = ({ src, title, desc }) => {
+export const TaskCard = ({ src, title, desc, name }) => {
   return (
-    <Link to="/Tasks/Details" className="task-card">
-      <div className="row">
-        <img alt="title" src={src} />
-        <div className="info">
-          <p className="title">{title}</p>
-          <p className="sub-title">{desc}</p>
+    <div className="task-card">
+      <div className="flex items-start justify-between">
+        <div className="flex items-start justify-between task-card__details">
+          <img alt="title" src={src} />
+          <div className="info">
+            <p className="title">{title}</p>
+            <p className="sub-title">{desc}</p>
+          </div>
         </div>
+        <div className="name">{name}</div>
       </div>
-    </Link>
+    </div>
   );
 };
 

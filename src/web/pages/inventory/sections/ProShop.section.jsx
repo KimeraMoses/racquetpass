@@ -1,4 +1,4 @@
-// import { Field } from 'redux-form';
+import { useNavigate } from 'react-router-dom';
 import {
   HeadingButton,
   Heading,
@@ -9,12 +9,13 @@ import {
 import './ProShop.styles.scss';
 
 export function ProShop({ t, setCurrentScreen, setDrawer }) {
+  const navigate = useNavigate();
   return (
     <>
       <div className="shop">
         <div className="shop__header">
           <div className="shop__header-headings">
-            <HeadingButton drawer onClick={() => setDrawer(true)} />
+            <HeadingButton drawer onClick={() => setDrawer()} />
             <Heading>{t('shopProHeading')}</Heading>
           </div>
           <HeadingButton
@@ -105,7 +106,12 @@ export function ProShop({ t, setCurrentScreen, setDrawer }) {
             </div>
             <div className="bg-[#F8F8F8] border-[#E8E8E8] border-[1px] p-[6px] rounded-[12px] flex items-center justify-between">
               <div className="p-[10px]">••••••••••••</div>
-              <HeadingButton text="Reset" />
+              <HeadingButton
+                text="Reset"
+                onClick={() => {
+                  navigate('/reset-password?comingFrom=shop');
+                }}
+              />
             </div>
           </div>
         </div>

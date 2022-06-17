@@ -140,4 +140,25 @@
       }
     }
   }
+  .just-completed-box {
+    background: #ffffff;
+    box-shadow: 0px 4px 40px rgba(0, 0, 0, 0.25);
+    border-radius: 12px;
+    padding: 19px;
+    &__text {
+      font-family: 'Poppins';
+      font-style: normal;
+      font-weight: 500;
+      font-size: 14px;
+      color: #3c3c3c;
+    }
+    &__undo {
+      font-family: 'Poppins';
+      font-style: normal;
+      font-weight: 500;
+      font-size: 14px;
+      text-align: right;
+      color: #304ffe;
+    }
+  }
 }

@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import Drawer from 'react-modern-drawer';
 import { useLocation, useNavigate } from 'react-router-dom';
 
@@ -8,13 +8,18 @@ import { Tick, Shop, Inventory, Payment, Logout } from 'web/icons';
 //import styles 👇
 import 'react-modern-drawer/dist/index.css';
 import './index.scss';
+import { useDispatch, useSelector } from 'react-redux';
 
-export const CustomDrawer = ({ show, setShow, activeLink }) => {
-  const toggleDrawer = () => {
-    setShow((prevState) => !prevState);
-  };
+function useQuery() {
+  const { search } = useLocation();
+  return useMemo(() => new URLSearchParams(search), [search]);
+}
 
+export const CustomDrawer = () => {
+  const query = useQuery();
+  const activeLink = query.get('active');
   const [active, setActive] = useState('');
+  const { show } = useSelector((state) => state?.drawer);
 
   const location = useLocation();
   const navigate = useNavigate();
@@ -31,11 +36,13 @@ export const CustomDrawer = ({ show, setShow, activeLink }) => {
     }
   }, [location?.pathname, activeLink]);
 
+  const dispatch = useDispatch();
+
   return (
     <>
       <Drawer
         open={show}
-        onClose={toggleDrawer}
+        onClose={() => dispatch({ type: 'HIDE_DRAWER' })}
         direction="left"
         className="bla bla bla"
         size={`${80}vw`}
@@ -55,7 +62,7 @@ export const CustomDrawer = ({ show, setShow, activeLink }) => {
                 close
                 height="48px"
                 width="48px"
-                onClick={() => setShow(false)}
+                onClick={() => dispatch({ type: 'HIDE_DRAWER' })}
               />
             </div>
           </div>
@@ -70,7 +77,7 @@ export const CustomDrawer = ({ show, setShow, activeLink }) => {
                   onClick: () => {
                     setActive('1');
                     navigate('/tasks');
-                    setShow(false);
+                    dispatch({ type: 'HIDE_DRAWER' });
                   },
                 },
                 {
@@ -80,7 +87,7 @@ export const CustomDrawer = ({ show, setShow, activeLink }) => {
                   onClick: () => {
                     setActive('2');
                     navigate('/inventory?active=proshop');
-                    setShow(false);
+                    dispatch({ type: 'HIDE_DRAWER' });
                   },
                 },
                 {
@@ -90,7 +97,7 @@ export const CustomDrawer = ({ show, setShow, activeLink }) => {
                   onClick: () => {
                     setActive('3');
                     navigate('/inventory?active=inventory');
-                    setShow(false);
+                    dispatch({ type: 'HIDE_DRAWER' });
                   },
                 },
                 {
@@ -100,7 +107,7 @@ export const CustomDrawer = ({ show, setShow, activeLink }) => {
                   onClick: () => {
                     setActive('4');
                     navigate('/inventory?active=payment');
-                    setShow(false);
+                    dispatch({ type: 'HIDE_DRAWER' });
                   },
                 },
                 {
@@ -109,7 +116,7 @@ export const CustomDrawer = ({ show, setShow, activeLink }) => {
                   active: active === '5',
                   onClick: () => {
                     navigate('/login');
-                    setShow(false);
+                    dispatch({ type: 'HIDE_DRAWER' });
                   },
                 },
               ]}
