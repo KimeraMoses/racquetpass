@@ -1,11 +1,12 @@
+import { useState } from 'react';
+import { useSelector } from 'react-redux';
 import { Field } from 'redux-form';
 // Custom Components
 import {
   Heading,
-  SubHeading,
   Description,
-  HeadingButton,
   CustomInput,
+  CustomPhoneInput,
 } from 'web/components';
 import { BackButton } from 'web/components/Buttons/BackButton.component';
 
@@ -13,20 +14,11 @@ import { BackButton } from 'web/components/Buttons/BackButton.component';
 import './Contact.styles.scss';
 
 const required = (value) => (value ? undefined : 'Required');
-// Phone Validation
-const formats = '(999)999-9999|999-999-9999|9999999999';
-const r = RegExp(
-  '^(' + formats.replace(/([\(\)])/g, '\\$1').replace(/9/g, '\\d') + ')$'
-);
-const phoneNumber = (value) => {
-  if (r.test(value) === true) {
-    return undefined;
-  } else {
-    return 'Please enter a valid phone number.';
-  }
-};
 
 export function Contact({ t, backward, change }) {
+  const phoneNumber = useSelector(
+    (state) => state?.form?.signup?.values?.['phone-number']
+  );
   return (
     <>
       <div className="contact-section-odr">
@@ -35,7 +27,6 @@ export function Contact({ t, backward, change }) {
           <Heading customClass="contact-section-odr__heading-text">
             {t('odrStayHeading')}
           </Heading>
-          {/* <HeadingButton close onClick={backward} /> */}
         </div>
         <div className="contact-section-odr__text-container">
           <Description customClass="contact-section-odr__text-container-text">
@@ -57,30 +48,43 @@ export function Contact({ t, backward, change }) {
             validate={required}
             component={CustomInput}
           />
-          <Field
+          <CustomPhoneInput
+            change={change}
             name="phone-number"
             label="Phone Number"
+            value={phoneNumber}
+          />
+          {/* <CustomInput
+            name="phone-number"
+            label="Phone Number"
+            value={phoneNumber}
             type="tel"
             placeholder="(323)323-3323"
-            validate={[required, phoneNumber]}
-            component={(props) => (
-              <CustomInput
-                {...props}
-                customOnChange={(e) => {
-                  const value = e?.target?.value;
-                  if (value && value?.length === 10 && !isNaN(Number(value))) {
-                    const formattedNumber = `(${value.substring(
-                      0,
-                      3
-                    )})${value?.substring(3, 6)}-${value?.substring(6, 10)}`;
-                    change('phone-number', formattedNumber);
-                  } else {
-                    change('phone-number', value);
-                  }
-                }}
-              />
-            )}
-          />
+            customOnBlur={(e) => {
+              setPhoneTouched(true);
+            }}
+            meta={{
+              touched: phoneTouched,
+              error: !phoneNumber
+                ? 'Field is required'
+                : phoneValidation(phoneNumber) !== undefined
+                ? phoneValidation(phoneNumber)
+                : '',
+            }}
+            customOnChange={(e) => {
+              const value = e?.target?.value;
+              if (value && value?.length === 10 && !isNaN(Number(value))) {
+                const formattedNumber = `(${value.substring(
+                  0,
+                  3
+                )})${value?.substring(3, 6)}-${value?.substring(6, 10)}`;
+                change('phone-number', formattedNumber);
+              } else {
+                change('phone-number', value);
+              }
+            }}
+          /> */}
+
           <Description>{t('selectStringContact')}</Description>
         </div>
       </div>

@@ -28,8 +28,10 @@ export const Done = ({ t, setStep, setDone }) => {
               Order Submitted!
             </h5>
             <p className="text-white text-[18px] font-normal text-center mt-[20px] mb-[34px]">
-              We've sent you a text confirming your order details. Didn't get a
-              text?
+              We've sent you a text confirming your order details.{' '}
+              <Link to="" className="underline">
+                Didn't get a text?
+              </Link>
             </p>
             <div className="flex flex-col items-center gap-[12px]">
               <button

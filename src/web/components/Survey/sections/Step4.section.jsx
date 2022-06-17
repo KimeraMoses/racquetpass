@@ -44,11 +44,11 @@ export const Step4 = ({ back, onExit, setShow }) => {
           if (e.target.value < 1.5 || e.target.value > 7.0) {
             setNtrp(e.target.value);
             setNtrpError('Please enter a valid NTRP rating');
-            setUtr('');
+            // setUtr('');
           } else {
             setNtrpError('');
             setNtrp(e.target.value);
-            setUtr('');
+            // setUtr('');
           }
         }}
         type="number"
@@ -67,11 +67,11 @@ export const Step4 = ({ back, onExit, setShow }) => {
           if (e.target.value < 1 || e.target.value > 16.5) {
             setUtr(e.target.value);
             setUtrError('Please enter a valid NTRP rating');
-            setNtrp('');
+            // setNtrp('');
           } else {
             setUtrError('');
             setUtr(e.target.value);
-            setNtrp('');
+            // setNtrp('');
           }
         }}
         error={utrError}

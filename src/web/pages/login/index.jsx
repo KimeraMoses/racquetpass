@@ -74,7 +74,7 @@ function Login({ t, handleSubmit }) {
             <Field
               name="password"
               label="Password"
-              placeholder="&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;"
+              placeholder="Password"
               component={CustomInput}
               switchPasswordShow={() => {
                 if (passwordFieldType === 'password') {
@@ -100,7 +100,7 @@ function Login({ t, handleSubmit }) {
               }}
               className="signin__form-buttons-btn"
             >
-              {t('homeSignin')}
+              Log In
             </SubmitButton>
             <Link to="/forgot" className="signin__form-buttons-link">
               {t('odrForgetPass')}

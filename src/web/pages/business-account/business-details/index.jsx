@@ -50,7 +50,6 @@ let BusinessDetails = ({ t, change }) => {
               placeholder="Apt, suite, etc"
               type="text"
               component={CustomInput}
-              validate={required}
             />
             <div className="business-account-fields-cs">
               <Field
@@ -77,7 +76,7 @@ let BusinessDetails = ({ t, change }) => {
               name="zip-code"
               label="ZIP Code"
               placeholder="ZIP`"
-              type="text"
+              type="number"
               validate={required}
               component={CustomInput}
             />

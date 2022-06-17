@@ -9,7 +9,7 @@ import './index.styles.scss';
 // import { AccountButton } from 'web/components/Buttons/AccountButton.component';
 // import { SubHeading } from 'web/components/atoms/SubHeading.atom';
 import { SubmitButton } from 'web/components/Buttons/SubmitButton.component';
-import { CustomInput } from 'web/components/formFields/index';
+import { CustomInput, CustomPhoneInput } from 'web/components/formFields/index';
 import { Heading } from 'web/components/atoms/Heading.atom';
 import { BackButton } from 'web/components/Buttons/BackButton.component';
 import { useNavigate } from '../../../../../node_modules/react-router-dom/index';
@@ -17,21 +17,25 @@ import { useSelector } from 'react-redux';
 
 const required = (value) => (value ? undefined : 'This field is required');
 // Phone Validation
-const formats = '(999)999-9999|999-999-9999|9999999999';
-const r = RegExp(
-  '^(' + formats.replace(/([\(\)])/g, '\\$1').replace(/9/g, '\\d') + ')$'
-);
-const phoneNumber = (value) => {
-  if (r.test(value) === true) {
-    return undefined;
-  } else {
-    return 'Please enter a valid phone number.';
-  }
-};
+// const formats = '(999)999-9999|999-999-9999|9999999999';
+// const r = RegExp(
+//   '^(' + formats.replace(/([\(\)])/g, '\\$1').replace(/9/g, '\\d') + ')$'
+// );
+// const phoneNumber = (value) => {
+//   if (r.test(value) === true) {
+//     return undefined;
+//   } else {
+//     return 'Please enter a valid phone number.';
+//   }
+// };
 
-let Create = ({ t }) => {
+let Create = ({ t, change }) => {
   const errors = useSelector(
     (state) => state?.form?.['create-business-account-1']?.syncErrors
+  );
+  const phoneNumber = useSelector(
+    (state) =>
+      state?.form?.['create-business-account-1']?.values?.['phone-number']
   );
   const navigate = useNavigate();
   return (
@@ -54,7 +58,7 @@ let Create = ({ t }) => {
                   navigate('/login');
                 }}
               >
-                {t('homeSignin')}
+                Log In
               </button>
             </div>
           </div>
@@ -77,12 +81,11 @@ let Create = ({ t }) => {
               component={CustomInput}
               validate={required}
             />
-            <Field
+            <CustomPhoneInput
+              change={change}
               name="phone-number"
               label="Phone Number"
-              type="text"
-              component={CustomInput}
-              validate={[required, phoneNumber]}
+              value={phoneNumber}
             />
           </div>
           <div>

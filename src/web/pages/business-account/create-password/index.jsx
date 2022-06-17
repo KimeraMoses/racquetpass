@@ -302,7 +302,7 @@ let CreatePassword = ({ t, back }) => {
               }
               className="account-details__form-button-btn"
             >
-              Reset Password
+              Create Account
             </SubmitButton>
           </div>
         </div>
