@@ -88,7 +88,7 @@ export function ReviewOrder({ t, setStep, setDone, setBackFromReview }) {
             <Heading customClass="review-order-odr__shop-heading-text">
               {t('odrRacquet')}
             </Heading>
-            <HeadingButton text="Change Racquet" />
+            <HeadingButton text="Change Racquet" onClick={() => setStep(20)} />
           </div>
           <div className="review-order-odr__shop-card">
             <SearchCard
@@ -105,7 +105,13 @@ export function ReviewOrder({ t, setStep, setDone, setBackFromReview }) {
             <Heading customClass="review-order-odr__summary-heading-text">
               {t('odrSummary')}
             </Heading>
-            <HeadingButton text="Change Strings" />
+            <HeadingButton
+              text="Change Strings"
+              onClick={() => {
+                setBackFromReview(true);
+                setStep(2);
+              }}
+            />
           </div>
           <div className="review-order-odr__summary-card">
             <SummaryCard />
@@ -122,7 +128,7 @@ export function ReviewOrder({ t, setStep, setDone, setBackFromReview }) {
             }}
             style={{ marginBottom: '40px' }}
           >
-            Pay with Stripe
+            Pay and Finish
           </PaymentButton>
         </div>
         {/* {active ? (

@@ -36,7 +36,17 @@ export function ShopSearchResults({
             }}
             component={CustomInput}
           />
-          <div role="button" onClick={() => navigate('/')}>
+          <div
+            role="button"
+            onClick={() => {
+              if (backFromReview) {
+                setStep(6);
+                setBackFromReview(false);
+              } else {
+                navigate('/');
+              }
+            }}
+          >
             <span className="shop-result__search-container-link">Cancel</span>
           </div>
         </div>

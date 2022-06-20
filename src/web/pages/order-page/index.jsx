@@ -19,13 +19,14 @@ import {
   ReviewOrder,
   Done,
   OrderDetails,
+  EditRacquet,
 } from './sections';
 
 import './order.styles.scss';
 import { useSelector } from 'react-redux';
 
 let OrderPage = ({ t, handleSubmit, change }) => {
-  const [step, setStep] = useState(6);
+  const [step, setStep] = useState(0);
   const [steps, setSteps] = useState({
     active: '',
     content: ['QR', 'Strings', 'Contact', 'Review'],
@@ -163,6 +164,7 @@ let OrderPage = ({ t, handleSubmit, change }) => {
             backFromReview={backFromReview}
             forward={forward}
             change={change}
+            setBackFromReview={setBackFromReview}
           />
         );
       case 'find':
@@ -192,6 +194,8 @@ let OrderPage = ({ t, handleSubmit, change }) => {
             setStep={setStep}
             step={step}
             change={change}
+            backFromReview={backFromReview}
+            setBackFromReview={setBackFromReview}
           />
         );
       case 'search':
@@ -255,7 +259,16 @@ let OrderPage = ({ t, handleSubmit, change }) => {
       case 3:
         return getCurrentMainCross();
       case 4:
-        return <Contact t={t} backward={backward} change={change} />;
+        return (
+          <Contact
+            t={t}
+            backward={backward}
+            change={change}
+            setStep={setStep}
+            setBackFromReview={setBackFromReview}
+            backFromReview={setBackFromReview}
+          />
+        );
       case 5:
         return <VerifyPhone t={t} backward={backward} />;
       case 6:
@@ -272,6 +285,8 @@ let OrderPage = ({ t, handleSubmit, change }) => {
         return <Done t={t} setStep={setStep} setDone={setDone} />;
       case 8:
         return <OrderDetails t={t} setStep={setStep} setDone={setDone} />;
+      case 20:
+        return <EditRacquet t={t} setStep={setStep} change={change} />;
       default:
         return <>Undetected Step</>;
     }
@@ -281,6 +296,7 @@ let OrderPage = ({ t, handleSubmit, change }) => {
       {step === 7 ||
       step === 0 ||
       step === 8 ||
+      step === 20 ||
       mainCross.current === 'search' ||
       strings.current === 'search' ? (
         <></>

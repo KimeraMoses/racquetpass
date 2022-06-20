@@ -27,6 +27,8 @@ export function SelectString({
   setStringsCurrent,
   setStep,
   change,
+  backFromReview,
+  setBackFromReview,
 }) {
   const [modal, setModal] = useState(false);
 
@@ -71,7 +73,16 @@ export function SelectString({
           closeText="Got it"
         />
         <div className="select-string-odr__heading">
-          <BackButton onClick={backward} />
+          <BackButton
+            onClick={() => {
+              if (backFromReview) {
+                setStep(6);
+                setBackFromReview(false);
+              } else {
+                backward();
+              }
+            }}
+          />
           <Heading>{t('odrSelect')}</Heading>
         </div>
         <div className="select-string-odr__text-container">

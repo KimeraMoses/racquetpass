@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import { useSelector } from 'react-redux';
 import { Field } from 'redux-form';
 // Custom Components
@@ -15,7 +14,14 @@ import './Contact.styles.scss';
 
 const required = (value) => (value ? undefined : 'Required');
 
-export function Contact({ t, backward, change }) {
+export function Contact({
+  t,
+  backward,
+  change,
+  backFromReview,
+  setStep,
+  setBackFromReview,
+}) {
   const phoneNumber = useSelector(
     (state) => state?.form?.signup?.values?.['phone-number']
   );
@@ -23,7 +29,16 @@ export function Contact({ t, backward, change }) {
     <>
       <div className="contact-section-odr">
         <div className="contact-section-odr__heading">
-          <BackButton onClick={backward} />
+          <BackButton
+            onClick={() => {
+              if (backFromReview) {
+                setStep(6);
+                setBackFromReview(false);
+              } else {
+                backward();
+              }
+            }}
+          />
           <Heading customClass="contact-section-odr__heading-text">
             {t('odrStayHeading')}
           </Heading>
