@@ -29,9 +29,12 @@ export const Done = ({ t, setStep, setDone }) => {
             </h5>
             <p className="text-white text-[18px] font-normal text-center mt-[20px] mb-[34px]">
               We've sent you a text confirming your order details.{' '}
-              <Link to="" className="underline">
+              <span
+                className="underline cursor-pointer"
+                onClick={() => setStep(9)}
+              >
                 Didn't get a text?
-              </Link>
+              </span>
             </p>
             <div className="flex flex-col items-center gap-[12px]">
               <button

@@ -20,13 +20,15 @@ import {
   Done,
   OrderDetails,
   EditRacquet,
+  DidntGetText,
 } from './sections';
 
 import './order.styles.scss';
 import { useSelector } from 'react-redux';
+import { VerifyResend } from './sections/VerifyResend.section';
 
 let OrderPage = ({ t, handleSubmit, change }) => {
-  const [step, setStep] = useState(0);
+  const [step, setStep] = useState(7);
   const [steps, setSteps] = useState({
     active: '',
     content: ['QR', 'Strings', 'Contact', 'Review'],
@@ -37,7 +39,7 @@ let OrderPage = ({ t, handleSubmit, change }) => {
   const [mainCross, setMainCross] = useState({ current: 'initial' });
   const [main, setMain] = useState(false);
   const [cross, setCross] = useState(false);
-  const [done, setDone] = useState(false);
+  const [done, setDone] = useState(true);
   const [backFromReview, setBackFromReview] = useState(false);
 
   const navigate = useNavigate();
@@ -285,6 +287,19 @@ let OrderPage = ({ t, handleSubmit, change }) => {
         return <Done t={t} setStep={setStep} setDone={setDone} />;
       case 8:
         return <OrderDetails t={t} setStep={setStep} setDone={setDone} />;
+      case 9:
+        return (
+          <DidntGetText
+            t={t}
+            backward={backward}
+            change={change}
+            setStep={setStep}
+            setBackFromReview={setBackFromReview}
+            backFromReview={setBackFromReview}
+          />
+        );
+      case 10:
+        return <VerifyResend t={t} setStep={setStep} />;
       case 20:
         return <EditRacquet t={t} setStep={setStep} change={change} />;
       default:
@@ -296,7 +311,9 @@ let OrderPage = ({ t, handleSubmit, change }) => {
       {step === 7 ||
       step === 0 ||
       step === 8 ||
+      step === 9 ||
       step === 20 ||
+      done ||
       mainCross.current === 'search' ||
       strings.current === 'search' ? (
         <></>

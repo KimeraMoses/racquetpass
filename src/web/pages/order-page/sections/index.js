@@ -15,3 +15,5 @@ export { ReviewOrder } from './ReviewOrder.section';
 export { Done } from './Done.section';
 export { OrderDetails } from './OrderDetails.section';
 export { EditRacquet } from './EditRacquet.section';
+export { DidntGetText } from './DidntGetText.section';
+export { VerifyResend } from './VerifyResend.section';
