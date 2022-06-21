@@ -14,18 +14,26 @@ export const Survey = ({ show, setShow, onExit }) => {
   }, [show]);
 
   const [step, setStep] = useState(1);
+  const [hasRating, setHasRating] = useState(false);
   const next = () => {
     setStep((prev) => prev + 1);
   };
   const back = () => {
-    setStep((prev) => prev - 1);
+    if (step === 4 && hasRating) {
+      setStep(2);
+      setHasRating(false);
+    } else {
+      setStep((prev) => prev - 1);
+    }
   };
 
   return (
     <div className={`survey ${show ? 'survey-show' : ''}`}>
       <div className="survey__inner">
         {step === 1 && <Step1 next={next} />}
-        {step === 2 && <Step2 next={next} />}
+        {step === 2 && (
+          <Step2 next={next} setStep={setStep} setHasRating={setHasRating} />
+        )}
         {step === 3 && <Step3 next={next} back={back} />}
         {step === 4 && <Step4 back={back} onExit={onExit} setShow={setShow} />}
       </div>

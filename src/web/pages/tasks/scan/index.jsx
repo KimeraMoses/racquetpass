@@ -38,13 +38,13 @@ let Scan = ({ t, scanForward, change, backward }) => {
 
   return (
     <>
-      <div className="scan-section">
-        <div className="scan-section__heading">
+      <div className="task-scan-section">
+        <div className="task-scan-section__heading">
           <BackButton onClick={() => navigate('/tasks')} />
           <Heading>Scan QR Code</Heading>
         </div>
         <div
-          className="scan-section__image-container"
+          className="task-scan-section__image-container"
           onClick={() => {
             setQrScanner((qrScanner) => !qrScanner);
             setPermissionsDenied(false);
@@ -86,9 +86,9 @@ let Scan = ({ t, scanForward, change, backward }) => {
               ) : (
                 <img src="/img/orderpage/card.png" alt="scan" />
               )}
-              <div className="scan-section__image-container-button">
+              <div className="task-scan-section__image-container-button">
                 {/* <button
-                  className="scan-section__image-container-button-btn"
+                  className="task-scan-section__image-container-button-btn"
                   onClick={() => {
                     setQrScanner((qrScanner) => !qrScanner);
                   }}
@@ -99,7 +99,7 @@ let Scan = ({ t, scanForward, change, backward }) => {
             </>
           )}
         </div>
-        <div className="scan-section__description">
+        <div className="task-scan-section__description">
           <Description>{t('scanQRDesc')}</Description>
         </div>
       </div>

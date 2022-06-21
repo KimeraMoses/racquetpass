@@ -28,7 +28,7 @@ import { useSelector } from 'react-redux';
 import { VerifyResend } from './sections/VerifyResend.section';
 
 let OrderPage = ({ t, handleSubmit, change }) => {
-  const [step, setStep] = useState(7);
+  const [step, setStep] = useState(0);
   const [steps, setSteps] = useState({
     active: '',
     content: ['QR', 'Strings', 'Contact', 'Review'],
@@ -39,12 +39,23 @@ let OrderPage = ({ t, handleSubmit, change }) => {
   const [mainCross, setMainCross] = useState({ current: 'initial' });
   const [main, setMain] = useState(false);
   const [cross, setCross] = useState(false);
-  const [done, setDone] = useState(true);
+  const [done, setDone] = useState(false);
   const [backFromReview, setBackFromReview] = useState(false);
 
   const navigate = useNavigate();
 
   const errors = useSelector((state) => state?.form?.signup?.syncErrors);
+
+  const goToTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth',
+    });
+  };
+
+  useEffect(() => {
+    goToTop();
+  }, [step, strings, mainCross, done, scan, shop]);
 
   useEffect(() => {
     switch (step) {
