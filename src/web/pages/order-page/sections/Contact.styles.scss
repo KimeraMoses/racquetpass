@@ -1,8 +1,8 @@
-.contact-section {
+.contact-section-odr {
   &__heading {
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    gap: 20px;
     &-text {
       max-width: 300px;
     }
@@ -24,5 +24,14 @@
     line-height: 18px;
     color: #969696;
     margin-bottom: 20px;
+    p.description {
+      font-family: 'Poppins';
+      font-style: normal;
+      font-weight: 500;
+      font-size: 12px;
+      line-height: 18px;
+
+      color: #545454;
+    }
   }
 }

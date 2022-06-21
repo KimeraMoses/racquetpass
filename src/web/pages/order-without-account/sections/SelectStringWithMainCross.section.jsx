@@ -14,9 +14,14 @@ import {
 
 // Styles
 import './SelectStringWithMainCross.styles.scss';
+import { FileInput } from 'web/components/formFields/index';
+import { useState } from 'react';
+import { Modal } from 'web/components/index';
+import { BackButton } from 'web/components/Buttons/BackButton.component';
 
 export function SelectStringWithMainCross({
   t,
+  backward,
   setStep,
   setMainCross,
   setMain,
@@ -28,10 +33,31 @@ export function SelectStringWithMainCross({
   const cross = useSelector(
     (state) => state?.form?.orderWithoutAccount?.values?.cross
   );
+
+  const [modal, setModal] = useState(false);
   return (
     <>
+      <Modal
+        showModal={modal}
+        handleShow={() => setModal(!modal)}
+        heading="Use hybrid strings for further customization"
+        text={
+          <div className="flex flex-col gap-[24px] mt-[18px]">
+            <p className="text-[rgba(51,51,51,0.8)] text-[14px]">
+              Enable “use hybrid strings” to use different strings for mains and
+              crosses.
+            </p>
+            <p className="text-[rgba(51,51,51,0.8)] text-[14px]">
+              Mains are the vertical strings and crosses are the horizontal
+              strings.
+            </p>
+          </div>
+        }
+        closeText="Got it"
+      />
       <div className="select-string-mc">
-        <div className="select-string-mc__heading">
+        <div className="select-string-mc__heading justify-start gap-[16px]">
+          <BackButton onClick={() => setStep(3)} />
           <Heading customClass="select-string-mc__heading-text">
             {t('odrSelect')}
           </Heading>
@@ -106,7 +132,7 @@ export function SelectStringWithMainCross({
               }}
               checked={true}
             />
-            <InfoButton />
+            <InfoButton onClick={() => setModal(!modal)} />
           </div>
         </div>
         <div className="select-string-mc__total-price">
@@ -147,6 +173,17 @@ export function SelectStringWithMainCross({
             type="text"
             component={CustomInput}
           />
+          <div className="select-string-odr__recquet-form-pic-box">
+            <Field
+              name="image"
+              label="Picture (optional)"
+              component={FileInput}
+            />
+            <Description>
+              Adding a picture makes it easy for your stringer to pick out your
+              racquet from others.
+            </Description>
+          </div>
         </div>
       </div>
     </>

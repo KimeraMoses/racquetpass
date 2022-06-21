@@ -137,9 +137,21 @@ let CreatePassword = ({ t, back }) => {
 
   const renderBullet = (condition) => {
     if (condition) {
-      return <img src="/img/bullets/blue.png" />;
+      return (
+        <img
+          src="/img/bullets/dark.png"
+          alt="tick"
+          style={{ height: '24px', width: '24px' }}
+        />
+      );
     } else {
-      return <img src="/img/bullets/grey.png" />;
+      return (
+        <img
+          src="/img/bullets/light.png"
+          alt="tick"
+          style={{ height: '24px', width: '24px' }}
+        />
+      );
     }
   };
   return (
@@ -148,15 +160,17 @@ let CreatePassword = ({ t, back }) => {
         <div>
           <div className="create-business-password__header">
             <div className="create-business-password__header-heading">
-              <BackButton onClick={back} />
+              <BackButton
+                onClick={() => navigate('/BusinessAccount/BusinessDetails')}
+              />
               <Heading>{t('accPassword')}</Heading>
             </div>
           </div>
-          <div>
+          {/* <div>
             <Description customClass="create-business-password__desc">
               {t('accPasstxt')}
             </Description>
-          </div>
+          </div> */}
           <div className="create-business-password__input-password">
             <Field
               name="password"
@@ -174,7 +188,7 @@ let CreatePassword = ({ t, back }) => {
               isPasswordField
               onChange={(e) => setPassword(e.target.value)}
             />
-            <div
+            {/* <div
               className={`create-business-password__input-password-strength ${
                 passwordStrenght === 'weak'
                   ? 'create-business-password__input-password-strength-weak'
@@ -194,9 +208,9 @@ let CreatePassword = ({ t, back }) => {
                 : passwordStrenght === 'medium'
                 ? 'Medium'
                 : 'Weak'}
-            </div>
+            </div> */}
           </div>
-          <div className="create-business-password__progress">
+          {/* <div className="create-business-password__progress">
             <div
               className={`create-business-password__progress-inner ${
                 passwordStrenght === 'weak'
@@ -212,9 +226,9 @@ let CreatePassword = ({ t, back }) => {
                   : ''
               }`}
             ></div>
-          </div>
+          </div> */}
           <div className="create-business-password__password-list">
-            <Description>{t('accPassRecommend')}</Description>
+            {/* <Description>{t('accPassRecommend')}</Description> */}
             <ul className="create-business-password__password-list-recommend">
               <li>
                 {renderBullet(passwordConditions.moreThanEight)}
@@ -275,13 +289,20 @@ let CreatePassword = ({ t, back }) => {
         </div>
 
         <div>
-          <div className="account-details__form-button">
+          <div className="mt-[40px]">
             <SubmitButton
-              onClick={() => navigate('/BusinessAccount/VerifyBusiness')}
+              onClick={() => navigate('/BusinessAccount/Thanks')}
               type="submit"
+              disabled={
+                !passwordConditions.moreThanEight ||
+                !passwordConditions.oneLowerCase ||
+                !passwordConditions.oneUpperCase ||
+                !passwordConditions.oneNumber ||
+                !passwordConditions.noTextFromNameEmail
+              }
               className="account-details__form-button-btn"
             >
-              {t('odrCreateBtn')}
+              Create Account
             </SubmitButton>
           </div>
         </div>

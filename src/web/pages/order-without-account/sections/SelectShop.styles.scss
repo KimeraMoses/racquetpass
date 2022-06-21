@@ -1,8 +1,8 @@
-.shop-section {
+.shop-section-wa {
   &__heading {
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    gap: 16px;
   }
   &__text-container {
     &-text {

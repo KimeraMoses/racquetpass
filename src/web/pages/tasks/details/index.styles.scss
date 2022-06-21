@@ -1,14 +1,14 @@
-.task-detail-container{
+.task-detail-container {
   padding: 40px 20px;
-  min-height: 100vh;	
-	display: flex;
-	flex-direction: column;
-	justify-content: space-between;
-  .header-row{
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  .header-row {
     display: flex;
     align-items: center;
-		padding-bottom: 12px;
-    &-heading{
+    padding-bottom: 12px;
+    &-heading {
       font-family: Poppins;
       font-style: normal;
       font-weight: bold;
@@ -17,129 +17,148 @@
       flex-grow: 1;
     }
   }
-	.status-container{
-		padding: 13px 0 40px 0;
-		font-family: Poppins;
-		font-style: normal;
-		font-weight: 500;
-		font-size: 18px;
-		line-height: 27px;
-		.icon{
-			padding-right: 13px;
-		}
-	}
-	.detail-body-container{
-		max-width: 450px;
-		margin: auto;
-		.racquet-info{
-			width: 100%;
-			display: flex;
-			.img{
-				height: 120px;
-				width: 120px;
-				border-radius: 12px;
-			}
-			.brand{
-				display: flex;
-				flex-wrap: wrap;
-				flex-direction: column;
-				justify-content: flex-start;
-				padding-left: 15px;
-				.model{
-					font-family: Poppins;
-					font-style: normal;
-					font-weight: 600;
-					font-size: 12px;
-					line-height: 18px;
-					color: #8E8E8E;
-				}
-				.title{
-					font-family: Poppins;
-					font-style: normal;
-					font-weight: 600;
-					font-size: 24px;
-					line-height: 36px;
-					width: 250px;
-					overflow: hidden;
-					display: -webkit-box;
-					-webkit-line-clamp: 3;
-					-webkit-box-orient: vertical;
-				}
-			}
-		}
-		.string-details{
-			padding: 40px 0 20px 0;
-			.title{
-				font-family: Poppins;
-				font-style: normal;
-				font-weight: 600;
-				font-size: 24px;
-				line-height: 36px;
-				padding-bottom: 9px;
-			}
-			.string-label{
-				font-family: Poppins;
-				font-style: normal;
-				font-weight: 600;
-				font-size: 12px;
-				line-height: 18px;				
-				color: #8E8E8E;
-				padding-bottom: 4px;
-			}
-			.string-desc{
-				font-family: Poppins;
-				font-style: normal;
-				font-weight: 500;
-				font-size: 18px;
-				line-height: 27px;
-				padding-bottom: 25px;
-			}
-		}
-		.player-details{
-			padding-bottom: 20px;
-			.title-row{
-				padding-bottom: 9px;
-				display: flex;
-				justify-content: space-between;
-				align-items: flex-start;
-				.title{					
-					font-family: Poppins;
-					font-style: normal;
-					font-weight: 600;
-					font-size: 24px;
-					line-height: 36px;
-				}
-				.link{
-					color: #304FFE;
-					text-decoration: none;
-					font-family: Poppins;
-					font-style: normal;
-					font-weight: 600;
-					font-size: 12px;
-					line-height: 18px;
-				}
-			}
-			.player-label{
-				font-family: Poppins;
-				font-style: normal;
-				font-weight: 600;
-				font-size: 12px;
-				line-height: 18px;				
-				color: #8E8E8E;
-				padding-bottom: 4px;
-			}
-			.player-desc{
-				font-family: Poppins;
-				font-style: normal;
-				font-weight: 500;
-				font-size: 18px;
-				line-height: 27px;
-				padding-bottom: 25px;
-				a{
-					color: #304FFE;
-					text-decoration: none;
-				}
-			}
-		}
-	}
+  .status-container {
+    padding: 13px 0 40px 0;
+    font-family: Poppins;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 27px;
+    .icon {
+      padding-right: 13px;
+    }
+  }
+  .detail-body-container {
+    max-width: 450px;
+    margin: auto;
+    .racquet-info {
+      width: 100%;
+      display: flex;
+      .img {
+        height: 120px;
+        width: 120px;
+        border-radius: 12px;
+      }
+      .brand {
+        display: flex;
+        flex-wrap: wrap;
+        flex-direction: column;
+        justify-content: flex-start;
+        padding-left: 15px;
+        .model {
+          font-family: Poppins;
+          font-style: normal;
+          font-weight: 600;
+          font-size: 12px;
+          line-height: 18px;
+          color: #8e8e8e;
+        }
+        .title {
+          font-family: Poppins;
+          font-style: normal;
+          font-weight: 600;
+          font-size: 24px;
+          line-height: 36px;
+          width: 250px;
+          overflow: hidden;
+          display: -webkit-box;
+          -webkit-line-clamp: 3;
+          -webkit-box-orient: vertical;
+        }
+      }
+    }
+    .string-details-details {
+      padding: 30px 0 0px 0;
+      .title {
+        font-family: Poppins;
+        font-style: normal;
+        font-weight: 600;
+        font-size: 24px;
+        line-height: 36px;
+        padding-bottom: 9px;
+      }
+      .string-label {
+        font-family: Poppins;
+        font-style: normal;
+        font-weight: 600;
+        font-size: 12px;
+        line-height: 18px;
+        color: #8e8e8e;
+        padding-bottom: 4px;
+      }
+      .string-desc-details {
+        font-family: Poppins;
+        font-style: normal;
+        font-weight: 500;
+        font-size: 18px;
+        line-height: 27px;
+      }
+    }
+    .player-details {
+      padding-bottom: 20px;
+      .title-row {
+        padding-bottom: 9px;
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        .title {
+          font-family: Poppins;
+          font-style: normal;
+          font-weight: 600;
+          font-size: 24px;
+          line-height: 36px;
+        }
+        .link {
+          color: #304ffe;
+          text-decoration: none;
+          font-family: Poppins;
+          font-style: normal;
+          font-weight: 600;
+          font-size: 12px;
+          line-height: 18px;
+        }
+      }
+      .player-label {
+        font-family: Poppins;
+        font-style: normal;
+        font-weight: 600;
+        font-size: 12px;
+        line-height: 18px;
+        color: #8e8e8e;
+        padding-bottom: 4px;
+      }
+      .player-desc-details {
+        font-family: Poppins;
+        font-style: normal;
+        font-weight: 500;
+        font-size: 18px;
+        line-height: 27px;
+        a {
+          color: #304ffe;
+          text-decoration: none;
+        }
+      }
+    }
+  }
+  .just-completed-box {
+    background: #ffffff;
+    box-shadow: 0px 4px 40px rgba(0, 0, 0, 0.25);
+    border-radius: 12px;
+    padding: 19px;
+    &__text {
+      font-family: 'Poppins';
+      font-style: normal;
+      font-weight: 500;
+      font-size: 14px;
+      color: #3c3c3c;
+    }
+    &__undo {
+      font-family: 'Poppins';
+      font-style: normal;
+      font-weight: 500;
+      font-size: 14px;
+      text-align: right;
+      color: #304ffe;
+    }
+  }
 }

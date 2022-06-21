@@ -66,7 +66,7 @@ export function SearchCard({
                   ) : (
                     <></>
                   )}
-                  <img src="/img/orderpage/shop.png" alt="shop" />
+                  <img src={'/img/orderpage/shop.png'} alt="shop" />
                 </div>
                 <div className="search__card-container-content-txt">
                   <SubHeading customClass="search__card-container-content-heading">
@@ -130,6 +130,17 @@ export function SearchCard({
               </>
             ) : (
               <>
+                {raquet?.img ? (
+                  <div className="search__card-container-content-img min-w-[44px]">
+                    <img
+                      src={raquet?.img}
+                      alt="raquet"
+                      className="h-[44px] w-[44px] object-cover rounded-[16px]"
+                    />
+                  </div>
+                ) : (
+                  <></>
+                )}
                 <div className="search__card-container-content-txt">
                   <div className="search__card-container-content-heading">
                     <SubHeading customClass="search__card-container-content-heading-text">

@@ -1,11 +1,12 @@
-.scan-details {
+.scan-details-sc {
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+
   &__heading {
-    display: flex;
+    display: grid;
+    grid-template-columns: 48px 1fr;
     align-items: center;
-    justify-content: space-between;
+    gap: 16px;
   }
   &__text-container {
     margin-top: 35px;
@@ -16,21 +17,76 @@
     flex-direction: row;
     align-items: center;
     gap: 25px;
-    box-shadow: (0px 4px 20px rgba(0, 0, 0, 0.15));
+    box-shadow: 0px 4px 20px rgb(0 0 0 / 15%);
     border-radius: 12px;
-    &-divider {
-      width: 3px;
-      height: 320px;
-      background: #304ffe;
-      border-radius: 1.5px;
-      content: '';
-    }
+
     &-content {
+      &-racquet {
+        &-inner {
+          position: relative;
+        }
+        &-img {
+          display: block;
+          margin: 0 auto;
+        }
+        &-text {
+          position: absolute;
+          left: 25px;
+          bottom: 22px;
+          h1.sub-heading {
+            font-family: 'Poppins';
+            font-style: normal;
+            font-weight: 600;
+            font-size: 14px;
+            line-height: 21px;
+            margin-bottom: 5px;
+            /* identical to box height */
+
+            color: rgba(255, 255, 255, 0.7);
+          }
+          p.description {
+            font-family: 'Poppins';
+            font-style: normal;
+            font-weight: 600;
+            font-size: 24px;
+            line-height: 36px;
+            color: #ffffff;
+          }
+        }
+      }
       &-heading {
         margin-top: 32px;
       }
       &-inner-card {
-        margin-top: 22px;
+        padding: 25px;
+        display: flex;
+        justify-content: space-between;
+        &-txt {
+          display: flex;
+          flex-direction: column;
+          gap: 20px;
+          h1.sub-heading {
+            font-family: 'Poppins';
+            font-style: normal;
+            font-weight: 600;
+            font-size: 12px;
+            line-height: 18px;
+            /* identical to box height */
+
+            color: #969696;
+          }
+          p.description {
+            font-family: 'Poppins';
+            font-style: normal;
+            font-weight: 500;
+            font-size: 18px;
+            line-height: 27px;
+            /* identical to box height */
+
+            color: #3c3c3c;
+          }
+        }
+        // margin-top: 22px;
         &-heading {
           margin-top: 10px;
           font-family: Poppins;
@@ -69,15 +125,19 @@
         color: #304ffe;
         border: none;
         cursor: pointer;
+        margin-top: 17px;
       }
     }
   }
-  .scan-details__button-container {
+  .scan-details-sc__button-container {
     display: flex;
     flex-direction: column;
     gap: 20px;
     &-btn {
       width: 100%;
     }
+  }
+  &__btn {
+    margin-top: 40px;
   }
 }

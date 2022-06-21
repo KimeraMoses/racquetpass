@@ -1,30 +1,121 @@
-import React from 'react';
+import { useEffect, useState } from 'react';
+import { Field, reduxForm } from 'redux-form';
+import BarcodeScannerComponent from 'react-qr-barcode-scanner';
+import { Link } from 'react-router-dom';
+// Custom Components
+import { Heading, Description, Modal } from 'web/components';
+
+// Styles
+import { BackButton } from 'web/components/Buttons/BackButton.component';
 import { withNamespaces } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
-import { HeadingButton } from 'web/components';
 import './index.styles.scss';
 
-function Scan({ t }) {
+let Scan = ({ t, scanForward, change, backward }) => {
+  const [qrCode, setQrCode] = useState('');
+  const [qrScanner, setQrScanner] = useState(false);
+  const [raquetFound, setRacquetFound] = useState(true);
+  const [showModal, setShowModal] = useState(false);
+  const [permissionsDenied, setPermissionsDenied] = useState(false);
+
   const navigate = useNavigate();
+
+  const handleShow = () => {
+    setShowModal((prev) => {
+      return !prev;
+    });
+  };
+  useEffect(() => {
+    if (qrCode) {
+      change('raquet-details-from-qr', qrCode);
+      // TODO: Update logic with RaquetWith with Backend
+      // scanForward(raquetFound);
+      navigate('/Tasks/Details');
+    }
+  }, [qrCode, change, raquetFound, scanForward]);
+
+  console.log(permissionsDenied);
+
   return (
-    <div className="scan-task-container">
-      <div className="header-row">
-        <HeadingButton drawer onClick={() => navigate('/inventory')} />
-        <h1 className="header-row-heading">{t('taskScanHeading')}</h1>
-      </div>
-      <div className="scan-task-body">
-        <div className="heading-row">
-          <p className="title">{t('taskScanTitle')}</p>
-          <p className="desc">{t('taskScanDesc')}</p>
+    <>
+      <div className="task-scan-section">
+        <div className="task-scan-section__heading">
+          <BackButton onClick={() => navigate('/tasks')} />
+          <Heading>Scan QR Code</Heading>
         </div>
-        <div className="scan-qr-container">
-          <a href="/Tasks/Scanned" className="img-container">
-            <img alt="Scan QR" src="../img/tasks/scanqr.png" />
-          </a>
+        <div
+          className="task-scan-section__image-container"
+          onClick={() => {
+            setQrScanner((qrScanner) => !qrScanner);
+            setPermissionsDenied(false);
+          }}
+        >
+          {qrScanner && !permissionsDenied ? (
+            <>
+              <BarcodeScannerComponent
+                width={500}
+                height={500}
+                onError={(err) => {
+                  console.log(err?.name);
+                  if (err.name === 'NotAllowedError') {
+                    setPermissionsDenied(true);
+                  }
+                }}
+                onUpdate={(err, result) => {
+                  if (result) {
+                    setQrCode(result.text);
+                    setQrScanner(false);
+                  } else {
+                    setQrCode('');
+                  }
+                }}
+              />
+              <Field
+                name="raquet-details-from-qr"
+                style={{ visibility: 'hidden' }}
+                component="input"
+              />
+            </>
+          ) : (
+            <>
+              <div></div>
+              {permissionsDenied ? (
+                <div className="px-[30px] text-center text-white text-[24px] font-bold">
+                  Please allow camera permissions and scan again.
+                </div>
+              ) : (
+                <img src="/img/orderpage/card.png" alt="scan" />
+              )}
+              <div className="task-scan-section__image-container-button">
+                {/* <button
+                  className="task-scan-section__image-container-button-btn"
+                  onClick={() => {
+                    setQrScanner((qrScanner) => !qrScanner);
+                  }}
+                > */}
+                Scan
+                {/* </button> */}
+              </div>
+            </>
+          )}
+        </div>
+        <div className="task-scan-section__description">
+          <Description>{t('scanQRDesc')}</Description>
         </div>
       </div>
-    </div>
+    </>
   );
-}
+};
+
+const onSubmit = (values, dispatch) => {
+  // dispatch(    // your submit action //      );
+  console.log(values);
+};
+
+Scan = reduxForm({
+  // a unique name for the form
+  form: 'task-scan',
+  onSubmit,
+})(Scan);
 
 export default withNamespaces()(Scan);

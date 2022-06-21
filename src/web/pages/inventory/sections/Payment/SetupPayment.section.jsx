@@ -1,4 +1,10 @@
-import { Heading, HeadingButton, PaymentCard } from 'web/components';
+import {
+  Heading,
+  HeadingButton,
+  PaymentCard,
+  Description,
+} from 'web/components';
+import { Link } from 'react-router-dom';
 import './SetupPayment.styles.scss';
 
 const Card = ({
@@ -55,7 +61,12 @@ const Card = ({
   );
 };
 
-export const SetupPayment = ({ t, setCurrentScreen, setIsReceive }) => {
+export const SetupPayment = ({
+  t,
+  setCurrentScreen,
+  setIsReceive,
+  setDrawer,
+}) => {
   const cardData = [
     {
       heading: 'RacquetPass Payment',
@@ -94,11 +105,42 @@ export const SetupPayment = ({ t, setCurrentScreen, setIsReceive }) => {
   return (
     <div className="setup-payment">
       <div className="setup-payment__header">
-        <HeadingButton drawer onClick={() => setCurrentScreen('default')} />
+        <HeadingButton drawer onClick={() => setDrawer()} />
         <Heading>{t('paymentHeading')}</Heading>
       </div>
 
-      {cardData.map((data) => {
+      <div className="setup-payment__body">
+        <Description>{t('setupPayTxt')}</Description>
+        <ol className="mt-[13px] ml-[13px] flex flex-col gap-[15px] list-none">
+          <li className="flex">
+            <Description>1.&nbsp;</Description>
+            <Description>
+              {t('setupPayList1p1')}
+              <span className="text-lg font-semibold">
+                &nbsp;{t('setupPayList1p2')}&nbsp;
+              </span>
+              {t('setupPayList1p3')}
+            </Description>
+          </li>
+          <li className="flex">
+            <Description>2.&nbsp;</Description>
+            <Description>
+              {t('setupPayList2p1')}
+              <span className="text-lg font-semibold">
+                &nbsp;{t('setupPayList2p2')}&nbsp;
+              </span>
+              {t('setupPayList2p3')}
+            </Description>
+          </li>
+        </ol>
+      </div>
+      <div className="flex justify-center mt-[50px]">
+        <Link to="#" className="text-[#304FFE] font-medium text-lg">
+          {t('setupStripe')}
+        </Link>
+      </div>
+
+      {/* {cardData.map((data) => {
         return (
           <Card
             key={data?.heading}
@@ -106,7 +148,7 @@ export const SetupPayment = ({ t, setCurrentScreen, setIsReceive }) => {
             setCurrentScreen={setCurrentScreen}
           />
         );
-      })}
+      })} */}
     </div>
   );
 };

@@ -4,7 +4,6 @@ import { Field } from 'redux-form';
 import { useNavigate } from 'react-router-dom';
 
 import {
-  Button,
   Heading,
   Description,
   SubHeading,
@@ -14,7 +13,70 @@ import {
 } from 'web/components';
 import './Done.styles.scss';
 
-export function Done({ t }) {
+export const Done = ({ t, setStep, setDone }) => {
+  const links = [
+    { path: '#', title: t('homePP') },
+    { path: '#', title: t('homeCU') },
+  ];
+  const navigate = useNavigate();
+  return (
+    <>
+      <div className="done">
+        <div>
+          <div className="mt-[100px]">
+            <h5 className="text-white text-[24px] font-semibold text-center">
+              Order Submitted!
+            </h5>
+            <p className="text-white text-[18px] font-normal text-center mt-[20px] mb-[34px]">
+              We've sent you a text confirming your order details.{' '}
+              <span
+                className="underline cursor-pointer"
+                onClick={() => setStep(9)}
+              >
+                Didn't get a text?
+              </span>
+            </p>
+            <div className="flex flex-col items-center gap-[12px]">
+              <button
+                onClick={() => navigate('/')}
+                className="bg-[#044794] text-white text-[18px] w-full h-[59px] rounded-[12px]"
+              >
+                Back to Homepage
+              </button>
+              <button
+                onClick={() => {
+                  setDone(false);
+                  setStep(8);
+                }}
+                className="bg-[rgba(255,255,255,0.21)] text-white text-[18px] w-full h-[59px] rounded-[12px]"
+              >
+                View Order Details
+              </button>
+            </div>
+          </div>
+        </div>
+        <div>
+          <div className="done__footer">
+            {links.map((link, index) => (
+              <Link className="done__footer-link" key={index} to={link.path}>
+                {link.title}
+              </Link>
+            ))}
+          </div>
+          <div className="done__image">
+            <img
+              className="done__image-img"
+              src="img/homepage/racquet.png"
+              alt="racquet"
+            />
+          </div>
+        </div>
+      </div>
+    </>
+  );
+};
+
+export function DoneOld({ t }) {
   const [passwordFieldType, setPasswordFieldType] = useState('password');
 
   const links = [

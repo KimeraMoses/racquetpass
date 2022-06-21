@@ -18,3 +18,5 @@ export * from './RequestCard/RequestCard.component';
 export * from './AdminPaymentCard/AdminPaymentCard.component';
 export * from './SetupPaymentCard/SetupPaymentCard.component';
 export * from './Progress/Progress.component.jsx';
+export * from './Drawer';
+export * from './Survey/Survey.component';

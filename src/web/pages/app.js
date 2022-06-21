@@ -2,6 +2,8 @@ import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Home from './home';
 import Login from './login';
+import Forgot from './forgot';
+import ResetPassword from './reset-password';
 import Page404 from './page-404';
 import Order from './order-page';
 import Tasks from './tasks';
@@ -15,6 +17,7 @@ import VerifyPhone from './business-account/verify-phone';
 import VerifyBusiness from './business-account/verify-business';
 import BusinessDetails from './business-account/business-details';
 import ProfileInfo from './business-account/profile-info';
+import ThankYou from './business-account/Thank-you/';
 import ViewServiceOrder from './view-service-order';
 import OrderDetails from './view-service-order/details';
 import OrderScanned from './view-service-order/scanned';
@@ -33,14 +36,20 @@ import Inventory from './inventory';
 import PlayerTabs from './player-tabs';
 import ConfigureRacquet from './configure-racquet';
 import AdminWorkflow from './admin-workflow';
+import { CustomDrawer } from 'web/components';
+import { useSelector } from 'react-redux';
 
 function Routers() {
+  const { show } = useSelector((state) => state?.drawer);
   return (
     <>
       <Router>
+        <CustomDrawer show={show} />
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/login" element={<Login />} />
+          <Route path="/forgot" element={<Forgot />} />
+          <Route path="/reset-password" element={<ResetPassword />} />
           <Route path="/order" element={<Order />} />
           <Route path="/create-account" element={<CreateAccount />} />
           <Route path="*" element={<Page404 />} />
@@ -57,6 +66,7 @@ function Routers() {
             path="/BusinessAccount/CreatePassword"
             element={<CreatePassword />}
           />
+          <Route path="/BusinessAccount/Thanks" element={<ThankYou />} />
           <Route
             path="/BusinessAccount/VerifyPhone"
             element={<VerifyPhone />}

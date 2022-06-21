@@ -1,3 +1,14 @@
+.summary-card.summary-card__out-of-stock {
+  position: relative;
+  background: #fff0f0;
+  border: 1px solid #e40000;
+  border-radius: 12px;
+  &::before {
+    content: '';
+    display: none;
+  }
+}
+
 .summary-card {
   position: relative;
   &::before {

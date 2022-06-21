@@ -6,12 +6,13 @@ export const Modal = ({
   text = 'Mains are the vertical strings and crosses are the horizontal strings. Some players like to use different strings or tensions between the two.',
   closeText = 'Got it',
   showModal,
+  customButtons,
   handleShow = () => {},
 }) => {
   useEffect(() => {
     if (showModal) {
+      window.scrollTo(0, 0);
       document.body.style.overflow = 'hidden';
-
       return () => {
         document.body.style.overflow = 'auto';
       };
@@ -23,9 +24,13 @@ export const Modal = ({
       <div className="modal__inner">
         <div className="modal__inner-heading">{heading}</div>
         <div className="modal__inner-text">{text}</div>
-        <div className="modal__inner-closeText" onClick={handleShow}>
-          {closeText}
-        </div>
+        {customButtons ? (
+          <>{customButtons}</>
+        ) : (
+          <div className="modal__inner-closeText" onClick={handleShow}>
+            {closeText}
+          </div>
+        )}
       </div>
     </div>
   );

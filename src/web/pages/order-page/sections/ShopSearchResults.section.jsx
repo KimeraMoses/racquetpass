@@ -7,7 +7,15 @@ import { Description, CustomInput, SearchCard } from 'web/components';
 // Styles
 import './ShopSearchResults.styles.scss';
 
-export function ShopSearchResults({ t, setShopCurrent, forward, change }) {
+export function ShopSearchResults({
+  t,
+  setShopCurrent,
+  setStep,
+  backFromReview,
+  setBackFromReview,
+  forward,
+  change,
+}) {
   const navigate = useNavigate();
   let inputEl = useRef(null);
   useEffect(() => {
@@ -21,14 +29,24 @@ export function ShopSearchResults({ t, setShopCurrent, forward, change }) {
             name="shop-search"
             type="text"
             icon="/img/orderpage/search.png"
-            label="Search By Name, City Or State"
+            label="Find your pro shop or club by name, city, or state"
             noLabel
             setFieldToBeFocused={(input) => {
               inputEl = input;
             }}
             component={CustomInput}
           />
-          <div role="button" onClick={() => navigate('/')}>
+          <div
+            role="button"
+            onClick={() => {
+              if (backFromReview) {
+                setStep(6);
+                setBackFromReview(false);
+              } else {
+                navigate('/');
+              }
+            }}
+          >
             <span className="shop-result__search-container-link">Cancel</span>
           </div>
         </div>
@@ -39,7 +57,12 @@ export function ShopSearchResults({ t, setShopCurrent, forward, change }) {
               address: '123 Main Street, City, State',
             }}
             onClick={() => {
-              forward();
+              if (backFromReview) {
+                setStep(6);
+                setBackFromReview(false);
+              } else {
+                forward();
+              }
             }}
             change={change}
           />
@@ -49,7 +72,12 @@ export function ShopSearchResults({ t, setShopCurrent, forward, change }) {
               address: '123 Main Street, City, State',
             }}
             onClick={() => {
-              forward();
+              if (backFromReview) {
+                setStep(6);
+                setBackFromReview(false);
+              } else {
+                forward();
+              }
             }}
             change={change}
           />
@@ -59,7 +87,12 @@ export function ShopSearchResults({ t, setShopCurrent, forward, change }) {
               address: '123 Main Street, City, State',
             }}
             onClick={() => {
-              forward();
+              if (backFromReview) {
+                setStep(6);
+                setBackFromReview(false);
+              } else {
+                forward();
+              }
             }}
             change={change}
           />

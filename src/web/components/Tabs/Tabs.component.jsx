@@ -1,45 +1,24 @@
-import { Fragment } from 'react';
 import { OrderCard } from '../OrderCard/OrderCard.component';
-import { Link } from 'react-router-dom';
 import './Tabs.styles.scss';
 
-export const Tabs = ({
-  tabs = [
-    { title: 'My Locker', icon: '/img/drawer/locker.png' },
-    { title: 'Pro Shop', icon: '/img/drawer/shop.png' },
-    {
-      title: 'Orders',
-      icon: '/img/drawer/orders.png',
-      orders: [
-        {
-          title: 'Ole Reliable',
-          description: 'Pickup at Jimmy’s Pro Shop',
-          status: 'Ready for pickup',
-        },
-        {
-          title: 'Why did you make this',
-          description: 'Available in 3-5 days',
-          status: 'In progress',
-        },
-      ],
-    },
-    { title: 'Payment Methods', icon: '/img/drawer/payment.png' },
-    { title: 'Account Details', icon: '/img/drawer/account.png' },
-    { title: 'Logout', icon: '/img/drawer/logout.png' },
-  ],
-}) => {
+export const Tabs = ({ tabs, active = 'My Locker' }) => {
   return (
     <div className="tabs">
       {tabs.map((tab) => {
+        const { Icon } = tab;
         return (
           <div
-            className="tabs-link"
+            className={`tabs-link ${tab?.active ? 'tabs-link__active' : ''}`}
             key={tab?.title}
             onClick={tab.title !== 'Orders' ? tab?.onClick : () => {}}
           >
             {tab.title !== 'Orders' ? (
               <div className="tabs__tab">
-                <img src={tab.icon} alt={tab.title} />
+                {Icon ? (
+                  <Icon color={tab?.active ? '#304FFE' : '#3B3B3B'} />
+                ) : (
+                  <img src={'/img/drawer/tick-circle.png'} alt={tab.title} />
+                )}
                 <p className="tabs__tab-text">
                   {tab.title} <br />{' '}
                   <span className="tabs__tab-text-description">
@@ -51,7 +30,14 @@ export const Tabs = ({
               <div className="tabs__tab tabs__tab-order">
                 <div className="tabs__tab-order-main">
                   <div className="tabs__tab-order-inner">
-                    <img src={tab.icon} alt={tab.title} />
+                    {Icon ? (
+                      <Icon color={tab?.active ? '#304FFE' : '#3B3B3B'} />
+                    ) : (
+                      <img
+                        src={'/img/drawer/tick-circle.png'}
+                        alt={tab.title}
+                      />
+                    )}
                     <p className="tabs__tab-text">{tab.title}</p>
                   </div>
                   <div

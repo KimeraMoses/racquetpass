@@ -1,13 +1,13 @@
 {
   "homeSignin": "Sign In",
-  "homeSignup": "Sign Up",
+  "homeSignup": "Business Sign Up",
   "homeLogo": "RacquetPass",
-  "homeHeading": "String your racquet the easy way.",
+  "homeHeading": "Get your racquet strung the easy way.",
   "homeDarkBtn": "String a racquet",
-  "homeLightBtn": "Create a business account",
+  "homeLightBtn": "Start your order now",
   "homePP": "Privacy Policy",
   "homeCU": "Contact Us",
-  "homeNewBtnTxt": "Select shop",
+  "homeNewBtnTxt": "Start your order now",
 
   "odrHeading": "Scan your racquet",
   "odrHT": "How To",
@@ -43,7 +43,7 @@
   "odrShopText": "Let us know what pro shop you normally go to. We’d love to help equip them with the magic of RacquetPass!",
   "odrShopName": "Shop Name",
   "odrPhone": "Phone Number (optional)",
-  "odrMsg": "We’ll send a message to this number when this shop joins RacquetPass.",
+  "odrMsg": "We’ll use this number to text you when this shop joins RacquetPass.",
   "odrSubmitBtn": "Submit Form",
 
   "odrStayHeading": "Tell us how to stay in touch",
@@ -53,7 +53,7 @@
   "odrPhon": "Phone Number",
 
   "odrPhonHeading": "Verify your phone number",
-  "odrphnDesc": "Please enter the 6 digit verification code that Racquet Pass texted to your phone number (phone number)",
+  "odrphnDesc": "Please enter the 6 digit verification code that RacquetPass texted to your phone number (phone number)",
   "odrResendCode": "Resend Code",
 
   "odrSelect": "Select strings",
@@ -96,7 +96,7 @@
   "odrCreateFB": "Create with Facebook",
   "odrCreateGoogle": "Create with Google",
   "odrCreateApple": "Create with Apple",
-  "odrPivacyText": "By clicking Create Account, Continue Using Facebook, Continue Using Google or Continue Using Apple, you agree to our Terms & Conditions and Privacy Statement.",
+  "odrPivacyText": "By clicking on continue, you agree to our ",
 
   "taskHeading": "Racquet Pass",
   "taskScan": "Scan QR",
@@ -206,10 +206,10 @@
   "businessAccountPasswordAverage": "Average",
   "businessAccountPasswordStrong": "Strong",
   "businessAccountPasswordRecommendation": "Recommendations",
-  "businessAccountPasswordRecommendationOne": "At least eight characters long",
-  "businessAccountPasswordRecommendationTwo": "One lowercase letter",
-  "businessAccountPasswordRecommendationThree": "One uppercase letter",
-  "businessAccountPasswordRecommendationFour": "One number",
+  "businessAccountPasswordRecommendationOne": "At least 8 characters long",
+  "businessAccountPasswordRecommendationTwo": "1 lowercase letter",
+  "businessAccountPasswordRecommendationThree": "1 uppercase letter",
+  "businessAccountPasswordRecommendationFour": "1 number",
   "businessAccountPasswordRecommendationFive": "No text from email/name",
   "businessAccountPasswordCreateBtn": "Create Account",
 
@@ -339,7 +339,7 @@
   "orderPaymentSummaryLabelCrosses": "Crosses (Luxilon Alu Rough 1.6 G @ 42 lbs)",
   "orderPaymentSummaryLabelLabour": "Labor",
   "orderPaymentSummaryLabelTax": "Tax",
-  "orderPaymentSummaryLabelPrice": "$16",
+  "orderPaymentSummaryLabelPrice": "$16.00",
   "orderPaymentApple": "Pay With ",
   "orderPaymentApplePay": "Pay",
   "orderPaymentCreditCard": "Pay with Credit Card",
@@ -388,7 +388,7 @@
   "profileItemDelete": "Delete Item",
   "profileButtonSave": "Save Changes",
 
-  "shopProHeading": "My Pro Shop",
+  "shopProHeading": "Shop Settings",
   "ShopContactHeading": "Contact Info",
   "shopButtonEdit": "Edit",
   "shopEmailHeading": "Email",
@@ -460,5 +460,57 @@
   "orderQRtxt": "Attach a QR sticker to the racquet that you want strung, and then scan it.",
   "orderLinktxt": "Where do I attach the sticker?",
   "orderSelectStringTxt": "Select the strings you want to restring your racquet with.",
-  "orderRecquetDesc": "This helps the shop identify and find your racquet."
+  "orderRecquetDesc": "This helps the shop identify and find your racquet.",
+
+  "scanQRHeading": "Choose your racquet",
+  "scanQRText": "Choose your racquet by scanning its QR sticker.",
+  "scanQRLinkTxt": "Don’t have a QR sticker?",
+  "scanQRDesc": "To scan a QR code, move your camera so the QR code is in the frame. The QR code will be detected automatically.",
+
+  "scanSuccessHeading": "Successfully scanned your racquet!",
+  "scanSuccessRacDesc": "Unconfigured Racquet",
+  "selectStringDesc": "Select the strings you want your racquet restrung with.",
+  "scanSuccessTennis": "TENNIS RACQUET",
+  "scanSuccessRacName": "Wilson Hyper Prostaff 6.1",
+  "scanSuccessMains": "Last strung with (mains)",
+  "scanSuccessMainsTxt": "Luxilon Alu Rough 1.6 G",
+  "scanSuccessCrosses": "Last strung with (crosses)",
+  "scanSuccessCrossesTxt": "Solinco Hyper-G",
+  "scanSuccessOwner": "Racquet Owner",
+  "scanSuccessOwnerName": "Bryan Song",
+  "selectStringContact": "We will use this number to text you when we finish stringing your racquet.",
+
+  "reviewOdrName": "Name",
+
+  "businessprivacy": "By clicking on continue, you agree to our",
+  "businessaccountlogin": "Have an account?",
+
+  "racquetLogIn": "Log In",
+  "racquetLogInBtn": "Business Sign Up",
+  "alreadyHaveAccount": "Don’t have an account?",
+  "signUpNow": "Sign up now.",
+
+  "inventoryItemBtn": "Add Item",
+  "inventoryAddItemString": "Type (when hybrid stringing)",
+  "inventoryItemPrice": "Price",
+  "inventoryItemRSDetail": "($29.50 when hybrid)",
+  "inventoryType": "Type (when hybrid stringing)",
+  "inventoryTypeTxt": "Reel",
+  "inStock": "In Stock",
+  "inStockTxt": "Yes",
+
+  "shopString": "Allow players to bring their own strings",
+  "shopNo": "No",
+
+  "editShopNewTxt": "This will give players the option to bring their own strings instead of buying strings from your shop. If you select this option, make sure you have a way of storing the strings the player brings in alongside their racquet.",
+  "setupPayTxt": "We use Stripe to manage your payment methods:",
+  "setupPayList1p1": "How you",
+  "setupPayList1p2": "pay",
+  "setupPayList1p3": "RacquetPass",
+  "setupPayList2p1": "How you",
+  "setupPayList2p2": "recieve payments",
+  "setupPayList2p3": "from players",
+
+  "setupStripe": "Go to Stripe to manage payments",
+  "odrWithoutScanTxt": "To scan a QR code, move your camera so the QR code is in the frame and it will be automatically detected."
 }

@@ -10,52 +10,22 @@ import {
 
 import './SearchInventory.styles.scss';
 
-const search = [
-  {
-    name: 'Brand Name',
-    description: 'Brand Description',
-    size: 'Size Description',
-    price: 'price',
-  },
-  {
-    name: 'Brand Name',
-    description: 'Brand Description',
-    size: 'Size Description',
-    price: 'price',
-  },
-  {
-    name: 'Brand Name',
-    description: 'Brand Description',
-    size: 'Size Description',
-    price: 'price',
-  },
-  {
-    name: 'Brand Name',
-    description: 'Brand Description',
-    size: 'Size Description',
-    price: 'price',
-  },
-  {
-    name: 'Brand Name',
-    description: 'Brand Description',
-    size: 'Size Description',
-    price: 'price',
-  },
-  {
-    name: 'Brand Name',
-    description: 'Brand Description',
-    size: 'Size Description',
-    price: 'price',
-  },
-];
+let search = [];
+for (let i = 1; i <= 5; i++) {
+  search.push({
+    name: `Brand ${i} Model ${i}2${i}`,
+    description: i % 2 === 0 ? 'Out of Stock' : 'In Stock',
+    price: `$20${i}`,
+  });
+}
 
-export function SearchInventory({ t, setCurrentScreen }) {
+export function SearchInventory({ t, setCurrentScreen, setDrawer }) {
   return (
     <>
       <div className="search-inventory">
         <div>
           <div className="search-inventory__header">
-            <HeadingButton drawer onClick={() => setCurrentScreen('default')} />
+            <HeadingButton drawer onClick={() => setDrawer()} />
             <Heading>{t('businessAccountDetailsInventory')}</Heading>
           </div>
 
@@ -78,7 +48,7 @@ export function SearchInventory({ t, setCurrentScreen }) {
                   <SearchCard
                     string={item}
                     onClick={() => {
-                      setCurrentScreen('edit');
+                      setCurrentScreen('detail');
                     }}
                   />
                 </Fragment>
@@ -87,13 +57,13 @@ export function SearchInventory({ t, setCurrentScreen }) {
           </div>
         </div>
         <div className="search-inventory__buttons">
-          <StepButton outlined>{t('profileButtonCSV')}</StepButton>
+          {/* <StepButton outlined>{t('profileButtonCSV')}</StepButton> */}
           <StepButton
             onClick={() => {
               setCurrentScreen('add');
             }}
           >
-            {t('profileButtonAddNew')}
+            {t('inventoryItemBtn')}
           </StepButton>
         </div>
       </div>

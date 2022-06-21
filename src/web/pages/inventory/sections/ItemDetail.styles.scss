@@ -1,0 +1,32 @@
+.item-details-inventory {
+  padding: 0px 20px;
+  display: flex;
+  flex-direction: column;
+  &__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  &__txt {
+    h1.sub-heading {
+      font-family: 'Poppins';
+      font-style: normal;
+      font-weight: 600;
+      font-size: 12px;
+      line-height: 18px;
+      /* identical to box height */
+
+      color: #8e8e8e;
+    }
+    p.description {
+      font-family: 'Poppins';
+      font-style: normal;
+      font-weight: 500;
+      font-size: 18px;
+      line-height: 27px;
+      /* identical to box height */
+
+      color: #3c3c3c;
+    }
+  }
+}

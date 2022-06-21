@@ -1,5 +1,5 @@
 // Custom Components
-import { SubHeading, Description, Heading } from 'web/components';
+import { SubHeading, Heading } from 'web/components';
 
 // Styles
 import './SummaryCard.styles.scss';
@@ -7,6 +7,7 @@ import './SummaryCard.styles.scss';
 const items = [
   {
     heading: 'Mains',
+    isOutOfStock: true,
     description: 'Luxilon Alu Rough 1.6 G @ 42 lbs',
     price: '$18.99',
   },
@@ -25,13 +26,17 @@ const items = [
   },
 ];
 
-const Item = ({ heading, description, price }) => {
+const Item = ({ heading, description, price, isOutOfStock }) => {
   return (
     <div className="summary-card__container-content-txt-item">
       <div className="summary-card__container-content-txt-item-content">
         {heading ? (
-          <div className="summary-card__container-content-txt-item-content-heading">
-            {heading}
+          <div
+            className={`summary-card__container-content-txt-item-content-heading ${
+              isOutOfStock ? 'text-[#E40000] ' : ''
+            }`}
+          >
+            {heading} {isOutOfStock && '(out of stock)'}
           </div>
         ) : (
           <></>
@@ -48,9 +53,19 @@ const Item = ({ heading, description, price }) => {
 };
 
 export function SummaryCard() {
+  let isOutOfStock = false;
+  items.forEach((item) => {
+    if (item?.isOutOfStock) {
+      isOutOfStock = true;
+    }
+  });
   return (
     <>
-      <div className="summary-card">
+      <div
+        className={`summary-card ${
+          isOutOfStock ? 'summary-card__out-of-stock' : ''
+        }`}
+      >
         <div className="summary-card__container">
           <div className={`summary-card__container-content`}>
             <div className="summary-card__container-content-txt">
@@ -66,6 +81,10 @@ export function SummaryCard() {
             </div>
           </div>
         </div>
+      </div>
+      <div className="mt-[12px] text-[#E40000] font-semibold text-[12px]">
+        The strings you've selected are out of stock at this shop. Press “Change
+        strings” to browse in stock options.
       </div>
     </>
   );

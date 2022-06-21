@@ -5,20 +5,19 @@ export const CustomInput = (props) => {
   const { touched, error } = props?.meta
     ? props?.meta
     : { touched: false, error: false };
-  console.log(props?.meta);
   return (
     <div className="custom-input">
       <div className="custom-input__header">
-        {props.noLabel ? (
+        {props?.noLabel ? (
           <></>
         ) : (
-          <div className="custom-input__header-label">{props.label}</div>
+          <div className="custom-input__header-label">{props?.label}</div>
         )}
-        {props.link ? (
+        {props?.link ? (
           <>
             <div className="custom-input__header-link">
               <Link to="#" className="custom-input__header-link-lnk">
-                {props.link}
+                {props?.link}
               </Link>
             </div>
           </>
@@ -28,33 +27,48 @@ export const CustomInput = (props) => {
         {touched && error && (
           <div className="custom-input__header-error">{error}</div>
         )}
-        {props.isPasswordField && (
+        {props?.isPasswordField && (
           <button
             className="custom-input__header-show"
             type="button"
             onClick={() => {
-              props.switchPasswordShow();
+              props?.switchPasswordShow();
             }}
           >
-            {props.type === 'password' ? 'Show' : 'Hide'}
+            {props?.type === 'password' ? 'Show' : 'Hide'}
           </button>
         )}
       </div>
       <input
-        {...props.input}
-        placeholder={props.placeholder ? props.placeholder : props.label}
+        {...props?.input}
+        placeholder={props?.placeholder ? props?.placeholder : props?.label}
         className={`custom-input__input ${
           touched && error ? 'custom-input__input-error' : ''
         }`}
-        onClick={props.onClick}
-        type={props.type}
+        onClick={props?.onClick}
+        type={props?.type}
+        onBlur={(e) => {
+          if (props?.input) {
+            props.input.onBlur(e);
+          }
+          if (props?.customOnBlur) {
+            props?.customOnBlur(e);
+          }
+        }}
+        value={props?.value ? props?.value : props?.input?.value}
+        onChange={(e) => {
+          props?.input?.onChange(e);
+          if (props?.customOnChange) {
+            props?.customOnChange(e);
+          }
+        }}
         ref={(input) => {
-          if (props.setFieldToBeFocused) {
+          if (props?.setFieldToBeFocused) {
             props.setFieldToBeFocused(input);
           }
         }}
         style={
-          props.icon
+          props?.icon
             ? {
                 background: `url(${props.icon}) no-repeat scroll 7px 7px`,
                 paddingLeft: '45px',

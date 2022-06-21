@@ -1,9 +1,9 @@
 .signin {
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  // justify-content: space-between;
   padding: 0px 20px;
-  min-height: 100vh;
+  // min-height: 100vh;
   &__header {
     display: flex;
     justify-content: space-between;
@@ -88,5 +88,25 @@
     gap: 15px;
     margin-top: 40px;
     margin-bottom: 20px;
+  }
+  &__account-text {
+    display: flex;
+    justify-content: center;
+    p.description {
+      font-family: 'Poppins';
+      font-style: normal;
+      font-weight: 400;
+      font-size: 16px;
+      line-height: 24px;
+      color: #545454;
+    }
+    a {
+      font-family: 'Poppins';
+      font-style: normal;
+      font-weight: 400;
+      font-size: 16px;
+      line-height: 24px;
+      color: #304ffe;
+    }
   }
 }

@@ -189,7 +189,8 @@ let OrderWithoutAccount = ({ t, change }) => {
           {step === 8 ? <VerifyPhone t={t} setStep={setStep} /> : <></>}
           {step === 9 ? <ReviewOrder t={t} setStep={setStep} /> : <></>}
         </div>
-        {step === 1 ||
+        {step === 0 ||
+        step === 1 ||
         step === 3 ||
         step === 4 ||
         step === 9 ||
@@ -197,8 +198,8 @@ let OrderWithoutAccount = ({ t, change }) => {
         mainCross.current === 'search' ? (
           <></>
         ) : (
-          <div className="without-account__button-container">
-            <StepButton
+          <div className="mt-[30px]">
+            {/* <StepButton
               onClick={() => {
                 if (step === 0) {
                   navigate('/');
@@ -210,7 +211,7 @@ let OrderWithoutAccount = ({ t, change }) => {
               type="button"
             >
               Back
-            </StepButton>
+            </StepButton> */}
             <StepButton
               onClick={() => {
                 if (step === 5) {
@@ -225,17 +226,6 @@ let OrderWithoutAccount = ({ t, change }) => {
               Next
             </StepButton>
           </div>
-        )}
-        {step === 9 && (
-          <StepButton
-            type="submit"
-            className="without-account__submit-btn"
-            onClick={() => {
-              navigate('/');
-            }}
-          >
-            Submit Order
-          </StepButton>
         )}
       </div>
     </>

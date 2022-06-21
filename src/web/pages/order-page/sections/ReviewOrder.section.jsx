@@ -1,6 +1,3 @@
-import { useState } from 'react';
-import { Field } from 'redux-form';
-import { useNavigate } from 'react-router-dom';
 // Custom Components
 import {
   Heading,
@@ -8,35 +5,76 @@ import {
   HeadingButton,
   SummaryCard,
   PaymentButton,
-  CustomInput,
+  SubHeading,
 } from 'web/components';
-import { SearchCard } from 'web/components/index';
+import { SearchCard, Survey } from 'web/components/index';
 
 // Styles
 import './ReviewOrder.styles.scss';
+import { BackButton } from 'web/components/Buttons/BackButton.component';
+import { useState } from 'react';
 
-export function ReviewOrder({ t, active, handleClick }) {
+export function ReviewOrder({ t, setStep, setDone, setBackFromReview }) {
+  const [showSurvey, setShowSurvey] = useState(false);
   return (
     <>
-      <div className="review-order">
-        <div className="review-order__heading">
-          <Heading customClass="review-order__heading-text">
+      <Survey
+        show={showSurvey}
+        setShow={setShowSurvey}
+        onExit={() => {
+          setStep(7);
+          setDone(true);
+        }}
+      />
+      <div className="review-order-odr">
+        <div className="review-order-odr__heading">
+          <BackButton onClick={() => setStep(5)} />
+          <Heading customClass="review-order-odr__heading-text">
             {t('odrReviewHeading')}
           </Heading>
         </div>
-        <div className="review-order__text-container">
-          <Description customClass="review-order__text-container-text">
+        <div className="review-order-odr__text-container">
+          <Description customClass="review-order-odr__text-container-text">
             {t('odrReviewDesc')}
           </Description>
         </div>
-        <div className="review-order__shop">
-          <div className="review-order__shop-heading">
-            <Heading customClass="review-order__shop-heading-text">
+        <div className="review-order-odr__shop-heading">
+          <Heading customClass="review-order-odr__shop-heading-text">
+            {t('ShopContactHeading')}
+          </Heading>
+          <HeadingButton
+            text="Edit"
+            onClick={() => {
+              setBackFromReview(true);
+              setStep(4);
+            }}
+          />
+        </div>
+        <div className="review-order-odr__contact">
+          <div className="review-order-odr__contact-details">
+            <SubHeading>{t('reviewOdrName')}</SubHeading>
+            <Description>{t('scanSuccessOwnerName')}</Description>
+          </div>
+          <div className="review-order-odr__contact-details">
+            <SubHeading>{t('taskOpenedPlayerPhoneHeading')}</SubHeading>
+            <Description>{t('taskOpenedPlayerPhone')}</Description>
+          </div>
+        </div>
+
+        <div className="review-order-odr__shop">
+          <div className="review-order-odr__shop-heading">
+            <Heading customClass="review-order-odr__shop-heading-text">
               {t('odrReviewShop')}
             </Heading>
-            <HeadingButton text="Change Shop" />
+            <HeadingButton
+              text="Change Shop"
+              onClick={() => {
+                setBackFromReview(true);
+                setStep(0);
+              }}
+            />
           </div>
-          <div className="review-order__shop-card">
+          <div className="review-order-odr__shop-card">
             <SearchCard
               shop={{
                 name: 'Jimmy’s Shop',
@@ -45,53 +83,60 @@ export function ReviewOrder({ t, active, handleClick }) {
             />
           </div>
         </div>
-        <div className="review-order__raquet">
-          <div className="review-order__raquet-heading">
-            <Heading customClass="review-order__shop-heading-text">
+        <div className="review-order-odr__raquet">
+          <div className="review-order-odr__raquet-heading">
+            <Heading customClass="review-order-odr__shop-heading-text">
               {t('odrRacquet')}
             </Heading>
-            <HeadingButton text="Change Racquet" />
+            <HeadingButton text="Change Racquet" onClick={() => setStep(20)} />
           </div>
-          <div className="review-order__shop-card">
+          <div className="review-order-odr__shop-card">
             <SearchCard
-              raquet={{
-                name: 'No Name',
-                model: 'Model not specified',
-                qrConnected: true,
+              shop={{
+                img: '/img/orders/racquet-img.png',
+                name: 'Wilson Hyper Prostaff 6.1',
+                address: 'Tennis Racquet',
               }}
             />
           </div>
         </div>
-        <div className="review-order__summary">
-          <div className="review-order__summary-heading">
-            <Heading customClass="review-order__summary-heading-text">
+        <div className="review-order-odr__summary">
+          <div className="review-order-odr__summary-heading">
+            <Heading customClass="review-order-odr__summary-heading-text">
               {t('odrSummary')}
             </Heading>
-            <HeadingButton text="Change Strings" />
+            <HeadingButton
+              text="Change Strings"
+              onClick={() => {
+                setBackFromReview(true);
+                setStep(2);
+              }}
+            />
           </div>
-          <div className="review-order__summary-card">
+          <div className="review-order-odr__summary-card">
             <SummaryCard />
           </div>
         </div>
-        <div className="review-order__buttons">
-          <PaymentButton isDark className="review-order__buttons-apple">
+        <div className="review-order-odr__buttons">
+          {/* <PaymentButton isDark className="review-order-odr__buttons-apple">
             Pay with &nbsp; <img src="/img/button/apple.png" alt="apple-pay" />
-          </PaymentButton>
+          </PaymentButton> */}
           <PaymentButton
-            className="review-order__buttons-credit"
-            handleClick={handleClick}
-            active={active}
+            className="review-order-odr__buttons-credit"
+            handleClick={() => {
+              setShowSurvey(true);
+            }}
             style={{ marginBottom: '40px' }}
           >
-            Pay with Credit Card
+            Pay and Finish
           </PaymentButton>
         </div>
-        {active ? (
+        {/* {active ? (
           <>
-            <div className="review-order__credit-cards">
+            <div className="review-order-odr__credit-cards">
               <img src="/img/orderpage/cards.png" alt="list-of-cards" />
             </div>
-            <div className="review-order__credit-card-input">
+            <div className="review-order-odr__credit-card-input">
               <Field
                 name="card-number"
                 label="Card Number"
@@ -100,7 +145,7 @@ export function ReviewOrder({ t, active, handleClick }) {
                 component={CustomInput}
               />
             </div>
-            <div className="review-order__credit-card-input">
+            <div className="review-order-odr__credit-card-input">
               <Field
                 name="expiration-date"
                 label="Expiration Date"
@@ -109,7 +154,7 @@ export function ReviewOrder({ t, active, handleClick }) {
                 component={CustomInput}
               />
             </div>
-            <div className="review-order__credit-card-input">
+            <div className="review-order-odr__credit-card-input">
               <Field
                 name="security-code"
                 label="Security Code"
@@ -118,7 +163,7 @@ export function ReviewOrder({ t, active, handleClick }) {
                 component={CustomInput}
               />
             </div>
-            <div className="review-order__credit-card-input">
+            <div className="review-order-odr__credit-card-input">
               <Field
                 name="zip-code"
                 label="ZIP code"
@@ -126,17 +171,17 @@ export function ReviewOrder({ t, active, handleClick }) {
                 component={CustomInput}
               />
             </div>
-            <div className="review-order__total-card">
-              <div className="review-order__total-card-text">
+            <div className="review-order-odr__total-card">
+              <div className="review-order-odr__total-card-text">
                 Replace Strings
               </div>
-              <div className="review-order__total-card-price">$62.47</div>
+              <div className="review-order-odr__total-card-price">$62.47</div>
             </div>
           </>
         ) : (
           <></>
-        )}
-        {/* <div className="review-order__form-container">
+        )} */}
+        {/* <div className="review-order-odr__form-container">
           <Field
             name="brand"
             label="Brand (Optional)"

@@ -10,6 +10,7 @@ import {
   SelectShop,
   ShopSearchResults,
   GiveShopInfo,
+  Thanks,
   Contact,
   VerifyPhone,
   SelectString,
@@ -17,9 +18,14 @@ import {
   SelectStringWithMainCross,
   ReviewOrder,
   Done,
+  OrderDetails,
+  EditRacquet,
+  DidntGetText,
 } from './sections';
 
 import './order.styles.scss';
+import { useSelector } from 'react-redux';
+import { VerifyResend } from './sections/VerifyResend.section';
 
 let OrderPage = ({ t, handleSubmit, change }) => {
   const [step, setStep] = useState(0);
@@ -27,22 +33,29 @@ let OrderPage = ({ t, handleSubmit, change }) => {
     active: '',
     content: ['QR', 'Strings', 'Contact', 'Review'],
   });
-  const [scan, setScan] = useState({ current: 'initial' });
   const [shop, setShop] = useState({ current: 'search' });
+  const [scan, setScan] = useState({ current: 'initial' });
   const [strings, setStrings] = useState({ current: 'initial' });
   const [mainCross, setMainCross] = useState({ current: 'initial' });
   const [main, setMain] = useState(false);
   const [cross, setCross] = useState(false);
   const [done, setDone] = useState(false);
-  const [active, setActive] = useState(false);
-
-  const handleClick = () => {
-    setActive((active) => !active);
-  };
+  const [backFromReview, setBackFromReview] = useState(false);
 
   const navigate = useNavigate();
 
-  console.log(steps);
+  const errors = useSelector((state) => state?.form?.signup?.syncErrors);
+
+  const goToTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth',
+    });
+  };
+
+  useEffect(() => {
+    goToTop();
+  }, [step, strings, mainCross, done, scan, shop]);
 
   useEffect(() => {
     switch (step) {
@@ -128,7 +141,14 @@ let OrderPage = ({ t, handleSubmit, change }) => {
   const getCurrentScanScreen = () => {
     switch (scan.current) {
       case 'initial':
-        return <ScanSection t={t} change={change} scanForward={scanForward} />;
+        return (
+          <ScanSection
+            t={t}
+            change={change}
+            scanForward={scanForward}
+            backward={backward}
+          />
+        );
       case 'found':
         return <ScanSuccess t={t} backward={backward} setStep={setStep} />;
       case 'notFound':
@@ -153,8 +173,11 @@ let OrderPage = ({ t, handleSubmit, change }) => {
           <ShopSearchResults
             t={t}
             setShopCurrent={setShopCurrent}
+            setStep={setStep}
+            backFromReview={backFromReview}
             forward={forward}
             change={change}
+            setBackFromReview={setBackFromReview}
           />
         );
       case 'find':
@@ -163,8 +186,11 @@ let OrderPage = ({ t, handleSubmit, change }) => {
             t={t}
             setShopCurrent={setShopCurrent}
             setStep={setStep}
+            change={change}
           />
         );
+      case 'thanks':
+        return <Thanks />;
       default:
         return <>Check current shop</>;
     }
@@ -180,6 +206,9 @@ let OrderPage = ({ t, handleSubmit, change }) => {
             backward={backward}
             setStep={setStep}
             step={step}
+            change={change}
+            backFromReview={backFromReview}
+            setBackFromReview={setBackFromReview}
           />
         );
       case 'search':
@@ -211,6 +240,7 @@ let OrderPage = ({ t, handleSubmit, change }) => {
             setMain={setMain}
             setCross={setCross}
             step={step}
+            change={change}
           />
         );
       case 'search':
@@ -242,27 +272,65 @@ let OrderPage = ({ t, handleSubmit, change }) => {
       case 3:
         return getCurrentMainCross();
       case 4:
-        return <Contact t={t} backward={backward} />;
+        return (
+          <Contact
+            t={t}
+            backward={backward}
+            change={change}
+            setStep={setStep}
+            setBackFromReview={setBackFromReview}
+            backFromReview={setBackFromReview}
+          />
+        );
       case 5:
         return <VerifyPhone t={t} backward={backward} />;
       case 6:
         return (
           <ReviewOrder
             t={t}
+            setBackFromReview={setBackFromReview}
             backward={backward}
-            active={active}
-            handleClick={handleClick}
+            setStep={setStep}
+            setDone={setDone}
           />
         );
       case 7:
-        return <Done t={t} />;
+        return <Done t={t} setStep={setStep} setDone={setDone} />;
+      case 8:
+        return <OrderDetails t={t} setStep={setStep} setDone={setDone} />;
+      case 9:
+        return (
+          <DidntGetText
+            t={t}
+            backward={backward}
+            change={change}
+            setStep={setStep}
+            setBackFromReview={setBackFromReview}
+            backFromReview={setBackFromReview}
+          />
+        );
+      case 10:
+        return <VerifyResend t={t} setStep={setStep} />;
+      case 20:
+        return <EditRacquet t={t} setStep={setStep} change={change} />;
       default:
         return <>Undetected Step</>;
     }
   };
   return (
     <>
-      {step === 7 || step === 0 ? <></> : <Progress steps={steps} />}
+      {step === 7 ||
+      step === 0 ||
+      step === 8 ||
+      step === 9 ||
+      step === 20 ||
+      done ||
+      mainCross.current === 'search' ||
+      strings.current === 'search' ? (
+        <></>
+      ) : (
+        <Progress steps={steps} />
+      )}
       <div
         className={`order-page ${done ? 'order-page-done' : ''} ${
           step === 0 ? 'order-page-zero' : ''
@@ -272,38 +340,30 @@ let OrderPage = ({ t, handleSubmit, change }) => {
           <div>{getActiveSection()}</div>
           {done ||
           shop.current === 'find' ||
+          shop.current === 'thanks' ||
           mainCross.current === 'search' ||
-          step === 6 ? (
+          step === 6 ||
+          step === 0 ||
+          (step === 1 && scan.current === 'initial') ||
+          step === 8 ? (
             <></>
           ) : (
             <div className="order-page__button-container">
               <StepButton
-                onClick={step === 5 || step === 6 ? () => setStep(4) : backward}
-                outlined
-                type="button"
-              >
-                {t('odrBack')}
-              </StepButton>{' '}
-              <StepButton
-                onClick={forward}
-                disabled={scan.current === 'initial' || step === 0}
+                onClick={() => {
+                  if (backFromReview) {
+                    setStep(6);
+                    setBackFromReview(false);
+                  } else {
+                    forward();
+                  }
+                }}
+                disabled={step === 0 || errors}
                 type="button"
               >
                 {t('odrNext')}
               </StepButton>
             </div>
-          )}
-          {step === 6 && active && (
-            <StepButton
-              type="submit"
-              className="order-page__submit-btn"
-              onClick={() => {
-                setDone(true);
-                forward();
-              }}
-            >
-              Submit Order
-            </StepButton>
           )}
         </form>
       </div>
@@ -317,7 +377,6 @@ const onSubmit = (values, dispatch) => {
 };
 
 OrderPage = reduxForm({
-  // a unique name for the form
   form: 'signup',
   onSubmit,
 })(OrderPage);

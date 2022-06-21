@@ -3,7 +3,11 @@ import './CustomOrderSelect.styles.scss';
 
 export const CustomOrderSelect = (props) => {
   return (
-    <div className="custom-order-select">
+    <div
+      className={`custom-order-select ${
+        props?.placeholderBold ? 'custom-order-select-bold' : ''
+      }`}
+    >
       {props.noLabel ? (
         <></>
       ) : (
