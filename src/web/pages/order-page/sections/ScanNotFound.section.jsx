@@ -7,7 +7,7 @@ import './ScanNotFound.styles.scss';
 export function ScanNotFound({ t, backward }) {
   return (
     <>
-      <div className="scan-details">
+      <div className="scan-details max-w-[430px] m-[0_auto]">
         <div>
           <div className="scan-details__heading">
             <BackButton onClick={backward} />

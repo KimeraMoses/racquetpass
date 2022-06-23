@@ -2,13 +2,7 @@ import { Link } from 'react-router-dom';
 import { Field } from 'redux-form';
 
 // Custom Components
-import {
-  Heading,
-  SubHeading,
-  Description,
-  HeadingButton,
-  CustomInput,
-} from 'web/components';
+import { Heading, Description, CustomInput } from 'web/components';
 import { BackButton } from 'web/components/Buttons/BackButton.component';
 
 // Styles
@@ -18,7 +12,7 @@ const required = (value) => (value ? undefined : 'Required');
 export function VerifyPhone({ t, backward }) {
   return (
     <>
-      <div className="phone-section">
+      <div className="phone-section max-w-[430px] m-[0_auto]">
         <div className="phone-section__heading flex justify-start gap-[12px]">
           <BackButton onClick={backward} />
           <Heading customClass="phone-section__heading-text">

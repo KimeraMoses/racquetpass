@@ -27,7 +27,7 @@ export function Contact({
   );
   return (
     <>
-      <div className="contact-section-odr">
+      <div className="contact-section-odr max-w-[430px] m-[0_auto]">
         <div className="contact-section-odr__heading">
           <BackButton
             onClick={() => {

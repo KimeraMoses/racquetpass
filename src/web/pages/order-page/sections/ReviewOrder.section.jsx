@@ -26,7 +26,7 @@ export function ReviewOrder({ t, setStep, setDone, setBackFromReview }) {
           setDone(true);
         }}
       />
-      <div className="review-order-odr">
+      <div className="review-order-odr max-w-[430px] m-[0_auto]">
         <div className="review-order-odr__heading">
           <BackButton onClick={() => setStep(5)} />
           <Heading customClass="review-order-odr__heading-text">
@@ -77,7 +77,7 @@ export function ReviewOrder({ t, setStep, setDone, setBackFromReview }) {
           <div className="review-order-odr__shop-card">
             <SearchCard
               shop={{
-                name: 'Jimmy’s Shop',
+                name: "Jimmy's Shop",
                 address: '123 Main Street, Seattle, Washington',
               }}
             />
@@ -118,9 +118,6 @@ export function ReviewOrder({ t, setStep, setDone, setBackFromReview }) {
           </div>
         </div>
         <div className="review-order-odr__buttons">
-          {/* <PaymentButton isDark className="review-order-odr__buttons-apple">
-            Pay with &nbsp; <img src="/img/button/apple.png" alt="apple-pay" />
-          </PaymentButton> */}
           <PaymentButton
             className="review-order-odr__buttons-credit"
             handleClick={() => {
@@ -131,71 +128,6 @@ export function ReviewOrder({ t, setStep, setDone, setBackFromReview }) {
             Pay and Finish
           </PaymentButton>
         </div>
-        {/* {active ? (
-          <>
-            <div className="review-order-odr__credit-cards">
-              <img src="/img/orderpage/cards.png" alt="list-of-cards" />
-            </div>
-            <div className="review-order-odr__credit-card-input">
-              <Field
-                name="card-number"
-                label="Card Number"
-                placeholder="Card Number"
-                type="text"
-                component={CustomInput}
-              />
-            </div>
-            <div className="review-order-odr__credit-card-input">
-              <Field
-                name="expiration-date"
-                label="Expiration Date"
-                placeholder="MM/YY"
-                type="text"
-                component={CustomInput}
-              />
-            </div>
-            <div className="review-order-odr__credit-card-input">
-              <Field
-                name="security-code"
-                label="Security Code"
-                placeholder="Security Code (CVV)"
-                type="text"
-                component={CustomInput}
-              />
-            </div>
-            <div className="review-order-odr__credit-card-input">
-              <Field
-                name="zip-code"
-                label="ZIP code"
-                type="text"
-                component={CustomInput}
-              />
-            </div>
-            <div className="review-order-odr__total-card">
-              <div className="review-order-odr__total-card-text">
-                Replace Strings
-              </div>
-              <div className="review-order-odr__total-card-price">$62.47</div>
-            </div>
-          </>
-        ) : (
-          <></>
-        )} */}
-        {/* <div className="review-order-odr__form-container">
-          <Field
-            name="brand"
-            label="Brand (Optional)"
-            placeholder="Brand"
-            type="text"
-            component={CustomInput}
-          />
-          <Field
-            name="model"
-            label="Model (Optional)"
-            type="text"
-            component={CustomInput}
-          />
-        </div> */}
       </div>
     </>
   );

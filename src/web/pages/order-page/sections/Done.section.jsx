@@ -20,8 +20,8 @@ export const Done = ({ t, setStep, setDone }) => {
   ];
   const navigate = useNavigate();
   return (
-    <>
-      <div className="done">
+    <div className="done-background">
+      <div className="done max-w-[430px] m-[0_auto]">
         <div>
           <div className="mt-[100px]">
             <h5 className="text-white text-[24px] font-semibold text-center">
@@ -72,7 +72,7 @@ export const Done = ({ t, setStep, setDone }) => {
           </div>
         </div>
       </div>
-    </>
+    </div>
   );
 };
 

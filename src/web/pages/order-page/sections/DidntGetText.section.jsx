@@ -22,7 +22,7 @@ export function DidntGetText({
   );
   return (
     <>
-      <div className="didnt-get-text">
+      <div className="didnt-get-text max-w-[430px] m-[0_auto]">
         <div className="didnt-get-text__heading">
           <BackButton
             onClick={() => {

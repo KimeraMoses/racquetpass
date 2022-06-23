@@ -28,7 +28,7 @@ import { useSelector } from 'react-redux';
 import { VerifyResend } from './sections/VerifyResend.section';
 
 let OrderPage = ({ t, handleSubmit, change }) => {
-  const [step, setStep] = useState(0);
+  const [step, setStep] = useState(2);
   const [steps, setSteps] = useState({
     active: '',
     content: ['QR', 'Strings', 'Contact', 'Review'],
@@ -348,7 +348,7 @@ let OrderPage = ({ t, handleSubmit, change }) => {
           step === 8 ? (
             <></>
           ) : (
-            <div className="order-page__button-container">
+            <div className="order-page__button-container max-w-[430px] w-full mr-[auto] ml-[auto]">
               <StepButton
                 onClick={() => {
                   if (backFromReview) {

@@ -30,7 +30,7 @@ const orderDetails = {
 export function OrderDetails({ t, setStep, setDone }) {
   return (
     <>
-      <div className="review-order-odr">
+      <div className="review-order-odr max-w-[430px] m-[0_auto]">
         <div className="review-order-odr__heading">
           <BackButton
             onClick={() => {

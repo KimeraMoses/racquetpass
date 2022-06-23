@@ -23,7 +23,7 @@ export function ShopSearchResults({
   }, [inputEl]);
   return (
     <>
-      <div className="shop-result">
+      <div className="shop-result max-w-[430px] m-[0_auto]">
         <div className="shop-result__search-container">
           <Field
             name="shop-search"
