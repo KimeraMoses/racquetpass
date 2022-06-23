@@ -3,21 +3,14 @@ import { reduxForm, Field } from 'redux-form';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { withNamespaces } from 'react-i18next';
 import { Link } from 'react-router-dom';
-import {
-  AccountButton,
-  SubHeading,
-  BackButton,
-  Heading,
-  CustomInput,
-  SubmitButton,
-} from 'web/components';
+import { BackButton, Heading, CustomInput, SubmitButton } from 'web/components';
 import './Login.styles.scss';
 import { Description } from 'web/components/atoms/Description.atom';
 
 const required = (value) => (value ? undefined : 'Email is required');
 const email = (value) => {
   if (
-    /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i.test(
+    /^(([^<>()[\].,;:\s@"]+(\.[^<>()[\].,;:\s@"]+)*)|(".+"))@(([^<>()[\].,;:\s@"]+\.)+[^<>()[\].,;:\s@"]{2,})$/i.test(
       value
     )
   ) {
@@ -63,71 +56,55 @@ function Login({ t, handleSubmit }) {
               </button>
             </div>
           </div>
-          <div className="signin__form">
-            <Field
-              name="email"
-              label="Email Address"
-              type="email"
-              component={CustomInput}
-              validate={[required, email]}
-            />
-            <Field
-              name="password"
-              label="Password"
-              placeholder="Password"
-              component={CustomInput}
-              switchPasswordShow={() => {
-                if (passwordFieldType === 'password') {
-                  setPasswordFieldType('text');
-                } else {
-                  setPasswordFieldType('password');
-                }
-              }}
-              type={passwordFieldType}
-              isPasswordField
-              // Validate with Backend
-            />
-          </div>
-          <div className="signin__form-buttons">
-            <SubmitButton
-              type="submit"
-              onClick={() => {
-                if (missingQR) {
-                  navigate('/CreateOrder/Locker');
-                } else {
-                  navigate('/tasks');
-                }
-              }}
-              className="signin__form-buttons-btn"
-            >
-              Log In
-            </SubmitButton>
-            <Link to="/forgot" className="signin__form-buttons-link">
-              {t('odrForgetPass')}
-            </Link>
-          </div>
-        </div>
-        <div className="signin__account-text">
-          <Description>{t('alreadyHaveAccount')}</Description>
-          <Link to="/BusinessAccount/Create">&nbsp;{t('signUpNow')}</Link>
-        </div>
-        {/* <div className="sign__placeholder"></div> */}
-        {/* <div> */}
-        {/* <div className="signin__option">
-            <div className="signin__option-line"></div>
-            <div>
-              <SubHeading customClass="signin__option-txt">
-                {t('odrCreateWith')}
-              </SubHeading>
+          <div className="max-w-[340px] m-[0_auto]">
+            <div className="signin__form">
+              <Field
+                name="email"
+                label="Email Address"
+                type="email"
+                component={CustomInput}
+                validate={[required, email]}
+              />
+              <Field
+                name="password"
+                label="Password"
+                placeholder="Password"
+                component={CustomInput}
+                switchPasswordShow={() => {
+                  if (passwordFieldType === 'password') {
+                    setPasswordFieldType('text');
+                  } else {
+                    setPasswordFieldType('password');
+                  }
+                }}
+                type={passwordFieldType}
+                isPasswordField
+              />
             </div>
-            <div className="signin__option-line"></div>
-          </div> */}
-        {/* <div className="signin__buttons">
-            <AccountButton facebook />
-            <AccountButton google />
-            <AccountButton apple />
-          </div> */}
-        {/* </div> */}
+            <div className="signin__form-buttons">
+              <SubmitButton
+                type="submit"
+                onClick={() => {
+                  if (missingQR) {
+                    navigate('/CreateOrder/Locker');
+                  } else {
+                    navigate('/tasks');
+                  }
+                }}
+                className="signin__form-buttons-btn"
+              >
+                Log In
+              </SubmitButton>
+              <Link to="/forgot" className="signin__form-buttons-link">
+                {t('odrForgetPass')}
+              </Link>
+            </div>
+            <div className="signin__account-text">
+              <Description>{t('alreadyHaveAccount')}</Description>
+              <Link to="/BusinessAccount/Create">&nbsp;{t('signUpNow')}</Link>
+            </div>
+          </div>
+        </div>
       </form>
     </>
   );
