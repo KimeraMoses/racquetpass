@@ -1,7 +1,6 @@
 .home-container {
   background: linear-gradient(180deg, #044794 0%, #1883e7 100%);
   min-height: 100vh;
-  // gap: 350px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -52,6 +51,8 @@
     }
   }
   .banner-container {
+    max-width: 430px;
+    margin: 0 auto;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -76,6 +77,8 @@
     }
   }
   .banner-button-container {
+    max-width: 430px;
+    margin: 0 auto;
     margin-top: 48px;
     display: flex;
     flex-direction: column;
@@ -114,6 +117,8 @@
     }
   }
   .footer-container {
+    max-width: 430px;
+    margin: 0 auto;
     display: flex;
     justify-content: space-between;
     position: relative;
@@ -129,6 +134,8 @@
     }
   }
   .image-container {
+    max-width: 430px;
+    margin: 0 auto;
     display: flex;
     align-items: center;
     justify-content: center;
