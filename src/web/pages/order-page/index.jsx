@@ -45,6 +45,7 @@ let OrderPage = ({ t, handleSubmit, change }) => {
   const navigate = useNavigate();
 
   const errors = useSelector((state) => state?.form?.signup?.syncErrors);
+  const values = useSelector((state) => state?.form?.signup?.values);
 
   const goToTop = () => {
     window.scrollTo({
@@ -358,7 +359,12 @@ let OrderPage = ({ t, handleSubmit, change }) => {
                     forward();
                   }
                 }}
-                disabled={step === 0 || errors}
+                disabled={
+                  step === 0 ||
+                  errors ||
+                  (step === 2 && !values?.brand) ||
+                  (step === 3 && !values?.mains && !values?.cross)
+                }
                 type="button"
               >
                 {t('odrNext')}

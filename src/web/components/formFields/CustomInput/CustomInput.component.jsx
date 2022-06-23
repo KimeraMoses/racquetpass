@@ -56,6 +56,8 @@ export const CustomInput = (props) => {
           }
         }}
         value={props?.value ? props?.value : props?.input?.value}
+        autoCapitalize="words"
+        pattern={props?.pattern}
         onChange={(e) => {
           props?.input?.onChange(e);
           if (props?.customOnChange) {

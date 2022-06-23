@@ -1,4 +1,4 @@
-import { useRef, useState } from 'react';
+import { useRef } from 'react';
 import { Link } from 'react-router-dom';
 import './CustomInputNumber.styles.scss';
 
@@ -16,9 +16,9 @@ export const CustomInputNumber = (props) => {
     // setValue((value) => value - 1);
   };
 
-  const handleChange = () => {
-    // setValue(value);
-  };
+  // const handleChange = () => {
+  //   setValue(value);
+  // };
   return (
     <div className="custom-input-number">
       {props?.noLabel ? (
@@ -42,6 +42,7 @@ export const CustomInputNumber = (props) => {
             placeholder={props?.placeholder ? props?.placeholder : props?.label}
             className="custom-input-number__input"
             ref={inputEl}
+            pattern={props?.pattern}
             type="number"
             style={
               props.icon
@@ -52,8 +53,6 @@ export const CustomInputNumber = (props) => {
                   }
                 : {}
             }
-            // onChange={handleChange}
-            // value={value}
             readOnly={props?.readOnly}
           />
           <div className="custom-input-number__postfix">lbs</div>

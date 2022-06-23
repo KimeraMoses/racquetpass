@@ -1,107 +1,8 @@
-import {
-  Heading,
-  HeadingButton,
-  PaymentCard,
-  Description,
-} from 'web/components';
+import { Heading, HeadingButton, Description } from 'web/components';
 import { Link } from 'react-router-dom';
 import './SetupPayment.styles.scss';
 
-const Card = ({
-  heading,
-  btnText,
-  onClick,
-  description,
-  method,
-  methodDetails,
-  setCurrentScreen,
-  setIsReceive,
-}) => {
-  // const screen = method === 'bank' ? 'addBank' : 'addCard';
-  return (
-    <div className="setup-payment__card">
-      <div className="setup-payment__card-heading">
-        <div className="setup-payment__card-heading-text">{heading}</div>
-        {method ? (
-          <div
-            className="setup-payment__card-heading-btn"
-            role="button"
-            onClick={() => {
-              if (heading === 'Receive Payment') {
-                setCurrentScreen('choose');
-                setIsReceive(true);
-              } else {
-                setCurrentScreen('choose');
-                setIsReceive(false);
-              }
-            }}
-          >
-            Change
-          </div>
-        ) : (
-          <></>
-        )}
-      </div>
-      {method ? (
-        <PaymentCard {...methodDetails} />
-      ) : (
-        <div
-          className="setup-payment__card-button"
-          role="button"
-          onClick={onClick}
-        >
-          <div className="setup-payment__card-button-text">{btnText}</div>
-          <div className="setup-payment__card-button-arrow">
-            <img src="/img/arrow-left.png" alt="arrow left" />
-          </div>
-        </div>
-      )}
-      <div className="setup-payment__card-description">{description}</div>
-    </div>
-  );
-};
-
-export const SetupPayment = ({
-  t,
-  setCurrentScreen,
-  setIsReceive,
-  setDrawer,
-}) => {
-  const cardData = [
-    {
-      heading: 'RacquetPass Payment',
-      btnText: 'Setup this payment method',
-      description: 'This will be used to pay RacquetPass.',
-      onClick: () => {
-        setCurrentScreen('choose');
-        setIsReceive(false);
-      },
-      method: 'card',
-      methodDetails: {
-        cardType: 'visa',
-        title: 'Visa Card',
-        ending: '5432',
-      },
-      setIsReceive,
-    },
-    {
-      heading: 'Receive Payment',
-      btnText: 'Setup this payment method',
-      description:
-        'You will recieve money in this account when your customers place service orders.',
-      onClick: () => {
-        setCurrentScreen('choose');
-        setIsReceive(true);
-      },
-      setIsReceive,
-      // method: 'bank',
-      // methodDetails: {
-      //   title: 'Chase Banking',
-      //   ending: 'Ends with 1234',
-      // },
-    },
-  ];
-
+export const SetupPayment = ({ t, setDrawer }) => {
   return (
     <div className="setup-payment">
       <div className="setup-payment__header">
@@ -109,7 +10,7 @@ export const SetupPayment = ({
         <Heading>{t('paymentHeading')}</Heading>
       </div>
 
-      <div className="setup-payment__body">
+      <div className="setup-payment__body max-w-[450px]">
         <Description>{t('setupPayTxt')}</Description>
         <ol className="mt-[13px] ml-[13px] flex flex-col gap-[15px] list-none">
           <li className="flex">
@@ -133,22 +34,12 @@ export const SetupPayment = ({
             </Description>
           </li>
         </ol>
+        <div className="flex justify-center mt-[50px]">
+          <Link to="#" className="text-[#304FFE] font-medium text-lg">
+            {t('setupStripe')}
+          </Link>
+        </div>
       </div>
-      <div className="flex justify-center mt-[50px]">
-        <Link to="#" className="text-[#304FFE] font-medium text-lg">
-          {t('setupStripe')}
-        </Link>
-      </div>
-
-      {/* {cardData.map((data) => {
-        return (
-          <Card
-            key={data?.heading}
-            {...data}
-            setCurrentScreen={setCurrentScreen}
-          />
-        );
-      })} */}
     </div>
   );
 };

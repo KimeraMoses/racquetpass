@@ -1,15 +1,13 @@
 .edit-form {
   padding: 0px 20px;
-  // min-height: calc(100vh - 80px);
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
   &__header {
     display: flex;
     gap: 12px;
     align-items: center;
   }
   &__form {
+    max-width: 450px;
+    margin: 0 auto;
     margin-top: 40px;
     display: flex;
     flex-direction: column;
@@ -78,6 +76,8 @@
     }
   }
   &__button {
+    margin: 0 auto;
     margin-top: 50px;
+    max-width: 450px;
   }
 }

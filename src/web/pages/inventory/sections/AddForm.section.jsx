@@ -126,8 +126,11 @@ export function AddForm({ t, setCurrentScreen }) {
             </div>
           </div>
         </div>
-        <div className="item-form__button">
-          <SubmitButton onClick={() => setCurrentScreen('detail')}>
+        <div className="item-form__button w-full sm:w-[450px] m-[0_auto] mt-[50px]">
+          <SubmitButton
+            onClick={() => setCurrentScreen('detail')}
+            className="w-full"
+          >
             {t('profileButtonAddNew')}
           </SubmitButton>
         </div>

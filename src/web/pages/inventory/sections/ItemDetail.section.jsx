@@ -24,7 +24,7 @@ export function ItemDetails({ t, setCurrentScreen }) {
             />
           </div>
         </div>
-        <div className="mt-[30px] flex flex-col gap-[20px]">
+        <div className="mt-[30px] flex flex-col gap-[20px] max-w-[450px] m-[0_auto]">
           <div className="item-details-inventory__txt flex flex-col gap-[4px]">
             <SubHeading>{t('odrBrnd')}</SubHeading>
             <Description>{t('odrBrndDesc')}</Description>

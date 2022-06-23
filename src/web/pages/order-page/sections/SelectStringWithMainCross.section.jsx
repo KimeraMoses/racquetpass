@@ -30,8 +30,8 @@ export function SelectStringWithMainCross({
   setCross,
   change,
 }) {
-  const [mainsTension, setMainsTension] = useState(150);
-  const [crossesTension, setCrossesTension] = useState(150);
+  const [mainsTension, setMainsTension] = useState(50);
+  const [crossesTension, setCrossesTension] = useState(50);
 
   const main = useSelector((state) => state?.form?.signup?.values?.main);
   const cross = useSelector((state) => state?.form?.signup?.values?.cross);
@@ -144,19 +144,11 @@ export function SelectStringWithMainCross({
             />
           </div>
           <div className="select-string-mc__crosses-info-number">
-            {/* <Field
-              name="crosses-tension"
-              label="Tension"
-              type="number"
-              link={{ text: 'Change units to kg', path: '#' }}
-              component={CustomInputNumber}
-            /> */}
             <CustomInputNumber
-              // {...props}
               label="Tension"
               value={crossesTension}
               onChange={(e) => {
-                crossesTension(e.target.value);
+                setCrossesTension(e.target.value);
               }}
               link={{ text: 'Change units to kg', path: '#' }}
               type="number"

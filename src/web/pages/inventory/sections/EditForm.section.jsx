@@ -121,12 +121,12 @@ export function EditForm({ t, setCurrentScreen }) {
               }
             />
           </div>
-        </div>
-        <div className="edit-form__button">
-          {/* <SubmitButton>{t('profileButtonAddNew')}</SubmitButton> */}
-          <SubmitButton onClick={() => setCurrentScreen('inventory')}>
-            {t('profileButtonSave')}
-          </SubmitButton>
+          <div className="edit-form__button">
+            {/* <SubmitButton>{t('profileButtonAddNew')}</SubmitButton> */}
+            <SubmitButton onClick={() => setCurrentScreen('inventory')}>
+              {t('profileButtonSave')}
+            </SubmitButton>
+          </div>
         </div>
       </div>
     </>

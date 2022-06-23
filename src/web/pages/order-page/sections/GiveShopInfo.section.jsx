@@ -16,15 +16,6 @@ import { StepButton } from 'web/components/Buttons/StepButton.componet';
 import './GiveShopInfo.styles.scss';
 
 const required = (value) => (value ? undefined : 'Required');
-const r = /^\s*([A-Z]\w*\s*)*$/;
-const titleCase = (value) => {
-  if (r.test(value) === true) {
-    return undefined;
-  } else {
-    return 'Please enter shop name in title case';
-  }
-};
-//
 
 export function GiveShopInfo({ t, setShopCurrent, setStep, change }) {
   const [states, setStates] = useState([]);
@@ -57,7 +48,7 @@ export function GiveShopInfo({ t, setShopCurrent, setStep, change }) {
               label="Shop Name"
               type="text"
               component={CustomInput}
-              validate={[required, titleCase]}
+              validate={required}
             />
             <div className="grid grid-cols-[3fr_1fr] items-center gap-[10px]">
               <Field
@@ -88,7 +79,7 @@ export function GiveShopInfo({ t, setShopCurrent, setStep, change }) {
               name="phone-number"
               label="Your Phone Number (Optional)"
               type="number"
-              component={CustomInput}
+              component={(props) => <CustomInput {...props} pattern="\d*" />}
             />
           </div>
           <Description customClass="find-shop-section__form-text">

@@ -38,7 +38,7 @@ export function SelectString({
 
   const brand = useSelector((state) => state?.form?.signup?.values?.brand);
 
-  const [mainsTension, setMainsTension] = useState(150);
+  const [mainsTension, setMainsTension] = useState(50);
 
   // useEffect(() => {
   //   change('mains-tension', mainsTension);
@@ -110,7 +110,9 @@ export function SelectString({
             <CustomInputNumber
               // {...props}
               label="Tension"
+              placeholder=" "
               value={mainsTension}
+              pattern="\d*"
               onChange={(e) => {
                 setMainsTension(e.target.value);
               }}

@@ -23,48 +23,50 @@ export function SearchInventory({ t, setCurrentScreen, setDrawer }) {
   return (
     <>
       <div className="search-inventory">
-        <div>
-          <div className="search-inventory__header">
-            <HeadingButton drawer onClick={() => setDrawer()} />
-            <Heading>{t('businessAccountDetailsInventory')}</Heading>
-          </div>
-
-          <div className="search-inventory__search">
-            <CustomInput
-              icon="/img/orderpage/search.png"
-              label="Search Inventory"
-              noLabel
-              onClick={() => {}}
-            />
-          </div>
-
-          <div className="search-inventory__strings">
-            <SubHeading>{t('profileString')}</SubHeading>
-          </div>
-          <div className="search-inventory__cards">
-            {search.map((item, idx) => {
-              return (
-                <Fragment key={idx}>
-                  <SearchCard
-                    string={item}
-                    onClick={() => {
-                      setCurrentScreen('detail');
-                    }}
-                  />
-                </Fragment>
-              );
-            })}
-          </div>
+        <div className="search-inventory__header">
+          <HeadingButton drawer onClick={() => setDrawer()} />
+          <Heading>{t('businessAccountDetailsInventory')}</Heading>
         </div>
-        <div className="search-inventory__buttons">
-          {/* <StepButton outlined>{t('profileButtonCSV')}</StepButton> */}
-          <StepButton
-            onClick={() => {
-              setCurrentScreen('add');
-            }}
-          >
-            {t('inventoryItemBtn')}
-          </StepButton>
+
+        <div className="flex flex-col items-center">
+          <div className="w-full sm:w-[450px]">
+            <div className="search-inventory__search">
+              <CustomInput
+                icon="/img/orderpage/search.png"
+                label="Search Inventory"
+                noLabel
+                onClick={() => {}}
+              />
+            </div>
+
+            <div className="search-inventory__strings">
+              <SubHeading>{t('profileString')}</SubHeading>
+            </div>
+            <div className="search-inventory__cards">
+              {search.map((item, idx) => {
+                return (
+                  <Fragment key={idx}>
+                    <SearchCard
+                      string={item}
+                      onClick={() => {
+                        setCurrentScreen('detail');
+                      }}
+                    />
+                  </Fragment>
+                );
+              })}
+            </div>
+            <div className="search-inventory__buttons">
+              {/* <StepButton outlined>{t('profileButtonCSV')}</StepButton> */}
+              <StepButton
+                onClick={() => {
+                  setCurrentScreen('add');
+                }}
+              >
+                {t('inventoryItemBtn')}
+              </StepButton>
+            </div>
+          </div>
         </div>
       </div>
     </>
