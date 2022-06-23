@@ -62,80 +62,68 @@ let Create = ({ t, change }) => {
               </button>
             </div>
           </div>
-          <div className="text-[#545454] text-[18px]">
-            We' re so excited for your business to join RacquetPass! Signing up
-            will only take a few minutes.
-          </div>
-          <div className="create-business-account__form-container">
-            <Field
-              name="firstName"
-              label="First Name"
-              type="text"
-              component={CustomInput}
-              validate={required}
-            />
-            <Field
-              name="lastName"
-              label="Last Name"
-              type="text"
-              component={CustomInput}
-              validate={required}
-            />
-            <CustomPhoneInput
-              change={change}
-              name="phone-number"
-              label="Phone Number"
-              value={phoneNumber}
-            />
-          </div>
-          <div>
-            <div className="create-business-account__statement">
-              <Description customClass="create-business-account__statement-txt">
-                {t('odrPivacyText')}
-                <span className="create-business-account__statement-txt-bold">
-                  {t('odrTermsBold')}
-                </span>
-                &nbsp;
-                {t('odrPrivacyAnd')}
-                &nbsp;
-                <span className="create-business-account__statement-txt-bold">
-                  {t('odrPrivacyBold')}
-                </span>
-              </Description>
+          <div className="max-w-[430px] m-[0_auto]">
+            <div className="text-[#545454] text-[18px]">
+              We' re so excited for your business to join RacquetPass! Signing
+              up will only take a few minutes.
             </div>
-          </div>
-          <div className="create-business-account__form-button">
-            <SubmitButton
-              type="button"
-              className="create-business-account__form-button-btn"
-              disabled={errors}
-              onClick={() => {
-                navigate('/BusinessAccount/BusinessDetails');
-              }}
-            >
-              {t('odrCreateBtn')}
-            </SubmitButton>
-          </div>
-          <div className="text-center text-[16px]">
-            Have an account?{' '}
-            <Link to="/login" className="text-[16px] text-[#304FFE]">
-              Log in.
-            </Link>
-          </div>
-          {/* <div className="create-business-account__option-container">
-            <div className="create-business-account__option-container-line"></div>
+            <div className="create-business-account__form-container">
+              <Field
+                name="firstName"
+                label="First Name"
+                type="text"
+                component={CustomInput}
+                validate={required}
+              />
+              <Field
+                name="lastName"
+                label="Last Name"
+                type="text"
+                component={CustomInput}
+                validate={required}
+              />
+              <CustomPhoneInput
+                change={change}
+                name="phone-number"
+                label="Phone Number"
+                value={phoneNumber}
+              />
+            </div>
             <div>
-              <SubHeading customClass="create-business-account__option-container-txt">
-                {t('odrCreateWith')}
-              </SubHeading>
+              <div className="create-business-account__statement">
+                <Description customClass="create-business-account__statement-txt">
+                  {t('odrPivacyText')}
+                  <span className="create-business-account__statement-txt-bold">
+                    {t('odrTermsBold')}
+                  </span>
+                  &nbsp;
+                  {t('odrPrivacyAnd')}
+                  &nbsp;
+                  <span className="create-business-account__statement-txt-bold">
+                    {t('odrPrivacyBold')}
+                  </span>
+                </Description>
+              </div>
             </div>
-            <div className="create-business-account__option-container-line"></div>
-          </div> */}
-          {/* <div className="create-business-account__buttons">
-            <AccountButton facebook />
-            <AccountButton google />
-            <AccountButton apple />
-          </div> */}
+            <div className="create-business-account__form-button">
+              <SubmitButton
+                type="button"
+                className="create-business-account__form-button-btn"
+                disabled={errors}
+                onClick={() => {
+                  navigate('/BusinessAccount/BusinessDetails');
+                }}
+              >
+                {t('odrCreateBtn')}
+              </SubmitButton>
+            </div>
+            <div className="text-center text-[16px]">
+              Have an account?{' '}
+              <Link to="/login" className="text-[16px] text-[#304FFE]">
+                Log in.
+              </Link>
+            </div>
+          </div>
         </div>
       </div>
     </>
