@@ -12,7 +12,7 @@ const required = (value) => (value ? undefined : 'Required');
 export function VerifyPhone({ t, backward }) {
   return (
     <>
-      <div className="phone-section max-w-[430px] m-[0_auto]">
+      <div className="phone-section max-w-[450px] m-[0_auto]">
         <div className="phone-section__heading flex justify-start gap-[12px]">
           <BackButton onClick={backward} />
           <Heading customClass="phone-section__heading-text">

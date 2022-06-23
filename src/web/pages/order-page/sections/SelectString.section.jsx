@@ -53,7 +53,7 @@ export function SelectString({
 
   return (
     <>
-      <div className="select-string-odr max-w-[430px] m-[0_auto]">
+      <div className="select-string-odr max-w-[450px] m-[0_auto]">
         <Modal
           showModal={modal}
           handleShow={handleShow}

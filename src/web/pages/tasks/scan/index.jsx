@@ -43,7 +43,7 @@ let Scan = ({ t, scanForward, change, backward }) => {
           <BackButton onClick={() => navigate('/tasks')} />
           <Heading>Scan QR Code</Heading>
         </div>
-        <div className="max-w-[430px] m-[0_auto]">
+        <div className="max-w-[450px] m-[0_auto]">
           <div
             className="task-scan-section__image-container"
             onClick={() => {

@@ -26,7 +26,7 @@ export function ReviewOrder({ t, setStep, setDone, setBackFromReview }) {
           setDone(true);
         }}
       />
-      <div className="review-order-odr max-w-[430px] m-[0_auto]">
+      <div className="review-order-odr max-w-[450px] m-[0_auto]">
         <div className="review-order-odr__heading">
           <BackButton onClick={() => setStep(5)} />
           <Heading customClass="review-order-odr__heading-text">

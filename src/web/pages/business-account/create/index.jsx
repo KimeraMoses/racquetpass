@@ -62,7 +62,7 @@ let Create = ({ t, change }) => {
               </button>
             </div>
           </div>
-          <div className="max-w-[430px] m-[0_auto]">
+          <div className="max-w-[450px] m-[0_auto]">
             <div className="text-[#545454] text-[18px]">
               We' re so excited for your business to join RacquetPass! Signing
               up will only take a few minutes.

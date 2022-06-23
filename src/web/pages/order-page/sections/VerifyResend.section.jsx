@@ -13,7 +13,7 @@ const required = (value) => (value ? undefined : 'Required');
 export function VerifyResend({ t, setStep }) {
   return (
     <>
-      <div className="verify-resend-section max-w-[430px] m-[0_auto]">
+      <div className="verify-resend-section max-w-[450px] m-[0_auto]">
         <div className="verify-resend-section__heading flex justify-start gap-[12px]">
           <BackButton onClick={() => setStep(9)} />
           <Heading customClass="verify-resend-section__heading-text">

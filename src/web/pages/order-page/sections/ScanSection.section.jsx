@@ -39,7 +39,7 @@ export function ScanSection({
 
   return (
     <>
-      <div className="scan-section max-w-[430px] m-[0_auto]">
+      <div className="scan-section max-w-[450px] m-[0_auto]">
         <div className="scan-section__heading">
           <BackButton onClick={backward} />
           <Heading>{t('scanQRHeading')}</Heading>

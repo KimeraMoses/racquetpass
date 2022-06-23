@@ -65,7 +65,7 @@ export function SelectStringWithMainCross({
         }
         closeText="Got it"
       />
-      <div className="select-string-mc max-w-[430px] m-[0_auto]">
+      <div className="select-string-mc max-w-[450px] m-[0_auto]">
         <div className="select-string-mc__heading justify-start gap-[16px]">
           <BackButton onClick={backward} />
           <Heading customClass="select-string-mc__heading-text">

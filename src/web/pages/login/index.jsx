@@ -56,7 +56,7 @@ function Login({ t, handleSubmit }) {
               </button>
             </div>
           </div>
-          <div className="max-w-[340px] m-[0_auto]">
+          <div className="max-w-[450px] m-[0_auto]">
             <div className="signin__form">
               <Field
                 name="email"

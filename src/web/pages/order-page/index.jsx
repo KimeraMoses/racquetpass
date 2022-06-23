@@ -348,7 +348,7 @@ let OrderPage = ({ t, handleSubmit, change }) => {
           step === 8 ? (
             <></>
           ) : (
-            <div className="order-page__button-container max-w-[430px] w-full mr-[auto] ml-[auto]">
+            <div className="order-page__button-container max-w-[450px] w-full mr-[auto] ml-[auto]">
               <StepButton
                 onClick={() => {
                   if (backFromReview) {

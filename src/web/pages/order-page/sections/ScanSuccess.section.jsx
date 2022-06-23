@@ -13,7 +13,7 @@ import './ScanSuccess.styles.scss';
 export function ScanSuccess({ t, backward }) {
   return (
     <>
-      <div className="scan-details-sc max-w-[430px] m-[0_auto]">
+      <div className="scan-details-sc max-w-[450px] m-[0_auto]">
         <div>
           {/* <BackButton /> */}
           <div className="scan-details-sc__heading">

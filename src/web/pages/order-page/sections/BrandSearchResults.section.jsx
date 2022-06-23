@@ -32,7 +32,7 @@ export function BrandSearchResults({
   };
   return (
     <>
-      <div className="brand-result-o max-w-[430px] m-[0_auto]">
+      <div className="brand-result-o max-w-[450px] m-[0_auto]">
         <div className="brand-result-o__search-container">
           <Field
             name="brand-search"

@@ -40,7 +40,7 @@ let BusinessDetails = ({ t, change }) => {
           {t('businessAccountDetailHeading')}
         </h1>
       </div>
-      <div className="max-w-[430px] m-[0_auto]">
+      <div className="max-w-[450px] m-[0_auto]">
         <div className="business-details-description text-[#545454]">
           {t('businessAccountDetailDescription')}
         </div>

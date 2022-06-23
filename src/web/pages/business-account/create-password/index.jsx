@@ -145,7 +145,7 @@ let CreatePassword = ({ t, back }) => {
               <Heading>{t('accPassword')}</Heading>
             </div>
           </div>
-          <div className="max-w-[430px] m-[0_auto]">
+          <div className="max-w-[450px] m-[0_auto]">
             <div className="create-business-password__input-password">
               <Field
                 name="password"
