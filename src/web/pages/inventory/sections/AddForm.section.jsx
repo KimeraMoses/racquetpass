@@ -13,8 +13,9 @@ import {
 
 import './AddForm.styles.scss';
 
-export function AddForm({ t, setCurrentScreen }) {
+export function AddForm({ t, setCurrentScreen, change }) {
   const [show, setShow] = useState(false);
+  const [price, setPrice] = useState('');
   // const [active, setActive] = useState(true);
   const [check, setCheck] = useState(false);
   const [activeIndex, setActiveIndex] = useState(0);
@@ -54,11 +55,34 @@ export function AddForm({ t, setCurrentScreen }) {
               type="text"
               component={CustomInput}
             />
-            <Field
-              name="price"
+            <CustomInput
+              pattern="\d*"
+              value={price}
+              customOnChange={(e) => {
+                const value = e.target.value;
+                if (value.charAt(0) === '$') {
+                  const substr = value?.substring(1);
+                  if (!isNaN(Number(substr))) {
+                    setPrice(`${substr}`);
+                  }
+                } else {
+                  if (!isNaN(Number(value))) {
+                    setPrice(value);
+                  }
+                }
+              }}
               label="Price"
-              type="text"
-              component={CustomInput}
+              hidePostFix
+              customOnBlur={(e) => {
+                const value = e?.target?.value;
+                if (value?.charAt(0) === '$') {
+                  const substr = value?.substring(1);
+                  setPrice(`$${Number(substr)?.toFixed(2)}`);
+                } else {
+                  setPrice(`$${Number(e?.target?.value).toFixed(2)}`);
+                }
+                change('itemPrice', e?.target?.value);
+              }}
             />
             <div className="item-form__form-types">
               <div className="item-form__form-types-heading">

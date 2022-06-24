@@ -13,8 +13,9 @@ import {
 
 import './EditForm.styles.scss';
 
-export function EditForm({ t, setCurrentScreen }) {
+export function EditForm({ t, setCurrentScreen, change }) {
   const [check, setCheck] = useState(true);
+  const [price, setPrice] = useState('');
   const [activeIndex, setActiveIndex] = useState(0);
 
   const handleOnClick = (index) => setActiveIndex(index);
@@ -85,13 +86,6 @@ export function EditForm({ t, setCurrentScreen }) {
             <Heading>{t('profileFormEdit')}</Heading>
           </div>
           <div className="edit-form__form">
-            {/* <form></form> */}
-            {/* <Field
-              name="type"
-              label="Type"
-              type="text"
-              component={CustomInput}
-            /> */}
             <Field
               name="brand"
               label="Brand"
@@ -104,11 +98,34 @@ export function EditForm({ t, setCurrentScreen }) {
               type="text"
               component={CustomInput}
             />
-            <Field
-              name="price"
+            <CustomInput
+              pattern="\d*"
+              value={price}
+              customOnChange={(e) => {
+                const value = e.target.value;
+                if (value.charAt(0) === '$') {
+                  const substr = value?.substring(1);
+                  if (!isNaN(Number(substr))) {
+                    setPrice(`${substr}`);
+                  }
+                } else {
+                  if (!isNaN(Number(value))) {
+                    setPrice(value);
+                  }
+                }
+              }}
               label="Price"
-              type="text"
-              component={CustomInput}
+              hidePostFix
+              customOnBlur={(e) => {
+                const value = e?.target?.value;
+                if (value?.charAt(0) === '$') {
+                  const substr = value?.substring(1);
+                  setPrice(`$${Number(substr)?.toFixed(2)}`);
+                } else {
+                  setPrice(`$${Number(e?.target?.value).toFixed(2)}`);
+                }
+                change('itemPrice', e?.target?.value);
+              }}
             />
 
             <div className="edit-form__form-types">
