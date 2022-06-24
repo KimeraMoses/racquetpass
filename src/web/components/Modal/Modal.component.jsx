@@ -13,8 +13,12 @@ export const Modal = ({
     if (showModal) {
       window.scrollTo(0, 0);
       document.body.style.overflow = 'hidden';
+      document.ontouchmove = function (event) {
+        event.preventDefault();
+      };
       return () => {
         document.body.style.overflow = 'auto';
+        document.ontouchmove = function (event) {};
       };
     }
   }, [showModal]);

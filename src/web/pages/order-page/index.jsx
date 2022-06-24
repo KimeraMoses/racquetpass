@@ -28,7 +28,7 @@ import { useSelector } from 'react-redux';
 import { VerifyResend } from './sections/VerifyResend.section';
 
 let OrderPage = ({ t, handleSubmit, change }) => {
-  const [step, setStep] = useState(0);
+  const [step, setStep] = useState(6);
   const [steps, setSteps] = useState({
     active: '',
     content: ['QR', 'Strings', 'Contact', 'Review'],
