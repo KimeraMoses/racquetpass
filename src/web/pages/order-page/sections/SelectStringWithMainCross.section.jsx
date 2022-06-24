@@ -74,7 +74,7 @@ export function SelectStringWithMainCross({
         </div>
         <div className="select-string-mc__text-container">
           <Description customClass="select-string-mc__text-container-text">
-            {t('odrSelectDesc')}
+            Select the strings you want your racquet restrung with.
           </Description>
         </div>
         <div className="select-string-mc__main-info">

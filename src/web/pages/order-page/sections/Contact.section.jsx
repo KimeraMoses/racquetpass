@@ -69,37 +69,6 @@ export function Contact({
             label="Phone Number"
             value={phoneNumber}
           />
-          {/* <CustomInput
-            name="phone-number"
-            label="Phone Number"
-            value={phoneNumber}
-            type="tel"
-            placeholder="(323)323-3323"
-            customOnBlur={(e) => {
-              setPhoneTouched(true);
-            }}
-            meta={{
-              touched: phoneTouched,
-              error: !phoneNumber
-                ? 'Field is required'
-                : phoneValidation(phoneNumber) !== undefined
-                ? phoneValidation(phoneNumber)
-                : '',
-            }}
-            customOnChange={(e) => {
-              const value = e?.target?.value;
-              if (value && value?.length === 10 && !isNaN(Number(value))) {
-                const formattedNumber = `(${value.substring(
-                  0,
-                  3
-                )})${value?.substring(3, 6)}-${value?.substring(6, 10)}`;
-                change('phone-number', formattedNumber);
-              } else {
-                change('phone-number', value);
-              }
-            }}
-          /> */}
-
           <Description>{t('selectStringContact')}</Description>
         </div>
       </div>

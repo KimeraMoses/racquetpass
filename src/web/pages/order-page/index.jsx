@@ -343,6 +343,7 @@ let OrderPage = ({ t, handleSubmit, change }) => {
           shop.current === 'find' ||
           shop.current === 'thanks' ||
           mainCross.current === 'search' ||
+          strings.current === 'search' ||
           step === 6 ||
           step === 0 ||
           (step === 1 && scan.current === 'initial') ||
@@ -363,7 +364,8 @@ let OrderPage = ({ t, handleSubmit, change }) => {
                   step === 0 ||
                   errors ||
                   (step === 2 && !values?.brand) ||
-                  (step === 3 && !values?.mains && !values?.cross)
+                  (step === 3 && !values?.mains && !values?.cross) ||
+                  (step === 4 && !values?.['phone-number'])
                 }
                 type="button"
               >
