@@ -135,7 +135,10 @@ export function OrderDetails({ t, setStep, setDone }) {
             <Heading customClass="review-order-odr__shop-heading-text">
               {t('odrReviewShop')}
             </Heading>
-            <a href="/" className="text-[12px] text-[#304FFE] font-semibold">
+            <a
+              href="tel:(123) 456-4567"
+              className="text-[12px] text-[#304FFE] font-semibold"
+            >
               Call Shop
             </a>
           </div>
