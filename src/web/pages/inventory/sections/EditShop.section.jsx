@@ -77,15 +77,29 @@ export function EditShop({ t, setCurrentScreen, change }) {
               pattern="\d*"
               value={labor}
               customOnChange={(e) => {
-                setLabor(e?.target?.value);
+                const value = e.target.value;
+                if (value.charAt(0) === '$') {
+                  const substr = value?.substring(1);
+                  if (!isNaN(Number(substr))) {
+                    setLabor(`${substr}`);
+                  }
+                } else {
+                  if (!isNaN(Number(value))) {
+                    setLabor(value);
+                  }
+                }
               }}
               label="Labor Price"
               hidePostFix
               customOnBlur={(e) => {
-                if (e?.target?.value) {
-                  setLabor(`$${e?.target?.value}`);
+                const value = e?.target?.value;
+                if (value?.charAt(0) === '$') {
+                  const substr = value?.substring(1);
+                  setLabor(`$${Number(substr)?.toFixed(2)}`);
+                } else {
+                  setLabor(`$${Number(e?.target?.value).toFixed(2)}`);
                 }
-                change('labore-price', e?.target?.value);
+                change('labor-price', e?.target?.value);
               }}
             />
           </div>

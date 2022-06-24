@@ -39,6 +39,7 @@ export function SelectStringWithMainCross({
   const cross = useSelector((state) => state?.form?.signup?.values?.cross);
 
   const [modal, setModal] = useState(false);
+  const [unit, setUnit] = useState('lbs');
 
   const racquetSport = useSelector(
     (state) => state?.form?.signup?.values?.racquetSport
@@ -130,7 +131,18 @@ export function SelectStringWithMainCross({
               onChange={(e) => {
                 setMainsTension(e.target.value);
               }}
-              link={{ text: 'Change units to kg', path: '#' }}
+              link={{
+                text: `Change units to ${unit === 'kg' ? 'lbs' : 'kg'}`,
+                path: '#',
+                onClick: () => {
+                  if (unit === 'kg') {
+                    setUnit('lbs');
+                  } else {
+                    setUnit('kg');
+                  }
+                },
+              }}
+              postFix={unit}
               type="number"
             />
           </div>
@@ -165,7 +177,18 @@ export function SelectStringWithMainCross({
               onChange={(e) => {
                 setCrossesTension(e.target.value);
               }}
-              link={{ text: 'Change units to kg', path: '#' }}
+              link={{
+                text: `Change units to ${unit === 'kg' ? 'lbs' : 'kg'}`,
+                path: '#',
+                onClick: () => {
+                  if (unit === 'kg') {
+                    setUnit('lbs');
+                  } else {
+                    setUnit('kg');
+                  }
+                },
+              }}
+              postFix={unit}
               type="number"
             />
           </div>

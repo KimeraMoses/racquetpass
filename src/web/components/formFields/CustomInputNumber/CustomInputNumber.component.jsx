@@ -27,7 +27,9 @@ export const CustomInputNumber = (props) => {
         <div className="custom-input-number__label">
           <p>{props?.label}</p>
           {props?.link ? (
-            <Link to={props?.link?.path}>{props?.link?.text}</Link>
+            <Link to={props?.link?.path} onClick={props?.link?.onClick}>
+              {props?.link?.text}
+            </Link>
           ) : (
             <></>
           )}
@@ -67,7 +69,9 @@ export const CustomInputNumber = (props) => {
           {props?.hidePostFix ? (
             <></>
           ) : (
-            <div className="custom-input-number__postfix">lbs</div>
+            <div className="custom-input-number__postfix">
+              {props?.postFix ? props?.postFix : 'lbs'}
+            </div>
           )}
         </div>
         {!props?.showSteps ? (

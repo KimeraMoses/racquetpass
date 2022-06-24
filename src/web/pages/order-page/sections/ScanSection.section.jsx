@@ -152,9 +152,13 @@ export function ScanSection({
         >
           <Description>{t('scanQRDesc')}</Description>
         </div>
-        <div className="mt-[40px]">
-          <SubmitButton disabled>Change to this racquet</SubmitButton>
-        </div>
+        {backFromReview ? (
+          <div className="mt-[40px]">
+            <SubmitButton disabled>Change to this racquet</SubmitButton>
+          </div>
+        ) : (
+          <></>
+        )}
       </div>
     </>
   );

@@ -31,6 +31,7 @@ export function SelectString({
   setBackFromReview,
 }) {
   const [modal, setModal] = useState(false);
+  const [unit, setUnit] = useState('lbs');
 
   const handleShow = () => {
     setModal((modal) => !modal);
@@ -112,7 +113,6 @@ export function SelectString({
           </div>
           <div className="select-string-odr__main-info-number">
             <CustomInputNumber
-              // {...props}
               label="Tension"
               placeholder=" "
               value={mainsTension}
@@ -120,13 +120,20 @@ export function SelectString({
               onChange={(e) => {
                 setMainsTension(e.target.value);
               }}
-              link={{ text: 'Change units to kg', path: '#' }}
+              link={{
+                text: `Change units to ${unit === 'kg' ? 'lbs' : 'kg'}`,
+                path: '#',
+                onClick: () => {
+                  if (unit === 'kg') {
+                    setUnit('lbs');
+                  } else {
+                    setUnit('kg');
+                  }
+                },
+              }}
+              postFix={unit}
               type="number"
             />
-            {/* <Field
-              name="mains-tension"
-              component={(props) => (
-              )} /> */}
           </div>
         </div>
         <div className="select-string-odr__hybrid-settings">
