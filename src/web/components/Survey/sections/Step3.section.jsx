@@ -20,7 +20,7 @@ const Option = ({ label, description, active, onClick }) => {
   );
 };
 
-export const Step3 = ({ next, back }) => {
+export const Step3 = ({ back, setShow, onExit }) => {
   const [active, setActive] = useState('');
 
   const options = [
@@ -71,8 +71,14 @@ export const Step3 = ({ next, back }) => {
         ))}
       </div>
       <div className="mt-[45px]">
-        <SubmitButton disabled={!active} onClick={next}>
-          Next
+        <SubmitButton
+          disabled={!active}
+          onClick={() => {
+            setShow(false);
+            onExit();
+          }}
+        >
+          Complete Survey
         </SubmitButton>
       </div>
     </div>

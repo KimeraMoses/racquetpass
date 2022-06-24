@@ -1,6 +1,6 @@
 import { SubmitButton } from 'web/components/Buttons/SubmitButton.component';
 
-export const Step2 = ({ next, setStep, setHasRating }) => {
+export const Step2 = ({ setStep }) => {
   return (
     <div>
       <div className="mb-[30px] text-[#545454] text-[18px]">
@@ -9,13 +9,17 @@ export const Step2 = ({ next, setStep, setHasRating }) => {
       <SubmitButton
         onClick={() => {
           setStep(4);
-          setHasRating(true);
         }}
         className="mb-[12px]"
       >
         Yes
       </SubmitButton>
-      <SubmitButton onClick={next} outlined>
+      <SubmitButton
+        onClick={() => {
+          setStep(3);
+        }}
+        outlined
+      >
         No
       </SubmitButton>
     </div>
