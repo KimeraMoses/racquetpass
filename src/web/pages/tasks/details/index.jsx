@@ -129,7 +129,7 @@ function Details({ t }) {
             {t('taskOpenedPlayerPhoneHeading')}
           </div>
           <div className="player-desc text-[#304FFE]">
-            <a href="/">{t('taskOpenedPlayerPhone')}</a>
+            <a href="tel:(123) 456-7890">(123) 456-7890</a>
           </div>
         </div>
 

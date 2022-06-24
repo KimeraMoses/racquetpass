@@ -31,6 +31,7 @@ export function VerifyPhone({ t, backward, change }) {
               if (e.target.value?.length > 6) {
               } else {
                 setVerification(e?.target?.value);
+                change('verification-code', e?.target?.value);
                 setErrorCode('');
               }
             }}
