@@ -305,7 +305,7 @@ let OrderPage = ({ t, handleSubmit, change }) => {
           />
         );
       case 5:
-        return <VerifyPhone t={t} backward={backward} />;
+        return <VerifyPhone t={t} backward={backward} change={change} />;
       case 6:
         return (
           <ReviewOrder
@@ -332,7 +332,7 @@ let OrderPage = ({ t, handleSubmit, change }) => {
           />
         );
       case 10:
-        return <VerifyResend t={t} setStep={setStep} />;
+        return <VerifyResend t={t} setStep={setStep} change={change} />;
       case 20:
         return <EditRacquet t={t} setStep={setStep} change={change} />;
       default:
@@ -387,7 +387,8 @@ let OrderPage = ({ t, handleSubmit, change }) => {
                   errors ||
                   (step === 2 && !values?.brand) ||
                   (step === 3 && !values?.mains && !values?.cross) ||
-                  (step === 4 && !values?.['phone-number'])
+                  (step === 4 && !values?.['phone-number']) ||
+                  (step === 5 && !values?.['verification-code'])
                 }
                 type="button"
               >

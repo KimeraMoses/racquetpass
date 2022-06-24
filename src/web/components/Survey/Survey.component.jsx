@@ -8,27 +8,36 @@ import { Step1, Step2, Step3, Step4 } from './sections';
 import './Survey.styles.scss';
 
 export const Survey = ({ show, setShow, onExit }) => {
-  useEffect(() => {
-    if (show) {
-      window.scrollTo(0, 0);
-      document.body.style.overflow = 'hidden';
-      return () => {
-        document.body.style.overflow = 'auto';
-        clearAllBodyScrollLocks();
-      };
-    }
-  }, [show]);
-
-  const [step, setStep] = useState(1);
-
   let targetRef = createRef();
+
   useEffect(() => {
-    if (show) {
-      disableBodyScroll(targetRef?.current);
-    } else {
-      enableBodyScroll(targetRef?.current);
+    const targetEl = targetRef?.current;
+    var ua = navigator.userAgent.toLowerCase();
+    if (ua.indexOf('safari') !== -1) {
+      if (ua.indexOf('chrome') > -1) {
+        if (show) {
+          window.scrollTo(0, 0);
+          document.body.style.overflow = 'hidden';
+          return () => {
+            document.body.style.overflow = 'auto';
+          };
+        }
+      } else {
+        if (show) {
+          window.scrollTo(0, 0);
+          document.body.style.overflow = 'hidden';
+          disableBodyScroll(targetEl);
+          return () => {
+            document.body.style.overflow = 'auto';
+            enableBodyScroll(targetEl);
+            clearAllBodyScrollLocks();
+          };
+        }
+      }
     }
   }, [show, targetRef]);
+
+  const [step, setStep] = useState(1);
 
   return (
     <div className={`survey ${show ? 'survey-show' : ''}`} ref={targetRef}>

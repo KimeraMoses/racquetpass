@@ -1,5 +1,5 @@
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Field } from 'redux-form';
 
 // Custom Components
 import { Heading, Description, CustomInput } from 'web/components';
@@ -10,7 +10,10 @@ import { SubmitButton } from 'web/components/Buttons/SubmitButton.component';
 import './VerifyResend.styles.scss';
 
 const required = (value) => (value ? undefined : 'Required');
-export function VerifyResend({ t, setStep }) {
+export function VerifyResend({ t, setStep, change }) {
+  const [verification, setVerification] = useState('');
+  const [touchedCode, setTouchedCode] = useState(false);
+  const [errorCode, setErrorCode] = useState('');
   return (
     <>
       <div className="verify-resend-section max-w-[450px] m-[0_auto]">
@@ -27,14 +30,33 @@ export function VerifyResend({ t, setStep }) {
         </p>
 
         <div className="verify-resend-section__form-container">
-          <Field
-            CustomInputClass="verify-resend-section__form-container-input"
-            name="verfication-code"
-            label="Verification Code"
-            placeholder="- - - - - -"
+          <CustomInput
+            CustomInputClass="phone-section__form-container-input"
             type="number"
-            component={CustomInput}
+            value={verification}
+            customOnChange={(e) => {
+              if (e.target.value?.length > 6) {
+              } else {
+                setVerification(e?.target?.value);
+                setErrorCode('');
+              }
+            }}
+            customOnBlur={(e) => {
+              setTouchedCode(true);
+              if (!e?.target?.value) {
+                setErrorCode('This value is required!');
+              } else {
+                setVerification(e?.target?.value);
+                setErrorCode('');
+                change('verification-code-new', e?.target?.value);
+              }
+            }}
+            label="Verification Code"
+            name="verfication-code-new"
+            pattern="\d*"
+            placeholder="- - - - - -"
             validate={required}
+            meta={{ touched: touchedCode, error: errorCode }}
           />
         </div>
         <div className="verify-resend-section__text-container">
@@ -49,6 +71,7 @@ export function VerifyResend({ t, setStep }) {
           <SubmitButton
             type="button"
             className="mt-[45px]"
+            disabled={!verification || errorCode}
             onClick={() => setStep(7)}
           >
             Verify and Resend Text

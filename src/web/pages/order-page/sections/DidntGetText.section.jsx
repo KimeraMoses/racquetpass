@@ -63,7 +63,11 @@ export function DidntGetText({
             label="Phone Number"
             value={phoneNumber}
           />
-          <SubmitButton type="button" onClick={() => setStep(10)}>
+          <SubmitButton
+            type="button"
+            disabled={!phoneNumber}
+            onClick={() => setStep(10)}
+          >
             Update Phone Number
           </SubmitButton>
         </div>

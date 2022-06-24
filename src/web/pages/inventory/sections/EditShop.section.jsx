@@ -63,9 +63,9 @@ export function EditShop({ t, setCurrentScreen, change }) {
                 setDelivery(e?.target?.value);
               }}
               customOnBlur={(e) => {
-                if (e?.target?.value) {
-                  setLabor(`$${e?.target?.value}`);
-                }
+                // if (e?.target?.value) {
+                //   // setDelivery(`$${e?.target?.value}`);
+                // }
                 change('delivery-days', e?.target?.value);
               }}
               hidePostFix
