@@ -162,7 +162,11 @@ export function SelectString({
                   customOnChange={(option) => {
                     change('racquetSport', option?.value);
                   }}
-                  value={{ label: racquetSport, value: racquetSport }}
+                  value={
+                    racquetSport
+                      ? { label: racquetSport, value: racquetSport }
+                      : null
+                  }
                 />
               );
             }}
@@ -170,23 +174,27 @@ export function SelectString({
             options={[
               { label: 'Tennis', value: 'Tennis' },
               { label: 'Squash', value: 'Squash' },
-              { label: 'Bedminton', value: 'Bedminton' },
+              { label: 'Badminton', value: 'Badminton' },
               { label: 'Other', value: 'Other' },
             ]}
           />
           <Field
             name="racquetBrand"
             label="Brand"
-            placeholder="Select a racquet brand"
             validate={required}
             component={(props) => {
               return (
                 <CustomSelect
                   {...props}
+                  placeholder="Select a racquet brand"
                   customOnChange={(option) => {
                     change('racquetBrand', option?.value);
                   }}
-                  value={{ label: racquetBrand, value: racquetBrand }}
+                  value={
+                    racquetBrand
+                      ? { label: racquetBrand, value: racquetBrand }
+                      : null
+                  }
                 />
               );
             }}

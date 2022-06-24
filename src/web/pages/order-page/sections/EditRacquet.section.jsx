@@ -42,7 +42,11 @@ export function EditRacquet({ t, setStep, change }) {
                   customOnChange={(option) => {
                     change('racquetSport', option?.value);
                   }}
-                  value={{ label: racquetSport, value: racquetSport }}
+                  value={
+                    racquetSport
+                      ? { label: racquetSport, value: racquetSport }
+                      : null
+                  }
                 />
               );
             }}
@@ -50,7 +54,7 @@ export function EditRacquet({ t, setStep, change }) {
             options={[
               { label: 'Tennis', value: 'Tennis' },
               { label: 'Squash', value: 'Squash' },
-              { label: 'Bedminton', value: 'Bedminton' },
+              { label: 'Badminton', value: 'Badminton' },
               { label: 'Other', value: 'Other' },
             ]}
           />
@@ -66,7 +70,11 @@ export function EditRacquet({ t, setStep, change }) {
                   customOnChange={(option) => {
                     change('racquetBrand', option?.value);
                   }}
-                  value={{ label: racquetBrand, value: racquetBrand }}
+                  value={
+                    racquetBrand
+                      ? { label: racquetBrand, value: racquetBrand }
+                      : null
+                  }
                 />
               );
             }}

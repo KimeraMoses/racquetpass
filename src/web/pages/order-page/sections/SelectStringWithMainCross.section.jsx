@@ -188,7 +188,11 @@ export function SelectStringWithMainCross({
                   customOnChange={(option) => {
                     change('racquetSport', option?.value);
                   }}
-                  value={{ label: racquetSport, value: racquetSport }}
+                  value={
+                    racquetSport
+                      ? { label: racquetSport, value: racquetSport }
+                      : null
+                  }
                 />
               );
             }}
@@ -196,7 +200,7 @@ export function SelectStringWithMainCross({
             options={[
               { label: 'Tennis', value: 'Tennis' },
               { label: 'Squash', value: 'Squash' },
-              { label: 'Bedminton', value: 'Bedminton' },
+              { label: 'Badminton', value: 'Badminton' },
               { label: 'Other', value: 'Other' },
             ]}
           />
@@ -212,7 +216,11 @@ export function SelectStringWithMainCross({
                   customOnChange={(option) => {
                     change('racquetBrand', option?.value);
                   }}
-                  value={{ label: racquetBrand, value: racquetBrand }}
+                  value={
+                    racquetBrand
+                      ? { label: racquetBrand, value: racquetBrand }
+                      : null
+                  }
                 />
               );
             }}
