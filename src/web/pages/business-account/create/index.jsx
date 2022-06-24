@@ -16,18 +16,6 @@ import { useNavigate } from '../../../../../node_modules/react-router-dom/index'
 import { useSelector } from 'react-redux';
 
 const required = (value) => (value ? undefined : 'This field is required');
-// Phone Validation
-// const formats = '(999)999-9999|999-999-9999|9999999999';
-// const r = RegExp(
-//   '^(' + formats.replace(/([\(\)])/g, '\\$1').replace(/9/g, '\\d') + ')$'
-// );
-// const phoneNumber = (value) => {
-//   if (r.test(value) === true) {
-//     return undefined;
-//   } else {
-//     return 'Please enter a valid phone number.';
-//   }
-// };
 
 let Create = ({ t, change }) => {
   const errors = useSelector(
@@ -109,7 +97,7 @@ let Create = ({ t, change }) => {
               <SubmitButton
                 type="button"
                 className="create-business-account__form-button-btn"
-                disabled={errors}
+                disabled={errors || !phoneNumber}
                 onClick={() => {
                   navigate('/BusinessAccount/BusinessDetails');
                 }}

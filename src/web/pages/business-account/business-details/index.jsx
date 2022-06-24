@@ -88,10 +88,10 @@ let BusinessDetails = ({ t, change }) => {
               <Field
                 name="zip-code"
                 label="ZIP Code"
-                placeholder="ZIP`"
+                placeholder="ZIP"
                 type="number"
                 validate={required}
-                component={CustomInput}
+                component={(props) => <CustomInput pattern="\d*" {...props} />}
               />
             </div>
             <div className="btn-container">

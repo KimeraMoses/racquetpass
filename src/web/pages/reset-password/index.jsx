@@ -244,7 +244,13 @@ let ResetPassword = ({ t, back }) => {
             <div>
               <div className="mt-[40px]">
                 <SubmitButton
-                  onClick={() => navigate('/login')}
+                  onClick={() => {
+                    if (comingFrom === 'shop') {
+                      navigate('/inventory?active=proshop');
+                    } else {
+                      navigate('/login');
+                    }
+                  }}
                   type="submit"
                   disabled={
                     !passwordConditions.moreThanEight ||

@@ -26,23 +26,32 @@ export const CustomInputNumber = (props) => {
       ) : (
         <div className="custom-input-number__label">
           <p>{props?.label}</p>
-          <Link to={props?.link.path}>{props?.link?.text}</Link>
+          {props?.link ? (
+            <Link to={props?.link?.path}>{props?.link?.text}</Link>
+          ) : (
+            <></>
+          )}
         </div>
       )}
       <div
         className="custom-input-number__container"
         onClick={() => inputEl?.current?.focus()}
       >
-        <div className="custom-input-number__container-value">
+        <div
+          className={`custom-input-number__container-value ${
+            props?.hidePostFix ? 'flex-grow' : ''
+          }`}
+        >
           <input
             {...props?.input}
             value={props?.value || props?.input?.value}
             onChange={props?.onChange || props?.input?.onChange}
-            onBlur={() => {}}
             placeholder={props?.placeholder ? props?.placeholder : props?.label}
-            className="custom-input-number__input"
+            className={`custom-input-number__input ${
+              props?.hidePostFix ? 'w-full' : 'w-[38px]'
+            }`}
             ref={inputEl}
-            pattern={props?.pattern}
+            pattern="\d*"
             type="number"
             style={
               props.icon
@@ -55,7 +64,11 @@ export const CustomInputNumber = (props) => {
             }
             readOnly={props?.readOnly}
           />
-          <div className="custom-input-number__postfix">lbs</div>
+          {props?.hidePostFix ? (
+            <></>
+          ) : (
+            <div className="custom-input-number__postfix">lbs</div>
+          )}
         </div>
         {!props?.showSteps ? (
           <></>

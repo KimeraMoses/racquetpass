@@ -12,18 +12,29 @@ import {
   CustomPhoneInput,
 } from 'web/components';
 import './EditShop.styles.scss';
+import { useEffect, useState } from 'react';
 
-const r = /^\s*([A-Z]\w*\s*)*$/;
-const titleCase = (value) => {
-  if (r.test(value) === true) {
-    return undefined;
-  } else {
-    return 'Please enter shop name in title case';
-  }
-};
+// const r = /^\s*([A-Z]\w*\s*)*$/;
+// const titleCase = (value) => {
+//   if (r.test(value) === true) {
+//     return undefined;
+//   } else {
+//     return 'Please enter shop name in title case';
+//   }
+// };
 //
 
 export function EditShop({ t, setCurrentScreen, change }) {
+  const [labor, setLabor] = useState();
+  const [delivery, setDelivery] = useState();
+
+  const [states, setStates] = useState([]);
+
+  useEffect(() => {
+    fetch('/states.json')
+      .then((res) => res.json())
+      .then((data) => setStates(data));
+  }, []);
   // const shopNameEdited = true;
   // const shopAddressEdited = false;
   const phoneNumber = useSelector(
@@ -35,7 +46,7 @@ export function EditShop({ t, setCurrentScreen, change }) {
         <div className="edit__heading">
           <Heading>Edit My Pro Shop Info</Heading>
           <HeadingButton
-            text="Close"
+            text="Cancel"
             onClick={() => setCurrentScreen('proshop')}
           />
         </div>
@@ -45,17 +56,37 @@ export function EditShop({ t, setCurrentScreen, change }) {
             <Heading>{t('orderOpenedHeading')}</Heading>
           </div>
           <div className="edit__services-form">
-            <Field
-              name="delivery-time"
+            <CustomInput
+              type="number"
+              value={delivery}
+              customOnChange={(e) => {
+                setDelivery(e?.target?.value);
+              }}
+              customOnBlur={(e) => {
+                if (e?.target?.value) {
+                  setLabor(`$${e?.target?.value}`);
+                }
+                change('delivery-days', e?.target?.value);
+              }}
+              hidePostFix
               label="Estimated delivery time (# of days)"
-              type="number"
-              component={CustomInput}
+              name="delivery-time"
+              pattern="\d*"
             />
-            <Field
-              name="labor-price"
-              label="Labor price"
-              type="number"
-              component={CustomInput}
+            <CustomInput
+              pattern="\d*"
+              value={labor}
+              customOnChange={(e) => {
+                setLabor(e?.target?.value);
+              }}
+              label="Labor Price"
+              hidePostFix
+              customOnBlur={(e) => {
+                if (e?.target?.value) {
+                  setLabor(`$${e?.target?.value}`);
+                }
+                change('labore-price', e?.target?.value);
+              }}
             />
           </div>
           <div className="mt-[12px] text-[10px] text-[#838383] font-semibold">
@@ -78,7 +109,7 @@ export function EditShop({ t, setCurrentScreen, change }) {
               name="shop"
               label="Shop Name"
               type="text"
-              validate={titleCase}
+              // validate={titleCase}
               component={CustomInput}
             />
             <Field
@@ -118,14 +149,19 @@ export function EditShop({ t, setCurrentScreen, change }) {
                 component={CustomInput}
               />
               <Field
-                name="shopstate"
-                label="Shop State"
+                name="state"
+                label="State"
                 placeholder="Select"
-                component={CustomSelect}
-                options={[
-                  { label: 'Babolat', value: 'Babolat' },
-                  { label: 'Wilson', value: 'Wilson' },
-                ]}
+                component={(props) => (
+                  <CustomSelect
+                    {...props}
+                    customOnChange={(option) => {
+                      change('state', option?.value);
+                    }}
+                    showInitials
+                  />
+                )}
+                options={states}
               />
             </div>
             <Field
