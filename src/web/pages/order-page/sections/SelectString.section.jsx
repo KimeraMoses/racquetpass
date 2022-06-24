@@ -233,10 +233,11 @@ export function SelectString({
                 component={CustomInput}
               />
               <div className="select-string-odr__recquet-form-pic-box">
-                <Field
-                  name="image"
+                <FileInput
+                  name="racquetImage"
                   label="Picture (optional)"
-                  component={FileInput}
+                  change={change}
+                  accept="image/*"
                 />
                 <Description>
                   Adding a picture makes it easy for your stringer to pick out
