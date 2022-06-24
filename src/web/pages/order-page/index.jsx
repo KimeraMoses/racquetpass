@@ -28,7 +28,7 @@ import { useSelector } from 'react-redux';
 import { VerifyResend } from './sections/VerifyResend.section';
 
 let OrderPage = ({ t, handleSubmit, change }) => {
-  const [step, setStep] = useState(2);
+  const [step, setStep] = useState(6);
   const [steps, setSteps] = useState({
     active: '',
     content: ['QR', 'Strings', 'Contact', 'Review'],
@@ -148,12 +148,31 @@ let OrderPage = ({ t, handleSubmit, change }) => {
             change={change}
             scanForward={scanForward}
             backward={backward}
+            setStep={setStep}
+            backFromReview={backFromReview}
+            setBackFromReview={setBackFromReview}
           />
         );
       case 'found':
-        return <ScanSuccess t={t} backward={backward} setStep={setStep} />;
+        return (
+          <ScanSuccess
+            t={t}
+            backward={backward}
+            setStep={setStep}
+            backFromReview={backFromReview}
+            setBackFromReview={setBackFromReview}
+          />
+        );
       case 'notFound':
-        return <ScanNotFound t={t} backward={backward} setStep={setStep} />;
+        return (
+          <ScanNotFound
+            t={t}
+            backward={backward}
+            setStep={setStep}
+            backFromReview={backFromReview}
+            setBackFromReview={setBackFromReview}
+          />
+        );
       default:
         return <>Check current scan</>;
     }
@@ -242,6 +261,8 @@ let OrderPage = ({ t, handleSubmit, change }) => {
             setCross={setCross}
             step={step}
             change={change}
+            backFromReview={backFromReview}
+            setBackFromReview={setBackFromReview}
           />
         );
       case 'search':
@@ -280,7 +301,7 @@ let OrderPage = ({ t, handleSubmit, change }) => {
             change={change}
             setStep={setStep}
             setBackFromReview={setBackFromReview}
-            backFromReview={setBackFromReview}
+            backFromReview={backFromReview}
           />
         );
       case 5:
@@ -327,7 +348,8 @@ let OrderPage = ({ t, handleSubmit, change }) => {
       step === 20 ||
       done ||
       mainCross.current === 'search' ||
-      strings.current === 'search' ? (
+      strings.current === 'search' ||
+      backFromReview ? (
         <></>
       ) : (
         <Progress steps={steps} />
@@ -369,7 +391,9 @@ let OrderPage = ({ t, handleSubmit, change }) => {
                 }
                 type="button"
               >
-                {t('odrNext')}
+                {step === 1 && backFromReview
+                  ? 'Change to this racquet'
+                  : t('odrNext')}
               </StepButton>
             </div>
           )}

@@ -88,7 +88,13 @@ export function ReviewOrder({ t, setStep, setDone, setBackFromReview }) {
             <Heading customClass="review-order-odr__shop-heading-text">
               {t('odrRacquet')}
             </Heading>
-            <HeadingButton text="Change Racquet" onClick={() => setStep(20)} />
+            <HeadingButton
+              text="Change Racquet"
+              onClick={() => {
+                setBackFromReview(true);
+                setStep(1);
+              }}
+            />
           </div>
           <div className="review-order-odr__shop-card">
             <SearchCard

@@ -29,6 +29,8 @@ export function SelectStringWithMainCross({
   setMain,
   setCross,
   change,
+  backFromReview,
+  setBackFromReview,
 }) {
   const [mainsTension, setMainsTension] = useState(50);
   const [crossesTension, setCrossesTension] = useState(50);
@@ -67,15 +69,28 @@ export function SelectStringWithMainCross({
       />
       <div className="select-string-mc max-w-[450px] m-[0_auto]">
         <div className="select-string-mc__heading justify-start gap-[16px]">
-          <BackButton onClick={backward} />
+          <BackButton
+            onClick={() => {
+              if (backFromReview) {
+                setStep(6);
+                setBackFromReview(false);
+              } else {
+                backward();
+              }
+            }}
+          />
           <Heading customClass="select-string-mc__heading-text">
-            {t('odrSelect')}
+            {backFromReview ? 'Strings' : t('odrSelect')}
           </Heading>
         </div>
         <div className="select-string-mc__text-container">
-          <Description customClass="select-string-mc__text-container-text">
-            Select the strings you want your racquet restrung with.
-          </Description>
+          {backFromReview ? (
+            <></>
+          ) : (
+            <Description customClass="select-string-mc__text-container-text">
+              Select the strings you want your racquet restrung with.
+            </Description>
+          )}
         </div>
         <div className="select-string-mc__main-info">
           <div className="select-string-mc__main-info-heading">
@@ -172,94 +187,100 @@ export function SelectStringWithMainCross({
           </div>
         </div>
         {/* Racquet Details Section */}
-        <div className="select-string-odr__recquet-heading">
-          <Heading>{t('odrdetailHeading')}</Heading>
-          <Description>{t('orderRecquetDesc')}</Description>
-        </div>
-        <div className="select-string-odr__recquet-form">
-          <Field
-            name="racquetSport"
-            label="Sport"
-            placeholder="Select a sport"
-            component={(props) => {
-              return (
-                <CustomSelect
-                  {...props}
-                  customOnChange={(option) => {
-                    change('racquetSport', option?.value);
-                  }}
-                  value={
-                    racquetSport
-                      ? { label: racquetSport, value: racquetSport }
-                      : null
-                  }
+        {backFromReview ? (
+          <> </>
+        ) : (
+          <>
+            <div className="select-string-odr__recquet-heading">
+              <Heading>{t('odrdetailHeading')}</Heading>
+              <Description>{t('orderRecquetDesc')}</Description>
+            </div>
+            <div className="select-string-odr__recquet-form">
+              <Field
+                name="racquetSport"
+                label="Sport"
+                placeholder="Select a sport"
+                component={(props) => {
+                  return (
+                    <CustomSelect
+                      {...props}
+                      customOnChange={(option) => {
+                        change('racquetSport', option?.value);
+                      }}
+                      value={
+                        racquetSport
+                          ? { label: racquetSport, value: racquetSport }
+                          : null
+                      }
+                    />
+                  );
+                }}
+                validate={required}
+                options={[
+                  { label: 'Tennis', value: 'Tennis' },
+                  { label: 'Squash', value: 'Squash' },
+                  { label: 'Badminton', value: 'Badminton' },
+                  { label: 'Other', value: 'Other' },
+                ]}
+              />
+              <Field
+                name="racquetBrand"
+                label="Brand"
+                placeholder="Select a racquet brand"
+                validate={required}
+                component={(props) => {
+                  return (
+                    <CustomSelect
+                      {...props}
+                      customOnChange={(option) => {
+                        change('racquetBrand', option?.value);
+                      }}
+                      value={
+                        racquetBrand
+                          ? { label: racquetBrand, value: racquetBrand }
+                          : null
+                      }
+                    />
+                  );
+                }}
+                options={[
+                  { label: 'Babolat', value: 'Babolat' },
+                  { label: 'Wilson', value: 'Wilson' },
+                  { label: 'Head', value: 'Head' },
+                  { label: 'Prince', value: 'Prince' },
+                  { label: 'Yonex', value: 'Yonex' },
+                  { label: 'Volkl', value: 'Volkl' },
+                  { label: 'Dunlop', value: 'Dunlop' },
+                  { label: 'Technifibre', value: 'Technifibre' },
+                  { label: 'Prokennex', value: 'Prokennex' },
+                  { label: 'Solinco', value: 'Solinco' },
+                  { label: 'Gamma', value: 'Gamma' },
+                  { label: 'Lacoste', value: 'Lacoste' },
+                  { label: 'Donnay', value: 'Donnay' },
+                  { label: 'Other', value: 'Other' },
+                ]}
+              />
+              <Field
+                name="racquetModel"
+                label="Model"
+                validate={required}
+                type="text"
+                component={CustomInput}
+              />
+              <div className="select-string-odr__recquet-form-pic-box">
+                <Field
+                  name="image"
+                  label="Picture (optional)"
+                  component={FileInput}
                 />
-              );
-            }}
-            validate={required}
-            options={[
-              { label: 'Tennis', value: 'Tennis' },
-              { label: 'Squash', value: 'Squash' },
-              { label: 'Badminton', value: 'Badminton' },
-              { label: 'Other', value: 'Other' },
-            ]}
-          />
-          <Field
-            name="racquetBrand"
-            label="Brand"
-            placeholder="Select a racquet brand"
-            validate={required}
-            component={(props) => {
-              return (
-                <CustomSelect
-                  {...props}
-                  customOnChange={(option) => {
-                    change('racquetBrand', option?.value);
-                  }}
-                  value={
-                    racquetBrand
-                      ? { label: racquetBrand, value: racquetBrand }
-                      : null
-                  }
-                />
-              );
-            }}
-            options={[
-              { label: 'Babolat', value: 'Babolat' },
-              { label: 'Wilson', value: 'Wilson' },
-              { label: 'Head', value: 'Head' },
-              { label: 'Prince', value: 'Prince' },
-              { label: 'Yonex', value: 'Yonex' },
-              { label: 'Volkl', value: 'Volkl' },
-              { label: 'Dunlop', value: 'Dunlop' },
-              { label: 'Technifibre', value: 'Technifibre' },
-              { label: 'Prokennex', value: 'Prokennex' },
-              { label: 'Solinco', value: 'Solinco' },
-              { label: 'Gamma', value: 'Gamma' },
-              { label: 'Lacoste', value: 'Lacoste' },
-              { label: 'Donnay', value: 'Donnay' },
-              { label: 'Other', value: 'Other' },
-            ]}
-          />
-          <Field
-            name="racquetModel"
-            label="Model"
-            validate={required}
-            type="text"
-            component={CustomInput}
-          />
-          <div className="select-string-odr__recquet-form-pic-box">
-            <Field
-              name="image"
-              label="Picture (optional)"
-              component={FileInput}
-            />
-            <Description>
-              Adding a picture makes it easy for your stringer to pick out your
-              racquet from others.
-            </Description>
-          </div>
-        </div>
+                <Description>
+                  Adding a picture makes it easy for your stringer to pick out
+                  your racquet from others.
+                </Description>
+              </div>
+            </div>
+          </>
+        )}
       </div>
     </>
   );

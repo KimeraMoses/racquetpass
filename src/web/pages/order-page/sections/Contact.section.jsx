@@ -16,7 +16,6 @@ const required = (value) => (value ? undefined : 'Required');
 
 export function Contact({
   t,
-  backward,
   change,
   backFromReview,
   setStep,
@@ -35,19 +34,23 @@ export function Contact({
                 setStep(6);
                 setBackFromReview(false);
               } else {
-                backward();
+                setStep(2);
               }
             }}
           />
           <Heading customClass="contact-section-odr__heading-text">
-            {t('odrStayHeading')}
+            {backFromReview ? 'Edit Contact Info' : t('odrStayHeading')}
           </Heading>
         </div>
-        <div className="contact-section-odr__text-container">
-          <Description customClass="contact-section-odr__text-container-text">
-            {t('odrStayDesc')}
-          </Description>
-        </div>
+        {backFromReview ? (
+          <></>
+        ) : (
+          <div className="contact-section-odr__text-container">
+            <Description customClass="contact-section-odr__text-container-text">
+              {t('odrStayDesc')}
+            </Description>
+          </div>
+        )}
         <div className="contact-section-odr__form-container">
           <Field
             name="first-name"
