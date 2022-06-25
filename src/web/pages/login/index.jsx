@@ -6,6 +6,7 @@ import { Link } from 'react-router-dom';
 import { BackButton, Heading, CustomInput, SubmitButton } from 'web/components';
 import './Login.styles.scss';
 import { Description } from 'web/components/atoms/Description.atom';
+import { useSelector } from 'react-redux';
 
 const required = (value) => (value ? undefined : 'Email is required');
 const email = (value) => {
@@ -31,6 +32,9 @@ function Login({ t, handleSubmit }) {
 
   const navigate = useNavigate();
   const [passwordFieldType, setPasswordFieldType] = useState('password');
+
+  const values = useSelector((state) => state?.form?.login?.values);
+
   return (
     <>
       <form onSubmit={handleSubmit} className="signin">
@@ -84,12 +88,9 @@ function Login({ t, handleSubmit }) {
             <div className="signin__form-buttons">
               <SubmitButton
                 type="submit"
+                disabled={!values?.email || !values?.password}
                 onClick={() => {
-                  if (missingQR) {
-                    navigate('/CreateOrder/Locker');
-                  } else {
-                    navigate('/tasks');
-                  }
+                  navigate('/tasks');
                 }}
                 className="signin__form-buttons-btn"
               >
