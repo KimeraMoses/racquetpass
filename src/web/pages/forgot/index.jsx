@@ -51,6 +51,7 @@ let Forgot = ({ t, handleSubmit }) => {
           <SubmitButton
             type="submit"
             disabled={errors}
+            onClick={() => navigate('/login')}
             className="forgot__form-buttons-btn"
           >
             Email me a recovery link
