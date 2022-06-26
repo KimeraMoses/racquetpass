@@ -10,11 +10,23 @@ import {
   CustomSelect,
   SubmitButton,
   CustomPhoneInput,
+  CustomZIPInput,
 } from 'web/components';
 import './EditShop.styles.scss';
 import { useEffect, useState } from 'react';
 
 const required = (value) => (value ? undefined : 'This field is required');
+const email = (value) => {
+  if (
+    /^(([^<>()[\].,;:\s@"]+(\.[^<>()[\].,;:\s@"]+)*)|(".+"))@(([^<>()[\].,;:\s@"]+\.)+[^<>()[\].,;:\s@"]{2,})$/i.test(
+      value
+    )
+  ) {
+    return undefined;
+  } else {
+    return 'Please enter a valid email';
+  }
+};
 // Phone Validation
 const formats = '(999) 999-9999|(999)999-9999|999-999-9999|9999999999';
 const r = RegExp(
@@ -29,6 +41,14 @@ const phoneValidation = (value) => {
     }
   } else {
     return 'Please enter a valid phone number.';
+  }
+};
+// ZIP Validation
+const zipValidation = (value) => {
+  if (value?.length < 3 || value?.length > 7) {
+    return 'Please enter value between 3 and 7 digits';
+  } else {
+    return undefined;
   }
 };
 
@@ -145,7 +165,7 @@ export function EditShop({ t, setCurrentScreen, change }) {
               name="email"
               label="Email"
               type="email"
-              validate={required}
+              validate={[required, email]}
               component={CustomInput}
             />
             <CustomPhoneInput
@@ -191,22 +211,11 @@ export function EditShop({ t, setCurrentScreen, change }) {
                 showInitials
               />
             </div>
-            <CustomInput
-              pattern="\d*"
+            <CustomZIPInput
               name="zip-code"
               label="ZIP Code"
-              placeholder="ZIP"
-              customOnChange={(e) => {
-                const value = e.target.value;
-                console.log(value?.length);
-                if (value?.length > 7) {
-                  return;
-                } else {
-                  change('zip-code', Number(value));
-                }
-              }}
+              change={change}
               value={zipCode}
-              type="number"
             />
           </div>
           <div className="edit__button">
@@ -219,7 +228,8 @@ export function EditShop({ t, setCurrentScreen, change }) {
                 !labor ||
                 !state ||
                 !zipCode ||
-                phoneValidation(phoneNumber) !== undefined
+                phoneValidation(phoneNumber) !== undefined ||
+                zipValidation(zipCode) !== undefined
               }
             >
               {t('stringDetailsSave')}

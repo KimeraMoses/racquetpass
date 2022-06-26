@@ -5,6 +5,7 @@ import { withNamespaces } from 'react-i18next';
 import {
   MenuButton,
   CustomInput,
+  CustomZIPInput,
   // CustomButton,
   CustomSelect,
 } from 'web/components';
@@ -13,6 +14,14 @@ import { SubmitButton } from 'web/components/Buttons/SubmitButton.component';
 import { useSelector } from 'react-redux';
 
 const required = (value) => (value ? undefined : 'This field is required');
+// ZIP Validation
+const zipValidation = (value) => {
+  if (value?.length < 3 || value?.length > 7) {
+    return 'Please enter value between 3 and 7 digits';
+  } else {
+    return undefined;
+  }
+};
 
 let BusinessDetails = ({ t, change }) => {
   const navigate = useNavigate();
@@ -86,29 +95,23 @@ let BusinessDetails = ({ t, change }) => {
                   showInitials
                 />
               </div>
-              <CustomInput
-                pattern="\d*"
+              <CustomZIPInput
                 name="zip-code"
                 label="ZIP Code"
-                placeholder="ZIP"
-                customOnChange={(e) => {
-                  const value = e.target.value;
-                  console.log(value?.length);
-                  if (value?.length > 7) {
-                    return;
-                  } else {
-                    change('zip-code', Number(value));
-                  }
-                }}
+                change={change}
                 value={zipCode}
-                type="number"
               />
             </div>
             <div className="btn-container">
               <SubmitButton
                 type="button"
                 className="create-business-account__form-button-btn"
-                disabled={errors || !state || !zipCode}
+                disabled={
+                  errors ||
+                  !state ||
+                  !zipCode ||
+                  zipValidation(zipCode) !== undefined
+                }
                 onClick={() => {
                   navigate('/BusinessAccount/CreatePassword');
                 }}

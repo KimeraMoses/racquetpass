@@ -8,8 +8,8 @@ const r = RegExp(
 );
 const phoneValidation = (value) => {
   if (r.test(value) === true) {
-    if (value.length < 9 || value.length > 14) {
-      return 'Please enter value between 9 and 14';
+    if (value?.length < 9 || value?.length > 14) {
+      return 'Please enter value between 9 and 14 digits.';
     } else {
       return undefined;
     }
@@ -32,7 +32,9 @@ export const CustomPhoneInput = ({ name, label, value, change, optional }) => {
         setTouched(true);
       }}
       meta={{
-        touched,
+        touched:
+          touched ||
+          (value?.length && (value?.length < 9 || value?.length > 14)),
         error:
           !optional && !value
             ? 'Field is required'
