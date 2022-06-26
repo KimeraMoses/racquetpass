@@ -14,15 +14,7 @@ import {
 import './EditShop.styles.scss';
 import { useEffect, useState } from 'react';
 
-// const r = /^\s*([A-Z]\w*\s*)*$/;
-// const titleCase = (value) => {
-//   if (r.test(value) === true) {
-//     return undefined;
-//   } else {
-//     return 'Please enter shop name in title case';
-//   }
-// };
-//
+const required = (value) => (value ? undefined : 'This field is required');
 
 export function EditShop({ t, setCurrentScreen, change }) {
   const [labor, setLabor] = useState();
@@ -40,6 +32,16 @@ export function EditShop({ t, setCurrentScreen, change }) {
   const phoneNumber = useSelector(
     (state) => state?.form?.inventory?.values?.['phone-number']
   );
+
+  const state = useSelector((state) => state?.form?.inventory)?.values?.[
+    'shop-state'
+  ];
+  const zipCode = useSelector(
+    (state) => state?.form?.inventory?.values?.['zip-code']
+  );
+
+  const errors = useSelector((state) => state?.form?.inventory?.syncErrors);
+
   return (
     <>
       <div className="edit">
@@ -63,9 +65,6 @@ export function EditShop({ t, setCurrentScreen, change }) {
                 setDelivery(e?.target?.value);
               }}
               customOnBlur={(e) => {
-                // if (e?.target?.value) {
-                //   // setDelivery(`$${e?.target?.value}`);
-                // }
                 change('delivery-days', e?.target?.value);
               }}
               hidePostFix
@@ -123,13 +122,14 @@ export function EditShop({ t, setCurrentScreen, change }) {
               name="shop"
               label="Shop Name"
               type="text"
-              // validate={titleCase}
+              validate={required}
               component={CustomInput}
             />
             <Field
               name="email"
               label="Email"
               type="email"
+              validate={required}
               component={CustomInput}
             />
             <CustomPhoneInput
@@ -147,6 +147,7 @@ export function EditShop({ t, setCurrentScreen, change }) {
               name="address"
               label="Street Address"
               type="text"
+              validate={required}
               component={CustomInput}
             />
             <Field
@@ -160,34 +161,50 @@ export function EditShop({ t, setCurrentScreen, change }) {
                 name="shopcity"
                 label="Shop City"
                 type="text"
+                validate={required}
                 component={CustomInput}
               />
-              <Field
-                name="state"
+              <CustomSelect
+                name="shop-state"
+                options={states}
                 label="State"
                 placeholder="Select"
-                component={(props) => (
-                  <CustomSelect
-                    {...props}
-                    customOnChange={(option) => {
-                      change('state', option?.value);
-                    }}
-                    showInitials
-                  />
-                )}
-                options={states}
+                customOnChange={(option) => {
+                  change('shop-state', option?.value);
+                }}
+                showInitials
               />
             </div>
-            <Field
-              name="zip"
-              label="Zip Code"
+            <CustomInput
+              pattern="\d*"
+              name="zip-code"
+              label="ZIP Code"
               placeholder="ZIP"
-              type="text"
-              component={CustomInput}
+              customOnChange={(e) => {
+                const value = e.target.value;
+                console.log(value?.length);
+                if (value?.length > 7) {
+                  return;
+                } else {
+                  change('zip-code', Number(value));
+                }
+              }}
+              value={zipCode}
+              type="number"
             />
           </div>
           <div className="edit__button">
-            <SubmitButton onClick={() => setCurrentScreen('proshop')}>
+            <SubmitButton
+              onClick={() => setCurrentScreen('proshop')}
+              disabled={
+                errors ||
+                !phoneNumber ||
+                !delivery ||
+                !labor ||
+                !state ||
+                !zipCode
+              }
+            >
               {t('stringDetailsSave')}
             </SubmitButton>
           </div>

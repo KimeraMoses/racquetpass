@@ -8,6 +8,7 @@ export const StepButton = ({
   disabled,
   className,
   danger,
+  tabIndex,
 }) => {
   return (
     <div className="button-container">
@@ -20,6 +21,7 @@ export const StepButton = ({
         disabled={disabled}
         type={type}
         onClick={onClick}
+        tabIndex={tabIndex}
       >
         {children}
       </button>

@@ -1,4 +1,4 @@
-import { Fragment } from 'react';
+import { Fragment, useState } from 'react';
 import {
   HeadingButton,
   Heading,
@@ -20,6 +20,7 @@ for (let i = 1; i <= 5; i++) {
 }
 
 export function SearchInventory({ t, setCurrentScreen, setDrawer }) {
+  const [inventoryData, setInventoryData] = useState(search);
   return (
     <>
       <div className="search-inventory">
@@ -35,7 +36,23 @@ export function SearchInventory({ t, setCurrentScreen, setDrawer }) {
                 icon="/img/orderpage/search.png"
                 label="Search Inventory"
                 noLabel
-                onClick={() => {}}
+                tabIndex="0"
+                onKeyDown={(e) => {
+                  if (e.key === 'Enter') {
+                    e.preventDefault();
+                  }
+                }}
+                customOnChange={(e) => {
+                  const value = e.target.value;
+                  if (value) {
+                    const filteredInventory = inventoryData.filter((item) =>
+                      item?.name?.includes(value.toLowerCase())
+                    );
+                    setInventoryData(filteredInventory);
+                  } else {
+                    setInventoryData(search);
+                  }
+                }}
               />
             </div>
 
@@ -43,18 +60,22 @@ export function SearchInventory({ t, setCurrentScreen, setDrawer }) {
               <SubHeading>{t('profileString')}</SubHeading>
             </div>
             <div className="search-inventory__cards">
-              {search.map((item, idx) => {
-                return (
-                  <Fragment key={idx}>
-                    <SearchCard
-                      string={item}
-                      onClick={() => {
-                        setCurrentScreen('detail');
-                      }}
-                    />
-                  </Fragment>
-                );
-              })}
+              {inventoryData?.length ? (
+                inventoryData.map((item, idx) => {
+                  return (
+                    <Fragment key={idx}>
+                      <SearchCard
+                        string={item}
+                        onClick={() => {
+                          setCurrentScreen('detail');
+                        }}
+                      />
+                    </Fragment>
+                  );
+                })
+              ) : (
+                <div>No Data Found!</div>
+              )}
             </div>
             <div className="search-inventory__buttons">
               {/* <StepButton outlined>{t('profileButtonCSV')}</StepButton> */}
@@ -62,6 +83,8 @@ export function SearchInventory({ t, setCurrentScreen, setDrawer }) {
                 onClick={() => {
                   setCurrentScreen('add');
                 }}
+                type="button"
+                tabIndex="-1"
               >
                 {t('inventoryItemBtn')}
               </StepButton>

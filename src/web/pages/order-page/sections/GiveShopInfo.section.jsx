@@ -81,6 +81,7 @@ export function GiveShopInfo({ t, setShopCurrent, setStep, change }) {
               name="shop-phone-number"
               label="Your Phone Number (Optional)"
               value={phoneNumber}
+              optional
             />
           </div>
           <Description customClass="find-shop-section__form-text">
@@ -89,7 +90,7 @@ export function GiveShopInfo({ t, setShopCurrent, setStep, change }) {
           <div className="find-shop-section__button mt-[50px]">
             <StepButton
               className="find-shop-section__button-btn"
-              disabled={errors || !phoneNumber || !state}
+              disabled={errors || !state}
               onClick={() => {
                 setShopCurrent('thanks');
               }}

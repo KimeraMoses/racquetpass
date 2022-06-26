@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useSelector } from 'react-redux';
 import { Field } from 'redux-form';
 
 import {
@@ -13,7 +14,11 @@ import {
 
 import './EditForm.styles.scss';
 
+const required = (value) => (value ? undefined : 'This field is required');
+
 export function EditForm({ t, setCurrentScreen, change }) {
+  const errors = useSelector((state) => state?.form?.inventory?.syncErrors);
+
   const [check, setCheck] = useState(true);
   const [price, setPrice] = useState('');
   const [activeIndex, setActiveIndex] = useState(0);
@@ -87,16 +92,18 @@ export function EditForm({ t, setCurrentScreen, change }) {
           </div>
           <div className="edit-form__form">
             <Field
-              name="brand"
+              name="edit-brand"
               label="Brand"
               type="text"
               component={CustomInput}
+              validate={required}
             />
             <Field
-              name="model"
+              name="edit-model"
               label="Model"
               type="text"
               component={CustomInput}
+              validate={required}
             />
             <CustomInput
               pattern="\d*"
@@ -176,7 +183,11 @@ export function EditForm({ t, setCurrentScreen, change }) {
           </div>
           <div className="edit-form__button">
             {/* <SubmitButton>{t('profileButtonAddNew')}</SubmitButton> */}
-            <SubmitButton onClick={() => setCurrentScreen('inventory')}>
+            <SubmitButton
+              disabled={errors || !price}
+              onClick={() => setCurrentScreen('inventory')}
+              className="w-full"
+            >
               {t('profileButtonSave')}
             </SubmitButton>
           </div>

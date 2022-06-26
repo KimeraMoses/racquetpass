@@ -58,6 +58,8 @@ export const CustomInput = (props) => {
         }}
         value={props?.value ? props?.value : props?.input?.value}
         autoCapitalize="words"
+        tabIndex={props?.tabIndex}
+        onKeyDown={props?.onKeyDown}
         pattern={props?.pattern}
         onChange={(e) => {
           if (props?.customOnChange) {

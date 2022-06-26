@@ -78,7 +78,9 @@ export function ProShop({ t, setCurrentScreen, setDrawer }) {
                 {t('shopEmailHeading')}
               </SubHeading>
               <SubHeading customClass="shop__contact-info-inner-txt text-[#304FFE]">
-                {t('shopEmail')}
+                <a href="mailto:awesome_pro_racquets@gmail.com">
+                  awesome_pro_racquets@gmail.com
+                </a>
               </SubHeading>
             </div>
             <div className="shop__contact-info-inner">
@@ -86,7 +88,7 @@ export function ProShop({ t, setCurrentScreen, setDrawer }) {
                 {t('taskOpenedPlayerPhoneHeading')}
               </SubHeading>
               <SubHeading customClass="shop__contact-info-inner-txt text-[#304FFE]">
-                {t('shopPhone')}
+                <a href="tel:(123) 4567-8910">(123) 4567-8910</a>
               </SubHeading>
             </div>
 

@@ -14,7 +14,7 @@ const phoneValidation = (value) => {
   }
 };
 
-export const CustomPhoneInput = ({ name, label, value, change }) => {
+export const CustomPhoneInput = ({ name, label, value, change, optional }) => {
   const [touched, setTouched] = useState(false);
   return (
     <CustomInput
@@ -29,22 +29,27 @@ export const CustomPhoneInput = ({ name, label, value, change }) => {
       }}
       meta={{
         touched,
-        error: !value
-          ? 'Field is required'
-          : phoneValidation(value) !== undefined
-          ? phoneValidation(value)
-          : '',
+        error:
+          !optional && !value
+            ? 'Field is required'
+            : phoneValidation(value) !== undefined
+            ? phoneValidation(value)
+            : '',
       }}
       customOnChange={(e) => {
         const value = e?.target?.value;
-        if (value && value?.length === 10 && !isNaN(Number(value))) {
-          const formattedNumber = `(${value.substring(
-            0,
-            3
-          )}) ${value?.substring(3, 6)}-${value?.substring(6, 10)}`;
-          change(name, formattedNumber);
+        if (value?.length > 12) {
+          return;
         } else {
-          change(name, value);
+          if (value && value?.length === 10 && !isNaN(Number(value))) {
+            const formattedNumber = `(${value.substring(
+              0,
+              3
+            )}) ${value?.substring(3, 6)}-${value?.substring(6, 10)}`;
+            change(name, formattedNumber);
+          } else {
+            change(name, value);
+          }
         }
       }}
     />

@@ -19,6 +19,12 @@ let BusinessDetails = ({ t, change }) => {
   const errors = useSelector(
     (state) => state?.form?.['create-business-account-3']?.syncErrors
   );
+  const state = useSelector(
+    (state) => state?.form?.['create-business-account-3']
+  )?.values?.['shop-state'];
+  const zipCode = useSelector(
+    (state) => state?.form?.['create-business-account-3']?.values?.['zip-code']
+  );
 
   const [states, setStates] = useState([]);
 
@@ -69,36 +75,40 @@ let BusinessDetails = ({ t, change }) => {
                   component={CustomInput}
                   validate={required}
                 />
-                <Field
-                  name="state"
+                <CustomSelect
+                  name="shop-state"
+                  options={states}
                   label="State"
                   placeholder="Select"
-                  component={(props) => (
-                    <CustomSelect
-                      {...props}
-                      customOnChange={(option) => {
-                        change('state', option?.value);
-                      }}
-                      showInitials
-                    />
-                  )}
-                  options={states}
+                  customOnChange={(option) => {
+                    change('shop-state', option?.value);
+                  }}
+                  showInitials
                 />
               </div>
-              <Field
+              <CustomInput
+                pattern="\d*"
                 name="zip-code"
                 label="ZIP Code"
                 placeholder="ZIP"
+                customOnChange={(e) => {
+                  const value = e.target.value;
+                  console.log(value?.length);
+                  if (value?.length > 7) {
+                    return;
+                  } else {
+                    change('zip-code', Number(value));
+                  }
+                }}
+                value={zipCode}
                 type="number"
-                validate={required}
-                component={(props) => <CustomInput pattern="\d*" {...props} />}
               />
             </div>
             <div className="btn-container">
               <SubmitButton
                 type="button"
                 className="create-business-account__form-button-btn"
-                disabled={errors}
+                disabled={errors || !state || !zipCode}
                 onClick={() => {
                   navigate('/BusinessAccount/CreatePassword');
                 }}

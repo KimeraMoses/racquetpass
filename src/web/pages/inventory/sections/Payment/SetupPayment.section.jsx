@@ -35,9 +35,14 @@ export const SetupPayment = ({ t, setDrawer }) => {
           </li>
         </ol>
         <div className="flex justify-center mt-[50px]">
-          <Link to="#" className="text-[#304FFE] font-medium text-lg">
+          <a
+            href="https://stripe.com"
+            target="_blank"
+            rel="noreferrer"
+            className="text-[#304FFE] font-medium text-lg"
+          >
             {t('setupStripe')}
-          </Link>
+          </a>
         </div>
       </div>
     </div>

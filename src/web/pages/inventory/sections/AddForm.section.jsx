@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useSelector } from 'react-redux';
 import { Field } from 'redux-form';
 
 import {
@@ -13,7 +14,11 @@ import {
 
 import './AddForm.styles.scss';
 
+const required = (value) => (value ? undefined : 'This field is required');
+
 export function AddForm({ t, setCurrentScreen, change }) {
+  const errors = useSelector((state) => state?.form?.inventory?.syncErrors);
+
   const [show, setShow] = useState(false);
   const [price, setPrice] = useState('');
   // const [active, setActive] = useState(true);
@@ -41,18 +46,21 @@ export function AddForm({ t, setCurrentScreen, change }) {
               name="type"
               label="Type"
               type="text"
+              validate={required}
               component={CustomInput}
             />
             <Field
               name="brand"
               label="Brand"
               type="text"
+              validate={required}
               component={CustomInput}
             />
             <Field
               name="model"
               label="Model"
               type="text"
+              required={required}
               component={CustomInput}
             />
             <CustomInput
@@ -154,6 +162,7 @@ export function AddForm({ t, setCurrentScreen, change }) {
         <div className="item-form__button w-full sm:w-[450px] m-[0_auto] mt-[50px]">
           <SubmitButton
             onClick={() => setCurrentScreen('detail')}
+            disabled={errors || !price}
             className="w-full"
           >
             {t('profileButtonAddNew')}
