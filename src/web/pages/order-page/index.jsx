@@ -45,7 +45,7 @@ const phoneValidation = (value) => {
 };
 
 let OrderPage = ({ t, handleSubmit, change }) => {
-  const [step, setStep] = useState(0);
+  const [step, setStep] = useState(5);
   const [steps, setSteps] = useState({
     active: '',
     content: ['QR', 'Strings', 'Contact', 'Review'],
@@ -408,7 +408,12 @@ let OrderPage = ({ t, handleSubmit, change }) => {
                     (!values?.['phone-number'] ||
                       phoneValidation(values?.['phone-number']) !==
                         undefined)) ||
-                  (step === 5 && !values?.['verification-code'])
+                  (step === 5 &&
+                    (!values?.['verification-code'] ||
+                      values?.['verification-code']?.length !== 6)) ||
+                  (step === 10 &&
+                    (!values?.['verification-code-new'] ||
+                      values?.['verification-code-new']?.length !== 6))
                 }
                 type="button"
               >

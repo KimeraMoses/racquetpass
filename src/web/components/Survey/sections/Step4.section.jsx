@@ -70,9 +70,9 @@ export const Step4 = ({ back, onExit, setShow }) => {
         onChange={(e) => {
           if (
             e.target.value !== '' &&
-            (e.target.value < 1.5 || e.target.value > 7.0)
+            (e.target.value < 1 || e.target.value > 16.5)
           ) {
-            setUtrError('Please enter a valid NTRP rating');
+            setUtrError('Please enter a valid UTR rating');
             setUtr(e.target.value);
           } else {
             setUtrError('');
