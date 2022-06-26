@@ -34,6 +34,7 @@ function Login({ t, handleSubmit }) {
   const [passwordFieldType, setPasswordFieldType] = useState('password');
 
   const values = useSelector((state) => state?.form?.login?.values);
+  const errors = useSelector((state) => state?.form?.login?.syncErrors);
 
   return (
     <>
@@ -88,7 +89,7 @@ function Login({ t, handleSubmit }) {
             <div className="signin__form-buttons">
               <SubmitButton
                 type="submit"
-                disabled={!values?.email || !values?.password}
+                disabled={errors || !values?.password}
                 onClick={() => {
                   navigate('/tasks');
                 }}

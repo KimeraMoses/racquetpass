@@ -71,7 +71,7 @@ export function VerifyResend({ t, setStep, change }) {
           <SubmitButton
             type="button"
             className="mt-[45px]"
-            disabled={!verification || errorCode}
+            disabled={!verification || errorCode || verification.length !== 6}
             onClick={() => setStep(7)}
           >
             Verify and Resend Text

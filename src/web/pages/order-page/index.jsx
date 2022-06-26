@@ -410,10 +410,7 @@ let OrderPage = ({ t, handleSubmit, change }) => {
                         undefined)) ||
                   (step === 5 &&
                     (!values?.['verification-code'] ||
-                      values?.['verification-code']?.length !== 6)) ||
-                  (step === 10 &&
-                    (!values?.['verification-code-new'] ||
-                      values?.['verification-code-new']?.length !== 6))
+                      values?.['verification-code']?.length !== 6))
                 }
                 type="button"
               >
