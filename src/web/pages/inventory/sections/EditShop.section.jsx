@@ -15,6 +15,22 @@ import './EditShop.styles.scss';
 import { useEffect, useState } from 'react';
 
 const required = (value) => (value ? undefined : 'This field is required');
+// Phone Validation
+const formats = '(999) 999-9999|(999)999-9999|999-999-9999|9999999999';
+const r = RegExp(
+  '^(' + formats.replace(/([()])/g, '\\$1').replace(/9/g, '\\d') + ')$'
+);
+const phoneValidation = (value) => {
+  if (r.test(value) === true) {
+    if (value.length < 9 || value.length > 14) {
+      return 'Please enter value between 9 and 14';
+    } else {
+      return undefined;
+    }
+  } else {
+    return 'Please enter a valid phone number.';
+  }
+};
 
 export function EditShop({ t, setCurrentScreen, change }) {
   const [labor, setLabor] = useState();
@@ -202,7 +218,8 @@ export function EditShop({ t, setCurrentScreen, change }) {
                 !delivery ||
                 !labor ||
                 !state ||
-                !zipCode
+                !zipCode ||
+                phoneValidation(phoneNumber) !== undefined
               }
             >
               {t('stringDetailsSave')}

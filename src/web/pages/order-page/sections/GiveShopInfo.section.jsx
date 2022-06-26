@@ -16,6 +16,23 @@ import { StepButton } from 'web/components/Buttons/StepButton.componet';
 // Styles
 import './GiveShopInfo.styles.scss';
 
+// Phone Validation
+const formats = '(999) 999-9999|(999)999-9999|999-999-9999|9999999999';
+const r = RegExp(
+  '^(' + formats.replace(/([()])/g, '\\$1').replace(/9/g, '\\d') + ')$'
+);
+const phoneValidation = (value) => {
+  if (r.test(value) === true) {
+    if (value.length < 9 || value.length > 14) {
+      return 'Please enter value between 9 and 14';
+    } else {
+      return undefined;
+    }
+  } else {
+    return 'Please enter a valid phone number.';
+  }
+};
+
 const required = (value) => (value ? undefined : 'Required');
 
 export function GiveShopInfo({ t, setShopCurrent, setStep, change }) {
@@ -90,7 +107,9 @@ export function GiveShopInfo({ t, setShopCurrent, setStep, change }) {
           <div className="find-shop-section__button mt-[50px]">
             <StepButton
               className="find-shop-section__button-btn"
-              disabled={errors || !state}
+              disabled={
+                errors || !state || phoneValidation(phoneNumber) !== undefined
+              }
               onClick={() => {
                 setShopCurrent('thanks');
               }}

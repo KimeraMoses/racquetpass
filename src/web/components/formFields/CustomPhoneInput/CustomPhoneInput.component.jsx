@@ -8,7 +8,11 @@ const r = RegExp(
 );
 const phoneValidation = (value) => {
   if (r.test(value) === true) {
-    return undefined;
+    if (value.length < 9 || value.length > 14) {
+      return 'Please enter value between 9 and 14';
+    } else {
+      return undefined;
+    }
   } else {
     return 'Please enter a valid phone number.';
   }
@@ -38,7 +42,7 @@ export const CustomPhoneInput = ({ name, label, value, change, optional }) => {
       }}
       customOnChange={(e) => {
         const value = e?.target?.value;
-        if (value?.length > 12) {
+        if (value?.length > 14) {
           return;
         } else {
           if (value && value?.length === 10 && !isNaN(Number(value))) {

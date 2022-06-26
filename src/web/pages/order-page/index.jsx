@@ -27,6 +27,23 @@ import './order.styles.scss';
 import { useSelector } from 'react-redux';
 import { VerifyResend } from './sections/VerifyResend.section';
 
+// Phone Validation
+const formats = '(999) 999-9999|(999)999-9999|999-999-9999|9999999999';
+const r = RegExp(
+  '^(' + formats.replace(/([()])/g, '\\$1').replace(/9/g, '\\d') + ')$'
+);
+const phoneValidation = (value) => {
+  if (r.test(value) === true) {
+    if (value.length < 9 || value.length > 14) {
+      return 'Please enter value between 9 and 14';
+    } else {
+      return undefined;
+    }
+  } else {
+    return 'Please enter a valid phone number.';
+  }
+};
+
 let OrderPage = ({ t, handleSubmit, change }) => {
   const [step, setStep] = useState(0);
   const [steps, setSteps] = useState({
@@ -387,7 +404,10 @@ let OrderPage = ({ t, handleSubmit, change }) => {
                   errors ||
                   (step === 2 && !values?.brand) ||
                   (step === 3 && !values?.mains && !values?.cross) ||
-                  (step === 4 && !values?.['phone-number']) ||
+                  (step === 4 &&
+                    (!values?.['phone-number'] ||
+                      phoneValidation(values?.['phone-number']) !==
+                        undefined)) ||
                   (step === 5 && !values?.['verification-code'])
                 }
                 type="button"
