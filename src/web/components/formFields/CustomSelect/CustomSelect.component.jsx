@@ -5,8 +5,6 @@ import './CustomSelect.styles.scss';
 export const CustomSelect = (props) => {
   const [selectedOption, setSelectedOption] = useState(null);
 
-  console.log(props?.placeholder);
-
   const { visited, error } = props?.meta
     ? props?.meta
     : { visited: false, error: false };

@@ -1,10 +1,5 @@
 import { useNavigate } from 'react-router-dom';
-import {
-  HeadingButton,
-  Heading,
-  SubHeading,
-  // CustomInput,
-} from 'web/components';
+import { HeadingButton, Heading, SubHeading } from 'web/components';
 
 import './ProShop.styles.scss';
 

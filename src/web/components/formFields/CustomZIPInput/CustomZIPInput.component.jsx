@@ -19,8 +19,6 @@ export const CustomZIPInput = ({
   placeholder,
 }) => {
   const [touched, setTouched] = useState(false);
-  console.log(value);
-  console.log(zipValidation(value));
   return (
     <CustomInput
       name={name}

@@ -55,6 +55,7 @@ const zipValidation = (value) => {
 export function EditShop({ t, setCurrentScreen, change }) {
   const [labor, setLabor] = useState();
   const [delivery, setDelivery] = useState();
+  const [deliveryError, setDeliveryError] = useState();
 
   const [states, setStates] = useState([]);
 
@@ -95,21 +96,39 @@ export function EditShop({ t, setCurrentScreen, change }) {
           </div>
           <div className="edit__services-form">
             <CustomInput
-              type="number"
+              // type="number"
               value={delivery}
               customOnChange={(e) => {
-                setDelivery(e?.target?.value);
+                const value = e.target.value;
+                console.log(isNaN(Number(value)));
+                if (isNaN(Number(value))) {
+                  setDeliveryError({
+                    error: 'Please enter a number',
+                    touched: true,
+                  });
+                  setDelivery(value);
+                } else {
+                  setDeliveryError({
+                    error: '',
+                    touched: true,
+                  });
+                  setDelivery(value);
+                }
               }}
               customOnBlur={(e) => {
                 change('delivery-days', e?.target?.value);
               }}
+              meta={deliveryError}
               hidePostFix
               label="Estimated delivery time (# of days)"
               name="delivery-time"
-              pattern="\d*"
+              min="0"
+              autoCapitalize={false}
+              inputmode="numeric"
+              pattern="[0-9]*"
+              title="Non-negative integral number"
             />
             <CustomInput
-              pattern="\d*"
               value={labor}
               customOnChange={(e) => {
                 const value = e.target.value;
