@@ -137,8 +137,12 @@ export function SelectStringWithMainCross({
                 onClick: () => {
                   if (unit === 'kg') {
                     setUnit('lbs');
+                    setMainsTension(50);
+                    setCrossesTension(50);
                   } else {
                     setUnit('kg');
+                    setMainsTension(25);
+                    setCrossesTension(25);
                   }
                 },
               }}
@@ -183,8 +187,12 @@ export function SelectStringWithMainCross({
                 onClick: () => {
                   if (unit === 'kg') {
                     setUnit('lbs');
+                    setMainsTension(50);
+                    setCrossesTension(50);
                   } else {
                     setUnit('kg');
+                    setMainsTension(25);
+                    setCrossesTension(25);
                   }
                 },
               }}

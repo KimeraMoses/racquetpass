@@ -1,7 +1,12 @@
 .custom-order-select.custom-order-select-bold {
   .custom-order-select__input {
     &::placeholder {
-      color: #3c3c3c;
+      font-family: Poppins;
+      font-style: normal;
+      font-weight: normal;
+      font-size: 14px;
+      line-height: 21px;
+      color: #858585;
     }
   }
 }
@@ -13,7 +18,7 @@
     font-weight: 600;
     font-size: 12px;
     line-height: 18px;
-    color: #969696;
+    color: #858585;
     margin-bottom: 12px;
   }
   &__container {
@@ -37,8 +42,12 @@
   &__input {
     font-family: Poppins;
     background: #ffffff;
-    // border: 1px solid #e8e8e8;
-    border: none;
+    font-family: Poppins;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 15px;
+    line-height: 21px;
+    color: #333;
     box-sizing: border-box;
     border-radius: 12px;
     // padding: 16px;
@@ -49,9 +58,11 @@
     }
     &::placeholder {
       font-family: Poppins;
-      font-size: 15px;
-      line-height: 27px;
-      color: #bababa;
+      font-style: normal;
+      font-weight: normal;
+      font-size: 14px;
+      line-height: 21px;
+      color: #858585;
     }
   }
 }

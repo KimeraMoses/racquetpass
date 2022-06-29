@@ -59,7 +59,7 @@ export function ReviewOrder({ t, setStep, setDone, setBackFromReview }) {
             </div>
             <div className="review-order-odr__contact-details">
               <SubHeading>{t('taskOpenedPlayerPhoneHeading')}</SubHeading>
-              <Description>{t('taskOpenedPlayerPhone')}</Description>
+              <Description>(332) 331-4432</Description>
             </div>
           </div>
 

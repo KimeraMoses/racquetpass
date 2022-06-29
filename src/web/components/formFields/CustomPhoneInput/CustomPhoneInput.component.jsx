@@ -7,14 +7,18 @@ const r = RegExp(
   '^(' + formats.replace(/([()])/g, '\\$1').replace(/9/g, '\\d') + ')$'
 );
 const phoneValidation = (value) => {
-  if (r.test(value) === true) {
-    if (value?.length < 9 || value?.length > 14) {
-      return 'Please enter value between 9 and 14 digits.';
+  if (value?.length > 0) {
+    if (r.test(value) === true) {
+      if (value?.length < 9 || value?.length > 14) {
+        return 'Please enter value between 9 and 14 digits.';
+      } else {
+        return undefined;
+      }
     } else {
-      return undefined;
+      return 'Please enter a valid phone number.';
     }
   } else {
-    return 'Please enter a valid phone number.';
+    return undefined;
   }
 };
 

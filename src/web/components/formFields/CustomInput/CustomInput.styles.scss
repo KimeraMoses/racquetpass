@@ -59,6 +59,9 @@
       line-height: 21px;
       color: #858585;
     }
+    &:placeholder-shown {
+      text-overflow: ellipsis;
+    }
   }
   .custom-input__input.custom-input__input-error {
     background: #fcebeb;

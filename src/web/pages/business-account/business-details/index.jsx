@@ -16,8 +16,8 @@ import { useSelector } from 'react-redux';
 const required = (value) => (value ? undefined : 'This field is required');
 // ZIP Validation
 const zipValidation = (value) => {
-  if (value?.length < 3 || value?.length > 7) {
-    return 'Please enter value between 3 and 7 digits';
+  if (value?.length !== 5) {
+    return 'Please enter a standard 5 digits zip code';
   } else {
     return undefined;
   }

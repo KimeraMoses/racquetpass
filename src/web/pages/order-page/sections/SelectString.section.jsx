@@ -126,8 +126,10 @@ export function SelectString({
                 onClick: () => {
                   if (unit === 'kg') {
                     setUnit('lbs');
+                    setMainsTension(50);
                   } else {
                     setUnit('kg');
+                    setMainsTension(25);
                   }
                 },
               }}

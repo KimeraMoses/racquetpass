@@ -37,6 +37,14 @@ export const Survey = ({ show, setShow, onExit }) => {
     }
   }, [show, targetRef]);
 
+  useEffect(() => {
+    if (!show) {
+      const targetEl = targetRef?.current;
+      enableBodyScroll(targetEl);
+      clearAllBodyScrollLocks();
+    }
+  });
+
   const [step, setStep] = useState(1);
 
   return (
