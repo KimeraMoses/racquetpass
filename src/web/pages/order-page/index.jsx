@@ -45,7 +45,7 @@ const phoneValidation = (value) => {
 };
 
 let OrderPage = ({ t, handleSubmit, change }) => {
-  const [step, setStep] = useState(6);
+  const [step, setStep] = useState(0);
   const [steps, setSteps] = useState({
     active: '',
     content: ['QR', 'Strings', 'Contact', 'Review'],
