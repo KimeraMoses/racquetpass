@@ -12,38 +12,15 @@ export const Survey = ({ show, setShow, onExit }) => {
 
   useEffect(() => {
     const targetEl = targetRef?.current;
-    var ua = navigator.userAgent.toLowerCase();
-    if (ua.indexOf('safari') !== -1) {
-      if (ua.indexOf('chrome') > -1) {
-        if (show) {
-          window.scrollTo(0, 0);
-          document.body.style.overflow = 'hidden';
-          return () => {
-            document.body.style.overflow = 'auto';
-          };
-        }
-      } else {
-        if (show) {
-          window.scrollTo(0, 0);
-          document.body.style.overflow = 'hidden';
-          disableBodyScroll(targetEl);
-          return () => {
-            document.body.style.overflow = 'auto';
-            enableBodyScroll(targetEl);
-            clearAllBodyScrollLocks();
-          };
-        }
-      }
+    if (show) {
+      window.scrollTo(0, 0);
+      disableBodyScroll(targetEl);
+      return () => {
+        enableBodyScroll(targetEl);
+        clearAllBodyScrollLocks();
+      };
     }
   }, [show, targetRef]);
-
-  useEffect(() => {
-    if (!show) {
-      const targetEl = targetRef?.current;
-      enableBodyScroll(targetEl);
-      clearAllBodyScrollLocks();
-    }
-  });
 
   const [step, setStep] = useState(1);
 

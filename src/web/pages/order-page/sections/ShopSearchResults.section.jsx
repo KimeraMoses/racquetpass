@@ -29,7 +29,7 @@ export function ShopSearchResults({
             name="shop-search"
             type="text"
             icon="/img/orderpage/search.png"
-            label="Find your pro shop or club by name, city, or state"
+            label="Find pro shop or club"
             noLabel
             setFieldToBeFocused={(input) => {
               inputEl = input;

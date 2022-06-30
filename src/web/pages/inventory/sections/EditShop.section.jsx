@@ -14,6 +14,7 @@ import {
 } from 'web/components';
 import './EditShop.styles.scss';
 import { useEffect, useState } from 'react';
+import { CustomCurrencyInput } from 'web/components/formFields/CustomCurrencyInput/CustomCurrencyInput.component';
 
 const required = (value) => (value ? undefined : 'This field is required');
 const email = (value) => {
@@ -128,7 +129,7 @@ export function EditShop({ t, setCurrentScreen, change }) {
               pattern="[0-9]*"
               title="Non-negative integral number"
             />
-            <CustomInput
+            {/* <CustomInput
               value={labor}
               customOnChange={(e) => {
                 const value = e.target.value;
@@ -155,6 +156,14 @@ export function EditShop({ t, setCurrentScreen, change }) {
                 }
                 change('labor-price', e?.target?.value);
               }}
+            /> */}
+            <CustomCurrencyInput
+              value={labor}
+              label="Labor Price"
+              customOnChange={(value) => {
+                setLabor(value);
+              }}
+              onBlur={(e) => change('labor-price', e?.target?.value)}
             />
           </div>
           <div className="mt-[12px] text-[10px] text-[#838383] font-semibold">

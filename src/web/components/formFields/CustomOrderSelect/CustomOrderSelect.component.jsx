@@ -11,7 +11,16 @@ export const CustomOrderSelect = (props) => {
       {props.noLabel ? (
         <></>
       ) : (
-        <div className="custom-order-select__label">{props.label}</div>
+        <div className="flex items-center justify-between">
+          <div className="custom-order-select__label">{props.label}</div>
+          {!props?.value ? (
+            <div className="custom-order-select__error text-[#e53935] text-[12px] font-semibold">
+              Required
+            </div>
+          ) : (
+            <></>
+          )}
+        </div>
       )}
       <div className="custom-order-select__container">
         <input
@@ -34,11 +43,6 @@ export const CustomOrderSelect = (props) => {
           {props.link}
         </Link>
       </div>
-      {props.meta &&
-        props.meta.error &&
-        props.meta.touched(
-          <div className="custom-order-select__error">{props.meta.error}</div>
-        )}
     </div>
   );
 };
