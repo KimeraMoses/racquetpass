@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { withNamespaces } from "react-i18next";
 // import { useNavigate } from "react-router-dom";
 import {
@@ -9,8 +9,8 @@ import {
 } from "web/components";
 import { Link } from "react-router-dom";
 import "./index.styles.scss";
-import { useDispatch, useSelector } from "react-redux";
-import { fetchAllOrders } from "web/store/Actions/businessActions";
+import { useDispatch } from "react-redux";
+// import { fetchAllOrders } from "web/store/Actions/businessActions";
 
 const dueToday = [];
 for (let i = 0; i <= 3; i++) {
@@ -41,12 +41,13 @@ for (let i = 0; i <= 9; i++) {
 
 function Tasks({ t }) {
   // const [showDrawer, setShowDrawer] = useState(false);
-  const authToken = useSelector((state) => state.auth.token);
+  // const authToken = useSelector((state) => state.auth.token);
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    dispatch(fetchAllOrders(authToken));
-  }, [authToken]);
+  // useEffect(() => {
+  //   dispatch(fetchAllOrders(authToken));
+  // }, [authToken]);
+
   return (
     <div className="tasks-container">
       {/* <CustomDrawer show={showDrawer} setShow={setShowDrawer} /> */}

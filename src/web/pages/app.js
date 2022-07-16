@@ -52,12 +52,11 @@ function Routers() {
   const isAuthenticated = useSelector((state) => state.auth.isLoggedIn);
   const initialValues = useSelector((state) => state.business.businessData);
   const dispatch = useDispatch();
-
+  const hasValues = initialValues?.hasOwnProperty("firstName");
+  console.log(hasValues);
   useEffect(() => {
     AutoAuthenticate(dispatch);
   }, [dispatch]);
-
-  console.log(isAuthenticated);
 
   return (
     <>
@@ -86,11 +85,23 @@ function Routers() {
           />
           <Route
             path="/BusinessAccount/BusinessDetails"
-            element={<BusinessDetails initialValues={initialValues} />}
+            element={
+              !hasValues ? (
+                <Navigate to="/BusinessAccount/Create" />
+              ) : (
+                <BusinessDetails initialValues={initialValues} />
+              )
+            }
           />
           <Route
             path="/BusinessAccount/CreatePassword"
-            element={<CreatePassword initialValues={initialValues} />}
+            element={
+              !hasValues ? (
+                <Navigate to="/BusinessAccount/Create" />
+              ) : (
+                <CreatePassword initialValues={initialValues} />
+              )
+            }
           />
           <Route path="/BusinessAccount/Thanks" element={<ThankYou />} />
 

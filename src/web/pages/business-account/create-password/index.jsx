@@ -184,7 +184,12 @@ let CreatePassword = ({ t, back }) => {
       );
     } catch (err) {
       setIsLoading(false);
-      toast.error("Failed to create business");
+      if (window.navigator.onLine) {
+        return toast.error(
+          "Failed to create business, Please try again later!"
+        );
+      }
+      toast.error("Failed to create business, Please check your internet!");
     }
   };
 
