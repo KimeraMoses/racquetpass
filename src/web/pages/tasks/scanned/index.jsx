@@ -72,13 +72,13 @@ function Scanned({ t }) {
         </div>
       </div>
 
-      <div className="scan-msg">
+      <div className="scan-msg m-[20px_0px]">
         <a className="link" href="/">
           {t('taskRescan')}
         </a>
       </div>
 
-      <div>
+      <div className="w-full">
         <CustomButton
           size="lg"
           btn="primary"
@@ -88,9 +88,17 @@ function Scanned({ t }) {
         >
           View Details
         </CustomButton>
-        <SubmitButton outlined className="mt-[12px]">
-          Contact Player
-        </SubmitButton>
+        <div className="mt-[12px]">
+          <CustomButton
+            size="lg"
+            btn="secondary"
+            onClick={() => {
+              // navigate('/Tasks/Details');
+            }}
+          >
+            Contact Player
+          </CustomButton>
+        </div>
       </div>
     </div>
   );

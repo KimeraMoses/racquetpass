@@ -30,7 +30,7 @@ const orderDetails = {
 export function OrderDetails({ t, setStep, setDone }) {
   return (
     <>
-      <div className="review-order-odr">
+      <div className="review-order-odr max-w-[450px] m-[0_auto]">
         <div className="review-order-odr__heading">
           <BackButton
             onClick={() => {
@@ -135,7 +135,10 @@ export function OrderDetails({ t, setStep, setDone }) {
             <Heading customClass="review-order-odr__shop-heading-text">
               {t('odrReviewShop')}
             </Heading>
-            <a href="/" className="text-[12px] text-[#304FFE] font-semibold">
+            <a
+              href="tel:(123) 456-4567"
+              className="text-[12px] text-[#304FFE] font-semibold"
+            >
               Call Shop
             </a>
           </div>

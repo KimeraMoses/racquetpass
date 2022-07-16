@@ -1,4 +1,4 @@
-import { useRef, useState } from 'react';
+import { useRef } from 'react';
 import { Link } from 'react-router-dom';
 import './CustomInputNumber.styles.scss';
 
@@ -16,9 +16,9 @@ export const CustomInputNumber = (props) => {
     // setValue((value) => value - 1);
   };
 
-  const handleChange = () => {
-    // setValue(value);
-  };
+  // const handleChange = () => {
+  //   setValue(value);
+  // };
   return (
     <div className="custom-input-number">
       {props?.noLabel ? (
@@ -26,22 +26,34 @@ export const CustomInputNumber = (props) => {
       ) : (
         <div className="custom-input-number__label">
           <p>{props?.label}</p>
-          <Link to={props?.link.path}>{props?.link?.text}</Link>
+          {props?.link ? (
+            <Link to={props?.link?.path} onClick={props?.link?.onClick}>
+              {props?.link?.text}
+            </Link>
+          ) : (
+            <></>
+          )}
         </div>
       )}
       <div
         className="custom-input-number__container"
         onClick={() => inputEl?.current?.focus()}
       >
-        <div className="custom-input-number__container-value">
+        <div
+          className={`custom-input-number__container-value ${
+            props?.hidePostFix ? 'flex-grow' : ''
+          }`}
+        >
           <input
             {...props?.input}
             value={props?.value || props?.input?.value}
             onChange={props?.onChange || props?.input?.onChange}
-            onBlur={() => {}}
             placeholder={props?.placeholder ? props?.placeholder : props?.label}
-            className="custom-input-number__input"
+            className={`custom-input-number__input ${
+              props?.hidePostFix ? 'w-full' : 'w-[38px]'
+            }`}
             ref={inputEl}
+            pattern="\d*"
             type="number"
             style={
               props.icon
@@ -52,11 +64,15 @@ export const CustomInputNumber = (props) => {
                   }
                 : {}
             }
-            // onChange={handleChange}
-            // value={value}
             readOnly={props?.readOnly}
           />
-          <div className="custom-input-number__postfix">lbs</div>
+          {props?.hidePostFix ? (
+            <></>
+          ) : (
+            <div className="custom-input-number__postfix">
+              {props?.postFix ? props?.postFix : 'lbs'}
+            </div>
+          )}
         </div>
         {!props?.showSteps ? (
           <></>

@@ -1,18 +1,16 @@
 .item-form {
   padding: 0px 20px;
-  min-height: calc(100vh - 80px);
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
   &__header {
     display: flex;
     gap: 12px;
     align-items: center;
   }
   &__form {
+    margin: 0 auto;
     margin-top: 40px;
     display: flex;
     flex-direction: column;
+    max-width: 450px;
     gap: 20px;
     &-types {
       &-heading {
@@ -75,8 +73,5 @@
       line-height: 27px;
       color: #ea5353;
     }
-  }
-  &__button {
-    margin-top: 50px;
   }
 }

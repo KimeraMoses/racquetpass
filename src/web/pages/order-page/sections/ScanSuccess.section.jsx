@@ -10,14 +10,29 @@ import {
 // Styles
 import './ScanSuccess.styles.scss';
 
-export function ScanSuccess({ t, backward }) {
+export function ScanSuccess({
+  t,
+  backward,
+  setStep,
+  setBackFromReview,
+  backFromReview,
+}) {
   return (
     <>
-      <div className="scan-details-sc">
+      <div className="scan-details-sc max-w-[450px] m-[0_auto]">
         <div>
           {/* <BackButton /> */}
           <div className="scan-details-sc__heading">
-            <BackButton onClick={backward} />
+            <BackButton
+              onClick={() => {
+                if (backFromReview) {
+                  setStep(6);
+                  setBackFromReview(false);
+                } else {
+                  backward();
+                }
+              }}
+            />
             <Heading>{t('scanSuccessHeading')}</Heading>
           </div>
 

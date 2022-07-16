@@ -5,7 +5,7 @@ import { SubmitButton } from 'web/components/Buttons/SubmitButton.component';
 const Option = ({ label, description, active, onClick }) => {
   return (
     <div
-      className={`p-[16px] h-[80px] flex items-center justify-start rounded-[12px] border-[1px] cursor-pointer ${
+      className={`p-[16px] h-[52px] md:h-[80px] flex items-center justify-start rounded-[12px] border-[1px] cursor-pointer ${
         !active
           ? 'bg-[#ffffff] border-[#e8e8e8]'
           : 'bg-[#EAEDFF] border-[#304FFE]'
@@ -14,13 +14,15 @@ const Option = ({ label, description, active, onClick }) => {
     >
       <div>
         <div className="text-[18px] text-[#3c3c3c]">{label}</div>
-        <div className="text-[14px] text-[#9A9A9A]">{description}</div>
+        <div className="text-[14px] text-[#9A9A9A] hidden md:block">
+          {description}
+        </div>
       </div>
     </div>
   );
 };
 
-export const Step3 = ({ next, back }) => {
+export const Step3 = ({ back, setShow, onExit }) => {
   const [active, setActive] = useState('');
 
   const options = [
@@ -53,7 +55,7 @@ export const Step3 = ({ next, back }) => {
 
   return (
     <div>
-      <div className="flex gap-[20px] items-center mb-[18px]">
+      <div className="grid grid-cols-[46px_4fr] gap-[20px] items-center mb-[18px]">
         <BackButton onClick={back} />
         <div className="text-[#545454] text-[18px] ">
           What best describes your experience level?
@@ -71,8 +73,14 @@ export const Step3 = ({ next, back }) => {
         ))}
       </div>
       <div className="mt-[45px]">
-        <SubmitButton disabled={!active} onClick={next}>
-          Next
+        <SubmitButton
+          disabled={!active}
+          onClick={() => {
+            setShow(false);
+            onExit();
+          }}
+        >
+          Complete Survey
         </SubmitButton>
       </div>
     </div>

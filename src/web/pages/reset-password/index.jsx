@@ -12,12 +12,6 @@ const length = new RegExp('^(?=.{8,})');
 const lowerCase = new RegExp('^(?=.*[a-z])');
 const upperCase = new RegExp('^(?=.*[A-Z])');
 const number = new RegExp('^(?=.*[0-9])');
-const strongStrenght = new RegExp(
-  '^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*])(?=.{8,})'
-);
-const mediumStrength = new RegExp(
-  '^(?=.*[a-z])(?=.*[A-Z])(?=.*[^A-Za-z0-9])(?=.{8,})'
-);
 
 function useQuery() {
   const { search } = useLocation();
@@ -35,7 +29,6 @@ let ResetPassword = ({ t, back }) => {
     oneNumber: false,
     noTextFromNameEmail: false,
   });
-  const [passwordStrenght, setPasswordStrenght] = useState('weak');
 
   const query = useQuery();
   const comingFrom = query.get('comingFrom');
@@ -128,15 +121,7 @@ let ResetPassword = ({ t, back }) => {
         };
       });
     }
-    // Check Strenght
-    if (strongStrenght.test(password)) {
-      setPasswordStrenght('strong');
-    } else if (mediumStrength.test(password)) {
-      setPasswordStrenght('medium');
-    } else {
-      setPasswordStrenght('weak');
-    }
-  }, [password]);
+  }, [password, firstName, lastName]);
 
   const renderBullet = (condition) => {
     if (condition) {
@@ -175,144 +160,111 @@ let ResetPassword = ({ t, back }) => {
               <Heading>Reset Password</Heading>
             </div>
           </div>
-          {/* <div>
-            <Description customClass="reset-password__desc">
-              {t('accPasstxt')}
-            </Description>
-          </div> */}
-          <div className="reset-password__input-password">
-            <Field
-              name="password"
-              label="Password"
-              placeholder="Password"
-              type={passwordFieldType}
-              component={CustomInput}
-              switchPasswordShow={() => {
-                if (passwordFieldType === 'password') {
-                  setPasswordFieldType('text');
-                } else {
-                  setPasswordFieldType('password');
-                }
-              }}
-              isPasswordField
-              onChange={(e) => setPassword(e.target.value)}
-            />
-            {/* <div
-              className={`reset-password__input-password-strength ${
-                passwordStrenght === 'weak'
-                  ? 'reset-password__input-password-strength-weak'
-                  : ''
-              } ${
-                passwordStrenght === 'medium'
-                  ? 'reset-password__input-password-strength-medium'
-                  : ''
-              } ${
-                passwordStrenght === 'strong'
-                  ? 'reset-password__input-password-strength-strong'
-                  : ''
-              }`}
-            >
-              {passwordStrenght === 'strong'
-                ? 'Strong'
-                : passwordStrenght === 'medium'
-                ? 'Medium'
-                : 'Weak'}
-            </div> */}
-          </div>
-          {/* <div className="reset-password__progress">
-            <div
-              className={`reset-password__progress-inner ${
-                passwordStrenght === 'weak'
-                  ? 'reset-password__progress-inner-weak'
-                  : ''
-              } ${
-                passwordStrenght === 'medium'
-                  ? 'reset-password__progress-inner-medium'
-                  : ''
-              } ${
-                passwordStrenght === 'strong'
-                  ? 'reset-password__progress-inner-strong'
-                  : ''
-              }`}
-            ></div>
-          </div> */}
-          <div className="reset-password__password-list">
-            {/* <Description>{t('accPassRecommend')}</Description> */}
-            <ul className="reset-password__password-list-recommend">
-              <li>
-                {renderBullet(passwordConditions.moreThanEight)}
-                <p
-                  style={
-                    !passwordConditions.moreThanEight
-                      ? { color: '#a6a6a6' }
-                      : {}
+          <div className="max-w-[450px] m-[0_auto]">
+            <div className="reset-password__input-password">
+              <Field
+                name="password"
+                label="Password"
+                placeholder="Password"
+                type={passwordFieldType}
+                component={CustomInput}
+                switchPasswordShow={() => {
+                  if (passwordFieldType === 'password') {
+                    setPasswordFieldType('text');
+                  } else {
+                    setPasswordFieldType('password');
                   }
-                >
-                  {t('accPassitem1')}
-                </p>
-              </li>
-              <li>
-                {renderBullet(passwordConditions.oneLowerCase)}
-                <p
-                  style={
-                    !passwordConditions.oneLowerCase ? { color: '#a6a6a6' } : {}
-                  }
-                >
-                  {t('accPassitem2')}
-                </p>
-              </li>
-              <li>
-                {renderBullet(passwordConditions.oneUpperCase)}
-                <p
-                  style={
-                    !passwordConditions.oneUpperCase ? { color: '#a6a6a6' } : {}
-                  }
-                >
-                  {t('accPassitem3')}
-                </p>
-              </li>
-              <li>
-                {renderBullet(passwordConditions.oneNumber)}
-                <p
-                  style={
-                    !passwordConditions.oneNumber ? { color: '#a6a6a6' } : {}
-                  }
-                >
-                  {t('accPassitem4')}
-                </p>
-              </li>
-              <li>
-                {renderBullet(passwordConditions.noTextFromNameEmail)}
-                <p
-                  style={
+                }}
+                isPasswordField
+                onChange={(e) => setPassword(e.target.value)}
+              />
+            </div>
+            <div className="reset-password__password-list">
+              <ul className="reset-password__password-list-recommend">
+                <li>
+                  {renderBullet(passwordConditions.moreThanEight)}
+                  <p
+                    style={
+                      !passwordConditions.moreThanEight
+                        ? { color: '#a6a6a6' }
+                        : {}
+                    }
+                  >
+                    {t('accPassitem1')}
+                  </p>
+                </li>
+                <li>
+                  {renderBullet(passwordConditions.oneLowerCase)}
+                  <p
+                    style={
+                      !passwordConditions.oneLowerCase
+                        ? { color: '#a6a6a6' }
+                        : {}
+                    }
+                  >
+                    {t('accPassitem2')}
+                  </p>
+                </li>
+                <li>
+                  {renderBullet(passwordConditions.oneUpperCase)}
+                  <p
+                    style={
+                      !passwordConditions.oneUpperCase
+                        ? { color: '#a6a6a6' }
+                        : {}
+                    }
+                  >
+                    {t('accPassitem3')}
+                  </p>
+                </li>
+                <li>
+                  {renderBullet(passwordConditions.oneNumber)}
+                  <p
+                    style={
+                      !passwordConditions.oneNumber ? { color: '#a6a6a6' } : {}
+                    }
+                  >
+                    {t('accPassitem4')}
+                  </p>
+                </li>
+                <li>
+                  {renderBullet(passwordConditions.noTextFromNameEmail)}
+                  <p
+                    style={
+                      !passwordConditions.noTextFromNameEmail
+                        ? { color: '#a6a6a6' }
+                        : {}
+                    }
+                  >
+                    {t('accPassitem5')}
+                  </p>
+                </li>
+              </ul>
+            </div>
+            <div>
+              <div className="mt-[40px]">
+                <SubmitButton
+                  onClick={() => {
+                    if (comingFrom === 'shop') {
+                      navigate('/inventory?active=proshop');
+                    } else {
+                      navigate('/login');
+                    }
+                  }}
+                  type="submit"
+                  disabled={
+                    !passwordConditions.moreThanEight ||
+                    !passwordConditions.oneLowerCase ||
+                    !passwordConditions.oneUpperCase ||
+                    !passwordConditions.oneNumber ||
                     !passwordConditions.noTextFromNameEmail
-                      ? { color: '#a6a6a6' }
-                      : {}
                   }
+                  className="account-details__form-button-btn"
                 >
-                  {t('accPassitem5')}
-                </p>
-              </li>
-            </ul>
-          </div>
-        </div>
-
-        <div>
-          <div className="mt-[40px]">
-            <SubmitButton
-              onClick={() => navigate('/login')}
-              type="submit"
-              disabled={
-                !passwordConditions.moreThanEight ||
-                !passwordConditions.oneLowerCase ||
-                !passwordConditions.oneUpperCase ||
-                !passwordConditions.oneNumber ||
-                !passwordConditions.noTextFromNameEmail
-              }
-              className="account-details__form-button-btn"
-            >
-              Reset Password
-            </SubmitButton>
+                  Reset Password
+                </SubmitButton>
+              </div>
+            </div>
           </div>
         </div>
       </div>

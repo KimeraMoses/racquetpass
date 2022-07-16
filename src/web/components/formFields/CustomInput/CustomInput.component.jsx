@@ -48,18 +48,27 @@ export const CustomInput = (props) => {
         onClick={props?.onClick}
         type={props?.type}
         onBlur={(e) => {
-          if (props?.input) {
-            props.input.onBlur(e);
-          }
           if (props?.customOnBlur) {
             props?.customOnBlur(e);
+          } else {
+            if (props?.input) {
+              props.input.onBlur(e);
+            }
           }
         }}
         value={props?.value ? props?.value : props?.input?.value}
+        autoCapitalize={props?.autoCapitalize ? props?.autoCapitalize : 'words'}
+        tabIndex={props?.tabIndex}
+        onKeyDown={props?.onKeyDown}
+        min={props?.min}
+        title={props?.title}
+        inputMode={props?.inputMode}
+        pattern={props?.pattern}
         onChange={(e) => {
-          props?.input?.onChange(e);
           if (props?.customOnChange) {
             props?.customOnChange(e);
+          } else {
+            props?.input?.onChange(e);
           }
         }}
         ref={(input) => {

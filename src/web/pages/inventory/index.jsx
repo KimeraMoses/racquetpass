@@ -53,9 +53,13 @@ let Inventory = ({ t, change }) => {
           />
         );
       case 'add':
-        return <AddForm t={t} setCurrentScreen={setCurrentScreen} />;
+        return (
+          <AddForm t={t} setCurrentScreen={setCurrentScreen} change={change} />
+        );
       case 'edit':
-        return <EditForm t={t} setCurrentScreen={setCurrentScreen} />;
+        return (
+          <EditForm t={t} setCurrentScreen={setCurrentScreen} change={change} />
+        );
       case 'detail':
         return <ItemDetails t={t} setCurrentScreen={setCurrentScreen} />;
       case 'proshop':

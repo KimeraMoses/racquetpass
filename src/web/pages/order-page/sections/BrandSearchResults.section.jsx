@@ -32,7 +32,7 @@ export function BrandSearchResults({
   };
   return (
     <>
-      <div className="brand-result-o">
+      <div className="brand-result-o max-w-[450px] m-[0_auto]">
         <div className="brand-result-o__search-container">
           <Field
             name="brand-search"
@@ -56,7 +56,7 @@ export function BrandSearchResults({
             brand={{
               name: "I'm bringing my own strings",
               description: ' ',
-              price: '$ 0',
+              price: '$0',
             }}
             main={main}
             cross={cross}
@@ -67,7 +67,7 @@ export function BrandSearchResults({
             brand={{
               name: 'Wilson NXT 16',
               description: 'In stock',
-              price: '$ 9.50',
+              price: '$9.50',
             }}
             main={main}
             cross={cross}
@@ -78,7 +78,7 @@ export function BrandSearchResults({
             brand={{
               name: 'Wilson NXT 16 (Packet)',
               description: 'In stock',
-              price: '$ 18.99',
+              price: '$18.99',
             }}
             main={main}
             cross={cross}
@@ -89,7 +89,7 @@ export function BrandSearchResults({
             brand={{
               name: 'Silicon Cooliostrings (Packet)',
               description: 'In stock',
-              price: '$ 17.99',
+              price: '$17.99',
             }}
             main={main}
             cross={cross}

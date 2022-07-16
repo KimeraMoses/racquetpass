@@ -41,14 +41,18 @@ export const Step4 = ({ back, onExit, setShow }) => {
       <Input
         label="NTRP Rating"
         onChange={(e) => {
-          if (e.target.value < 1.5 || e.target.value > 7.0) {
-            setNtrp(e.target.value);
+          if (
+            e.target.value !== '' &&
+            (e.target.value < 1.5 || e.target.value > 7.0)
+          ) {
             setNtrpError('Please enter a valid NTRP rating');
-            // setUtr('');
+            setNtrp(e.target.value);
           } else {
             setNtrpError('');
             setNtrp(e.target.value);
-            // setUtr('');
+            if (!utr) {
+              setUtrError('');
+            }
           }
         }}
         type="number"
@@ -64,14 +68,18 @@ export const Step4 = ({ back, onExit, setShow }) => {
       <Input
         label="UTR Rating"
         onChange={(e) => {
-          if (e.target.value < 1 || e.target.value > 16.5) {
+          if (
+            e.target.value !== '' &&
+            (e.target.value < 1 || e.target.value > 16.5)
+          ) {
+            setUtrError('Please enter a valid UTR rating');
             setUtr(e.target.value);
-            setUtrError('Please enter a valid NTRP rating');
-            // setNtrp('');
           } else {
             setUtrError('');
             setUtr(e.target.value);
-            // setNtrp('');
+            if (!ntrp) {
+              setNtrpError('');
+            }
           }
         }}
         error={utrError}

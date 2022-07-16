@@ -27,6 +27,23 @@ import './order.styles.scss';
 import { useSelector } from 'react-redux';
 import { VerifyResend } from './sections/VerifyResend.section';
 
+// Phone Validation
+const formats = '(999) 999-9999|(999)999-9999|999-999-9999|9999999999';
+const r = RegExp(
+  '^(' + formats.replace(/([()])/g, '\\$1').replace(/9/g, '\\d') + ')$'
+);
+const phoneValidation = (value) => {
+  if (r.test(value) === true) {
+    if (value.length < 9 || value.length > 14) {
+      return 'Please enter value between 9 and 14';
+    } else {
+      return undefined;
+    }
+  } else {
+    return 'Please enter a valid phone number.';
+  }
+};
+
 let OrderPage = ({ t, handleSubmit, change }) => {
   const [step, setStep] = useState(0);
   const [steps, setSteps] = useState({
@@ -45,6 +62,7 @@ let OrderPage = ({ t, handleSubmit, change }) => {
   const navigate = useNavigate();
 
   const errors = useSelector((state) => state?.form?.signup?.syncErrors);
+  const values = useSelector((state) => state?.form?.signup?.values);
 
   const goToTop = () => {
     window.scrollTo({
@@ -147,12 +165,31 @@ let OrderPage = ({ t, handleSubmit, change }) => {
             change={change}
             scanForward={scanForward}
             backward={backward}
+            setStep={setStep}
+            backFromReview={backFromReview}
+            setBackFromReview={setBackFromReview}
           />
         );
       case 'found':
-        return <ScanSuccess t={t} backward={backward} setStep={setStep} />;
+        return (
+          <ScanSuccess
+            t={t}
+            backward={backward}
+            setStep={setStep}
+            backFromReview={backFromReview}
+            setBackFromReview={setBackFromReview}
+          />
+        );
       case 'notFound':
-        return <ScanNotFound t={t} backward={backward} setStep={setStep} />;
+        return (
+          <ScanNotFound
+            t={t}
+            backward={backward}
+            setStep={setStep}
+            backFromReview={backFromReview}
+            setBackFromReview={setBackFromReview}
+          />
+        );
       default:
         return <>Check current scan</>;
     }
@@ -241,6 +278,8 @@ let OrderPage = ({ t, handleSubmit, change }) => {
             setCross={setCross}
             step={step}
             change={change}
+            backFromReview={backFromReview}
+            setBackFromReview={setBackFromReview}
           />
         );
       case 'search':
@@ -279,11 +318,11 @@ let OrderPage = ({ t, handleSubmit, change }) => {
             change={change}
             setStep={setStep}
             setBackFromReview={setBackFromReview}
-            backFromReview={setBackFromReview}
+            backFromReview={backFromReview}
           />
         );
       case 5:
-        return <VerifyPhone t={t} backward={backward} />;
+        return <VerifyPhone t={t} backward={backward} change={change} />;
       case 6:
         return (
           <ReviewOrder
@@ -310,7 +349,7 @@ let OrderPage = ({ t, handleSubmit, change }) => {
           />
         );
       case 10:
-        return <VerifyResend t={t} setStep={setStep} />;
+        return <VerifyResend t={t} setStep={setStep} change={change} />;
       case 20:
         return <EditRacquet t={t} setStep={setStep} change={change} />;
       default:
@@ -326,7 +365,8 @@ let OrderPage = ({ t, handleSubmit, change }) => {
       step === 20 ||
       done ||
       mainCross.current === 'search' ||
-      strings.current === 'search' ? (
+      strings.current === 'search' ||
+      backFromReview ? (
         <></>
       ) : (
         <Progress steps={steps} />
@@ -342,13 +382,14 @@ let OrderPage = ({ t, handleSubmit, change }) => {
           shop.current === 'find' ||
           shop.current === 'thanks' ||
           mainCross.current === 'search' ||
+          strings.current === 'search' ||
           step === 6 ||
           step === 0 ||
           (step === 1 && scan.current === 'initial') ||
           step === 8 ? (
             <></>
           ) : (
-            <div className="order-page__button-container">
+            <div className="order-page__button-container max-w-[450px] w-full mr-[auto] ml-[auto]">
               <StepButton
                 onClick={() => {
                   if (backFromReview) {
@@ -358,10 +399,26 @@ let OrderPage = ({ t, handleSubmit, change }) => {
                     forward();
                   }
                 }}
-                disabled={step === 0 || errors}
+                disabled={
+                  step === 0 ||
+                  errors ||
+                  (step === 2 && !values?.brand) ||
+                  (step === 3 && !values?.mains && !values?.cross) ||
+                  (step === 4 &&
+                    (!values?.['phone-number'] ||
+                      phoneValidation(values?.['phone-number']) !==
+                        undefined)) ||
+                  (step === 5 &&
+                    (!values?.['verification-code'] ||
+                      values?.['verification-code']?.length !== 6))
+                }
                 type="button"
               >
-                {t('odrNext')}
+                {step === 1 && backFromReview
+                  ? 'Change to this racquet'
+                  : (step === 4 || step === 2 || step === 3) && backFromReview
+                  ? 'Save Changes'
+                  : t('odrNext')}
               </StepButton>
             </div>
           )}

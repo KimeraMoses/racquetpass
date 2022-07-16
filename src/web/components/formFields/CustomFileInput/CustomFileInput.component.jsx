@@ -2,12 +2,14 @@ import { useState } from 'react';
 import './CustomFileInput.styles.scss';
 
 export const FileInput = (props) => {
-  const [image, setImage] = useState();
+  const [image, setImage] = useState('');
 
   const handleChange = (e) => {
+    const [file] = e.target.files;
     if (props.change) {
-      props.change('image', e.target.files[0]);
+      props.change(props?.name, file);
     }
+    setImage(URL.createObjectURL(file));
   };
 
   return (
@@ -22,8 +24,11 @@ export const FileInput = (props) => {
           background: `url(${
             props.background
               ? props.background
+              : image
+              ? image
               : '/img/configureRacquet/camera.png'
           }) no-repeat center`,
+          backgroundSize: image ? 'contain' : 'auto',
         }}
       ></label>
       <input

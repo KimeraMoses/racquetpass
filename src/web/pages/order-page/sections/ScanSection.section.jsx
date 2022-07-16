@@ -8,12 +8,15 @@ import { Heading, Description, Modal } from 'web/components';
 // Styles
 import './ScanSection.styles.scss';
 import { BackButton } from 'web/components/Buttons/BackButton.component';
+import { SubmitButton } from 'web/components/Buttons/SubmitButton.component';
 
 export function ScanSection({
   t,
   scanForward,
   change,
-  setCurrentScreen,
+  setStep,
+  backFromReview,
+  setBackFromReview,
   backward,
 }) {
   const [qrCode, setQrCode] = useState('');
@@ -39,10 +42,21 @@ export function ScanSection({
 
   return (
     <>
-      <div className="scan-section">
+      <div className="scan-section max-w-[450px] m-[0_auto]">
         <div className="scan-section__heading">
-          <BackButton onClick={backward} />
-          <Heading>{t('scanQRHeading')}</Heading>
+          <BackButton
+            onClick={() => {
+              if (backFromReview) {
+                setStep(6);
+                setBackFromReview(false);
+              } else {
+                backward();
+              }
+            }}
+          />
+          <Heading>
+            {backFromReview ? 'Change Racquet' : t('scanQRHeading')}
+          </Heading>
         </div>
         <div className="scan-section__text-container">
           <Description customClass="scan-section__text-container-text">
@@ -131,9 +145,20 @@ export function ScanSection({
             </>
           )}
         </div>
-        <div className="scan-section__description">
+        <div
+          className={`scan-section__description ${
+            !backFromReview ? 'mb-[120px]' : ''
+          }`}
+        >
           <Description>{t('scanQRDesc')}</Description>
         </div>
+        {backFromReview ? (
+          <div className="mt-[40px]">
+            <SubmitButton disabled>Change to this racquet</SubmitButton>
+          </div>
+        ) : (
+          <></>
+        )}
       </div>
     </>
   );

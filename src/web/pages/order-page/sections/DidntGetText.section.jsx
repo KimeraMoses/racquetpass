@@ -9,6 +9,23 @@ import './DidntGetText.styles.scss';
 
 const phone = '(123) 456-7890';
 
+// Phone Validation
+const formats = '(999) 999-9999|(999)999-9999|999-999-9999|9999999999';
+const r = RegExp(
+  '^(' + formats.replace(/([()])/g, '\\$1').replace(/9/g, '\\d') + ')$'
+);
+const phoneValidation = (value) => {
+  if (r.test(value) === true) {
+    if (value.length < 9 || value.length > 14) {
+      return 'Please enter value between 9 and 14';
+    } else {
+      return undefined;
+    }
+  } else {
+    return 'Please enter a valid phone number.';
+  }
+};
+
 export function DidntGetText({
   t,
   backward,
@@ -22,7 +39,7 @@ export function DidntGetText({
   );
   return (
     <>
-      <div className="didnt-get-text">
+      <div className="didnt-get-text max-w-[450px] m-[0_auto]">
         <div className="didnt-get-text__heading">
           <BackButton
             onClick={() => {
@@ -63,7 +80,13 @@ export function DidntGetText({
             label="Phone Number"
             value={phoneNumber}
           />
-          <SubmitButton type="button" onClick={() => setStep(10)}>
+          <SubmitButton
+            type="button"
+            disabled={
+              !phoneNumber || phoneValidation(phoneNumber) !== undefined
+            }
+            onClick={() => setStep(10)}
+          >
             Update Phone Number
           </SubmitButton>
         </div>

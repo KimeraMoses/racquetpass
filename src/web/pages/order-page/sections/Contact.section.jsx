@@ -16,7 +16,6 @@ const required = (value) => (value ? undefined : 'Required');
 
 export function Contact({
   t,
-  backward,
   change,
   backFromReview,
   setStep,
@@ -27,7 +26,7 @@ export function Contact({
   );
   return (
     <>
-      <div className="contact-section-odr">
+      <div className="contact-section-odr max-w-[450px] m-[0_auto]">
         <div className="contact-section-odr__heading">
           <BackButton
             onClick={() => {
@@ -35,19 +34,23 @@ export function Contact({
                 setStep(6);
                 setBackFromReview(false);
               } else {
-                backward();
+                setStep(2);
               }
             }}
           />
           <Heading customClass="contact-section-odr__heading-text">
-            {t('odrStayHeading')}
+            {backFromReview ? 'Edit Contact Info' : t('odrStayHeading')}
           </Heading>
         </div>
-        <div className="contact-section-odr__text-container">
-          <Description customClass="contact-section-odr__text-container-text">
-            {t('odrStayDesc')}
-          </Description>
-        </div>
+        {backFromReview ? (
+          <></>
+        ) : (
+          <div className="contact-section-odr__text-container">
+            <Description customClass="contact-section-odr__text-container-text">
+              {t('odrStayDesc')}
+            </Description>
+          </div>
+        )}
         <div className="contact-section-odr__form-container">
           <Field
             name="first-name"
@@ -69,37 +72,6 @@ export function Contact({
             label="Phone Number"
             value={phoneNumber}
           />
-          {/* <CustomInput
-            name="phone-number"
-            label="Phone Number"
-            value={phoneNumber}
-            type="tel"
-            placeholder="(323)323-3323"
-            customOnBlur={(e) => {
-              setPhoneTouched(true);
-            }}
-            meta={{
-              touched: phoneTouched,
-              error: !phoneNumber
-                ? 'Field is required'
-                : phoneValidation(phoneNumber) !== undefined
-                ? phoneValidation(phoneNumber)
-                : '',
-            }}
-            customOnChange={(e) => {
-              const value = e?.target?.value;
-              if (value && value?.length === 10 && !isNaN(Number(value))) {
-                const formattedNumber = `(${value.substring(
-                  0,
-                  3
-                )})${value?.substring(3, 6)}-${value?.substring(6, 10)}`;
-                change('phone-number', formattedNumber);
-              } else {
-                change('phone-number', value);
-              }
-            }}
-          /> */}
-
           <Description>{t('selectStringContact')}</Description>
         </div>
       </div>

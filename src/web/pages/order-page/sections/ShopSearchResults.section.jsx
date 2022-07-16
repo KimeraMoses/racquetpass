@@ -23,13 +23,13 @@ export function ShopSearchResults({
   }, [inputEl]);
   return (
     <>
-      <div className="shop-result">
+      <div className="shop-result max-w-[450px] m-[0_auto]">
         <div className="shop-result__search-container">
           <Field
             name="shop-search"
             type="text"
             icon="/img/orderpage/search.png"
-            label="Find your pro shop or club by name, city, or state"
+            label="Find pro shop or club"
             noLabel
             setFieldToBeFocused={(input) => {
               inputEl = input;

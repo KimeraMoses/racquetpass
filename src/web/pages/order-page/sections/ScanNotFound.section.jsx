@@ -4,13 +4,28 @@ import { Heading, Description, BackButton } from 'web/components';
 // Styles
 import './ScanNotFound.styles.scss';
 
-export function ScanNotFound({ t, backward }) {
+export function ScanNotFound({
+  t,
+  backward,
+  setStep,
+  backFromReview,
+  setBackFromReview,
+}) {
   return (
     <>
-      <div className="scan-details">
+      <div className="scan-details max-w-[450px] m-[0_auto]">
         <div>
           <div className="scan-details__heading">
-            <BackButton onClick={backward} />
+            <BackButton
+              onClick={() => {
+                if (backFromReview) {
+                  setStep(6);
+                  setBackFromReview(false);
+                } else {
+                  backward();
+                }
+              }}
+            />
             <Heading>{t('scanSuccessHeading')}</Heading>
           </div>
           <div className="scan-details__text-container">

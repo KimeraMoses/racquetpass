@@ -50,15 +50,16 @@ function Details({ t }) {
           </div>
         }
       />
-      <div>
-        <div className="header-row">
-          <MenuButton>
-            <Link to="/tasks/scan">
-              <img alt="Menu Icon" src="../svg/arrowLeft.svg" />
-            </Link>
-          </MenuButton>
-          <h1 className="header-row-heading">Order #312</h1>
-        </div>
+      {/* <div> */}
+      <div className="header-row">
+        <MenuButton>
+          <Link to="/tasks/scan">
+            <img alt="Menu Icon" src="../svg/arrowLeft.svg" />
+          </Link>
+        </MenuButton>
+        <h1 className="header-row-heading">Order #312</h1>
+      </div>
+      <div className="detail-body-container">
         <div className="status-container">
           {complete ? (
             <TaskStatus status>
@@ -72,131 +73,120 @@ function Details({ t }) {
             </TaskStatus>
           )}
         </div>
-        <div className="detail-body-container">
-          <div className="racquet-info">
-            <img className="img" alt="racquet" src="../img/tasks/racquet.png" />
-            <div className="brand">
-              <div className="model">{t('taskOpenedBrand')}</div>
-              <div className="title">{t('taskOpenedBrandTitle')}</div>
-            </div>
+        <div className="racquet-info">
+          <img className="img" alt="racquet" src="../img/tasks/racquet.png" />
+          <div className="brand">
+            <div className="model">{t('taskOpenedBrand')}</div>
+            <div className="title">{t('taskOpenedBrandTitle')}</div>
           </div>
+        </div>
 
-          <div className="string-details-details">
-            <div className="font-semibold text-[24px] text-[#3c3c3c]">
-              Desired String Settings
-            </div>
-            <div className="grid grid-cols-[3fr_1fr] mb-[0px]">
-              <div>
-                <div className="string-label">
-                  {t('taskScannedMainsHeading')}
-                </div>
-                <div className="string-desc-details">
-                  Luxilon Alu Rough 1.6 G
-                </div>
-              </div>
-              <div>
-                <div className="string-label">Tension</div>
-                <div className="string-desc-details">42 lbs</div>
-              </div>
-              <div className="col-span-full text-[12px] text-[#545454] font-medium mt-[5px] mb-[20px]">
-                This player should've brought these strings. Contact them if
-                they forgot to or didn't bring enough.
-              </div>
-              <div>
-                <div className="string-label">
-                  {t('taskScannedCrossesHeading')}
-                </div>
-                <div className="string-desc-details">
-                  Luxilon Alu Rough 1.6 G
-                </div>
-              </div>
-              <div>
-                <div className="string-label">Tension</div>
-                <div className="string-desc-details">42 lbs</div>
-              </div>
-              <div className="col-span-full text-[12px] text-[#545454] font-medium mt-[5px] mb-[20px]">
-                This player should've brought these strings. Contact them if
-                they forgot to or didn't bring enough.
-              </div>
-            </div>
+        <div className="string-details-details">
+          <div className="font-semibold text-[24px] text-[#3c3c3c]">
+            Desired String Settings
           </div>
-
-          <div className="player-details">
-            <div className="title-row">
-              <div className="title">{t('taskOpenedPlayerTitle')}</div>
+          <div className="grid grid-cols-[3fr_1fr] mb-[0px]">
+            <div>
+              <div className="string-label">{t('taskScannedMainsHeading')}</div>
+              <div className="string-desc-details">Luxilon Alu Rough 1.6 G</div>
             </div>
-            <div className="player-label">
-              {t('taskOpenedPlayerNameHeading')}
+            <div>
+              <div className="string-label">Tension</div>
+              <div className="string-desc-details">42 lbs</div>
             </div>
-            <div className="player-desc-details">
-              {t('taskOpenedPlayerName')}
+            <div className="col-span-full text-[12px] text-[#545454] font-medium mt-[5px] mb-[20px]">
+              This player should've brought these strings. Contact them if they
+              forgot to or didn't bring enough.
             </div>
-            <div className="mt-[8px] text-[#545454] text-[12px] font-medium">
-              If this is missing from the racquet's QR sticker, make sure to
-              write it in.
-            </div>
-            <div className="player-label mt-[14px]">
-              {t('taskOpenedPlayerPhoneHeading')}
-            </div>
-            <div className="player-desc text-[#304FFE]">
-              <a href="/">{t('taskOpenedPlayerPhone')}</a>
-            </div>
-          </div>
-
-          <div className="string-details-details">
-            <div className="font-semibold text-[24px] text-[#3c3c3c]">
-              Order Details
-            </div>
-            <div className="grid grid-cols-[1fr_1fr] mb-[0px]">
-              <div>
-                <div className="string-label">Order Number</div>
-                <div className="string-desc-details">312</div>
+            <div>
+              <div className="string-label">
+                {t('taskScannedCrossesHeading')}
               </div>
-
-              <div>
-                <div className="string-label">Price</div>
-                <div className="string-desc-details">$50.00</div>
-              </div>
+              <div className="string-desc-details">Luxilon Alu Rough 1.6 G</div>
+            </div>
+            <div>
+              <div className="string-label">Tension</div>
+              <div className="string-desc-details">42 lbs</div>
+            </div>
+            <div className="col-span-full text-[12px] text-[#545454] font-medium mt-[5px] mb-[20px]">
+              This player should've brought these strings. Contact them if they
+              forgot to or didn't bring enough.
             </div>
           </div>
         </div>
-      </div>
 
-      <div>
-        {complete && !justCompleted ? (
-          <div
-            className="text-[16px] text-[#304fee] font-semibold text-center mt-[40px]"
-            onClick={() => setShow(true)}
-          >
-            Tap here if you made a mistake stringing this racquet
+        <div className="player-details">
+          <div className="title-row">
+            <div className="title">{t('taskOpenedPlayerTitle')}</div>
           </div>
-        ) : complete && justCompleted ? (
-          <div className="just-completed-box flex items-center gap-[14px] mt-[40px]">
-            <div className="just-completed-box__text">
-              Completed task and notified Rafael Nadal
+          <div className="player-label">{t('taskOpenedPlayerNameHeading')}</div>
+          <div className="player-desc-details">{t('taskOpenedPlayerName')}</div>
+          <div className="mt-[8px] text-[#545454] text-[12px] font-medium">
+            If this is missing from the racquet's QR sticker, make sure to write
+            it in.
+          </div>
+          <div className="player-label mt-[14px]">
+            {t('taskOpenedPlayerPhoneHeading')}
+          </div>
+          <div className="player-desc text-[#304FFE]">
+            <a href="tel:(123) 456-7890">(123) 456-7890</a>
+          </div>
+        </div>
+
+        <div className="string-details-details">
+          <div className="font-semibold text-[24px] text-[#3c3c3c]">
+            Order Details
+          </div>
+          <div className="grid grid-cols-[1fr_1fr] mb-[0px]">
+            <div>
+              <div className="string-label">Order Number</div>
+              <div className="string-desc-details">312</div>
             </div>
+
+            <div>
+              <div className="string-label">Price</div>
+              <div className="string-desc-details">$50.00</div>
+            </div>
+          </div>
+        </div>
+
+        <div>
+          {complete && !justCompleted ? (
             <div
-              className="just-completed-box__undo"
-              onClick={() => setComplete(false)}
+              className="text-[16px] text-[#304fee] font-semibold text-center mt-[40px]"
+              onClick={() => setShow(true)}
             >
-              Undo
+              Tap here if you made a mistake stringing this racquet
             </div>
-          </div>
-        ) : (
-          <SubmitButton
-            className="mt-[40px]"
-            onClick={() => {
-              setComplete(true);
-              setJustCompleted(true);
-              setTimeout(() => {
-                setJustCompleted(false);
-              }, 15000);
-            }}
-          >
-            Complete Order
-          </SubmitButton>
-        )}
+          ) : complete && justCompleted ? (
+            <div className="just-completed-box flex items-center gap-[14px] mt-[40px]">
+              <div className="just-completed-box__text">
+                Completed task and notified Rafael Nadal
+              </div>
+              <div
+                className="just-completed-box__undo"
+                onClick={() => setComplete(false)}
+              >
+                Undo
+              </div>
+            </div>
+          ) : (
+            <SubmitButton
+              className="mt-[40px]"
+              onClick={() => {
+                setComplete(true);
+                setJustCompleted(true);
+                setTimeout(() => {
+                  setJustCompleted(false);
+                }, 15000);
+              }}
+            >
+              Complete Order
+            </SubmitButton>
+          )}
+        </div>
       </div>
+      {/* </div> */}
     </div>
   );
 }

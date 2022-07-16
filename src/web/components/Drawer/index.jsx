@@ -115,7 +115,7 @@ export const CustomDrawer = () => {
                   Icon: Logout,
                   active: active === '5',
                   onClick: () => {
-                    navigate('/login');
+                    navigate('/');
                     dispatch({ type: 'HIDE_DRAWER' });
                   },
                 },

@@ -9,22 +9,35 @@ import {
   BackButton,
   CustomInput,
   CustomSelect,
+  CustomPhoneInput,
 } from 'web/components';
 import { StepButton } from 'web/components/Buttons/StepButton.componet';
 
 // Styles
 import './GiveShopInfo.styles.scss';
 
-const required = (value) => (value ? undefined : 'Required');
-const r = /^\s*([A-Z]\w*\s*)*$/;
-const titleCase = (value) => {
-  if (r.test(value) === true) {
-    return undefined;
+// Phone Validation
+const formats = '(999) 999-9999|(999)999-9999|999-999-9999|9999999999';
+const r = RegExp(
+  '^(' + formats.replace(/([()])/g, '\\$1').replace(/9/g, '\\d') + ')$'
+);
+const phoneValidation = (value) => {
+  if (value?.length > 0) {
+    if (r.test(value) === true) {
+      if (value?.length < 9 || value?.length > 14) {
+        return 'Please enter value between 9 and 14 digits.';
+      } else {
+        return undefined;
+      }
+    } else {
+      return 'Please enter a valid phone number.';
+    }
   } else {
-    return 'Please enter shop name in title case';
+    return undefined;
   }
 };
-//
+
+const required = (value) => (value ? undefined : 'Required');
 
 export function GiveShopInfo({ t, setShopCurrent, setStep, change }) {
   const [states, setStates] = useState([]);
@@ -36,16 +49,22 @@ export function GiveShopInfo({ t, setShopCurrent, setStep, change }) {
   }, []);
 
   const errors = useSelector((state) => state?.form?.signup?.syncErrors);
+  const phoneNumber = useSelector(
+    (state) => state?.form?.['signup']?.values?.['shop-phone-number']
+  );
+  const state = useSelector(
+    (state) => state?.form?.['signup']?.values?.['shop-state']
+  );
   return (
     <>
       <div className="find-shop-section">
-        <div>
-          <div className="find-shop-section__heading">
-            <BackButton onClick={() => setShopCurrent('search')} />
-            <Heading customClass="phone-section__heading-text">
-              {t('odrShop')}
-            </Heading>
-          </div>
+        <div className="find-shop-section__heading">
+          <BackButton onClick={() => setShopCurrent('search')} />
+          <Heading customClass="phone-section__heading-text">
+            {t('odrShop')}
+          </Heading>
+        </div>
+        <div className="max-w-[450px] m-[0_auto]">
           <div className="find-shop-section__text-container">
             <Description customClass="find-shop-section__text-container-text">
               {t('odrShopText')}
@@ -57,9 +76,9 @@ export function GiveShopInfo({ t, setShopCurrent, setStep, change }) {
               label="Shop Name"
               type="text"
               component={CustomInput}
-              validate={[required, titleCase]}
+              validate={required}
             />
-            <div className="grid grid-cols-[3fr_1fr] items-center gap-[10px]">
+            <div className="grid grid-cols-[2fr_1fr] items-center gap-[10px]">
               <Field
                 name="shop-city"
                 label="Shop City"
@@ -67,44 +86,41 @@ export function GiveShopInfo({ t, setShopCurrent, setStep, change }) {
                 component={CustomInput}
                 validate={required}
               />
-              <Field
-                name="shopState"
-                label="Shop State"
-                placeholder="Select"
-                validate={required}
-                component={(props) => (
-                  <CustomSelect
-                    {...props}
-                    customOnChange={(option) => {
-                      change('shopState', option?.value);
-                    }}
-                    showInitials
-                  />
-                )}
+              <CustomSelect
+                name="shop-state"
                 options={states}
+                label="State"
+                placeholder="Select"
+                customOnChange={(option) => {
+                  change('shop-state', option?.value);
+                }}
+                showInitials
               />
             </div>
-            <Field
-              name="phone-number"
+            <CustomPhoneInput
+              change={change}
+              name="shop-phone-number"
               label="Your Phone Number (Optional)"
-              type="number"
-              component={CustomInput}
+              value={phoneNumber}
+              optional
             />
           </div>
           <Description customClass="find-shop-section__form-text">
             {t('odrMsg')}
           </Description>
-        </div>
-        <div className="find-shop-section__button">
-          <StepButton
-            className="find-shop-section__button-btn"
-            disabled={errors}
-            onClick={() => {
-              setShopCurrent('thanks');
-            }}
-          >
-            Submit Form
-          </StepButton>
+          <div className="find-shop-section__button mt-[50px]">
+            <StepButton
+              className="find-shop-section__button-btn"
+              disabled={
+                errors || !state || phoneValidation(phoneNumber) !== undefined
+              }
+              onClick={() => {
+                setShopCurrent('thanks');
+              }}
+            >
+              Submit Form
+            </StepButton>
+          </div>
         </div>
       </div>
     </>

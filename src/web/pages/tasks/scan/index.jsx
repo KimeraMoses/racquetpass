@@ -43,64 +43,66 @@ let Scan = ({ t, scanForward, change, backward }) => {
           <BackButton onClick={() => navigate('/tasks')} />
           <Heading>Scan QR Code</Heading>
         </div>
-        <div
-          className="task-scan-section__image-container"
-          onClick={() => {
-            setQrScanner((qrScanner) => !qrScanner);
-            setPermissionsDenied(false);
-          }}
-        >
-          {qrScanner && !permissionsDenied ? (
-            <>
-              <BarcodeScannerComponent
-                width={500}
-                height={500}
-                onError={(err) => {
-                  console.log(err?.name);
-                  if (err.name === 'NotAllowedError') {
-                    setPermissionsDenied(true);
-                  }
-                }}
-                onUpdate={(err, result) => {
-                  if (result) {
-                    setQrCode(result.text);
-                    setQrScanner(false);
-                  } else {
-                    setQrCode('');
-                  }
-                }}
-              />
-              <Field
-                name="raquet-details-from-qr"
-                style={{ visibility: 'hidden' }}
-                component="input"
-              />
-            </>
-          ) : (
-            <>
-              <div></div>
-              {permissionsDenied ? (
-                <div className="px-[30px] text-center text-white text-[24px] font-bold">
-                  Please allow camera permissions and scan again.
-                </div>
-              ) : (
-                <img src="/img/orderpage/card.png" alt="scan" />
-              )}
-              <div className="task-scan-section__image-container-button">
-                {/* <button
+        <div className="max-w-[450px] m-[0_auto]">
+          <div
+            className="task-scan-section__image-container"
+            onClick={() => {
+              setQrScanner((qrScanner) => !qrScanner);
+              setPermissionsDenied(false);
+            }}
+          >
+            {qrScanner && !permissionsDenied ? (
+              <>
+                <BarcodeScannerComponent
+                  width={500}
+                  height={500}
+                  onError={(err) => {
+                    console.log(err?.name);
+                    if (err.name === 'NotAllowedError') {
+                      setPermissionsDenied(true);
+                    }
+                  }}
+                  onUpdate={(err, result) => {
+                    if (result) {
+                      setQrCode(result.text);
+                      setQrScanner(false);
+                    } else {
+                      setQrCode('');
+                    }
+                  }}
+                />
+                <Field
+                  name="raquet-details-from-qr"
+                  style={{ visibility: 'hidden' }}
+                  component="input"
+                />
+              </>
+            ) : (
+              <>
+                <div></div>
+                {permissionsDenied ? (
+                  <div className="px-[30px] text-center text-white text-[24px] font-bold">
+                    Please allow camera permissions and scan again.
+                  </div>
+                ) : (
+                  <img src="/img/orderpage/card.png" alt="scan" />
+                )}
+                <div className="task-scan-section__image-container-button">
+                  {/* <button
                   className="task-scan-section__image-container-button-btn"
                   onClick={() => {
                     setQrScanner((qrScanner) => !qrScanner);
                   }}
                 > */}
-                Scan
-                {/* </button> */}
-              </div>
-            </>
-          )}
-        </div>
-        <div className="task-scan-section__description">
-          <Description>{t('scanQRDesc')}</Description>
+                  Scan
+                  {/* </button> */}
+                </div>
+              </>
+            )}
+          </div>
+          <div className="task-scan-section__description">
+            <Description>{t('scanQRDesc')}</Description>
+          </div>
         </div>
       </div>
     </>
