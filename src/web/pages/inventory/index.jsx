@@ -1,9 +1,7 @@
-import { useEffect, useMemo, useState } from 'react';
-import { withNamespaces } from 'react-i18next';
-import { reduxForm } from 'redux-form';
-import { CustomDrawer } from 'web/components';
+import { useEffect, useMemo, useState } from "react";
+import { withNamespaces } from "react-i18next";
+import { reduxForm } from "redux-form";
 import {
-  InventoryDashboard,
   SearchInventory,
   AddForm,
   EditForm,
@@ -17,11 +15,11 @@ import {
   AddCard,
   AddBank,
   ItemDetails,
-} from './sections';
+} from "./sections";
 
-import './inventory.styles.scss';
-import { useLocation } from '../../../../node_modules/react-router-dom/index';
-import { useDispatch } from 'react-redux';
+import "./inventory.styles.scss";
+import { useLocation } from "../../../../node_modules/react-router-dom/index";
+import { useDispatch } from "react-redux";
 
 function useQuery() {
   const { search } = useLocation();
@@ -32,7 +30,7 @@ let Inventory = ({ t, change }) => {
   // const [showDrawer, setShowDrawer] = useState(false);
   const [isReceive, setIsReceive] = useState(false);
   const query = useQuery();
-  const active = query.get('active');
+  const active = query.get("active");
 
   const [currentScreen, setCurrentScreen] = useState(active);
 
@@ -44,58 +42,58 @@ let Inventory = ({ t, change }) => {
 
   const getCurrentScreen = () => {
     switch (currentScreen) {
-      case 'inventory':
+      case "inventory":
         return (
           <SearchInventory
             t={t}
             setCurrentScreen={setCurrentScreen}
-            setDrawer={() => dispatch({ type: 'SHOW_DRAWER' })}
+            setDrawer={() => dispatch({ type: "SHOW_DRAWER" })}
           />
         );
-      case 'add':
+      case "add":
         return (
           <AddForm t={t} setCurrentScreen={setCurrentScreen} change={change} />
         );
-      case 'edit':
+      case "edit":
         return (
           <EditForm t={t} setCurrentScreen={setCurrentScreen} change={change} />
         );
-      case 'detail':
+      case "detail":
         return <ItemDetails t={t} setCurrentScreen={setCurrentScreen} />;
-      case 'proshop':
+      case "proshop":
         return (
           <ProShop
             t={t}
             setCurrentScreen={setCurrentScreen}
-            setDrawer={() => dispatch({ type: 'SHOW_DRAWER' })}
+            setDrawer={() => dispatch({ type: "SHOW_DRAWER" })}
           />
         );
-      case 'editShop':
+      case "editShop":
         return (
           <EditShop t={t} setCurrentScreen={setCurrentScreen} change={change} />
         );
-      case 'editShopName':
+      case "editShopName":
         return <RequestChange t={t} setCurrentScreen={setCurrentScreen} />;
-      case 'editShopAddress':
+      case "editShopAddress":
         return (
           <RequestChange t={t} setCurrentScreen={setCurrentScreen} isAddress />
         );
-      case 'modifyShopName':
+      case "modifyShopName":
         return <CancelRequest t={t} setCurrentScreen={setCurrentScreen} />;
-      case 'modifyShopAddress':
+      case "modifyShopAddress":
         return (
           <CancelRequest t={t} setCurrentScreen={setCurrentScreen} isAddress />
         );
-      case 'payment':
+      case "payment":
         return (
           <SetupPayment
             t={t}
             setCurrentScreen={setCurrentScreen}
-            setDrawer={() => dispatch({ type: 'SHOW_DRAWER' })}
+            setDrawer={() => dispatch({ type: "SHOW_DRAWER" })}
             setIsReceive={setIsReceive}
           />
         );
-      case 'choose':
+      case "choose":
         return (
           <Choose
             t={t}
@@ -103,16 +101,16 @@ let Inventory = ({ t, change }) => {
             isReceive={isReceive}
           />
         );
-      case 'addCard':
+      case "addCard":
         return <AddCard t={t} setCurrentScreen={setCurrentScreen} />;
-      case 'addBank':
+      case "addBank":
         return <AddBank t={t} setCurrentScreen={setCurrentScreen} />;
       default:
         return (
           <SearchInventory
             t={t}
             setCurrentScreen={setCurrentScreen}
-            setDrawer={() => dispatch({ type: 'SHOW_DRAWER' })}
+            setDrawer={() => dispatch({ type: "SHOW_DRAWER" })}
           />
         );
     }
@@ -138,7 +136,7 @@ const onSubmit = (values, dispatch) => {
 
 Inventory = reduxForm({
   // a unique name for the form
-  form: 'inventory',
+  form: "inventory",
   onSubmit,
 })(Inventory);
 

@@ -1,20 +1,19 @@
-import { useEffect, useState } from 'react';
-import { Field } from 'redux-form';
-import BarcodeScannerComponent from 'react-qr-barcode-scanner';
-import { Link } from 'react-router-dom';
+import { useEffect, useState } from "react";
+import { Field } from "redux-form";
+import BarcodeScannerComponent from "react-qr-barcode-scanner";
 // Custom Components
-import { Heading, Description } from 'web/components';
+import { Heading, Description } from "web/components";
 
 // Styles
-import './ScanSection.styles.scss';
+import "./ScanSection.styles.scss";
 
 export function ScanSection({ t, setRacquetFound, setStep, change }) {
-  const [qrCode, setQrCode] = useState('');
+  const [qrCode, setQrCode] = useState("");
   const [qrScanner, setQrScanner] = useState(false);
 
   useEffect(() => {
     if (qrCode) {
-      change('raquet-details-from-qr', qrCode);
+      change("raquet-details-from-qr", qrCode);
       // TODO: setup with backend api if racquet not found
       setRacquetFound(true);
       setStep(1);
@@ -25,7 +24,7 @@ export function ScanSection({ t, setRacquetFound, setStep, change }) {
     <>
       <div className="owa-scan-section">
         <div className="owa-scan-section__heading">
-          <Heading>{t('taskScanHeading')}</Heading>
+          <Heading>{t("taskScanHeading")}</Heading>
         </div>
         {/* <div className="owa-scan-section__text-container">
           <Description customClass="owa-scan-section__text-container-text">
@@ -47,12 +46,12 @@ export function ScanSection({ t, setRacquetFound, setStep, change }) {
                   if (result) {
                     setQrCode(result.text);
                     setQrScanner(false);
-                  } else setQrCode('');
+                  } else setQrCode("");
                 }}
               />
               <Field
                 name="raquet-details-from-qr"
-                style={{ visibility: 'hidden' }}
+                style={{ visibility: "hidden" }}
                 component="input"
               />
             </>
@@ -74,7 +73,7 @@ export function ScanSection({ t, setRacquetFound, setStep, change }) {
           )}
         </div>
         <div className="owa-scan-section__text">
-          <Description>{t('odrWithoutScanTxt')}</Description>
+          <Description>{t("odrWithoutScanTxt")}</Description>
         </div>
       </div>
     </>

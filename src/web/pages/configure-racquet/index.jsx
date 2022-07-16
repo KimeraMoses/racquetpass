@@ -1,7 +1,6 @@
-import { useEffect, useState } from 'react';
-import { reduxForm } from 'redux-form';
-import { useNavigate } from 'react-router-dom';
-import { withNamespaces } from 'react-i18next';
+import { useEffect, useState } from "react";
+import { reduxForm } from "redux-form";
+import { withNamespaces } from "react-i18next";
 
 import {
   Locker,
@@ -12,17 +11,17 @@ import {
   EditRacquetInfo,
   EditStringInfo,
   ReviewRacquet,
-} from './sections';
+} from "./sections";
 
-import './configure-racquet.styles.scss';
-import { Modal, Progress } from 'web/components/index';
-import { StepButton } from 'web/components/Buttons/StepButton.componet';
+import "./configure-racquet.styles.scss";
+import { Modal, Progress } from "web/components/index";
+import { StepButton } from "web/components/Buttons/StepButton.componet";
 
-function ConfigureRacquet({ t, handleSubmit, change }) {
+let ConfigureRacquet = ({ t, handleSubmit, change }) => {
   const [step, setStep] = useState(1);
   const [steps, setSteps] = useState({
-    active: '',
-    content: ['Basic Info', 'Strings'],
+    active: "",
+    content: ["Basic Info", "Strings"],
   });
   const [hybrid, setHybrid] = useState(false);
   const [strings, setStrings] = useState(false);
@@ -38,12 +37,12 @@ function ConfigureRacquet({ t, handleSubmit, change }) {
     switch (step) {
       case 3:
         setSteps((s) => {
-          return { ...s, active: 'Basic Info' };
+          return { ...s, active: "Basic Info" };
         });
         break;
       case 4:
         setSteps((s) => {
-          return { ...s, active: 'Strings' };
+          return { ...s, active: "Strings" };
         });
         break;
       default:
@@ -56,7 +55,7 @@ function ConfigureRacquet({ t, handleSubmit, change }) {
       <form
         onSubmit={handleSubmit}
         className={`configure-racquet ${
-          step === 3 || step === 4 ? 'configure-racquet-steps' : ''
+          step === 3 || step === 4 ? "configure-racquet-steps" : ""
         }`}
       >
         <Modal showModal={showModal} handleShow={handleShow} />
@@ -119,13 +118,13 @@ function ConfigureRacquet({ t, handleSubmit, change }) {
               outlined
               type="button"
             >
-              {t('odrBack')}
-            </StepButton>{' '}
+              {t("odrBack")}
+            </StepButton>{" "}
             <StepButton
               onClick={() => setStep((step) => step + 1)}
               type="button"
             >
-              {step === 3 ? t('odrNext') : 'Create Racquet'}
+              {step === 3 ? t("odrNext") : "Create Racquet"}
             </StepButton>
           </div>
         ) : (
@@ -134,7 +133,7 @@ function ConfigureRacquet({ t, handleSubmit, change }) {
       </form>
     </>
   );
-}
+};
 
 const onSubmit = (values, dispatch) => {
   // dispatch(    // your submit action //      );
@@ -143,7 +142,7 @@ const onSubmit = (values, dispatch) => {
 
 ConfigureRacquet = reduxForm({
   // a unique name for the form
-  form: 'racquetDetails',
+  form: "racquetDetails",
   onSubmit,
 })(ConfigureRacquet);
 

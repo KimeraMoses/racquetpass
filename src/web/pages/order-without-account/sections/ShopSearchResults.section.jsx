@@ -1,14 +1,13 @@
-import { useEffect, useRef } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
-import { Field } from 'redux-form';
+import { useEffect, useRef } from "react";
+import { Link } from "react-router-dom";
+import { Field } from "redux-form";
 // Custom Components
-import { Description, CustomInput, SearchCard } from 'web/components';
+import { Description, CustomInput, SearchCard } from "web/components";
 
 // Styles
-import './ShopSearchResults.styles.scss';
+import "./ShopSearchResults.styles.scss";
 
 export function ShopSearchResults({ t, setStep, change }) {
-  const navigate = useNavigate();
   let inputEl = useRef(null);
   useEffect(() => {
     inputEl.focus();
@@ -35,8 +34,8 @@ export function ShopSearchResults({ t, setStep, change }) {
         <div className="shop-result__results">
           <SearchCard
             shop={{
-              name: 'Joe’s Tennis Pro',
-              address: '123 Main Street, City, State',
+              name: "Joe’s Tennis Pro",
+              address: "123 Main Street, City, State",
             }}
             onClick={() => {
               setStep(5);
@@ -45,8 +44,8 @@ export function ShopSearchResults({ t, setStep, change }) {
           />
           <SearchCard
             shop={{
-              name: 'Joe’s Tennis Pro',
-              address: '123 Main Street, City, State',
+              name: "Joe’s Tennis Pro",
+              address: "123 Main Street, City, State",
             }}
             onClick={() => {
               setStep(5);
@@ -55,8 +54,8 @@ export function ShopSearchResults({ t, setStep, change }) {
           />
           <SearchCard
             shop={{
-              name: 'Joe’s Tennis Pro',
-              address: '123 Main Street, City, State',
+              name: "Joe’s Tennis Pro",
+              address: "123 Main Street, City, State",
             }}
             onClick={() => {
               setStep(5);
@@ -66,10 +65,10 @@ export function ShopSearchResults({ t, setStep, change }) {
         </div>
         <div className="shop-result__account-container">
           <Description customClass="shop-result__account-container-text">
-            {t('odrSearchNF')} &nbsp;
+            {t("odrSearchNF")} &nbsp;
             <Link to="#" onClick={() => setStep(4)}>
               <span className="shop-result__accound-container-text-span">
-                {t('odrSearchLK')}
+                {t("odrSearchLK")}
               </span>
             </Link>
           </Description>

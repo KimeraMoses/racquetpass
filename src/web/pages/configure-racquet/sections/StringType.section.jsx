@@ -1,15 +1,14 @@
-import { Field } from 'redux-form';
+import { Field } from "redux-form";
 
 import {
   Heading,
-  HeadingButton,
   CustomInput,
   Description,
   CustomSwitch,
   InfoButton,
-} from 'web/components';
+} from "web/components";
 
-import './StringType.styles.scss';
+import "./StringType.styles.scss";
 
 export function StringType({ t, setStep, hybrid, setHybrid, handleShow }) {
   const handleChange = (hybrid) => {
@@ -22,12 +21,12 @@ export function StringType({ t, setStep, hybrid, setHybrid, handleShow }) {
           <div className="string-type__header">
             <div className="string-type__header">
               <Heading customClass="string-type__header-heading">
-                {t('configStringHead')}
+                {t("configStringHead")}
               </Heading>
             </div>
           </div>
           <div className="string-type__mains">
-            <Heading>{t('odrMain')}</Heading>
+            <Heading>{t("odrMain")}</Heading>
           </div>
           <div className="string-type__form">
             <Field
@@ -45,7 +44,7 @@ export function StringType({ t, setStep, hybrid, setHybrid, handleShow }) {
             />
           </div>
           <div className="string-type__cross">
-            <Heading>{t('odrcross')}</Heading>
+            <Heading>{t("odrcross")}</Heading>
           </div>
           <div className="string-type__form">
             <Field
@@ -64,7 +63,7 @@ export function StringType({ t, setStep, hybrid, setHybrid, handleShow }) {
           </div>
           <div className="string-type__swtich">
             <Description customClass="string-type__swtich-text">
-              {t('stringDetailsHybrid')}
+              {t("stringDetailsHybrid")}
             </Description>
             <div className="string__swtich-right">
               <CustomSwitch handleChange={handleChange} checked={hybrid} />

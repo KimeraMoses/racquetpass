@@ -1,5 +1,3 @@
-import { Link } from 'react-router-dom';
-
 import {
   BackButton,
   Heading,
@@ -7,9 +5,9 @@ import {
   Description,
   StepButton,
   SubmitButton,
-} from 'web/components';
+} from "web/components";
 
-import './ReviewRacquet.styles.scss';
+import "./ReviewRacquet.styles.scss";
 
 export function ReviewRacquet({ t, setStep }) {
   return (
@@ -23,17 +21,17 @@ export function ReviewRacquet({ t, setStep }) {
                 setStep(4);
               }}
             />
-            <Heading>{t('orderOpenedBrandTitle')}</Heading>
+            <Heading>{t("orderOpenedBrandTitle")}</Heading>
           </div>
           <div className="review__racquet">
             <img src="/img/orderWithoutAccount/racquet.png" alt="racquet" />
             <div className="review__racquet-details">
               <div>
                 <Description customClass="review__racquet-details-heading">
-                  {t('orderOpenedBrand')}
+                  {t("orderOpenedBrand")}
                 </Description>
                 <SubHeading customClass="review__racquet-details-text">
-                  {t('orderOpenedBrandTitle')}
+                  {t("orderOpenedBrandTitle")}
                 </SubHeading>
               </div>
               <div className="review__racquet-details-button">
@@ -42,7 +40,7 @@ export function ReviewRacquet({ t, setStep }) {
                   className="review__racquet-details-button-btn"
                   onClick={() => setStep(6)}
                 >
-                  {t('viewOrderEdit')}
+                  {t("viewOrderEdit")}
                 </StepButton>
               </div>
             </div>
@@ -50,46 +48,46 @@ export function ReviewRacquet({ t, setStep }) {
           <div className="review__racquet-info">
             <div className="review__racquet-info-details">
               <Description customClass="review__racquet-info-details-heading">
-                {t('orderScannedBrandLabel')}
+                {t("orderScannedBrandLabel")}
               </Description>
               <SubHeading customClass="review__racquet-info-details-text">
-                {t('orderScannedBrandName')}
+                {t("orderScannedBrandName")}
               </SubHeading>
             </div>
             <div className="review__racquet-info-details">
               <Description customClass="review__racquet-info-details-heading">
-                {t('orderScannedModelLabel')}
+                {t("orderScannedModelLabel")}
               </Description>
               <SubHeading customClass="review__racquet-info-details-text">
-                {t('orderScannedModelName')}
+                {t("orderScannedModelName")}
               </SubHeading>
             </div>
             <div className="review__racquet-info-details">
               <Description customClass="review__racquet-info-details-heading">
-                {t('orderScannedStringLabel')}
+                {t("orderScannedStringLabel")}
               </Description>
               <SubHeading customClass="review__racquet-info-details-text">
-                {t('orderScannedStringName')}
+                {t("orderScannedStringName")}
               </SubHeading>
             </div>
             <div className="review__racquet-info-details">
               <Description customClass="review__racquet-info-details-heading">
-                {t('createOrderDateLabel')}
+                {t("createOrderDateLabel")}
               </Description>
               <SubHeading customClass="review__racquet-info-details-text">
-                {t('createOrderDate')}
+                {t("createOrderDate")}
               </SubHeading>
             </div>
           </div>
           <div className="review__link">
             <div className="review__link-text" onClick={() => setStep(1)}>
-              {t('createOrderDelete')}
+              {t("createOrderDelete")}
             </div>
           </div>
         </div>
         <div className="review__button">
           <SubmitButton onClick={() => setStep(1)}>
-            {t('orderScannedComplete')}
+            {t("orderScannedComplete")}
           </SubmitButton>
         </div>
       </div>

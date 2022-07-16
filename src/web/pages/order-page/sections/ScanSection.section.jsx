@@ -1,14 +1,14 @@
-import { useEffect, useState } from 'react';
-import { Field } from 'redux-form';
-import BarcodeScannerComponent from 'react-qr-barcode-scanner';
-import { Link } from 'react-router-dom';
+import { useEffect, useState } from "react";
+import { Field } from "redux-form";
+import BarcodeScannerComponent from "react-qr-barcode-scanner";
+import { Link } from "react-router-dom";
 // Custom Components
-import { Heading, Description, Modal } from 'web/components';
+import { Heading, Description, Modal } from "web/components";
 
 // Styles
-import './ScanSection.styles.scss';
-import { BackButton } from 'web/components/Buttons/BackButton.component';
-import { SubmitButton } from 'web/components/Buttons/SubmitButton.component';
+import "./ScanSection.styles.scss";
+import { BackButton } from "web/components/Buttons/BackButton.component";
+import { SubmitButton } from "web/components/Buttons/SubmitButton.component";
 
 export function ScanSection({
   t,
@@ -19,11 +19,13 @@ export function ScanSection({
   setBackFromReview,
   backward,
 }) {
-  const [qrCode, setQrCode] = useState('');
+  const [qrCode, setQrCode] = useState("");
   const [qrScanner, setQrScanner] = useState(false);
-  const [raquetFound, setRacquetFound] = useState(true);
+  // const [raquetFound, setRacquetFound] = useState(true);
   const [showModal, setShowModal] = useState(false);
   const [permissionsDenied, setPermissionsDenied] = useState(false);
+
+  const raquetFound = true;
 
   const handleShow = () => {
     setShowModal((prev) => {
@@ -32,7 +34,7 @@ export function ScanSection({
   };
   useEffect(() => {
     if (qrCode) {
-      change('raquet-details-from-qr', qrCode);
+      change("raquet-details-from-qr", qrCode);
       // TODO: Update logic with RaquetWith with Backend
       scanForward(raquetFound);
     }
@@ -55,12 +57,12 @@ export function ScanSection({
             }}
           />
           <Heading>
-            {backFromReview ? 'Change Racquet' : t('scanQRHeading')}
+            {backFromReview ? "Change Racquet" : t("scanQRHeading")}
           </Heading>
         </div>
         <div className="scan-section__text-container">
           <Description customClass="scan-section__text-container-text">
-            {t('scanQRText')}
+            {t("scanQRText")}
           </Description>
         </div>
         <div className="scan-section__link">
@@ -86,7 +88,7 @@ export function ScanSection({
             to="#"
             className="scan-section__link-txt"
           >
-            {t('scanQRLinkTxt')}
+            {t("scanQRLinkTxt")}
           </Link>
         </div>
         <div
@@ -103,7 +105,7 @@ export function ScanSection({
                 height={500}
                 onError={(err) => {
                   console.log(err?.name);
-                  if (err.name === 'NotAllowedError') {
+                  if (err.name === "NotAllowedError") {
                     setPermissionsDenied(true);
                   }
                 }}
@@ -112,13 +114,13 @@ export function ScanSection({
                     setQrCode(result.text);
                     setQrScanner(false);
                   } else {
-                    setQrCode('');
+                    setQrCode("");
                   }
                 }}
               />
               <Field
                 name="raquet-details-from-qr"
-                style={{ visibility: 'hidden' }}
+                style={{ visibility: "hidden" }}
                 component="input"
               />
             </>
@@ -147,10 +149,10 @@ export function ScanSection({
         </div>
         <div
           className={`scan-section__description ${
-            !backFromReview ? 'mb-[120px]' : ''
+            !backFromReview ? "mb-[120px]" : ""
           }`}
         >
-          <Description>{t('scanQRDesc')}</Description>
+          <Description>{t("scanQRDesc")}</Description>
         </div>
         {backFromReview ? (
           <div className="mt-[40px]">

@@ -1,15 +1,16 @@
-import React, { useState } from 'react';
-import { withNamespaces } from 'react-i18next';
-import { useNavigate } from 'react-router-dom';
+import React, { useEffect } from "react";
+import { withNamespaces } from "react-i18next";
+// import { useNavigate } from "react-router-dom";
 import {
   HeadingButton,
   CustomButton,
   TaskCard,
-  CustomDrawer,
-} from 'web/components';
-import { Link } from 'react-router-dom';
-import './index.styles.scss';
-import { useDispatch } from 'react-redux';
+  // CustomDrawer,
+} from "web/components";
+import { Link } from "react-router-dom";
+import "./index.styles.scss";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchAllOrders } from "web/store/Actions/businessActions";
 
 const dueToday = [];
 for (let i = 0; i <= 3; i++) {
@@ -40,18 +41,23 @@ for (let i = 0; i <= 9; i++) {
 
 function Tasks({ t }) {
   // const [showDrawer, setShowDrawer] = useState(false);
+  const authToken = useSelector((state) => state.auth.token);
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(fetchAllOrders(authToken));
+  }, [authToken]);
   return (
     <div className="tasks-container">
       {/* <CustomDrawer show={showDrawer} setShow={setShowDrawer} /> */}
       <div className="header-row">
         <HeadingButton
           drawer
-          onClick={() => dispatch({ type: 'SHOW_DRAWER' })}
+          onClick={() => dispatch({ type: "SHOW_DRAWER" })}
         />
-        <h1 className="header-row-heading">{t('taskHeading')}</h1>
+        <h1 className="header-row-heading">{t("taskHeading")}</h1>
         <CustomButton size="sm" btn="white">
-          <Link to="/Tasks/Scan">{t('taskScan')}</Link>
+          <Link to="/Tasks/Scan">{t("taskScan")}</Link>
         </CustomButton>
       </div>
       <div className="tasks-body">
@@ -59,7 +65,7 @@ function Tasks({ t }) {
           <div className="task-row">
             <p className="title">Your Orders</p>
             <p className="link" onClick={showCompletedTasks}>
-              {t('taskShowCompleted')}
+              {t("taskShowCompleted")}
             </p>
           </div>
           <p className="mb-[35px] text-[#545454] text-[18px]">
@@ -67,13 +73,14 @@ function Tasks({ t }) {
             is associated with.
           </p>
           <div className="task-row">
-            <p className="tasks-info">{t('taskDueToday')}</p>
+            <p className="tasks-info">{t("taskDueToday")}</p>
             <div className="badge">{dueToday?.length}</div>
           </div>
           <div className="cards-container">
             {dueToday?.map((task) => {
               return (
                 <TaskCard
+                  key={task.title}
                   title={task?.title}
                   desc={task?.description}
                   name={task?.player}
@@ -82,13 +89,14 @@ function Tasks({ t }) {
             })}
           </div>
           <div className="task-row">
-            <p className="tasks-info">{t('taskDueWeek')}</p>
+            <p className="tasks-info">{t("taskDueWeek")}</p>
             <div className="badge">{dueThisWeek?.length}</div>
           </div>
           <div className="cards-container">
             {dueThisWeek?.map((task) => {
               return (
                 <TaskCard
+                  key={task.title}
                   title={task?.title}
                   desc={task?.description}
                   name={task?.player}
@@ -99,9 +107,9 @@ function Tasks({ t }) {
         </div>
         <div id="completed-tasks">
           <div className="task-row">
-            <p className="title">{t('taskCompleted')}</p>
+            <p className="title">{t("taskCompleted")}</p>
             <div className="link" onClick={showDueTasks}>
-              {t('taskHideCompleted')}
+              {t("taskHideCompleted")}
             </div>
           </div>
           <p className="mb-[35px] text-[#545454] text-[18px]">
@@ -129,12 +137,12 @@ function Tasks({ t }) {
   );
 }
 function showCompletedTasks() {
-  document.getElementById('due-tasks').style.display = 'none';
-  document.getElementById('completed-tasks').style.display = 'block';
+  document.getElementById("due-tasks").style.display = "none";
+  document.getElementById("completed-tasks").style.display = "block";
 }
 function showDueTasks() {
-  document.getElementById('due-tasks').style.display = 'block';
-  document.getElementById('completed-tasks').style.display = 'none';
+  document.getElementById("due-tasks").style.display = "block";
+  document.getElementById("completed-tasks").style.display = "none";
 }
 
 export default withNamespaces()(Tasks);

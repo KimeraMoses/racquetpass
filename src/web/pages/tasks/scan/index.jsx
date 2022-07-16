@@ -1,38 +1,38 @@
-import { useEffect, useState } from 'react';
-import { Field, reduxForm } from 'redux-form';
-import BarcodeScannerComponent from 'react-qr-barcode-scanner';
-import { Link } from 'react-router-dom';
+import { useEffect, useState } from "react";
+import { Field, reduxForm } from "redux-form";
+import BarcodeScannerComponent from "react-qr-barcode-scanner";
+// import { Link } from 'react-router-dom';
 // Custom Components
-import { Heading, Description, Modal } from 'web/components';
+import { Heading, Description } from "web/components";
 
 // Styles
-import { BackButton } from 'web/components/Buttons/BackButton.component';
-import { withNamespaces } from 'react-i18next';
-import { useNavigate } from 'react-router-dom';
-import './index.styles.scss';
+import { BackButton } from "web/components/Buttons/BackButton.component";
+import { withNamespaces } from "react-i18next";
+import { useNavigate } from "react-router-dom";
+import "./index.styles.scss";
 
-let Scan = ({ t, scanForward, change, backward }) => {
-  const [qrCode, setQrCode] = useState('');
+let Scan = ({ t, scanForward, change }) => {
+  const [qrCode, setQrCode] = useState("");
   const [qrScanner, setQrScanner] = useState(false);
-  const [raquetFound, setRacquetFound] = useState(true);
-  const [showModal, setShowModal] = useState(false);
+  // const [raquetFound, setRacquetFound] = useState(true);
+  // const [showModal, setShowModal] = useState(false);
   const [permissionsDenied, setPermissionsDenied] = useState(false);
 
   const navigate = useNavigate();
 
-  const handleShow = () => {
-    setShowModal((prev) => {
-      return !prev;
-    });
-  };
+  // const handleShow = () => {
+  //   setShowModal((prev) => {
+  //     return !prev;
+  //   });
+  // };
   useEffect(() => {
     if (qrCode) {
-      change('raquet-details-from-qr', qrCode);
+      change("raquet-details-from-qr", qrCode);
       // TODO: Update logic with RaquetWith with Backend
       // scanForward(raquetFound);
-      navigate('/Tasks/Details');
+      navigate("/Tasks/Details");
     }
-  }, [qrCode, change, raquetFound, scanForward]);
+  }, [qrCode, change, scanForward, navigate]);
 
   console.log(permissionsDenied);
 
@@ -40,7 +40,7 @@ let Scan = ({ t, scanForward, change, backward }) => {
     <>
       <div className="task-scan-section">
         <div className="task-scan-section__heading">
-          <BackButton onClick={() => navigate('/tasks')} />
+          <BackButton onClick={() => navigate("/tasks")} />
           <Heading>Scan QR Code</Heading>
         </div>
         <div className="max-w-[450px] m-[0_auto]">
@@ -58,7 +58,7 @@ let Scan = ({ t, scanForward, change, backward }) => {
                   height={500}
                   onError={(err) => {
                     console.log(err?.name);
-                    if (err.name === 'NotAllowedError') {
+                    if (err.name === "NotAllowedError") {
                       setPermissionsDenied(true);
                     }
                   }}
@@ -67,13 +67,13 @@ let Scan = ({ t, scanForward, change, backward }) => {
                       setQrCode(result.text);
                       setQrScanner(false);
                     } else {
-                      setQrCode('');
+                      setQrCode("");
                     }
                   }}
                 />
                 <Field
                   name="raquet-details-from-qr"
-                  style={{ visibility: 'hidden' }}
+                  style={{ visibility: "hidden" }}
                   component="input"
                 />
               </>
@@ -101,7 +101,7 @@ let Scan = ({ t, scanForward, change, backward }) => {
             )}
           </div>
           <div className="task-scan-section__description">
-            <Description>{t('scanQRDesc')}</Description>
+            <Description>{t("scanQRDesc")}</Description>
           </div>
         </div>
       </div>
@@ -116,7 +116,7 @@ const onSubmit = (values, dispatch) => {
 
 Scan = reduxForm({
   // a unique name for the form
-  form: 'task-scan',
+  form: "task-scan",
   onSubmit,
 })(Scan);
 

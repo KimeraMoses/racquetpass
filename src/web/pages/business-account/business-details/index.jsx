@@ -1,23 +1,24 @@
-import React, { useEffect, useState } from 'react';
-import { reduxForm, Field } from 'redux-form';
-import { Link, useNavigate } from 'react-router-dom';
-import { withNamespaces } from 'react-i18next';
+import React, { useEffect, useState } from "react";
+import { reduxForm, Field } from "redux-form";
+import { Link, useNavigate } from "react-router-dom";
+import { withNamespaces } from "react-i18next";
 import {
   MenuButton,
   CustomInput,
   CustomZIPInput,
   // CustomButton,
   CustomSelect,
-} from 'web/components';
-import './index.styles.scss';
-import { SubmitButton } from 'web/components/Buttons/SubmitButton.component';
-import { useSelector } from 'react-redux';
+} from "web/components";
+import "./index.styles.scss";
+import { SubmitButton } from "web/components/Buttons/SubmitButton.component";
+import { useDispatch, useSelector } from "react-redux";
+import { saveEnteredValues } from "web/store/Slices/businessSlice";
 
-const required = (value) => (value ? undefined : 'This field is required');
+const required = (value) => (value ? undefined : "This field is required");
 // ZIP Validation
 const zipValidation = (value) => {
   if (value?.length !== 5) {
-    return 'Please enter a standard 5 digits zip code';
+    return "Please enter a standard 5 digits zip code";
   } else {
     return undefined;
   }
@@ -25,20 +26,24 @@ const zipValidation = (value) => {
 
 let BusinessDetails = ({ t, change }) => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const errors = useSelector(
-    (state) => state?.form?.['create-business-account-3']?.syncErrors
+    (state) => state?.form?.["create-business-account-3"]?.syncErrors
   );
   const state = useSelector(
-    (state) => state?.form?.['create-business-account-3']
-  )?.values?.['shop-state'];
+    (state) => state?.form?.["create-business-account-3"]
+  )?.values?.["shop-state"];
   const zipCode = useSelector(
-    (state) => state?.form?.['create-business-account-3']?.values?.['zip-code']
+    (state) => state?.form?.["create-business-account-3"]?.values?.["zip-code"]
+  );
+  const values = useSelector(
+    (state) => state?.form?.["create-business-account-3"]?.values
   );
 
   const [states, setStates] = useState([]);
 
   useEffect(() => {
-    fetch('/states.json')
+    fetch("/states.json")
       .then((res) => res.json())
       .then((data) => setStates(data));
   }, []);
@@ -52,12 +57,12 @@ let BusinessDetails = ({ t, change }) => {
           </Link>
         </MenuButton>
         <h1 className="header-row-heading mb-[0px]">
-          {t('businessAccountDetailHeading')}
+          {t("businessAccountDetailHeading")}
         </h1>
       </div>
       <div className="max-w-[450px] m-[0_auto]">
         <div className="business-details-description text-[#545454]">
-          {t('businessAccountDetailDescription')}
+          {t("businessAccountDetailDescription")}
         </div>
         <div className="business-details-body">
           <form className="business-account-form">
@@ -90,7 +95,7 @@ let BusinessDetails = ({ t, change }) => {
                   label="State"
                   placeholder="Select"
                   customOnChange={(option) => {
-                    change('shop-state', option?.value);
+                    change("shop-state", option?.value);
                   }}
                   showInitials
                 />
@@ -113,10 +118,11 @@ let BusinessDetails = ({ t, change }) => {
                   zipValidation(zipCode) !== undefined
                 }
                 onClick={() => {
-                  navigate('/BusinessAccount/CreatePassword');
+                  dispatch(saveEnteredValues(values));
+                  navigate("/BusinessAccount/CreatePassword");
                 }}
               >
-                {t('businessAccountDetailNextBtn')}
+                {t("businessAccountDetailNextBtn")}
               </SubmitButton>
             </div>
           </form>
@@ -133,7 +139,7 @@ const onSubmit = (values, dispatch) => {
 
 BusinessDetails = reduxForm({
   // a unique name for the form
-  form: 'create-business-account-3',
+  form: "create-business-account-3",
   onSubmit,
 })(BusinessDetails);
 

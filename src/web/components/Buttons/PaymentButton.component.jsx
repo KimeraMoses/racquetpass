@@ -1,5 +1,4 @@
-import { useState } from 'react';
-import './PaymentButton.styles.scss';
+import "./PaymentButton.styles.scss";
 
 export const PaymentButton = ({
   children,
@@ -11,10 +10,10 @@ export const PaymentButton = ({
 }) => {
   return (
     <button
-      className={`payment-button ${isDark ? 'payment-button-dark' : ''} ${
-        className ? className : ''
+      className={`payment-button ${isDark ? "payment-button-dark" : ""} ${
+        className ? className : ""
       }
-      ${active ? 'payment-button-active' : ''}
+      ${active ? "payment-button-active" : ""}
       `}
       onClick={handleClick}
       style={style}

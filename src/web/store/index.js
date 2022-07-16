@@ -1,15 +1,16 @@
-import { createStore, applyMiddleware } from 'redux';
-import reducer from './rootReducer';
-import { createLogger } from 'redux-logger';
-import { composeWithDevTools } from 'redux-devtools-extension';
+import { createStore, applyMiddleware } from "redux";
+import reducer from "./rootReducer";
+import thunk from "redux-thunk";
+import { createLogger } from "redux-logger";
+import { composeWithDevTools } from "redux-devtools-extension";
 
 function configureState() {
-  const middleware = [];
-  if (process.env.NODE_ENV === 'development') {
+  const middleware = [thunk];
+  if (process.env.NODE_ENV === "development") {
     middleware.push(createLogger({ collapsed: true }));
   }
   let store;
-  if (process.env.NODE_ENV === 'development') {
+  if (process.env.NODE_ENV === "development") {
     store = createStore(
       reducer,
       composeWithDevTools(applyMiddleware(...middleware))

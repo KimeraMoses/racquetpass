@@ -1,8 +1,7 @@
-import { useEffect, useState } from 'react';
-import { withNamespaces } from 'react-i18next';
-import { reduxForm } from 'redux-form';
-import { StepButton, Progress } from 'web/components';
-import { useNavigate } from 'react-router-dom';
+import { useEffect, useState } from "react";
+import { withNamespaces } from "react-i18next";
+import { reduxForm } from "redux-form";
+import { StepButton, Progress } from "web/components";
 
 import {
   RacquetFound,
@@ -14,24 +13,23 @@ import {
   ScanSection,
   ShopSearchResults,
   GiveShopInfo,
-} from './sections';
+} from "./sections";
 
-import './orderWithoutAccount.styles.scss';
-import { SelectString } from './sections/SelectString.section';
-import { BrandSearchResults } from './sections/BrandSearchResults.section';
-import { SelectStringWithMainCross } from './sections/SelectStringWithMainCross.section';
+import "./orderWithoutAccount.styles.scss";
+import { SelectString } from "./sections/SelectString.section";
+import { BrandSearchResults } from "./sections/BrandSearchResults.section";
+import { SelectStringWithMainCross } from "./sections/SelectStringWithMainCross.section";
 
 let OrderWithoutAccount = ({ t, change }) => {
-  const navigate = useNavigate();
   const [step, setStep] = useState(0);
   const [main, setMain] = useState(false);
   const [cross, setCross] = useState(false);
   const [steps, setSteps] = useState({
-    active: '',
-    content: ['Shop', 'Strings', 'Contact', 'Review'],
+    active: "",
+    content: ["Shop", "Strings", "Contact", "Review"],
   });
-  const [strings, setStrings] = useState({ current: 'initial' });
-  const [mainCross, setMainCross] = useState({ current: 'initial' });
+  const [strings, setStrings] = useState({ current: "initial" });
+  const [mainCross, setMainCross] = useState({ current: "initial" });
 
   const [racquetFound, setRacquetFound] = useState(false);
 
@@ -39,47 +37,47 @@ let OrderWithoutAccount = ({ t, change }) => {
     switch (step) {
       case 1:
         setSteps((s) => {
-          return { ...s, active: 'QR' };
+          return { ...s, active: "QR" };
         });
         break;
       case 2:
         setSteps((s) => {
-          return { ...s, active: 'Shop' };
+          return { ...s, active: "Shop" };
         });
         break;
       case 3:
         setSteps((s) => {
-          return { ...s, active: 'Shop' };
+          return { ...s, active: "Shop" };
         });
         break;
       case 4:
         setSteps((s) => {
-          return { ...s, active: 'Shop' };
+          return { ...s, active: "Shop" };
         });
         break;
       case 5:
         setSteps((s) => {
-          return { ...s, active: 'Strings' };
+          return { ...s, active: "Strings" };
         });
         break;
       case 6:
         setSteps((s) => {
-          return { ...s, active: 'Strings' };
+          return { ...s, active: "Strings" };
         });
         break;
       case 7:
         setSteps((s) => {
-          return { ...s, active: 'Contact' };
+          return { ...s, active: "Contact" };
         });
         break;
       case 8:
         setSteps((s) => {
-          return { ...s, active: 'Contact' };
+          return { ...s, active: "Contact" };
         });
         break;
       case 9:
         setSteps((s) => {
-          return { ...s, active: 'Review' };
+          return { ...s, active: "Review" };
         });
         break;
       default:
@@ -95,7 +93,7 @@ let OrderWithoutAccount = ({ t, change }) => {
 
   const getCurrentStringsScreen = () => {
     switch (strings.current) {
-      case 'initial':
+      case "initial":
         return (
           <SelectString
             t={t}
@@ -104,7 +102,7 @@ let OrderWithoutAccount = ({ t, change }) => {
             step={step}
           />
         );
-      case 'search':
+      case "search":
         return (
           <BrandSearchResults
             t={t}
@@ -123,7 +121,7 @@ let OrderWithoutAccount = ({ t, change }) => {
   };
   const getCurrentMainCross = () => {
     switch (mainCross.current) {
-      case 'initial':
+      case "initial":
         return (
           <SelectStringWithMainCross
             t={t}
@@ -134,7 +132,7 @@ let OrderWithoutAccount = ({ t, change }) => {
             step={step}
           />
         );
-      case 'search':
+      case "search":
         return (
           <BrandSearchResults
             t={t}
@@ -157,7 +155,7 @@ let OrderWithoutAccount = ({ t, change }) => {
       {step === 0 || step === 1 ? <></> : <Progress steps={steps} />}
       <div
         className={`without-account ${
-          step === 0 || step === 1 ? 'without-account-zero' : ''
+          step === 0 || step === 1 ? "without-account-zero" : ""
         }`}
       >
         <div className="without-account__sections">
@@ -194,8 +192,8 @@ let OrderWithoutAccount = ({ t, change }) => {
         step === 3 ||
         step === 4 ||
         step === 9 ||
-        strings.current === 'search' ||
-        mainCross.current === 'search' ? (
+        strings.current === "search" ||
+        mainCross.current === "search" ? (
           <></>
         ) : (
           <div className="mt-[30px]">
@@ -239,7 +237,7 @@ const onSubmit = (values, dispatch) => {
 
 OrderWithoutAccount = reduxForm({
   // a unique name for the form
-  form: 'orderWithoutAccount',
+  form: "orderWithoutAccount",
   onSubmit,
 })(OrderWithoutAccount);
 

@@ -1,15 +1,9 @@
-import { Link } from 'react-router-dom';
 // Custom Components
-import {
-  Heading,
-  Description,
-  HeadingButton,
-  CustomInput,
-} from 'web/components';
-import { BackButton } from 'web/components/Buttons/BackButton.component';
+import { Heading, Description, CustomInput } from "web/components";
+import { BackButton } from "web/components/Buttons/BackButton.component";
 
 // Styles
-import './SelectShop.styles.scss';
+import "./SelectShop.styles.scss";
 
 export function SelectShop({ t, setStep }) {
   return (
@@ -21,11 +15,11 @@ export function SelectShop({ t, setStep }) {
               setStep(0);
             }}
           />
-          <Heading>{t('odrShopHeading')}</Heading>
+          <Heading>{t("odrShopHeading")}</Heading>
         </div>
         <div className="shop-section-wa__text-container">
           <Description customClass="shop-section-wa__text-container-text">
-            {t('odrShopDesc')}
+            {t("odrShopDesc")}
           </Description>
         </div>
         <div className="shop-section-wa__search-container">

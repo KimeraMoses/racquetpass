@@ -1,23 +1,21 @@
-import { Field } from 'redux-form';
-import { Link } from 'react-router-dom';
+import { Field } from "redux-form";
+import { Link } from "react-router-dom";
 import {
   Heading,
-  HeadingButton,
   CustomInput,
   Description,
-  SubmitButton,
   FileInput,
   CustomSelect,
-} from 'web/components';
-import './AboutRacquet.styles.scss';
+} from "web/components";
+import "./AboutRacquet.styles.scss";
 
-export function AboutRacquet({ t, setStep, change }) {
+export function AboutRacquet({ t, change }) {
   return (
     <>
       <div className="about">
         <div className="about__header">
           <div className="about__header-heading">
-            <Heading>{t('configHeading')}</Heading>
+            <Heading>{t("configHeading")}</Heading>
           </div>
         </div>
 
@@ -38,10 +36,10 @@ export function AboutRacquet({ t, setStep, change }) {
             placeholder="Select"
             component={CustomSelect}
             options={[
-              { label: 'Brand 1', value: 'b1' },
-              { label: 'Brand 2', value: 'b2' },
-              { label: 'Brand 3', value: 'b3' },
-              { label: 'Brand 4', value: 'b4' },
+              { label: "Brand 1", value: "b1" },
+              { label: "Brand 2", value: "b2" },
+              { label: "Brand 3", value: "b3" },
+              { label: "Brand 4", value: "b4" },
             ]}
           />
           <Field
@@ -61,10 +59,10 @@ export function AboutRacquet({ t, setStep, change }) {
 
         <div className="about__qr">
           <Description customClass="about__qr-text">
-            {t('configQR')}
+            {t("configQR")}
           </Description>
           <Link to="#" className="about__qr-link">
-            {t('configWhatLink')}
+            {t("configWhatLink")}
           </Link>
         </div>
         <div className="about__qrImage">
@@ -76,8 +74,8 @@ export function AboutRacquet({ t, setStep, change }) {
             />
           </button>
           <div className="about__qrImage-text">
-            <Description>{t('configQRText')}</Description>
-            <Description>{t('configQRText1')}</Description>
+            <Description>{t("configQRText")}</Description>
+            <Description>{t("configQRText1")}</Description>
           </div>
         </div>
       </div>

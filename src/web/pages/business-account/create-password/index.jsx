@@ -1,21 +1,39 @@
-import { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { withNamespaces } from 'react-i18next';
-import { Field, reduxForm } from 'redux-form';
-import { useSelector } from 'react-redux';
-import { BackButton, Heading, CustomInput, SubmitButton } from 'web/components';
+import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import { withNamespaces } from "react-i18next";
+import { Field, reduxForm } from "redux-form";
+import { toast } from "react-toastify";
+import { useSelector, useDispatch } from "react-redux";
+import { BackButton, Heading, CustomInput, SubmitButton } from "web/components";
 
-import './index.styles.scss';
+import "./index.styles.scss";
+import { clearEnteredValues } from "web/store/Slices/businessSlice";
+import { createNewBusiness } from "../../../store/Actions/businessActions";
 
-const length = new RegExp('^(?=.{8,})');
-const lowerCase = new RegExp('^(?=.*[a-z])');
-const upperCase = new RegExp('^(?=.*[A-Z])');
-const number = new RegExp('^(?=.*[0-9])');
+const length = new RegExp("^(?=.{8,})");
+const lowerCase = new RegExp("^(?=.*[a-z])");
+const upperCase = new RegExp("^(?=.*[A-Z])");
+const number = new RegExp("^(?=.*[0-9])");
+
+const required = (value) => (value ? undefined : "Email is required");
+const email = (value) => {
+  if (
+    /^(([^<>()[\].,;:\s@"]+(\.[^<>()[\].,;:\s@"]+)*)|(".+"))@(([^<>()[\].,;:\s@"]+\.)+[^<>()[\].,;:\s@"]{2,})$/i.test(
+      value
+    )
+  ) {
+    return undefined;
+  } else {
+    return "Please enter a valid email";
+  }
+};
 
 let CreatePassword = ({ t, back }) => {
-  const [passwordFieldType, setPasswordFieldType] = useState('password');
+  const [isLoading, setIsLoading] = useState(false);
+  const [passwordFieldType, setPasswordFieldType] = useState("password");
   const navigate = useNavigate();
-  const [password, setPassword] = useState('');
+  const dispatch = useDispatch();
+  const [password, setPassword] = useState("");
   const [passwordConditions, setPasswordConditions] = useState({
     moreThanEight: false,
     oneLowerCase: false,
@@ -29,6 +47,9 @@ let CreatePassword = ({ t, back }) => {
   );
   const lastName = useSelector(
     (state) => state?.form?.signup?.values?.lastName
+  );
+  const values = useSelector(
+    (state) => state?.form?.["create-business-account-4"]?.values
   );
 
   useEffect(() => {
@@ -120,7 +141,7 @@ let CreatePassword = ({ t, back }) => {
         <img
           src="/img/bullets/dark.png"
           alt="tick"
-          style={{ height: '24px', width: '24px' }}
+          style={{ height: "24px", width: "24px" }}
         />
       );
     } else {
@@ -128,11 +149,45 @@ let CreatePassword = ({ t, back }) => {
         <img
           src="/img/bullets/light.png"
           alt="tick"
-          style={{ height: '24px', width: '24px' }}
+          style={{ height: "24px", width: "24px" }}
         />
       );
     }
   };
+
+  const formSubmitHandler = async () => {
+    setIsLoading(true);
+    console.log("Multiform values", values);
+    try {
+      await dispatch(
+        createNewBusiness(
+          values.firstName,
+          values.lastName,
+          values["phone-number"],
+          values["street-address"],
+          values.shopName,
+          values["apt-suite"],
+          values.city,
+          "country",
+          values["shop-state"],
+          values["zip-code"],
+          values.email,
+          values.password
+        )
+      );
+
+      setIsLoading(false);
+      dispatch(clearEnteredValues());
+      navigate("/BusinessAccount/Thanks");
+      toast.success(
+        "Your business is successfuly, Please go to settings to complete profile"
+      );
+    } catch (err) {
+      setIsLoading(false);
+      toast.error("Failed to create business");
+    }
+  };
+
   return (
     <>
       <div className="create-business-password">
@@ -140,13 +195,21 @@ let CreatePassword = ({ t, back }) => {
           <div className="create-business-password__header">
             <div className="create-business-password__header-heading">
               <BackButton
-                onClick={() => navigate('/BusinessAccount/BusinessDetails')}
+                onClick={() => navigate("/BusinessAccount/BusinessDetails")}
               />
-              <Heading>{t('accPassword')}</Heading>
+              <Heading>{t("accPassword")}</Heading>
             </div>
           </div>
           <div className="max-w-[450px] m-[0_auto]">
             <div className="create-business-password__input-password">
+              <Field
+                name="email"
+                label="Email Address"
+                type="email"
+                component={CustomInput}
+                validate={[required, email]}
+              />
+
               <Field
                 name="password"
                 label="Password"
@@ -154,10 +217,10 @@ let CreatePassword = ({ t, back }) => {
                 type={passwordFieldType}
                 component={CustomInput}
                 switchPasswordShow={() => {
-                  if (passwordFieldType === 'password') {
-                    setPasswordFieldType('text');
+                  if (passwordFieldType === "password") {
+                    setPasswordFieldType("text");
                   } else {
-                    setPasswordFieldType('password');
+                    setPasswordFieldType("password");
                   }
                 }}
                 isPasswordField
@@ -171,11 +234,11 @@ let CreatePassword = ({ t, back }) => {
                   <p
                     style={
                       !passwordConditions.moreThanEight
-                        ? { color: '#a6a6a6' }
+                        ? { color: "#a6a6a6" }
                         : {}
                     }
                   >
-                    {t('accPassitem1')}
+                    {t("accPassitem1")}
                   </p>
                 </li>
                 <li>
@@ -183,11 +246,11 @@ let CreatePassword = ({ t, back }) => {
                   <p
                     style={
                       !passwordConditions.oneLowerCase
-                        ? { color: '#a6a6a6' }
+                        ? { color: "#a6a6a6" }
                         : {}
                     }
                   >
-                    {t('accPassitem2')}
+                    {t("accPassitem2")}
                   </p>
                 </li>
                 <li>
@@ -195,21 +258,21 @@ let CreatePassword = ({ t, back }) => {
                   <p
                     style={
                       !passwordConditions.oneUpperCase
-                        ? { color: '#a6a6a6' }
+                        ? { color: "#a6a6a6" }
                         : {}
                     }
                   >
-                    {t('accPassitem3')}
+                    {t("accPassitem3")}
                   </p>
                 </li>
                 <li>
                   {renderBullet(passwordConditions.oneNumber)}
                   <p
                     style={
-                      !passwordConditions.oneNumber ? { color: '#a6a6a6' } : {}
+                      !passwordConditions.oneNumber ? { color: "#a6a6a6" } : {}
                     }
                   >
-                    {t('accPassitem4')}
+                    {t("accPassitem4")}
                   </p>
                 </li>
                 <li>
@@ -217,18 +280,18 @@ let CreatePassword = ({ t, back }) => {
                   <p
                     style={
                       !passwordConditions.noTextFromNameEmail
-                        ? { color: '#a6a6a6' }
+                        ? { color: "#a6a6a6" }
                         : {}
                     }
                   >
-                    {t('accPassitem5')}
+                    {t("accPassitem5")}
                   </p>
                 </li>
               </ul>
 
               <div className="mt-[40px]">
                 <SubmitButton
-                  onClick={() => navigate('/BusinessAccount/Thanks')}
+                  onClick={formSubmitHandler}
                   type="submit"
                   disabled={
                     !passwordConditions.moreThanEight ||
@@ -239,7 +302,7 @@ let CreatePassword = ({ t, back }) => {
                   }
                   className="account-details__form-button-btn"
                 >
-                  Create Account
+                  {isLoading ? "Creating..." : "Create Account"}
                 </SubmitButton>
               </div>
             </div>
@@ -250,15 +313,9 @@ let CreatePassword = ({ t, back }) => {
   );
 };
 
-const onSubmit = (values, dispatch) => {
-  // dispatch(    // your submit action //      );
-  console.log(values);
-};
-
 CreatePassword = reduxForm({
   // a unique name for the form
-  form: 'create-business-account-4',
-  onSubmit,
+  form: "create-business-account-4",
 })(CreatePassword);
 
 export default withNamespaces()(CreatePassword);

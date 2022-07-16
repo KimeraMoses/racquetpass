@@ -1,47 +1,53 @@
-import React from 'react';
-import { withNamespaces } from 'react-i18next';
+import React from "react";
+import { withNamespaces } from "react-i18next";
 // import { MenuButton } from 'web/components';
 // import { CustomButton } from 'web/components';
-import { Description } from 'web/components/atoms/Description.atom';
-import { Link } from 'react-router-dom';
-import { reduxForm, Field } from 'redux-form';
-import './index.styles.scss';
+import { Description } from "web/components/atoms/Description.atom";
+import { Link } from "react-router-dom";
+import { reduxForm, Field } from "redux-form";
+import "./index.styles.scss";
 // import { AccountButton } from 'web/components/Buttons/AccountButton.component';
 // import { SubHeading } from 'web/components/atoms/SubHeading.atom';
-import { SubmitButton } from 'web/components/Buttons/SubmitButton.component';
-import { CustomInput, CustomPhoneInput } from 'web/components/formFields/index';
-import { Heading } from 'web/components/atoms/Heading.atom';
-import { BackButton } from 'web/components/Buttons/BackButton.component';
-import { useNavigate } from '../../../../../node_modules/react-router-dom/index';
-import { useSelector } from 'react-redux';
+import { SubmitButton } from "web/components/Buttons/SubmitButton.component";
+import { CustomInput, CustomPhoneInput } from "web/components/formFields/index";
+import { Heading } from "web/components/atoms/Heading.atom";
+import { BackButton } from "web/components/Buttons/BackButton.component";
+import { useNavigate } from "../../../../../node_modules/react-router-dom/index";
+import { useSelector, useDispatch } from "react-redux";
+import { saveEnteredValues } from "web/store/Slices/businessSlice";
 
-const required = (value) => (value ? undefined : 'This field is required');
+const required = (value) => (value ? undefined : "This field is required");
 // Phone Validation
-const formats = '(999) 999-9999|(999)999-9999|999-999-9999|9999999999';
+const formats = "(999) 999-9999|(999)999-9999|999-999-9999|9999999999";
 const r = RegExp(
-  '^(' + formats.replace(/([()])/g, '\\$1').replace(/9/g, '\\d') + ')$'
+  "^(" + formats.replace(/([()])/g, "\\$1").replace(/9/g, "\\d") + ")$"
 );
 const phoneValidation = (value) => {
   if (r.test(value) === true) {
     if (value.length < 9 || value.length > 14) {
-      return 'Please enter value between 9 and 14';
+      return "Please enter value between 9 and 14";
     } else {
       return undefined;
     }
   } else {
-    return 'Please enter a valid phone number.';
+    return "Please enter a valid phone number.";
   }
 };
 
 let Create = ({ t, change }) => {
   const errors = useSelector(
-    (state) => state?.form?.['create-business-account-1']?.syncErrors
+    (state) => state?.form?.["create-business-account-1"]?.syncErrors
+  );
+  const values = useSelector(
+    (state) => state?.form?.["create-business-account-1"]?.values
   );
   const phoneNumber = useSelector(
     (state) =>
-      state?.form?.['create-business-account-1']?.values?.['phone-number']
+      state?.form?.["create-business-account-1"]?.values?.["phone-number"]
   );
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+
   return (
     <>
       <div className="create-business-account">
@@ -50,16 +56,16 @@ let Create = ({ t, change }) => {
             <div className="create-business-account__header-container-heading">
               <BackButton
                 onClick={() => {
-                  navigate('/');
+                  navigate("/");
                 }}
               />
-              <Heading>{t('odrCreateBtn')}</Heading>
+              <Heading>{t("odrCreateBtn")}</Heading>
             </div>
             <div className="create-business-account__button-container">
               <button
                 className="create-business-account__button-container-btn"
                 onClick={() => {
-                  navigate('/login');
+                  navigate("/login");
                 }}
               >
                 Log In
@@ -86,6 +92,13 @@ let Create = ({ t, change }) => {
                 component={CustomInput}
                 validate={required}
               />
+              <Field
+                name="shopName"
+                label="Shop Name"
+                type="text"
+                component={CustomInput}
+                validate={required}
+              />
               <CustomPhoneInput
                 change={change}
                 name="phone-number"
@@ -96,15 +109,15 @@ let Create = ({ t, change }) => {
             <div>
               <div className="create-business-account__statement">
                 <Description customClass="create-business-account__statement-txt">
-                  {t('odrPivacyText')}
+                  {t("odrPivacyText")}
                   <span className="create-business-account__statement-txt-bold">
-                    {t('odrTermsBold')}
+                    {t("odrTermsBold")}
                   </span>
                   &nbsp;
-                  {t('odrPrivacyAnd')}
+                  {t("odrPrivacyAnd")}
                   &nbsp;
                   <span className="create-business-account__statement-txt-bold">
-                    {t('odrPrivacyBold')}
+                    {t("odrPrivacyBold")}
                   </span>
                 </Description>
               </div>
@@ -119,14 +132,15 @@ let Create = ({ t, change }) => {
                   phoneValidation(phoneNumber) !== undefined
                 }
                 onClick={() => {
-                  navigate('/BusinessAccount/BusinessDetails');
+                  dispatch(saveEnteredValues(values));
+                  navigate("/BusinessAccount/BusinessDetails");
                 }}
               >
-                {t('odrCreateBtn')}
+                {t("odrCreateBtn")}
               </SubmitButton>
             </div>
             <div className="text-center text-[16px]">
-              Have an account?{' '}
+              Have an account?{" "}
               <Link to="/login" className="text-[16px] text-[#304FFE]">
                 Log in.
               </Link>
@@ -138,15 +152,9 @@ let Create = ({ t, change }) => {
   );
 };
 
-const onSubmit = (values, dispatch) => {
-  // dispatch(    // your submit action //      );
-  console.log(values);
-};
-
 Create = reduxForm({
   // a unique name for the form
-  form: 'create-business-account-1',
-  onSubmit,
+  form: "create-business-account-1",
 })(Create);
 
 export default withNamespaces()(Create);

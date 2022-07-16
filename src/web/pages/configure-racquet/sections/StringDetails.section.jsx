@@ -1,17 +1,15 @@
-import { Field } from 'redux-form';
+import { Field } from "redux-form";
 
 import {
   Heading,
-  HeadingButton,
   Description,
   SubHeading,
   CustomInput,
   InfoButton,
   CustomSwitch,
-  StepButton,
-} from 'web/components';
+} from "web/components";
 
-import './StringDetails.styles.scss';
+import "./StringDetails.styles.scss";
 
 export function StringDetails({ t, hybrid, setHybrid, handleShow }) {
   const handleChange = (value) => {
@@ -24,11 +22,11 @@ export function StringDetails({ t, hybrid, setHybrid, handleShow }) {
         <div>
           <div className="string__header">
             <div className="string__header-heading">
-              <Heading>{t('configStringHeading')}</Heading>
+              <Heading>{t("configStringHeading")}</Heading>
             </div>
           </div>
           <div className="string__info">
-            <SubHeading>{t('configMains')}</SubHeading>
+            <SubHeading>{t("configMains")}</SubHeading>
           </div>
           <div className="string__form">
             <Field
@@ -46,7 +44,7 @@ export function StringDetails({ t, hybrid, setHybrid, handleShow }) {
           </div>
           <div className="string__swtich">
             <Description customClass="string__swtich-text">
-              {t('odrHybrid')}
+              {t("odrHybrid")}
             </Description>
             <div className="string__swtich-right">
               <CustomSwitch handleChange={handleChange} checked={hybrid} />

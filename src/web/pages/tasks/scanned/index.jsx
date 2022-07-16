@@ -1,13 +1,8 @@
-import React from 'react';
-import { withNamespaces } from 'react-i18next';
-import { useNavigate } from 'react-router-dom';
-import {
-  TaskStatus,
-  CustomButton,
-  SubmitButton,
-  MenuButton,
-} from 'web/components';
-import './index.styles.scss';
+import React from "react";
+import { withNamespaces } from "react-i18next";
+import { useNavigate } from "react-router-dom";
+import { TaskStatus, CustomButton, MenuButton } from "web/components";
+import "./index.styles.scss";
 
 function Scanned({ t }) {
   const navigate = useNavigate();
@@ -31,21 +26,21 @@ function Scanned({ t }) {
           <div className="status-container">
             <TaskStatus>
               <img className="icon" alt="calender" src="../svg/calender.svg" />
-              {t('taskScannedDueDate')}
+              {t("taskScannedDueDate")}
             </TaskStatus>
           </div>
 
           <div className="racquet-info">
             <img className="img" alt="racquet" src="../img/tasks/racquet.png" />
             <div className="brand">
-              <div className="model">{t('taskScannedBrand')}</div>
-              <div className="brand-title">{t('taskScannedBrandTitle')}</div>
+              <div className="model">{t("taskScannedBrand")}</div>
+              <div className="brand-title">{t("taskScannedBrandTitle")}</div>
             </div>
           </div>
 
           <div className="string-details grid grid-cols-[3fr_1fr] mb-[0px]">
             <div>
-              <div className="string-label">{t('taskScannedMainsHeading')}</div>
+              <div className="string-label">{t("taskScannedMainsHeading")}</div>
               <div className="string-desc">Luxilon Alu Rough 1.6 G</div>
             </div>
             <div>
@@ -54,7 +49,7 @@ function Scanned({ t }) {
             </div>
             <div>
               <div className="string-label">
-                {t('taskScannedCrossesHeading')}
+                {t("taskScannedCrossesHeading")}
               </div>
               <div className="string-desc">Luxilon Alu Rough 1.6 G</div>
             </div>
@@ -74,7 +69,7 @@ function Scanned({ t }) {
 
       <div className="scan-msg m-[20px_0px]">
         <a className="link" href="/">
-          {t('taskRescan')}
+          {t("taskRescan")}
         </a>
       </div>
 
@@ -83,7 +78,7 @@ function Scanned({ t }) {
           size="lg"
           btn="primary"
           onClick={() => {
-            navigate('/Tasks/Details');
+            navigate("/Tasks/Details");
           }}
         >
           View Details
