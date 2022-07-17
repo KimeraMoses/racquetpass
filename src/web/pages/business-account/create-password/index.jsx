@@ -9,6 +9,7 @@ import { BackButton, Heading, CustomInput, SubmitButton } from "web/components";
 import "./index.styles.scss";
 import { clearEnteredValues } from "web/store/Slices/businessSlice";
 import { createNewBusiness } from "../../../store/Actions/businessActions";
+import { saveUserInitials } from "web/store/Slices/authSlice";
 
 const length = new RegExp("^(?=.{8,})");
 const lowerCase = new RegExp("^(?=.*[a-z])");
@@ -176,11 +177,12 @@ let CreatePassword = ({ t, back }) => {
       );
 
       setIsLoading(false);
-      dispatch(clearEnteredValues());
+      dispatch(saveUserInitials({ email: values.email, pwd: values.password }));
       navigate("/BusinessAccount/Thanks");
       toast.success(
-        "Your business is successfuly, Please go to settings to complete profile"
+        "Your Account is created successfuly, Please go to settings to complete profile"
       );
+      dispatch(clearEnteredValues());
     } catch (err) {
       setIsLoading(false);
       if (window.navigator.onLine) {

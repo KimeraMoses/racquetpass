@@ -1,5 +1,5 @@
-import CurrencyInput from 'react-currency-input-field';
-import './CustomCurrencyInput.styles.scss';
+import CurrencyInput from "react-currency-input-field";
+import "./CustomCurrencyInput.styles.scss";
 
 export const CustomCurrencyInput = (props) => {
   return (
@@ -26,7 +26,6 @@ export const CustomCurrencyInput = (props) => {
           if (props?.customOnChange) {
             props?.customOnChange(value);
           }
-          console.log(value, name);
         }}
       />
     </div>

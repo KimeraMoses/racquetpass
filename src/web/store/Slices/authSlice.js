@@ -7,6 +7,7 @@ const initialState = {
   status: "",
   message: null,
   updateStatus: "",
+  userInitials: {},
   isLoading: false,
 };
 
@@ -61,6 +62,12 @@ export const authSlice = createSlice({
       state.message = payload.message;
       state.status = payload.status;
     },
+    saveUserInitials: (state, { payload }) => {
+      state.userInitials = payload;
+    },
+    clearUserInitials: (state, { payload }) => {
+      state.userInitials = {};
+    },
     logout(state) {
       state.user = {};
       state.token = null;
@@ -90,6 +97,8 @@ export const {
   forgotPasswordPending,
   forgotPasswordSuccess,
   forgotPasswordFail,
+  saveUserInitials,
+  clearUserInitials,
   logout,
 } = actions;
 
