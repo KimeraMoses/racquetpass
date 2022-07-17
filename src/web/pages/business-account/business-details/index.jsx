@@ -132,15 +132,15 @@ let BusinessDetails = ({ t, change }) => {
   );
 };
 
-const onSubmit = (values, dispatch) => {
-  // dispatch(    // your submit action //      );
-  console.log(values);
-};
+// const onSubmit = (values, dispatch) => {
+//   // dispatch(    // your submit action //      );
+//   console.log(values);
+// };
 
 BusinessDetails = reduxForm({
   // a unique name for the form
   form: "create-business-account-3",
-  onSubmit,
+  // onSubmit,
 })(BusinessDetails);
 
 export default withNamespaces()(BusinessDetails);

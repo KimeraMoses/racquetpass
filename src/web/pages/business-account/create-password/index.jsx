@@ -157,7 +157,6 @@ let CreatePassword = ({ t, back }) => {
 
   const formSubmitHandler = async () => {
     setIsLoading(true);
-    console.log("Multiform values", values);
     try {
       await dispatch(
         createNewBusiness(

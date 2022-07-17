@@ -2,7 +2,11 @@ import {
   createNewBusinessFail,
   createNewBusinessPending,
   createNewBusinessSuccess,
+  editBusinessFail,
+  editBusinessPending,
+  editBusinessSuccess,
 } from "../Slices/businessSlice";
+import { fetchShopDetails } from "./shopActions";
 
 export const createNewBusiness =
   (
@@ -47,11 +51,9 @@ export const createNewBusiness =
         }
       );
       const res = await response.json();
-      console.log("biz data", res);
       dispatch(createNewBusinessSuccess(res));
     } catch (error) {
       dispatch(createNewBusinessFail(error));
-      console.log("biz error", error);
     }
   };
 
@@ -59,39 +61,31 @@ export const editBusinessDetails =
   (
     authToken,
     Id,
-    first_name,
-    last_name,
-    phone,
-    street,
-    shop_name,
-    apartment,
-    city,
-    country,
-    state,
-    zip_code,
+    name,
     email,
-    password
+    phone,
+    etimated_delivery_time,
+    labor_price,
+    country,
+    allow_own_strings,
+    address
   ) =>
   async (dispatch) => {
-    // dispatch(editBusinessPending());
+    dispatch(editBusinessPending());
     try {
       const response = await fetch(
         `${process.env.REACT_APP_BASEURL}/api/v1/catalog/edit-shop-settings/${Id}`,
         {
-          method: "PATCH",
+          method: "POST",
           body: JSON.stringify({
-            first_name,
-            last_name,
-            phone,
-            street,
-            shop_name,
-            apartment,
-            city,
-            country,
-            state,
-            zip_code,
+            name,
             email,
-            password,
+            phone,
+            etimated_delivery_time,
+            labor_price,
+            country,
+            allow_own_strings,
+            address,
           }),
           headers: new Headers({
             "Content-type": "application/json",
@@ -101,11 +95,10 @@ export const editBusinessDetails =
         }
       );
       const res = await response.json();
-      console.log(res);
-      // dispatch(editBusinessSuccess(res));
+      dispatch(editBusinessSuccess(res.status));
+      dispatch(fetchShopDetails(authToken, Id));
     } catch (error) {
-      // dispatch(editBusinessFail(error));
-      console.log(error);
+      dispatch(editBusinessFail(error));
     }
   };
 
@@ -125,11 +118,11 @@ export const fetchAllOrders = (authToken) => {
         }
       );
       const data = await response.json();
-      console.log("Orders", data);
+      // console.log("Orders", data);
       // dispatch(fetchOrdersSuccess(data.orders));
     } catch (error) {
       // dispatch(fetchOrdersFail(error));
-      console.log("Orders err", error);
+      // console.log("Orders err", error);
     }
   };
 };

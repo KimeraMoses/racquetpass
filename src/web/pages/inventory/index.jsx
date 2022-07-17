@@ -6,7 +6,6 @@ import {
   AddForm,
   EditForm,
   ProShop,
-  EditShop,
   RequestChange,
   CancelRequest,
   // Payment Screens
@@ -20,6 +19,9 @@ import {
 import "./inventory.styles.scss";
 import { useLocation } from "../../../../node_modules/react-router-dom/index";
 import { useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
+import { fetchShopDetails } from "web/store/Actions/shopActions";
+import EditShop from "./sections/EditShop.section";
 
 function useQuery() {
   const { search } = useLocation();
@@ -31,12 +33,31 @@ let Inventory = ({ t, change }) => {
   const [isReceive, setIsReceive] = useState(false);
   const query = useQuery();
   const active = query.get("active");
-
+  const { token, user } = useSelector((state) => state.auth);
+  const shop = useSelector((state) => state.shop.shop);
   const [currentScreen, setCurrentScreen] = useState(active);
+
+  const shopDetails = {
+    shop: shop && shop?.name,
+    email: shop && shop?.email,
+    ["phone-number"]: shop && shop?.phone,
+    ["delivery-days"]: shop && shop?.etimated_delivery_time,
+    ["labor-price"]: shop && shop?.labor_price,
+    address: shop && shop?.address?.street,
+    shopcity: shop && shop?.address?.city,
+    apt: shop && shop?.address?.apartment,
+    ["shop-state"]: shop && shop?.address?.state,
+    ["zip-code"]: shop && shop?.address?.zip_code,
+    country: shop && shop?.country,
+  };
 
   useEffect(() => {
     setCurrentScreen(active);
   }, [active]);
+
+  useEffect(() => {
+    dispatch(fetchShopDetails(token, user && user.shop));
+  }, [token]);
 
   const dispatch = useDispatch();
 
@@ -70,7 +91,13 @@ let Inventory = ({ t, change }) => {
         );
       case "editShop":
         return (
-          <EditShop t={t} setCurrentScreen={setCurrentScreen} change={change} />
+          <EditShop
+            t={t}
+            setCurrentScreen={setCurrentScreen}
+            change={change}
+            initialValues={shopDetails}
+            hasOwnStrings={shop && shop?.allow_own_strings}
+          />
         );
       case "editShopName":
         return <RequestChange t={t} setCurrentScreen={setCurrentScreen} />;
@@ -129,15 +156,15 @@ let Inventory = ({ t, change }) => {
   );
 };
 
-const onSubmit = (values, dispatch) => {
-  // dispatch(    // your submit action //      );
-  console.log(values);
-};
+// const onSubmit = (values, dispatch) => {
+//   // dispatch(    // your submit action //      );
+//   console.log(values);
+// };
 
 Inventory = reduxForm({
   // a unique name for the form
   form: "inventory",
-  onSubmit,
+  // onSubmit,
 })(Inventory);
 
 export default withNamespaces()(Inventory);

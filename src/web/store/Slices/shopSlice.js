@@ -2,7 +2,9 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   shops: [],
+  shop: {},
   isLoading: false,
+  isFetching: false,
   message: "",
 };
 
@@ -11,14 +13,25 @@ const shopSlice = createSlice({
   initialState,
   reducers: {
     fetchShopsPending: (state) => {
-      state.isLoading = true;
+      state.isFetching = true;
     },
     fetchShopsSuccess: (state, { payload }) => {
-      state.isLoading = false;
+      state.isFetching = false;
       state.shops = payload;
     },
     fetchShopsFail: (state, { payload }) => {
-      state.isLoading = false;
+      state.isFetching = false;
+      state.message = payload;
+    },
+    fetchShopPending: (state) => {
+      state.isFetching = true;
+    },
+    fetchShopSuccess: (state, { payload }) => {
+      state.isFetching = false;
+      state.shop = payload;
+    },
+    fetchShopFail: (state, { payload }) => {
+      state.isFetching = false;
       state.message = payload;
     },
     updateShopSettingsPending: (state) => {
@@ -51,6 +64,9 @@ export const {
   fetchShopsPending,
   fetchShopsSuccess,
   fetchShopsFail,
+  fetchShopPending,
+  fetchShopSuccess,
+  fetchShopFail,
   updateShopSettingsPending,
   updateShopSettingsSuccess,
   updateShopSettingsFail,

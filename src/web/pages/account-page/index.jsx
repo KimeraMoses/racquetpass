@@ -1,10 +1,10 @@
-import { reduxForm } from 'redux-form';
-import { useNavigate } from 'react-router-dom';
-import { withNamespaces } from 'react-i18next';
-import { SelectAccount, AccountDetails, CreatePassword } from './sections';
+import { reduxForm } from "redux-form";
+import { useNavigate } from "react-router-dom";
+import { withNamespaces } from "react-i18next";
+import { SelectAccount, AccountDetails, CreatePassword } from "./sections";
 
-import './accountPage.styles.scss';
-import { useState } from 'react';
+import "./accountPage.styles.scss";
+import { useState } from "react";
 
 let CreateAccount = ({ t, handleSubmit, change }) => {
   const [step, setStep] = useState(1);
@@ -20,11 +20,11 @@ let CreateAccount = ({ t, handleSubmit, change }) => {
   };
 
   const firstStepBack = () => {
-    navigate('/');
+    navigate("/");
   };
 
   const moveToLogin = () => {
-    navigate('/login');
+    navigate("/login");
   };
 
   const getActiveScreen = () => {
@@ -63,15 +63,15 @@ let CreateAccount = ({ t, handleSubmit, change }) => {
   );
 };
 
-const onSubmit = (values, dispatch) => {
-  // dispatch(    // your submit action //      );
-  console.log(values);
-};
+// const onSubmit = (values, dispatch) => {
+//   // dispatch(    // your submit action //      );
+//   console.log(values);
+// };
 
 CreateAccount = reduxForm({
   // a unique name for the form
-  form: 'signup',
-  onSubmit,
+  form: "signup",
+  // onSubmit,
 })(CreateAccount);
 
 export default withNamespaces()(CreateAccount);

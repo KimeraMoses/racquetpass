@@ -27,6 +27,17 @@ export const businessSlice = createSlice({
       state.isLoading = false;
       state.message = payload.status;
     },
+    editBusinessPending: (state) => {
+      state.isLoading = true;
+    },
+    editBusinessSuccess: (state, { payload }) => {
+      state.isLoading = false;
+      state.message = payload.status;
+    },
+    editBusinessFail: (state, { payload }) => {
+      state.isLoading = false;
+      state.message = payload.status;
+    },
   },
 });
 const { reducer, actions } = businessSlice;
@@ -37,6 +48,9 @@ export const {
   createNewBusinessPending,
   createNewBusinessSuccess,
   createNewBusinessFail,
+  editBusinessPending,
+  editBusinessSuccess,
+  editBusinessFail,
 } = actions;
 
 export default reducer;

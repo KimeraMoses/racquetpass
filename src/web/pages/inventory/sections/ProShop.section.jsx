@@ -1,22 +1,30 @@
-import { useNavigate } from 'react-router-dom';
-import { HeadingButton, Heading, SubHeading } from 'web/components';
+import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { HeadingButton, Heading, SubHeading } from "web/components";
 
-import './ProShop.styles.scss';
+import "./ProShop.styles.scss";
+
+// Create our number formatter.
+const formatter = new Intl.NumberFormat("en-US", {
+  style: "currency",
+  currency: "USD",
+});
 
 export function ProShop({ t, setCurrentScreen, setDrawer }) {
   const navigate = useNavigate();
+  const { shop, isFetching: isLoading } = useSelector((state) => state.shop);
   return (
     <>
       <div className="shop">
         <div className="shop__header">
           <div className="shop__header-headings">
             <HeadingButton drawer onClick={() => setDrawer()} />
-            <Heading>{t('shopProHeading')}</Heading>
+            <Heading>{t("shopProHeading")}</Heading>
           </div>
           <HeadingButton
-            text={t('shopButtonEdit')}
+            text={t("shopButtonEdit")}
             onClick={() => {
-              setCurrentScreen('editShop');
+              setCurrentScreen("editShop");
             }}
           />
         </div>
@@ -27,75 +35,105 @@ export function ProShop({ t, setCurrentScreen, setDrawer }) {
             <div>
               <div className="shop__services-card-inner">
                 <div className="shop__services-card-heading">
-                  <Heading>{t('shopServiceHeading')}</Heading>
+                  <Heading>{t("shopServiceHeading")}</Heading>
                 </div>
                 <div className="shop__services-card-inner-text">
                   <SubHeading customClass="shop__services-card-inner-text-heading">
-                    {t('shopDeliveryTime')}
+                    {t("shopDeliveryTime")}
                   </SubHeading>
                   <SubHeading customClass="shop__services-card-inner-text-txt">
-                    {t('shopDeliveryTimeDay')}
+                    {/* {t("shopDeliveryTimeDay")} */}
+                    {isLoading
+                      ? "Loading..."
+                      : `${
+                          shop && shop.etimated_delivery_time
+                            ? `${shop?.etimated_delivery_time}d`
+                            : "Not set"
+                        }`}
                   </SubHeading>
                 </div>
                 <div className="shop__services-card-inner-text">
                   <SubHeading customClass="shop__services-card-inner-text-heading">
-                    {t('shopLaborPriceHeading')}
+                    {t("shopLaborPriceHeading")}
                   </SubHeading>
                   <SubHeading customClass="shop__services-card-inner-text-txt">
-                    {t('shopLaborPrice')}
+                    {/* {t("shopLaborPrice")} */}
+                    {isLoading
+                      ? "Loading..."
+                      : shop && shop.labor_price
+                      ? `${formatter.format(shop && shop?.labor_price)}`
+                      : "Not Set"}
                   </SubHeading>
                 </div>
                 <div className="shop__services-card-inner-text">
                   <SubHeading customClass="shop__services-card-inner-text-heading">
-                    {t('shopString')}
+                    {t("shopString")}
                   </SubHeading>
                   <SubHeading customClass="shop__services-card-inner-text-txt">
-                    {t('shopNo')}
+                    {/* {t("shopNo")} */}
+                    {isLoading
+                      ? "Loading..."
+                      : shop?.allow_own_strings
+                      ? "YES"
+                      : "NO"}
                   </SubHeading>
                 </div>
               </div>
             </div>
           </div>
           <div className="shop__contact-heading">
-            <Heading>{t('ShopContactHeading')}</Heading>
+            <Heading>{t("ShopContactHeading")}</Heading>
           </div>
           <div className="shop__contact-info">
             <div className="shop__contact-info-inner">
               <SubHeading customClass="shop__contact-info-inner-heading">
-                {t('odrShopName')}
+                {t("odrShopName")}
               </SubHeading>
               <SubHeading customClass="shop__contact-info-inner-txt">
-                {t('businessAccountDetailsHeading')}
+                {/* {t("businessAccountDetailsHeading")} */}
+                {isLoading ? "Loading..." : shop && shop?.name}
               </SubHeading>
             </div>
             <div className="shop__contact-info-inner">
               <SubHeading customClass="shop__contact-info-inner-heading">
-                {t('shopEmailHeading')}
+                {t("shopEmailHeading")}
               </SubHeading>
               <SubHeading customClass="shop__contact-info-inner-txt text-[#304FFE]">
-                <a href="mailto:awesome_pro_racquets@gmail.com">
-                  awesome_pro_racquets@gmail.com
+                <a href={`mailto:${shop && shop?.email}`}>
+                  {isLoading ? "Loading..." : shop && shop?.email}
                 </a>
               </SubHeading>
             </div>
             <div className="shop__contact-info-inner">
               <SubHeading customClass="shop__contact-info-inner-heading">
-                {t('taskOpenedPlayerPhoneHeading')}
+                {t("taskOpenedPlayerPhoneHeading")}
               </SubHeading>
               <SubHeading customClass="shop__contact-info-inner-txt text-[#304FFE]">
-                <a href="tel:(123) 4567-8910">(123) 4567-8910</a>
+                <a href={`tel:${shop && shop?.phone}`}>
+                  {isLoading ? "Loading..." : shop && shop?.phone}
+                </a>
               </SubHeading>
             </div>
 
             <div className="shop__contact-info-inner">
               <SubHeading customClass="shop__contact-info-inner-heading">
-                {t('orderOpenedShopAddressHeading')}
+                {t("orderOpenedShopAddressHeading")}
               </SubHeading>
               <SubHeading customClass="shop__contact-info-inner-txt">
-                {t('orderOpenedShopAddress')}
+                {/* {t("orderOpenedShopAddress")} */}
+                {isLoading
+                  ? "Loading..."
+                  : `${shop && shop?.address?.street}, ${
+                      shop && shop?.address?.apartment
+                    }`}
               </SubHeading>
               <SubHeading customClass="shop__contact-info-inner-txt">
-                {t('orderOpenedShopAddress1')}
+                {/* {t("orderOpenedShopAddress1")} */}
+                {!shop
+                  ? "Loading..."
+                  : `${shop && shop?.address?.state}, ${
+                      shop && shop?.address?.city
+                    }-${shop && shop?.country}`}
               </SubHeading>
             </div>
             <div className="shop__contact-info-inner">
@@ -107,7 +145,7 @@ export function ProShop({ t, setCurrentScreen, setDrawer }) {
                 <HeadingButton
                   text="Reset"
                   onClick={() => {
-                    navigate('/reset-password?comingFrom=shop');
+                    navigate("/reset-password?comingFrom=shop");
                   }}
                 />
               </div>

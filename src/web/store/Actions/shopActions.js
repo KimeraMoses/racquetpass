@@ -1,13 +1,18 @@
 //FETCH ALL SHOPS
 
 import {
+  fetchShopFail,
+  fetchShopPending,
   fetchShopsFail,
   fetchShopsPending,
   fetchShopsSuccess,
+  fetchShopSuccess,
   sendMessageFail,
   sendMessagePending,
   sendMessageSucess,
 } from "../Slices/shopSlice";
+
+//FETCH ALL SHOPS
 
 export const fetchAllShops = () => {
   return async (dispatch) => {
@@ -48,10 +53,36 @@ export const fetchEnabledShops = () => {
       );
       const data = await response.json();
       // dispatch(fetchEnabledShopsSuccess(data?.shops));
-      console.log("shops", data?.shops);
+      // console.log("shops", data?.shops);
     } catch (error) {
       // dispatch(fetchEnabledShopssFail(error));
-      console.log(error);
+      // console.log(error);
+    }
+  };
+};
+
+//FETCH SHOP DETAILS
+export const fetchShopDetails = (authToken, shopId) => {
+  return async (dispatch) => {
+    dispatch(fetchShopPending());
+    if (shopId && authToken) {
+      try {
+        const response = await fetch(
+          `${process.env.REACT_APP_BASEURL}/api/v1/shops/${shopId}`,
+          {
+            method: "GET",
+            headers: new Headers({
+              "Content-type": "application/json",
+              apiKey: process.env.REACT_APP_APIKEY,
+              Authorization: "Bearer " + authToken,
+            }),
+          }
+        );
+        const data = await response.json();
+        dispatch(fetchShopSuccess(data?.shop));
+      } catch (error) {
+        dispatch(fetchShopFail(error));
+      }
     }
   };
 };
@@ -59,11 +90,11 @@ export const fetchEnabledShops = () => {
 //DON'T SEE SHOP MESSAGE
 
 export const sendShopInquiry =
-  (shop_name, city, state, phone, shop_search) => async (dispatch) => {
+  (shop_name, city, state, phone, search) => async (dispatch) => {
     dispatch(sendMessagePending());
     try {
       const response = await fetch(
-        `${process.env.REACT_APP_BASEURL}/api/v1/catalog/message`,
+        `${process.env.REACT_APP_BASEURL}/api/v1/shops/shop-requests`,
         {
           method: "POST",
           body: JSON.stringify({
@@ -71,7 +102,7 @@ export const sendShopInquiry =
             city,
             state,
             phone,
-            shop_search,
+            search,
           }),
           headers: new Headers({
             "Content-type": "application/json",
@@ -80,10 +111,8 @@ export const sendShopInquiry =
         }
       );
       const res = await response.json();
-      // console.log("msg data", res);
       dispatch(sendMessageSucess(res.status));
     } catch (error) {
       dispatch(sendMessageFail(error));
-      // console.log("msg error", error);
     }
   };

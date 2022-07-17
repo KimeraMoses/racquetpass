@@ -141,7 +141,10 @@ function Routers() {
           <Route path="/inventory" element={<Inventory />} />
           <Route path="/player-tabs" element={<PlayerTabs />} />
           <Route path="/configure-racquet" element={<ConfigureRacquet />} />
-          <Route path="/admin" element={<AdminWorkflow />} />
+          <Route
+            path="/admin"
+            element={!isAuthenticated ? <Navigate to="/" /> : <AdminWorkflow />}
+          />
           <Route path="*" element={<Page404 />} />
           {/* <Route path="/create-account" element={<CreateAccount />} /> */}
           {/* <Route path="/BusinessAccount" element={<BusinessAccount />} /> */}

@@ -23,7 +23,8 @@ export function ShopSearchResults({
   const navigate = useNavigate();
   const [searchTerm, setSearchTerm] = useState("");
   const [searchResults, setSearchResults] = useState([]);
-  const shops = useSelector((state) => state.shop.shops);
+  const { shops, isFetching } = useSelector((state) => state.shop);
+
   let inputEl = useRef(null);
   useEffect(() => {
     inputEl.focus();
@@ -85,7 +86,14 @@ export function ShopSearchResults({
           </div>
         </div>
         <div className="shop-result__results">
-          {searchTerm.length > 3 && searchResults.length < 1 ? (
+          {isFetching ? (
+            <SearchCard
+              shop={{
+                name: `Loading shops...`,
+                address: `Please hold on as we get you all the shops to search...`,
+              }}
+            />
+          ) : searchTerm.length > 3 && searchResults.length < 1 ? (
             <SearchCard
               shop={{
                 name: `No shop matching '${searchTerm.toUpperCase()}' found!`,
