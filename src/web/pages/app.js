@@ -53,7 +53,6 @@ function Routers() {
   const initialValues = useSelector((state) => state.business.businessData);
   const dispatch = useDispatch();
   const hasValues = initialValues?.hasOwnProperty("firstName");
-  console.log(hasValues);
   useEffect(() => {
     AutoAuthenticate(dispatch);
   }, [dispatch]);

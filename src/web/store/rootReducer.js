@@ -4,10 +4,12 @@ import settlementReport from "./modules/settements-reports/reducer";
 import { reducer as formReducer } from "redux-form";
 import userReducer from "./Slices/authSlice";
 import businessReducer from "./Slices/businessSlice";
+import shopReducer from "./Slices/shopSlice";
 
 const reducer = combineReducers({
   auth: userReducer,
   business: businessReducer,
+  shop: shopReducer,
   settlementsReports: settlementReport,
   drawer: drawerReducer,
   form: formReducer,

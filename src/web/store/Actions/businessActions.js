@@ -133,27 +133,3 @@ export const fetchAllOrders = (authToken) => {
     }
   };
 };
-
-export const fetchEnabledShops = () => {
-  return async (dispatch) => {
-    // dispatch(fetchEnabledShopsPending());
-    try {
-      const response = await fetch(
-        `${process.env.REACT_APP_BASEURL}/api/v1/shops`,
-        {
-          method: "GET",
-          headers: new Headers({
-            "Content-type": "application/json",
-            apiKey: process.env.REACT_APP_APIKEY,
-          }),
-        }
-      );
-      const data = await response.json();
-      // dispatch(fetchEnabledShopsSuccess(data?.shops));
-      console.log("shops", data?.shops);
-    } catch (error) {
-      // dispatch(fetchEnabledShopssFail(error));
-      console.log(error);
-    }
-  };
-};
