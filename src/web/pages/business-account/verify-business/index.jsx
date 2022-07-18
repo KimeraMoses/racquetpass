@@ -1,10 +1,12 @@
-import React from 'react';
-import { withNamespaces } from 'react-i18next';
-import { Link } from 'react-router-dom';
-import { MenuButton } from 'web/components';
-import './index.styles.scss';
+import React, { useRef } from "react";
+import { withNamespaces } from "react-i18next";
+import { Link } from "react-router-dom";
+import { MenuButton } from "web/components";
+import Recaptcha from "web/components/Google-Recaptcha/Recaptcha";
+import "./index.styles.scss";
 
 function VerifyBusiness({ t }) {
+  const refRecaptcha = useRef(null);
   return (
     <div className="verify-business-container">
       <div>
@@ -15,7 +17,7 @@ function VerifyBusiness({ t }) {
             </Link>
           </MenuButton>
           <h1 className="header-row-heading">
-            {t('verifyBusinessAccountBusinessHeading')}
+            {t("verifyBusinessAccountBusinessHeading")}
           </h1>
         </div>
 
@@ -29,6 +31,7 @@ function VerifyBusiness({ t }) {
             <div className="verify-business-body-link">Resend</div>
           </div>
         </div>
+        <Recaptcha refRecaptcha={refRecaptcha} />
       </div>
     </div>
   );

@@ -1,7 +1,7 @@
-import React from 'react';
-import { Link, useNavigate } from 'react-router-dom';
-import { reduxForm, Field } from 'redux-form';
-import { withNamespaces } from 'react-i18next';
+import React, { useRef } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { reduxForm, Field } from "redux-form";
+import { withNamespaces } from "react-i18next";
 
 // Custom Components
 import {
@@ -10,16 +10,18 @@ import {
   BackButton,
   CustomInput,
   CustomButton,
-} from 'web/components';
+} from "web/components";
 
-import './index.styles.scss';
-import { useSelector } from 'react-redux';
+import "./index.styles.scss";
+import { useSelector } from "react-redux";
+import Recaptcha from "web/components/Google-Recaptcha/Recaptcha";
 
-const required = (value) => (value ? undefined : 'This field is required');
+const required = (value) => (value ? undefined : "This field is required");
 
 let VerifyPhone = ({ t }) => {
+  const refRecaptcha = useRef(null);
   const errors = useSelector(
-    (state) => state?.form?.['create-business-account-2']?.syncErrors
+    (state) => state?.form?.["create-business-account-2"]?.syncErrors
   );
   const navigate = useNavigate();
   return (
@@ -28,11 +30,11 @@ let VerifyPhone = ({ t }) => {
         <div className="phone-section__heading">
           <BackButton
             onClick={() => {
-              navigate('/BusinessAccount/create');
+              navigate("/BusinessAccount/create");
             }}
           />
           <Heading customClass="phone-section__heading-text">
-            {t('odrPhonHeading')}
+            {t("odrPhonHeading")}
           </Heading>
         </div>
         <div className="phone-section__form-container">
@@ -48,20 +50,21 @@ let VerifyPhone = ({ t }) => {
         </div>
         <div className="phone-section__text-container">
           <Description customClass="phone-section__text-container-text">
-            {t('odrphnDesc')}
+            {t("odrphnDesc")}
           </Description>
           <Link to="#" className="phone-section__text-container-rescan">
-            {t('odrResendCode')}
+            {t("odrResendCode")}
           </Link>
         </div>
       </div>
       <div className="btn-container">
         <CustomButton size="lg" btn="primary" disabled={errors}>
           <Link to="/BusinessAccount/BusinessDetails">
-            {t('verifyBusinessAccountPhoneNextBtn')}
+            {t("verifyBusinessAccountPhoneNextBtn")}
           </Link>
         </CustomButton>
       </div>
+      <Recaptcha refRecaptcha={refRecaptcha} />
     </div>
   );
 };
@@ -73,7 +76,7 @@ const onSubmit = (values, dispatch) => {
 
 VerifyPhone = reduxForm({
   // a unique name for the form
-  form: 'create-business-account-2',
+  form: "create-business-account-2",
   onSubmit,
 })(VerifyPhone);
 

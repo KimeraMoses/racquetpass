@@ -1,16 +1,18 @@
 import { useNavigate } from "react-router-dom";
 import { withNamespaces } from "react-i18next";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { toast } from "react-toastify";
 import { clearUserInitials } from "web/store/Slices/authSlice";
 import { login } from "web/store/Actions/authActions";
+import Recaptcha from "web/components/Google-Recaptcha/Recaptcha";
 
 const ThankYou = () => {
   const [isLoading, setIsLoading] = useState(false);
   const { email, pwd } = useSelector((state) => state.auth.userInitials);
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const refRecaptcha = useRef(null);
 
   const formSubmitHandler = async () => {
     setIsLoading(true);
@@ -54,6 +56,7 @@ const ThankYou = () => {
           {isLoading ? "Redirecting..." : "Go to your account"}
         </button>
       </div>
+      <Recaptcha refRecaptcha={refRecaptcha} />
     </div>
   );
 };

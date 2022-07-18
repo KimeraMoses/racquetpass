@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { reduxForm, Field, reset } from "redux-form";
 import { useNavigate } from "react-router-dom";
 import { withNamespaces } from "react-i18next";
@@ -10,6 +10,7 @@ import { useSelector } from "react-redux";
 import { login } from "web/store/Actions/authActions";
 import { useDispatch } from "react-redux";
 import { toast } from "react-toastify";
+import Recaptcha from "web/components/Google-Recaptcha/Recaptcha";
 
 const required = (value) => (value ? undefined : "Email is required");
 const email = (value) => {
@@ -33,6 +34,7 @@ let Login = ({ t, handleSubmit }) => {
   const [loading, setIsLoading] = useState(false);
   // const query = useQuery();
   // const missingQR = query.get("missingQR");
+  const refRecaptcha = useRef();
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [passwordFieldType, setPasswordFieldType] = useState("password");
@@ -125,6 +127,7 @@ let Login = ({ t, handleSubmit }) => {
               <Description>{t("alreadyHaveAccount")}</Description>
               <Link to="/BusinessAccount/Create">&nbsp;{t("signUpNow")}</Link>
             </div>
+            <Recaptcha refRecaptcha={refRecaptcha} />
           </div>
         </div>
       </form>

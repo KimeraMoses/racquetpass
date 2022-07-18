@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { withNamespaces } from "react-i18next";
 import { Field, reduxForm } from "redux-form";
@@ -10,6 +10,7 @@ import "./index.styles.scss";
 import { clearEnteredValues } from "web/store/Slices/businessSlice";
 import { createNewBusiness } from "../../../store/Actions/businessActions";
 import { saveUserInitials } from "web/store/Slices/authSlice";
+import Recaptcha from "web/components/Google-Recaptcha/Recaptcha";
 
 const length = new RegExp("^(?=.{8,})");
 const lowerCase = new RegExp("^(?=.*[a-z])");
@@ -34,6 +35,7 @@ let CreatePassword = ({ t, back }) => {
   const [passwordFieldType, setPasswordFieldType] = useState("password");
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const refRecaptcha = useRef(null);
   const [password, setPassword] = useState("");
   const [passwordConditions, setPasswordConditions] = useState({
     moreThanEight: false,
@@ -294,6 +296,7 @@ let CreatePassword = ({ t, back }) => {
                   </p>
                 </li>
               </ul>
+              <Recaptcha refRecaptcha={refRecaptcha} />
 
               <div className="mt-[40px]">
                 <SubmitButton

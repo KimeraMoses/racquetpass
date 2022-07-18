@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { reduxForm, Field } from "redux-form";
 import { Link, useNavigate } from "react-router-dom";
 import { withNamespaces } from "react-i18next";
@@ -13,6 +13,7 @@ import "./index.styles.scss";
 import { SubmitButton } from "web/components/Buttons/SubmitButton.component";
 import { useDispatch, useSelector } from "react-redux";
 import { saveEnteredValues } from "web/store/Slices/businessSlice";
+import Recaptcha from "web/components/Google-Recaptcha/Recaptcha";
 
 const required = (value) => (value ? undefined : "This field is required");
 // ZIP Validation
@@ -27,6 +28,7 @@ const zipValidation = (value) => {
 let BusinessDetails = ({ t, change }) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const refRecaptcha = useRef(null);
   const errors = useSelector(
     (state) => state?.form?.["create-business-account-3"]?.syncErrors
   );
@@ -107,6 +109,7 @@ let BusinessDetails = ({ t, change }) => {
                 value={zipCode}
               />
             </div>
+            <Recaptcha refRecaptcha={refRecaptcha} />
             <div className="btn-container">
               <SubmitButton
                 type="button"

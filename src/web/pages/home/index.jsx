@@ -1,13 +1,16 @@
-import { Link, useNavigate } from 'react-router-dom';
-import { withNamespaces } from 'react-i18next';
-import { Button } from 'web/components';
-import './home.styles.scss';
+import React, { useRef } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { withNamespaces } from "react-i18next";
+import { Button } from "web/components";
+import Recaptcha from "web/components/Google-Recaptcha/Recaptcha";
+import "./home.styles.scss";
 
 function Home({ t }) {
   const navigate = useNavigate();
+  const refRecaptcha = useRef();
   const links = [
-    { path: '#', title: t('homePP') },
-    { path: '#', title: t('homeCU') },
+    { path: "#", title: t("homePP") },
+    { path: "#", title: t("homeCU") },
   ];
   return (
     <>
@@ -15,26 +18,26 @@ function Home({ t }) {
         <div>
           <div className="home-container__button-container">
             <div className="home-container__button-container-text">
-              {t('homeLogo')}
+              {t("homeLogo")}
             </div>
             <div className="home-container__button-container-buttons">
               <button
                 className="home-container__button-container-buttons-btn bg-[#fff]"
                 type="button"
                 onClick={() => {
-                  navigate('/BusinessAccount/Create');
+                  navigate("/BusinessAccount/Create");
                 }}
               >
-                {t('homeSignup')}
+                {t("homeSignup")}
               </button>
             </div>
           </div>
           <div className="banner-container">
-            <h1 className="banner-container__heading">{t('homeHeading')}</h1>
+            <h1 className="banner-container__heading">{t("homeHeading")}</h1>
           </div>
           <div className="banner-button-container">
-            <Button isDark onClick={() => navigate('/order')}>
-              {t('homeNewBtnTxt')}
+            <Button isDark onClick={() => navigate("/order")}>
+              {t("homeNewBtnTxt")}
             </Button>
           </div>
         </div>
@@ -57,6 +60,7 @@ function Home({ t }) {
               alt="racquet"
             />
           </div>
+          <Recaptcha refRecaptcha={refRecaptcha} />
         </div>
       </div>
     </>

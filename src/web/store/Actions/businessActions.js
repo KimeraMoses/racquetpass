@@ -102,27 +102,27 @@ export const editBusinessDetails =
     }
   };
 
-export const fetchAllOrders = (authToken) => {
-  return async (dispatch) => {
-    // dispatch(fetchOrdersPending());
-    try {
-      const response = await fetch(
-        `${process.env.REACT_APP_BASEURL}/api/v1/orders`,
-        {
-          method: "GET",
-          headers: new Headers({
-            "Content-type": "application/json",
-            Authorization: "Bearer " + authToken,
-            apiKey: process.env.REACT_APP_APIKEY,
-          }),
-        }
-      );
-      const data = await response.json();
-      // console.log("Orders", data);
-      // dispatch(fetchOrdersSuccess(data.orders));
-    } catch (error) {
-      // dispatch(fetchOrdersFail(error));
-      // console.log("Orders err", error);
-    }
-  };
-};
+// export const fetchAllOrders = (authToken) => {
+//   return async (dispatch) => {
+//     // dispatch(fetchOrdersPending());
+//     try {
+//       const response = await fetch(
+//         `${process.env.REACT_APP_BASEURL}/api/v1/orders`,
+//         {
+//           method: "GET",
+//           headers: new Headers({
+//             "Content-type": "application/json",
+//             Authorization: "Bearer " + authToken,
+//             apiKey: process.env.REACT_APP_APIKEY,
+//           }),
+//         }
+//       );
+//       const data = await response.json();
+//       // console.log("Orders", data);
+//       // dispatch(fetchOrdersSuccess(data.orders));
+//     } catch (error) {
+//       // dispatch(fetchOrdersFail(error));
+//       // console.log("Orders err", error);
+//     }
+//   };
+// };

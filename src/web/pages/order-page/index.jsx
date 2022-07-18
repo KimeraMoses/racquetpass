@@ -1,8 +1,8 @@
-import { useEffect, useState } from 'react';
-import { withNamespaces } from 'react-i18next';
-import { reduxForm } from 'redux-form';
-import { useNavigate } from 'react-router-dom';
-import { StepButton, Progress } from 'web/components';
+import { useEffect, useRef, useState } from "react";
+import { withNamespaces } from "react-i18next";
+import { reduxForm } from "redux-form";
+import { useNavigate } from "react-router-dom";
+import { StepButton, Progress } from "web/components";
 import {
   ScanSection,
   ScanNotFound,
@@ -21,39 +21,41 @@ import {
   OrderDetails,
   EditRacquet,
   DidntGetText,
-} from './sections';
+} from "./sections";
 
-import './order.styles.scss';
-import { useSelector } from 'react-redux';
-import { VerifyResend } from './sections/VerifyResend.section';
+import "./order.styles.scss";
+import { useSelector } from "react-redux";
+import { VerifyResend } from "./sections/VerifyResend.section";
+import Recaptcha from "web/components/Google-Recaptcha/Recaptcha";
 
 // Phone Validation
-const formats = '(999) 999-9999|(999)999-9999|999-999-9999|9999999999';
+const formats = "(999) 999-9999|(999)999-9999|999-999-9999|9999999999";
 const r = RegExp(
-  '^(' + formats.replace(/([()])/g, '\\$1').replace(/9/g, '\\d') + ')$'
+  "^(" + formats.replace(/([()])/g, "\\$1").replace(/9/g, "\\d") + ")$"
 );
 const phoneValidation = (value) => {
   if (r.test(value) === true) {
     if (value.length < 9 || value.length > 14) {
-      return 'Please enter value between 9 and 14';
+      return "Please enter value between 9 and 14";
     } else {
       return undefined;
     }
   } else {
-    return 'Please enter a valid phone number.';
+    return "Please enter a valid phone number.";
   }
 };
 
 let OrderPage = ({ t, handleSubmit, change }) => {
+  const refRecaptcha = useRef(null);
   const [step, setStep] = useState(0);
   const [steps, setSteps] = useState({
-    active: '',
-    content: ['QR', 'Strings', 'Contact', 'Review'],
+    active: "",
+    content: ["QR", "Strings", "Contact", "Review"],
   });
-  const [shop, setShop] = useState({ current: 'search' });
-  const [scan, setScan] = useState({ current: 'initial' });
-  const [strings, setStrings] = useState({ current: 'initial' });
-  const [mainCross, setMainCross] = useState({ current: 'initial' });
+  const [shop, setShop] = useState({ current: "search" });
+  const [scan, setScan] = useState({ current: "initial" });
+  const [strings, setStrings] = useState({ current: "initial" });
+  const [mainCross, setMainCross] = useState({ current: "initial" });
   const [main, setMain] = useState(false);
   const [cross, setCross] = useState(false);
   const [done, setDone] = useState(false);
@@ -67,7 +69,7 @@ let OrderPage = ({ t, handleSubmit, change }) => {
   const goToTop = () => {
     window.scrollTo({
       top: 0,
-      behavior: 'smooth',
+      behavior: "smooth",
     });
   };
 
@@ -79,37 +81,37 @@ let OrderPage = ({ t, handleSubmit, change }) => {
     switch (step) {
       case 1:
         setSteps((s) => {
-          return { ...s, active: 'QR' };
+          return { ...s, active: "QR" };
         });
         break;
       case 2:
         setSteps((s) => {
-          return { ...s, active: 'Strings' };
+          return { ...s, active: "Strings" };
         });
         break;
       case 3:
         setSteps((s) => {
-          return { ...s, active: 'Strings' };
+          return { ...s, active: "Strings" };
         });
         break;
       case 4:
         setSteps((s) => {
-          return { ...s, active: 'Contact' };
+          return { ...s, active: "Contact" };
         });
         break;
       case 5:
         setSteps((s) => {
-          return { ...s, active: 'Contact' };
+          return { ...s, active: "Contact" };
         });
         break;
       case 6:
         setSteps((s) => {
-          return { ...s, active: 'Review' };
+          return { ...s, active: "Review" };
         });
         break;
       case 7:
         setSteps((s) => {
-          return { ...s, active: 'Review' };
+          return { ...s, active: "Review" };
         });
         break;
       default:
@@ -120,9 +122,9 @@ let OrderPage = ({ t, handleSubmit, change }) => {
   // Function to move search forward
   const scanForward = (scan) => {
     if (scan) {
-      setScan({ current: 'found' });
+      setScan({ current: "found" });
     } else {
-      setScan({ current: 'notFound' });
+      setScan({ current: "notFound" });
     }
   };
 
@@ -147,10 +149,10 @@ let OrderPage = ({ t, handleSubmit, change }) => {
   };
 
   const backward = () => {
-    if (step === 1 && scan.current !== 'initial') {
-      setScan({ current: 'initial' });
+    if (step === 1 && scan.current !== "initial") {
+      setScan({ current: "initial" });
     } else if (step === 0) {
-      navigate('/');
+      navigate("/");
     } else {
       setStep((step) => step - 1);
     }
@@ -158,7 +160,7 @@ let OrderPage = ({ t, handleSubmit, change }) => {
 
   const getCurrentScanScreen = () => {
     switch (scan.current) {
-      case 'initial':
+      case "initial":
         return (
           <ScanSection
             t={t}
@@ -170,7 +172,7 @@ let OrderPage = ({ t, handleSubmit, change }) => {
             setBackFromReview={setBackFromReview}
           />
         );
-      case 'found':
+      case "found":
         return (
           <ScanSuccess
             t={t}
@@ -180,7 +182,7 @@ let OrderPage = ({ t, handleSubmit, change }) => {
             setBackFromReview={setBackFromReview}
           />
         );
-      case 'notFound':
+      case "notFound":
         return (
           <ScanNotFound
             t={t}
@@ -197,7 +199,7 @@ let OrderPage = ({ t, handleSubmit, change }) => {
 
   const getCurrentShopScreen = () => {
     switch (shop.current) {
-      case 'initial':
+      case "initial":
         return (
           <SelectShop
             t={t}
@@ -205,7 +207,7 @@ let OrderPage = ({ t, handleSubmit, change }) => {
             backward={backward}
           />
         );
-      case 'search':
+      case "search":
         return (
           <ShopSearchResults
             t={t}
@@ -217,7 +219,7 @@ let OrderPage = ({ t, handleSubmit, change }) => {
             setBackFromReview={setBackFromReview}
           />
         );
-      case 'find':
+      case "find":
         return (
           <GiveShopInfo
             t={t}
@@ -226,7 +228,7 @@ let OrderPage = ({ t, handleSubmit, change }) => {
             change={change}
           />
         );
-      case 'thanks':
+      case "thanks":
         return <Thanks />;
       default:
         return <>Check current shop</>;
@@ -235,7 +237,7 @@ let OrderPage = ({ t, handleSubmit, change }) => {
 
   const getCurrentStringsScreen = () => {
     switch (strings.current) {
-      case 'initial':
+      case "initial":
         return (
           <SelectString
             t={t}
@@ -248,7 +250,7 @@ let OrderPage = ({ t, handleSubmit, change }) => {
             setBackFromReview={setBackFromReview}
           />
         );
-      case 'search':
+      case "search":
         return (
           <BrandSearchResults
             t={t}
@@ -267,7 +269,7 @@ let OrderPage = ({ t, handleSubmit, change }) => {
   };
   const getCurrentMainCross = () => {
     switch (mainCross.current) {
-      case 'initial':
+      case "initial":
         return (
           <SelectStringWithMainCross
             t={t}
@@ -282,7 +284,7 @@ let OrderPage = ({ t, handleSubmit, change }) => {
             setBackFromReview={setBackFromReview}
           />
         );
-      case 'search':
+      case "search":
         return (
           <BrandSearchResults
             t={t}
@@ -364,28 +366,28 @@ let OrderPage = ({ t, handleSubmit, change }) => {
       step === 9 ||
       step === 20 ||
       done ||
-      mainCross.current === 'search' ||
-      strings.current === 'search' ||
+      mainCross.current === "search" ||
+      strings.current === "search" ||
       backFromReview ? (
         <></>
       ) : (
         <Progress steps={steps} />
       )}
       <div
-        className={`order-page ${done ? 'order-page-done' : ''} ${
-          step === 0 ? 'order-page-zero' : ''
+        className={`order-page ${done ? "order-page-done" : ""} ${
+          step === 0 ? "order-page-zero" : ""
         }`}
       >
         <form onSubmit={handleSubmit} className="order-page__form">
           <div>{getActiveSection()}</div>
           {done ||
-          shop.current === 'find' ||
-          shop.current === 'thanks' ||
-          mainCross.current === 'search' ||
-          strings.current === 'search' ||
+          shop.current === "find" ||
+          shop.current === "thanks" ||
+          mainCross.current === "search" ||
+          strings.current === "search" ||
           step === 6 ||
           step === 0 ||
-          (step === 1 && scan.current === 'initial') ||
+          (step === 1 && scan.current === "initial") ||
           step === 8 ? (
             <></>
           ) : (
@@ -405,23 +407,24 @@ let OrderPage = ({ t, handleSubmit, change }) => {
                   (step === 2 && !values?.brand) ||
                   (step === 3 && !values?.mains && !values?.cross) ||
                   (step === 4 &&
-                    (!values?.['phone-number'] ||
-                      phoneValidation(values?.['phone-number']) !==
+                    (!values?.["phone-number"] ||
+                      phoneValidation(values?.["phone-number"]) !==
                         undefined)) ||
                   (step === 5 &&
-                    (!values?.['verification-code'] ||
-                      values?.['verification-code']?.length !== 6))
+                    (!values?.["verification-code"] ||
+                      values?.["verification-code"]?.length !== 6))
                 }
                 type="button"
               >
                 {step === 1 && backFromReview
-                  ? 'Change to this racquet'
+                  ? "Change to this racquet"
                   : (step === 4 || step === 2 || step === 3) && backFromReview
-                  ? 'Save Changes'
-                  : t('odrNext')}
+                  ? "Save Changes"
+                  : t("odrNext")}
               </StepButton>
             </div>
           )}
+          <Recaptcha refRecaptcha={refRecaptcha} />
         </form>
       </div>
     </>
@@ -434,7 +437,7 @@ const onSubmit = (values, dispatch) => {
 };
 
 OrderPage = reduxForm({
-  form: 'signup',
+  form: "signup",
   onSubmit,
 })(OrderPage);
 

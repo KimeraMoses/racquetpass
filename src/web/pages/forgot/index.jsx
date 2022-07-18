@@ -1,11 +1,13 @@
-import { reduxForm, Field } from 'redux-form';
-import { useNavigate } from 'react-router-dom';
-import { withNamespaces } from 'react-i18next';
-import { BackButton, Heading, CustomInput, SubmitButton } from 'web/components';
-import './index.styles.scss';
-import { useSelector } from 'react-redux';
+import { reduxForm, Field } from "redux-form";
+import { useNavigate } from "react-router-dom";
+import { withNamespaces } from "react-i18next";
+import { BackButton, Heading, CustomInput, SubmitButton } from "web/components";
+import "./index.styles.scss";
+import { useSelector } from "react-redux";
+import Recaptcha from "web/components/Google-Recaptcha/Recaptcha";
+import { useRef } from "react";
 
-const required = (value) => (value ? undefined : 'Email is required');
+const required = (value) => (value ? undefined : "Email is required");
 const email = (value) => {
   if (
     /^(([^<>()[\].,;:\s@"]+(\.[^<>()[\].,;:\s@"]+)*)|(".+"))@(([^<>()[\].,;:\s@"]+\.)+[^<>()[\].,;:\s@"]{2,})$/i.test(
@@ -14,20 +16,21 @@ const email = (value) => {
   ) {
     return undefined;
   } else {
-    return 'Please enter a valid email';
+    return "Please enter a valid email";
   }
 };
 
 let Forgot = ({ t, handleSubmit }) => {
+  const refRecaptcha = useRef(null);
   const navigate = useNavigate();
-  const errors = useSelector((state) => state?.form?.['forgot']?.syncErrors);
+  const errors = useSelector((state) => state?.form?.["forgot"]?.syncErrors);
   return (
     <form onSubmit={handleSubmit} className="forgot">
       <div className="forgot__header">
         <div className="forgot__header-heading">
           <BackButton
             onClick={() => {
-              navigate('/login');
+              navigate("/login");
             }}
           />
           <Heading>Forgot Password?</Heading>
@@ -47,11 +50,12 @@ let Forgot = ({ t, handleSubmit }) => {
             validate={[required, email]}
           />
         </div>
+        <Recaptcha refRecaptcha={refRecaptcha} />
         <div className="forgot__form-buttons">
           <SubmitButton
             type="submit"
             disabled={errors}
-            onClick={() => navigate('/login')}
+            onClick={() => navigate("/login")}
             className="forgot__form-buttons-btn"
           >
             Email me a recovery link
@@ -69,7 +73,7 @@ const onSubmit = (values, dispatch) => {
 
 Forgot = reduxForm({
   // a unique name for the form
-  form: 'forgot',
+  form: "forgot",
   onSubmit,
 })(Forgot);
 

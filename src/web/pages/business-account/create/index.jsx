@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useRef } from "react";
 import { withNamespaces } from "react-i18next";
 // import { MenuButton } from 'web/components';
 // import { CustomButton } from 'web/components';
@@ -15,6 +15,7 @@ import { BackButton } from "web/components/Buttons/BackButton.component";
 import { useNavigate } from "../../../../../node_modules/react-router-dom/index";
 import { useSelector, useDispatch } from "react-redux";
 import { saveEnteredValues } from "web/store/Slices/businessSlice";
+import Recaptcha from "web/components/Google-Recaptcha/Recaptcha";
 
 const required = (value) => (value ? undefined : "This field is required");
 // Phone Validation
@@ -47,6 +48,7 @@ let Create = ({ t, change }) => {
   );
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const refRecaptcha = useRef();
 
   return (
     <>
@@ -122,6 +124,7 @@ let Create = ({ t, change }) => {
                 </Description>
               </div>
             </div>
+            <Recaptcha refRecaptcha={refRecaptcha} />
             <div className="create-business-account__form-button">
               <SubmitButton
                 type="button"
