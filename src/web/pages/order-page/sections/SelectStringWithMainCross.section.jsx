@@ -1,5 +1,5 @@
-import { Field } from 'redux-form';
-import { useSelector } from 'react-redux';
+import { Field } from "redux-form";
+import { useSelector } from "react-redux";
 // Custom Components
 import {
   Heading,
@@ -10,16 +10,16 @@ import {
   CustomSwitch,
   CustomInput,
   CustomSelect,
-} from 'web/components';
+} from "web/components";
 
 // Styles
-import './SelectStringWithMainCross.styles.scss';
-import { FileInput } from 'web/components/formFields/index';
-import { useState } from 'react';
-import { Modal } from 'web/components/index';
-import { BackButton } from 'web/components/Buttons/BackButton.component';
+import "./SelectStringWithMainCross.styles.scss";
+import { FileInput } from "web/components/formFields/index";
+import { useState } from "react";
+import { Modal } from "web/components/index";
+import { BackButton } from "web/components/Buttons/BackButton.component";
 
-const required = (value) => (value ? undefined : 'Required');
+const required = (value) => (value ? undefined : "Required");
 
 export function SelectStringWithMainCross({
   t,
@@ -39,7 +39,7 @@ export function SelectStringWithMainCross({
   const cross = useSelector((state) => state?.form?.signup?.values?.cross);
 
   const [modal, setModal] = useState(false);
-  const [unit, setUnit] = useState('lbs');
+  const [unit, setUnit] = useState("lbs");
 
   const racquetSport = useSelector(
     (state) => state?.form?.signup?.values?.racquetSport
@@ -81,7 +81,7 @@ export function SelectStringWithMainCross({
             }}
           />
           <Heading customClass="select-string-mc__heading-text">
-            {backFromReview ? 'Strings' : t('odrSelect')}
+            {backFromReview ? "Strings" : t("odrSelect")}
           </Heading>
         </div>
         <div className="select-string-mc__text-container">
@@ -95,7 +95,7 @@ export function SelectStringWithMainCross({
         </div>
         <div className="select-string-mc__main-info">
           <div className="select-string-mc__main-info-heading">
-            <Heading>{t('odrMain')}</Heading>
+            <Heading>{t("odrMain")}</Heading>
           </div>
           <div className="select-string-mc__main-info-select">
             <CustomOrderSelect
@@ -111,7 +111,7 @@ export function SelectStringWithMainCross({
               onSelectClick={() => {
                 setMain(true);
                 setCross(false);
-                setMainCross({ current: 'search' });
+                setMainCross({ current: "search" });
               }}
               value={main?.name}
             />
@@ -132,15 +132,15 @@ export function SelectStringWithMainCross({
                 setMainsTension(e.target.value);
               }}
               link={{
-                text: `Change units to ${unit === 'kg' ? 'lbs' : 'kg'}`,
-                path: '#',
+                text: `Change units to ${unit === "kg" ? "lbs" : "kg"}`,
+                path: "#",
                 onClick: () => {
-                  if (unit === 'kg') {
-                    setUnit('lbs');
+                  if (unit === "kg") {
+                    setUnit("lbs");
                     setMainsTension(50);
                     setCrossesTension(50);
                   } else {
-                    setUnit('kg');
+                    setUnit("kg");
                     setMainsTension(25);
                     setCrossesTension(25);
                   }
@@ -153,7 +153,7 @@ export function SelectStringWithMainCross({
         </div>
         <div className="select-string-mc__crosses-info">
           <div className="select-string-mc__crosses-info-heading">
-            <Heading>{t('odrcross')}</Heading>
+            <Heading>{t("odrcross")}</Heading>
           </div>
           <div className="select-string-mc__crosses-info-select">
             <CustomOrderSelect
@@ -170,7 +170,7 @@ export function SelectStringWithMainCross({
               onSelectClick={() => {
                 setMain(false);
                 setCross(true);
-                setMainCross({ current: 'search' });
+                setMainCross({ current: "search" });
               }}
             />
           </div>
@@ -182,15 +182,15 @@ export function SelectStringWithMainCross({
                 setCrossesTension(e.target.value);
               }}
               link={{
-                text: `Change units to ${unit === 'kg' ? 'lbs' : 'kg'}`,
-                path: '#',
+                text: `Change units to ${unit === "kg" ? "lbs" : "kg"}`,
+                path: "#",
                 onClick: () => {
-                  if (unit === 'kg') {
-                    setUnit('lbs');
+                  if (unit === "kg") {
+                    setUnit("lbs");
                     setMainsTension(50);
                     setCrossesTension(50);
                   } else {
-                    setUnit('kg');
+                    setUnit("kg");
                     setMainsTension(25);
                     setCrossesTension(25);
                   }
@@ -223,8 +223,8 @@ export function SelectStringWithMainCross({
         ) : (
           <>
             <div className="select-string-odr__recquet-heading">
-              <Heading>{t('odrdetailHeading')}</Heading>
-              <Description>{t('orderRecquetDesc')}</Description>
+              <Heading>{t("odrdetailHeading")}</Heading>
+              <Description>{t("orderRecquetDesc")}</Description>
             </div>
             <div className="select-string-odr__recquet-form">
               <Field
@@ -236,7 +236,7 @@ export function SelectStringWithMainCross({
                     <CustomSelect
                       {...props}
                       customOnChange={(option) => {
-                        change('racquetSport', option?.value);
+                        change("racquetSport", option?.value);
                       }}
                       value={
                         racquetSport
@@ -248,10 +248,10 @@ export function SelectStringWithMainCross({
                 }}
                 validate={required}
                 options={[
-                  { label: 'Tennis', value: 'Tennis' },
-                  { label: 'Squash', value: 'Squash' },
-                  { label: 'Badminton', value: 'Badminton' },
-                  { label: 'Other', value: 'Other' },
+                  { label: "Tennis", value: "Tennis" },
+                  { label: "Squash", value: "Squash" },
+                  { label: "Badminton", value: "Badminton" },
+                  { label: "Other", value: "Other" },
                 ]}
               />
               <Field
@@ -264,7 +264,7 @@ export function SelectStringWithMainCross({
                     <CustomSelect
                       {...props}
                       customOnChange={(option) => {
-                        change('racquetBrand', option?.value);
+                        change("racquetBrand", option?.value);
                       }}
                       value={
                         racquetBrand
@@ -275,20 +275,20 @@ export function SelectStringWithMainCross({
                   );
                 }}
                 options={[
-                  { label: 'Babolat', value: 'Babolat' },
-                  { label: 'Wilson', value: 'Wilson' },
-                  { label: 'Head', value: 'Head' },
-                  { label: 'Prince', value: 'Prince' },
-                  { label: 'Yonex', value: 'Yonex' },
-                  { label: 'Volkl', value: 'Volkl' },
-                  { label: 'Dunlop', value: 'Dunlop' },
-                  { label: 'Technifibre', value: 'Technifibre' },
-                  { label: 'Prokennex', value: 'Prokennex' },
-                  { label: 'Solinco', value: 'Solinco' },
-                  { label: 'Gamma', value: 'Gamma' },
-                  { label: 'Lacoste', value: 'Lacoste' },
-                  { label: 'Donnay', value: 'Donnay' },
-                  { label: 'Other', value: 'Other' },
+                  { label: "Babolat", value: "Babolat" },
+                  { label: "Wilson", value: "Wilson" },
+                  { label: "Head", value: "Head" },
+                  { label: "Prince", value: "Prince" },
+                  { label: "Yonex", value: "Yonex" },
+                  { label: "Volkl", value: "Volkl" },
+                  { label: "Dunlop", value: "Dunlop" },
+                  { label: "Technifibre", value: "Technifibre" },
+                  { label: "Prokennex", value: "Prokennex" },
+                  { label: "Solinco", value: "Solinco" },
+                  { label: "Gamma", value: "Gamma" },
+                  { label: "Lacoste", value: "Lacoste" },
+                  { label: "Donnay", value: "Donnay" },
+                  { label: "Other", value: "Other" },
                 ]}
               />
               <Field

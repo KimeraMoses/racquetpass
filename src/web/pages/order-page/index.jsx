@@ -27,6 +27,8 @@ import "./order.styles.scss";
 import { useSelector } from "react-redux";
 import { VerifyResend } from "./sections/VerifyResend.section";
 import Recaptcha from "web/components/Google-Recaptcha/Recaptcha";
+import { useDispatch } from "react-redux";
+import { createOrder } from "web/store/Actions/shopActions";
 
 // Phone Validation
 const formats = "(999) 999-9999|(999)999-9999|999-999-9999|9999999999";
@@ -62,9 +64,26 @@ let OrderPage = ({ t, handleSubmit, change }) => {
   const [backFromReview, setBackFromReview] = useState(false);
 
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const errors = useSelector((state) => state?.form?.signup?.syncErrors);
   const values = useSelector((state) => state?.form?.signup?.values);
+
+  // const createOrderHandler = async () => {
+  //   const data = {
+  //     string_id: values?.brand?.string_id,
+  //     racquet_id: values["raquet-details-from-qr"],
+  //     shop_id: values?.shop?.shop_id,
+  //     use_hybrid_settings: false,
+  //     firs_name: values["first-name"],
+  //     last_name: values["last-name"],
+  //     phone_number: values["phone-number"],
+  //   };
+  //   try {
+  //     await dispatch(createOrder(data));
+  //     navigate();
+  //   } catch (error) {}
+  // };
 
   const goToTop = () => {
     window.scrollTo({
@@ -358,6 +377,8 @@ let OrderPage = ({ t, handleSubmit, change }) => {
         return <>Undetected Step</>;
     }
   };
+  console.log("current step", step);
+
   return (
     <>
       {step === 7 ||
@@ -431,9 +452,23 @@ let OrderPage = ({ t, handleSubmit, change }) => {
   );
 };
 
-const onSubmit = (values, dispatch) => {
+const onSubmit = async (values, dispatch) => {
   // dispatch(    // your submit action //      );
   console.log(values);
+  const data = {
+    string_id: values?.brand?.string_id,
+    racquet_id: values["raquet-details-from-qr"],
+    shop_id: values?.shop?.shop_id,
+    use_hybrid_settings: false,
+    first_name: values["first-name"],
+    last_name: values["last-name"],
+    phone_number: values["phone-number"],
+  };
+  try {
+    await dispatch(createOrder(data));
+  } catch (error) {
+    console.log("Failed to send order");
+  }
 };
 
 OrderPage = reduxForm({

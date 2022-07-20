@@ -1,16 +1,22 @@
-import React, { useState } from 'react';
-import { withNamespaces } from 'react-i18next';
-import { MenuButton } from 'web/components';
-import { TaskStatus } from 'web/components';
-import { SubmitButton } from 'web/components/Buttons/SubmitButton.component';
-import { Modal } from 'web/components/index';
-import { Link } from 'react-router-dom';
-import './index.styles.scss';
+import React, { useState } from "react";
+import { withNamespaces } from "react-i18next";
+import { MenuButton } from "web/components";
+import { TaskStatus } from "web/components";
+import { SubmitButton } from "web/components/Buttons/SubmitButton.component";
+import { Modal } from "web/components/index";
+import { Link } from "react-router-dom";
+import "./index.styles.scss";
+import { useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 
 function Details({ t }) {
   const [show, setShow] = useState(false);
   const [complete, setComplete] = useState(false);
   const [justCompleted, setJustCompleted] = useState(false);
+  const order = useSelector((state) => state.shop?.order);
+  const dispatch = useDispatch();
+  console.log("Scaned Order", order);
+
   return (
     <div className="task-detail-container">
       <Modal
@@ -57,27 +63,27 @@ function Details({ t }) {
             <img alt="Menu Icon" src="../svg/arrowLeft.svg" />
           </Link>
         </MenuButton>
-        <h1 className="header-row-heading">Order #312</h1>
+        <h1 className="header-row-heading">Order #{order && order.id}</h1>
       </div>
       <div className="detail-body-container">
         <div className="status-container">
           {complete ? (
             <TaskStatus status>
               <img className="icon" alt="tick" src="../svg/tick.svg" />
-              {t('taskCompleted')}
+              {t("taskCompleted")}
             </TaskStatus>
           ) : (
             <TaskStatus>
               <img className="icon" alt="calender" src="../svg/calender.svg" />
-              {t('taskScannedDueDate')}
+              {t("taskScannedDueDate")}
             </TaskStatus>
           )}
         </div>
         <div className="racquet-info">
           <img className="img" alt="racquet" src="../img/tasks/racquet.png" />
           <div className="brand">
-            <div className="model">{t('taskOpenedBrand')}</div>
-            <div className="title">{t('taskOpenedBrandTitle')}</div>
+            <div className="model">{t("taskOpenedBrand")}</div>
+            <div className="title">{order && order.id}</div>
           </div>
         </div>
 
@@ -87,8 +93,8 @@ function Details({ t }) {
           </div>
           <div className="grid grid-cols-[3fr_1fr] mb-[0px]">
             <div>
-              <div className="string-label">{t('taskScannedMainsHeading')}</div>
-              <div className="string-desc-details">Luxilon Alu Rough 1.6 G</div>
+              <div className="string-label">{t("taskScannedMainsHeading")}</div>
+              <div className="string-desc-details">{order && order.string}</div>
             </div>
             <div>
               <div className="string-label">Tension</div>
@@ -100,7 +106,7 @@ function Details({ t }) {
             </div>
             <div>
               <div className="string-label">
-                {t('taskScannedCrossesHeading')}
+                {t("taskScannedCrossesHeading")}
               </div>
               <div className="string-desc-details">Luxilon Alu Rough 1.6 G</div>
             </div>
@@ -117,19 +123,23 @@ function Details({ t }) {
 
         <div className="player-details">
           <div className="title-row">
-            <div className="title">{t('taskOpenedPlayerTitle')}</div>
+            <div className="title">{t("taskOpenedPlayerTitle")}</div>
           </div>
-          <div className="player-label">{t('taskOpenedPlayerNameHeading')}</div>
-          <div className="player-desc-details">{t('taskOpenedPlayerName')}</div>
+          <div className="player-label">{t("taskOpenedPlayerNameHeading")}</div>
+          <div className="player-desc-details">
+            {order && order?.delivery_address?.last_name}
+          </div>
           <div className="mt-[8px] text-[#545454] text-[12px] font-medium">
             If this is missing from the racquet's QR sticker, make sure to write
             it in.
           </div>
           <div className="player-label mt-[14px]">
-            {t('taskOpenedPlayerPhoneHeading')}
+            {t("taskOpenedPlayerPhoneHeading")}
           </div>
           <div className="player-desc text-[#304FFE]">
-            <a href="tel:(123) 456-7890">(123) 456-7890</a>
+            <a href={`tel:${order && order?.delivery_address?.phone_number}`}>
+              {order && order?.delivery_address?.phone_number}
+            </a>
           </div>
         </div>
 
@@ -140,7 +150,7 @@ function Details({ t }) {
           <div className="grid grid-cols-[1fr_1fr] mb-[0px]">
             <div>
               <div className="string-label">Order Number</div>
-              <div className="string-desc-details">312</div>
+              <div className="string-desc-details">32</div>
             </div>
 
             <div>

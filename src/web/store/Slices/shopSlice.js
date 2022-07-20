@@ -3,6 +3,9 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
   shops: [],
   shop: {},
+  orders: [],
+  order: {},
+  link: "",
   isLoading: false,
   isFetching: false,
   message: "",
@@ -12,6 +15,9 @@ const shopSlice = createSlice({
   name: "shops",
   initialState,
   reducers: {
+    setShopLoading: (state, { payload }) => {
+      state.isLoading = payload;
+    },
     fetchShopsPending: (state) => {
       state.isFetching = true;
     },
@@ -55,6 +61,15 @@ const shopSlice = createSlice({
       state.isLoading = false;
       state.message = payload;
     },
+    getSessionLink: (state, { payload }) => {
+      state.link = payload;
+    },
+    getAllShopOrders: (state, { payload }) => {
+      state.orders = payload;
+    },
+    getAllShopOrder: (state, { payload }) => {
+      state.order = payload;
+    },
   },
 });
 
@@ -73,6 +88,10 @@ export const {
   sendMessagePending,
   sendMessageSucess,
   sendMessageFail,
+  getSessionLink,
+  setShopLoading,
+  getAllShopOrders,
+  getAllShopOrder,
 } = actions;
 
 export default reducer;

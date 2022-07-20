@@ -63,13 +63,19 @@ function Routers() {
         <ToastContainer />
         <CustomDrawer show={show} />
         <Routes>
-          <Route path="/" element={<Home />} />
+          <Route
+            path="/"
+            element={isAuthenticated ? <Navigate to="/tasks" /> : <Home />}
+          />
           <Route
             path="/login"
             element={isAuthenticated ? <Navigate to="/tasks" /> : <Login />}
           />
-          <Route path="/forgot" element={<Forgot />} />
-          <Route path="/reset-password" element={<ResetPassword />} />
+          <Route path="/forgot-password" element={<Forgot />} />
+          <Route
+            path="/reset-password/:resetToken"
+            element={<ResetPassword />}
+          />
           <Route path="/order" element={<Order />} />
           <Route
             path="/Tasks"

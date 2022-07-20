@@ -37,7 +37,7 @@ export function SelectString({
     setModal((modal) => !modal);
   };
 
-  const brand = useSelector((state) => state?.form?.signup?.values?.string);
+  const brand = useSelector((state) => state?.form?.signup?.values?.brand);
 
   const [mainsTension, setMainsTension] = useState(50);
 

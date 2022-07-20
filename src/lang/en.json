@@ -372,6 +372,7 @@
   "odrForgetPass": "Forgot Password?",
 
   "accPassword": "Make a password",
+  "newPassword": "New Password",
   "accPasstxt": "A little pain for a lot of security.",
   "accPassRecommend": "Recommendations",
   "accPassitem1": "At least eight characters long",

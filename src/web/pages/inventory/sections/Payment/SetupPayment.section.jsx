@@ -1,7 +1,34 @@
+import { useEffect } from "react";
+import { useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { Heading, HeadingButton, Description } from "web/components";
+import {
+  fetchShopDetails,
+  getStripeManagementSessionLink,
+  getStripeSessionLink,
+} from "web/store/Actions/shopActions";
 import "./SetupPayment.styles.scss";
 
 export const SetupPayment = ({ t, setDrawer }) => {
+  const shopId = useSelector((state) => state?.auth?.user?.shop);
+  const { link, isLoading } = useSelector((state) => state.shop);
+  const stripe_status = useSelector((state) => state.shop?.shop?.stripe_status);
+
+  const dispatch = useDispatch();
+  useEffect(() => {
+    if (stripe_status === "disabled") {
+      dispatch(getStripeSessionLink(shopId));
+      dispatch(fetchShopDetails(shopId));
+    } else {
+      dispatch(getStripeManagementSessionLink(shopId));
+    }
+  }, [shopId, stripe_status]);
+
+  const LinkText =
+    stripe_status === "disabled"
+      ? "Go to Stripe to setup payment"
+      : t("setupStripe");
+
   return (
     <div className="setup-payment">
       <div className="setup-payment__header">
@@ -35,12 +62,12 @@ export const SetupPayment = ({ t, setDrawer }) => {
         </ol>
         <div className="flex justify-center mt-[50px]">
           <a
-            href="https://stripe.com"
+            href={link ? link : "#"}
             target="_blank"
             rel="noreferrer"
             className="text-[#304FFE] font-medium text-lg"
           >
-            {t("setupStripe")}
+            {isLoading ? "Generating payment link..." : LinkText}
           </a>
         </div>
       </div>

@@ -1,4 +1,10 @@
-import { axios, loginRoute, showError } from "lib";
+import {
+  axios,
+  loginRoute,
+  showError,
+  forgotPasswordRoute,
+  passwordResetRoute,
+} from "lib";
 import { toast } from "react-toastify";
 import {
   autoAuthenticationSuccess,
@@ -7,6 +13,7 @@ import {
   setUserLoading,
 } from "../Slices/authSlice";
 
+//LOGIN USER
 export const login = (data) => {
   return async (dispatch) => {
     dispatch(setUserLoading(true));
@@ -22,12 +29,11 @@ export const login = (data) => {
     } catch (error) {
       dispatch(setUserLoading(false));
       toast.error(showError(error));
-
-      // toast.error(`Failed to login, ${error.response?.data?.message}`);
     }
   };
 };
 
+//SAVE TOKEN TO LOCAL STORAGE
 export const SaveTokenInLocalStorage = (dispatch, userDetails) => {
   logOutTimer(dispatch, userDetails.expiresIn);
   let AuthTokenDetails = {
@@ -42,12 +48,14 @@ export const SaveTokenInLocalStorage = (dispatch, userDetails) => {
   );
 };
 
+//LOGOUT TIMER
 export const logOutTimer = (dispatch, timer) => {
   setTimeout(() => {
     dispatch(logout());
   }, timer);
 };
 
+//AUTO AUTHENTICATE USER WITH VALID TOKEN
 export const AutoAuthenticate = (dispatch) => {
   const AuthToken = localStorage.getItem("Racquet__AuthToken");
   const CurrentUser = localStorage.getItem("Racquet__CurrentUser");
@@ -72,52 +80,42 @@ export const AutoAuthenticate = (dispatch) => {
   logOutTimer(dispatch, timer);
 };
 
-// export const forgotPassword = (email) => {
-//   return async (dispatch) => {
-//     dispatch(forgotPasswordPending());
-//     const response = await fetch(
-//       `${process.env.REACT_APP_BASEURL}/api/v1/forgotPassword`,
-//       {
-//         method: "POST",
-//         body: JSON.stringify({
-//           email,
-//         }),
-//         headers: new Headers({
-//           "Content-type": "application/json",
-//           apiKey: process.env.REACT_APP_APIKEY,
-//         }),
-//       }
-//     );
-//     if (!response.ok) {
-//       const error = await response.json();
-//       dispatch(forgotPasswordFail(error));
-//     }
-//     const data = await response.json();
-//     dispatch(forgotPasswordSuccess(data));
-//   };
-// };
+//FORGOT PASSWORD RESET LINK REQUEST
+export const forgotPassword = (email) => {
+  return async (dispatch) => {
+    dispatch(setUserLoading());
+    if (email) {
+      try {
+        const { url } = forgotPasswordRoute();
+        const res = await axios.post(url, { email });
+        dispatch(setUserLoading(false));
+        if (res.status === 200) toast.success(res.data?.message);
+      } catch (error) {
+        toast.error(showError(error));
+        dispatch(setUserLoading(false));
+      }
+    }
+  };
+};
 
-// export const passwordReset = (password, resetToken) => {
-//   return async (dispatch) => {
-//     dispatch(resetPasswordPending());
-//     const response = await fetch(
-//       `${process.env.REACT_APP_BASEURL}/api/v1/resetPassword/${resetToken}`,
-//       {
-//         method: "PATCH",
-//         body: JSON.stringify({
-//           password,
-//         }),
-//         headers: new Headers({
-//           "Content-type": "application/json",
-//           apiKey: process.env.REACT_APP_APIKEY,
-//         }),
-//       }
-//     );
-//     if (!response.ok) {
-//       const error = await response.json();
-//       dispatch(resetPasswordFail(error));
-//     }
-//     const data = await response.json();
-//     dispatch(resetPasswordSuccess(data));
-//   };
-// };
+//RESET PASSWORD TOKEN
+export const resetPassword = (password, resetToken) => {
+  return async (dispatch) => {
+    dispatch(setUserLoading());
+    if (password) {
+      try {
+        const { url } = passwordResetRoute(resetToken);
+        const res = await axios.post(url, { password });
+        dispatch(setUserLoading(false));
+        if (res.status === 200) {
+          toast.success(
+            "Password changed successfuly, Please login with the new password"
+          );
+        }
+      } catch (error) {
+        toast.error(showError(error));
+        dispatch(setUserLoading(false));
+      }
+    }
+  };
+};

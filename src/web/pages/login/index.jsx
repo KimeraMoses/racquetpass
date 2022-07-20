@@ -25,15 +25,8 @@ const email = (value) => {
   }
 };
 
-// function useQuery() {
-//   const { search } = useLocation();
-//   return useMemo(() => new URLSearchParams(search), [search]);
-// }
-
 let Login = ({ t, handleSubmit }) => {
   const [loading, setIsLoading] = useState(false);
-  // const query = useQuery();
-  // const missingQR = query.get("missingQR");
   const refRecaptcha = useRef();
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -111,14 +104,11 @@ let Login = ({ t, handleSubmit }) => {
               <SubmitButton
                 type="submit"
                 disabled={errors || !values?.password || loading}
-                // onClick={() => {
-                //   navigate("/tasks");
-                // }}
                 className="signin__form-buttons-btn"
               >
                 {loading ? "Logging In..." : "Log In"}
               </SubmitButton>
-              <Link to="/forgot" className="signin__form-buttons-link">
+              <Link to="/forgot-password" className="signin__form-buttons-link">
                 {t("odrForgetPass")}
               </Link>
             </div>
@@ -134,15 +124,9 @@ let Login = ({ t, handleSubmit }) => {
   );
 };
 
-// const onSubmit = (values, dispatch) => {
-//   // dispatch(    // your submit action //      );
-//   console.log(values);
-// };
-
 Login = reduxForm({
   // a unique name for the form
   form: "login",
-  // onSubmit,
 })(Login);
 
 export default withNamespaces()(Login);

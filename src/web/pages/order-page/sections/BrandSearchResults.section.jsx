@@ -101,23 +101,23 @@ export function BrandSearchResults({
         <div className="brand-result-o__results">
           {isLoading ? (
             <SearchCard
-              shop={{
+              brand={{
                 name: `Loading strings...`,
-                address: `Please hold on as we get you all the strings to search...`,
+                description: `Please hold on as we get you all the strings to search...`,
               }}
             />
           ) : searchTerm.length > 3 && searchResults.length < 1 ? (
             <SearchCard
-              shop={{
+              brand={{
                 name: `No string matching '${searchTerm.toUpperCase()}' found!`,
-                address: `Try searching with another term!`,
+                description: `Try searching with another term!`,
               }}
             />
           ) : (
             (searchResults.length > 0 ? searchResults : FilteredStrings).map(
               (string) => (
                 <SearchCard
-                  string={{
+                  brand={{
                     string_id: string.id,
                     tension: string.tension,
                     name: `${string.brand}, ${string.model}, ${string.type}`,

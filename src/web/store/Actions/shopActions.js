@@ -1,6 +1,13 @@
-//FETCH ALL SHOPS
-
-import { allShopsRoute, axios, enabledShopsRoute } from "lib/index";
+import {
+  allShopsRoute,
+  axios,
+  createOrdersRoute,
+  enabledShopsRoute,
+  manageSessionRoute,
+  shopOrderRoute,
+  shopOrdersRoute,
+  subscriptionSessionRoute,
+} from "lib/index";
 import {
   fetchShopFail,
   fetchShopPending,
@@ -11,7 +18,12 @@ import {
   sendMessageFail,
   sendMessagePending,
   sendMessageSucess,
+  setShopLoading,
+  getSessionLink,
+  getAllShopOrders,
+  getAllShopOrder,
 } from "../Slices/shopSlice";
+import { toast } from "react-toastify";
 
 //FETCH ALL SHOPS
 
@@ -27,6 +39,7 @@ export const fetchAllShops = () => {
     }
   };
 };
+
 export const fetchEnabledShops = () => {
   return async (dispatch) => {
     dispatch(fetchShopsPending());
@@ -36,6 +49,107 @@ export const fetchEnabledShops = () => {
       dispatch(fetchShopsSuccess(res.data?.list_shops));
     } catch (error) {
       dispatch(fetchShopsFail(error));
+    }
+  };
+};
+
+//GET ALL SHOP ORDERS
+export const fetchShopOrders = (id) => {
+  return async (dispatch) => {
+    dispatch(setShopLoading(true));
+    if (id) {
+      const { url } = shopOrdersRoute(id);
+      try {
+        const res = await axios.get(url);
+        console.log(res);
+        dispatch(getAllShopOrders(res.data.order));
+      } catch (error) {
+        console.log(error);
+        // dispatch(fetchShopsFail(error));
+      }
+    }
+  };
+};
+
+//GET ALL SHOP ORDERS
+export const fetchShopOrder = (id) => {
+  return async (dispatch) => {
+    dispatch(setShopLoading(true));
+    if (id) {
+      const { url } = shopOrderRoute(id);
+      try {
+        const res = await axios.get(url);
+        console.log("Order", res);
+        dispatch(getAllShopOrder(res.data.order));
+      } catch (error) {
+        console.log(error);
+        toast.error("Failed to load order details");
+        // dispatch(fetchShopsFail(error));
+      }
+    }
+  };
+};
+
+//GET ALL SHOP ORDERS
+export const createOrder = (data) => {
+  return async (dispatch) => {
+    dispatch(setShopLoading(true));
+    console.log("Order data", data);
+    if (data) {
+      const { url } = createOrdersRoute();
+      try {
+        const res = await axios.post(url, data);
+        console.log(res);
+        // dispatch(getAllShopOrders(res.data.order));
+        toast.success("Order Sent successfuly!");
+      } catch (error) {
+        console.log(error);
+        toast.error("Failed to make order!");
+        // dispatch(fetchShopsFail(error));
+      }
+    }
+  };
+};
+
+//GET SESSION PAYMENT LINK
+export const getStripeSessionLink = (id) => {
+  return async (dispatch) => {
+    const data = {
+      shop_id: id,
+    };
+    dispatch(setShopLoading(true));
+    console.log(data);
+    if (id) {
+      const { url } = subscriptionSessionRoute();
+      try {
+        const res = await axios.post(url, data);
+        console.log("Session Link", res);
+        dispatch(getSessionLink(res.data.url));
+        dispatch(setShopLoading(false));
+      } catch (error) {
+        dispatch(setShopLoading(false));
+        console.log("Session Link err", error);
+        // dispatch(fetchShopsFail(error));
+      }
+    }
+  };
+};
+//GET PAYMENT MANAGEMENT LINK
+export const getStripeManagementSessionLink = (id) => {
+  return async (dispatch) => {
+    const data = {
+      shop_id: id,
+    };
+    dispatch(setShopLoading(true));
+    if (id) {
+      const { url } = manageSessionRoute();
+      try {
+        const res = await axios.post(url, data);
+        dispatch(getSessionLink(res.data.url));
+        dispatch(setShopLoading(false));
+      } catch (error) {
+        dispatch(setShopLoading(false));
+      }
     }
   };
 };
@@ -59,6 +173,7 @@ export const fetchShopDetails = (authToken, shopId) => {
         );
         const data = await response.json();
         dispatch(fetchShopSuccess(data?.shop));
+        console.log(data);
       } catch (error) {
         dispatch(fetchShopFail(error));
       }
@@ -67,7 +182,6 @@ export const fetchShopDetails = (authToken, shopId) => {
 };
 
 //DON'T SEE SHOP MESSAGE
-
 export const sendShopInquiry =
   (shop_name, city, state, phone, search) => async (dispatch) => {
     dispatch(sendMessagePending());

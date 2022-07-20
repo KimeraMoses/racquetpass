@@ -4,8 +4,11 @@ import { withNamespaces } from "react-i18next";
 import { BackButton, Heading, CustomInput, SubmitButton } from "web/components";
 import "./index.styles.scss";
 import { useSelector } from "react-redux";
+import { toast } from "react-toastify";
 import Recaptcha from "web/components/Google-Recaptcha/Recaptcha";
-import { useRef } from "react";
+import { useRef, useState } from "react";
+import { forgotPassword } from "web/store/Actions/authActions";
+import { useDispatch } from "react-redux";
 
 const required = (value) => (value ? undefined : "Email is required");
 const email = (value) => {
@@ -22,10 +25,32 @@ const email = (value) => {
 
 let Forgot = ({ t, handleSubmit }) => {
   const refRecaptcha = useRef(null);
+  const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
   const errors = useSelector((state) => state?.form?.["forgot"]?.syncErrors);
+  const userEmail = useSelector(
+    (state) => state?.form?.["forgot"]?.values?.email
+  );
+  const dispatch = useDispatch();
+
+  const formSubmitHandler = async () => {
+    setIsLoading(true);
+    try {
+      await dispatch(forgotPassword(userEmail));
+      setIsLoading(false);
+      navigate("/login");
+    } catch (err) {
+      setIsLoading(false);
+      if (!window.navigator.onLine) {
+        return toast.error(
+          "Failed to generate reset token, Please check your internet!"
+        );
+      }
+    }
+  };
+
   return (
-    <form onSubmit={handleSubmit} className="forgot">
+    <form onSubmit={handleSubmit(formSubmitHandler)} className="forgot">
       <div className="forgot__header">
         <div className="forgot__header-heading">
           <BackButton
@@ -55,10 +80,9 @@ let Forgot = ({ t, handleSubmit }) => {
           <SubmitButton
             type="submit"
             disabled={errors}
-            onClick={() => navigate("/login")}
             className="forgot__form-buttons-btn"
           >
-            Email me a recovery link
+            {isLoading ? "Sending link..." : "Email me a recovery link"}
           </SubmitButton>
         </div>
       </div>
@@ -66,15 +90,9 @@ let Forgot = ({ t, handleSubmit }) => {
   );
 };
 
-const onSubmit = (values, dispatch) => {
-  // dispatch(    // your submit action //      );
-  console.log(values);
-};
-
 Forgot = reduxForm({
   // a unique name for the form
   form: "forgot",
-  onSubmit,
 })(Forgot);
 
 export default withNamespaces()(Forgot);

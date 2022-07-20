@@ -10,6 +10,8 @@ import { BackButton } from "web/components/Buttons/BackButton.component";
 import { withNamespaces } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import "./index.styles.scss";
+import { fetchShopOrder } from "web/store/Actions/shopActions";
+import { useDispatch } from "react-redux";
 
 let Scan = ({ t, scanForward, change }) => {
   const [qrCode, setQrCode] = useState("");
@@ -19,20 +21,24 @@ let Scan = ({ t, scanForward, change }) => {
   const [permissionsDenied, setPermissionsDenied] = useState(false);
 
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
-  // const handleShow = () => {
-  //   setShowModal((prev) => {
-  //     return !prev;
-  //   });
-  // };
-  useEffect(() => {
+  const fetchOrderDetails = async (order_id) => {
     if (qrCode) {
-      change("raquet-details-from-qr", qrCode);
-      // TODO: Update logic with RaquetWith with Backend
-      // scanForward(raquetFound);
+      await dispatch(fetchShopOrder(order_id));
       navigate("/Tasks/Details");
     }
-  }, [qrCode, change, scanForward, navigate]);
+  };
+
+  useEffect(() => {
+    fetchOrderDetails(qrCode);
+  }, [qrCode]);
+
+  useEffect(() => {
+    if (qrCode) {
+      change("order-details-id", qrCode);
+    }
+  }, [qrCode, change, scanForward]);
 
   console.log(permissionsDenied);
 

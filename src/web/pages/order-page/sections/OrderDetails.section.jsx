@@ -7,27 +7,31 @@ import {
   // PaymentButton,
   SubHeading,
   SearchCard,
-} from 'web/components';
+} from "web/components";
 
 // Styles
-import './ReviewOrder.styles.scss';
-import { BackButton } from 'web/components/Buttons/BackButton.component';
-
-const orderDetails = {
-  // done: true,
-  expectedPickup: 'Jan 7 - Jan 9',
-  shopName: `Jimmy's Pro Shop`,
-  shopAddress: '123 Main Street, Seattle, Washington',
-  orderDate: 'Jan 7, 2021',
-  completionDate: 'Jan 9, 2021',
-  orderNumber: '1255',
-  name: 'Bryan Song',
-  phone: '(123) 456-4567',
-  racquetName: 'Wilson Hyper Prostaff 6.1',
-  racquetSport: 'Tennis Racquet',
-};
+import "./ReviewOrder.styles.scss";
+import { BackButton } from "web/components/Buttons/BackButton.component";
+import { useSelector } from "react-redux";
 
 export function OrderDetails({ t, setStep, setDone }) {
+  const user = useSelector((state) => state?.form?.signup?.values);
+  const shop = useSelector((state) => state?.form?.signup?.values?.shop);
+
+  const orderDetails = {
+    // done: true,
+    expectedPickup: "Jan 7 - Jan 9",
+    shopName: shop?.name,
+    shopAddress: shop?.address,
+    orderDate: "July 20, 2022",
+    completionDate: "July 22, 2022",
+    orderNumber: "1255",
+    name: user && `${user["first-name"]} ${user["last-name"]}`,
+    phone: user && user["phone-number"],
+    racquetName: `${user && user?.racquetBrand}, ${user && user?.racquetModel}`,
+    racquetSport: user && user?.racquetSport,
+  };
+
   return (
     <>
       <div className="review-order-odr max-w-[450px] m-[0_auto]">
@@ -46,8 +50,8 @@ export function OrderDetails({ t, setStep, setDone }) {
         <div
           className={`mt-[15px] py-[10px] px-[16px] rounded-[12px] w-[fit-content] flex items-center font-medium ${
             orderDetails?.done
-              ? 'text-[#008d3b] bg-[#E5FAEE]'
-              : 'text-[#D78700] bg-[#FFF6E5] gap-[50px]'
+              ? "text-[#008d3b] bg-[#E5FAEE]"
+              : "text-[#D78700] bg-[#FFF6E5] gap-[50px]"
           }`}
         >
           {orderDetails?.done ? (
@@ -57,7 +61,7 @@ export function OrderDetails({ t, setStep, setDone }) {
             </>
           ) : (
             <>
-              Expected Pickup: {orderDetails?.expectedPickup}{' '}
+              Expected Pickup: {orderDetails?.expectedPickup}{" "}
               <img src="/svg/calenderOD.svg" alt="calender" />
             </>
           )}
@@ -66,13 +70,13 @@ export function OrderDetails({ t, setStep, setDone }) {
         <div className="mt-[15px] text-[18px]">
           {orderDetails?.done ? (
             <>
-              Pickup this racquet at{' '}
+              Pickup this racquet at{" "}
               <span className="font-bold">{orderDetails?.shopName}.</span> When
               you arrive, show the attendant this screen to verify your order.
             </>
           ) : (
             <>
-              Your order is{' '}
+              Your order is{" "}
               <span className="text-[#DF9D2E] font-bold">in progress</span>.
               You'll be notified when your racquet is ready for pickup.
             </>
@@ -116,16 +120,16 @@ export function OrderDetails({ t, setStep, setDone }) {
         </div>
         <div className="review-order-odr__shop-heading">
           <Heading customClass="review-order-odr__shop-heading-text">
-            {t('ShopContactHeading')}
+            {t("ShopContactHeading")}
           </Heading>
         </div>
         <div className="review-order-odr__contact">
           <div className="review-order-odr__contact-details">
-            <SubHeading>{t('reviewOdrName')}</SubHeading>
+            <SubHeading>{t("reviewOdrName")}</SubHeading>
             <Description>{orderDetails?.name}</Description>
           </div>
           <div className="review-order-odr__contact-details">
-            <SubHeading>{t('taskOpenedPlayerPhoneHeading')}</SubHeading>
+            <SubHeading>{t("taskOpenedPlayerPhoneHeading")}</SubHeading>
             <Description>{orderDetails?.phone}</Description>
           </div>
         </div>
@@ -133,7 +137,7 @@ export function OrderDetails({ t, setStep, setDone }) {
         <div className="review-order-odr__shop">
           <div className="review-order-odr__shop-heading">
             <Heading customClass="review-order-odr__shop-heading-text">
-              {t('odrReviewShop')}
+              {t("odrReviewShop")}
             </Heading>
             <a
               href="tel:(123) 456-4567"
@@ -154,15 +158,15 @@ export function OrderDetails({ t, setStep, setDone }) {
         <div className="review-order-odr__raquet">
           <div className="review-order-odr__raquet-heading">
             <Heading customClass="review-order-odr__shop-heading-text">
-              {t('odrRacquet')}
+              {t("odrRacquet")}
             </Heading>
           </div>
           <div className="review-order-odr__shop-card">
             <SearchCard
               raquet={{
-                img: '/img/raquet.png',
-                name: 'Wilson Hyper Prostaff 6.1',
-                model: 'Tennis Racquet',
+                img: "/img/raquet.png",
+                name: "Wilson Hyper Prostaff 6.1",
+                model: "Tennis Racquet",
               }}
             />
           </div>
@@ -170,7 +174,7 @@ export function OrderDetails({ t, setStep, setDone }) {
         <div className="review-order-odr__summary">
           <div className="review-order-odr__summary-heading">
             <Heading customClass="review-order-odr__summary-heading-text">
-              {t('odrSummary')}
+              {t("odrSummary")}
             </Heading>
           </div>
           <div className="review-order-odr__summary-card mb-[116px]">

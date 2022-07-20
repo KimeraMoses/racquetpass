@@ -6,16 +6,20 @@ import {
   SummaryCard,
   PaymentButton,
   SubHeading,
-} from 'web/components';
-import { SearchCard, Survey } from 'web/components/index';
+} from "web/components";
+import { SearchCard, Survey } from "web/components/index";
 
 // Styles
-import './ReviewOrder.styles.scss';
-import { BackButton } from 'web/components/Buttons/BackButton.component';
-import { useState } from 'react';
+import "./ReviewOrder.styles.scss";
+import { BackButton } from "web/components/Buttons/BackButton.component";
+import { useState } from "react";
+import { useSelector } from "react-redux";
 
 export function ReviewOrder({ t, setStep, setDone, setBackFromReview }) {
   const [showSurvey, setShowSurvey] = useState(false);
+
+  const user = useSelector((state) => state?.form?.signup?.values);
+  const shop = useSelector((state) => state?.form?.signup?.values?.shop);
 
   return (
     <>
@@ -32,17 +36,17 @@ export function ReviewOrder({ t, setStep, setDone, setBackFromReview }) {
           <div className="review-order-odr__heading">
             <BackButton onClick={() => setStep(5)} />
             <Heading customClass="review-order-odr__heading-text">
-              {t('odrReviewHeading')}
+              {t("odrReviewHeading")}
             </Heading>
           </div>
           <div className="review-order-odr__text-container">
             <Description customClass="review-order-odr__text-container-text">
-              {t('odrReviewDesc')}
+              {t("odrReviewDesc")}
             </Description>
           </div>
           <div className="review-order-odr__shop-heading">
             <Heading customClass="review-order-odr__shop-heading-text">
-              {t('ShopContactHeading')}
+              {t("ShopContactHeading")}
             </Heading>
             <HeadingButton
               text="Edit"
@@ -54,19 +58,21 @@ export function ReviewOrder({ t, setStep, setDone, setBackFromReview }) {
           </div>
           <div className="review-order-odr__contact">
             <div className="review-order-odr__contact-details">
-              <SubHeading>{t('reviewOdrName')}</SubHeading>
-              <Description>{t('scanSuccessOwnerName')}</Description>
+              <SubHeading>{t("reviewOdrName")}</SubHeading>
+              <Description>
+                {user && `${user["first-name"]} ${user["last-name"]}`}
+              </Description>
             </div>
             <div className="review-order-odr__contact-details">
-              <SubHeading>{t('taskOpenedPlayerPhoneHeading')}</SubHeading>
-              <Description>(332) 331-4432</Description>
+              <SubHeading>{t("taskOpenedPlayerPhoneHeading")}</SubHeading>
+              <Description>{user && user["phone-number"]}</Description>
             </div>
           </div>
 
           <div className="review-order-odr__shop">
             <div className="review-order-odr__shop-heading">
               <Heading customClass="review-order-odr__shop-heading-text">
-                {t('odrReviewShop')}
+                {t("odrReviewShop")}
               </Heading>
               <HeadingButton
                 text="Change Shop"
@@ -79,8 +85,8 @@ export function ReviewOrder({ t, setStep, setDone, setBackFromReview }) {
             <div className="review-order-odr__shop-card">
               <SearchCard
                 shop={{
-                  name: "Jimmy's Shop",
-                  address: '123 Main Street, Seattle, Washington',
+                  name: shop?.name,
+                  address: shop?.address,
                 }}
               />
             </div>
@@ -88,7 +94,7 @@ export function ReviewOrder({ t, setStep, setDone, setBackFromReview }) {
           <div className="review-order-odr__raquet">
             <div className="review-order-odr__raquet-heading">
               <Heading customClass="review-order-odr__shop-heading-text">
-                {t('odrRacquet')}
+                {t("odrRacquet")}
               </Heading>
               <HeadingButton
                 text="Change Racquet"
@@ -101,9 +107,11 @@ export function ReviewOrder({ t, setStep, setDone, setBackFromReview }) {
             <div className="review-order-odr__shop-card">
               <SearchCard
                 shop={{
-                  img: '/img/orders/racquet-img.png',
-                  name: 'Wilson Hyper Prostaff 6.1',
-                  address: 'Tennis Racquet',
+                  img: "/img/orders/racquet-img.png",
+                  name: `${user && user?.racquetBrand}, ${
+                    user && user?.racquetModel
+                  }`,
+                  address: user && user?.racquetSport,
                 }}
               />
             </div>
@@ -111,7 +119,7 @@ export function ReviewOrder({ t, setStep, setDone, setBackFromReview }) {
           <div className="review-order-odr__summary">
             <div className="review-order-odr__summary-heading">
               <Heading customClass="review-order-odr__summary-heading-text">
-                {t('odrSummary')}
+                {t("odrSummary")}
               </Heading>
               <HeadingButton
                 text="Change Strings"
@@ -131,7 +139,7 @@ export function ReviewOrder({ t, setStep, setDone, setBackFromReview }) {
               handleClick={() => {
                 setShowSurvey(true);
               }}
-              style={{ marginBottom: '40px' }}
+              style={{ marginBottom: "40px" }}
             >
               Pay and Finish
             </PaymentButton>

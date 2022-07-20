@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { withNamespaces } from "react-i18next";
 // import { useNavigate } from "react-router-dom";
 import {
@@ -9,7 +9,8 @@ import {
 } from "web/components";
 import { Link } from "react-router-dom";
 import "./index.styles.scss";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchShopOrders } from "web/store/Actions/shopActions";
 // import { fetchAllOrders } from "web/store/Actions/businessActions";
 
 const dueToday = [];
@@ -41,13 +42,15 @@ for (let i = 0; i <= 9; i++) {
 
 function Tasks({ t }) {
   // const [showDrawer, setShowDrawer] = useState(false);
-  // const authToken = useSelector((state) => state.auth.token);
+  const shopOrders = useSelector((state) => state.shop.orders);
+  const shopId = useSelector((state) => state.auth?.user?.shop);
   const dispatch = useDispatch();
 
-  // useEffect(() => {
-  //   dispatch(fetchAllOrders(authToken));
-  // }, [authToken]);
+  useEffect(() => {
+    dispatch(fetchShopOrders(shopId));
+  }, [shopId]);
 
+  console.log(shopOrders);
   return (
     <div className="tasks-container">
       {/* <CustomDrawer show={showDrawer} setShow={setShowDrawer} /> */}
@@ -78,13 +81,13 @@ function Tasks({ t }) {
             <div className="badge">{dueToday?.length}</div>
           </div>
           <div className="cards-container">
-            {dueToday?.map((task) => {
+            {shopOrders?.map((task, index) => {
               return (
                 <TaskCard
-                  key={task.title}
-                  title={task?.title}
-                  desc={task?.description}
-                  name={task?.player}
+                  key={task.id}
+                  title={`Order #${index + 1}`}
+                  desc={`${task?.racquet?.model}, ${task?.racquet?.brand}`}
+                  name={task.id}
                 />
               );
             })}
@@ -94,16 +97,17 @@ function Tasks({ t }) {
             <div className="badge">{dueThisWeek?.length}</div>
           </div>
           <div className="cards-container">
-            {dueThisWeek?.map((task) => {
-              return (
-                <TaskCard
-                  key={task.title}
-                  title={task?.title}
-                  desc={task?.description}
-                  name={task?.player}
-                />
-              );
-            })}
+            {shopOrders &&
+              shopOrders?.map((task, index) => {
+                return (
+                  <TaskCard
+                    key={task.id}
+                    title={`Order #${index + 1}`}
+                    desc={`${task?.racquet?.model}, ${task?.racquet?.brand}`}
+                    name={task.id}
+                  />
+                );
+              })}
           </div>
         </div>
         <div id="completed-tasks">
@@ -122,15 +126,17 @@ function Tasks({ t }) {
             <div className="badge">{completed?.length}</div>
           </div>
           <div className="cards-container">
-            {completed?.map((task) => {
-              return (
-                <TaskCard
-                  title={task?.title}
-                  desc={task?.description}
-                  name={task?.player}
-                />
-              );
-            })}
+            {shopOrders &&
+              shopOrders?.map((task, index) => {
+                return (
+                  <TaskCard
+                    key={task.id}
+                    title={`Order #${index + 1}`}
+                    desc={`${task?.racquet?.model}, ${task?.racquet?.brand}`}
+                    name={task.id}
+                  />
+                );
+              })}
           </div>
         </div>
       </div>
