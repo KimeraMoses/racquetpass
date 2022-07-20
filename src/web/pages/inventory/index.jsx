@@ -35,6 +35,18 @@ let Inventory = ({ t, change }) => {
   const active = query.get("active");
   const { token, user } = useSelector((state) => state.auth);
   const shop = useSelector((state) => state.shop.shop);
+  const string = useSelector(
+    (state) => state?.form?.inventory?.values?.current_string
+  );
+
+  const initialValues = {
+    string_id: string && string.id,
+    ["edit-brand"]: string && string?.brand,
+    ["edit-model"]: string && string?.brand,
+    itemPrice: string && string?.price,
+    type: string && string.hybrid_type,
+    in_stock: string && string.in_stock,
+  };
   const [currentScreen, setCurrentScreen] = useState(active);
 
   const shopDetails = {
@@ -69,6 +81,7 @@ let Inventory = ({ t, change }) => {
             t={t}
             setCurrentScreen={setCurrentScreen}
             setDrawer={() => dispatch({ type: "SHOW_DRAWER" })}
+            change={change}
           />
         );
       case "add":
@@ -77,10 +90,21 @@ let Inventory = ({ t, change }) => {
         );
       case "edit":
         return (
-          <EditForm t={t} setCurrentScreen={setCurrentScreen} change={change} />
+          <EditForm
+            t={t}
+            setCurrentScreen={setCurrentScreen}
+            change={change}
+            initialValues={initialValues}
+          />
         );
       case "detail":
-        return <ItemDetails t={t} setCurrentScreen={setCurrentScreen} />;
+        return (
+          <ItemDetails
+            t={t}
+            setCurrentScreen={setCurrentScreen}
+            change={change}
+          />
+        );
       case "proshop":
         return (
           <ProShop
@@ -138,6 +162,7 @@ let Inventory = ({ t, change }) => {
             t={t}
             setCurrentScreen={setCurrentScreen}
             setDrawer={() => dispatch({ type: "SHOW_DRAWER" })}
+            change={change}
           />
         );
     }

@@ -1,5 +1,6 @@
 //FETCH ALL SHOPS
 
+import { allShopsRoute, axios, enabledShopsRoute } from "lib/index";
 import {
   fetchShopFail,
   fetchShopPending,
@@ -17,49 +18,27 @@ import {
 export const fetchAllShops = () => {
   return async (dispatch) => {
     dispatch(fetchShopsPending());
+    const { url } = allShopsRoute();
     try {
-      const response = await fetch(
-        `${process.env.REACT_APP_BASEURL}/api/v1/shops`,
-        {
-          method: "GET",
-          headers: new Headers({
-            "Content-type": "application/json",
-            apiKey: process.env.REACT_APP_APIKEY,
-          }),
-        }
-      );
-      const data = await response.json();
-      dispatch(fetchShopsSuccess(data?.list_shops));
+      const res = await axios.get(url);
+      dispatch(fetchShopsSuccess(res.data?.list_shops));
     } catch (error) {
       dispatch(fetchShopsFail(error));
     }
   };
 };
-
-//FETCH ALL ENABLED SHOPS
-// export const fetchEnabledShops = () => {
-//   return async (dispatch) => {
-//     // dispatch(fetchEnabledShopsPending());
-//     try {
-//       const response = await fetch(
-//         `${process.env.REACT_APP_BASEURL}/api/v1/shops/get-enabled`,
-//         {
-//           method: "GET",
-//           headers: new Headers({
-//             "Content-type": "application/json",
-//             apiKey: process.env.REACT_APP_APIKEY,
-//           }),
-//         }
-//       );
-//       const data = await response.json();
-//       // dispatch(fetchEnabledShopsSuccess(data?.shops));
-//       // console.log("shops", data?.shops);
-//     } catch (error) {
-//       // dispatch(fetchEnabledShopssFail(error));
-//       // console.log(error);
-//     }
-//   };
-// };
+export const fetchEnabledShops = () => {
+  return async (dispatch) => {
+    dispatch(fetchShopsPending());
+    const { url } = enabledShopsRoute();
+    try {
+      const res = await axios.get(url);
+      dispatch(fetchShopsSuccess(res.data?.list_shops));
+    } catch (error) {
+      dispatch(fetchShopsFail(error));
+    }
+  };
+};
 
 //FETCH SHOP DETAILS
 export const fetchShopDetails = (authToken, shopId) => {

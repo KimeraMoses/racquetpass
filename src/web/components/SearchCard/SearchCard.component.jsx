@@ -1,8 +1,8 @@
 // Custom Components
-import { SubHeading, Description } from 'web/components';
+import { SubHeading, Description } from "web/components";
 
 // Styles
-import './SearchCard.styles.scss';
+import "./SearchCard.styles.scss";
 
 export function SearchCard({
   shop,
@@ -16,17 +16,17 @@ export function SearchCard({
 }) {
   const handleClick = () => {
     if (shop) {
-      change('shop', shop);
+      change("shop", shop);
     } else if (string) {
-      change('string', string);
+      change("string", string);
     } else if (raquet) {
-      change('raquet', raquet);
+      change("raquet", raquet);
     } else if (main) {
-      change('main', brand);
+      change("main", brand);
     } else if (cross) {
-      change('cross', brand);
+      change("cross", brand);
     } else if (brand) {
-      change('brand', brand);
+      change("brand", brand);
     }
     onClick();
   };
@@ -35,13 +35,13 @@ export function SearchCard({
       <div className="search" onClick={handleClick}>
         <div
           className="search__card-container"
-          style={shop?.editPage ? { gap: '10px' } : {}}
+          style={shop?.editPage ? { gap: "10px" } : {}}
         >
           <div className="search__card-container-divider"></div>
           <div
             className={`search__card-container-content ${
               (raquet || brand || string || shop) &&
-              'search__card-container-content-raquet'
+              "search__card-container-content-raquet"
             }`}
           >
             {shop ? (
@@ -50,7 +50,7 @@ export function SearchCard({
                   className="search__card-container-content-img"
                   style={
                     shop?.editPage
-                      ? { display: 'flex', alignItems: 'center', gap: '5px' }
+                      ? { display: "flex", alignItems: "center", gap: "5px" }
                       : {}
                   }
                 >
@@ -59,14 +59,14 @@ export function SearchCard({
                       src="/img/delete.png"
                       alt="shop"
                       style={{
-                        height: '24px',
-                        width: '24px',
+                        height: "24px",
+                        width: "24px",
                       }}
                     />
                   ) : (
                     <></>
                   )}
-                  <img src={'/img/orderpage/shop.png'} alt="shop" />
+                  <img src={"/img/orderpage/shop.png"} alt="shop" />
                 </div>
                 <div className="search__card-container-content-txt">
                   <SubHeading customClass="search__card-container-content-heading">
@@ -115,7 +115,7 @@ export function SearchCard({
                       {string?.name}
                     </SubHeading>
                     <SubHeading customClass="search__brand-card-container-content-txt-subheading">
-                      {string?.description}
+                      {string?.in_stock ? "In stock" : "Out of stock"}
                     </SubHeading>
                   </div>
                   <div>

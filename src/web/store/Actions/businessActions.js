@@ -1,12 +1,11 @@
 import {
-  createNewBusinessFail,
-  createNewBusinessPending,
   createNewBusinessSuccess,
-  editBusinessFail,
-  editBusinessPending,
   editBusinessSuccess,
+  setBusinessLoading,
 } from "../Slices/businessSlice";
 import { fetchShopDetails } from "./shopActions";
+import { toast } from "react-toastify";
+import { axios, createBusinessRoute, editBusinessRoute, showError } from "lib";
 
 export const createNewBusiness =
   (
@@ -24,36 +23,32 @@ export const createNewBusiness =
     password
   ) =>
   async (dispatch) => {
-    dispatch(createNewBusinessPending());
+    const data = {
+      first_name,
+      last_name,
+      phone,
+      street,
+      shop_name,
+      apartment,
+      city,
+      country,
+      state,
+      zip_code,
+      email,
+      password,
+    };
+    dispatch(setBusinessLoading(true));
     try {
-      const response = await fetch(
-        `${process.env.REACT_APP_BASEURL}/api/v1/catalog/register-business`,
-        {
-          method: "POST",
-          body: JSON.stringify({
-            first_name,
-            last_name,
-            phone,
-            street,
-            shop_name,
-            apartment,
-            city,
-            country,
-            state,
-            zip_code,
-            email,
-            password,
-          }),
-          headers: new Headers({
-            "Content-type": "application/json",
-            apiKey: process.env.REACT_APP_APIKEY,
-          }),
-        }
+      const { url } = createBusinessRoute();
+      const res = await axios.post(url, data);
+      dispatch(createNewBusinessSuccess(res.data));
+      toast.success(
+        "Your Account is created successfuly, Please go to settings to complete profile"
       );
-      const res = await response.json();
-      dispatch(createNewBusinessSuccess(res));
+      dispatch(setBusinessLoading(false));
     } catch (error) {
-      dispatch(createNewBusinessFail(error));
+      toast.error(showError(error));
+      dispatch(setBusinessLoading(false));
     }
   };
 
@@ -71,34 +66,31 @@ export const editBusinessDetails =
     address
   ) =>
   async (dispatch) => {
-    dispatch(editBusinessPending());
+    const data = {
+      name,
+      email,
+      phone,
+      etimated_delivery_time,
+      labor_price,
+      country,
+      allow_own_strings,
+      address,
+    };
+    dispatch(setBusinessLoading(true));
     try {
-      const response = await fetch(
-        `${process.env.REACT_APP_BASEURL}/api/v1/catalog/edit-shop-settings/${Id}`,
-        {
-          method: "POST",
-          body: JSON.stringify({
-            name,
-            email,
-            phone,
-            etimated_delivery_time,
-            labor_price,
-            country,
-            allow_own_strings,
-            address,
-          }),
-          headers: new Headers({
-            "Content-type": "application/json",
-            apiKey: process.env.REACT_APP_APIKEY,
-            Authorization: "Bearer " + authToken,
-          }),
-        }
-      );
-      const res = await response.json();
-      dispatch(editBusinessSuccess(res.status));
-      dispatch(fetchShopDetails(authToken, Id));
+      const { url } = editBusinessRoute(Id);
+      const res = await axios.post(url, data);
+      dispatch(editBusinessSuccess(res?.data));
+      if (res.status === 200) {
+        dispatch(setBusinessLoading(false));
+        dispatch(fetchShopDetails(authToken, Id));
+        toast.success("Changes saved successfuly");
+      } else {
+        toast.error(res?.data?.message);
+      }
     } catch (error) {
-      dispatch(editBusinessFail(error));
+      toast.error(showError(error));
+      dispatch(setBusinessLoading(false));
     }
   };
 

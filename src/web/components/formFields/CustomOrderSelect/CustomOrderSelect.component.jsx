@@ -1,11 +1,11 @@
-import { Link } from 'react-router-dom';
-import './CustomOrderSelect.styles.scss';
+import { Link } from "react-router-dom";
+import "./CustomOrderSelect.styles.scss";
 
 export const CustomOrderSelect = (props) => {
   return (
     <div
       className={`custom-order-select ${
-        props?.placeholderBold ? 'custom-order-select-bold' : ''
+        props?.placeholderBold ? "custom-order-select-bold" : ""
       }`}
     >
       {props.noLabel ? (
@@ -32,8 +32,8 @@ export const CustomOrderSelect = (props) => {
             props.icon
               ? {
                   background: `url(${props.icon}) no-repeat scroll 7px 7px`,
-                  paddingLeft: '45px',
-                  backgroundPosition: '11px 50%',
+                  paddingLeft: "45px",
+                  backgroundPosition: "11px 50%",
                 }
               : {}
           }

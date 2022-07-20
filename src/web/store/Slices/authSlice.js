@@ -21,46 +21,14 @@ export const authSlice = createSlice({
       state.isLoggedIn = !!state.token;
       state.isLoading = false;
     },
-    authenticationPending(state) {
-      state.isLoading = true;
+    setUserLoading: (state, { payload }) => {
+      state.loading = payload;
     },
-    authenticationSuccess(state, { payload }) {
+    getAuthenticatedUser(state, { payload }) {
       state.user = payload.user;
       state.token = payload.token;
       state.isLoggedIn = !!state.token;
       state.isLoading = false;
-    },
-
-    authenticationFail(state, { payload }) {
-      state.isLoading = false;
-      state.message = payload;
-    },
-    updateAdminDetails(state, { payload }) {
-      state.user = payload;
-    },
-    resetPasswordPending(state) {
-      state.isLoading = true;
-    },
-    resetPasswordSuccess(state, { payload }) {
-      state.isLoading = false;
-      state.message = payload.massage;
-      state.status = payload.status;
-    },
-    resetPasswordFail(state) {
-      state.isLoading = false;
-    },
-    forgotPasswordPending(state) {
-      state.isLoading = true;
-    },
-    forgotPasswordSuccess(state, { payload }) {
-      state.isLoading = false;
-      state.message = payload.message;
-      state.status = payload.status;
-    },
-    forgotPasswordFail(state, { payload }) {
-      state.isLoading = false;
-      state.message = payload.message;
-      state.status = payload.status;
     },
     saveUserInitials: (state, { payload }) => {
       state.userInitials = payload;
@@ -81,22 +49,8 @@ const { reducer, actions } = authSlice;
 
 export const {
   autoAuthenticationSuccess,
-  authenticationPending,
-  authenticationSuccess,
-  authenticationFail,
-  verificationPending,
-  verificationSuccess,
-  verificationFail,
-  updateProfilePending,
-  updateProfileSuccess,
-  updateProfileFail,
-  updateAdminDetails,
-  resetPasswordPending,
-  resetPasswordSuccess,
-  resetPasswordFail,
-  forgotPasswordPending,
-  forgotPasswordSuccess,
-  forgotPasswordFail,
+  setUserLoading,
+  getAuthenticatedUser,
   saveUserInitials,
   clearUserInitials,
   logout,

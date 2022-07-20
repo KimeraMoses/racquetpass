@@ -1,6 +1,6 @@
-import { useState } from 'react';
-import { Field } from 'redux-form';
-import { useSelector } from 'react-redux';
+import { useState } from "react";
+import { Field } from "redux-form";
+import { useSelector } from "react-redux";
 // Custom Components
 import {
   Heading,
@@ -14,12 +14,12 @@ import {
   Modal,
   BackButton,
   FileInput,
-} from 'web/components';
+} from "web/components";
 
 // Styles
-import './SelectString.styles.scss';
+import "./SelectString.styles.scss";
 
-const required = (value) => (value ? undefined : 'Required');
+const required = (value) => (value ? undefined : "Required");
 
 export function SelectString({
   t,
@@ -31,13 +31,13 @@ export function SelectString({
   setBackFromReview,
 }) {
   const [modal, setModal] = useState(false);
-  const [unit, setUnit] = useState('lbs');
+  const [unit, setUnit] = useState("lbs");
 
   const handleShow = () => {
     setModal((modal) => !modal);
   };
 
-  const brand = useSelector((state) => state?.form?.signup?.values?.brand);
+  const brand = useSelector((state) => state?.form?.signup?.values?.string);
 
   const [mainsTension, setMainsTension] = useState(50);
 
@@ -84,14 +84,14 @@ export function SelectString({
               }
             }}
           />
-          <Heading>{backFromReview ? 'Strings' : t('odrSelect')}</Heading>
+          <Heading>{backFromReview ? "Strings" : t("odrSelect")}</Heading>
         </div>
         {backFromReview ? (
           <></>
         ) : (
           <div className="select-string-odr__text-container">
             <Description customClass="select-string-odr__text-container-text">
-              {t('selectStringDesc')}
+              {t("selectStringDesc")}
             </Description>
           </div>
         )}
@@ -107,8 +107,8 @@ export function SelectString({
                   alt="down-arrow"
                 />
               }
-              value={brand?.name}
-              onSelectClick={() => setStringsCurrent('search')}
+              value={brand?.string_id}
+              onSelectClick={() => setStringsCurrent("search")}
             />
           </div>
           <div className="select-string-odr__main-info-number">
@@ -121,14 +121,14 @@ export function SelectString({
                 setMainsTension(e.target.value);
               }}
               link={{
-                text: `Change units to ${unit === 'kg' ? 'lbs' : 'kg'}`,
-                path: '#',
+                text: `Change units to ${unit === "kg" ? "lbs" : "kg"}`,
+                path: "#",
                 onClick: () => {
-                  if (unit === 'kg') {
-                    setUnit('lbs');
+                  if (unit === "kg") {
+                    setUnit("lbs");
                     setMainsTension(50);
                   } else {
-                    setUnit('kg');
+                    setUnit("kg");
                     setMainsTension(25);
                   }
                 },
@@ -146,7 +146,7 @@ export function SelectString({
             <CustomSwitch
               handleChange={() => {
                 setStep(3);
-                setStringsCurrent('initial');
+                setStringsCurrent("initial");
               }}
               checked={false}
             />
@@ -159,8 +159,8 @@ export function SelectString({
         ) : (
           <>
             <div className="select-string-odr__recquet-heading">
-              <Heading>{t('odrdetailHeading')}</Heading>
-              <Description>{t('orderRecquetDesc')}</Description>
+              <Heading>{t("odrdetailHeading")}</Heading>
+              <Description>{t("orderRecquetDesc")}</Description>
             </div>
             <div className="select-string-odr__recquet-form">
               <Field
@@ -172,7 +172,7 @@ export function SelectString({
                     <CustomSelect
                       {...props}
                       customOnChange={(option) => {
-                        change('racquetSport', option?.value);
+                        change("racquetSport", option?.value);
                       }}
                       value={
                         racquetSport
@@ -184,10 +184,10 @@ export function SelectString({
                 }}
                 validate={required}
                 options={[
-                  { label: 'Tennis', value: 'Tennis' },
-                  { label: 'Squash', value: 'Squash' },
-                  { label: 'Badminton', value: 'Badminton' },
-                  { label: 'Other', value: 'Other' },
+                  { label: "Tennis", value: "Tennis" },
+                  { label: "Squash", value: "Squash" },
+                  { label: "Badminton", value: "Badminton" },
+                  { label: "Other", value: "Other" },
                 ]}
               />
               <Field
@@ -200,7 +200,7 @@ export function SelectString({
                       {...props}
                       placeholder="Select a racquet brand"
                       customOnChange={(option) => {
-                        change('racquetBrand', option?.value);
+                        change("racquetBrand", option?.value);
                       }}
                       value={
                         racquetBrand
@@ -211,20 +211,20 @@ export function SelectString({
                   );
                 }}
                 options={[
-                  { label: 'Babolat', value: 'Babolat' },
-                  { label: 'Wilson', value: 'Wilson' },
-                  { label: 'Head', value: 'Head' },
-                  { label: 'Prince', value: 'Prince' },
-                  { label: 'Yonex', value: 'Yonex' },
-                  { label: 'Volkl', value: 'Volkl' },
-                  { label: 'Dunlop', value: 'Dunlop' },
-                  { label: 'Technifibre', value: 'Technifibre' },
-                  { label: 'Prokennex', value: 'Prokennex' },
-                  { label: 'Solinco', value: 'Solinco' },
-                  { label: 'Gamma', value: 'Gamma' },
-                  { label: 'Lacoste', value: 'Lacoste' },
-                  { label: 'Donnay', value: 'Donnay' },
-                  { label: 'Other', value: 'Other' },
+                  { label: "Babolat", value: "Babolat" },
+                  { label: "Wilson", value: "Wilson" },
+                  { label: "Head", value: "Head" },
+                  { label: "Prince", value: "Prince" },
+                  { label: "Yonex", value: "Yonex" },
+                  { label: "Volkl", value: "Volkl" },
+                  { label: "Dunlop", value: "Dunlop" },
+                  { label: "Technifibre", value: "Technifibre" },
+                  { label: "Prokennex", value: "Prokennex" },
+                  { label: "Solinco", value: "Solinco" },
+                  { label: "Gamma", value: "Gamma" },
+                  { label: "Lacoste", value: "Lacoste" },
+                  { label: "Donnay", value: "Donnay" },
+                  { label: "Other", value: "Other" },
                 ]}
               />
               <Field

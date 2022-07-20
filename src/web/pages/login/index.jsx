@@ -42,19 +42,18 @@ let Login = ({ t, handleSubmit }) => {
   const values = useSelector((state) => state?.form?.login?.values);
   const errors = useSelector((state) => state?.form?.login?.syncErrors);
   const formSubmitHandler = async (values) => {
+    const userValues = { email: values.email, password: values.password };
     setIsLoading(true);
     try {
-      await dispatch(login(values.email, values.password));
+      await dispatch(login(userValues));
       dispatch(reset("login"));
       setIsLoading(false);
       navigate("/tasks");
-      toast.success("You have logged in successfuly");
     } catch (err) {
       setIsLoading(false);
-      if (window.navigator.onLine) {
-        return toast.error("Failed to login, Wrong email or Password!");
+      if (!window.navigator.onLine) {
+        return toast.error("Failed to login, Please check your internet!");
       }
-      toast.error("Failed to login, Please check your internet!");
     }
   };
 

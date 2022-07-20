@@ -1,49 +1,30 @@
+import { axios, loginRoute, showError } from "lib";
+import { toast } from "react-toastify";
 import {
-  authenticationFail,
-  authenticationPending,
-  authenticationSuccess,
   autoAuthenticationSuccess,
-  forgotPasswordFail,
-  forgotPasswordPending,
-  forgotPasswordSuccess,
+  getAuthenticatedUser,
   logout,
-  resetPasswordFail,
-  resetPasswordPending,
-  resetPasswordSuccess,
+  setUserLoading,
 } from "../Slices/authSlice";
 
-export const login = (email, password) => {
+export const login = (data) => {
   return async (dispatch) => {
-    dispatch(authenticationPending());
-    const response = await fetch(
-      `${process.env.REACT_APP_BASEURL}/api/v1/auth/login`,
-      {
-        method: "POST",
-        body: JSON.stringify({
-          email,
-          password,
-        }),
-        headers: new Headers({
-          "Content-type": "application/json",
-          apiKey: process.env.REACT_APP_APIKEY,
-        }),
-      }
-    );
-    if (!response.ok) {
-      const error = await response.json();
-      dispatch(authenticationFail(error));
-      // console.log("login", error);
-    }
-    const data = await response.json();
-    // console.log("data", data);
+    dispatch(setUserLoading(true));
+    try {
+      const { url } = loginRoute();
+      const res = await axios.post(url, data);
+      dispatch(setUserLoading(false));
+      dispatch(
+        getAuthenticatedUser({ user: res.data.user, token: res.data.token })
+      );
+      SaveTokenInLocalStorage(dispatch, res.data);
+      toast.success("You have logged in successfuly");
+    } catch (error) {
+      dispatch(setUserLoading(false));
+      toast.error(showError(error));
 
-    dispatch(
-      authenticationSuccess({
-        user: data.user,
-        token: data.token,
-      })
-    );
-    SaveTokenInLocalStorage(dispatch, data);
+      // toast.error(`Failed to login, ${error.response?.data?.message}`);
+    }
   };
 };
 
@@ -91,52 +72,52 @@ export const AutoAuthenticate = (dispatch) => {
   logOutTimer(dispatch, timer);
 };
 
-export const forgotPassword = (email) => {
-  return async (dispatch) => {
-    dispatch(forgotPasswordPending());
-    const response = await fetch(
-      `${process.env.REACT_APP_BASEURL}/api/v1/forgotPassword`,
-      {
-        method: "POST",
-        body: JSON.stringify({
-          email,
-        }),
-        headers: new Headers({
-          "Content-type": "application/json",
-          apiKey: process.env.REACT_APP_APIKEY,
-        }),
-      }
-    );
-    if (!response.ok) {
-      const error = await response.json();
-      dispatch(forgotPasswordFail(error));
-    }
-    const data = await response.json();
-    dispatch(forgotPasswordSuccess(data));
-  };
-};
+// export const forgotPassword = (email) => {
+//   return async (dispatch) => {
+//     dispatch(forgotPasswordPending());
+//     const response = await fetch(
+//       `${process.env.REACT_APP_BASEURL}/api/v1/forgotPassword`,
+//       {
+//         method: "POST",
+//         body: JSON.stringify({
+//           email,
+//         }),
+//         headers: new Headers({
+//           "Content-type": "application/json",
+//           apiKey: process.env.REACT_APP_APIKEY,
+//         }),
+//       }
+//     );
+//     if (!response.ok) {
+//       const error = await response.json();
+//       dispatch(forgotPasswordFail(error));
+//     }
+//     const data = await response.json();
+//     dispatch(forgotPasswordSuccess(data));
+//   };
+// };
 
-export const passwordReset = (password, resetToken) => {
-  return async (dispatch) => {
-    dispatch(resetPasswordPending());
-    const response = await fetch(
-      `${process.env.REACT_APP_BASEURL}/api/v1/resetPassword/${resetToken}`,
-      {
-        method: "PATCH",
-        body: JSON.stringify({
-          password,
-        }),
-        headers: new Headers({
-          "Content-type": "application/json",
-          apiKey: process.env.REACT_APP_APIKEY,
-        }),
-      }
-    );
-    if (!response.ok) {
-      const error = await response.json();
-      dispatch(resetPasswordFail(error));
-    }
-    const data = await response.json();
-    dispatch(resetPasswordSuccess(data));
-  };
-};
+// export const passwordReset = (password, resetToken) => {
+//   return async (dispatch) => {
+//     dispatch(resetPasswordPending());
+//     const response = await fetch(
+//       `${process.env.REACT_APP_BASEURL}/api/v1/resetPassword/${resetToken}`,
+//       {
+//         method: "PATCH",
+//         body: JSON.stringify({
+//           password,
+//         }),
+//         headers: new Headers({
+//           "Content-type": "application/json",
+//           apiKey: process.env.REACT_APP_APIKEY,
+//         }),
+//       }
+//     );
+//     if (!response.ok) {
+//       const error = await response.json();
+//       dispatch(resetPasswordFail(error));
+//     }
+//     const data = await response.json();
+//     dispatch(resetPasswordSuccess(data));
+//   };
+// };

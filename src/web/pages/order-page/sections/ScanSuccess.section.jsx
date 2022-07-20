@@ -1,4 +1,5 @@
 // Custom Components
+import { useSelector } from "react-redux";
 import { Heading, SubHeading, Description, BackButton } from "web/components";
 
 // Styles
@@ -11,6 +12,8 @@ export function ScanSuccess({
   setBackFromReview,
   backFromReview,
 }) {
+  const racquet = useSelector((state) => state.racquet?.racquet);
+  console.log("rac details", racquet);
   return (
     <>
       <div className="scan-details-sc max-w-[450px] m-[0_auto]">
@@ -40,8 +43,14 @@ export function ScanSuccess({
                     className="scan-details-sc__card-continer-content-racquet-img"
                   />
                   <div className="scan-details-sc__card-continer-content-racquet-text">
-                    <SubHeading>{t("scanSuccessTennis")}</SubHeading>
-                    <Description>{t("scanSuccessRacName")}</Description>
+                    <SubHeading>
+                      {/* {t("scanSuccessTennis")} */}
+                      {racquet && racquet.sport?.toUpperCase()} RACQUET
+                    </SubHeading>
+                    <Description>
+                      {racquet && racquet.id}
+                      {/* {t("scanSuccessRacName")} */}
+                    </Description>
                   </div>
                 </div>
               </div>
@@ -49,25 +58,32 @@ export function ScanSuccess({
                 <div className="scan-details-sc__card-continer-content-inner-card-txt">
                   <div className='scan-details-sc__card-continer-content-inner-card-txt-box"'>
                     <SubHeading>{t("scanSuccessMains")}</SubHeading>
-                    <Description>{t("scanSuccessMainsTxt")}</Description>
+                    {racquet && racquet.mains?.string_type}
+                    {/* <Description>{t("scanSuccessMainsTxt")}</Description> */}
                   </div>
                   <div className='scan-details-sc__card-continer-content-inner-card-txt-box"'>
                     <SubHeading>{t("scanSuccessCrosses")}</SubHeading>
-                    <Description>{t("scanSuccessCrossesTxt")}</Description>
+                    {racquet && racquet.crosses?.string_type}
+                    {/* <Description>{t("scanSuccessCrossesTxt")}</Description> */}
                   </div>
                   <div className='scan-details-sc__card-continer-content-inner-card-txt-box"'>
                     <SubHeading>{t("scanSuccessOwner")}</SubHeading>
-                    <Description>{t("scanSuccessOwnerName")}</Description>
+                    {racquet && racquet?.account?.full_name}
+                    {/* <Description>{t("scanSuccessOwnerName")}</Description> */}
                   </div>
                 </div>
                 <div className="scan-details-sc__card-continer-content-inner-card-txt">
                   <div className='scan-details-sc__card-continer-content-inner-card-txt-box"'>
                     <SubHeading>{t("odrTension")}</SubHeading>
-                    <Description>42 lbs</Description>
+                    <Description>
+                      {racquet && racquet.mains?.tension} lbs
+                    </Description>
                   </div>
                   <div className='scan-details-sc__card-continer-content-inner-card-txt-box"'>
                     <SubHeading>{t("odrTension")}</SubHeading>
-                    <Description>56 lbs</Description>
+                    <Description>
+                      {racquet && racquet.crosses?.tension} lbs
+                    </Description>
                   </div>
                 </div>
               </div>

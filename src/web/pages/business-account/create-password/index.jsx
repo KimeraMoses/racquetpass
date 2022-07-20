@@ -181,18 +181,14 @@ let CreatePassword = ({ t, back }) => {
       setIsLoading(false);
       dispatch(saveUserInitials({ email: values.email, pwd: values.password }));
       navigate("/BusinessAccount/Thanks");
-      toast.success(
-        "Your Account is created successfuly, Please go to settings to complete profile"
-      );
       dispatch(clearEnteredValues());
     } catch (err) {
       setIsLoading(false);
-      if (window.navigator.onLine) {
+      if (!window.navigator.onLine) {
         return toast.error(
-          "Failed to create business, Please try again later!"
+          "Failed to create business, Please check your internet!"
         );
       }
-      toast.error("Failed to create business, Please check your internet!");
     }
   };
 

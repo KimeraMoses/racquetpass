@@ -118,13 +118,13 @@ let EditShop = ({
       );
       setIsLoading(false);
       setCurrentScreen("proshop");
-      toast.success("Changes saved successfuly");
     } catch (err) {
       setIsLoading(false);
-      if (window.navigator.onLine) {
-        return toast.error("Failed to save changes, Please try again later!");
+      if (!window.navigator.onLine) {
+        return toast.error(
+          "Failed to save changes, Please check your internet!"
+        );
       }
-      toast.error("Failed to save changes, Please check your internet!");
     }
   };
   return (

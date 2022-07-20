@@ -1,7 +1,8 @@
-import { useState } from 'react';
-import { useSelector } from 'react-redux';
-import { Field } from 'redux-form';
-
+import { useState } from "react";
+import { useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
+import { Field } from "redux-form";
+import { toast } from "react-toastify";
 import {
   BackButton,
   Heading,
@@ -10,34 +11,88 @@ import {
   Modal,
   Description,
   CustomSwitch,
-} from 'web/components';
+} from "web/components";
 
-import './EditForm.styles.scss';
+import "./EditForm.styles.scss";
+import { deleteString, editNewString } from "web/store/Actions/racquetActions";
 
-const required = (value) => (value ? undefined : 'This field is required');
+const required = (value) => (value ? undefined : "This field is required");
 
-export function EditForm({ t, setCurrentScreen, change }) {
+export function EditForm({ t, setCurrentScreen, change, initialValues }) {
   const errors = useSelector((state) => state?.form?.inventory?.syncErrors);
+  const [isLoading, setIsLoading] = useState(false);
+  const dispatch = useDispatch();
+  const [check, setCheck] = useState(initialValues.in_stock);
+  const [price, setPrice] = useState(initialValues.itemPrice);
+  const [activeIndex, setActiveIndex] = useState(
+    initialValues.type === "Reel" ? 0 : initialValues.type === "Packet" ? 1 : 2
+  );
+  const [selectedType, setSelectedType] = useState(initialValues.type);
+  const handleOnClick = (el, index) => {
+    setActiveIndex(index);
+    setSelectedType(el);
+  };
+  console.log(initialValues);
 
-  const [check, setCheck] = useState(true);
-  const [price, setPrice] = useState('');
-  const [activeIndex, setActiveIndex] = useState(0);
-
-  const handleOnClick = (index) => setActiveIndex(index);
-
+  console.log(selectedType, check, price);
   const handleCheck = () => setCheck(!check);
   const [show, setShow] = useState(false);
   const [showInfo, setShowInfo] = useState(false);
-  const btns = ['Reel', 'Packet', 'Both'];
+  const btns = ["Reel", "Packet", "Both"];
 
   const handleShow = () => setShow(!show);
   const handleShowInfo = () => setShowInfo(!showInfo);
+  const values = useSelector((state) => state?.form?.inventory?.values);
+
+  const formSubmitHandler = async () => {
+    setIsLoading(true);
+    try {
+      await dispatch(
+        editNewString(
+          initialValues.string_id,
+          values["edit-brand"],
+          values["edit-model"],
+          parseInt(values.itemPrice),
+          selectedType,
+          check
+        )
+      );
+      setIsLoading(false);
+      setCurrentScreen("inventory");
+      // dispatch(reset("inventory"));
+    } catch (err) {
+      setIsLoading(false);
+      if (!window.navigator.onLine) {
+        return toast.error(
+          "Failed to save changes, Please check your internet!"
+        );
+      }
+    }
+  };
+
+  const handleDelete = async () => {
+    setIsLoading(true);
+    try {
+      await dispatch(deleteString(initialValues.string_id));
+      setIsLoading(false);
+      setShow(false);
+      setCurrentScreen("inventory");
+    } catch (error) {
+      setIsLoading(false);
+      if (!window.navigator.onLine) {
+        return toast.error(
+          "Failed to delete string, Please check your internet!"
+        );
+      }
+    }
+  };
+
   return (
     <>
       <Modal
         showModal={show}
         handleShow={handleShow}
-        heading="Delete “Wilson 5989-C3PO”?"
+        heading={`Delete “${initialValues.string_id}”?`}
         text={
           <div className="">
             <p>This will permanently delete this item.</p>
@@ -48,8 +103,12 @@ export function EditForm({ t, setCurrentScreen, change }) {
             <button onClick={handleShow} type="button">
               Cancel
             </button>
-            <button className="text-[#EA5353]" type="button">
-              Delete
+            <button
+              className="text-[#EA5353]"
+              type="button"
+              onClick={handleDelete}
+            >
+              {isLoading ? "Deleting..." : "Delete"}
             </button>
           </div>
         }
@@ -86,9 +145,8 @@ export function EditForm({ t, setCurrentScreen, change }) {
       <div className="edit-form">
         <div>
           <div className="edit-form__header">
-            <BackButton onClick={() => setCurrentScreen('detail')} />
-            {/* <Heading>{t('profileButtonAddNew')}</Heading> */}
-            <Heading>{t('profileFormEdit')}</Heading>
+            <BackButton onClick={() => setCurrentScreen("detail")} />
+            <Heading>{t("profileFormEdit")}</Heading>
           </div>
           <div className="edit-form__form">
             <Field
@@ -110,7 +168,7 @@ export function EditForm({ t, setCurrentScreen, change }) {
               value={price}
               customOnChange={(e) => {
                 const value = e.target.value;
-                if (value.charAt(0) === '$') {
+                if (value.charAt(0) === "$") {
                   const substr = value?.substring(1);
                   if (!isNaN(Number(substr))) {
                     setPrice(`${substr}`);
@@ -122,22 +180,23 @@ export function EditForm({ t, setCurrentScreen, change }) {
                 }
               }}
               label="Price"
+              name="itemPrice"
               hidePostFix
               customOnBlur={(e) => {
                 const value = e?.target?.value;
-                if (value?.charAt(0) === '$') {
+                if (value?.charAt(0) === "$") {
                   const substr = value?.substring(1);
                   setPrice(`$${Number(substr)?.toFixed(2)}`);
                 } else {
                   setPrice(`$${Number(e?.target?.value).toFixed(2)}`);
                 }
-                change('itemPrice', e?.target?.value);
+                change("itemPrice", e?.target?.value);
               }}
             />
 
             <div className="edit-form__form-types">
               <div className="edit-form__form-types-heading">
-                <Description>{t('inventoryAddItemString')}</Description>
+                <Description>{t("inventoryAddItemString")}</Description>
 
                 <img
                   onClick={handleShowInfo}
@@ -152,12 +211,12 @@ export function EditForm({ t, setCurrentScreen, change }) {
                     <>
                       <button
                         key={index}
-                        onClick={() => handleOnClick(index)}
+                        onClick={() => handleOnClick(el, index)}
                         type="button"
                         className={
                           activeIndex === index
-                            ? 'edit-form__form-types-btns-btn-active'
-                            : 'edit-form__form-types-btns-btn'
+                            ? "edit-form__form-types-btns-btn-active"
+                            : "edit-form__form-types-btns-btn"
                         }
                       >
                         {el}
@@ -178,17 +237,17 @@ export function EditForm({ t, setCurrentScreen, change }) {
               type="button"
               onClick={handleShow}
             >
-              {t('profileItemDelete')}
+              {t("profileItemDelete")}
             </button>
           </div>
           <div className="edit-form__button">
-            {/* <SubmitButton>{t('profileButtonAddNew')}</SubmitButton> */}
             <SubmitButton
               disabled={errors || !price}
-              onClick={() => setCurrentScreen('inventory')}
+              onClick={formSubmitHandler}
               className="w-full"
+              type="submit"
             >
-              {t('profileButtonSave')}
+              {isLoading ? "Saving..." : t("profileButtonSave")}
             </SubmitButton>
           </div>
         </div>

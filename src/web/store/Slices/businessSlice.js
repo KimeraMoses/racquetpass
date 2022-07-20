@@ -16,27 +16,16 @@ export const businessSlice = createSlice({
     clearEnteredValues(state) {
       state.businessData = {};
     },
-    createNewBusinessPending: (state) => {
+    setBusinessLoading: (state) => {
       state.isLoading = true;
     },
     createNewBusinessSuccess: (state, { payload }) => {
       state.isLoading = false;
-      state.message = payload.status;
-    },
-    createNewBusinessFail: (state, { payload }) => {
-      state.isLoading = false;
-      state.message = payload.status;
-    },
-    editBusinessPending: (state) => {
-      state.isLoading = true;
+      state.message = payload;
     },
     editBusinessSuccess: (state, { payload }) => {
       state.isLoading = false;
-      state.message = payload.status;
-    },
-    editBusinessFail: (state, { payload }) => {
-      state.isLoading = false;
-      state.message = payload.status;
+      state.message = payload;
     },
   },
 });
@@ -45,12 +34,9 @@ const { reducer, actions } = businessSlice;
 export const {
   saveEnteredValues,
   clearEnteredValues,
-  createNewBusinessPending,
+  setBusinessLoading,
   createNewBusinessSuccess,
-  createNewBusinessFail,
-  editBusinessPending,
   editBusinessSuccess,
-  editBusinessFail,
 } = actions;
 
 export default reducer;

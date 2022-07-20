@@ -5,7 +5,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { Field } from "redux-form";
 // Custom Components
 import { Description, CustomInput, SearchCard } from "web/components";
-import { fetchAllShops } from "web/store/Actions/shopActions";
+import { fetchEnabledShops } from "web/store/Actions/shopActions";
 
 // Styles
 import "./ShopSearchResults.styles.scss";
@@ -24,7 +24,7 @@ export function ShopSearchResults({
   const [searchTerm, setSearchTerm] = useState("");
   const [searchResults, setSearchResults] = useState([]);
   const { shops, isFetching } = useSelector((state) => state.shop);
-
+  console.log(shops);
   let inputEl = useRef(null);
   useEffect(() => {
     inputEl.focus();
@@ -52,8 +52,11 @@ export function ShopSearchResults({
   }, [isSearching]);
 
   useEffect(() => {
-    dispatch(fetchAllShops());
+    dispatch(fetchEnabledShops());
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
   return (
     <>
       <div className="shop-result max-w-[450px] m-[0_auto]">
@@ -106,6 +109,7 @@ export function ShopSearchResults({
                 <SearchCard
                   key={shop.id}
                   shop={{
+                    shop_id: shop.id,
                     name: shop.name,
                     address: `${shop.address.street}, ${shop.address.city}, ${shop.address.state}`,
                   }}

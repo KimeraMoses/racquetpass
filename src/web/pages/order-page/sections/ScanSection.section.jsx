@@ -9,6 +9,11 @@ import { Heading, Description, Modal } from "web/components";
 import "./ScanSection.styles.scss";
 import { BackButton } from "web/components/Buttons/BackButton.component";
 import { SubmitButton } from "web/components/Buttons/SubmitButton.component";
+import { useDispatch } from "react-redux";
+import {
+  // fetchAllRacquets,
+  fetchRacquetDetails,
+} from "web/store/Actions/racquetActions";
 
 export function ScanSection({
   t,
@@ -24,23 +29,39 @@ export function ScanSection({
   // const [raquetFound, setRacquetFound] = useState(true);
   const [showModal, setShowModal] = useState(false);
   const [permissionsDenied, setPermissionsDenied] = useState(false);
-
-  const raquetFound = true;
+  const dispatch = useDispatch();
+  // const raquetFound = true;
 
   const handleShow = () => {
     setShowModal((prev) => {
       return !prev;
     });
   };
+
+  const fetchRacquet = async (rac_id) => {
+    if (qrCode) {
+      await dispatch(fetchRacquetDetails(rac_id));
+      scanForward(true);
+    }
+  };
+
+  useEffect(() => {
+    fetchRacquet(qrCode);
+  }, [qrCode]);
+
+  console.log("Change", change);
   useEffect(() => {
     if (qrCode) {
       change("raquet-details-from-qr", qrCode);
+      // fetchRacquet(qrCode);
       // TODO: Update logic with RaquetWith with Backend
-      scanForward(raquetFound);
+      // scanForward(raquetFound);
     }
-  }, [qrCode, change, raquetFound, scanForward]);
+  }, [qrCode, change, scanForward]);
 
   console.log(permissionsDenied);
+
+  console.log("Qr code", qrCode);
 
   return (
     <>
@@ -111,6 +132,7 @@ export function ScanSection({
                 }}
                 onUpdate={(err, result) => {
                   if (result) {
+                    console.log(result);
                     setQrCode(result.text);
                     setQrScanner(false);
                   } else {

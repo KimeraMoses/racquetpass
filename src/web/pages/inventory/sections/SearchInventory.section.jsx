@@ -1,4 +1,5 @@
-import { Fragment, useState } from 'react';
+import { Fragment, useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import {
   HeadingButton,
   Heading,
@@ -6,27 +7,35 @@ import {
   SubHeading,
   SearchCard,
   StepButton,
-} from 'web/components';
+} from "web/components";
+import { fetchAllStrings } from "web/store/Actions/racquetActions";
 
-import './SearchInventory.styles.scss';
+import "./SearchInventory.styles.scss";
 
-let search = [];
-for (let i = 1; i <= 5; i++) {
-  search.push({
-    name: `Brand ${i} Model ${i}2${i}`,
-    description: i % 2 === 0 ? 'Out of Stock' : 'In Stock',
-    price: `$20${i}`,
-  });
-}
+export function SearchInventory({ t, setCurrentScreen, setDrawer, change }) {
+  const shop = useSelector((state) => state?.auth?.user?.shop);
+  const { strings, isLoading } = useSelector((state) => state.racquet);
+  const [searchTerm, setSearchTerm] = useState("");
+  const [searchResults, setSearchResults] = useState([]);
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(fetchAllStrings(shop));
 
-export function SearchInventory({ t, setCurrentScreen, setDrawer }) {
-  const [inventoryData, setInventoryData] = useState(search);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [shop]);
+  let FilteredStrings = strings;
+
+  const isSearching = searchTerm.length < 1 ? false : true;
+  useEffect(() => {
+    setSearchResults([]);
+  }, [isSearching]);
+
   return (
     <>
       <div className="search-inventory">
         <div className="search-inventory__header">
           <HeadingButton drawer onClick={() => setDrawer()} />
-          <Heading>{t('businessAccountDetailsInventory')}</Heading>
+          <Heading>{t("businessAccountDetailsInventory")}</Heading>
         </div>
 
         <div className="flex flex-col items-center">
@@ -38,36 +47,79 @@ export function SearchInventory({ t, setCurrentScreen, setDrawer }) {
                 noLabel
                 tabIndex="0"
                 onKeyDown={(e) => {
-                  if (e.key === 'Enter') {
+                  if (e.key === "Enter") {
                     e.preventDefault();
                   }
                 }}
                 customOnChange={(e) => {
                   const value = e.target.value;
                   if (value) {
-                    const filteredInventory = inventoryData.filter((item) =>
-                      item?.name?.includes(value.toLowerCase())
-                    );
-                    setInventoryData(filteredInventory);
-                  } else {
-                    setInventoryData(search);
+                    setSearchTerm(value);
+                    const Results = FilteredStrings.filter((Result) => {
+                      return Object.values(Result)
+                        .join(" ")
+                        .replace(/-/g, " ")
+                        .toLowerCase()
+                        .includes(searchTerm.toLowerCase());
+                    });
+                    setSearchResults(Results);
                   }
                 }}
               />
             </div>
 
             <div className="search-inventory__strings">
-              <SubHeading>{t('profileString')}</SubHeading>
+              <SubHeading>{t("profileString")}</SubHeading>
             </div>
             <div className="search-inventory__cards">
-              {inventoryData?.length ? (
+              {isLoading ? (
+                <SearchCard
+                  string={{
+                    name: `Loading strings...`,
+                    description: `Please hold on as we get you all the strings to search...`,
+                  }}
+                />
+              ) : searchTerm.length > 3 && searchResults.length < 1 ? (
+                <SearchCard
+                  string={{
+                    name: `No string matching '${searchTerm.toUpperCase()}' found!`,
+                    description: `Try searching with another term!`,
+                  }}
+                />
+              ) : (
+                (searchResults.length > 0
+                  ? searchResults
+                  : FilteredStrings
+                ).map((string) => (
+                  <SearchCard
+                    key={string.id}
+                    onClick={() => {
+                      setCurrentScreen("detail");
+                      change("current_string", string);
+                    }}
+                    string={{
+                      string_id: string.id,
+                      tension: string.tension,
+                      name: `${string.brand}, ${string.model}, ${string.type}`,
+                      description: `${string.hybrid_type}`,
+                      in_stock: string?.in_stock,
+                      price: `$${string.price}`,
+                      size: string.size,
+                    }}
+                    // main={main}
+                    // cross={cross}
+                    // change={change}
+                  />
+                ))
+              )}
+              {/* {inventoryData?.length ? (
                 inventoryData.map((item, idx) => {
                   return (
                     <Fragment key={idx}>
                       <SearchCard
                         string={item}
                         onClick={() => {
-                          setCurrentScreen('detail');
+                          setCurrentScreen("detail");
                         }}
                       />
                     </Fragment>
@@ -75,18 +127,18 @@ export function SearchInventory({ t, setCurrentScreen, setDrawer }) {
                 })
               ) : (
                 <div>No Data Found!</div>
-              )}
+              )} */}
             </div>
             <div className="search-inventory__buttons">
               {/* <StepButton outlined>{t('profileButtonCSV')}</StepButton> */}
               <StepButton
                 onClick={() => {
-                  setCurrentScreen('add');
+                  setCurrentScreen("add");
                 }}
                 type="button"
                 tabIndex="-1"
               >
-                {t('inventoryItemBtn')}
+                {t("inventoryItemBtn")}
               </StepButton>
             </div>
           </div>

@@ -1,7 +1,8 @@
-import { useState } from 'react';
-import { useSelector } from 'react-redux';
-import { Field } from 'redux-form';
-
+import { useState } from "react";
+import { useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
+import { Field } from "redux-form";
+import { toast } from "react-toastify";
 import {
   BackButton,
   Heading,
@@ -10,36 +11,72 @@ import {
   Modal,
   Description,
   CustomSwitch,
-} from 'web/components';
+} from "web/components";
+import { createNewString } from "web/store/Actions/racquetActions";
 
-import './AddForm.styles.scss';
+import "./AddForm.styles.scss";
 
-const required = (value) => (value ? undefined : 'This field is required');
+const required = (value) => (value ? undefined : "This field is required");
 
 export function AddForm({ t, setCurrentScreen, change }) {
   const errors = useSelector((state) => state?.form?.inventory?.syncErrors);
-
+  const values = useSelector((state) => state?.form?.inventory?.values);
+  const shop = useSelector((state) => state?.shop?.shop);
   const [show, setShow] = useState(false);
-  const [price, setPrice] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
+  const [price, setPrice] = useState("");
   // const [active, setActive] = useState(true);
   const [check, setCheck] = useState(false);
   const [activeIndex, setActiveIndex] = useState(0);
-
-  const handleOnClick = (index) => setActiveIndex(index);
+  const [selectedType, setSelectedType] = useState("");
+  const dispatch = useDispatch();
+  const handleOnClick = (el, index) => {
+    setActiveIndex(index);
+    setSelectedType(el);
+  };
+  console.log(activeIndex);
 
   const handleCheck = () => setCheck(!check);
 
   // const handleActive = () => setActive(!active);
 
   const handleShow = () => setShow(!show);
-  const btns = ['Reel', 'Packet', 'Both'];
+  const btns = ["Reel", "Packet", "Both"];
+
+  const formSubmitHandler = async () => {
+    setIsLoading(true);
+    try {
+      await dispatch(
+        createNewString(
+          values.type,
+          values.brand,
+          values.model,
+          3,
+          parseInt(values.itemPrice),
+          shop && shop.id,
+          selectedType,
+          check,
+          12
+        )
+      );
+      setIsLoading(false);
+      setCurrentScreen("inventory");
+      // dispatch(reset("inventory"));
+    } catch (err) {
+      setIsLoading(false);
+      if (!window.navigator.onLine) {
+        return toast.error("Failed to add Item, Please check your internet!");
+      }
+    }
+  };
+
   return (
     <>
       <div className="item-form">
         <div>
           <div className="item-form__header">
-            <BackButton onClick={() => setCurrentScreen('inventory')} />
-            <Heading>{t('profileButtonAddNew')}</Heading>
+            <BackButton onClick={() => setCurrentScreen("inventory")} />
+            <Heading>{t("profileButtonAddNew")}</Heading>
           </div>
           <div className="item-form__form">
             <Field
@@ -68,7 +105,7 @@ export function AddForm({ t, setCurrentScreen, change }) {
               value={price}
               customOnChange={(e) => {
                 const value = e.target.value;
-                if (value.charAt(0) === '$') {
+                if (value.charAt(0) === "$") {
                   const substr = value?.substring(1);
                   if (!isNaN(Number(substr))) {
                     setPrice(`${substr}`);
@@ -83,18 +120,18 @@ export function AddForm({ t, setCurrentScreen, change }) {
               hidePostFix
               customOnBlur={(e) => {
                 const value = e?.target?.value;
-                if (value?.charAt(0) === '$') {
+                if (value?.charAt(0) === "$") {
                   const substr = value?.substring(1);
                   setPrice(`$${Number(substr)?.toFixed(2)}`);
                 } else {
                   setPrice(`$${Number(e?.target?.value).toFixed(2)}`);
                 }
-                change('itemPrice', e?.target?.value);
+                change("itemPrice", e?.target?.value);
               }}
             />
             <div className="item-form__form-types">
               <div className="item-form__form-types-heading">
-                <Description>{t('inventoryAddItemString')}</Description>
+                <Description>{t("inventoryAddItemString")}</Description>
                 <Modal
                   showModal={show}
                   handleShow={handleShow}
@@ -139,11 +176,11 @@ export function AddForm({ t, setCurrentScreen, change }) {
                       <button
                         type="button"
                         key={index}
-                        onClick={() => handleOnClick(index)}
+                        onClick={() => handleOnClick(el, index)}
                         className={
                           activeIndex === index
-                            ? 'item-form__form-types-btns-btn-active'
-                            : 'item-form__form-types-btns-btn'
+                            ? "item-form__form-types-btns-btn-active"
+                            : "item-form__form-types-btns-btn"
                         }
                       >
                         {el}
@@ -161,11 +198,12 @@ export function AddForm({ t, setCurrentScreen, change }) {
         </div>
         <div className="item-form__button w-full sm:w-[450px] m-[0_auto] mt-[50px]">
           <SubmitButton
-            onClick={() => setCurrentScreen('detail')}
+            // onClick={() => setCurrentScreen('detail')}
+            onClick={formSubmitHandler}
             disabled={errors || !price}
             className="w-full"
           >
-            {t('profileButtonAddNew')}
+            {isLoading ? "Adding..." : t("profileButtonAddNew")}
           </SubmitButton>
         </div>
       </div>
