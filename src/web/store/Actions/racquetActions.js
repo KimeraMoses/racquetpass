@@ -101,14 +101,29 @@ export const createNewString =
   };
 
 export const editNewString =
-  (string_id, brand, model, price, hybrid_type, in_stock) =>
+  (
+    string_id,
+    name,
+    type,
+    brand,
+    model,
+    price,
+    size,
+    tension,
+    hybrid_type,
+    in_stock
+  ) =>
   async (dispatch) => {
     const data = {
+      name,
+      type,
       brand,
       model,
       price,
       hybrid_type,
       in_stock,
+      size,
+      tension,
     };
     console.log(data);
     dispatch(setRacquetsLoading(true));

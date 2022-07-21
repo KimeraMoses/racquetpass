@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
-import { Field } from "redux-form";
+import { Field, reset } from "redux-form";
 import { toast } from "react-toastify";
 import {
   BackButton,
@@ -50,16 +50,20 @@ export function EditForm({ t, setCurrentScreen, change, initialValues }) {
       await dispatch(
         editNewString(
           initialValues.string_id,
+          values["edit-name"],
+          values["edit-type"],
           values["edit-brand"],
           values["edit-model"],
           parseInt(values.itemPrice),
+          values?.size,
+          values?.tension,
           selectedType,
           check
         )
       );
       setIsLoading(false);
       setCurrentScreen("inventory");
-      // dispatch(reset("inventory"));
+      dispatch(reset("inventory"));
     } catch (err) {
       setIsLoading(false);
       if (!window.navigator.onLine) {
@@ -150,6 +154,20 @@ export function EditForm({ t, setCurrentScreen, change, initialValues }) {
           </div>
           <div className="edit-form__form">
             <Field
+              name="edit-name"
+              label="Name"
+              type="text"
+              component={CustomInput}
+              validate={required}
+            />
+            <Field
+              name="edit-type"
+              label="Type"
+              type="text"
+              component={CustomInput}
+              validate={required}
+            />
+            <Field
               name="edit-brand"
               label="Brand"
               type="text"
@@ -225,6 +243,20 @@ export function EditForm({ t, setCurrentScreen, change, initialValues }) {
                   );
                 })}
               </div>
+            </div>
+            <div className="item-form__half">
+              <Field
+                name="size"
+                label="Size"
+                type="number"
+                component={CustomInput}
+              />
+              <Field
+                name="tension"
+                label="Tension(lb)"
+                type="number"
+                component={CustomInput}
+              />
             </div>
             <div className="edit-form__form-switch">
               <Description>In Stock</Description>

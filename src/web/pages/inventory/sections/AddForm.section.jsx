@@ -48,15 +48,16 @@ export function AddForm({ t, setCurrentScreen, change }) {
     try {
       await dispatch(
         createNewString(
-          values.type,
-          values.brand,
-          values.model,
-          3,
-          parseInt(values.itemPrice),
+          values?.name,
+          values?.type,
+          values?.brand,
+          values?.model,
+          values?.size,
+          parseInt(values?.itemPrice),
           shop && shop.id,
           selectedType,
           check,
-          12
+          values?.tension
         )
       );
       setIsLoading(false);
@@ -79,6 +80,13 @@ export function AddForm({ t, setCurrentScreen, change }) {
             <Heading>{t("profileButtonAddNew")}</Heading>
           </div>
           <div className="item-form__form">
+            <Field
+              name="name"
+              label="Name"
+              type="text"
+              validate={required}
+              component={CustomInput}
+            />
             <Field
               name="type"
               label="Type"
@@ -188,6 +196,20 @@ export function AddForm({ t, setCurrentScreen, change }) {
                     </>
                   );
                 })}
+              </div>
+              <div className="item-form__half">
+                <Field
+                  name="size"
+                  label="Size"
+                  type="number"
+                  component={CustomInput}
+                />
+                <Field
+                  name="tension"
+                  label="Tension(lb)"
+                  type="number"
+                  component={CustomInput}
+                />
               </div>
             </div>
             <div className="item-form__form-switch">

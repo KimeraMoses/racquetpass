@@ -26,14 +26,22 @@ export function ItemDetails({ t, setCurrentScreen, change }) {
               text="Edit"
               onClick={() => {
                 setCurrentScreen("edit");
+                change("edit-name", string?.name);
+                change("edit-type", string?.type);
                 change("edit-brand", string?.brand);
                 change("edit-model", string?.model);
                 change("itemPrice", string?.price);
+                change("size", string?.size);
+                change("tension", string?.tension);
               }}
             />
           </div>
         </div>
         <div className="mt-[30px] flex flex-col gap-[20px] max-w-[450px] m-[0_auto]">
+          <div className="item-details-inventory__txt flex flex-col gap-[4px]">
+            <SubHeading>String Name</SubHeading>
+            <Description>{string && string?.name}</Description>
+          </div>
           <div className="item-details-inventory__txt flex flex-col gap-[4px]">
             <SubHeading>{t("odrBrnd")}</SubHeading>
             <Description>{string && string?.brand}</Description>
@@ -46,9 +54,9 @@ export function ItemDetails({ t, setCurrentScreen, change }) {
             <SubHeading>{t("inventoryItemPrice")}</SubHeading>
             <Description>
               ${string && string.price}&nbsp;{" "}
-              <span className="text-[#8E8E8E]">
+              {/* <span className="text-[#8E8E8E]">
                 {t("inventoryItemRSDetail")}
-              </span>
+              </span> */}
             </Description>
           </div>
           <div className="item-details-inventory__txt flex flex-col gap-[4px]">

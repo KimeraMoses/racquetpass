@@ -100,7 +100,7 @@ export function SearchInventory({ t, setCurrentScreen, setDrawer, change }) {
                     string={{
                       string_id: string.id,
                       tension: string.tension,
-                      name: `${string.brand}, ${string.model}, ${string.type}`,
+                      name: `${string.brand}, ${string.model}, (${string.hybrid_type})`,
                       description: `${string.hybrid_type}`,
                       in_stock: string?.in_stock,
                       price: `$${string.price}`,

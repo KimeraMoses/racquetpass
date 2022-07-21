@@ -41,11 +41,15 @@ let Inventory = ({ t, change }) => {
 
   const initialValues = {
     string_id: string && string.id,
+    ["edit-name"]: string && string?.name,
+    ["edit-type"]: string && string?.type,
     ["edit-brand"]: string && string?.brand,
-    ["edit-model"]: string && string?.brand,
+    ["edit-model"]: string && string?.model,
     itemPrice: string && string?.price,
     type: string && string.hybrid_type,
     in_stock: string && string.in_stock,
+    size: string && string?.size,
+    tension: string && string?.tension,
   };
   const [currentScreen, setCurrentScreen] = useState(active);
 

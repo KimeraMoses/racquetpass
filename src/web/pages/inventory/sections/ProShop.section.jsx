@@ -67,6 +67,18 @@ export function ProShop({ t, setCurrentScreen, setDrawer }) {
                 </div>
                 <div className="shop__services-card-inner-text">
                   <SubHeading customClass="shop__services-card-inner-text-heading">
+                    {t("shopTaxPriceHeading")}
+                  </SubHeading>
+                  <SubHeading customClass="shop__services-card-inner-text-txt">
+                    {isLoading
+                      ? "Loading..."
+                      : shop && shop?.tax
+                      ? `${formatter.format(shop && shop?.tax)}`
+                      : "Not Set"}
+                  </SubHeading>
+                </div>
+                <div className="shop__services-card-inner-text">
+                  <SubHeading customClass="shop__services-card-inner-text-heading">
                     {t("shopString")}
                   </SubHeading>
                   <SubHeading customClass="shop__services-card-inner-text-txt">

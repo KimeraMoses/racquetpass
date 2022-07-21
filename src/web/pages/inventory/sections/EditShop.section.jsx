@@ -64,6 +64,7 @@ let EditShop = ({
   initialValues,
 }) => {
   const [labor, setLabor] = useState(initialValues["labor-price"]);
+  const [tax, setTax] = useState(initialValues["tax"]);
   const [delivery, setDelivery] = useState(initialValues["delivery-days"]);
   const [ownStrings, setOwnStrings] = useState(hasOwnStrings);
   const [deliveryError, setDeliveryError] = useState();
@@ -111,6 +112,7 @@ let EditShop = ({
           values["phone-number"],
           parseInt(delivery),
           parseFloat(labor),
+          parseFloat(tax),
           values.country,
           ownStrings,
           address
@@ -218,6 +220,16 @@ let EditShop = ({
             It will be added to the cost of strings to determine the price of a
             service order.
           </div>
+
+          <CustomCurrencyInput
+            value={tax}
+            label="Tax"
+            // onChange={(e) => setPrice(e.target.value)}
+            customOnChange={(value) => {
+              setTax(value);
+            }}
+            onBlur={(e) => change("tax", e?.target?.value)}
+          />
           <div className="edit__service-switch flex justify-between mt-[26px]">
             <Description>{t("shopString")}</Description>
             <CustomSwitch

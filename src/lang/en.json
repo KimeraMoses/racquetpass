@@ -400,6 +400,8 @@
   "shopDeliveryTimeDay": "3d",
   "shopLaborPriceHeading": "Labor price",
   "shopLaborPrice": "$19.99",
+  "shopTaxPriceHeading": "Tax",
+  "shopTaxPrice": "$20.99",
 
   "editShopHeading": "Edit My Pro Shop",
   "editNameRequest": "Request Name change",

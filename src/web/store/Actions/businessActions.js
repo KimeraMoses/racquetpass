@@ -61,6 +61,7 @@ export const editBusinessDetails =
     phone,
     etimated_delivery_time,
     labor_price,
+    tax,
     country,
     allow_own_strings,
     address
@@ -72,6 +73,7 @@ export const editBusinessDetails =
       phone,
       etimated_delivery_time,
       labor_price,
+      tax,
       country,
       allow_own_strings,
       address,
