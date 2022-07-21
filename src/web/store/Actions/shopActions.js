@@ -83,6 +83,8 @@ export const fetchShopOrder = (id) => {
         dispatch(getAllShopOrder(res.data.order));
       } catch (error) {
         console.log(error);
+        if (error.response.status === 404)
+          return toast.error("Order with scaned code not found!");
         toast.error("Failed to load order details");
         // dispatch(fetchShopsFail(error));
       }

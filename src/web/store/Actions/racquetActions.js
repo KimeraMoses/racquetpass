@@ -49,6 +49,7 @@ export const fetchAllStrings = (shop_id) => {
 
 export const fetchRacquetDetails = (racquet_id) => {
   return async (dispatch) => {
+    console.log("reached");
     dispatch(setRacquetsLoading(true));
     const { url } = getRaquetRoute(racquet_id);
     try {
@@ -62,6 +63,10 @@ export const fetchRacquetDetails = (racquet_id) => {
       console.log("rac data", res);
     } catch (error) {
       dispatch(setRacquetsLoading(false));
+      if (error?.response?.status === 404)
+        return toast.error(
+          "Racquet not found, Please select shop to create order!"
+        );
       toast.error("Failed to scan racquet!");
       console.log("rac err", error);
     }

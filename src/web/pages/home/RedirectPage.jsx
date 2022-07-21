@@ -11,28 +11,33 @@ import { fetchRacquetDetails } from "web/store/Actions/racquetActions";
 function RedirectPage({ t }) {
   const navigate = useNavigate();
   const refRecaptcha = useRef();
-  const isLoggedIn = !localStorage.getItem("Racquet__AuthToken")?.token;
+  const isLoggedIn = !!JSON.parse(localStorage.getItem("Racquet__AuthToken"))
+    ?.token;
   const { uuid } = useParams();
+
   const dispatch = useDispatch();
   const redirectUserWithToken = async () => {
     await dispatch(
       isLoggedIn ? fetchShopOrder(uuid) : fetchRacquetDetails(uuid)
     );
-    navigate(isLoggedIn ? "/Tasks/Details" : "/order");
+    navigate(isLoggedIn ? "/tasks/scan" : "/order");
   };
 
   useEffect(() => {
-    if (isLoggedIn) {
-      redirectUserWithToken();
-    }
-  }, [isLoggedIn]);
+    redirectUserWithToken();
+  }, []);
 
   return (
     <>
       <div className="home-container">
         <div>
+          <div className="home-container__button-container">
+            <div className="home-container__button-container-text">
+              {t("homeLogo")}
+            </div>
+          </div>
           <div className="banner-container">
-            <h1 className="banner-container__heading">
+            <h1 className="banner-container__heading text-center">
               Thank you for using RacquetPass, you will be redirected shortly to
               {isLoggedIn ? " complete this " : " continue with your"} order
             </h1>
