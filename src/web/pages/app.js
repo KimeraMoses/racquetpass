@@ -46,6 +46,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { AutoAuthenticate } from "web/store/Actions/authActions";
+import RedirectPage from "./home/RedirectPage";
 
 function Routers() {
   const { show } = useSelector((state) => state?.drawer);
@@ -67,6 +68,7 @@ function Routers() {
             path="/"
             element={isAuthenticated ? <Navigate to="/tasks" /> : <Home />}
           />
+          <Route path="/code/:uuid" element={<RedirectPage />} />
           <Route
             path="/login"
             element={isAuthenticated ? <Navigate to="/tasks" /> : <Login />}

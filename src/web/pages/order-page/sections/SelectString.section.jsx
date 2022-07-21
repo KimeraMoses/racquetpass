@@ -19,6 +19,16 @@ import {
 // Styles
 import "./SelectString.styles.scss";
 
+const convertPoundsToKilograms = (value, unit) => {
+  let result;
+  if (unit === "kg") {
+    result = value * 0.453592;
+  } else {
+    result = value / 0.453592;
+  }
+  return result;
+};
+
 const required = (value) => (value ? undefined : "Required");
 
 export function SelectString({
@@ -126,10 +136,14 @@ export function SelectString({
                 onClick: () => {
                   if (unit === "kg") {
                     setUnit("lbs");
-                    setMainsTension(50);
+                    setMainsTension(
+                      convertPoundsToKilograms(mainsTension, "lbs")
+                    );
                   } else {
                     setUnit("kg");
-                    setMainsTension(25);
+                    setMainsTension(
+                      convertPoundsToKilograms(mainsTension, "kg")
+                    );
                   }
                 },
               }}
