@@ -14,6 +14,8 @@ import {
   // fetchAllRacquets,
   fetchRacquetDetails,
 } from "web/store/Actions/racquetActions";
+import Loader from "web/components/Loader/Loader";
+import { useSelector } from "react-redux";
 
 export function ScanSection({
   t,
@@ -26,11 +28,10 @@ export function ScanSection({
 }) {
   const [qrCode, setQrCode] = useState("");
   const [qrScanner, setQrScanner] = useState(false);
-  // const [raquetFound, setRacquetFound] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
   const [showModal, setShowModal] = useState(false);
   const [permissionsDenied, setPermissionsDenied] = useState(false);
   const dispatch = useDispatch();
-  // const raquetFound = true;
 
   const handleShow = () => {
     setShowModal((prev) => {
@@ -40,8 +41,10 @@ export function ScanSection({
 
   const fetchRacquet = async (rac_id) => {
     if (qrCode) {
+      setIsLoading(true);
       await dispatch(fetchRacquetDetails(rac_id));
       scanForward(true);
+      setIsLoading(false);
     }
   };
 
@@ -49,7 +52,6 @@ export function ScanSection({
     fetchRacquet(qrCode);
   }, [qrCode]);
 
-  console.log("Change", change);
   useEffect(() => {
     if (qrCode) {
       change("raquet-details-from-qr", qrCode);
@@ -153,8 +155,14 @@ export function ScanSection({
                 <div className="px-[30px] text-center text-white text-[24px] font-bold">
                   Please allow camera permissions and scan again.
                 </div>
+              ) : isLoading ? (
+                <div className="bg-white rounded-md text-white p-5 h-2/3 flex justify-center items-center w-4/5">
+                  <Loader />
+                </div>
               ) : (
-                <img src="img/orderpage/card.png" alt="scan" />
+                <>
+                  <img src="img/orderpage/card.png" alt="scan" />
+                </>
               )}
               <div className="scan-section__image-container-button">
                 {/* <button

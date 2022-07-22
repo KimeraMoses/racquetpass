@@ -36,6 +36,14 @@ export const createOrdersRoute = () => ({
   url: `/api/v1/catalog/create-order`,
 });
 
+export const sendCodeVerificationRoute = () => ({
+  url: `/api/v1/auth/send-otp`,
+});
+
+export const verifyCodeRoute = () => ({
+  url: `/api/v1/auth/verify-otp`,
+});
+
 //PAYMENT ROUTES
 export const subscriptionSessionRoute = () => ({
   url: `/api/v1/shops/subscription-session`,
@@ -45,11 +53,19 @@ export const manageSessionRoute = () => ({
 });
 
 //RACQUET ROUTES
+export const newRaquetsRoute = () => ({
+  url: `/api/v1/racquets`,
+});
+
+export const editRaquetsRoute = (id) => ({
+  url: `/api/v1/racquets/${id}`,
+});
+
 export const getRaquetsRoute = () => ({
   url: `/api/v1/racquets/`,
 });
 export const getRaquetRoute = (id) => ({
-  url: `/api/v1/racquets/${id}`,
+  url: `/api/v1/racquets/get-by-code/${id}`,
 });
 export const getStringsRoute = (id) => ({
   url: `/api/v1/catalog/inventory/${id}`,

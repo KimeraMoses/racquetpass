@@ -4,9 +4,11 @@ import {
   createOrdersRoute,
   enabledShopsRoute,
   manageSessionRoute,
+  sendCodeVerificationRoute,
   shopOrderRoute,
   shopOrdersRoute,
   subscriptionSessionRoute,
+  verifyCodeRoute,
 } from "lib/index";
 import {
   fetchShopFail,
@@ -211,3 +213,40 @@ export const sendShopInquiry =
       dispatch(sendMessageFail(error));
     }
   };
+
+//SEND VERIFICATION CODE VERIFICATION CODE
+
+export const sendVerificationCode = (email) => {
+  return async (dispatch) => {
+    dispatch(setShopLoading(true));
+    try {
+      const { url } = sendCodeVerificationRoute();
+      const res = await axios.post(url, { email });
+      console.log("code sent", res);
+      toast.success("Verification code sent to your email");
+      dispatch(setShopLoading(false));
+    } catch (error) {
+      dispatch(setShopLoading(false));
+      console.log("Code verify", error);
+      toast.error("Failed to generate verification code!");
+    }
+  };
+};
+
+// VERIFY USER CODE
+export const codeVerification = (otp, email) => {
+  return async (dispatch) => {
+    dispatch(setShopLoading(true));
+    try {
+      const { url } = verifyCodeRoute();
+      const res = await axios.post(url, { otp, email });
+      console.log("Code verify", res);
+      toast.success("Phone Number verified Successfuly");
+      dispatch(setShopLoading(false));
+    } catch (error) {
+      dispatch(setShopLoading(false));
+      console.log("Code verify", error);
+      toast.error("Phone verification failed!");
+    }
+  };
+};

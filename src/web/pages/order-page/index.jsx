@@ -23,6 +23,11 @@ import {
   DidntGetText,
 } from "./sections";
 
+import {
+  createNewRacquet,
+  editRacquetDetails,
+} from "../../store/Actions/racquetActions";
+
 import "./order.styles.scss";
 import { useSelector } from "react-redux";
 import { VerifyResend } from "./sections/VerifyResend.section";
@@ -62,28 +67,72 @@ let OrderPage = ({ t, handleSubmit, change }) => {
   const [cross, setCross] = useState(false);
   const [done, setDone] = useState(false);
   const [backFromReview, setBackFromReview] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const racquet = useSelector((state) => state.racquet?.racquet);
+  const hasRaquet = !!useSelector((state) => state.racquet?.racquet?.id);
 
   const errors = useSelector((state) => state?.form?.signup?.syncErrors);
   const values = useSelector((state) => state?.form?.signup?.values);
 
-  // const createOrderHandler = async () => {
-  //   const data = {
-  //     string_id: values?.brand?.string_id,
-  //     racquet_id: values["raquet-details-from-qr"],
-  //     shop_id: values?.shop?.shop_id,
-  //     use_hybrid_settings: false,
-  //     firs_name: values["first-name"],
-  //     last_name: values["last-name"],
-  //     phone_number: values["phone-number"],
-  //   };
-  //   try {
-  //     await dispatch(createOrder(data));
-  //     navigate();
-  //   } catch (error) {}
-  // };
+  const NewRacquetHandler = async () => {
+    setIsLoading(true);
+    let mainObj = {};
+    let crossObj = {};
+
+    if (step === 2) {
+      mainObj = {
+        string_id: values?.brand?.string_id,
+        tension: values?.brand?.tension,
+      };
+      crossObj = {
+        string_id: values?.brand?.string_id,
+        tension: values?.brand?.tension,
+      };
+    } else {
+      mainObj = {
+        string_id: values?.main?.string_id,
+        tension: values?.main?.tension,
+      };
+      crossObj = {
+        string_id: values?.cross?.string_id,
+        tension: values?.cross?.tension,
+      };
+    }
+
+    const data = {
+      qr_code: values["raquet-details-from-qr"],
+      shop: values?.shop?.shop_id,
+      brand: values?.racquetBrand,
+      model: values?.racquetModel,
+      image_url: values?.racquetImage ? values?.racquetImage : "",
+      mains: mainObj,
+      crosses: crossObj,
+      sport: values?.racquetSport,
+      owner: values?.ownerName,
+    };
+    try {
+      await dispatch(
+        hasRaquet
+          ? editRacquetDetails(data, racquet && racquet?.id)
+          : createNewRacquet(data)
+      );
+      setIsLoading(false);
+    } catch (error) {
+      console.log("Failed...", error);
+      setIsLoading(false);
+    }
+  };
+
+  const sendCodeVericationHandler = () => {
+    //Logic for sending code here
+  };
+
+  const codeverificationHandler = () => {
+    //Logic for verifying code here
+  };
 
   const goToTop = () => {
     window.scrollTo({
@@ -195,6 +244,7 @@ let OrderPage = ({ t, handleSubmit, change }) => {
         return (
           <ScanSuccess
             t={t}
+            change={change}
             backward={backward}
             setStep={setStep}
             backFromReview={backFromReview}
@@ -415,17 +465,26 @@ let OrderPage = ({ t, handleSubmit, change }) => {
             <div className="order-page__button-container max-w-[450px] w-full mr-[auto] ml-[auto]">
               <StepButton
                 onClick={() => {
+                  if (step === 2 || step === 3) {
+                    NewRacquetHandler();
+                  }
+                  if (step === 4) {
+                    sendCodeVericationHandler();
+                  }
+                  if (step === 5) {
+                    codeverificationHandler();
+                  }
                   if (backFromReview) {
                     setStep(6);
                     setBackFromReview(false);
                   } else {
-                    forward();
+                    if (!isLoading) forward();
                   }
                 }}
                 disabled={
                   step === 0 ||
                   errors ||
-                  (step === 2 && !values?.brand) ||
+                  (step === 2 && !values?.racquetModel) ||
                   (step === 3 && !values?.mains && !values?.cross) ||
                   (step === 4 &&
                     (!values?.["phone-number"] ||

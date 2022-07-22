@@ -1,30 +1,9 @@
 // Custom Components
-import { SubHeading, Heading } from 'web/components';
+import { useSelector } from "react-redux";
+import { SubHeading, Heading } from "web/components";
 
 // Styles
-import './SummaryCard.styles.scss';
-
-const items = [
-  {
-    heading: 'Mains',
-    isOutOfStock: true,
-    description: 'Luxilon Alu Rough 1.6 G @ 42 lbs',
-    price: '$18.99',
-  },
-  {
-    heading: 'Crosses',
-    description: 'Luxilon Alu Rough 1.6 G @ 42 lbs',
-    price: '$18.99',
-  },
-  {
-    description: 'Labor',
-    price: '$19.99',
-  },
-  {
-    description: 'Tax',
-    price: '$4.50',
-  },
-];
+import "./SummaryCard.styles.scss";
 
 const Item = ({ heading, description, price, isOutOfStock }) => {
   return (
@@ -33,10 +12,10 @@ const Item = ({ heading, description, price, isOutOfStock }) => {
         {heading ? (
           <div
             className={`summary-card__container-content-txt-item-content-heading ${
-              isOutOfStock ? 'text-[#E40000] ' : ''
+              isOutOfStock ? "text-[#E40000] " : ""
             }`}
           >
-            {heading} {isOutOfStock && '(out of stock)'}
+            {heading} {isOutOfStock && "(out of stock)"}
           </div>
         ) : (
           <></>
@@ -53,6 +32,37 @@ const Item = ({ heading, description, price, isOutOfStock }) => {
 };
 
 export function SummaryCard() {
+  const racquet = useSelector((state) => state.racquet?.racquet);
+
+  const items = [
+    {
+      heading: "Mains",
+      isOutOfStock: !racquet?.mains?.string_id?.in_stock,
+      description: `${racquet?.mains?.string_id?.name} ${racquet?.mains?.string_id?.size} G @ ${racquet?.mains?.string_id?.tension} lbs`,
+      price: `$${racquet?.mains?.string_id?.price}`,
+    },
+    {
+      heading: "Crosses",
+      isOutOfStock: !racquet?.crosses?.string_id?.in_stock,
+      description: `${racquet?.crosses?.string_id?.name} ${racquet?.crosses?.string_id?.size} G @ ${racquet?.crosses?.string_id?.tension} lbs`,
+      price: `$${racquet?.crosses?.string_id?.price}`,
+    },
+    {
+      description: "Labor",
+      price: `$${racquet?.shop?.labor_price}`,
+    },
+    {
+      description: "Tax",
+      price: "$4.50",
+    },
+  ];
+
+  const TotalPrice =
+    racquet?.mains?.string_id?.price +
+    racquet?.crosses?.string_id?.price +
+    racquet?.shop?.labor_price +
+    4.5;
+
   let isOutOfStock = false;
   items.forEach((item) => {
     if (item?.isOutOfStock) {
@@ -63,7 +73,7 @@ export function SummaryCard() {
     <>
       <div
         className={`summary-card ${
-          isOutOfStock ? 'summary-card__out-of-stock' : ''
+          isOutOfStock ? "summary-card__out-of-stock" : ""
         }`}
       >
         <div className="summary-card__container">
@@ -73,19 +83,21 @@ export function SummaryCard() {
                 Replace Strings
               </Heading>
               <SubHeading customClass="summary-card__container-content-txt-subheading">
-                $62.47
+                ${TotalPrice}
               </SubHeading>
               {items.map((item) => (
-                <Item {...item} />
+                <Item {...item} key={item.description} />
               ))}
             </div>
           </div>
         </div>
       </div>
-      <div className="mt-[12px] text-[#E40000] font-semibold text-[12px]">
-        The strings you've selected are out of stock at this shop. Press “Change
-        strings” to browse in stock options.
-      </div>
+      {isOutOfStock && (
+        <div className="mt-[12px] text-[#E40000] font-semibold text-[12px]">
+          The strings you've selected are out of stock at this shop. Press
+          “Change strings” to browse in stock options.
+        </div>
+      )}
     </>
   );
 }

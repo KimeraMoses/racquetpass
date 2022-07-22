@@ -1,15 +1,31 @@
-import { useState } from 'react';
-import './CustomFileInput.styles.scss';
+import { useState } from "react";
+import "./CustomFileInput.styles.scss";
 
 export const FileInput = (props) => {
-  const [image, setImage] = useState('');
+  const [image, setImage] = useState("");
 
-  const handleChange = (e) => {
+  const handleChange = async (e) => {
     const [file] = e.target.files;
+
+    const racquetImage = await convertbase64Logo(file);
     if (props.change) {
-      props.change(props?.name, file);
+      props.change(props?.name, racquetImage);
     }
     setImage(URL.createObjectURL(file));
+  };
+
+  const convertbase64Logo = (file) => {
+    return new Promise((resolve, reject) => {
+      const fileReader = new FileReader();
+      fileReader.readAsDataURL(file);
+
+      fileReader.onload = () => {
+        resolve(fileReader.result);
+      };
+      fileReader.onerror = (error) => {
+        reject(error);
+      };
+    });
   };
 
   return (
@@ -26,9 +42,9 @@ export const FileInput = (props) => {
               ? props.background
               : image
               ? image
-              : '/img/configureRacquet/camera.png'
+              : "/img/configureRacquet/camera.png"
           }) no-repeat center`,
-          backgroundSize: image ? 'contain' : 'auto',
+          backgroundSize: image ? "contain" : "auto",
         }}
       ></label>
       <input

@@ -1,4 +1,5 @@
 // Custom Components
+import { useEffect } from "react";
 import { useSelector } from "react-redux";
 import { Heading, SubHeading, Description, BackButton } from "web/components";
 
@@ -11,9 +12,21 @@ export function ScanSuccess({
   setStep,
   setBackFromReview,
   backFromReview,
+  change,
 }) {
   const racquet = useSelector((state) => state.racquet?.racquet);
-  console.log("rac details", racquet);
+  const hasRaquet = !!useSelector((state) => state.racquet?.racquet?.id);
+  console.log("rac details", hasRaquet, racquet);
+  useEffect(() => {
+    if (hasRaquet) {
+      change("racquetId", racquet && racquet?.id);
+      change("racquetSport", racquet && racquet?.sport);
+      change("racquetBrand", racquet && racquet?.brand);
+      change("racquetModel", racquet && racquet?.model);
+      change("ownerName", racquet && racquet?.owner);
+    }
+  }, [hasRaquet]);
+
   return (
     <>
       <div className="scan-details-sc max-w-[450px] m-[0_auto]">
@@ -30,7 +43,11 @@ export function ScanSuccess({
                 }
               }}
             />
-            <Heading>{t("scanSuccessHeading")}</Heading>
+            <Heading>
+              {!hasRaquet
+                ? "Racquet not found, Start creating your racquet to complete order"
+                : t("scanSuccessHeading")}
+            </Heading>
           </div>
 
           <div className="scan-details-sc__card-continer">
@@ -45,7 +62,10 @@ export function ScanSuccess({
                   <div className="scan-details-sc__card-continer-content-racquet-text">
                     <SubHeading>
                       {/* {t("scanSuccessTennis")} */}
-                      {racquet && racquet.sport?.toUpperCase()} RACQUET
+                      {!hasRaquet
+                        ? "LET'S CREATE YOUR "
+                        : racquet && racquet.sport?.toUpperCase()}{" "}
+                      RACQUET
                     </SubHeading>
                     <Description>
                       {racquet && racquet.id}
@@ -54,39 +74,41 @@ export function ScanSuccess({
                   </div>
                 </div>
               </div>
-              <div className="scan-details-sc__card-continer-content-inner-card">
-                <div className="scan-details-sc__card-continer-content-inner-card-txt">
-                  <div className='scan-details-sc__card-continer-content-inner-card-txt-box"'>
-                    <SubHeading>{t("scanSuccessMains")}</SubHeading>
-                    {racquet && racquet.mains?.string_type}
-                    {/* <Description>{t("scanSuccessMainsTxt")}</Description> */}
+              {hasRaquet && (
+                <div className="scan-details-sc__card-continer-content-inner-card">
+                  <div className="scan-details-sc__card-continer-content-inner-card-txt">
+                    <div className='scan-details-sc__card-continer-content-inner-card-txt-box"'>
+                      <SubHeading>{t("scanSuccessMains")}</SubHeading>
+                      {racquet && racquet.mains?.string_id?.id}
+                      {/* <Description>{t("scanSuccessMainsTxt")}</Description> */}
+                    </div>
+                    <div className='scan-details-sc__card-continer-content-inner-card-txt-box"'>
+                      <SubHeading>{t("scanSuccessCrosses")}</SubHeading>
+                      {racquet && racquet.crosses?.string_id?.id}
+                      {/* <Description>{t("scanSuccessCrossesTxt")}</Description> */}
+                    </div>
+                    <div className='scan-details-sc__card-continer-content-inner-card-txt-box"'>
+                      <SubHeading>{t("scanSuccessOwner")}</SubHeading>
+                      {racquet?.owner ? racquet?.owner : "No Name set"}
+                      {/* <Description>{t("scanSuccessOwnerName")}</Description> */}
+                    </div>
                   </div>
-                  <div className='scan-details-sc__card-continer-content-inner-card-txt-box"'>
-                    <SubHeading>{t("scanSuccessCrosses")}</SubHeading>
-                    {racquet && racquet.crosses?.string_type}
-                    {/* <Description>{t("scanSuccessCrossesTxt")}</Description> */}
-                  </div>
-                  <div className='scan-details-sc__card-continer-content-inner-card-txt-box"'>
-                    <SubHeading>{t("scanSuccessOwner")}</SubHeading>
-                    {racquet && racquet?.account?.full_name}
-                    {/* <Description>{t("scanSuccessOwnerName")}</Description> */}
+                  <div className="scan-details-sc__card-continer-content-inner-card-txt">
+                    <div className='scan-details-sc__card-continer-content-inner-card-txt-box"'>
+                      <SubHeading>{t("odrTension")}</SubHeading>
+                      <Description>
+                        {racquet && racquet.mains?.tension} lbs
+                      </Description>
+                    </div>
+                    <div className='scan-details-sc__card-continer-content-inner-card-txt-box"'>
+                      <SubHeading>{t("odrTension")}</SubHeading>
+                      <Description>
+                        {racquet && racquet.crosses?.tension} lbs
+                      </Description>
+                    </div>
                   </div>
                 </div>
-                <div className="scan-details-sc__card-continer-content-inner-card-txt">
-                  <div className='scan-details-sc__card-continer-content-inner-card-txt-box"'>
-                    <SubHeading>{t("odrTension")}</SubHeading>
-                    <Description>
-                      {racquet && racquet.mains?.tension} lbs
-                    </Description>
-                  </div>
-                  <div className='scan-details-sc__card-continer-content-inner-card-txt-box"'>
-                    <SubHeading>{t("odrTension")}</SubHeading>
-                    <Description>
-                      {racquet && racquet.crosses?.tension} lbs
-                    </Description>
-                  </div>
-                </div>
-              </div>
+              )}
               <div>
                 {/* <Description customClass="scan-details-sc__card-continer-content-success">
                   {t('odrsuccess')}

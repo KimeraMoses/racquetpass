@@ -49,7 +49,7 @@ export function SelectString({
 
   const brand = useSelector((state) => state?.form?.signup?.values?.brand);
 
-  const [mainsTension, setMainsTension] = useState(50);
+  const [mainsTension, setMainsTension] = useState(brand?.tension);
 
   // useEffect(() => {
   //   change('mains-tension', mainsTension);
@@ -61,6 +61,8 @@ export function SelectString({
   const racquetBrand = useSelector(
     (state) => state?.form?.signup?.values?.racquetBrand
   );
+
+  console.log("I'm here...");
 
   return (
     <>
@@ -129,6 +131,11 @@ export function SelectString({
               pattern="\d*"
               onChange={(e) => {
                 setMainsTension(e.target.value);
+                const newTension = {
+                  tension: parseInt(e.target.value),
+                };
+                const newString = { ...brand, ...newTension };
+                change("brand", newString);
               }}
               link={{
                 text: `Change units to ${unit === "kg" ? "lbs" : "kg"}`,
@@ -161,6 +168,7 @@ export function SelectString({
               handleChange={() => {
                 setStep(3);
                 setStringsCurrent("initial");
+                change("brand", {});
               }}
               checked={false}
             />
@@ -244,6 +252,13 @@ export function SelectString({
               <Field
                 name="racquetModel"
                 label="Model"
+                validate={required}
+                type="text"
+                component={CustomInput}
+              />
+              <Field
+                name="ownerName"
+                label="Racquet Owner"
                 validate={required}
                 type="text"
                 component={CustomInput}

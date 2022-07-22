@@ -1,9 +1,11 @@
 import {
   axios,
+  editRaquetsRoute,
   editStringsRoute,
   getRaquetRoute,
   getRaquetsRoute,
   getStringsRoute,
+  newRaquetsRoute,
   newStringsRoute,
   showError,
 } from "lib/index";
@@ -27,6 +29,47 @@ export const fetchAllRacquets = () => {
       //   dispatch(setRacquetsLoading(false));
     }
   };
+};
+
+export const createNewRacquet = (data) => async (dispatch) => {
+  console.log(data);
+  dispatch(setRacquetsLoading(true));
+  try {
+    const { url } = newRaquetsRoute();
+    const res = await axios.post(url, data);
+    // dispatch(createNewBusinessSuccess(res.data));
+    // toast.success(
+    //   "Your Account is created successfuly, Please go to settings to complete profile"
+    // );
+    console.log("new Rac", res);
+    dispatch(getRacquetSuccess(res.data?.racquet));
+    dispatch(setRacquetsLoading(false));
+  } catch (error) {
+    // toast.error(showError(error));
+    console.log("New Raq err", error);
+    dispatch(setRacquetsLoading(false));
+  }
+};
+
+//EDIT RACQUET DETAILS
+export const editRacquetDetails = (data, rac_id) => async (dispatch) => {
+  console.log(data);
+  dispatch(setRacquetsLoading(true));
+  try {
+    const { url } = editRaquetsRoute(rac_id);
+    const res = await axios.patch(url, data);
+    // dispatch(createNewBusinessSuccess(res.data));
+    // toast.success(
+    //   "Your Account is created successfuly, Please go to settings to complete profile"
+    // );
+    console.log("edit Rac", res);
+    dispatch(fetchRacquetDetails(res.data?.racquet?.qr_code));
+    dispatch(setRacquetsLoading(false));
+  } catch (error) {
+    // toast.error(showError(error));
+    console.log("New Raq err", error);
+    dispatch(setRacquetsLoading(false));
+  }
 };
 
 export const fetchAllStrings = (shop_id) => {
@@ -65,7 +108,7 @@ export const fetchRacquetDetails = (racquet_id) => {
       dispatch(setRacquetsLoading(false));
       if (error?.response?.status === 404)
         return toast.error(
-          "Racquet not found, Please select shop to create order!"
+          "Racquet not found, Let's help you set up your own racquet quickly..."
         );
       toast.error("Failed to scan racquet!");
       console.log("rac err", error);

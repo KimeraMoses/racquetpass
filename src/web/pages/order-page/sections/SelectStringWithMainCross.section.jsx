@@ -32,11 +32,10 @@ export function SelectStringWithMainCross({
   backFromReview,
   setBackFromReview,
 }) {
-  const [mainsTension, setMainsTension] = useState(50);
-  const [crossesTension, setCrossesTension] = useState(50);
-
   const main = useSelector((state) => state?.form?.signup?.values?.main);
   const cross = useSelector((state) => state?.form?.signup?.values?.cross);
+  const [mainsTension, setMainsTension] = useState(main?.tension);
+  const [crossesTension, setCrossesTension] = useState(cross?.tension);
 
   const [modal, setModal] = useState(false);
   const [unit, setUnit] = useState("lbs");
@@ -130,6 +129,11 @@ export function SelectStringWithMainCross({
               value={mainsTension}
               onChange={(e) => {
                 setMainsTension(e.target.value);
+                const newTension = {
+                  tension: parseInt(e.target.value),
+                };
+                const newMain = { ...main, ...newTension };
+                change("main", newMain);
               }}
               link={{
                 text: `Change units to ${unit === "kg" ? "lbs" : "kg"}`,
@@ -180,6 +184,11 @@ export function SelectStringWithMainCross({
               value={crossesTension}
               onChange={(e) => {
                 setCrossesTension(e.target.value);
+                const newTension = {
+                  tension: parseInt(e.target.value),
+                };
+                const newCross = { ...cross, ...newTension };
+                change("cross", newCross);
               }}
               link={{
                 text: `Change units to ${unit === "kg" ? "lbs" : "kg"}`,
@@ -210,6 +219,8 @@ export function SelectStringWithMainCross({
               handleChange={() => {
                 setMain(false);
                 setCross(false);
+                change("main", {});
+                change("cross", {});
                 setStep(2);
               }}
               checked={true}
@@ -298,11 +309,19 @@ export function SelectStringWithMainCross({
                 type="text"
                 component={CustomInput}
               />
+              <Field
+                name="ownerName"
+                label="Racquet Owner"
+                validate={required}
+                type="text"
+                component={CustomInput}
+              />
               <div className="select-string-odr__recquet-form-pic-box">
-                <Field
-                  name="image"
+                <FileInput
+                  name="racquetImage"
                   label="Picture (optional)"
-                  component={FileInput}
+                  change={change}
+                  accept="image/*"
                 />
                 <Description>
                   Adding a picture makes it easy for your stringer to pick out
