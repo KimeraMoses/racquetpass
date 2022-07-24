@@ -33,7 +33,12 @@ import { useSelector } from "react-redux";
 import { VerifyResend } from "./sections/VerifyResend.section";
 import Recaptcha from "web/components/Google-Recaptcha/Recaptcha";
 import { useDispatch } from "react-redux";
-import { createOrder } from "web/store/Actions/shopActions";
+import {
+  codeVerification,
+  createOrder,
+  sendVerificationCode,
+} from "web/store/Actions/shopActions";
+// import { toast } from "react-toastify";
 
 // Phone Validation
 const formats = "(999) 999-9999|(999)999-9999|999-999-9999|9999999999";
@@ -55,6 +60,7 @@ const phoneValidation = (value) => {
 let OrderPage = ({ t, handleSubmit, change }) => {
   const refRecaptcha = useRef(null);
   const [step, setStep] = useState(0);
+  const [isVerified, setIsVerified] = useState(false);
   const [steps, setSteps] = useState({
     active: "",
     content: ["QR", "Strings", "Contact", "Review"],
@@ -104,7 +110,6 @@ let OrderPage = ({ t, handleSubmit, change }) => {
 
     const data = {
       qr_code: values["raquet-details-from-qr"],
-      shop: values?.shop?.shop_id,
       brand: values?.racquetBrand,
       model: values?.racquetModel,
       image_url: values?.racquetImage ? values?.racquetImage : "",
@@ -121,17 +126,44 @@ let OrderPage = ({ t, handleSubmit, change }) => {
       );
       setIsLoading(false);
     } catch (error) {
-      console.log("Failed...", error);
       setIsLoading(false);
     }
   };
 
-  const sendCodeVericationHandler = () => {
+  let isVerifiedObj = JSON.parse(localStorage.getItem("_rpe_"));
+
+  const sendCodeVericationHandler = async () => {
     //Logic for sending code here
+    setIsLoading(true);
+    if (isVerifiedObj?.e === values?.email && isVerifiedObj?.isV) {
+      setIsLoading(false);
+      return setIsVerified(true);
+    } else {
+      try {
+        await dispatch(sendVerificationCode(values.email));
+        setIsLoading(false);
+      } catch (error) {
+        setIsLoading(false);
+      }
+    }
   };
 
-  const codeverificationHandler = () => {
+  const codeverificationHandler = async () => {
     //Logic for verifying code here
+    setIsLoading(true);
+    if (isVerifiedObj?.email === values?.email && isVerifiedObj?.isV) {
+      setIsLoading(false);
+      return setIsVerified(true);
+    } else {
+      try {
+        await dispatch(
+          codeVerification(+values["verification-code"], values?.email)
+        );
+        setIsLoading(false);
+      } catch (error) {
+        setIsLoading(false);
+      }
+    }
   };
 
   const goToTop = () => {
@@ -393,7 +425,14 @@ let OrderPage = ({ t, handleSubmit, change }) => {
           />
         );
       case 5:
-        return <VerifyPhone t={t} backward={backward} change={change} />;
+        return (
+          <VerifyPhone
+            t={t}
+            backward={backward}
+            change={change}
+            setStep={setStep}
+          />
+        );
       case 6:
         return (
           <ReviewOrder
@@ -428,6 +467,7 @@ let OrderPage = ({ t, handleSubmit, change }) => {
     }
   };
   console.log("current step", step);
+  console.log("has value", !!values?.brand?.string_id);
 
   return (
     <>
@@ -485,6 +525,7 @@ let OrderPage = ({ t, handleSubmit, change }) => {
                   step === 0 ||
                   errors ||
                   (step === 2 && !values?.racquetModel) ||
+                  (step === 2 && !values?.brand?.string_id) ||
                   (step === 3 && !values?.mains && !values?.cross) ||
                   (step === 4 &&
                     (!values?.["phone-number"] ||
@@ -512,16 +553,14 @@ let OrderPage = ({ t, handleSubmit, change }) => {
 };
 
 const onSubmit = async (values, dispatch) => {
-  // dispatch(    // your submit action //      );
   console.log(values);
   const data = {
-    string_id: values?.brand?.string_id,
-    racquet_id: values["raquet-details-from-qr"],
+    racquet_id: values?.racquetId,
     shop_id: values?.shop?.shop_id,
-    use_hybrid_settings: false,
     first_name: values["first-name"],
     last_name: values["last-name"],
     phone_number: values["phone-number"],
+    email: values.email,
   };
   try {
     await dispatch(createOrder(data));

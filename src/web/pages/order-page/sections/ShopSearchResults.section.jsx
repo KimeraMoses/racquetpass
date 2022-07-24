@@ -29,8 +29,8 @@ export function ShopSearchResults({
   useEffect(() => {
     inputEl.focus();
   }, [inputEl]);
-  let FilteredShops = shops && shops;
-
+  let FilteredShops = shops && shops.filter((shop) => shop.enabled === true);
+  console.log("Enabled", FilteredShops);
   const userSearchHandler = (e) => {
     const { value } = e.target;
     setSearchTerm(value);
@@ -94,6 +94,13 @@ export function ShopSearchResults({
               shop={{
                 name: `Loading shops...`,
                 address: `Please hold on as we get you all the shops to search...`,
+              }}
+            />
+          ) : FilteredShops.length < 1 ? (
+            <SearchCard
+              shop={{
+                name: `No shop enabled shops found on RacquetPass!`,
+                address: `Try signing up a shop for users to make orders`,
               }}
             />
           ) : searchTerm.length > 3 && searchResults.length < 1 ? (

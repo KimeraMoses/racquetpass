@@ -25,6 +25,9 @@ export const enabledShopsRoute = () => ({
 });
 
 //SHOP ORDERS ROUTES
+export const shopDetailsRoute = (id) => ({
+  url: `/api/v1/shops/${id}`,
+});
 export const shopOrdersRoute = (id) => ({
   url: `/api/v1/catalog/orders/${id}?completed=false`,
 });

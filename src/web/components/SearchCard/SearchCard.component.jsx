@@ -1,5 +1,7 @@
 // Custom Components
+import { useDispatch } from "react-redux";
 import { SubHeading, Description } from "web/components";
+import { fetchShopDetails } from "web/store/Actions/shopActions";
 
 // Styles
 import "./SearchCard.styles.scss";
@@ -14,9 +16,13 @@ export function SearchCard({
   cross,
   onClick = () => {},
 }) {
+  const dispatch = useDispatch();
+
   const handleClick = () => {
+    console.log("Selected brand", brand);
     if (shop) {
       change("shop", shop);
+      dispatch(fetchShopDetails(shop?.shop_id));
     } else if (string) {
       change("string", string);
     } else if (raquet) {
@@ -26,6 +32,7 @@ export function SearchCard({
     } else if (cross) {
       change("cross", brand);
     } else if (brand) {
+      console.log(brand);
       change("brand", brand);
     }
     onClick();

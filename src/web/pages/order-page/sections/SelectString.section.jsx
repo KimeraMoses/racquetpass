@@ -119,7 +119,7 @@ export function SelectString({
                   alt="down-arrow"
                 />
               }
-              value={brand?.string_id}
+              value={brand?.name}
               onSelectClick={() => setStringsCurrent("search")}
             />
           </div>

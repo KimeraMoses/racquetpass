@@ -47,7 +47,10 @@ export function BrandSearchResults({
   useEffect(() => {
     inputEl.focus();
   }, [inputEl]);
-  let FilteredStrings = AllStrings;
+
+  let FilteredStrings = AllStrings.filter(
+    (string) => string?.in_stock === true
+  );
 
   const userSearchHandler = (e) => {
     const { value } = e.target;
@@ -106,6 +109,13 @@ export function BrandSearchResults({
                 description: `Please hold on as we get you all the strings to search...`,
               }}
             />
+          ) : FilteredStrings.length < 1 ? (
+            <SearchCard
+              brand={{
+                name: `No strings found for the selected shop!`,
+                description: `Try selecting another shop to continue with your order`,
+              }}
+            />
           ) : searchTerm.length > 3 && searchResults.length < 1 ? (
             <SearchCard
               brand={{
@@ -117,11 +127,12 @@ export function BrandSearchResults({
             (searchResults.length > 0 ? searchResults : FilteredStrings).map(
               (string) => (
                 <SearchCard
+                  key={string.id}
                   brand={{
                     string_id: string.id,
                     tension: string.tension,
-                    name: `${string.brand}, ${string.model}, (${string.hybrid_type})`,
-                    description: `${string.hybrid_type}`,
+                    name: `${string?.name}(${string.hybrid_type})`,
+                    description: `${string.brand}, ${string.model}`,
                     price: `$${string.price}`,
                     size: string.size,
                   }}

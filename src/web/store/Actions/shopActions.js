@@ -5,6 +5,7 @@ import {
   enabledShopsRoute,
   manageSessionRoute,
   sendCodeVerificationRoute,
+  shopDetailsRoute,
   shopOrderRoute,
   shopOrdersRoute,
   subscriptionSessionRoute,
@@ -24,6 +25,7 @@ import {
   getSessionLink,
   getAllShopOrders,
   getAllShopOrder,
+  getPaymentUrl,
 } from "../Slices/shopSlice";
 import { toast } from "react-toastify";
 
@@ -104,11 +106,14 @@ export const createOrder = (data) => {
       try {
         const res = await axios.post(url, data);
         console.log(res);
-        // dispatch(getAllShopOrders(res.data.order));
+        dispatch(getPaymentUrl(res.data.url));
+        dispatch(setShopLoading(false));
         toast.success("Order Sent successfuly!");
+        window.location.replace(res.data.url);
       } catch (error) {
         console.log(error);
         toast.error("Failed to make order!");
+        dispatch(setShopLoading(false));
         // dispatch(fetchShopsFail(error));
       }
     }
@@ -159,28 +164,16 @@ export const getStripeManagementSessionLink = (id) => {
 };
 
 //FETCH SHOP DETAILS
-export const fetchShopDetails = (authToken, shopId) => {
+export const fetchShopDetails = (shopId) => {
   return async (dispatch) => {
     dispatch(fetchShopPending());
-    if (shopId && authToken) {
-      try {
-        const response = await fetch(
-          `${process.env.REACT_APP_BASEURL}/api/v1/shops/${shopId}`,
-          {
-            method: "GET",
-            headers: new Headers({
-              "Content-type": "application/json",
-              apiKey: process.env.REACT_APP_APIKEY,
-              Authorization: "Bearer " + authToken,
-            }),
-          }
-        );
-        const data = await response.json();
-        dispatch(fetchShopSuccess(data?.shop));
-        console.log(data);
-      } catch (error) {
-        dispatch(fetchShopFail(error));
-      }
+    const { url } = shopDetailsRoute(shopId);
+    try {
+      const res = await axios.get(url);
+      dispatch(fetchShopSuccess(res.data?.shop));
+      console.log(res?.data);
+    } catch (error) {
+      dispatch(fetchShopFail(error));
     }
   };
 };
@@ -241,12 +234,15 @@ export const codeVerification = (otp, email) => {
       const { url } = verifyCodeRoute();
       const res = await axios.post(url, { otp, email });
       console.log("Code verify", res);
-      toast.success("Phone Number verified Successfuly");
+      toast.success("Email verified Successfuly");
       dispatch(setShopLoading(false));
+      if (res.status === 200) {
+        localStorage.setItem("_rpe_", JSON.stringify({ e: email, isV: true }));
+      }
     } catch (error) {
       dispatch(setShopLoading(false));
       console.log("Code verify", error);
-      toast.error("Phone verification failed!");
+      toast.error("Email verification failed!");
     }
   };
 };

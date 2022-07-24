@@ -1,7 +1,9 @@
 // Custom Components
 import { useEffect } from "react";
+import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 import { Heading, SubHeading, Description, BackButton } from "web/components";
+import { removeRacquetFromState } from "web/store/Slices/racquetSlice";
 
 // Styles
 import "./ScanSuccess.styles.scss";
@@ -27,11 +29,17 @@ export function ScanSuccess({
     }
   }, [hasRaquet]);
 
+  const dispatch = useDispatch();
+
+  const racquetRescanHandler = () => {
+    dispatch(removeRacquetFromState());
+    backward();
+  };
+
   return (
     <>
       <div className="scan-details-sc max-w-[450px] m-[0_auto]">
         <div>
-          {/* <BackButton /> */}
           <div className="scan-details-sc__heading">
             <BackButton
               onClick={() => {
@@ -40,6 +48,7 @@ export function ScanSuccess({
                   setBackFromReview(false);
                 } else {
                   backward();
+                  dispatch(removeRacquetFromState());
                 }
               }}
             />
@@ -79,12 +88,16 @@ export function ScanSuccess({
                   <div className="scan-details-sc__card-continer-content-inner-card-txt">
                     <div className='scan-details-sc__card-continer-content-inner-card-txt-box"'>
                       <SubHeading>{t("scanSuccessMains")}</SubHeading>
-                      {racquet && racquet.mains?.string_id?.id}
+                      {`${racquet && racquet.mains?.string_id?.name}(${
+                        racquet && racquet.mains?.string_id?.hybrid_type
+                      })`}
                       {/* <Description>{t("scanSuccessMainsTxt")}</Description> */}
                     </div>
                     <div className='scan-details-sc__card-continer-content-inner-card-txt-box"'>
                       <SubHeading>{t("scanSuccessCrosses")}</SubHeading>
-                      {racquet && racquet.crosses?.string_id?.id}
+                      {`${racquet && racquet.crosses?.string_id?.name}(${
+                        racquet && racquet.crosses?.string_id?.hybrid_type
+                      })`}
                       {/* <Description>{t("scanSuccessCrossesTxt")}</Description> */}
                     </div>
                     <div className='scan-details-sc__card-continer-content-inner-card-txt-box"'>
@@ -118,7 +131,7 @@ export function ScanSuccess({
           </div>
           <button
             className="scan-details-sc__card-continer-content-rescan"
-            onClick={backward}
+            onClick={racquetRescanHandler}
           >
             {t("ordRescan")}
           </button>

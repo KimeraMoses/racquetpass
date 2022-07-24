@@ -12,25 +12,29 @@ import { SearchCard, Survey } from "web/components/index";
 // Styles
 import "./ReviewOrder.styles.scss";
 import { BackButton } from "web/components/Buttons/BackButton.component";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
+import { createOrder } from "web/store/Actions/shopActions";
 
 export function ReviewOrder({ t, setStep, setDone, setBackFromReview }) {
   const [showSurvey, setShowSurvey] = useState(false);
-
+  const dispatch = useDispatch();
+  const { isLoading } = useSelector((state) => state.shop);
   const user = useSelector((state) => state?.form?.signup?.values);
   const shop = useSelector((state) => state?.form?.signup?.values?.shop);
+  const values = useSelector((state) => state?.form?.signup?.values);
 
   return (
     <>
-      <Survey
+      {/* <Survey
         show={showSurvey}
         setShow={setShowSurvey}
         onExit={() => {
           setStep(7);
           setDone(true);
         }}
-      />
+      /> */}
       <div>
         <div className={`review-order-odr max-w-[450px] m-[0_auto]`}>
           <div className="review-order-odr__heading">
@@ -125,7 +129,7 @@ export function ReviewOrder({ t, setStep, setDone, setBackFromReview }) {
                 text="Change Strings"
                 onClick={() => {
                   setBackFromReview(true);
-                  setStep(2);
+                  setStep(values?.brand?.string_id ? 2 : 3);
                 }}
               />
             </div>
@@ -136,12 +140,13 @@ export function ReviewOrder({ t, setStep, setDone, setBackFromReview }) {
           <div className="review-order-odr__buttons">
             <PaymentButton
               className="review-order-odr__buttons-credit"
-              handleClick={() => {
-                setShowSurvey(true);
-              }}
+              // handleClick={() => {
+              //   setShowSurvey(true);
+              // }}
+              // handleClick={onSubmitHandler}
               style={{ marginBottom: "40px" }}
             >
-              Pay and Finish
+              {isLoading ? "Generating Payment Link..." : "Pay and Finish"}
             </PaymentButton>
           </div>
         </div>

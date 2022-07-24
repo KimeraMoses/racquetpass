@@ -19,7 +19,7 @@ export function ItemDetails({ t, setCurrentScreen, change }) {
         <div className="item-details-inventory__header">
           <div className="flex items-center gap-[16px]">
             <BackButton onClick={() => setCurrentScreen("inventory")} />
-            <Heading>{string && string.id}</Heading>
+            <Heading>{string && string?.name}</Heading>
           </div>
           <div>
             <HeadingButton

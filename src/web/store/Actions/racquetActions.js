@@ -44,8 +44,11 @@ export const createNewRacquet = (data) => async (dispatch) => {
     console.log("new Rac", res);
     dispatch(getRacquetSuccess(res.data?.racquet));
     dispatch(setRacquetsLoading(false));
+    toast.success(
+      "Your raquet is created successfuly, You can now proceed with your order "
+    );
   } catch (error) {
-    // toast.error(showError(error));
+    toast.error(showError(error));
     console.log("New Raq err", error);
     dispatch(setRacquetsLoading(false));
   }
@@ -58,15 +61,14 @@ export const editRacquetDetails = (data, rac_id) => async (dispatch) => {
   try {
     const { url } = editRaquetsRoute(rac_id);
     const res = await axios.patch(url, data);
-    // dispatch(createNewBusinessSuccess(res.data));
-    // toast.success(
-    //   "Your Account is created successfuly, Please go to settings to complete profile"
-    // );
     console.log("edit Rac", res);
     dispatch(fetchRacquetDetails(res.data?.racquet?.qr_code));
     dispatch(setRacquetsLoading(false));
+    toast.success(
+      "Changes to your raquet are saved successfuly, You can now proceed with your order "
+    );
   } catch (error) {
-    // toast.error(showError(error));
+    toast.error(showError(error));
     console.log("New Raq err", error);
     dispatch(setRacquetsLoading(false));
   }
@@ -99,6 +101,7 @@ export const fetchRacquetDetails = (racquet_id) => {
       const res = await axios.get(url);
       if (res.status === 200) {
         dispatch(getRacquetSuccess(res.data?.racquet));
+        toast.success("Racquet found, You can now continue with your order");
       } else if (res.status === 404) {
         return toast.error("Racquet not found!");
       }

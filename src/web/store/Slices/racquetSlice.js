@@ -24,6 +24,9 @@ export const racquetSlice = createSlice({
     getRacquetStrings: (state, { payload }) => {
       state.strings = payload;
     },
+    removeRacquetFromState: (state) => {
+      state.racquet = {};
+    },
   },
 });
 const { reducer, actions } = racquetSlice;
@@ -33,6 +36,7 @@ export const {
   getRacquetsSuccess,
   getRacquetSuccess,
   getRacquetStrings,
+  removeRacquetFromState,
 } = actions;
 
 export default reducer;

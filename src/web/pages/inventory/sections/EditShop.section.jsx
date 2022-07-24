@@ -70,7 +70,7 @@ let EditShop = ({
   const [deliveryError, setDeliveryError] = useState();
   const [isLoading, setIsLoading] = useState(false);
   const [states, setStates] = useState([]);
-  const { user, token } = useSelector((state) => state.auth);
+  const { user } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -105,7 +105,6 @@ let EditShop = ({
     try {
       await dispatch(
         editBusinessDetails(
-          token,
           user && user.shop,
           values.shop,
           values.email,

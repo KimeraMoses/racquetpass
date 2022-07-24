@@ -33,7 +33,7 @@ let Inventory = ({ t, change }) => {
   const [isReceive, setIsReceive] = useState(false);
   const query = useQuery();
   const active = query.get("active");
-  const { token, user } = useSelector((state) => state.auth);
+  const user = useSelector((state) => state.auth.user);
   const shop = useSelector((state) => state.shop.shop);
   const string = useSelector(
     (state) => state?.form?.inventory?.values?.current_string
@@ -57,7 +57,7 @@ let Inventory = ({ t, change }) => {
     shop: shop && shop?.name,
     email: shop && shop?.email,
     ["phone-number"]: shop && shop?.phone,
-    ["delivery-days"]: shop && shop?.etimated_delivery_time,
+    ["delivery-days"]: shop && shop?.estimated_delivery_time,
     ["labor-price"]: shop && shop?.labor_price,
     address: shop && shop?.address?.street,
     shopcity: shop && shop?.address?.city,
@@ -65,6 +65,7 @@ let Inventory = ({ t, change }) => {
     ["shop-state"]: shop && shop?.address?.state,
     ["zip-code"]: shop && shop?.address?.zip_code,
     country: shop && shop?.country,
+    tax: shop && shop?.tax,
   };
 
   useEffect(() => {
@@ -72,8 +73,8 @@ let Inventory = ({ t, change }) => {
   }, [active]);
 
   useEffect(() => {
-    dispatch(fetchShopDetails(token, user && user.shop));
-  }, [token]);
+    dispatch(fetchShopDetails(user && user.shop));
+  }, [user]);
 
   const dispatch = useDispatch();
 

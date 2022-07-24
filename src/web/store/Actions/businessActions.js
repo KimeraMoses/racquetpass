@@ -54,12 +54,11 @@ export const createNewBusiness =
 
 export const editBusinessDetails =
   (
-    authToken,
     Id,
     name,
     email,
     phone,
-    etimated_delivery_time,
+    estimated_delivery_time,
     labor_price,
     tax,
     country,
@@ -71,7 +70,7 @@ export const editBusinessDetails =
       name,
       email,
       phone,
-      etimated_delivery_time,
+      estimated_delivery_time,
       labor_price,
       tax,
       country,
@@ -85,7 +84,7 @@ export const editBusinessDetails =
       dispatch(editBusinessSuccess(res?.data));
       if (res.status === 200) {
         dispatch(setBusinessLoading(false));
-        dispatch(fetchShopDetails(authToken, Id));
+        dispatch(fetchShopDetails(Id));
         toast.success("Changes saved successfuly");
       } else {
         toast.error(res?.data?.message);

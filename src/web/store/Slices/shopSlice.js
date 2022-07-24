@@ -6,6 +6,7 @@ const initialState = {
   orders: [],
   order: {},
   link: "",
+  paymentUrl: "",
   isLoading: false,
   isFetching: false,
   message: "",
@@ -70,6 +71,9 @@ const shopSlice = createSlice({
     getAllShopOrder: (state, { payload }) => {
       state.order = payload;
     },
+    getPaymentUrl: (state, { payload }) => {
+      state.paymentUrl = payload;
+    },
   },
 });
 
@@ -92,6 +96,7 @@ export const {
   setShopLoading,
   getAllShopOrders,
   getAllShopOrder,
+  getPaymentUrl,
 } = actions;
 
 export default reducer;

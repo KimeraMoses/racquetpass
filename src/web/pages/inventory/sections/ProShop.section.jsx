@@ -46,8 +46,8 @@ export function ProShop({ t, setCurrentScreen, setDrawer }) {
                     {isLoading
                       ? "Loading..."
                       : `${
-                          shop && shop.etimated_delivery_time
-                            ? `${shop?.etimated_delivery_time}d`
+                          shop && shop.estimated_delivery_time
+                            ? `${shop?.estimated_delivery_time}d`
                             : "Not set"
                         }`}
                   </SubHeading>
