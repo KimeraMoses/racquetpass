@@ -5,7 +5,7 @@ import { Button } from "web/components";
 import Recaptcha from "web/components/Google-Recaptcha/Recaptcha";
 import "./home.styles.scss";
 import { useDispatch } from "react-redux";
-import { fetchShopOrder } from "web/store/Actions/shopActions";
+import { getOrder } from "web/store/Actions/shopActions";
 import { fetchRacquetDetails } from "web/store/Actions/racquetActions";
 
 function RedirectPage({ t }) {
@@ -17,9 +17,7 @@ function RedirectPage({ t }) {
 
   const dispatch = useDispatch();
   const redirectUserWithToken = async () => {
-    await dispatch(
-      isLoggedIn ? fetchShopOrder(uuid) : fetchRacquetDetails(uuid)
-    );
+    await dispatch(isLoggedIn ? getOrder(uuid) : fetchRacquetDetails(uuid));
     navigate(isLoggedIn ? "/tasks/scan" : "/order");
   };
 

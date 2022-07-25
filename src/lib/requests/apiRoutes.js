@@ -35,6 +35,9 @@ export const shopOrdersRoute = (id) => ({
 export const shopOrderRoute = (id) => ({
   url: `/api/v1/orders/${id}`,
 });
+export const orderRoute = (id) => ({
+  url: `/api/v1/orders/${id}`,
+});
 export const createOrdersRoute = () => ({
   url: `/api/v1/catalog/create-order`,
 });
@@ -67,9 +70,14 @@ export const editRaquetsRoute = (id) => ({
 export const getRaquetsRoute = () => ({
   url: `/api/v1/racquets/`,
 });
-export const getRaquetRoute = (id) => ({
-  url: `/api/v1/racquets/get-by-code/${id}`,
+// export const getRaquetByQrRoute = (id) => ({
+//   url: `/api/v1/racquets/get-by-code/${id}`,
+// });
+
+export const getRaquetRoute = (id, isQr) => ({
+  url: isQr ? `/api/v1/racquets/get-by-code/${id}` : `/api/v1/racquets/${id}`,
 });
+
 export const getStringsRoute = (id) => ({
   url: `/api/v1/catalog/inventory/${id}`,
 });

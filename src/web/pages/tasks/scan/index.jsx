@@ -10,7 +10,7 @@ import { BackButton } from "web/components/Buttons/BackButton.component";
 import { withNamespaces } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import "./index.styles.scss";
-import { fetchShopOrder } from "web/store/Actions/shopActions";
+import { getOrder } from "web/store/Actions/shopActions";
 import { useDispatch } from "react-redux";
 
 let Scan = ({ t, scanForward, change }) => {
@@ -25,7 +25,7 @@ let Scan = ({ t, scanForward, change }) => {
 
   const fetchOrderDetails = async (order_id) => {
     if (qrCode) {
-      await dispatch(fetchShopOrder(order_id));
+      await dispatch(getOrder(order_id));
       navigate("/Tasks/Details");
     }
   };

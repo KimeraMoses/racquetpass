@@ -99,7 +99,7 @@ export function ShopSearchResults({
           ) : FilteredShops.length < 1 ? (
             <SearchCard
               shop={{
-                name: `No shop enabled shops found on RacquetPass!`,
+                name: `No enabled shops found on RacquetPass!`,
                 address: `Try signing up a shop for users to make orders`,
               }}
             />

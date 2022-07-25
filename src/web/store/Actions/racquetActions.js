@@ -62,7 +62,7 @@ export const editRacquetDetails = (data, rac_id) => async (dispatch) => {
     const { url } = editRaquetsRoute(rac_id);
     const res = await axios.patch(url, data);
     console.log("edit Rac", res);
-    dispatch(fetchRacquetDetails(res.data?.racquet?.qr_code));
+    dispatch(fetchRacquetDetails(res.data?.racquet?.id, false));
     dispatch(setRacquetsLoading(false));
     toast.success(
       "Changes to your raquet are saved successfuly, You can now proceed with your order "
@@ -92,16 +92,17 @@ export const fetchAllStrings = (shop_id) => {
   };
 };
 
-export const fetchRacquetDetails = (racquet_id) => {
+export const fetchRacquetDetails = (racquet_id, showSuccess, isQr) => {
   return async (dispatch) => {
     console.log("reached");
     dispatch(setRacquetsLoading(true));
-    const { url } = getRaquetRoute(racquet_id);
+    const { url } = getRaquetRoute(racquet_id, isQr ? true : false);
     try {
       const res = await axios.get(url);
       if (res.status === 200) {
         dispatch(getRacquetSuccess(res.data?.racquet));
-        toast.success("Racquet found, You can now continue with your order");
+        if (showSuccess)
+          toast.success("Racquet found, You can now continue with your order");
       } else if (res.status === 404) {
         return toast.error("Racquet not found!");
       }
@@ -111,7 +112,7 @@ export const fetchRacquetDetails = (racquet_id) => {
       dispatch(setRacquetsLoading(false));
       if (error?.response?.status === 404)
         return toast.error(
-          "Racquet not found, Let's help you set up your own racquet quickly..."
+          "Racquet not found, Please continue with the process to create your own racquet!"
         );
       toast.error("Failed to scan racquet!");
       console.log("rac err", error);

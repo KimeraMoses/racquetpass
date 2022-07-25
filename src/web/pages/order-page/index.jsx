@@ -18,7 +18,7 @@ import {
   SelectStringWithMainCross,
   ReviewOrder,
   Done,
-  OrderDetails,
+  // OrderDetails,
   EditRacquet,
   DidntGetText,
 } from "./sections";
@@ -38,6 +38,7 @@ import {
   createOrder,
   sendVerificationCode,
 } from "web/store/Actions/shopActions";
+import OrderDetailsSection from "./sections/OrderDetails.section";
 // import { toast } from "react-toastify";
 
 // Phone Validation
@@ -446,7 +447,9 @@ let OrderPage = ({ t, handleSubmit, change }) => {
       case 7:
         return <Done t={t} setStep={setStep} setDone={setDone} />;
       case 8:
-        return <OrderDetails t={t} setStep={setStep} setDone={setDone} />;
+        return (
+          <OrderDetailsSection t={t} setStep={setStep} setDone={setDone} />
+        );
       case 9:
         return (
           <DidntGetText

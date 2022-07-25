@@ -18,27 +18,70 @@ import { useDispatch } from "react-redux";
 import { createOrder } from "web/store/Actions/shopActions";
 
 export function ReviewOrder({ t, setStep, setDone, setBackFromReview }) {
-  const [showSurvey, setShowSurvey] = useState(false);
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
   const { isLoading } = useSelector((state) => state.shop);
   const user = useSelector((state) => state?.form?.signup?.values);
-  const shop = useSelector((state) => state?.form?.signup?.values?.shop);
+  const SelectedShop = useSelector(
+    (state) => state?.form?.signup?.values?.shop
+  );
   const values = useSelector((state) => state?.form?.signup?.values);
+
+  const racquet = useSelector((state) => state.racquet?.racquet);
+  const shop = useSelector((state) => state.shop?.shop);
+
+  let isVerifiedObj = JSON.parse(localStorage.getItem("_rpe_"));
+  let prevStep = 5;
+  if (isVerifiedObj?.e === values?.email && isVerifiedObj?.isV) {
+    prevStep = 4;
+  }
+
+  let mainsPrice = racquet && racquet?.mains?.string_id?.price;
+  let crossesPrice = racquet && racquet?.crosses?.string_id?.price;
+  if (racquet && racquet?.mains?.string_id?.hybrid_type === "Reel") {
+    mainsPrice = racquet && racquet?.mains?.string_id?.price / 2;
+  }
+  if (racquet && racquet?.crosses?.string_id?.hybrid_type === "Reel") {
+    crossesPrice = racquet && racquet?.crosses?.string_id?.price / 2;
+  }
+
+  const items = [
+    {
+      heading: "Mains",
+      isOutOfStock: !racquet?.mains?.string_id?.in_stock,
+      description: `${racquet?.mains?.string_id?.name}(${racquet?.mains?.string_id?.hybrid_type}) ${racquet?.mains?.string_id?.size} G @ ${racquet?.mains?.string_id?.tension} lbs`,
+      price: `$${mainsPrice}`,
+    },
+    {
+      heading: "Crosses",
+      isOutOfStock: !racquet?.crosses?.string_id?.in_stock,
+      description: `${racquet?.crosses?.string_id?.name}(${racquet?.crosses?.string_id?.hybrid_type}) ${racquet?.crosses?.string_id?.size} G @ ${racquet?.crosses?.string_id?.tension} lbs`,
+      price: `$${crossesPrice}`,
+    },
+    {
+      description: "Labor",
+      price: `$${shop && shop?.labor_price}`,
+    },
+    {
+      description: "Tax",
+      price: `$${shop && shop?.tax}`,
+    },
+  ];
+
+  const TotalPrice = mainsPrice + crossesPrice + shop?.labor_price + shop?.tax;
+
+  const summary = {
+    items,
+    TotalPrice,
+    mainsPrice,
+    crossesPrice,
+  };
 
   return (
     <>
-      {/* <Survey
-        show={showSurvey}
-        setShow={setShowSurvey}
-        onExit={() => {
-          setStep(7);
-          setDone(true);
-        }}
-      /> */}
       <div>
         <div className={`review-order-odr max-w-[450px] m-[0_auto]`}>
           <div className="review-order-odr__heading">
-            <BackButton onClick={() => setStep(5)} />
+            <BackButton onClick={() => setStep(prevStep)} />
             <Heading customClass="review-order-odr__heading-text">
               {t("odrReviewHeading")}
             </Heading>
@@ -89,8 +132,8 @@ export function ReviewOrder({ t, setStep, setDone, setBackFromReview }) {
             <div className="review-order-odr__shop-card">
               <SearchCard
                 shop={{
-                  name: shop?.name,
-                  address: shop?.address,
+                  name: SelectedShop?.name,
+                  address: SelectedShop?.address,
                 }}
               />
             </div>
@@ -134,7 +177,7 @@ export function ReviewOrder({ t, setStep, setDone, setBackFromReview }) {
               />
             </div>
             <div className="review-order-odr__summary-card">
-              <SummaryCard />
+              <SummaryCard summary={summary} />
             </div>
           </div>
           <div className="review-order-odr__buttons">

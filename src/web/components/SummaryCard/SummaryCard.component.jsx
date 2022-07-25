@@ -1,6 +1,5 @@
 // Custom Components
 import { useEffect } from "react";
-import { useSelector } from "react-redux";
 import { SubHeading, Heading } from "web/components";
 
 // Styles
@@ -32,52 +31,16 @@ const Item = ({ heading, description, price, isOutOfStock }) => {
   );
 };
 
-export function SummaryCard() {
-  const racquet = useSelector((state) => state.racquet?.racquet);
-  const shop = useSelector((state) => state.shop?.shop);
-
-  let mainsPrice = racquet && racquet?.mains?.string_id?.price;
-  let crossesPrice = racquet && racquet?.crosses?.string_id?.price;
-  if (racquet && racquet?.mains?.string_id?.hybrid_type === "Reel") {
-    mainsPrice = racquet && racquet?.mains?.string_id?.price / 2;
-  }
-  if (racquet && racquet?.crosses?.string_id?.hybrid_type === "Reel") {
-    crossesPrice = racquet && racquet?.crosses?.string_id?.price / 2;
-  }
-
-  const items = [
-    {
-      heading: "Mains",
-      isOutOfStock: !racquet?.mains?.string_id?.in_stock,
-      description: `${racquet?.mains?.string_id?.name}(${racquet?.mains?.string_id?.hybrid_type}) ${racquet?.mains?.string_id?.size} G @ ${racquet?.mains?.string_id?.tension} lbs`,
-      price: `$${mainsPrice}`,
-    },
-    {
-      heading: "Crosses",
-      isOutOfStock: !racquet?.crosses?.string_id?.in_stock,
-      description: `${racquet?.crosses?.string_id?.name}(${racquet?.crosses?.string_id?.hybrid_type}) ${racquet?.crosses?.string_id?.size} G @ ${racquet?.crosses?.string_id?.tension} lbs`,
-      price: `$${crossesPrice}`,
-    },
-    {
-      description: "Labor",
-      price: `$${shop && shop?.labor_price}`,
-    },
-    {
-      description: "Tax",
-      price: `$${shop && shop?.tax}`,
-    },
-  ];
-
-  useEffect(() => {}, [racquet, shop]);
-
-  const TotalPrice = mainsPrice + crossesPrice + shop?.labor_price + shop?.tax;
+export function SummaryCard({ summary }) {
+  useEffect(() => {}, [summary]);
 
   let isOutOfStock = false;
-  items.forEach((item) => {
-    if (item?.isOutOfStock) {
-      isOutOfStock = true;
-    }
-  });
+  summary &&
+    summary?.items.forEach((item) => {
+      if (item?.isOutOfStock) {
+        isOutOfStock = true;
+      }
+    });
   return (
     <>
       <div
@@ -92,11 +55,12 @@ export function SummaryCard() {
                 Replace Strings
               </Heading>
               <SubHeading customClass="summary-card__container-content-txt-subheading">
-                ${TotalPrice}
+                ${summary && summary?.TotalPrice}
               </SubHeading>
-              {items.map((item, index) => (
-                <Item {...item} key={`${item.description}-${index}`} />
-              ))}
+              {summary &&
+                summary?.items.map((item, index) => (
+                  <Item {...item} key={`${item.description}-${index}`} />
+                ))}
             </div>
           </div>
         </div>

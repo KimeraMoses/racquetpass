@@ -24,7 +24,7 @@ import BusinessDetails from "./business-account/business-details";
 import ProfileInfo from "./business-account/profile-info";
 import ThankYou from "./business-account/Thank-you/";
 import ViewServiceOrder from "./view-service-order";
-import OrderDetails from "./view-service-order/details";
+// import OrderDetails from "./view-service-order/details";
 import OrderScanned from "./view-service-order/scanned";
 import CreateOrder from "./create-service-order";
 import ScanOrder from "./create-service-order/scan";
@@ -47,6 +47,7 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { AutoAuthenticate } from "web/store/Actions/authActions";
 import RedirectPage from "./home/RedirectPage";
+import OrderDetails from "./order-page/sections/OrderDetails.section";
 
 function Routers() {
   const { show } = useSelector((state) => state?.drawer);
@@ -79,6 +80,7 @@ function Routers() {
             element={<ResetPassword />}
           />
           <Route path="/order" element={<Order />} />
+          <Route path="/order/:orderId" element={<OrderDetails />} />
           <Route
             path="/Tasks"
             element={!isAuthenticated ? <Navigate to="/" /> : <Tasks />}

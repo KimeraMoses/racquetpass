@@ -17,11 +17,11 @@ export function VerifyPhone({ t, backward, change, setStep }) {
   const values = useSelector((state) => state?.form?.signup?.values);
   let isVerifiedObj = JSON.parse(localStorage.getItem("_rpe_"));
 
-  // useEffect(() => {
+
   if (isVerifiedObj?.e === values?.email && isVerifiedObj?.isV) {
     setStep(6);
   }
-  // }, [isVerifiedObj]);
+ 
 
   return (
     <>

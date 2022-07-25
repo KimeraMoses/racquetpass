@@ -24,8 +24,8 @@ import {
   setShopLoading,
   getSessionLink,
   getAllShopOrders,
-  getAllShopOrder,
   getPaymentUrl,
+  getShopOrder,
 } from "../Slices/shopSlice";
 import { toast } from "react-toastify";
 
@@ -76,7 +76,28 @@ export const fetchShopOrders = (id) => {
 };
 
 //GET ALL SHOP ORDERS
-export const fetchShopOrder = (id) => {
+// export const fetchShopOrder = (id) => {
+//   return async (dispatch) => {
+//     dispatch(setShopLoading(true));
+//     if (id) {
+//       const { url } = shopOrderRoute(id);
+//       try {
+//         const res = await axios.get(url);
+//         console.log("Order", res);
+//         dispatch(getShopOrder(res.data.order));
+//       } catch (error) {
+//         console.log(error);
+//         if (error.response.status === 404)
+//           return toast.error("Order with scaned code not found!");
+//         toast.error("Failed to load order details");
+//         // dispatch(fetchShopsFail(error));
+//       }
+//     }
+//   };
+// };
+
+//GET ALL SHOP ORDERS
+export const getOrder = (id) => {
   return async (dispatch) => {
     dispatch(setShopLoading(true));
     if (id) {
@@ -84,11 +105,11 @@ export const fetchShopOrder = (id) => {
       try {
         const res = await axios.get(url);
         console.log("Order", res);
-        dispatch(getAllShopOrder(res.data.order));
+        dispatch(getShopOrder(res.data.order));
       } catch (error) {
         console.log(error);
         if (error.response.status === 404)
-          return toast.error("Order with scaned code not found!");
+          return toast.error("Order not found!");
         toast.error("Failed to load order details");
         // dispatch(fetchShopsFail(error));
       }
@@ -108,11 +129,11 @@ export const createOrder = (data) => {
         console.log(res);
         dispatch(getPaymentUrl(res.data.url));
         dispatch(setShopLoading(false));
-        toast.success("Order Sent successfuly!");
+        toast.success("Redirecting to stripe...");
         window.location.replace(res.data.url);
       } catch (error) {
         console.log(error);
-        toast.error("Failed to make order!");
+        toast.error("Failed to generate link!");
         dispatch(setShopLoading(false));
         // dispatch(fetchShopsFail(error));
       }

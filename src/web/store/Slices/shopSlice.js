@@ -68,7 +68,7 @@ const shopSlice = createSlice({
     getAllShopOrders: (state, { payload }) => {
       state.orders = payload;
     },
-    getAllShopOrder: (state, { payload }) => {
+    getShopOrder: (state, { payload }) => {
       state.order = payload;
     },
     getPaymentUrl: (state, { payload }) => {
@@ -95,7 +95,7 @@ export const {
   getSessionLink,
   setShopLoading,
   getAllShopOrders,
-  getAllShopOrder,
+  getShopOrder,
   getPaymentUrl,
 } = actions;
 

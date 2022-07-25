@@ -36,6 +36,7 @@ export function Contact({
   const phoneNumber = useSelector(
     (state) => state?.form?.signup?.values?.["phone-number"]
   );
+  const values = useSelector((state) => state?.form?.signup?.values);
 
   return (
     <>
@@ -47,7 +48,7 @@ export function Contact({
                 setStep(6);
                 setBackFromReview(false);
               } else {
-                setStep(2);
+                setStep(values?.brand?.string_id ? 2 : 3);
               }
             }}
           />
