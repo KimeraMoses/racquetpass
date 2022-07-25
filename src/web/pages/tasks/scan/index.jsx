@@ -10,33 +10,18 @@ import { BackButton } from "web/components/Buttons/BackButton.component";
 import { withNamespaces } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import "./index.styles.scss";
-import { getOrder } from "web/store/Actions/shopActions";
-import { useDispatch } from "react-redux";
 
 let Scan = ({ t, scanForward, change }) => {
   const [qrCode, setQrCode] = useState("");
   const [qrScanner, setQrScanner] = useState(false);
-  // const [raquetFound, setRacquetFound] = useState(true);
-  // const [showModal, setShowModal] = useState(false);
   const [permissionsDenied, setPermissionsDenied] = useState(false);
 
   const navigate = useNavigate();
-  const dispatch = useDispatch();
-
-  const fetchOrderDetails = async (order_id) => {
-    if (qrCode) {
-      await dispatch(getOrder(order_id));
-      navigate("/Tasks/Details");
-    }
-  };
-
-  useEffect(() => {
-    fetchOrderDetails(qrCode);
-  }, [qrCode]);
 
   useEffect(() => {
     if (qrCode) {
       change("order-details-id", qrCode);
+      navigate(`/Tasks/Details?order=${qrCode}`);
     }
   }, [qrCode, change, scanForward]);
 

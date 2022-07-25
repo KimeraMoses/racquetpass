@@ -1,6 +1,7 @@
 import {
   allShopsRoute,
   axios,
+  completeOrderRoute,
   createOrdersRoute,
   enabledShopsRoute,
   manageSessionRoute,
@@ -76,28 +77,7 @@ export const fetchShopOrders = (id) => {
 };
 
 //GET ALL SHOP ORDERS
-// export const fetchShopOrder = (id) => {
-//   return async (dispatch) => {
-//     dispatch(setShopLoading(true));
-//     if (id) {
-//       const { url } = shopOrderRoute(id);
-//       try {
-//         const res = await axios.get(url);
-//         console.log("Order", res);
-//         dispatch(getShopOrder(res.data.order));
-//       } catch (error) {
-//         console.log(error);
-//         if (error.response.status === 404)
-//           return toast.error("Order with scaned code not found!");
-//         toast.error("Failed to load order details");
-//         // dispatch(fetchShopsFail(error));
-//       }
-//     }
-//   };
-// };
-
-//GET ALL SHOP ORDERS
-export const getOrder = (id) => {
+export const getOrder = (id, isAdminShop, navigate) => {
   return async (dispatch) => {
     dispatch(setShopLoading(true));
     if (id) {
@@ -105,12 +85,41 @@ export const getOrder = (id) => {
       try {
         const res = await axios.get(url);
         console.log("Order", res);
+        if (res.data.order?.delivery_shop?.id !== isAdminShop) {
+          navigate("/Tasks/Scan");
+          return toast.error("Not authorised to view order");
+        }
         dispatch(getShopOrder(res.data.order));
       } catch (error) {
         console.log(error);
-        if (error.response.status === 404)
+        if (error.response.status === 404) {
+          if (isAdminShop) navigate("/tasks");
           return toast.error("Order not found!");
+        }
         toast.error("Failed to load order details");
+        // dispatch(fetchShopsFail(error));
+      }
+    }
+  };
+};
+
+//COMPLETE ORDER
+export const completeOrder = (data) => {
+  return async (dispatch) => {
+    // dispatch(setShopLoading(true));
+    if (data) {
+      const { url } = completeOrderRoute();
+      try {
+        const res = await axios.post(url, data);
+        console.log("Complete Order", res);
+        toast.success("Order Completed Successfuly");
+        // dispatch(getShopOrder(res.data.order));
+      } catch (error) {
+        console.log(error);
+        if (error?.response?.status === 400) {
+          return toast.error("Pending order can not be completed!");
+        }
+        toast.error("Failed to complete order!");
         // dispatch(fetchShopsFail(error));
       }
     }

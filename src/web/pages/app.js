@@ -87,9 +87,18 @@ function Routers() {
             path="/Tasks"
             element={!isAuthenticated ? <Navigate to="/" /> : <Tasks />}
           />
-          <Route path="/Tasks/Scan" element={<Scan />} />
-          <Route path="/Tasks/Scanned" element={<Scanned />} />
-          <Route path="/Tasks/Details" element={<Details />} />
+          <Route
+            path="/Tasks/Scan"
+            element={!isAuthenticated ? <Navigate to="/" /> : <Scan />}
+          />
+          <Route
+            path="/Tasks/Scanned"
+            element={!isAuthenticated ? <Navigate to="/" /> : <Scanned />}
+          />
+          <Route
+            path="/Tasks/Details"
+            element={!isAuthenticated ? <Navigate to="/" /> : <Details />}
+          />
           <Route
             path="/BusinessAccount/Create"
             element={<CreateBusinessAccount initialValues={initialValues} />}
