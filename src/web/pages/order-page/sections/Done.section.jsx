@@ -1,8 +1,8 @@
-import { useState } from 'react';
-import { Link } from 'react-router-dom';
-import { Field } from 'redux-form';
-import { useNavigate } from 'react-router-dom';
-
+import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
+import { Field } from "redux-form";
+import { useNavigate } from "react-router-dom";
+import { withNamespaces } from "react-i18next";
 import {
   Heading,
   Description,
@@ -10,15 +10,22 @@ import {
   CustomInput,
   SubmitButton,
   AccountButton,
-} from 'web/components';
-import './Done.styles.scss';
+} from "web/components";
+import "./Done.styles.scss";
+import { useSelector } from "react-redux";
 
-export const Done = ({ t, setStep, setDone }) => {
+const Done = ({ t, setStep }) => {
+  const orderId = useSelector((state) => state?.shop?.order?.id);
   const links = [
-    { path: '#', title: t('homePP') },
-    { path: '#', title: t('homeCU') },
+    { path: "#", title: t("homePP") },
+    { path: "#", title: t("homeCU") },
   ];
   const navigate = useNavigate();
+  useEffect(() => {
+    if (!orderId) {
+      navigate("/");
+    }
+  }, [orderId]);
   return (
     <div className="done-background">
       <div className="done max-w-[450px] m-[0_auto]">
@@ -28,7 +35,7 @@ export const Done = ({ t, setStep, setDone }) => {
               Order Submitted!
             </h5>
             <p className="text-white text-[18px] font-normal text-center mt-[20px] mb-[34px]">
-              We've sent you a text confirming your order details.{' '}
+              We've sent you a text confirming your order details.{" "}
               <span
                 className="underline cursor-pointer"
                 onClick={() => setStep(9)}
@@ -38,16 +45,13 @@ export const Done = ({ t, setStep, setDone }) => {
             </p>
             <div className="flex flex-col items-center gap-[12px]">
               <button
-                onClick={() => navigate('/')}
+                onClick={() => navigate("/")}
                 className="bg-[#044794] text-white text-[18px] w-full h-[59px] rounded-[12px]"
               >
                 Back to Homepage
               </button>
               <button
-                onClick={() => {
-                  setDone(false);
-                  setStep(8);
-                }}
+                onClick={() => navigate(`/order/${orderId}`)}
                 className="bg-[rgba(255,255,255,0.21)] text-white text-[18px] w-full h-[59px] rounded-[12px]"
               >
                 View Order Details
@@ -76,12 +80,14 @@ export const Done = ({ t, setStep, setDone }) => {
   );
 };
 
+export default withNamespaces()(Done);
+
 export function DoneOld({ t }) {
-  const [passwordFieldType, setPasswordFieldType] = useState('password');
+  const [passwordFieldType, setPasswordFieldType] = useState("password");
 
   const links = [
-    { path: '#', title: t('homePP') },
-    { path: '#', title: t('homeCU') },
+    { path: "#", title: t("homePP") },
+    { path: "#", title: t("homeCU") },
   ];
   const navigate = useNavigate();
   return (
@@ -91,27 +97,27 @@ export function DoneOld({ t }) {
           <div className="done__button">
             <button
               className="done__button-btn"
-              onClick={() => navigate('/login')}
+              onClick={() => navigate("/login")}
             >
-              {t('homeSignin')}
+              {t("homeSignin")}
             </button>
           </div>
           <div className="done__banner">
             <Heading customClass="done__banner-heading">
-              {t('odrDoneHeading')}
+              {t("odrDoneHeading")}
             </Heading>
             <Description customClass="done__banner-text">
-              {t('odrDoneDesc')}
+              {t("odrDoneDesc")}
             </Description>
             <SubHeading customClass="done__banner-bold">
-              {t('odrDoneText')}
+              {t("odrDoneText")}
             </SubHeading>
           </div>
           <div className="done__list">
             <ul>
-              <li>{t('odrList1')}</li>
-              <li>{t('odrList2')}</li>
-              <li>{t('odrList3')}</li>
+              <li>{t("odrList1")}</li>
+              <li>{t("odrList2")}</li>
+              <li>{t("odrList3")}</li>
             </ul>
           </div>
           <div className="done__form">
@@ -121,10 +127,10 @@ export function DoneOld({ t }) {
               placeholder="Password"
               component={CustomInput}
               switchPasswordShow={() => {
-                if (passwordFieldType === 'password') {
-                  setPasswordFieldType('text');
+                if (passwordFieldType === "password") {
+                  setPasswordFieldType("text");
                 } else {
-                  setPasswordFieldType('password');
+                  setPasswordFieldType("password");
                 }
               }}
               type={passwordFieldType}
@@ -132,14 +138,14 @@ export function DoneOld({ t }) {
               // Validate with Backend
             />
             <SubmitButton type="submit" className="done__form-submit-btn">
-              {t('odrCreateBtn')}
+              {t("odrCreateBtn")}
             </SubmitButton>
           </div>
           <div className="done__option">
             <div className="done__option-line"></div>
             <div>
               <SubHeading customClass="done__option-txt">
-                {t('odrContineWith')}
+                {t("odrContineWith")}
               </SubHeading>
             </div>
             <div className="done__option-line"></div>
@@ -151,15 +157,15 @@ export function DoneOld({ t }) {
           </div>
           <div className="done__statement">
             <Description customClass="done__statement-txt">
-              {t('odrPivacyText')}
+              {t("odrPivacyText")}
               <span className="done__statement-txt-bold">
-                {t('odrTermsBold')}
+                {t("odrTermsBold")}
               </span>
               &nbsp;
-              {t('odrPrivacyAnd')}
+              {t("odrPrivacyAnd")}
               &nbsp;
               <span className="done__statement-txt-bold">
-                {t('odrPrivacyBold')}
+                {t("odrPrivacyBold")}
               </span>
             </Description>
           </div>

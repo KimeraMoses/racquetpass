@@ -14,7 +14,7 @@ import "./ReviewOrder.styles.scss";
 import { BackButton } from "web/components/Buttons/BackButton.component";
 import { useSelector } from "react-redux";
 import { withNamespaces } from "react-i18next";
-import { useParams, useLocation } from "react-router-dom";
+import { useParams, useLocation, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { getOrder } from "web/store/Actions/shopActions";
@@ -26,6 +26,7 @@ function OrderDetails({ t, setStep, setDone }) {
   console.log("order", order);
   const { orderId } = useParams();
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   useEffect(() => {
     dispatch(getOrder(orderId));
@@ -46,7 +47,7 @@ function OrderDetails({ t, setStep, setDone }) {
     racquetName: `${order && order?.racquet?.brand}, ${
       order && order?.racquet?.model
     }`,
-    racquetSport: order && order?.sport,
+    racquetSport: order && order?.racquet?.sport,
   };
 
   let mainsPrice = order && order?.racquet?.mains?.string_id?.price;
@@ -64,7 +65,7 @@ function OrderDetails({ t, setStep, setDone }) {
       isOutOfStock: order && !order.racquet?.mains?.string_id?.in_stock,
       description:
         order &&
-        `${order?.racquet?.mains?.string_id?.string_id}(${
+        `${order?.racquet?.mains?.string_id?.name}(${
           order?.racquet?.mains?.string_id?.hybrid_type
         }) ${order && order?.racquet?.mains?.string_id?.size} G @ ${
           order && order?.racquet?.mains?.string_id?.tension
@@ -76,7 +77,7 @@ function OrderDetails({ t, setStep, setDone }) {
       isOutOfStock: order && !order.racquet?.crosses?.string_id?.in_stock,
       description:
         order &&
-        `${order?.racquet?.crosses?.string_id?.string_id}(${
+        `${order?.racquet?.crosses?.string_id?.name}(${
           order?.racquet?.crosses?.string_id?.hybrid_type
         }) ${order && order?.racquet?.crosses?.string_id?.size} G @ ${
           order && order?.racquet?.crosses?.string_id?.tension
@@ -124,26 +125,24 @@ function OrderDetails({ t, setStep, setDone }) {
           console.log("Done");
         }}
       />
-      <div
-        className={`max-w-[450px] m-[0_auto] ${
-          OrderStatus === "success"
-            ? `text-[#008d3b] bg-[#E5FAEE]`
-            : `text-[#E40000] bg-[#fff0f0]`
-        } p-3 rounded-md mt-1 text-center`}
-      >
-        {OrderStatus === "success"
-          ? `Your payment for this order has been successfuly recieved by{" "}
-        ${order && order?.delivery_shop?.name}`
-          : `Transaction for this order failed, Please try again or contact shop for help`}
-      </div>
+      {OrderStatus && (
+        <div
+          className={`max-w-[450px] m-[0_auto] ${
+            OrderStatus === "success"
+              ? `text-[#008d3b] bg-[#E5FAEE]`
+              : `text-[#E40000] bg-[#fff0f0]`
+          } p-3 rounded-md mt-1 text-center`}
+        >
+          {OrderStatus === "success"
+            ? `Your payment for this order has been successfuly recieved by ${
+                order && order?.delivery_shop?.name
+              }`
+            : `Transaction for this order has failed, Please try again or contact shop for help`}
+        </div>
+      )}
       <div className="review-order-odr max-w-[450px] m-[0_auto] mt-5">
         <div className="review-order-odr__heading">
-          <BackButton
-            onClick={() => {
-              setStep(7);
-              setDone(true);
-            }}
-          />
+          <BackButton onClick={() => navigate("/order/done")} />
           <Heading customClass="review-order-odr__heading-text">
             Order Details
           </Heading>

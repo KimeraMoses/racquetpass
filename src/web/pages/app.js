@@ -48,6 +48,7 @@ import "react-toastify/dist/ReactToastify.css";
 import { AutoAuthenticate } from "web/store/Actions/authActions";
 import RedirectPage from "./home/RedirectPage";
 import OrderDetails from "./order-page/sections/OrderDetails.section";
+import DoneSection from "./order-page/sections/Done.section";
 
 function Routers() {
   const { show } = useSelector((state) => state?.drawer);
@@ -81,6 +82,7 @@ function Routers() {
           />
           <Route path="/order" element={<Order />} />
           <Route path="/order/:orderId" element={<OrderDetails />} />
+          <Route path="/order/done" element={<DoneSection />} />
           <Route
             path="/Tasks"
             element={!isAuthenticated ? <Navigate to="/" /> : <Tasks />}

@@ -29,7 +29,11 @@ export function ShopSearchResults({
   useEffect(() => {
     inputEl.focus();
   }, [inputEl]);
-  let FilteredShops = shops && shops.filter((shop) => shop.enabled === true);
+  let FilteredShops =
+    shops &&
+    shops.filter(
+      (shop) => shop.enabled === true && shop.stripe_account_enabled === true
+    );
   console.log("Enabled", FilteredShops);
   const userSearchHandler = (e) => {
     const { value } = e.target;
