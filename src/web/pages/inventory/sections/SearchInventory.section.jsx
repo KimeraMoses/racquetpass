@@ -86,6 +86,13 @@ export function SearchInventory({ t, setCurrentScreen, setDrawer, change }) {
                     description: `Try searching with another term!`,
                   }}
                 />
+              ) : !isLoading && FilteredStrings?.length < 1 ? (
+                <SearchCard
+                  string={{
+                    name: `No strings for this shop found!`,
+                    description: `Click the add button below to add strings to your shop`,
+                  }}
+                />
               ) : (
                 (searchResults.length > 0
                   ? searchResults

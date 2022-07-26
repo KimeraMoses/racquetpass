@@ -207,15 +207,14 @@ export const getStripeManagementSessionLink = (id) => {
     const data = {
       shop_id: id,
     };
-    dispatch(setShopLoading(true));
     if (id) {
       const { url } = manageSessionRoute();
       try {
         const res = await axios.post(url, data);
-        dispatch(getSessionLink(res.data.url));
-        dispatch(setShopLoading(false));
+        toast.success("Redirecting to stripe...");
+        window.location.replace(res.data.url);
       } catch (error) {
-        dispatch(setShopLoading(false));
+        toast.error(showError(error));
       }
     }
   };

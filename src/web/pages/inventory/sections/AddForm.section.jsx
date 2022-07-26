@@ -22,13 +22,13 @@ export function AddForm({ t, setCurrentScreen, change }) {
   const errors = useSelector((state) => state?.form?.inventory?.syncErrors);
   const values = useSelector((state) => state?.form?.inventory?.values);
   const shop = useSelector((state) => state?.shop?.shop);
+  const btns = ["Reel", "Packet", "Both"];
   const [show, setShow] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [price, setPrice] = useState("");
-  // const [active, setActive] = useState(true);
   const [check, setCheck] = useState(false);
   const [activeIndex, setActiveIndex] = useState(0);
-  const [selectedType, setSelectedType] = useState("");
+  const [selectedType, setSelectedType] = useState(btns[0]);
   const dispatch = useDispatch();
   const handleOnClick = (el, index) => {
     setActiveIndex(index);
@@ -41,7 +41,6 @@ export function AddForm({ t, setCurrentScreen, change }) {
   // const handleActive = () => setActive(!active);
 
   const handleShow = () => setShow(!show);
-  const btns = ["Reel", "Packet", "Both"];
 
   const formSubmitHandler = async () => {
     setIsLoading(true);

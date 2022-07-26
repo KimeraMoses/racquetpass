@@ -1,33 +1,21 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { Heading, HeadingButton, Description } from "web/components";
-import {
-  fetchShopDetails,
-  getStripeManagementSessionLink,
-  getStripeSessionLink,
-} from "web/store/Actions/shopActions";
+import { getStripeManagementSessionLink } from "web/store/Actions/shopActions";
 import "./SetupPayment.styles.scss";
 
 export const SetupPayment = ({ t, setDrawer }) => {
   const shopId = useSelector((state) => state?.auth?.user?.shop);
-  const { sessionLink, isLoading } = useSelector((state) => state.shop);
-  const stripe_status = useSelector((state) => state.shop?.shop?.stripe_status);
+  const [isLoading, setIsLoading] = useState(false);
 
   const dispatch = useDispatch();
-  useEffect(() => {
-    if (stripe_status === "disabled") {
-      dispatch(getStripeSessionLink(shopId));
-      dispatch(fetchShopDetails(shopId));
-    } else {
-      dispatch(getStripeManagementSessionLink(shopId));
-    }
-  }, [shopId, stripe_status]);
 
-  const LinkText =
-    stripe_status === "disabled"
-      ? "Go to Stripe to setup payment"
-      : t("setupStripe");
+  const handleStripePayments = async () => {
+    setIsLoading(true);
+    await dispatch(getStripeManagementSessionLink(shopId && shopId));
+    setIsLoading(false);
+  };
 
   return (
     <div className="setup-payment">
@@ -61,14 +49,12 @@ export const SetupPayment = ({ t, setDrawer }) => {
           </li>
         </ol>
         <div className="flex justify-center mt-[50px]">
-          <a
-            href={sessionLink ? sessionLink : "#"}
-            target="_blank"
-            rel="noreferrer"
-            className="text-[#304FFE] font-medium text-lg"
+          <p
+            onClick={handleStripePayments}
+            className="text-[#304FFE] font-medium text-lg cursor-pointer"
           >
-            {isLoading ? "Generating payment link..." : LinkText}
-          </a>
+            {isLoading ? "Generating payment link..." : t("setupStripe")}
+          </p>
         </div>
       </div>
     </div>

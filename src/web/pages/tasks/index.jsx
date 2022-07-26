@@ -56,16 +56,8 @@ function Tasks({ t }) {
   });
   const shopOrders = useSelector((state) => state.shop.orders);
   const shopId = useSelector((state) => state.auth?.user?.shop);
-  const {
-    shop,
-    onBoardLink,
-    sessionLink,
-    isLoading: isFetching,
-  } = useSelector((state) => state.shop);
+  const { shop, isLoading: isFetching } = useSelector((state) => state.shop);
   const dispatch = useDispatch();
-
-  console.log("Onboard", onBoardLink);
-  console.log("session", sessionLink);
 
   useEffect(() => {
     dispatch(fetchShopOrders(shopId));
@@ -74,14 +66,12 @@ function Tasks({ t }) {
 
   const handleSubscription = async () => {
     setIsLoading({ ...isLoading, subscription: true });
-    //logic here
     await dispatch(getStripeSessionLink(shop && shop.id));
     setIsLoading({ ...isLoading, subscription: false });
   };
 
   const handleOnboarding = async () => {
     setIsLoading({ ...isLoading, onboarding: true });
-    //logic here
     await dispatch(getStripeOnBoardingLink(shop && shop.id));
     setIsLoading({ ...isLoading, onboarding: false });
   };
@@ -91,17 +81,14 @@ function Tasks({ t }) {
     shop?.labor_price === undefined ||
     shop?.tax === 0;
 
-  console.log(incompleteSetUp);
-
   const showPromp =
-    !incompleteSetUp ||
+    incompleteSetUp ||
     (shop && !shop?.enabled) ||
     (shop && !shop?.stripe_account_enabled) ||
     (shop && shop?.stripe_status === "disabled");
 
   return (
     <div className="tasks-container">
-      {/* <CustomDrawer show={showDrawer} setShow={setShowDrawer} /> */}
       <div className="header-row">
         <HeadingButton
           drawer

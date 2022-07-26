@@ -61,7 +61,7 @@ export const onboardSessionRoute = () => ({
   url: `/api/v1/shops/onboard-session`,
 });
 export const manageSessionRoute = () => ({
-  url: `/api/v1/shops/stripe-session`,
+  url: `/api/v1/shops/stripe-portal-session`,
 });
 
 //RACQUET ROUTES
