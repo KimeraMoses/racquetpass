@@ -11,7 +11,7 @@ import "./SetupPayment.styles.scss";
 
 export const SetupPayment = ({ t, setDrawer }) => {
   const shopId = useSelector((state) => state?.auth?.user?.shop);
-  const { link, isLoading } = useSelector((state) => state.shop);
+  const { sessionLink, isLoading } = useSelector((state) => state.shop);
   const stripe_status = useSelector((state) => state.shop?.shop?.stripe_status);
 
   const dispatch = useDispatch();
@@ -62,7 +62,7 @@ export const SetupPayment = ({ t, setDrawer }) => {
         </ol>
         <div className="flex justify-center mt-[50px]">
           <a
-            href={link ? link : "#"}
+            href={sessionLink ? sessionLink : "#"}
             target="_blank"
             rel="noreferrer"
             className="text-[#304FFE] font-medium text-lg"

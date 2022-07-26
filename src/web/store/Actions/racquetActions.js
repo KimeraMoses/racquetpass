@@ -31,7 +31,7 @@ export const fetchAllRacquets = () => {
   };
 };
 
-export const createNewRacquet = (data) => async (dispatch) => {
+export const createNewRacquet = (data, setStep) => async (dispatch) => {
   console.log(data);
   dispatch(setRacquetsLoading(true));
   try {
@@ -47,6 +47,7 @@ export const createNewRacquet = (data) => async (dispatch) => {
     toast.success(
       "Your raquet is created successfuly, You can now proceed with your order "
     );
+    if (setStep) setStep(4);
   } catch (error) {
     toast.error(showError(error));
     console.log("New Raq err", error);
@@ -55,24 +56,26 @@ export const createNewRacquet = (data) => async (dispatch) => {
 };
 
 //EDIT RACQUET DETAILS
-export const editRacquetDetails = (data, rac_id) => async (dispatch) => {
-  console.log(data);
-  dispatch(setRacquetsLoading(true));
-  try {
-    const { url } = editRaquetsRoute(rac_id);
-    const res = await axios.patch(url, data);
-    console.log("edit Rac", res);
-    dispatch(fetchRacquetDetails(res.data?.racquet?.id, false));
-    dispatch(setRacquetsLoading(false));
-    toast.success(
-      "Changes to your raquet are saved successfuly, You can now proceed with your order "
-    );
-  } catch (error) {
-    toast.error(showError(error));
-    console.log("New Raq err", error);
-    dispatch(setRacquetsLoading(false));
-  }
-};
+export const editRacquetDetails =
+  (data, rac_id, setStep) => async (dispatch) => {
+    console.log(data);
+    dispatch(setRacquetsLoading(true));
+    try {
+      const { url } = editRaquetsRoute(rac_id);
+      const res = await axios.patch(url, data);
+      console.log("edit Rac", res);
+      dispatch(fetchRacquetDetails(res.data?.racquet?.id, false));
+      dispatch(setRacquetsLoading(false));
+      toast.success(
+        "Changes to your raquet are saved successfuly, You can now proceed with your order "
+      );
+      if (setStep) setStep(4);
+    } catch (error) {
+      toast.error(showError(error));
+      console.log("New Raq err", error);
+      dispatch(setRacquetsLoading(false));
+    }
+  };
 
 export const fetchAllStrings = (shop_id) => {
   return async (dispatch) => {

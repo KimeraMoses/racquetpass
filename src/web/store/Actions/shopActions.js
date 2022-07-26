@@ -5,10 +5,12 @@ import {
   createOrdersRoute,
   enabledShopsRoute,
   manageSessionRoute,
+  onboardSessionRoute,
   sendCodeVerificationRoute,
   shopDetailsRoute,
   shopOrderRoute,
   shopOrdersRoute,
+  showError,
   subscriptionSessionRoute,
   verifyCodeRoute,
 } from "lib/index";
@@ -27,6 +29,7 @@ import {
   getAllShopOrders,
   getPaymentUrl,
   getShopOrder,
+  getOnboardSessionLink,
 } from "../Slices/shopSlice";
 import { toast } from "react-toastify";
 
@@ -52,8 +55,10 @@ export const fetchEnabledShops = () => {
     try {
       const res = await axios.get(url);
       dispatch(fetchShopsSuccess(res.data?.list_shops));
+      console.log("Enabled", res);
     } catch (error) {
       dispatch(fetchShopsFail(error));
+      console.log("Enabled", error);
     }
   };
 };
@@ -68,8 +73,10 @@ export const fetchShopOrders = (id) => {
         const res = await axios.get(url);
         console.log(res);
         dispatch(getAllShopOrders(res.data.order));
+        dispatch(setShopLoading(false));
       } catch (error) {
         console.log(error);
+        dispatch(setShopLoading(false));
         // dispatch(fetchShopsFail(error));
       }
     }
@@ -85,7 +92,7 @@ export const getOrder = (id, isAdminShop, navigate) => {
       try {
         const res = await axios.get(url);
         console.log("Order", res);
-        if (res.data.order?.delivery_shop?.id !== isAdminShop) {
+        if (isAdminShop && res.data.order?.delivery_shop?.id !== isAdminShop) {
           navigate("/Tasks/Scan");
           return toast.error("Not authorised to view order");
         }
@@ -93,7 +100,7 @@ export const getOrder = (id, isAdminShop, navigate) => {
       } catch (error) {
         console.log(error);
         if (error.response.status === 404) {
-          if (isAdminShop) navigate("/tasks");
+          if (isAdminShop && isAdminShop) navigate("/tasks");
           return toast.error("Order not found!");
         }
         toast.error("Failed to load order details");
@@ -156,23 +163,44 @@ export const getStripeSessionLink = (id) => {
     const data = {
       shop_id: id,
     };
-    dispatch(setShopLoading(true));
-    console.log(data);
     if (id) {
       const { url } = subscriptionSessionRoute();
       try {
         const res = await axios.post(url, data);
-        console.log("Session Link", res);
         dispatch(getSessionLink(res.data.url));
-        dispatch(setShopLoading(false));
+        toast.success("Redirecting to stripe...");
+        window.location.replace(res.data.url);
       } catch (error) {
-        dispatch(setShopLoading(false));
-        console.log("Session Link err", error);
-        // dispatch(fetchShopsFail(error));
+        toast.error(
+          `${showError(
+            error
+          )}, please contact admin to set subscription for your shop`
+        );
       }
     }
   };
 };
+
+//GET ONBOARDING SESSION PAYMENT LINK
+export const getStripeOnBoardingLink = (id) => {
+  return async (dispatch) => {
+    const data = {
+      shop_id: id,
+    };
+    if (id) {
+      const { url } = onboardSessionRoute();
+      try {
+        const res = await axios.post(url, data);
+        dispatch(getOnboardSessionLink(res.data.url));
+        toast.success("Redirecting to stripe...");
+        window.location.replace(res.data.url);
+      } catch (error) {
+        toast.error(showError(error));
+      }
+    }
+  };
+};
+
 //GET PAYMENT MANAGEMENT LINK
 export const getStripeManagementSessionLink = (id) => {
   return async (dispatch) => {
@@ -201,7 +229,6 @@ export const fetchShopDetails = (shopId) => {
     try {
       const res = await axios.get(url);
       dispatch(fetchShopSuccess(res.data?.shop));
-      console.log(res?.data);
     } catch (error) {
       dispatch(fetchShopFail(error));
     }
@@ -239,7 +266,7 @@ export const sendShopInquiry =
 
 //SEND VERIFICATION CODE VERIFICATION CODE
 
-export const sendVerificationCode = (email) => {
+export const sendVerificationCode = (email, setStep) => {
   return async (dispatch) => {
     dispatch(setShopLoading(true));
     try {
@@ -248,6 +275,7 @@ export const sendVerificationCode = (email) => {
       console.log("code sent", res);
       toast.success("Verification code sent to your email");
       dispatch(setShopLoading(false));
+      if (setStep) setStep(5);
     } catch (error) {
       dispatch(setShopLoading(false));
       console.log("Code verify", error);
@@ -257,7 +285,7 @@ export const sendVerificationCode = (email) => {
 };
 
 // VERIFY USER CODE
-export const codeVerification = (otp, email) => {
+export const codeVerification = (otp, email, setStep) => {
   return async (dispatch) => {
     dispatch(setShopLoading(true));
     try {
@@ -269,6 +297,7 @@ export const codeVerification = (otp, email) => {
       if (res.status === 200) {
         localStorage.setItem("_rpe_", JSON.stringify({ e: email, isV: true }));
       }
+      if (setStep) setStep(6);
     } catch (error) {
       dispatch(setShopLoading(false));
       console.log("Code verify", error);

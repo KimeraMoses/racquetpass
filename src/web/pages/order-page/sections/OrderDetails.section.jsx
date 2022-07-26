@@ -21,7 +21,7 @@ import { getOrder } from "web/store/Actions/shopActions";
 import { Survey } from "web/components/index";
 import Loader from "web/components/Loader/Loader";
 
-function OrderDetails({ t, setStep, setDone }) {
+function OrderDetails({ t }) {
   const [showSurvey, setShowSurvey] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const order = useSelector((state) => state?.shop?.order);
@@ -33,7 +33,8 @@ function OrderDetails({ t, setStep, setDone }) {
   const fetchOrderDetails = async (order_id) => {
     setIsLoading(true);
     if (order_id) {
-      await dispatch(getOrder(order_id, true, navigate));
+      await dispatch(getOrder(order_id));
+      setShowSurvey(true);
     }
     setIsLoading(false);
   };
@@ -125,7 +126,7 @@ function OrderDetails({ t, setStep, setDone }) {
   const OrderStatus = query.get("status");
 
   return (
-    <>
+    <div className="px-5">
       {isLoading ? (
         <div className="flex justify-center items-center absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
           <Loader />
@@ -136,8 +137,6 @@ function OrderDetails({ t, setStep, setDone }) {
             show={showSurvey}
             setShow={setShowSurvey}
             onExit={() => {
-              // setStep(7);
-              // setDone(true);
               console.log("Done");
             }}
           />
@@ -147,7 +146,7 @@ function OrderDetails({ t, setStep, setDone }) {
                 OrderStatus === "success"
                   ? `text-[#008d3b] bg-[#E5FAEE]`
                   : `text-[#E40000] bg-[#fff0f0]`
-              } p-3 rounded-md mt-1 text-center`}
+              } p-2 rounded-md mt-2 text-center`}
             >
               {OrderStatus === "success"
                 ? `Your payment for this order has been successfuly recieved by ${
@@ -307,7 +306,7 @@ function OrderDetails({ t, setStep, setDone }) {
           </div>
         </>
       )}
-    </>
+    </div>
   );
 }
 

@@ -1,10 +1,11 @@
 import { useState } from "react";
+import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
-import { Link } from "react-router-dom";
 
 // Custom Components
 import { Heading, Description, CustomInput } from "web/components";
 import { BackButton } from "web/components/Buttons/BackButton.component";
+import { sendVerificationCode } from "web/store/Actions/shopActions";
 
 // Styles
 import "./VerifyPhone.styles.scss";
@@ -12,16 +13,31 @@ import "./VerifyPhone.styles.scss";
 const required = (value) => (value ? undefined : "Required");
 export function VerifyPhone({ t, backward, change, setStep }) {
   const [verification, setVerification] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
   const [touchedCode, setTouchedCode] = useState(false);
   const [errorCode, setErrorCode] = useState("");
   const values = useSelector((state) => state?.form?.signup?.values);
   let isVerifiedObj = JSON.parse(localStorage.getItem("_rpe_"));
-
+  const dispatch = useDispatch();
 
   if (isVerifiedObj?.e === values?.email && isVerifiedObj?.isV) {
     setStep(6);
   }
- 
+
+  const sendCodeVericationHandler = async () => {
+    //Logic for sending code here
+    setIsLoading(true);
+    if (isVerifiedObj?.e === values?.email && isVerifiedObj?.isV) {
+      return setIsLoading(false);
+    } else {
+      try {
+        await dispatch(sendVerificationCode(values.email));
+        setIsLoading(false);
+      } catch (error) {
+        setIsLoading(false);
+      }
+    }
+  };
 
   return (
     <>
@@ -70,9 +86,12 @@ export function VerifyPhone({ t, backward, change, setStep }) {
             Please enter the 6 digit verification code that RacquetPass sent to
             your email
           </Description>
-          <Link to="#" className="phone-section__text-container-rescan">
-            {t("odrResendCode")}
-          </Link>
+          <p
+            className="phone-section__text-container-rescan cursor-pointer"
+            onClick={sendCodeVericationHandler}
+          >
+            {isLoading ? "Sending..." : t("odrResendCode")}
+          </p>
         </div>
       </div>
     </>

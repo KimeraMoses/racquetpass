@@ -62,7 +62,6 @@ const phoneValidation = (value) => {
 let OrderPage = ({ t, handleSubmit, change }) => {
   const refRecaptcha = useRef(null);
   const [step, setStep] = useState(0);
-  const [isVerified, setIsVerified] = useState(false);
   const [steps, setSteps] = useState({
     active: "",
     content: ["QR", "Strings", "Contact", "Review"],
@@ -85,7 +84,7 @@ let OrderPage = ({ t, handleSubmit, change }) => {
   const errors = useSelector((state) => state?.form?.signup?.syncErrors);
   const values = useSelector((state) => state?.form?.signup?.values);
 
-  const NewRacquetHandler = async () => {
+  const NewRacquetHandler = async (setNextStep) => {
     setIsLoading(true);
     let mainObj = {};
     let crossObj = {};
@@ -123,8 +122,12 @@ let OrderPage = ({ t, handleSubmit, change }) => {
     try {
       await dispatch(
         hasRaquet
-          ? editRacquetDetails(data, racquet && racquet?.id)
-          : createNewRacquet(data)
+          ? editRacquetDetails(
+              data,
+              racquet && racquet?.id,
+              setNextStep && setStep
+            )
+          : createNewRacquet(data, setNextStep && setStep)
       );
       setIsLoading(false);
     } catch (error) {
@@ -138,11 +141,11 @@ let OrderPage = ({ t, handleSubmit, change }) => {
     //Logic for sending code here
     setIsLoading(true);
     if (isVerifiedObj?.e === values?.email && isVerifiedObj?.isV) {
-      setIsLoading(false);
-      return setIsVerified(true);
+      setStep(5);
+      return setIsLoading(false);
     } else {
       try {
-        await dispatch(sendVerificationCode(values.email));
+        await dispatch(sendVerificationCode(values.email, setStep));
         setIsLoading(false);
       } catch (error) {
         setIsLoading(false);
@@ -154,12 +157,12 @@ let OrderPage = ({ t, handleSubmit, change }) => {
     //Logic for verifying code here
     setIsLoading(true);
     if (isVerifiedObj?.email === values?.email && isVerifiedObj?.isV) {
-      setIsLoading(false);
-      return setIsVerified(true);
+      setStep(6);
+      return setIsLoading(false);
     } else {
       try {
         await dispatch(
-          codeVerification(+values["verification-code"], values?.email)
+          codeVerification(+values["verification-code"], values?.email, setStep)
         );
         setIsLoading(false);
       } catch (error) {
@@ -243,8 +246,15 @@ let OrderPage = ({ t, handleSubmit, change }) => {
   };
 
   const forward = () => {
-    if (step === 2) {
-      setStep(4);
+    // if (step === 2) {
+    //   setStep(4);
+    // }
+    if (step === 2 || step === 3) {
+      NewRacquetHandler(true);
+    } else if (step === 4) {
+      sendCodeVericationHandler();
+    } else if (step === 5) {
+      codeverificationHandler();
     } else {
       setStep((step) => step + 1);
     }
@@ -509,16 +519,10 @@ let OrderPage = ({ t, handleSubmit, change }) => {
             <div className="order-page__button-container max-w-[450px] w-full mr-[auto] ml-[auto]">
               <StepButton
                 onClick={() => {
-                  if (step === 2 || step === 3) {
-                    NewRacquetHandler();
-                  }
-                  if (step === 4) {
-                    sendCodeVericationHandler();
-                  }
-                  if (step === 5) {
-                    codeverificationHandler();
-                  }
                   if (backFromReview) {
+                    if (step === 2 || step === 3) {
+                      NewRacquetHandler(false);
+                    }
                     setStep(6);
                     setBackFromReview(false);
                   } else {
@@ -545,6 +549,14 @@ let OrderPage = ({ t, handleSubmit, change }) => {
                   ? "Change to this racquet"
                   : (step === 4 || step === 2 || step === 3) && backFromReview
                   ? "Save Changes"
+                  : step === 4 && isLoading
+                  ? "Sending verfication code..."
+                  : step === 5 && isLoading
+                  ? "Verifying code..."
+                  : (step === 2 && isLoading) || (step === 3 && isLoading)
+                  ? "Saving..."
+                  : step === 2 || step === 3
+                  ? "Save Racquet"
                   : t("odrNext")}
               </StepButton>
             </div>

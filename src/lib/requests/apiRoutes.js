@@ -57,6 +57,9 @@ export const verifyCodeRoute = () => ({
 export const subscriptionSessionRoute = () => ({
   url: `/api/v1/shops/subscription-session`,
 });
+export const onboardSessionRoute = () => ({
+  url: `/api/v1/shops/onboard-session`,
+});
 export const manageSessionRoute = () => ({
   url: `/api/v1/shops/stripe-session`,
 });
