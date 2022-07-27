@@ -42,6 +42,7 @@ export const authSlice = createSlice({
       state.isLoggedIn = false;
       localStorage.removeItem("Racquet__AuthToken");
       localStorage.removeItem("Racquet__CurrentUser");
+      localStorage.removeItem("_rpn_");
     },
   },
 });

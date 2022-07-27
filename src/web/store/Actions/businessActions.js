@@ -46,6 +46,7 @@ export const createNewBusiness =
         "Your Account is created successfuly, Please go to settings to complete profile"
       );
       dispatch(setBusinessLoading(false));
+      localStorage.setItem("_rpn_", true);
     } catch (error) {
       toast.error(showError(error));
       dispatch(setBusinessLoading(false));
@@ -94,28 +95,3 @@ export const editBusinessDetails =
       dispatch(setBusinessLoading(false));
     }
   };
-
-// export const fetchAllOrders = (authToken) => {
-//   return async (dispatch) => {
-//     // dispatch(fetchOrdersPending());
-//     try {
-//       const response = await fetch(
-//         `${process.env.REACT_APP_BASEURL}/api/v1/orders`,
-//         {
-//           method: "GET",
-//           headers: new Headers({
-//             "Content-type": "application/json",
-//             Authorization: "Bearer " + authToken,
-//             apiKey: process.env.REACT_APP_APIKEY,
-//           }),
-//         }
-//       );
-//       const data = await response.json();
-//       // console.log("Orders", data);
-//       // dispatch(fetchOrdersSuccess(data.orders));
-//     } catch (error) {
-//       // dispatch(fetchOrdersFail(error));
-//       // console.log("Orders err", error);
-//     }
-//   };
-// };
