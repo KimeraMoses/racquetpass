@@ -74,7 +74,7 @@ export const AutoAuthenticate = (dispatch) => {
     token: UserToken.token,
     user: JSON.parse(CurrentUser),
   };
-  dispatch(autoAuthenticationSuccess(data));
+  dispatch(autoAuthenticationSuccess(data && data));
 
   const timer = expireDate.getTime() - todaysDate.getTime();
   logOutTimer(dispatch, timer);

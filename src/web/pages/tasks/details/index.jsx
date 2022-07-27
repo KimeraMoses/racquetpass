@@ -6,8 +6,7 @@ import { SubmitButton } from "web/components/Buttons/SubmitButton.component";
 import { Modal } from "web/components/index";
 import { Link } from "react-router-dom";
 import "./index.styles.scss";
-import { useDispatch } from "react-redux";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { getOrder } from "web/store/Actions/shopActions";
 import { useLocation, useNavigate } from "react-router-dom";
 import Loader from "web/components/Loader/Loader";
@@ -17,7 +16,7 @@ import { getShopOrder } from "web/store/Slices/shopSlice";
 
 function Details({ t }) {
   const order = useSelector((state) => state.shop?.order);
-  const shopId = useSelector((state) => state.auth?.user?.shop);
+  // const shopId = useSelector((state) => state.auth?.user?.shop);
   const [show, setShow] = useState(false);
   const completed =
     order && order?.status?.toLowerCase() === "completed" ? true : false;
@@ -74,7 +73,7 @@ function Details({ t }) {
   const fetchOrderDetails = async (order_id) => {
     setIsLoading(true);
     if (order_id) {
-      await dispatch(getOrder(order_id, shopId, navigate));
+      await dispatch(getOrder(order_id, navigate));
     }
     setIsLoading(false);
   };

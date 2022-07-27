@@ -10,10 +10,7 @@ import "./ScanSection.styles.scss";
 import { BackButton } from "web/components/Buttons/BackButton.component";
 import { SubmitButton } from "web/components/Buttons/SubmitButton.component";
 import { useDispatch } from "react-redux";
-import {
-  // fetchAllRacquets,
-  fetchRacquetDetails,
-} from "web/store/Actions/racquetActions";
+import { fetchRacquetDetails } from "web/store/Actions/racquetActions";
 import Loader from "web/components/Loader/Loader";
 import { useSelector } from "react-redux";
 
@@ -31,6 +28,7 @@ export function ScanSection({
   const [isLoading, setIsLoading] = useState(false);
   const [showModal, setShowModal] = useState(false);
   const [permissionsDenied, setPermissionsDenied] = useState(false);
+  const racquetDetails = useSelector((state) => state.racquet.racquet);
   const dispatch = useDispatch();
 
   const handleShow = () => {
@@ -53,17 +51,14 @@ export function ScanSection({
   }, [qrCode]);
 
   useEffect(() => {
+    if (!!localStorage.getItem("_rpr_")) scanForward(true);
+  }, [racquetDetails]);
+
+  useEffect(() => {
     if (qrCode) {
       change("raquet-details-from-qr", qrCode);
-      // fetchRacquet(qrCode);
-      // TODO: Update logic with RaquetWith with Backend
-      // scanForward(raquetFound);
     }
   }, [qrCode, change, scanForward]);
-
-  console.log(permissionsDenied);
-
-  console.log("Qr code", qrCode);
 
   return (
     <>

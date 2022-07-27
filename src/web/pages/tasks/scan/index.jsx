@@ -21,11 +21,9 @@ let Scan = ({ t, scanForward, change }) => {
   useEffect(() => {
     if (qrCode) {
       change("order-details-id", qrCode);
-      navigate(`/Tasks/Details?order=${qrCode}`);
+      navigate(`/tasks/details?order=${qrCode}`);
     }
   }, [qrCode, change, scanForward]);
-
-  console.log(permissionsDenied);
 
   return (
     <>

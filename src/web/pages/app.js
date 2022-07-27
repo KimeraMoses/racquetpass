@@ -52,8 +52,8 @@ import DoneSection from "./order-page/sections/Done.section";
 
 function Routers() {
   const { show } = useSelector((state) => state?.drawer);
-  const isAuthenticated = useSelector((state) => state.auth.isLoggedIn);
   const initialValues = useSelector((state) => state.business.businessData);
+  const isAuthenticated = useSelector((state) => state.auth.isLoggedIn);
   const dispatch = useDispatch();
   const hasValues = initialValues?.hasOwnProperty("firstName");
   useEffect(() => {
@@ -84,21 +84,18 @@ function Routers() {
           <Route path="/order/:orderId" element={<OrderDetails />} />
           <Route path="/order/done" element={<DoneSection />} />
           <Route
-            path="/Tasks"
-            element={!isAuthenticated ? <Navigate to="/" /> : <Tasks />}
+            path="/tasks"
+            element={isAuthenticated ? <Tasks /> : <Navigate to="/" />}
           />
           <Route
-            path="/Tasks/Scan"
+            path="/tasks/scan"
             element={!isAuthenticated ? <Navigate to="/" /> : <Scan />}
           />
           <Route
-            path="/Tasks/Scanned"
+            path="/tasks/scanned"
             element={!isAuthenticated ? <Navigate to="/" /> : <Scanned />}
           />
-          <Route
-            path="/Tasks/Details"
-            element={!isAuthenticated ? <Navigate to="/" /> : <Details />}
-          />
+          <Route path="/tasks/details" element={<Details />} />
           <Route
             path="/BusinessAccount/Create"
             element={<CreateBusinessAccount initialValues={initialValues} />}

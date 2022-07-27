@@ -24,7 +24,6 @@ export function ShopSearchResults({
   const [searchTerm, setSearchTerm] = useState("");
   const [searchResults, setSearchResults] = useState([]);
   const { shops, isFetching } = useSelector((state) => state.shop);
-  console.log(shops);
   let inputEl = useRef(null);
   useEffect(() => {
     inputEl.focus();
@@ -34,7 +33,6 @@ export function ShopSearchResults({
     shops.filter(
       (shop) => shop.enabled === true && shop.stripe_account_enabled === true
     );
-  console.log("Enabled", FilteredShops);
   const userSearchHandler = (e) => {
     const { value } = e.target;
     setSearchTerm(value);

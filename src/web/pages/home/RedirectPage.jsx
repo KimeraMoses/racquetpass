@@ -1,12 +1,11 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { withNamespaces } from "react-i18next";
 import { Button } from "web/components";
 import Recaptcha from "web/components/Google-Recaptcha/Recaptcha";
 import "./home.styles.scss";
 import { useDispatch } from "react-redux";
-import { getOrder } from "web/store/Actions/shopActions";
-import { fetchRacquetDetails } from "web/store/Actions/racquetActions";
+import { fetchScannedRacquetDetails } from "web/store/Actions/racquetActions";
 
 function RedirectPage({ t }) {
   const navigate = useNavigate();
@@ -17,8 +16,12 @@ function RedirectPage({ t }) {
 
   const dispatch = useDispatch();
   const redirectUserWithToken = async () => {
-    await dispatch(isLoggedIn ? getOrder(uuid) : fetchRacquetDetails(uuid));
-    navigate(isLoggedIn ? "/tasks/scan" : "/order");
+    await dispatch(
+      isLoggedIn
+        ? navigate(`/tasks/details?order=${uuid}`)
+        : fetchScannedRacquetDetails(uuid)
+    );
+    navigate(!isLoggedIn && "/order");
   };
 
   useEffect(() => {

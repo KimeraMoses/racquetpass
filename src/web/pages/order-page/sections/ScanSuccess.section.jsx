@@ -18,7 +18,6 @@ export function ScanSuccess({
 }) {
   const racquet = useSelector((state) => state.racquet?.racquet);
   const hasRaquet = !!useSelector((state) => state.racquet?.racquet?.id);
-  console.log("rac details", hasRaquet, racquet);
   useEffect(() => {
     if (hasRaquet) {
       change("racquetId", racquet && racquet?.id);
@@ -26,6 +25,7 @@ export function ScanSuccess({
       change("racquetBrand", racquet && racquet?.brand);
       change("racquetModel", racquet && racquet?.model);
       change("ownerName", racquet && racquet?.owner);
+      localStorage.removeItem("_rpr_");
     }
   }, [hasRaquet]);
 

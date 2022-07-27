@@ -53,7 +53,7 @@ export const SetupPayment = ({ t, setDrawer }) => {
             onClick={handleStripePayments}
             className="text-[#304FFE] font-medium text-lg cursor-pointer"
           >
-            {isLoading ? "Generating payment link..." : t("setupStripe")}
+            {isLoading ? "Generating redirect link..." : t("setupStripe")}
           </p>
         </div>
       </div>

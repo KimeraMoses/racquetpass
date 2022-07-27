@@ -17,15 +17,15 @@ import { withNamespaces } from "react-i18next";
 import { useParams, useLocation, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
-import { getOrder } from "web/store/Actions/shopActions";
+import { getOrder, getStripePaymentLink } from "web/store/Actions/shopActions";
 import { Survey } from "web/components/index";
 import Loader from "web/components/Loader/Loader";
 
 function OrderDetails({ t }) {
   const [showSurvey, setShowSurvey] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const [isGenerating, setIsGenerating] = useState(false);
   const order = useSelector((state) => state?.shop?.order);
-  console.log("order", order);
   const { orderId } = useParams();
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -125,6 +125,12 @@ function OrderDetails({ t }) {
   let query = useQuery();
   const OrderStatus = query.get("status");
 
+  const handlePayment = async () => {
+    setIsGenerating(true);
+    await dispatch(getStripePaymentLink(orderId));
+    setIsGenerating(false);
+  };
+
   return (
     <div className="px-5">
       {isLoading ? (
@@ -146,13 +152,24 @@ function OrderDetails({ t }) {
                 OrderStatus === "success"
                   ? `text-[#008d3b] bg-[#E5FAEE]`
                   : `text-[#E40000] bg-[#fff0f0]`
-              } p-2 rounded-md mt-2 text-center`}
+              } p-2 rounded-md mt-2 `}
             >
-              {OrderStatus === "success"
-                ? `Your payment for this order has been successfuly recieved by ${
-                    order && order?.delivery_shop?.name
-                  }`
-                : `Transaction for this order has failed, Please try again or contact shop for help`}
+              {OrderStatus === "success" ? (
+                `Your payment for this order has been successfuly recieved by ${
+                  order && order?.delivery_shop?.name
+                }`
+              ) : (
+                <p>
+                  Transaction for this order has failed, Please try again{" "}
+                  <span
+                    className="text-[#304FFE] cursor-pointer"
+                    onClick={handlePayment}
+                  >
+                    {isGenerating ? " Generating link... " : " here "}
+                  </span>
+                  or contact shop for help.
+                </p>
+              )}
             </div>
           )}
           <div className="review-order-odr max-w-[450px] m-[0_auto] mt-5">

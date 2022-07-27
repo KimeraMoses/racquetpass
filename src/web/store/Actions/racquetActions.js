@@ -77,8 +77,30 @@ export const fetchRacquetDetails = (racquet_id, showSuccess, isQr) => {
         dispatch(getRacquetSuccess(res.data?.racquet));
         if (showSuccess)
           toast.success("Racquet found, You can now continue with your order");
-      } else if (res.status === 404) {
-        return toast.error("Racquet not found!");
+      }
+      dispatch(setRacquetsLoading(false));
+    } catch (error) {
+      console.log("rac err", error);
+      dispatch(setRacquetsLoading(false));
+      if (error?.response?.status === 404)
+        return toast.error(
+          "Racquet not found, Please continue with the process to create your own racquet!"
+        );
+      toast.error("Failed to scan racquet!");
+    }
+  };
+};
+
+export const fetchScannedRacquetDetails = (racquet_id) => {
+  return async (dispatch) => {
+    dispatch(setRacquetsLoading(true));
+    const { url } = getRaquetRoute(racquet_id, false);
+    try {
+      const res = await axios.get(url);
+      if (res.status === 200) {
+        dispatch(getRacquetSuccess(res.data?.racquet));
+        toast.success("Racquet found, You can now continue with your order");
+        localStorage.setItem("_rpr_", true);
       }
       dispatch(setRacquetsLoading(false));
     } catch (error) {

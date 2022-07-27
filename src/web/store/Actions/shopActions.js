@@ -6,6 +6,7 @@ import {
   enabledShopsRoute,
   manageSessionRoute,
   onboardSessionRoute,
+  orderPaymentRoute,
   sendCodeVerificationRoute,
   shopDetailsRoute,
   shopOrderRoute,
@@ -84,23 +85,26 @@ export const fetchShopOrders = (id) => {
 };
 
 //GET ALL SHOP ORDERS
-export const getOrder = (id, isAdminShop, navigate) => {
+export const getOrder = (id, navigate) => {
   return async (dispatch) => {
     dispatch(setShopLoading(true));
+    const shopId = JSON.parse(
+      localStorage.getItem("Racquet__CurrentUser")
+    )?.shop;
     if (id) {
       const { url } = shopOrderRoute(id);
       try {
         const res = await axios.get(url);
         console.log("Order", res);
-        if (isAdminShop && res.data.order?.delivery_shop?.id !== isAdminShop) {
-          navigate("/Tasks/Scan");
-          return toast.error("Not authorised to view order");
+        if (navigate && res.data.order?.delivery_shop?.id !== shopId) {
+          navigate("/tasks/scan");
+          return toast.error("Not authorised to view this order");
         }
         dispatch(getShopOrder(res.data.order));
       } catch (error) {
         console.log(error);
-        if (error.response.status === 404) {
-          if (isAdminShop && isAdminShop) navigate("/tasks");
+        if (error?.response?.status === 404) {
+          if (navigate && shopId) navigate("/");
           return toast.error("Order not found!");
         }
         toast.error("Failed to load order details");
@@ -152,6 +156,27 @@ export const createOrder = (data) => {
         toast.error("Failed to generate link!");
         dispatch(setShopLoading(false));
         // dispatch(fetchShopsFail(error));
+      }
+    }
+  };
+};
+
+//GET STRIPE PAYMENT LINK
+export const getStripePaymentLink = (id) => {
+  return async () => {
+    const data = {
+      order_id: id,
+    };
+    if (id) {
+      const { url } = orderPaymentRoute();
+      try {
+        const res = await axios.post(url, data);
+        toast.success("Redirecting to stripe...");
+        window.location.replace(res.data.url);
+      } catch (error) {
+        toast.error(
+          `${showError(error)}, please contact admin to send you a payment link`
+        );
       }
     }
   };

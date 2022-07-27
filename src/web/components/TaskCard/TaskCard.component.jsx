@@ -1,8 +1,7 @@
-import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
-import './TaskCard.styles.scss';
+import PropTypes from "prop-types";
+import "./TaskCard.styles.scss";
 
-export const TaskCard = ({ src, title, desc, name }) => {
+export const TaskCard = ({ src, title, desc, name, status }) => {
   return (
     <div className="task-card">
       <div className="flex items-start justify-between">
@@ -13,14 +12,17 @@ export const TaskCard = ({ src, title, desc, name }) => {
             <p className="sub-title">{desc}</p>
           </div>
         </div>
-        <div className="name">{name}</div>
+        <div className="info text-right capitalize">
+          <p className="font-semibold ">{status}</p>
+          <div className="name">{name}</div>
+        </div>
       </div>
     </div>
   );
 };
 
 TaskCard.defaultProps = {
-  src: 'img/tasks/ImagesampleTask.png',
+  src: "img/tasks/ImagesampleTask.png",
 };
 
 TaskCard.propTypes = {

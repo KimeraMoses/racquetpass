@@ -36,6 +36,14 @@
     }
   }
 
+  &__services-card_welcome {
+    margin-top: 35px;
+    background: #ffffff;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    gap: 25px;
+  }
   &__services-card {
     box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.15);
     margin-top: 35px;

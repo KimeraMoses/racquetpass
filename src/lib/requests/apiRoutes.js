@@ -54,6 +54,9 @@ export const verifyCodeRoute = () => ({
 });
 
 //PAYMENT ROUTES
+export const orderPaymentRoute = () => ({
+  url: `/api/v1/orders/create-checkout-session`,
+});
 export const subscriptionSessionRoute = () => ({
   url: `/api/v1/shops/subscription-session`,
 });
