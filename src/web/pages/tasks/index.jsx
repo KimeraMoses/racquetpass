@@ -37,6 +37,12 @@ function Tasks({ t }) {
       )
       .filter((order) => order.status.toLowerCase() === "completed");
 
+  const OtherOrders =
+    shopOrders &&
+    shopOrders?.others.filter(
+      (order) => order.status.toLowerCase() !== "completed"
+    );
+
   console.log(completedOrders);
 
   const showPromp =
@@ -83,7 +89,7 @@ function Tasks({ t }) {
             {shopOrders && shopOrders?.dueToday.length < 1 ? (
               <TaskCard
                 title={`No Orders due today!`}
-                desc={`Click on completed to view completed orders`}
+                desc={`All orders due today will appear here`}
               />
             ) : (
               shopOrders?.dueToday?.map((order, index) => {
@@ -113,11 +119,41 @@ function Tasks({ t }) {
             {shopOrders && shopOrders?.dueThisWeek.length < 1 ? (
               <TaskCard
                 title={`No Orders due this week!`}
-                desc={`Click on completed to view completed orders`}
+                desc={`All orders due this week will appear here`}
               />
             ) : (
               shopOrders &&
               shopOrders?.dueThisWeek?.map((order) => {
+                return (
+                  <TaskCard
+                    key={order.id}
+                    status={order.status}
+                    title={`Order #${order.order_number}`}
+                    desc={`${order?.racquet?.model}, ${order?.racquet?.brand}`}
+                    name={
+                      order?.delivery_address?.first_name +
+                      " " +
+                      order?.delivery_address?.last_name
+                    }
+                  />
+                );
+              })
+            )}
+          </div>
+
+          <div className="task-row">
+            <p className="tasks-info">Pending &#38; Processing</p>
+            <div className="badge">{shopOrders && OtherOrders?.length}</div>
+          </div>
+          <div className="cards-container">
+            {shopOrders && OtherOrders.length < 1 ? (
+              <TaskCard
+                title={`No Orders recieved yet`}
+                desc={`All your pending and processing orders will appear here`}
+              />
+            ) : (
+              shopOrders &&
+              OtherOrders?.map((order) => {
                 return (
                   <TaskCard
                     key={order.id}
