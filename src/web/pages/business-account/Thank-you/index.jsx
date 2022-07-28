@@ -13,12 +13,17 @@ const ThankYou = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const refRecaptcha = useRef(null);
+  console.log(email, pwd);
 
   const formSubmitHandler = async () => {
     setIsLoading(true);
+    const data = {
+      email: email,
+      password: pwd,
+    };
     if (email && pwd) {
       try {
-        await dispatch(login(email, pwd));
+        await dispatch(login(data));
         setIsLoading(false);
         navigate("/tasks");
       } catch (err) {

@@ -1,5 +1,4 @@
 import {
-  allShopsRoute,
   axios,
   completeOrderRoute,
   createOrdersRoute,
@@ -34,21 +33,7 @@ import {
 } from "../Slices/shopSlice";
 import { toast } from "react-toastify";
 
-//FETCH ALL SHOPS
-
-export const fetchAllShops = () => {
-  return async (dispatch) => {
-    dispatch(fetchShopsPending());
-    const { url } = allShopsRoute();
-    try {
-      const res = await axios.get(url);
-      dispatch(fetchShopsSuccess(res.data?.list_shops));
-    } catch (error) {
-      dispatch(fetchShopsFail(error));
-    }
-  };
-};
-
+//FETCH ALL ENABLED SHOP
 export const fetchEnabledShops = () => {
   return async (dispatch) => {
     dispatch(fetchShopsPending());
@@ -56,10 +41,8 @@ export const fetchEnabledShops = () => {
     try {
       const res = await axios.get(url);
       dispatch(fetchShopsSuccess(res.data?.list_shops));
-      console.log("Enabled", res);
     } catch (error) {
       dispatch(fetchShopsFail(error));
-      console.log("Enabled", error);
     }
   };
 };
@@ -72,13 +55,10 @@ export const fetchShopOrders = (id) => {
       const { url } = shopOrdersRoute(id);
       try {
         const res = await axios.get(url);
-        console.log(res);
         dispatch(getAllShopOrders(res.data.order));
         dispatch(setShopLoading(false));
       } catch (error) {
-        console.log(error);
         dispatch(setShopLoading(false));
-        // dispatch(fetchShopsFail(error));
       }
     }
   };
@@ -95,20 +75,17 @@ export const getOrder = (id, navigate) => {
       const { url } = shopOrderRoute(id);
       try {
         const res = await axios.get(url);
-        console.log("Order", res);
         if (navigate && res.data.order?.delivery_shop?.id !== shopId) {
           navigate("/tasks/scan");
           return toast.error("Not authorised to view this order");
         }
         dispatch(getShopOrder(res.data.order));
       } catch (error) {
-        console.log(error);
         if (error?.response?.status === 404) {
           if (navigate && shopId) navigate("/");
           return toast.error("Order not found!");
         }
         toast.error("Failed to load order details");
-        // dispatch(fetchShopsFail(error));
       }
     }
   };
@@ -116,46 +93,37 @@ export const getOrder = (id, navigate) => {
 
 //COMPLETE ORDER
 export const completeOrder = (data) => {
-  return async (dispatch) => {
-    // dispatch(setShopLoading(true));
+  return async () => {
     if (data) {
       const { url } = completeOrderRoute();
       try {
-        const res = await axios.post(url, data);
-        console.log("Complete Order", res);
+        await axios.post(url, data);
         toast.success("Order Completed Successfuly");
-        // dispatch(getShopOrder(res.data.order));
       } catch (error) {
-        console.log(error);
         if (error?.response?.status === 400) {
           return toast.error("Pending order can not be completed!");
         }
         toast.error("Failed to complete order!");
-        // dispatch(fetchShopsFail(error));
       }
     }
   };
 };
 
-//GET ALL SHOP ORDERS
+//CREATE ORDER
 export const createOrder = (data) => {
   return async (dispatch) => {
     dispatch(setShopLoading(true));
-    console.log("Order data", data);
     if (data) {
       const { url } = createOrdersRoute();
       try {
         const res = await axios.post(url, data);
-        console.log(res);
         dispatch(getPaymentUrl(res.data.url));
         dispatch(setShopLoading(false));
         toast.success("Redirecting to stripe...");
         window.location.replace(res.data.url);
       } catch (error) {
-        console.log(error);
         toast.error("Failed to generate link!");
         dispatch(setShopLoading(false));
-        // dispatch(fetchShopsFail(error));
       }
     }
   };
@@ -290,14 +258,15 @@ export const sendShopInquiry =
 
 //SEND VERIFICATION CODE VERIFICATION CODE
 
-export const sendVerificationCode = (email, setStep) => {
+export const sendVerificationCode = (phone, setStep) => {
   return async (dispatch) => {
     dispatch(setShopLoading(true));
+    console.log("Phone", phoneFormater(phone));
     try {
       const { url } = sendCodeVerificationRoute();
-      const res = await axios.post(url, { email });
+      const res = await axios.post(url, { phone: phoneFormater(phone) });
       console.log("code sent", res);
-      toast.success("Verification code sent to your email");
+      toast.success("Verification code sent to your phone");
       dispatch(setShopLoading(false));
       if (setStep) setStep(5);
     } catch (error) {
@@ -309,23 +278,35 @@ export const sendVerificationCode = (email, setStep) => {
 };
 
 // VERIFY USER CODE
-export const codeVerification = (otp, email, setStep) => {
+export const codeVerification = (otp, phone, setStep) => {
   return async (dispatch) => {
     dispatch(setShopLoading(true));
     try {
       const { url } = verifyCodeRoute();
-      const res = await axios.post(url, { otp, email });
-      console.log("Code verify", res);
-      toast.success("Email verified Successfuly");
+      const res = await axios.post(url, { otp, phone: phoneFormater(phone) });
+      toast.success("Phone verified Successfuly");
       dispatch(setShopLoading(false));
       if (res.status === 200) {
-        localStorage.setItem("_rpe_", JSON.stringify({ e: email, isV: true }));
+        localStorage.setItem("_rpe_", JSON.stringify({ e: phone, isV: true }));
       }
       if (setStep) setStep(6);
     } catch (error) {
       dispatch(setShopLoading(false));
-      console.log("Code verify", error);
-      toast.error("Email verification failed!");
+      toast.error("Phone verification failed!");
     }
   };
+};
+
+//FORMATING PHONE NUMBER TO MATCH
+export const phoneFormater = (phone) => {
+  const code = "+256";
+  return (
+    code +
+    phone
+      .replace("-", "")
+      .replace("(", "")
+      .replace(")", "")
+      .replace(" ", "")
+      .substring(1)
+  );
 };

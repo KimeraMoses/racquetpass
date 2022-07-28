@@ -1,4 +1,4 @@
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from "react-router-dom";
 
 export const Thanks = () => {
   const navigate = useNavigate();
@@ -14,7 +14,7 @@ export const Thanks = () => {
         <button
           className="bg-[#304ffe] rounded-[12px] w-full py-[16px] text-[#fff] text-[18px] font-medium"
           onClick={() => {
-            navigate('/');
+            navigate("/");
           }}
         >
           Back to Homepage

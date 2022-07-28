@@ -17,8 +17,6 @@ import {
   BrandSearchResults,
   SelectStringWithMainCross,
   ReviewOrder,
-  // Done,
-  // OrderDetails,
   EditRacquet,
   DidntGetText,
 } from "./sections";
@@ -40,7 +38,6 @@ import {
 } from "web/store/Actions/shopActions";
 import OrderDetailsSection from "./sections/OrderDetails.section";
 import DoneSection from "./sections/Done.section";
-// import { toast } from "react-toastify";
 
 // Phone Validation
 const formats = "(999) 999-9999|(999)999-9999|999-999-9999|9999999999";
@@ -140,12 +137,12 @@ let OrderPage = ({ t, handleSubmit, change }) => {
   const sendCodeVericationHandler = async () => {
     //Logic for sending code here
     setIsLoading(true);
-    if (isVerifiedObj?.e === values?.email && isVerifiedObj?.isV) {
+    if (isVerifiedObj?.e === values["phone-number"] && isVerifiedObj?.isV) {
       setStep(5);
       return setIsLoading(false);
     } else {
       try {
-        await dispatch(sendVerificationCode(values.email, setStep));
+        await dispatch(sendVerificationCode(values["phone-number"], setStep));
         setIsLoading(false);
       } catch (error) {
         setIsLoading(false);
@@ -156,13 +153,17 @@ let OrderPage = ({ t, handleSubmit, change }) => {
   const codeverificationHandler = async () => {
     //Logic for verifying code here
     setIsLoading(true);
-    if (isVerifiedObj?.email === values?.email && isVerifiedObj?.isV) {
+    if (isVerifiedObj?.e === values["phone-number"] && isVerifiedObj?.isV) {
       setStep(6);
       return setIsLoading(false);
     } else {
       try {
         await dispatch(
-          codeVerification(+values["verification-code"], values?.email, setStep)
+          codeVerification(
+            +values["verification-code"],
+            values["phone-number"],
+            setStep
+          )
         );
         setIsLoading(false);
       } catch (error) {
@@ -569,7 +570,6 @@ let OrderPage = ({ t, handleSubmit, change }) => {
 };
 
 const onSubmit = async (values, dispatch) => {
-  console.log(values);
   const data = {
     racquet_id: values?.racquetId,
     shop_id: values?.shop?.shop_id,
@@ -578,11 +578,7 @@ const onSubmit = async (values, dispatch) => {
     phone_number: values["phone-number"],
     email: values.email,
   };
-  try {
-    await dispatch(createOrder(data));
-  } catch (error) {
-    console.log("Failed to send order");
-  }
+  await dispatch(createOrder(data));
 };
 
 OrderPage = reduxForm({

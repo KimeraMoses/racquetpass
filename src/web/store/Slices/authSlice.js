@@ -7,7 +7,8 @@ const initialState = {
   status: "",
   message: null,
   updateStatus: "",
-  userInitials: {},
+  // userInitials: {email: "kimeramoses001@gmail.com", pwd: "Moxhus@2020"},
+  userInitials: { email: "kimeramoses001@gmail.com", pwd: "Moxhus@2020" },
   isLoading: false,
 };
 

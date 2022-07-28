@@ -1,21 +1,21 @@
-import { useState } from 'react';
-import { CustomInput } from '../CustomInput/CustomInput.component';
+import { useState } from "react";
+import { CustomInput } from "../CustomInput/CustomInput.component";
 
 // Phone Validation
-const formats = '(999) 999-9999|(999)999-9999|999-999-9999|9999999999';
+const formats = "(999) 999-9999|(999)999-9999|999-999-9999|9999999999";
 const r = RegExp(
-  '^(' + formats.replace(/([()])/g, '\\$1').replace(/9/g, '\\d') + ')$'
+  "^(" + formats.replace(/([()])/g, "\\$1").replace(/9/g, "\\d") + ")$"
 );
 const phoneValidation = (value) => {
   if (value?.length > 0) {
     if (r.test(value) === true) {
       if (value?.length < 9 || value?.length > 14) {
-        return 'Please enter value between 9 and 14 digits.';
+        return "Please enter value between 9 and 14 digits.";
       } else {
         return undefined;
       }
     } else {
-      return 'Please enter a valid phone number.';
+      return "Please enter a valid phone number.";
     }
   } else {
     return undefined;
@@ -41,10 +41,10 @@ export const CustomPhoneInput = ({ name, label, value, change, optional }) => {
           (value?.length && (value?.length < 9 || value?.length > 14)),
         error:
           !optional && !value
-            ? 'Field is required'
+            ? "Field is required"
             : phoneValidation(value) !== undefined
             ? phoneValidation(value)
-            : '',
+            : "",
       }}
       customOnChange={(e) => {
         const value = e?.target?.value;

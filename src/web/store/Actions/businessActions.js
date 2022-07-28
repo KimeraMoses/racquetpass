@@ -3,7 +3,7 @@ import {
   editBusinessSuccess,
   setBusinessLoading,
 } from "../Slices/businessSlice";
-import { fetchShopDetails } from "./shopActions";
+import { fetchShopDetails, phoneFormater } from "./shopActions";
 import { toast } from "react-toastify";
 import { axios, createBusinessRoute, editBusinessRoute, showError } from "lib";
 
@@ -26,7 +26,7 @@ export const createNewBusiness =
     const data = {
       first_name,
       last_name,
-      phone,
+      phone: phoneFormater(phone),
       street,
       shop_name,
       apartment,

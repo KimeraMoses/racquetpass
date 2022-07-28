@@ -80,7 +80,6 @@ export const fetchRacquetDetails = (racquet_id, showSuccess, isQr) => {
       }
       dispatch(setRacquetsLoading(false));
     } catch (error) {
-      console.log("rac err", error);
       dispatch(setRacquetsLoading(false));
       if (error?.response?.status === 404)
         return toast.error(
@@ -100,6 +99,8 @@ export const fetchScannedRacquetDetails = (racquet_id) => {
       if (res.status === 200) {
         dispatch(getRacquetSuccess(res.data?.racquet));
         toast.success("Racquet found, You can now continue with your order");
+
+        // SET SCANNED STATE TO SKIP RESCANNING
         localStorage.setItem("_rpr_", true);
       }
       dispatch(setRacquetsLoading(false));
@@ -193,7 +194,6 @@ export const editNewString =
 
 export const deleteString = (string_id) => {
   return async (dispatch) => {
-    console.log(string_id);
     dispatch(setRacquetsLoading(true));
     if (string_id) {
       const { url } = editStringsRoute(string_id);
@@ -203,7 +203,6 @@ export const deleteString = (string_id) => {
         toast.success("String deleted Successfuly");
       } catch (error) {
         dispatch(setRacquetsLoading(false));
-        console.log("strings err", error);
         toast.error(showError(error));
       }
     }

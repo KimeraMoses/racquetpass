@@ -1,14 +1,13 @@
+import { useRef, useState } from "react";
 import { reduxForm, Field } from "redux-form";
+import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import { withNamespaces } from "react-i18next";
 import { BackButton, Heading, CustomInput, SubmitButton } from "web/components";
-import "./index.styles.scss";
-import { useSelector } from "react-redux";
-import { toast } from "react-toastify";
+import { useSelector, useDispatch } from "react-redux";
 import Recaptcha from "web/components/Google-Recaptcha/Recaptcha";
-import { useRef, useState } from "react";
 import { forgotPassword } from "web/store/Actions/authActions";
-import { useDispatch } from "react-redux";
+import "./index.styles.scss";
 
 const required = (value) => (value ? undefined : "Email is required");
 const email = (value) => {

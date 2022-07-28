@@ -1,16 +1,14 @@
 import { useRef, useState } from "react";
-import { reduxForm, Field, reset } from "redux-form";
-import { useNavigate } from "react-router-dom";
 import { withNamespaces } from "react-i18next";
-import { Link } from "react-router-dom";
-import { BackButton, Heading, CustomInput, SubmitButton } from "web/components";
-import "./Login.styles.scss";
-import { Description } from "web/components/atoms/Description.atom";
-import { useSelector } from "react-redux";
-import { login } from "web/store/Actions/authActions";
-import { useDispatch } from "react-redux";
-import { toast } from "react-toastify";
+import { reduxForm, Field, reset } from "redux-form";
+import { useSelector, useDispatch } from "react-redux";
+import { useNavigate, Link } from "react-router-dom";
 import Recaptcha from "web/components/Google-Recaptcha/Recaptcha";
+import { BackButton, Heading, CustomInput, SubmitButton } from "web/components";
+import { Description } from "web/components/atoms/Description.atom";
+import { login } from "web/store/Actions/authActions";
+import { toast } from "react-toastify";
+import "./Login.styles.scss";
 
 const required = (value) => (value ? undefined : "Email is required");
 const email = (value) => {

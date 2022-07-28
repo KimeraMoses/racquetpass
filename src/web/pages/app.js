@@ -15,7 +15,6 @@ import Tasks from "./tasks";
 import Scan from "./tasks/scan";
 import Details from "./tasks/details";
 import Scanned from "./tasks/scanned";
-// import BusinessAccount from "./business-account";
 import CreateBusinessAccount from "./business-account/create";
 import CreatePassword from "./business-account/create-password";
 import VerifyPhone from "./business-account/verify-phone";
@@ -24,7 +23,6 @@ import BusinessDetails from "./business-account/business-details";
 import ProfileInfo from "./business-account/profile-info";
 import ThankYou from "./business-account/Thank-you/";
 import ViewServiceOrder from "./view-service-order";
-// import OrderDetails from "./view-service-order/details";
 import OrderScanned from "./view-service-order/scanned";
 import CreateOrder from "./create-service-order";
 import ScanOrder from "./create-service-order/scan";
@@ -35,7 +33,6 @@ import StringDetails from "./create-service-order/string-details";
 import Shop from "./create-service-order/shop";
 import ShopSearching from "./create-service-order/shop-searching";
 import OrderSubmitted from "./create-service-order/submitted";
-// import CreateAccount from "./account-page";
 import OrderWithoutAccount from "./order-without-account";
 import Inventory from "./inventory";
 import PlayerTabs from "./player-tabs";
@@ -44,11 +41,11 @@ import AdminWorkflow from "./admin-workflow";
 import { CustomDrawer } from "web/components";
 import { useDispatch, useSelector } from "react-redux";
 import { ToastContainer } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
 import { AutoAuthenticate } from "web/store/Actions/authActions";
 import RedirectPage from "./home/RedirectPage";
 import OrderDetails from "./order-page/sections/OrderDetails.section";
 import DoneSection from "./order-page/sections/Done.section";
+import "react-toastify/dist/ReactToastify.css";
 
 function Routers() {
   const { show } = useSelector((state) => state?.drawer);
@@ -95,7 +92,10 @@ function Routers() {
             path="/tasks/scanned"
             element={!isAuthenticated ? <Navigate to="/" /> : <Scanned />}
           />
-          <Route path="/tasks/details" element={<Details />} />
+          <Route
+            path="/tasks/details"
+            element={!isAuthenticated ? <Navigate to="/" /> : <Details />}
+          />
           <Route
             path="/BusinessAccount/Create"
             element={<CreateBusinessAccount initialValues={initialValues} />}
@@ -164,8 +164,6 @@ function Routers() {
             element={!isAuthenticated ? <Navigate to="/" /> : <AdminWorkflow />}
           />
           <Route path="*" element={<Page404 />} />
-          {/* <Route path="/create-account" element={<CreateAccount />} /> */}
-          {/* <Route path="/BusinessAccount" element={<BusinessAccount />} /> */}
         </Routes>
       </Router>
     </>

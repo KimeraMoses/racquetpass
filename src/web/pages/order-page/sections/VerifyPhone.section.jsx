@@ -11,31 +11,28 @@ import { sendVerificationCode } from "web/store/Actions/shopActions";
 import "./VerifyPhone.styles.scss";
 
 const required = (value) => (value ? undefined : "Required");
+
 export function VerifyPhone({ t, backward, change, setStep }) {
   const [verification, setVerification] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [touchedCode, setTouchedCode] = useState(false);
-  const [errorCode, setErrorCode] = useState("");
   const values = useSelector((state) => state?.form?.signup?.values);
-  let isVerifiedObj = JSON.parse(localStorage.getItem("_rpe_"));
+  const [errorCode, setErrorCode] = useState("");
   const dispatch = useDispatch();
+  let isVerifiedObj = JSON.parse(localStorage.getItem("_rpe_"));
 
-  if (isVerifiedObj?.e === values?.email && isVerifiedObj?.isV) {
+  if (isVerifiedObj?.e === values["phone-number"] && isVerifiedObj?.isV) {
     setStep(6);
   }
 
+  //RESEND VERIFICATION CODE
   const sendCodeVericationHandler = async () => {
-    //Logic for sending code here
     setIsLoading(true);
-    if (isVerifiedObj?.e === values?.email && isVerifiedObj?.isV) {
-      return setIsLoading(false);
-    } else {
-      try {
-        await dispatch(sendVerificationCode(values.email));
-        setIsLoading(false);
-      } catch (error) {
-        setIsLoading(false);
-      }
+    try {
+      await dispatch(sendVerificationCode(values["phone-number"]));
+      setIsLoading(false);
+    } catch (error) {
+      setIsLoading(false);
     }
   };
 
@@ -45,8 +42,7 @@ export function VerifyPhone({ t, backward, change, setStep }) {
         <div className="phone-section__heading flex justify-start gap-[12px]">
           <BackButton onClick={backward} />
           <Heading customClass="phone-section__heading-text">
-            {/* {t("odrPhonHeading")} */}
-            Verify your email Address
+            {t("odrPhonHeading")}
           </Heading>
         </div>
         <div className="phone-section__form-container">
@@ -82,9 +78,7 @@ export function VerifyPhone({ t, backward, change, setStep }) {
         </div>
         <div className="phone-section__text-container">
           <Description customClass="phone-section__text-container-text">
-            {/* {t("odrphnDesc")} */}
-            Please enter the 6 digit verification code that RacquetPass sent to
-            your email
+            {t("odrphnDesc")}
           </Description>
           <p
             className="phone-section__text-container-rescan cursor-pointer"

@@ -8,7 +8,6 @@ import {
   ProShop,
   RequestChange,
   CancelRequest,
-  // Payment Screens
   SetupPayment,
   Choose,
   AddCard,
@@ -29,7 +28,6 @@ function useQuery() {
 }
 
 let Inventory = ({ t, change }) => {
-  // const [showDrawer, setShowDrawer] = useState(false);
   const [isReceive, setIsReceive] = useState(false);
   const query = useQuery();
   const active = query.get("active");
@@ -41,10 +39,10 @@ let Inventory = ({ t, change }) => {
 
   const initialValues = {
     string_id: string && string.id,
-    ["edit-name"]: string && string?.name,
-    ["edit-type"]: string && string?.type,
-    ["edit-brand"]: string && string?.brand,
-    ["edit-model"]: string && string?.model,
+    "edit-name": string && string?.name,
+    "edit-type": string && string?.type,
+    "edit-brand": string && string?.brand,
+    "edit-model": string && string?.model,
     itemPrice: string && string?.price,
     type: string && string.hybrid_type,
     in_stock: string && string.in_stock,
@@ -56,24 +54,26 @@ let Inventory = ({ t, change }) => {
   const shopDetails = {
     shop: shop && shop?.name,
     email: shop && shop?.email,
-    ["phone-number"]: shop && shop?.phone,
-    ["delivery-days"]: shop && shop?.estimated_delivery_time,
-    ["labor-price"]: shop && shop?.labor_price,
+    "phone-number": shop && shop?.phone,
+    "delivery-days": shop && shop?.estimated_delivery_time,
+    "labor-price": shop && shop?.labor_price,
     address: shop && shop?.address?.street,
     shopcity: shop && shop?.address?.city,
     apt: shop && shop?.address?.apartment,
-    ["shop-state"]: shop && shop?.address?.state,
-    ["zip-code"]: shop && shop?.address?.zip_code,
+    "shop-state": shop && shop?.address?.state,
+    "zip-code": shop && shop?.address?.zip_code,
     country: shop && shop?.country,
     tax: shop && shop?.tax,
   };
 
   useEffect(() => {
     setCurrentScreen(active);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [active]);
 
   useEffect(() => {
     dispatch(fetchShopDetails(user && user.shop));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [user]);
 
   const dispatch = useDispatch();
@@ -175,26 +175,13 @@ let Inventory = ({ t, change }) => {
 
   return (
     <div className="inventory">
-      {/* <CustomDrawer
-        setShow={setShowDrawer}
-        show={showDrawer}
-        setCurrentScreen={setCurrentScreen}
-        activeLink={active}
-      /> */}
       <form className="inventory-form">{getCurrentScreen()}</form>
     </div>
   );
 };
 
-// const onSubmit = (values, dispatch) => {
-//   // dispatch(    // your submit action //      );
-//   console.log(values);
-// };
-
 Inventory = reduxForm({
-  // a unique name for the form
   form: "inventory",
-  // onSubmit,
 })(Inventory);
 
 export default withNamespaces()(Inventory);

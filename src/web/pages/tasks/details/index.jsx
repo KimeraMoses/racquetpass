@@ -16,7 +16,6 @@ import { getShopOrder } from "web/store/Slices/shopSlice";
 
 function Details({ t }) {
   const order = useSelector((state) => state.shop?.order);
-  // const shopId = useSelector((state) => state.auth?.user?.shop);
   const [show, setShow] = useState(false);
   const completed =
     order && order?.status?.toLowerCase() === "completed" ? true : false;
@@ -80,6 +79,7 @@ function Details({ t }) {
 
   useEffect(() => {
     fetchOrderDetails(orderId);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [orderId]);
 
   return (
