@@ -28,6 +28,17 @@ function Tasks({ t }) {
     dispatch(fetchShopDetails(shopId));
   }, [shopId]);
 
+  const completedOrders =
+    shopOrders &&
+    shopOrders?.others
+      ?.concat(
+        shopOrders && shopOrders?.dueToday,
+        shopOrders && shopOrders?.dueThisWeek
+      )
+      .filter((order) => order.status.toLowerCase() === "completed");
+
+  console.log(completedOrders);
+
   const showPromp =
     (shop && shop?.tax === 0) ||
     (shop && shop?.labor_price === undefined) ||
@@ -64,32 +75,18 @@ function Tasks({ t }) {
           </p>
           <div className="task-row">
             <p className="tasks-info">{t("taskDueToday")}</p>
-            <div className="badge">{shopOrders && shopOrders?.length}</div>
+            <div className="badge">
+              {shopOrders && shopOrders?.dueToday?.length}
+            </div>
           </div>
           <div className="cards-container">
-            {shopOrders?.map((order, index) => {
-              return (
-                <TaskCard
-                  key={order.id}
-                  status={order.status}
-                  title={`Order #${order.order_number}`}
-                  desc={`${order?.racquet?.model}, ${order?.racquet?.brand}`}
-                  name={
-                    order?.delivery_address?.first_name +
-                    " " +
-                    order?.delivery_address?.last_name
-                  }
-                />
-              );
-            })}
-          </div>
-          <div className="task-row">
-            <p className="tasks-info">{t("taskDueWeek")}</p>
-            <div className="badge">{shopOrders && shopOrders?.length}</div>
-          </div>
-          <div className="cards-container">
-            {shopOrders &&
-              shopOrders?.map((order) => {
+            {shopOrders && shopOrders?.dueToday.length < 1 ? (
+              <TaskCard
+                title={`No Orders due today!`}
+                desc={`Click on completed to view completed orders`}
+              />
+            ) : (
+              shopOrders?.dueToday?.map((order, index) => {
                 return (
                   <TaskCard
                     key={order.id}
@@ -103,7 +100,39 @@ function Tasks({ t }) {
                     }
                   />
                 );
-              })}
+              })
+            )}
+          </div>
+          <div className="task-row">
+            <p className="tasks-info">{t("taskDueWeek")}</p>
+            <div className="badge">
+              {shopOrders && shopOrders?.dueThisWeek?.length}
+            </div>
+          </div>
+          <div className="cards-container">
+            {shopOrders && shopOrders?.dueThisWeek.length < 1 ? (
+              <TaskCard
+                title={`No Orders due this week!`}
+                desc={`Click on completed to view completed orders`}
+              />
+            ) : (
+              shopOrders &&
+              shopOrders?.dueThisWeek?.map((order) => {
+                return (
+                  <TaskCard
+                    key={order.id}
+                    status={order.status}
+                    title={`Order #${order.order_number}`}
+                    desc={`${order?.racquet?.model}, ${order?.racquet?.brand}`}
+                    name={
+                      order?.delivery_address?.first_name +
+                      " " +
+                      order?.delivery_address?.last_name
+                    }
+                  />
+                );
+              })
+            )}
           </div>
         </div>
         <div id="completed-tasks">
@@ -119,11 +148,17 @@ function Tasks({ t }) {
           </p>
           <div className="task-row">
             <p className="tasks-info">Completed</p>
-            <div className="badge">{shopOrders && shopOrders?.length}</div>
+            <div className="badge">{shopOrders && completedOrders?.length}</div>
           </div>
           <div className="cards-container">
-            {shopOrders &&
-              shopOrders?.map((order) => {
+            {shopOrders && completedOrders.length < 1 ? (
+              <TaskCard
+                title={`No completed orders found!`}
+                desc={`Scan the qr code to complete orders`}
+              />
+            ) : (
+              shopOrders &&
+              completedOrders.map((order) => {
                 return (
                   <TaskCard
                     key={order.id}
@@ -137,7 +172,8 @@ function Tasks({ t }) {
                     }
                   />
                 );
-              })}
+              })
+            )}
           </div>
         </div>
       </div>
