@@ -267,7 +267,7 @@ export const sendShopInquiry =
 export const sendVerificationCode = (phone, setStep) => {
   return async (dispatch) => {
     dispatch(setShopLoading(true));
-    console.log("Phone", phoneFormater(phone));
+    // console.log("Phone", phoneFormater(phone));
     try {
       const { url } = sendCodeVerificationRoute();
       await axios.post(url, { phone: phoneFormater(phone) });
@@ -306,6 +306,7 @@ export const codeVerification = (otp, phone, setStep) => {
 //FORMATING PHONE NUMBER TO MATCH
 export const phoneFormater = (phone) => {
   const code = process.env.REACT_APP_COUNTRY_CODE;
+  const hasZero = phone?.charAt(0) === "0" ? true : false;
   return (
     code +
     phone
@@ -313,6 +314,6 @@ export const phoneFormater = (phone) => {
       .replace("(", "")
       .replace(")", "")
       .replace(" ", "")
-      .substring(1)
+      .substring(hasZero ? 1 : 0)
   );
 };
