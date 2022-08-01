@@ -1,4 +1,5 @@
 import {
+  clearEnteredValues,
   createNewBusinessSuccess,
   editBusinessSuccess,
   setBusinessLoading,
@@ -6,6 +7,7 @@ import {
 import { fetchShopDetails, phoneFormater } from "./shopActions";
 import { toast } from "react-toastify";
 import { axios, createBusinessRoute, editBusinessRoute, showError } from "lib";
+import { saveUserInitials } from "../Slices/authSlice";
 
 export const createNewBusiness =
   (
@@ -20,7 +22,8 @@ export const createNewBusiness =
     state,
     zip_code,
     email,
-    password
+    password,
+    navigate
   ) =>
   async (dispatch) => {
     const data = {
@@ -46,7 +49,13 @@ export const createNewBusiness =
         "Your Account is created successfuly, Please go to settings to complete profile"
       );
       dispatch(setBusinessLoading(false));
+
       localStorage.setItem("_rpn_", true);
+      if (res.status === 200) {
+        navigate("/BusinessAccount/Thanks");
+        dispatch(saveUserInitials({ email: email, pwd: password }));
+        dispatch(clearEnteredValues());
+      }
     } catch (error) {
       toast.error(showError(error));
       dispatch(setBusinessLoading(false));

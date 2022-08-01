@@ -17,6 +17,7 @@ const WelcomeMessage = ({ t }) => {
     onboarding: false,
   });
   const dispatch = useDispatch();
+  console.log(shop);
 
   const handleSubscription = async () => {
     setIsLoading({ ...isLoading, subscription: true });

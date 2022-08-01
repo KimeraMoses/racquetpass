@@ -24,6 +24,13 @@ function Tasks({ t }) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [shopId]);
 
+  useEffect(() => {
+    // dispatch(fetchShopOrders(shopId));
+    dispatch(fetchShopDetails(shopId));
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   const completedOrders =
     shopOrders &&
     shopOrders?.others

@@ -7,9 +7,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { BackButton, Heading, CustomInput, SubmitButton } from "web/components";
 
 import "./index.styles.scss";
-import { clearEnteredValues } from "web/store/Slices/businessSlice";
 import { createNewBusiness } from "../../../store/Actions/businessActions";
-import { saveUserInitials } from "web/store/Slices/authSlice";
 import Recaptcha from "web/components/Google-Recaptcha/Recaptcha";
 
 const length = new RegExp("^(?=.{8,})");
@@ -174,14 +172,12 @@ let CreatePassword = ({ t, back }) => {
           values["shop-state"],
           values["zip-code"],
           values.email,
-          values.password
+          values.password,
+          navigate
         )
       );
 
       setIsLoading(false);
-      dispatch(saveUserInitials({ email: values.email, pwd: values.password }));
-      navigate("/BusinessAccount/Thanks");
-      dispatch(clearEnteredValues());
     } catch (err) {
       setIsLoading(false);
       if (!window.navigator.onLine) {

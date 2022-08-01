@@ -121,9 +121,11 @@ export const createOrder = (data) => {
         dispatch(setShopLoading(false));
         toast.success("Redirecting to stripe...");
         window.location.replace(res.data.url);
+        // console.log(res.data);
       } catch (error) {
         toast.error("Failed to generate link!");
         dispatch(setShopLoading(false));
+        // console.log(error);
       }
     }
   };
@@ -218,11 +220,15 @@ export const fetchShopDetails = (shopId) => {
   return async (dispatch) => {
     dispatch(fetchShopPending());
     const { url } = shopDetailsRoute(shopId);
-    try {
-      const res = await axios.get(url);
-      dispatch(fetchShopSuccess(res.data?.shop));
-    } catch (error) {
-      dispatch(fetchShopFail(error));
+    if (shopId) {
+      try {
+        const res = await axios.get(url);
+        dispatch(fetchShopSuccess(res.data?.shop));
+        // console.log("shop", res?.data?.shop);
+      } catch (error) {
+        dispatch(fetchShopFail(error));
+        // console.log(error);
+      }
     }
   };
 };
@@ -265,13 +271,13 @@ export const sendVerificationCode = (phone, setStep) => {
     try {
       const { url } = sendCodeVerificationRoute();
       const res = await axios.post(url, { phone: phoneFormater(phone) });
-      console.log("code sent", res);
+      // console.log("code sent", res);
       toast.success("Verification code sent to your phone");
       dispatch(setShopLoading(false));
       if (setStep) setStep(5);
     } catch (error) {
       dispatch(setShopLoading(false));
-      console.log("Code verify", error);
+      // console.log("Code verify", error);
       toast.error("Failed to generate verification code!");
     }
   };
@@ -299,7 +305,7 @@ export const codeVerification = (otp, phone, setStep) => {
 
 //FORMATING PHONE NUMBER TO MATCH
 export const phoneFormater = (phone) => {
-  const code = "+256";
+  const code = process.env.REACT_APP_COUNTRY_CODE;
   return (
     code +
     phone
