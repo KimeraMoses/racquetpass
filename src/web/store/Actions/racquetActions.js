@@ -15,18 +15,21 @@ import {
 } from "../Slices/racquetSlice";
 import { toast } from "react-toastify";
 
-export const createNewRacquet = (data, setStep) => async (dispatch) => {
+export const createNewRacquet = (data, setStep, change) => async (dispatch) => {
   dispatch(setRacquetsLoading(true));
   try {
     const { url } = newRaquetsRoute();
     const res = await axios.post(url, data);
+    console.log(res);
     dispatch(getRacquetSuccess(res.data?.racquet));
     dispatch(setRacquetsLoading(false));
     toast.success(
       "Your raquet is created successfuly, You can now proceed with your order "
     );
     if (setStep) setStep(4);
+    if (change) change("racquetId", res?.data.racquet?.id);
   } catch (error) {
+    console.log(error);
     toast.error(showError(error));
     dispatch(setRacquetsLoading(false));
   }

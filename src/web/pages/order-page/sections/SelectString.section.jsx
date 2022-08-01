@@ -62,8 +62,6 @@ export function SelectString({
     (state) => state?.form?.signup?.values?.racquetBrand
   );
 
-  console.log("I'm here...");
-
   return (
     <>
       <div className="select-string-odr max-w-[450px] m-[0_auto]">

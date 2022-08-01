@@ -123,9 +123,16 @@ export function ScanSuccess({
                 </div>
               )}
               <div>
-                {/* <Description customClass="scan-details-sc__card-continer-content-success">
-                  {t('odrsuccess')}
-                </Description> */}
+                {!hasRaquet && (
+                  <div className="scan-details__card-continer-content-inner-card">
+                    <div className="scan-details__card-continer-content-inner-card-txt">
+                      <Description>
+                        It looks like this is the first time this racquet has
+                        been scanned.
+                      </Description>
+                    </div>
+                  </div>
+                )}
               </div>
             </div>
           </div>

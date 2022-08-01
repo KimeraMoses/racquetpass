@@ -124,7 +124,7 @@ let OrderPage = ({ t, handleSubmit, change }) => {
               racquet && racquet?.id,
               setNextStep && setStep
             )
-          : createNewRacquet(data, setNextStep && setStep)
+          : createNewRacquet(data, setNextStep && setStep, change)
       );
       setIsLoading(false);
     } catch (error) {
@@ -160,7 +160,7 @@ let OrderPage = ({ t, handleSubmit, change }) => {
       try {
         await dispatch(
           codeVerification(
-            +values["verification-code"],
+            values["verification-code"],
             values["phone-number"],
             setStep
           )

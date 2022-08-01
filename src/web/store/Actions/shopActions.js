@@ -270,7 +270,7 @@ export const sendVerificationCode = (phone, setStep) => {
     console.log("Phone", phoneFormater(phone));
     try {
       const { url } = sendCodeVerificationRoute();
-      const res = await axios.post(url, { phone: phoneFormater(phone) });
+      await axios.post(url, { phone: phoneFormater(phone) });
       // console.log("code sent", res);
       toast.success("Verification code sent to your phone");
       dispatch(setShopLoading(false));
