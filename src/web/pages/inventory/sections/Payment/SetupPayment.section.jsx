@@ -1,19 +1,30 @@
 import { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
-import { useDispatch } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { toast } from "react-toastify";
 import { Heading, HeadingButton, Description } from "web/components";
-import { getStripeManagementSessionLink } from "web/store/Actions/shopActions";
+import {
+  fetchShopDetails,
+  getStripeManagementSessionLink,
+} from "web/store/Actions/shopActions";
 import "./SetupPayment.styles.scss";
 
 export const SetupPayment = ({ t, setDrawer }) => {
   const shopId = useSelector((state) => state?.auth?.user?.shop);
+  const { shop } = useSelector((state) => state.shop);
   const [isLoading, setIsLoading] = useState(false);
 
   const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(fetchShopDetails(shopId));
+  }, [shopId]);
 
   const handleStripePayments = async () => {
     setIsLoading(true);
-    await dispatch(getStripeManagementSessionLink(shopId && shopId));
+    if (shop?.enabled) {
+      await dispatch(getStripeManagementSessionLink(shopId && shopId));
+    } else {
+      toast.error("Please contact admin to enable your shop first");
+    }
     setIsLoading(false);
   };
 

@@ -110,7 +110,7 @@ export const fetchScannedRacquetDetails = (racquet_id) => {
     } catch (error) {
       dispatch(setRacquetsLoading(false));
       if (error?.response?.status === 404)
-        return toast.error(
+        return toast.warn(
           "Racquet not found, Please continue with the process to create your own racquet!"
         );
       toast.error("Failed to scan racquet!");

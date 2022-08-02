@@ -14,7 +14,7 @@ import "../inventory/sections/ProShop.styles.scss";
 function Tasks({ t }) {
   const shopOrders = useSelector((state) => state.shop.orders);
   const shopId = useSelector((state) => state.auth?.user?.shop);
-  const { shop, isFetching } = useSelector((state) => state.shop);
+  const { shop, isFetching, isLoading } = useSelector((state) => state.shop);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -25,7 +25,6 @@ function Tasks({ t }) {
   }, [shopId]);
 
   useEffect(() => {
-    // dispatch(fetchShopOrders(shopId));
     dispatch(fetchShopDetails(shopId));
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -83,11 +82,16 @@ function Tasks({ t }) {
           <div className="task-row">
             <p className="tasks-info">{t("taskDueToday")}</p>
             <div className="badge">
-              {shopOrders ? shopOrders?.dueToday?.length : 0}
+              {isLoading ? 0 : shopOrders ? shopOrders?.dueToday?.length : 0}
             </div>
           </div>
           <div className="cards-container">
-            {shopOrders && shopOrders?.dueToday?.length < 1 ? (
+            {isLoading ? (
+              <TaskCard
+                title={`Loading...`}
+                desc={`Please wait as we get you all the orders here`}
+              />
+            ) : shopOrders && shopOrders?.dueToday?.length < 1 ? (
               <TaskCard
                 title={`No Orders due today!`}
                 desc={`All orders due today will appear here`}
@@ -113,11 +117,16 @@ function Tasks({ t }) {
           <div className="task-row">
             <p className="tasks-info">{t("taskDueWeek")}</p>
             <div className="badge">
-              {shopOrders ? shopOrders?.dueThisWeek?.length : 0}
+              {isLoading ? 0 : shopOrders ? shopOrders?.dueThisWeek?.length : 0}
             </div>
           </div>
           <div className="cards-container">
-            {shopOrders && shopOrders?.dueThisWeek?.length < 1 ? (
+            {isLoading ? (
+              <TaskCard
+                title={`Loading...`}
+                desc={`Please wait as we get you all the orders here`}
+              />
+            ) : shopOrders && shopOrders?.dueThisWeek?.length < 1 ? (
               <TaskCard
                 title={`No Orders due this week!`}
                 desc={`All orders due this week will appear here`}
@@ -144,10 +153,17 @@ function Tasks({ t }) {
 
           <div className="task-row">
             <p className="tasks-info">Pending &#38; Processing</p>
-            <div className="badge">{shopOrders ? OtherOrders?.length : 0}</div>
+            <div className="badge">
+              {isLoading ? 0 : shopOrders ? OtherOrders?.length : 0}
+            </div>
           </div>
           <div className="cards-container">
-            {shopOrders && OtherOrders?.length < 1 ? (
+            {isLoading ? (
+              <TaskCard
+                title={`Loading...`}
+                desc={`Please wait as we get you all the orders here`}
+              />
+            ) : shopOrders && OtherOrders?.length < 1 ? (
               <TaskCard
                 title={`No Orders recieved yet`}
                 desc={`All your pending and processing orders will appear here`}
@@ -190,7 +206,12 @@ function Tasks({ t }) {
             </div>
           </div>
           <div className="cards-container">
-            {shopOrders && completedOrders?.length < 1 ? (
+            {isLoading ? (
+              <TaskCard
+                title={`Loading...`}
+                desc={`Please wait as we get you all the orders here`}
+              />
+            ) : shopOrders && completedOrders?.length < 1 ? (
               <TaskCard
                 title={`No completed orders found!`}
                 desc={`Scan the qr code to complete orders`}

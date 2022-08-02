@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
-import { Field } from "redux-form";
+import { Field, reset } from "redux-form";
 import { toast } from "react-toastify";
 import {
   BackButton,
@@ -34,7 +34,6 @@ export function AddForm({ t, setCurrentScreen, change }) {
     setActiveIndex(index);
     setSelectedType(el);
   };
-  console.log(activeIndex);
 
   const handleCheck = () => setCheck(!check);
 
@@ -61,7 +60,7 @@ export function AddForm({ t, setCurrentScreen, change }) {
       );
       setIsLoading(false);
       setCurrentScreen("inventory");
-      // dispatch(reset("inventory"));
+      dispatch(reset("inventory"));
     } catch (err) {
       setIsLoading(false);
       if (!window.navigator.onLine) {
