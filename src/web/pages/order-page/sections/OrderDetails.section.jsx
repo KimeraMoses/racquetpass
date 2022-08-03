@@ -150,7 +150,8 @@ function OrderDetails({ t }) {
       ) : (
         <>
           <Survey
-            show={showSurvey && OrderStatus === "success"}
+            // show={showSurvey && OrderStatus === "success"}
+            show={showSurvey}
             setShow={setShowSurvey}
             onExit={() => {
               console.log("Done");

@@ -76,36 +76,20 @@ export const getOrder = (id, navigate) => {
       try {
         const res = await axios.get(url);
         if (navigate && res.data.order?.delivery_shop?.id !== shopId) {
-          return navigate("/tasks/scan");
+          if (navigate) navigate("/tasks/scan");
+          return;
         }
         dispatch(getShopOrder(res.data.order));
       } catch (error) {
         if (error?.response?.status === 404) {
-          return navigate("/tasks/scan");
+          if (navigate) navigate("/tasks/scan");
+          return;
         }
         toast.error("Failed to load order details");
       }
     }
   };
 };
-
-//COMPLETE ORDER
-// export const completeOrder = (data) => {
-//   return async () => {
-//     if (data) {
-//       const { url } = completeOrderRoute();
-//       try {
-//         await axios.post(url, data);
-//         toast.success("Order Completed Successfuly");
-//       } catch (error) {
-//         if (error?.response?.status === 400) {
-//           return toast.error("Pending order can not be completed!");
-//         }
-//         toast.error("Failed to complete order!");
-//       }
-//     }
-//   };
-// };
 
 //CANCEL ORDER
 export const cancelOrder = (orderId, navigate) => {
@@ -139,11 +123,9 @@ export const createOrder = (data) => {
         dispatch(setShopLoading(false));
         toast.success("Redirecting to stripe...");
         window.location.replace(res.data.url);
-        // console.log(res.data);
       } catch (error) {
         toast.error("Failed to generate link!");
         dispatch(setShopLoading(false));
-        // console.log(error);
       }
     }
   };
