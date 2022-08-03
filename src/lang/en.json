@@ -510,7 +510,7 @@
   "setupPayList1p2": "pay",
   "setupPayList1p3": "RacquetPass",
   "setupPayList2p1": "How you",
-  "setupPayList2p2": "recieve payments",
+  "setupPayList2p2": "receive payments",
   "setupPayList2p3": "from players",
 
   "setupStripe": "Go to Stripe to manage payments",

@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Field } from "redux-form";
 import BarcodeScannerComponent from "react-qr-barcode-scanner";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 // Custom Components
 import { Heading, Description, Modal } from "web/components";
 
@@ -9,10 +9,10 @@ import { Heading, Description, Modal } from "web/components";
 import "./ScanSection.styles.scss";
 import { BackButton } from "web/components/Buttons/BackButton.component";
 import { SubmitButton } from "web/components/Buttons/SubmitButton.component";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { fetchRacquetDetails } from "web/store/Actions/racquetActions";
 import Loader from "web/components/Loader/Loader";
-import { useSelector } from "react-redux";
+import {} from "react-redux";
 
 export function ScanSection({
   t,
@@ -30,6 +30,7 @@ export function ScanSection({
   const [permissionsDenied, setPermissionsDenied] = useState(false);
   const racquetDetails = useSelector((state) => state.racquet.racquet);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const handleShow = () => {
     setShowModal((prev) => {
@@ -40,7 +41,7 @@ export function ScanSection({
   const fetchRacquet = async (rac_id) => {
     if (qrCode) {
       setIsLoading(true);
-      await dispatch(fetchRacquetDetails(rac_id, true, true));
+      await dispatch(fetchRacquetDetails(rac_id, true, navigate));
       scanForward(true);
       setIsLoading(false);
     }

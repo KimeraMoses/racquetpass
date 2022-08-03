@@ -20,7 +20,6 @@ export const createNewRacquet = (data, setStep, change) => async (dispatch) => {
   try {
     const { url } = newRaquetsRoute();
     const res = await axios.post(url, data);
-    console.log(res);
     dispatch(getRacquetSuccess(res.data?.racquet));
     dispatch(setRacquetsLoading(false));
     toast.success(
@@ -29,7 +28,6 @@ export const createNewRacquet = (data, setStep, change) => async (dispatch) => {
     if (setStep) setStep(4);
     if (change) change("racquetId", res?.data.racquet?.id);
   } catch (error) {
-    console.log(error);
     toast.error(showError(error));
     dispatch(setRacquetsLoading(false));
   }
@@ -70,16 +68,34 @@ export const fetchAllStrings = (shop_id) => {
   };
 };
 
-export const fetchRacquetDetails = (racquet_id, showSuccess, isQr) => {
+export const fetchRacquetDetails = (racquet_id, isQr, navigate) => {
   return async (dispatch) => {
     dispatch(setRacquetsLoading(true));
     const { url } = getRaquetRoute(racquet_id, isQr ? true : false);
     try {
       const res = await axios.get(url);
       if (res.status === 200) {
-        dispatch(getRacquetSuccess(res.data?.racquet));
-        if (showSuccess)
+        if (res.data?.order !== undefined) {
+          switch (res.data?.order?.status) {
+            case "Pending":
+              toast.info("Your order is pending payment");
+              navigate(`/order/${res.data?.order?.id}?status=pending`);
+              break;
+            case "Processing":
+              toast.info("Your order is still under processing");
+              navigate(`/order/${res.data?.order?.id}?status=processing`);
+              break;
+            default:
+              dispatch(getRacquetSuccess(res.data?.racquet));
+              toast.success(
+                "Racquet found, You can now continue with your order"
+              );
+              break;
+          }
+        } else {
+          dispatch(getRacquetSuccess(res.data?.racquet));
           toast.success("Racquet found, You can now continue with your order");
+        }
       }
       dispatch(setRacquetsLoading(false));
     } catch (error) {

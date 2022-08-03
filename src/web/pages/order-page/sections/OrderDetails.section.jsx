@@ -2,9 +2,7 @@
 import {
   Heading,
   Description,
-  // HeadingButton,
   SummaryCard,
-  // PaymentButton,
   SubHeading,
   SearchCard,
 } from "web/components";
@@ -17,14 +15,20 @@ import { withNamespaces } from "react-i18next";
 import { useParams, useLocation, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
-import { getOrder, getStripePaymentLink } from "web/store/Actions/shopActions";
+import {
+  cancelOrder,
+  getOrder,
+  getStripePaymentLink,
+} from "web/store/Actions/shopActions";
 import { Survey } from "web/components/index";
 import Loader from "web/components/Loader/Loader";
+import { PaymentButton } from "web/components/Buttons/PaymentButton.component";
 
 function OrderDetails({ t }) {
   const [showSurvey, setShowSurvey] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [isGenerating, setIsGenerating] = useState(false);
+  const [isCancelling, setIsCancelling] = useState(false);
   const order = useSelector((state) => state?.shop?.order);
   const { orderId } = useParams();
   const dispatch = useDispatch();
@@ -131,6 +135,12 @@ function OrderDetails({ t }) {
     setIsGenerating(false);
   };
 
+  const cancelOrderHanadler = async () => {
+    setIsCancelling(true);
+    await dispatch(cancelOrder(orderId, navigate));
+    setIsCancelling(false);
+  };
+
   return (
     <div className="px-5">
       {isLoading ? (
@@ -140,7 +150,7 @@ function OrderDetails({ t }) {
       ) : (
         <>
           <Survey
-            show={showSurvey}
+            show={showSurvey && OrderStatus === "success"}
             setShow={setShowSurvey}
             onExit={() => {
               console.log("Done");
@@ -151,14 +161,16 @@ function OrderDetails({ t }) {
               className={`max-w-[450px] m-[0_auto] ${
                 OrderStatus === "success"
                   ? `text-[#008d3b] bg-[#E5FAEE]`
-                  : `text-[#E40000] bg-[#fff0f0]`
-              } p-2 rounded-md mt-2 `}
+                  : OrderStatus === "fail"
+                  ? `text-[#E40000] bg-[#fff0f0]`
+                  : ` bg-[#ffffff]`
+              } p-2 rounded-md mt-2 text-center`}
             >
               {OrderStatus === "success" ? (
                 `Your payment for this order has been successfuly recieved by ${
                   order && order?.delivery_shop?.name
                 }`
-              ) : (
+              ) : OrderStatus === "fail" ? (
                 <p>
                   Transaction for this order has failed, Please try again{" "}
                   <span
@@ -169,7 +181,7 @@ function OrderDetails({ t }) {
                   </span>
                   or contact shop for help.
                 </p>
-              )}
+              ) : null}
             </div>
           )}
           <div className="review-order-odr max-w-[450px] m-[0_auto] mt-5">
@@ -194,7 +206,10 @@ function OrderDetails({ t }) {
                 </>
               ) : (
                 <>
-                  Expected Pickup: {orderDetails?.expectedPickup}{" "}
+                  Expected Pickup:{" "}
+                  {OrderStatus === "pending" || OrderStatus === "fail"
+                    ? "Pending"
+                    : orderDetails?.expectedPickup}{" "}
                   <img src="/svg/calenderOD.svg" alt="calender" />
                 </>
               )}
@@ -316,9 +331,40 @@ function OrderDetails({ t }) {
                   {t("odrSummary")}
                 </Heading>
               </div>
-              <div className="review-order-odr__summary-card mb-[116px]">
+              <div
+                className={`review-order-odr__summary-card ${
+                  OrderStatus !== "pending" ? "mb-[116px]" : ""
+                }`}
+              >
                 <SummaryCard summary={summary} />
               </div>
+              {(OrderStatus === "pending" || OrderStatus === "fail") && (
+                <div className="review-order-odr__buttons mt-10">
+                  <p className="text-sm mb-2">
+                    Create new order?{" "}
+                    <span
+                      className={
+                        isCancelling
+                          ? "text-[#E40000] cursor-auto"
+                          : "text-[#304FFE] cursor-pointer"
+                      }
+                      onClick={isCancelling ? null : cancelOrderHanadler}
+                    >
+                      {isCancelling
+                        ? "Cancelling order..."
+                        : "Cancel this order and create new one"}
+                    </span>
+                  </p>
+                  <PaymentButton
+                    className="review-order-odr__buttons-credit"
+                    handleClick={handlePayment}
+                    disabled={isGenerating}
+                    style={{ marginBottom: "40px" }}
+                  >
+                    {isGenerating ? "Generating Payment Link..." : "Pay"}
+                  </PaymentButton>
+                </div>
+              )}
             </div>
           </div>
         </>

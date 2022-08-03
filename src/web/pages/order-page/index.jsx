@@ -481,8 +481,6 @@ let OrderPage = ({ t, handleSubmit, change }) => {
         return <>Undetected Step</>;
     }
   };
-  console.log("current step", step);
-  console.log("has value", !!values?.brand?.string_id);
 
   return (
     <>

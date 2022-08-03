@@ -183,10 +183,7 @@ export function ReviewOrder({ t, setStep, setDone, setBackFromReview }) {
           <div className="review-order-odr__buttons">
             <PaymentButton
               className="review-order-odr__buttons-credit"
-              // handleClick={() => {
-              //   setShowSurvey(true);
-              // }}
-              // handleClick={onSubmitHandler}
+              disabled={isLoading}
               style={{ marginBottom: "40px" }}
             >
               {isLoading ? "Generating Payment Link..." : "Pay and Finish"}

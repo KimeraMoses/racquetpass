@@ -7,6 +7,7 @@ export const PaymentButton = ({
   handleClick,
   active,
   style,
+  disabled,
 }) => {
   return (
     <button
@@ -17,6 +18,7 @@ export const PaymentButton = ({
       `}
       onClick={handleClick}
       style={style}
+      disabled={disabled}
     >
       {children}
     </button>

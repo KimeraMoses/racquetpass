@@ -76,14 +76,12 @@ export const getOrder = (id, navigate) => {
       try {
         const res = await axios.get(url);
         if (navigate && res.data.order?.delivery_shop?.id !== shopId) {
-          navigate("/tasks/scan");
-          return toast.error("Not authorised to view this order");
+          return navigate("/tasks/scan");
         }
         dispatch(getShopOrder(res.data.order));
       } catch (error) {
         if (error?.response?.status === 404) {
-          if (navigate && shopId) navigate("/");
-          return toast.error("Order not found!");
+          return navigate("/tasks/scan");
         }
         toast.error("Failed to load order details");
       }
@@ -92,18 +90,38 @@ export const getOrder = (id, navigate) => {
 };
 
 //COMPLETE ORDER
-export const completeOrder = (data) => {
+// export const completeOrder = (data) => {
+//   return async () => {
+//     if (data) {
+//       const { url } = completeOrderRoute();
+//       try {
+//         await axios.post(url, data);
+//         toast.success("Order Completed Successfuly");
+//       } catch (error) {
+//         if (error?.response?.status === 400) {
+//           return toast.error("Pending order can not be completed!");
+//         }
+//         toast.error("Failed to complete order!");
+//       }
+//     }
+//   };
+// };
+
+//CANCEL ORDER
+export const cancelOrder = (orderId, navigate) => {
   return async () => {
-    if (data) {
+    const data = {
+      order_id: orderId,
+      action: "cancel",
+    };
+    if (orderId) {
       const { url } = completeOrderRoute();
       try {
         await axios.post(url, data);
-        toast.success("Order Completed Successfuly");
+        toast.success("Order cancelled Successfuly");
+        navigate("/order");
       } catch (error) {
-        if (error?.response?.status === 400) {
-          return toast.error("Pending order can not be completed!");
-        }
-        toast.error("Failed to complete order!");
+        toast.error("Failed to cancel order!");
       }
     }
   };
@@ -198,7 +216,7 @@ export const getStripeOnBoardingLink = (id) => {
 
 //GET PAYMENT MANAGEMENT LINK
 export const getStripeManagementSessionLink = (id) => {
-  return async (dispatch) => {
+  return async () => {
     const data = {
       shop_id: id,
     };
@@ -224,10 +242,8 @@ export const fetchShopDetails = (shopId) => {
       try {
         const res = await axios.get(url);
         dispatch(fetchShopSuccess(res.data?.shop));
-        // console.log("shop", res?.data?.shop);
       } catch (error) {
         dispatch(fetchShopFail(error));
-        // console.log(error);
       }
     }
   };
