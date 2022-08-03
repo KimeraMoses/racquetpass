@@ -1,14 +1,17 @@
-import { useState } from 'react';
-import { BackButton } from 'web/components/Buttons/BackButton.component';
-import { SubmitButton } from 'web/components/Buttons/SubmitButton.component';
+import { useState } from "react";
+import { useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
+import { BackButton } from "web/components/Buttons/BackButton.component";
+import { SubmitButton } from "web/components/Buttons/SubmitButton.component";
+import { sendSurveyResponse } from "web/store/Actions/shopActions";
 
 const Option = ({ label, description, active, onClick }) => {
   return (
     <div
       className={`p-[16px] h-[52px] md:h-[80px] flex items-center justify-start rounded-[12px] border-[1px] cursor-pointer ${
         !active
-          ? 'bg-[#ffffff] border-[#e8e8e8]'
-          : 'bg-[#EAEDFF] border-[#304FFE]'
+          ? "bg-[#ffffff] border-[#e8e8e8]"
+          : "bg-[#EAEDFF] border-[#304FFE]"
       }`}
       onClick={onClick}
     >
@@ -22,41 +25,63 @@ const Option = ({ label, description, active, onClick }) => {
   );
 };
 
-export const Step3 = ({ back, setShow, onExit }) => {
-  const [active, setActive] = useState('');
+export const Step3 = ({ setStep, setShow, onExit }) => {
+  const sport = useSelector((state) => state?.shop?.order?.racquet?.sport);
+
+  const [active, setActive] = useState("");
+  const dispatch = useDispatch();
+
+  const serveySubmitHandler = async () => {
+    const data = {
+      isCompetitive: "NO",
+      experience: active,
+    };
+
+    await dispatch(sendSurveyResponse(data, setShow));
+    setShow(false);
+    onExit();
+  };
 
   const options = [
     {
-      label: 'Just Started',
+      label: "Just Started",
       description: "I've only played a few times.",
-      active: active === 'Just Started',
+      active: active === "Just Started",
     },
     {
-      label: 'Beginner',
+      label: "Beginner",
       description: "I'm enthusiastically picking up the game!",
-      active: active === 'Beginner',
+      active: active === "Beginner",
     },
     {
-      label: 'Intermediate',
+      label: "Intermediate",
       description: "I've played in middle school or high school.",
-      active: active === 'Intermediate',
+      active: active === "Intermediate",
     },
     {
-      label: 'Elite',
+      label: "Elite",
       description: "I've played in regular tournaments or in college.",
-      active: active === 'Elite',
+      active: active === "Elite",
     },
     {
-      label: 'Pro',
+      label: "Pro",
       description: "I've played professionally.",
-      active: active === 'Pro',
+      active: active === "Pro",
     },
   ];
 
   return (
     <div>
       <div className="grid grid-cols-[46px_4fr] gap-[20px] items-center mb-[18px]">
-        <BackButton onClick={back} />
+        <BackButton
+          onClick={() => {
+            if (sport !== "Tennis" && sport !== "Squash") {
+              setStep(1);
+            } else {
+              setStep(2);
+            }
+          }}
+        />
         <div className="text-[#545454] text-[18px] ">
           What best describes your experience level?
         </div>
@@ -73,13 +98,7 @@ export const Step3 = ({ back, setShow, onExit }) => {
         ))}
       </div>
       <div className="mt-[45px]">
-        <SubmitButton
-          disabled={!active}
-          onClick={() => {
-            setShow(false);
-            onExit();
-          }}
-        >
+        <SubmitButton disabled={!active} onClick={serveySubmitHandler}>
           Complete Survey
         </SubmitButton>
       </div>

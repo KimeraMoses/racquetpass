@@ -1,13 +1,19 @@
-import { SubmitButton } from 'web/components/Buttons/SubmitButton.component';
+import { useSelector } from "react-redux";
+import { SubmitButton } from "web/components/Buttons/SubmitButton.component";
 
-export const Step2 = ({ setStep }) => {
+export const Step2 = ({ setStep, change }) => {
+  const sport = useSelector((state) => state?.shop?.order?.racquet?.sport);
+
   return (
     <div>
       <div className="mb-[30px] text-[#545454] text-[18px]">
-        Do you have a competitive tennis rating?
+        {sport === "Squash"
+          ? "Do you have a competitive squash rating?"
+          : "Do you have a competitive tennis rating?"}
       </div>
       <SubmitButton
         onClick={() => {
+          change("competitiveRating", "Yes");
           setStep(4);
         }}
         className="mb-[12px]"
@@ -16,6 +22,7 @@ export const Step2 = ({ setStep }) => {
       </SubmitButton>
       <SubmitButton
         onClick={() => {
+          change("competitiveRating", "No");
           setStep(3);
         }}
         outlined

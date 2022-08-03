@@ -231,6 +231,22 @@ export const fetchShopDetails = (shopId) => {
   };
 };
 
+//SEND ORDER SERVEY
+export const sendSurveyResponse = (data) => {
+  return async (dispatch) => {
+    // dispatch(fetchShopPending());
+    // const { url } = shopDetailsRoute();
+    // if (data) {
+    //   try {
+    //     const res = await axios.get(url);
+    //     dispatch(fetchShopSuccess(res.data?.shop));
+    //   } catch (error) {
+    //     dispatch(fetchShopFail(error));
+    //   }
+    // }
+  };
+};
+
 //DON'T SEE SHOP MESSAGE
 export const sendShopInquiry =
   (shop_name, city, state, phone, search) => async (dispatch) => {

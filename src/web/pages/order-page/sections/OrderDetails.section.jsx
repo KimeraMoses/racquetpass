@@ -20,8 +20,8 @@ import {
   getOrder,
   getStripePaymentLink,
 } from "web/store/Actions/shopActions";
-import { Survey } from "web/components/index";
 import Loader from "web/components/Loader/Loader";
+import Survey from "web/components/Survey/Survey.component";
 import { PaymentButton } from "web/components/Buttons/PaymentButton.component";
 
 function OrderDetails({ t }) {
@@ -150,8 +150,7 @@ function OrderDetails({ t }) {
       ) : (
         <>
           <Survey
-            // show={showSurvey && OrderStatus === "success"}
-            show={showSurvey}
+            show={showSurvey && OrderStatus === "success"}
             setShow={setShowSurvey}
             onExit={() => {
               console.log("Done");
