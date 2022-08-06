@@ -117,25 +117,27 @@ export const fetchRacquetDetails = (racquet_id, isQr, navigate) => {
 // FETCH RACQUET USING UUID
 export const fetchScannedRacquetDetails = (racquet_id) => {
   return async (dispatch) => {
-    dispatch(setRacquetsLoading(true));
-    const { url } = getRaquetRoute(racquet_id, false);
-    try {
-      const res = await axios.get(url);
-      if (res.status === 200) {
-        dispatch(getRacquetSuccess(res.data?.racquet));
-        toast.success("Racquet found, You can now continue with your order");
+    if (racquet_id) {
+      dispatch(setRacquetsLoading(true));
+      const { url } = getRaquetRoute(racquet_id, false);
+      try {
+        const res = await axios.get(url);
+        if (res.status === 200) {
+          dispatch(getRacquetSuccess(res.data?.racquet));
+          toast.success("Racquet found, You can now continue with your order");
 
-        // SET SCANNED STATE TO SKIP RESCANNING
-        localStorage.setItem("_rpr_", true);
+          // SET SCANNED STATE TO SKIP RESCANNING
+          localStorage.setItem("_rpr_", true);
+        }
+        dispatch(setRacquetsLoading(false));
+      } catch (error) {
+        dispatch(setRacquetsLoading(false));
+        if (error?.response?.status === 404)
+          return toast.warn(
+            "Racquet not found, Please continue with the process to create your own racquet!"
+          );
+        toast.error("Failed to scan racquet!");
       }
-      dispatch(setRacquetsLoading(false));
-    } catch (error) {
-      dispatch(setRacquetsLoading(false));
-      if (error?.response?.status === 404)
-        return toast.warn(
-          "Racquet not found, Please continue with the process to create your own racquet!"
-        );
-      toast.error("Failed to scan racquet!");
     }
   };
 };
@@ -203,8 +205,8 @@ export const editNewString =
       size,
       tension,
     };
-    dispatch(setRacquetsLoading(true));
     if (string_id) {
+      dispatch(setRacquetsLoading(true));
       try {
         const { url } = editStringsRoute(string_id);
         await axios.patch(url, data);
@@ -219,8 +221,8 @@ export const editNewString =
 
 export const deleteString = (string_id) => {
   return async (dispatch) => {
-    dispatch(setRacquetsLoading(true));
     if (string_id) {
+      dispatch(setRacquetsLoading(true));
       const { url } = editStringsRoute(string_id);
       try {
         await axios.delete(url);

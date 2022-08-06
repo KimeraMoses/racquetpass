@@ -96,3 +96,8 @@ export const newStringsRoute = () => ({
 export const editStringsRoute = (id) => ({
   url: `/api/v1/strings/${id}`,
 });
+
+//SURVEY
+export const shopSurveyRoute = () => ({
+  url: `/api/v1/survey`,
+});

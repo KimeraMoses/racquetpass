@@ -5,9 +5,6 @@ const initialState = {
   shop: {},
   orders: [],
   order: {},
-  sessionLink: "",
-  onBoardLink: "",
-  // paymentUrl: "",
   isLoading: false,
   isFetching: false,
   message: "",
@@ -29,12 +26,6 @@ const shopSlice = createSlice({
     getShop: (state, { payload }) => {
       state.shop = payload;
     },
-    getSessionLink: (state, { payload }) => {
-      state.link = payload;
-    },
-    getOnboardSessionLink: (state, { payload }) => {
-      state.onBoardLink = payload;
-    },
     getAllShopOrders: (state, { payload }) => {
       state.orders = payload;
     },
@@ -50,8 +41,6 @@ export const {
   setShopFetching,
   getAllShops,
   getShop,
-  getSessionLink,
-  getOnboardSessionLink,
   setShopLoading,
   getAllShopOrders,
   getShopOrder,

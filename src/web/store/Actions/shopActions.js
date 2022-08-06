@@ -10,6 +10,7 @@ import {
   shopDetailsRoute,
   shopOrderRoute,
   shopOrdersRoute,
+  shopSurveyRoute,
   showError,
   subscriptionSessionRoute,
   verifyCodeRoute,
@@ -55,18 +56,15 @@ export const fetchEnabledShops = () => {
 //GET ALL SHOP ORDERS
 export const fetchShopOrders = (id) => {
   return async (dispatch) => {
-    // dispatch(setShopLoading(true));
-    dispatch(setShopFetching(true));
     if (id) {
+      dispatch(setShopFetching(true));
       const { url } = shopOrdersRoute(id);
       try {
         const res = await axios.get(url);
         dispatch(getAllShopOrders(res.data.order));
-        // dispatch(setShopLoading(false));
         dispatch(setShopFetching(false));
       } catch (error) {
         toast.error(showError(error));
-        // dispatch(setShopLoading(false));
         dispatch(setShopFetching(false));
       }
     }
@@ -76,11 +74,11 @@ export const fetchShopOrders = (id) => {
 //GET ALL SHOP ORDERS
 export const getOrder = (id, navigate) => {
   return async (dispatch) => {
-    dispatch(setShopFetching(true));
     const shopId = JSON.parse(
       localStorage.getItem("Racquet__CurrentUser")
     )?.shop;
     if (id) {
+      dispatch(setShopFetching(true));
       const { url } = shopOrderRoute(id);
       try {
         const res = await axios.get(url);
@@ -125,10 +123,9 @@ export const cancelOrder = (orderId, navigate) => {
 //CREATE ORDER
 export const createOrder = (data, setCookie) => {
   return async (dispatch) => {
-    dispatch(setShopLoading(true));
-    console.log(data);
     if (data) {
       const { url } = createOrdersRoute();
+      dispatch(setShopLoading(true));
       try {
         const res = await axios.post(url, data);
         setCookie("_rpo_", JSON.stringify(data), { path: "/" });
@@ -174,7 +171,6 @@ export const getStripeSessionLink = (id) => {
       const { url } = subscriptionSessionRoute();
       try {
         const res = await axios.post(url, data);
-        // dispatch(getSessionLink(res.data.url));
         toast.success("Redirecting to stripe...");
         window.location.replace(res.data.url);
       } catch (error) {
@@ -198,7 +194,6 @@ export const getStripeOnBoardingLink = (id) => {
       const { url } = onboardSessionRoute();
       try {
         const res = await axios.post(url, data);
-        // dispatch(getOnboardSessionLink(res.data.url));
         toast.success("Redirecting to stripe...");
         window.location.replace(res.data.url);
       } catch (error) {
@@ -246,18 +241,21 @@ export const fetchShopDetails = (shopId) => {
 };
 
 //SEND ORDER SERVEY
-export const sendSurveyResponse = (data) => {
-  return async (dispatch) => {
-    // dispatch(fetchShopPending());
-    // const { url } = shopDetailsRoute();
-    // if (data) {
-    //   try {
-    //     const res = await axios.get(url);
-    //     dispatch(fetchShopSuccess(res.data?.shop));
-    //   } catch (error) {
-    //     dispatch(fetchShopFail(error));
-    //   }
-    // }
+export const sendSurveyResponse = (data, setShow, setCookie) => {
+  return async () => {
+    if (data) {
+      const { url } = shopSurveyRoute();
+      try {
+        await axios.post(url, data);
+        setCookie("_rpr_", data.email, {
+          path: "/",
+        });
+        toast.success("Your response is submitted successfully");
+        setShow(false);
+      } catch (error) {
+        toast.error(showError(error));
+      }
+    }
   };
 };
 

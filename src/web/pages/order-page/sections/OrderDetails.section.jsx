@@ -15,6 +15,7 @@ import { withNamespaces } from "react-i18next";
 import { useParams, useLocation, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
+import { useCookies } from "react-cookie";
 import {
   cancelOrder,
   getOrder,
@@ -30,6 +31,7 @@ function OrderDetails({ t }) {
   const [isGenerating, setIsGenerating] = useState(false);
   const [isCancelling, setIsCancelling] = useState(false);
   const order = useSelector((state) => state?.shop?.order);
+  const [cookies, setCookie] = useCookies("_rpr_");
   const { orderId } = useParams();
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -150,11 +152,13 @@ function OrderDetails({ t }) {
       ) : (
         <>
           <Survey
-            show={showSurvey && OrderStatus === "success"}
+            show={
+              showSurvey &&
+              OrderStatus === "success" &&
+              cookies?._rpr_ !== order?.delivery_address?.email
+            }
             setShow={setShowSurvey}
-            onExit={() => {
-              console.log("Done");
-            }}
+            // onExit={}
           />
           {OrderStatus && (
             <div

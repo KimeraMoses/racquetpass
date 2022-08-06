@@ -25,21 +25,25 @@ const Option = ({ label, description, active, onClick }) => {
   );
 };
 
-export const Step3 = ({ setStep, setShow, onExit }) => {
+export const Step3 = ({ setStep, setShow, setCookie }) => {
+  const playerEmail = useSelector(
+    (state) => state.shop?.order?.delivery_address?.email
+  );
   const sport = useSelector((state) => state?.shop?.order?.racquet?.sport);
-
+  const [isLoading, setIsLoading] = useState(false);
   const [active, setActive] = useState("");
   const dispatch = useDispatch();
 
   const serveySubmitHandler = async () => {
+    setIsLoading(true);
     const data = {
-      isCompetitive: "NO",
-      experience: active,
+      competitiveRating: false,
+      game: sport && sport,
+      experienceLevel: active,
+      email: playerEmail && playerEmail,
     };
-
-    await dispatch(sendSurveyResponse(data, setShow));
-    setShow(false);
-    onExit();
+    await dispatch(sendSurveyResponse(data, setShow, setCookie));
+    setIsLoading(false);
   };
 
   const options = [
@@ -98,8 +102,11 @@ export const Step3 = ({ setStep, setShow, onExit }) => {
         ))}
       </div>
       <div className="mt-[45px]">
-        <SubmitButton disabled={!active} onClick={serveySubmitHandler}>
-          Complete Survey
+        <SubmitButton
+          disabled={!active || isLoading}
+          onClick={serveySubmitHandler}
+        >
+          {isLoading ? "Sending response..." : "Complete Survey"}
         </SubmitButton>
       </div>
     </div>

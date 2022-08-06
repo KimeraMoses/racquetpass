@@ -163,7 +163,6 @@ let OrderPage = ({ t, handleSubmit, change }) => {
   let isVerifiedObj = JSON.parse(localStorage.getItem("_rpe_"));
 
   const sendCodeVericationHandler = async () => {
-    //Logic for sending code here
     setIsLoading(true);
     if (isVerifiedObj?.e === values["phone-number"] && isVerifiedObj?.isV) {
       setStep(5);
@@ -179,7 +178,6 @@ let OrderPage = ({ t, handleSubmit, change }) => {
   };
 
   const codeverificationHandler = async () => {
-    //Logic for verifying code here
     setIsLoading(true);
     if (isVerifiedObj?.e === values["phone-number"] && isVerifiedObj?.isV) {
       setStep(6);

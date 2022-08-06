@@ -1,4 +1,4 @@
-import { Fragment, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
   HeadingButton,
@@ -25,7 +25,7 @@ export function SearchInventory({ t, setCurrentScreen, setDrawer, change }) {
   }, [shop]);
   let FilteredStrings = strings;
 
-  const isSearching = searchTerm.length < 1 ? false : true;
+  const isSearching = searchTerm.length > 1 ? false : true;
   useEffect(() => {
     setSearchResults([]);
   }, [isSearching]);
@@ -94,7 +94,7 @@ export function SearchInventory({ t, setCurrentScreen, setDrawer, change }) {
                   }}
                 />
               ) : (
-                (searchResults.length > 0
+                (searchTerm.length > 0 && searchResults.length > 0
                   ? searchResults
                   : FilteredStrings
                 ).map((string) => (

@@ -4,11 +4,13 @@ import {
   enableBodyScroll,
 } from "body-scroll-lock";
 import { reduxForm } from "redux-form";
+import { useCookies } from "react-cookie";
 import { createRef, useEffect, useState } from "react";
 import { Step1, Step2, Step3, Step4 } from "./sections";
 import "./Survey.styles.scss";
 
 let Survey = ({ show, setShow, onExit, change }) => {
+  const [cookies, setCookie] = useCookies("_rpr_");
   let targetRef = createRef();
 
   useEffect(() => {
@@ -36,6 +38,7 @@ let Survey = ({ show, setShow, onExit, change }) => {
             onExit={onExit}
             setShow={setShow}
             change={change}
+            setCookie={setCookie}
           />
         )}
         {step === 4 && (
@@ -44,6 +47,7 @@ let Survey = ({ show, setShow, onExit, change }) => {
             onExit={onExit}
             setShow={setShow}
             change={change}
+            setCookie={setCookie}
           />
         )}
       </div>

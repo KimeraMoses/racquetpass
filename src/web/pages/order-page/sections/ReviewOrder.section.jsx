@@ -15,7 +15,7 @@ import { BackButton } from "web/components/Buttons/BackButton.component";
 import { useSelector } from "react-redux";
 import { useCookies } from "react-cookie";
 import { useEffect } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import { fetchShopDetails } from "web/store/Actions/shopActions";
 import { fetchRacquetDetails } from "web/store/Actions/racquetActions";
 import { useDispatch } from "react-redux";
@@ -40,13 +40,6 @@ export function ReviewOrder({
   const racquet = useSelector((state) => state.racquet?.racquet);
   const shop = useSelector((state) => state.shop?.shop);
   const dispatch = useDispatch();
-  // const navigate = useNavigate();
-
-  // useEffect(() => {
-  //   if (cookies?._rpo_ === undefined) navigate("/");
-
-  //   // eslint-disable-next-line react-hooks/exhaustive-deps
-  // }, [cookies]);
 
   function useQuery() {
     return new URLSearchParams(useLocation().search);

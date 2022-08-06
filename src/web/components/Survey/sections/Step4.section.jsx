@@ -29,7 +29,10 @@ const Input = ({ label, onChange, placeholder, value, type, error }) => {
   );
 };
 
-export const Step4 = ({ back, onExit, setShow }) => {
+export const Step4 = ({ back, setCookie, setShow }) => {
+  const playerEmail = useSelector(
+    (state) => state.shop?.order?.delivery_address?.email
+  );
   const sport = useSelector((state) => state?.shop?.order?.racquet?.sport);
   const [isLoading, setIsLoading] = useState(false);
   const [ntrp, setNtrp] = useState("");
@@ -39,17 +42,19 @@ export const Step4 = ({ back, onExit, setShow }) => {
   const dispatch = useDispatch();
 
   const serveySubmitHandler = async () => {
+    setIsLoading(true);
     const data = {
-      isCompetitive: "NO",
-      rating: {
-        utr,
-      },
+      competitiveRating: true,
+      game: sport && sport,
+      ntrpRating: sport === "Squash" ? "" : parseFloat(ntrp),
+      utrRating: sport === "Squash" ? "" : parseFloat(utr),
+      usSquashRating: sport === "Squash" ? parseFloat(ntrp) : "",
+      clubRating: sport === "Squash" ? parseFloat(utr) : "",
+      experienceLevel: "",
+      email: playerEmail && playerEmail,
     };
-
-    await dispatch(sendSurveyResponse(data, setShow));
-    console.log(ntrp, utr);
-    setShow(false);
-    onExit();
+    await dispatch(sendSurveyResponse(data, setShow, setCookie));
+    setIsLoading(false);
   };
 
   const lowerLimit1 = sport === "Squash" ? 1.0 : 1.5;
@@ -65,7 +70,9 @@ export const Step4 = ({ back, onExit, setShow }) => {
       </div>
       {/* Inputs */}
       <Input
-        label={`${sport === "Squash" ? "US Squash" : "NTRP"} Rating`}
+        label={`${sport === "Squash" ? "US Squash" : "NTRP"} Rating ${
+          sport === "Squash" ? "(1.0 - 7.5)" : "(1.5 - 7.0)"
+        }`}
         onChange={(e) => {
           if (
             e.target.value !== "" &&
@@ -101,7 +108,9 @@ export const Step4 = ({ back, onExit, setShow }) => {
         <div className="flex-grow border-t border-[#e8e8e8]"></div>
       </div>
       <Input
-        label={`${sport === "Squash" ? "Club" : "UTR"} Rating`}
+        label={`${sport === "Squash" ? "Club" : "UTR"} Rating ${
+          sport === "Squash" ? "(1.0 - 7.5)" : "(1.0 - 16.50)"
+        }`}
         onChange={(e) => {
           if (
             e.target.value !== "" &&
@@ -133,12 +142,8 @@ export const Step4 = ({ back, onExit, setShow }) => {
       />
       <div className="mt-[45px]">
         <SubmitButton
-          disabled={(!ntrp && !utr) || ntrpError || utrError}
+          disabled={(!ntrp && !utr) || ntrpError || utrError || isLoading}
           onClick={serveySubmitHandler}
-          // onClick={() => {
-          //   setShow(false);
-          //   onExit();
-          // }}
         >
           {isLoading ? "Sending response..." : "Complete Survey"}
         </SubmitButton>

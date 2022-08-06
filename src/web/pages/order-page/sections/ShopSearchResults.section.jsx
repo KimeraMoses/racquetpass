@@ -48,7 +48,7 @@ export function ShopSearchResults({
       setSearchResults(Results);
     }
   };
-  const isSearching = searchTerm.length < 1 ? false : true;
+  const isSearching = searchTerm.length > 1 ? false : true;
   useEffect(() => {
     setSearchResults([]);
   }, [isSearching]);
