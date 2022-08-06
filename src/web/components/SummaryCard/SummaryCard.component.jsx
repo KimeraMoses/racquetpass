@@ -5,17 +5,17 @@ import { SubHeading, Heading } from "web/components";
 // Styles
 import "./SummaryCard.styles.scss";
 
-const Item = ({ heading, description, price, isOutOfStock }) => {
+const Item = ({ heading, description, price, isOutOfStock, isToShop }) => {
   return (
     <div className="summary-card__container-content-txt-item">
       <div className="summary-card__container-content-txt-item-content">
         {heading ? (
           <div
             className={`summary-card__container-content-txt-item-content-heading ${
-              isOutOfStock ? "text-[#E40000] " : ""
+              isOutOfStock || isToShop ? "text-[#E40000] " : ""
             }`}
           >
-            {heading} {isOutOfStock && "(out of stock)"}
+            {heading} {(isOutOfStock || isToShop) && "(out of stock)"}
           </div>
         ) : (
           <></>
@@ -37,7 +37,7 @@ export function SummaryCard({ summary }) {
   let isOutOfStock = false;
   summary &&
     summary?.items.forEach((item) => {
-      if (item?.isOutOfStock) {
+      if (item?.isOutOfStock || item?.isToShop) {
         isOutOfStock = true;
       }
     });
@@ -45,7 +45,7 @@ export function SummaryCard({ summary }) {
     <>
       <div
         className={`summary-card ${
-          isOutOfStock ? "summary-card__out-of-stock" : ""
+          isOutOfStock || summary?.isToShop ? "summary-card__out-of-stock" : ""
         }`}
       >
         <div className="summary-card__container">
@@ -65,7 +65,7 @@ export function SummaryCard({ summary }) {
           </div>
         </div>
       </div>
-      {isOutOfStock && (
+      {(isOutOfStock || summary?.isToShop) && (
         <div className="mt-[12px] text-[#E40000] font-semibold text-[12px]">
           The strings you've selected are out of stock at this shop. Press
           “Change strings” to browse in stock options.

@@ -54,9 +54,9 @@ export const editRacquetDetails =
 
 export const fetchAllStrings = (shop_id) => {
   return async (dispatch) => {
-    dispatch(setRacquetsLoading(true));
-    const { url } = getStringsRoute(shop_id);
     if (shop_id) {
+      const { url } = getStringsRoute(shop_id);
+      dispatch(setRacquetsLoading(true));
       try {
         const res = await axios.get(url);
         dispatch(getRacquetStrings(res.data?.inventory));
@@ -70,45 +70,51 @@ export const fetchAllStrings = (shop_id) => {
 
 export const fetchRacquetDetails = (racquet_id, isQr, navigate) => {
   return async (dispatch) => {
-    dispatch(setRacquetsLoading(true));
-    const { url } = getRaquetRoute(racquet_id, isQr ? true : false);
-    try {
-      const res = await axios.get(url);
-      if (res.status === 200) {
-        if (res.data?.order !== undefined) {
-          switch (res.data?.order?.status) {
-            case "Pending":
-              toast.info("Your order is pending payment");
-              navigate(`/order/${res.data?.order?.id}?status=pending`);
-              break;
-            case "Processing":
-              toast.info("Your order is still under processing");
-              navigate(`/order/${res.data?.order?.id}?status=processing`);
-              break;
-            default:
-              dispatch(getRacquetSuccess(res.data?.racquet));
+    if (racquet_id) {
+      dispatch(setRacquetsLoading(true));
+      const { url } = getRaquetRoute(racquet_id, isQr ? true : false);
+      try {
+        const res = await axios.get(url);
+        if (res.status === 200) {
+          if (res.data?.order !== undefined) {
+            switch (isQr && res.data?.order?.status) {
+              case "Pending":
+                toast.info("Your order is pending payment");
+                navigate(`/order/${res.data?.order?.id}?status=pending`);
+                break;
+              case "Processing":
+                toast.info("Your order is still under processing");
+                navigate(`/order/${res.data?.order?.id}?status=processing`);
+                break;
+              default:
+                dispatch(getRacquetSuccess(res.data?.racquet));
+                toast.success(
+                  "Racquet found, You can now continue with your order"
+                );
+                break;
+            }
+          } else {
+            dispatch(getRacquetSuccess(res.data?.racquet));
+            isQr &&
               toast.success(
                 "Racquet found, You can now continue with your order"
               );
-              break;
           }
-        } else {
-          dispatch(getRacquetSuccess(res.data?.racquet));
-          toast.success("Racquet found, You can now continue with your order");
         }
+        dispatch(setRacquetsLoading(false));
+      } catch (error) {
+        dispatch(setRacquetsLoading(false));
+        if (error?.response?.status === 404)
+          return toast.error(
+            "Racquet not found, Please continue with the process to create your own racquet!"
+          );
+        toast.error("Failed to scan racquet!");
       }
-      dispatch(setRacquetsLoading(false));
-    } catch (error) {
-      dispatch(setRacquetsLoading(false));
-      if (error?.response?.status === 404)
-        return toast.error(
-          "Racquet not found, Please continue with the process to create your own racquet!"
-        );
-      toast.error("Failed to scan racquet!");
     }
   };
 };
 
+// FETCH RACQUET USING UUID
 export const fetchScannedRacquetDetails = (racquet_id) => {
   return async (dispatch) => {
     dispatch(setRacquetsLoading(true));

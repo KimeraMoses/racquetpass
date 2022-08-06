@@ -7,7 +7,7 @@ const initialState = {
   order: {},
   sessionLink: "",
   onBoardLink: "",
-  paymentUrl: "",
+  // paymentUrl: "",
   isLoading: false,
   isFetching: false,
   message: "",
@@ -20,48 +20,14 @@ const shopSlice = createSlice({
     setShopLoading: (state, { payload }) => {
       state.isLoading = payload;
     },
-    fetchShopsPending: (state) => {
-      state.isFetching = true;
+    setShopFetching: (state, { payload }) => {
+      state.isFetching = payload;
     },
-    fetchShopsSuccess: (state, { payload }) => {
-      state.isFetching = false;
+    getAllShops: (state, { payload }) => {
       state.shops = payload;
     },
-    fetchShopsFail: (state, { payload }) => {
-      state.isFetching = false;
-      state.message = payload;
-    },
-    fetchShopPending: (state) => {
-      state.isFetching = true;
-    },
-    fetchShopSuccess: (state, { payload }) => {
-      state.isFetching = false;
+    getShop: (state, { payload }) => {
       state.shop = payload;
-    },
-    fetchShopFail: (state, { payload }) => {
-      state.isFetching = false;
-      state.message = payload;
-    },
-    updateShopSettingsPending: (state) => {
-      state.isLoading = true;
-    },
-    updateShopSettingsSuccess: (state, { payload }) => {
-      state.isLoading = false;
-    },
-    updateShopSettingsFail: (state, { payload }) => {
-      state.isLoading = false;
-      state.message = payload;
-    },
-    sendMessagePending: (state) => {
-      state.isLoading = true;
-    },
-    sendMessageSucess: (state, { payload }) => {
-      state.isLoading = false;
-      state.message = payload;
-    },
-    sendMessageFail: (state, { payload }) => {
-      state.isLoading = false;
-      state.message = payload;
     },
     getSessionLink: (state, { payload }) => {
       state.link = payload;
@@ -75,33 +41,20 @@ const shopSlice = createSlice({
     getShopOrder: (state, { payload }) => {
       state.order = payload;
     },
-    getPaymentUrl: (state, { payload }) => {
-      state.paymentUrl = payload;
-    },
   },
 });
 
 const { reducer, actions } = shopSlice;
 
 export const {
-  fetchShopsPending,
-  fetchShopsSuccess,
-  fetchShopsFail,
-  fetchShopPending,
-  fetchShopSuccess,
-  fetchShopFail,
-  updateShopSettingsPending,
-  updateShopSettingsSuccess,
-  updateShopSettingsFail,
-  sendMessagePending,
-  sendMessageSucess,
-  sendMessageFail,
+  setShopFetching,
+  getAllShops,
+  getShop,
   getSessionLink,
   getOnboardSessionLink,
   setShopLoading,
   getAllShopOrders,
   getShopOrder,
-  getPaymentUrl,
 } = actions;
 
 export default reducer;

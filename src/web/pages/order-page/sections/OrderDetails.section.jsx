@@ -160,11 +160,11 @@ function OrderDetails({ t }) {
             <div
               className={`max-w-[450px] m-[0_auto] ${
                 OrderStatus === "success"
-                  ? `text-[#008d3b] bg-[#E5FAEE]`
+                  ? `bg-[#E5FAEE] text-[#008D3B]`
                   : OrderStatus === "fail"
                   ? `text-[#E40000] bg-[#fff0f0]`
                   : ` bg-[#ffffff]`
-              } p-2 rounded-md mt-2 text-center`}
+              } rounded-md mt-2 text-center px-2 py-4`}
             >
               {OrderStatus === "success" ? (
                 `Your payment for this order has been successfuly recieved by ${

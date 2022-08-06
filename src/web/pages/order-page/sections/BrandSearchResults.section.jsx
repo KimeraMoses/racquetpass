@@ -26,10 +26,8 @@ export function BrandSearchResults({
   const { strings: AllStrings, isLoading } = useSelector(
     (state) => state.racquet
   );
-  console.log(AllStrings);
-  const shopId = useSelector(
-    (state) => state?.form?.signup?.values?.shop?.shop_id
-  );
+  const shopId = useSelector((state) => state.shop?.shop?.id);
+
   const dispatch = useDispatch();
   let inputEl = useRef(null);
   useEffect(() => {
@@ -76,7 +74,7 @@ export function BrandSearchResults({
     dispatch(fetchAllStrings(shopId));
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [shopId]);
 
   return (
     <>
@@ -129,6 +127,7 @@ export function BrandSearchResults({
                 <SearchCard
                   key={string.id}
                   brand={{
+                    shop_id: string.shop,
                     string_id: string.id,
                     tension: string.tension,
                     name: `${string?.name}(${string.hybrid_type})`,

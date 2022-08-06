@@ -1,7 +1,8 @@
 import { useEffect, useRef, useState } from "react";
 import { withNamespaces } from "react-i18next";
 import { reduxForm } from "redux-form";
-import { useNavigate } from "react-router-dom";
+import { useCookies } from "react-cookie";
+import { useNavigate, useLocation } from "react-router-dom";
 import { StepButton, Progress } from "web/components";
 import {
   ScanSection,
@@ -27,10 +28,9 @@ import {
 } from "../../store/Actions/racquetActions";
 
 import "./order.styles.scss";
-import { useSelector } from "react-redux";
 import { VerifyResend } from "./sections/VerifyResend.section";
 import Recaptcha from "web/components/Google-Recaptcha/Recaptcha";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import {
   codeVerification,
   createOrder,
@@ -57,6 +57,7 @@ const phoneValidation = (value) => {
 };
 
 let OrderPage = ({ t, handleSubmit, change }) => {
+  const [cookies, setCookie] = useCookies(["_rpo_"]);
   const refRecaptcha = useRef(null);
   const [step, setStep] = useState(0);
   const [steps, setSteps] = useState({
@@ -72,6 +73,21 @@ let OrderPage = ({ t, handleSubmit, change }) => {
   const [done, setDone] = useState(false);
   const [backFromReview, setBackFromReview] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const [isReturnCustomer, setIsReturnCustomer] = useState(false);
+
+  function useQuery() {
+    return new URLSearchParams(useLocation().search);
+  }
+  let query = useQuery();
+  const isReturning = query.get("rpc");
+
+  useEffect(() => {
+    if (isReturning === "true") setStep(6);
+  }, [isReturning]);
+
+  useEffect(() => {
+    if (backFromReview) setIsReturnCustomer(true);
+  }, [backFromReview]);
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -80,6 +96,18 @@ let OrderPage = ({ t, handleSubmit, change }) => {
 
   const errors = useSelector((state) => state?.form?.signup?.syncErrors);
   const values = useSelector((state) => state?.form?.signup?.values);
+
+  const onSubmitHandler = async (values) => {
+    const data = {
+      racquet_id: values?.racquetId,
+      shop_id: values?.shop?.shop_id,
+      first_name: values["first-name"],
+      last_name: values["last-name"],
+      phone_number: values["phone-number"],
+      email: values.email,
+    };
+    await dispatch(createOrder(data, setCookie));
+  };
 
   const NewRacquetHandler = async (setNextStep) => {
     setIsLoading(true);
@@ -451,9 +479,10 @@ let OrderPage = ({ t, handleSubmit, change }) => {
           <ReviewOrder
             t={t}
             setBackFromReview={setBackFromReview}
+            isReturnCustomer={isReturnCustomer}
             backward={backward}
             setStep={setStep}
-            setDone={setDone}
+            change={change}
           />
         );
       case 7:
@@ -502,7 +531,10 @@ let OrderPage = ({ t, handleSubmit, change }) => {
           step === 0 ? "order-page-zero" : ""
         }`}
       >
-        <form onSubmit={handleSubmit} className="order-page__form">
+        <form
+          onSubmit={handleSubmit(onSubmitHandler)}
+          className="order-page__form"
+        >
           <div>{getActiveSection()}</div>
           {done ||
           shop.current === "find" ||
@@ -567,21 +599,21 @@ let OrderPage = ({ t, handleSubmit, change }) => {
   );
 };
 
-const onSubmit = async (values, dispatch) => {
-  const data = {
-    racquet_id: values?.racquetId,
-    shop_id: values?.shop?.shop_id,
-    first_name: values["first-name"],
-    last_name: values["last-name"],
-    phone_number: values["phone-number"],
-    email: values.email,
-  };
-  await dispatch(createOrder(data));
-};
+// const onSubmit = async (values, dispatch, setCookie) => {
+//   const data = {
+//     racquet_id: values?.racquetId,
+//     shop_id: values?.shop?.shop_id,
+//     first_name: values["first-name"],
+//     last_name: values["last-name"],
+//     phone_number: values["phone-number"],
+//     email: values.email,
+//   };
+//   await dispatch(createOrder(data, setCookie));
+// };
 
 OrderPage = reduxForm({
   form: "signup",
-  onSubmit,
+  // onSubmit,
 })(OrderPage);
 
 export default withNamespaces()(OrderPage);

@@ -39,7 +39,7 @@ const WelcomeMessage = ({ t }) => {
 
   const NewUserWelcomeMessage = () => {
     return (
-      <div className="shop__services-card_welcome bg-[#eaedff] rounded-">
+      <div className="shop__services-card_welcome bg-[rgba(48,79,254,0.1)] rounded-md">
         <div>
           <div className="shop__services-card-inner pl-3">
             <div className="shop__services-card-heading text-[#304FFE]">

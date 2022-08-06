@@ -19,7 +19,7 @@ export function SearchCard({
   const dispatch = useDispatch();
 
   const handleClick = () => {
-    console.log("Selected brand", brand);
+    // console.log("Selected brand", brand);
     if (shop) {
       change("shop", shop);
       dispatch(fetchShopDetails(shop?.shop_id));
