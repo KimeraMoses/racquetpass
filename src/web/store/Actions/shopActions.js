@@ -323,14 +323,10 @@ export const codeVerification = (otp, phone, setStep) => {
 //FORMATING PHONE NUMBER TO MATCH
 export const phoneFormater = (phone) => {
   const code = process.env.REACT_APP_COUNTRY_CODE;
-  const hasZero = phone?.charAt(0) === "0" ? true : false;
+  // const hasZero = phone?.charAt(0) === "0" ? true : false;
   return (
     code +
-    phone
-      .replace("-", "")
-      .replace("(", "")
-      .replace(")", "")
-      .replace(" ", "")
-      .substring(hasZero ? 1 : 0)
+    phone.replace("-", "").replace("(", "").replace(")", "").replace(" ", "")
+    // .substring(hasZero ? 1 : 0)
   );
 };

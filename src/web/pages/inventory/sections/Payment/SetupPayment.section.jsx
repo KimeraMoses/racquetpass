@@ -16,6 +16,8 @@ export const SetupPayment = ({ t, setDrawer }) => {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(fetchShopDetails(shopId));
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [shopId]);
 
   const handleStripePayments = async () => {

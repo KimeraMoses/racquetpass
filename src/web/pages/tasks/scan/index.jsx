@@ -23,6 +23,8 @@ let Scan = ({ t, scanForward, change }) => {
       change("order-details-id", qrCode);
       navigate(`/tasks/details?order=${qrCode}`);
     }
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [qrCode, change, scanForward]);
 
   return (
@@ -46,14 +48,19 @@ let Scan = ({ t, scanForward, change }) => {
                   width={500}
                   height={500}
                   onError={(err) => {
-                    console.log(err?.name);
+                    // console.log(err?.name);
                     if (err.name === "NotAllowedError") {
                       setPermissionsDenied(true);
                     }
                   }}
                   onUpdate={(err, result) => {
                     if (result) {
-                      setQrCode(result.text);
+                      let code = result.text;
+                      if (result.text.includes("http")) {
+                        const codeWord = result.text.split("/");
+                        code = codeWord[codeWord?.length - 1];
+                      }
+                      setQrCode(code);
                       setQrScanner(false);
                     } else {
                       setQrCode("");

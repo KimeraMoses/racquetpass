@@ -27,6 +27,8 @@ export function ScanSuccess({
       change("ownerName", racquet && racquet?.owner);
       localStorage.removeItem("_rpr_");
     }
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [hasRaquet]);
 
   const dispatch = useDispatch();

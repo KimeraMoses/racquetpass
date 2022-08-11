@@ -25,6 +25,8 @@ const Done = ({ t, setStep }) => {
     if (!orderId) {
       navigate("/");
     }
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [orderId]);
   return (
     <div className="done-background">

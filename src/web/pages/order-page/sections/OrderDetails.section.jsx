@@ -47,6 +47,8 @@ function OrderDetails({ t }) {
 
   useEffect(() => {
     fetchOrderDetails(orderId);
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [orderId]);
 
   const orderDetails = {

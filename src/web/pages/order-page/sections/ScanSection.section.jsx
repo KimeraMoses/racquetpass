@@ -49,10 +49,14 @@ export function ScanSection({
 
   useEffect(() => {
     fetchRacquet(qrCode);
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [qrCode]);
 
   useEffect(() => {
     if (!!localStorage.getItem("_rpr_")) scanForward(true);
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [racquetDetails]);
 
   useEffect(() => {
@@ -130,8 +134,12 @@ export function ScanSection({
                 }}
                 onUpdate={(err, result) => {
                   if (result) {
-                    console.log(result);
-                    setQrCode(result.text);
+                    let code = result.text;
+                    if (result.text.includes("http")) {
+                      const codeWord = result.text.split("/");
+                      code = codeWord[codeWord?.length - 1];
+                    }
+                    setQrCode(code);
                     setQrScanner(false);
                   } else {
                     setQrCode("");
