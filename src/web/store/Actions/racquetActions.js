@@ -136,7 +136,7 @@ export const fetchScannedRacquetDetails = (racquet_id, type) => {
           return toast.warn(
             "Racquet not found, Please continue with the process to create your own racquet!"
           );
-        toast.error("Failed to scan racquet!");
+        toast.error("Failed to load racquet details!");
       }
     }
   };
