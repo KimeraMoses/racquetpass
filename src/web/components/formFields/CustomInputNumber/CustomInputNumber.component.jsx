@@ -1,6 +1,6 @@
-import { useRef } from 'react';
-import { Link } from 'react-router-dom';
-import './CustomInputNumber.styles.scss';
+import { useRef } from "react";
+import { Link } from "react-router-dom";
+import "./CustomInputNumber.styles.scss";
 
 export const CustomInputNumber = (props) => {
   // const [value, setValue] = useState(100);
@@ -41,7 +41,7 @@ export const CustomInputNumber = (props) => {
       >
         <div
           className={`custom-input-number__container-value ${
-            props?.hidePostFix ? 'flex-grow' : ''
+            props?.hidePostFix ? "flex-grow" : ""
           }`}
         >
           <input
@@ -50,7 +50,7 @@ export const CustomInputNumber = (props) => {
             onChange={props?.onChange || props?.input?.onChange}
             placeholder={props?.placeholder ? props?.placeholder : props?.label}
             className={`custom-input-number__input ${
-              props?.hidePostFix ? 'w-full' : 'w-[38px]'
+              props?.hidePostFix ? "w-full" : "w-full"
             }`}
             ref={inputEl}
             pattern="\d*"
@@ -59,8 +59,8 @@ export const CustomInputNumber = (props) => {
               props.icon
                 ? {
                     background: `url(${props?.icon}) no-repeat scroll 7px 7px`,
-                    paddingLeft: '45px',
-                    backgroundPosition: '11px 50%',
+                    paddingLeft: "45px",
+                    backgroundPosition: "11px 50%",
                   }
                 : {}
             }
@@ -70,7 +70,7 @@ export const CustomInputNumber = (props) => {
             <></>
           ) : (
             <div className="custom-input-number__postfix">
-              {props?.postFix ? props?.postFix : 'lbs'}
+              {props?.postFix ? props?.postFix : "lbs"}
             </div>
           )}
         </div>

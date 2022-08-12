@@ -32,7 +32,7 @@ export function SearchCard({
     } else if (cross) {
       change("cross", brand);
     } else if (brand) {
-      console.log(brand);
+      // console.log(brand);
       change("brand", brand);
     }
     onClick();

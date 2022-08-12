@@ -115,11 +115,11 @@ export const fetchRacquetDetails = (racquet_id, isQr, navigate) => {
 };
 
 // FETCH RACQUET USING UUID
-export const fetchScannedRacquetDetails = (racquet_id) => {
+export const fetchScannedRacquetDetails = (racquet_id, type) => {
   return async (dispatch) => {
     if (racquet_id) {
       dispatch(setRacquetsLoading(true));
-      const { url } = getRaquetRoute(racquet_id, false);
+      const { url } = getRaquetRoute(racquet_id, false, type);
       try {
         const res = await axios.get(url);
         if (res.status === 200) {

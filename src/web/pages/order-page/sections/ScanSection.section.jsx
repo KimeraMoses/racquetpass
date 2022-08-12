@@ -127,7 +127,6 @@ export function ScanSection({
                 width={500}
                 height={500}
                 onError={(err) => {
-                  console.log(err?.name);
                   if (err.name === "NotAllowedError") {
                     setPermissionsDenied(true);
                   }

@@ -105,15 +105,15 @@ let Scan = ({ t, scanForward, change }) => {
   );
 };
 
-const onSubmit = (values, dispatch) => {
-  // dispatch(    // your submit action //      );
-  console.log(values);
-};
+// const onSubmit = (values, dispatch) => {
+//   // dispatch(    // your submit action //      );
+//   console.log(values);
+// };
 
 Scan = reduxForm({
   // a unique name for the form
   form: "task-scan",
-  onSubmit,
+  // onSubmit,
 })(Scan);
 
 export default withNamespaces()(Scan);

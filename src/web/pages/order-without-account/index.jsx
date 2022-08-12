@@ -230,15 +230,15 @@ let OrderWithoutAccount = ({ t, change }) => {
   );
 };
 
-const onSubmit = (values, dispatch) => {
-  // dispatch(    // your submit action //      );
-  console.log(values);
-};
+// const onSubmit = (values, dispatch) => {
+//   // dispatch(    // your submit action //      );
+//   console.log(values);
+// };
 
 OrderWithoutAccount = reduxForm({
   // a unique name for the form
   form: "orderWithoutAccount",
-  onSubmit,
+  // onSubmit,
 })(OrderWithoutAccount);
 
 export default withNamespaces()(OrderWithoutAccount);

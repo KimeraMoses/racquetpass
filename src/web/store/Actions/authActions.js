@@ -29,7 +29,6 @@ export const login = (data) => {
     } catch (error) {
       dispatch(setUserLoading(false));
       toast.error(showError(error));
-      console.log(error);
     }
   };
 };

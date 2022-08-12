@@ -19,9 +19,9 @@
     }
   }
   &__container {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+    // display: flex;
+    // align-items: center;
+    // justify-content: space-between;
     font-family: Poppins;
     background: #ffffff;
     border: 1px solid #e8e8e8;
@@ -32,6 +32,7 @@
     &-value {
       display: flex;
       align-items: center;
+      justify-content: space-between;
     }
     &:focus-within {
       border-color: #304ffe;
@@ -42,9 +43,9 @@
     }
   }
   &__input {
+    width: 100%;
     font-family: Poppins;
     background: #ffffff;
-    border: none;
     box-sizing: border-box;
     border-radius: 12px;
     -webkit-appearance: textfield;
@@ -67,6 +68,11 @@
     }
   }
   &__prefix {
+    font-family: Poppins;
+    font-size: 18px;
+  }
+  &__postfix {
+    padding-left: 8px;
     font-family: Poppins;
     font-size: 18px;
   }

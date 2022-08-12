@@ -71,15 +71,15 @@ let PlayerTabs = ({ t, handleSubmit, change }) => {
   );
 };
 
-const onSubmit = (values, dispatch) => {
-  // dispatch(    // your submit action //      );
-  console.log(values);
-};
+// const onSubmit = (values, dispatch) => {
+//   // dispatch(    // your submit action //      );
+//   console.log(values);
+// };
 
 PlayerTabs = reduxForm({
   // a unique name for the form
   form: "player",
-  onSubmit,
+  // onSubmit,
 })(PlayerTabs);
 
 export default withNamespaces()(PlayerTabs);

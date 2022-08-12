@@ -13,7 +13,6 @@ const ThankYou = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const refRecaptcha = useRef(null);
-  console.log(email, pwd);
 
   const formSubmitHandler = async () => {
     setIsLoading(true);
@@ -27,7 +26,6 @@ const ThankYou = () => {
         setIsLoading(false);
         navigate("/tasks");
       } catch (err) {
-        console.log(err);
         setIsLoading(false);
         if (window.navigator.onLine) {
           navigate("/login");

@@ -33,7 +33,6 @@ export function EditForm({ t, setCurrentScreen, change, initialValues }) {
     setSelectedType(el);
   };
 
-  console.log(selectedType, check, price);
   const handleCheck = () => setCheck(!check);
   const [show, setShow] = useState(false);
   const [showInfo, setShowInfo] = useState(false);

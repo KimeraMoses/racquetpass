@@ -45,13 +45,13 @@ export let BankForm = ({ t, setCurrentScreen }) => {
   );
 };
 
-const onSubmit = (values, dispatch) => {
-  // dispatch(    // your submit action //      );
-  console.log(values);
-};
+// const onSubmit = (values, dispatch) => {
+//   // dispatch(    // your submit action //      );
+//   console.log(values);
+// };
 
 BankForm = reduxForm({
   // a unique name for the form
   form: "bankform",
-  onSubmit,
+  // onSubmit,
 })(BankForm);

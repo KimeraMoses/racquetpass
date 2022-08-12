@@ -31,8 +31,6 @@ let ConfigureRacquet = ({ t, handleSubmit, change }) => {
     setShowModal(!showModal);
   };
 
-  console.log(step);
-
   useEffect(() => {
     switch (step) {
       case 3:
@@ -135,15 +133,15 @@ let ConfigureRacquet = ({ t, handleSubmit, change }) => {
   );
 };
 
-const onSubmit = (values, dispatch) => {
-  // dispatch(    // your submit action //      );
-  console.log(values);
-};
+// const onSubmit = (values, dispatch) => {
+//   // dispatch(    // your submit action //      );
+//   console.log(values);
+// };
 
 ConfigureRacquet = reduxForm({
   // a unique name for the form
   form: "racquetDetails",
-  onSubmit,
+  // onSubmit,
 })(ConfigureRacquet);
 
 export default withNamespaces()(ConfigureRacquet);

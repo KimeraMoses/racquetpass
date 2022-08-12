@@ -14,7 +14,7 @@ import "../inventory/sections/ProShop.styles.scss";
 function Tasks({ t }) {
   const shopOrders = useSelector((state) => state.shop.orders);
   const shopId = useSelector((state) => state.auth?.user?.shop);
-  const { shop, isFetching, isLoading } = useSelector((state) => state.shop);
+  const { shop, isFetching } = useSelector((state) => state.shop);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -82,11 +82,11 @@ function Tasks({ t }) {
           <div className="task-row">
             <p className="tasks-info">{t("taskDueToday")}</p>
             <div className="badge">
-              {isLoading ? 0 : shopOrders ? shopOrders?.dueToday?.length : 0}
+              {isFetching ? 0 : shopOrders ? shopOrders?.dueToday?.length : 0}
             </div>
           </div>
           <div className="cards-container">
-            {isLoading ? (
+            {isFetching ? (
               <TaskCard
                 title={`Loading...`}
                 desc={`Please wait as we get you all the orders here`}
@@ -117,11 +117,15 @@ function Tasks({ t }) {
           <div className="task-row">
             <p className="tasks-info">{t("taskDueWeek")}</p>
             <div className="badge">
-              {isLoading ? 0 : shopOrders ? shopOrders?.dueThisWeek?.length : 0}
+              {isFetching
+                ? 0
+                : shopOrders
+                ? shopOrders?.dueThisWeek?.length
+                : 0}
             </div>
           </div>
           <div className="cards-container">
-            {isLoading ? (
+            {isFetching ? (
               <TaskCard
                 title={`Loading...`}
                 desc={`Please wait as we get you all the orders here`}
@@ -154,11 +158,11 @@ function Tasks({ t }) {
           <div className="task-row">
             <p className="tasks-info">Pending &#38; Processing</p>
             <div className="badge">
-              {isLoading ? 0 : shopOrders ? OtherOrders?.length : 0}
+              {isFetching ? 0 : shopOrders ? OtherOrders?.length : 0}
             </div>
           </div>
           <div className="cards-container">
-            {isLoading ? (
+            {isFetching ? (
               <TaskCard
                 title={`Loading...`}
                 desc={`Please wait as we get you all the orders here`}
@@ -206,7 +210,7 @@ function Tasks({ t }) {
             </div>
           </div>
           <div className="cards-container">
-            {isLoading ? (
+            {isFetching ? (
               <TaskCard
                 title={`Loading...`}
                 desc={`Please wait as we get you all the orders here`}

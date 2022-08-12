@@ -11,7 +11,6 @@ export const Step1 = ({ setStep }) => {
       </div>
       <SubmitButton
         onClick={() => {
-          console.log(sport !== "Tennis" && sport !== "Squash");
           if (sport !== "Tennis" && sport !== "Squash") {
             setStep(3);
           } else {

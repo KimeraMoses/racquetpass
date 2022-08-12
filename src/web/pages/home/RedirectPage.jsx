@@ -16,12 +16,13 @@ function RedirectPage({ t }) {
 
   const dispatch = useDispatch();
   const redirectUserWithToken = async () => {
-    await dispatch(
-      isLoggedIn
-        ? navigate(`/tasks/details?order=${uuid}`)
-        : fetchScannedRacquetDetails(uuid)
-    );
-    navigate(!isLoggedIn && "/order");
+    const type = uuid?.split("-")?.length > 1 ? "uuid" : "id";
+    if (isLoggedIn) {
+      navigate(`/tasks/details?order=${uuid}`);
+    } else {
+      await dispatch(fetchScannedRacquetDetails(uuid, type));
+      navigate(!isLoggedIn && "/order");
+    }
   };
 
   useEffect(() => {
@@ -68,3 +69,5 @@ function RedirectPage({ t }) {
 }
 
 export default withNamespaces()(RedirectPage);
+
+// http://localhost:3001/code/22b52acb-33fa-474a-82f2-46868b18accc

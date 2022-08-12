@@ -90,10 +90,7 @@ export const getOrder = (id, navigate) => {
         dispatch(setShopFetching(false));
       } catch (error) {
         dispatch(setShopFetching(false));
-        if (error?.response?.status === 404) {
-          if (navigate) navigate("/tasks/scan");
-          return;
-        }
+        if (navigate) navigate("/tasks/scan");
         toast.error("Failed to load order details");
       }
     }

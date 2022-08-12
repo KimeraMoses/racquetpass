@@ -83,8 +83,10 @@ export const getRaquetsRoute = () => ({
 //   url: `/api/v1/racquets/get-by-code/${id}`,
 // });
 
-export const getRaquetRoute = (id, isQr) => ({
-  url: isQr ? `/api/v1/racquets/get-by-code/${id}` : `/api/v1/racquets/${id}`,
+export const getRaquetRoute = (id, isQr, type) => ({
+  url: isQr
+    ? `/api/v1/racquets/get-by-code/${id}`
+    : `/api/v1/racquets/${id}?type=${type}`,
 });
 
 export const getStringsRoute = (id) => ({

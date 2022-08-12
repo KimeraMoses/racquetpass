@@ -69,15 +69,15 @@ let VerifyPhone = ({ t }) => {
   );
 };
 
-const onSubmit = (values, dispatch) => {
-  // dispatch(    // your submit action //      );
-  console.log(values);
-};
+// const onSubmit = (values, dispatch) => {
+//   // dispatch(    // your submit action //      );
+//   console.log(values);
+// };
 
 VerifyPhone = reduxForm({
   // a unique name for the form
   form: "create-business-account-2",
-  onSubmit,
+  // onSubmit,
 })(VerifyPhone);
 
 export default withNamespaces()(VerifyPhone);
