@@ -71,8 +71,9 @@ function Details({ t }) {
 
   const fetchOrderDetails = async (order_id) => {
     setIsLoading(true);
+    const type = order_id?.split("-")?.length > 1 ? "uuid" : "id";
     if (order_id) {
-      await dispatch(getOrder(order_id, navigate));
+      await dispatch(getOrder(order_id, navigate, type));
     }
     setIsLoading(false);
   };

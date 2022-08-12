@@ -32,8 +32,8 @@ export const shopOrdersRoute = (id) => ({
   url: `/api/v1/catalog/orders/${id}?completed=false`,
 });
 
-export const shopOrderRoute = (id) => ({
-  url: `/api/v1/orders/${id}`,
+export const shopOrderRoute = (id, type) => ({
+  url: `/api/v1/orders/${id}?type=${type}`,
 });
 export const completeOrderRoute = () => ({
   url: `/api/v1/orders/complete-order`,

@@ -72,14 +72,14 @@ export const fetchShopOrders = (id) => {
 };
 
 //GET ALL SHOP ORDERS
-export const getOrder = (id, navigate) => {
+export const getOrder = (id, navigate, type) => {
   return async (dispatch) => {
     const shopId = JSON.parse(
       localStorage.getItem("Racquet__CurrentUser")
     )?.shop;
     if (id) {
       dispatch(setShopFetching(true));
-      const { url } = shopOrderRoute(id);
+      const { url } = shopOrderRoute(id, type);
       try {
         const res = await axios.get(url);
         if (navigate && res.data.order?.delivery_shop?.id !== shopId) {

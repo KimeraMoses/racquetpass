@@ -10,8 +10,6 @@
   }
   &__text-container {
     margin-top: 20px;
-    &-text {
-    }
   }
   &__main-info {
     margin-top: 44px;
@@ -25,9 +23,9 @@
     }
   }
   &__crosses-info {
-    margin-top: 70px;
     display: flex;
     flex-direction: column;
+    margin-top: 40px;
     gap: 20px;
     &-heading {
       display: flex;

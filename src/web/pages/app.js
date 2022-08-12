@@ -33,7 +33,7 @@ import StringDetails from "./create-service-order/string-details";
 import Shop from "./create-service-order/shop";
 import ShopSearching from "./create-service-order/shop-searching";
 import OrderSubmitted from "./create-service-order/submitted";
-import OrderWithoutAccount from "./order-without-account";
+// import OrderWithoutAccount from "./order-without-account";
 import Inventory from "./inventory";
 import PlayerTabs from "./player-tabs";
 import ConfigureRacquet from "./configure-racquet";
@@ -152,10 +152,10 @@ function Routers() {
             element={<ShopSearching />}
           />
           <Route path="/CreateOrder/Submitted" element={<OrderSubmitted />} />
-          <Route
+          {/* <Route
             path="/order-without-account"
             element={<OrderWithoutAccount />}
-          />
+          /> */}
           <Route path="/inventory" element={<Inventory />} />
           <Route path="/player-tabs" element={<PlayerTabs />} />
           <Route path="/configure-racquet" element={<ConfigureRacquet />} />
