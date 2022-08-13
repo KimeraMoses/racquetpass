@@ -8,6 +8,7 @@ import {
   orderPaymentRoute,
   sendCodeVerificationRoute,
   shopDetailsRoute,
+  shopOrderBySearchRoute,
   shopOrderRoute,
   shopOrdersRoute,
   shopSurveyRoute,
@@ -83,6 +84,33 @@ export const getOrder = (id, navigate, type) => {
       try {
         const res = await axios.get(url);
         if (navigate && res.data.order?.delivery_shop?.id !== shopId) {
+          if (navigate) navigate("/tasks/scan");
+          return;
+        }
+        dispatch(getShopOrder(res.data.order));
+        dispatch(setShopFetching(false));
+      } catch (error) {
+        dispatch(setShopFetching(false));
+        if (navigate) navigate("/tasks/scan");
+        toast.error("Failed to load order details");
+      }
+    }
+  };
+};
+
+//GET ALL SHOP ORDERS
+export const getOrderBySearchParameter = (id, navigate) => {
+  return async (dispatch) => {
+    const shopId = JSON.parse(
+      localStorage.getItem("Racquet__CurrentUser")
+    )?.shop;
+    if (id) {
+      dispatch(setShopFetching(true));
+      const { url } = shopOrderBySearchRoute(id);
+      try {
+        const res = await axios.get(url);
+        if (navigate && res.data.order?.delivery_shop?.id !== shopId) {
+          toast.info("Order Not Found!");
           if (navigate) navigate("/tasks/scan");
           return;
         }

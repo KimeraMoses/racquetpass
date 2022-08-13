@@ -7,7 +7,7 @@ import { Modal } from "web/components/index";
 import { Link } from "react-router-dom";
 import "./index.styles.scss";
 import { useDispatch, useSelector } from "react-redux";
-import { getOrder } from "web/store/Actions/shopActions";
+import { getOrderBySearchParameter } from "web/store/Actions/shopActions";
 import { useLocation, useNavigate } from "react-router-dom";
 import Loader from "web/components/Loader/Loader";
 import { axios, completeOrderRoute } from "lib/index";
@@ -71,9 +71,8 @@ function Details({ t }) {
 
   const fetchOrderDetails = async (order_id) => {
     setIsLoading(true);
-    const type = order_id?.split("-")?.length > 1 ? "uuid" : "id";
     if (order_id) {
-      await dispatch(getOrder(order_id, navigate, type));
+      await dispatch(getOrderBySearchParameter(order_id, navigate));
     }
     setIsLoading(false);
   };

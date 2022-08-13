@@ -35,6 +35,9 @@ export const shopOrdersRoute = (id) => ({
 export const shopOrderRoute = (id, type) => ({
   url: `/api/v1/orders/${id}?type=${type}`,
 });
+export const shopOrderBySearchRoute = (id) => ({
+  url: `/api/v1/catalog/search/${id}`,
+});
 export const completeOrderRoute = () => ({
   url: `/api/v1/orders/complete-order`,
 });
