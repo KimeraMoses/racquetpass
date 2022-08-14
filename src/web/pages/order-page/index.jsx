@@ -135,7 +135,9 @@ let OrderPage = ({ t, handleSubmit, change }) => {
     }
 
     const data = {
-      qr_code: values["raquet-details-from-qr"],
+      qr_code: values["raquet-details-from-qr"]
+        ? values["raquet-details-from-qr"]
+        : localStorage.getItem("_qrc_"),
       brand: values?.racquetBrand,
       model: values?.racquetModel,
       image_url: values?.racquetImage ? values?.racquetImage : "",
@@ -154,6 +156,7 @@ let OrderPage = ({ t, handleSubmit, change }) => {
             )
           : createNewRacquet(data, setNextStep && setStep, change)
       );
+      localStorage.removeItem("_qrc_");
       setIsLoading(false);
     } catch (error) {
       setIsLoading(false);

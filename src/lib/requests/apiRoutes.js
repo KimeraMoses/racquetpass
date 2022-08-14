@@ -85,11 +85,10 @@ export const getRaquetsRoute = () => ({
 // export const getRaquetByQrRoute = (id) => ({
 //   url: `/api/v1/racquets/get-by-code/${id}`,
 // });
-
-export const getRaquetRoute = (id, isQr, type) => ({
+export const getRaquetRoute = (id, isQr) => ({
   url: isQr
     ? `/api/v1/racquets/get-by-code/${id}`
-    : `/api/v1/racquets/${id}?type=${type}`,
+    : `/api/v1/racquets/get-by-value/${id}`,
 });
 
 export const getStringsRoute = (id) => ({

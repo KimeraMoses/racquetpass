@@ -16,6 +16,7 @@ import {
 import { toast } from "react-toastify";
 
 export const createNewRacquet = (data, setStep, change) => async (dispatch) => {
+  console.log(data);
   dispatch(setRacquetsLoading(true));
   try {
     const { url } = newRaquetsRoute();
@@ -37,6 +38,7 @@ export const createNewRacquet = (data, setStep, change) => async (dispatch) => {
 export const editRacquetDetails =
   (data, rac_id, setStep) => async (dispatch) => {
     dispatch(setRacquetsLoading(true));
+    console.log(data);
     try {
       const { url } = editRaquetsRoute(rac_id);
       const res = await axios.patch(url, data);
@@ -125,13 +127,15 @@ export const fetchScannedRacquetDetails = (racquet_id, type) => {
         if (res.status === 200) {
           dispatch(getRacquetSuccess(res.data?.racquet));
           toast.success("Racquet found, You can now continue with your order");
-
-          // SET SCANNED STATE TO SKIP RESCANNING
-          localStorage.setItem("_rpr_", true);
         }
         dispatch(setRacquetsLoading(false));
+        // SET SCANNED STATE TO SKIP RESCANNING
+        localStorage.setItem("_rpr_", true);
       } catch (error) {
         dispatch(setRacquetsLoading(false));
+        // SET SCANNED STATE TO SKIP RESCANNING
+        localStorage.setItem("_rpr_", true);
+        localStorage.setItem("_qrc_", racquet_id);
         if (error?.response?.status === 404)
           return toast.warn(
             "Racquet not found, Please continue with the process to create your own racquet!"

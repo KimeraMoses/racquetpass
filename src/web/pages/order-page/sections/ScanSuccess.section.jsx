@@ -25,8 +25,8 @@ export function ScanSuccess({
       change("racquetBrand", racquet && racquet?.brand);
       change("racquetModel", racquet && racquet?.model);
       change("ownerName", racquet && racquet?.owner);
-      localStorage.removeItem("_rpr_");
     }
+    localStorage.removeItem("_rpr_");
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [hasRaquet]);
