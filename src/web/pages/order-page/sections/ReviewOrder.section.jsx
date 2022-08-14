@@ -8,6 +8,7 @@ import {
   SubHeading,
 } from "web/components";
 import { SearchCard } from "web/components/index";
+import { useNavigate } from "react-router-dom";
 
 // Styles
 import "./ReviewOrder.styles.scss";
@@ -40,6 +41,7 @@ export function ReviewOrder({
   const racquet = useSelector((state) => state.racquet?.racquet);
   const shop = useSelector((state) => state.shop?.shop);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   function useQuery() {
     return new URLSearchParams(useLocation().search);
@@ -100,11 +102,13 @@ export function ReviewOrder({
       change("last-name", cookies?._rpo_?.last_name);
       change("phone-number", cookies?._rpo_?.phone_number);
       dispatch(fetchShopDetails(cookies?._rpo_?.shop_id));
-      dispatch(fetchRacquetDetails(cookies?._rpo_?.racquet_id, false));
+      dispatch(
+        fetchRacquetDetails(cookies?._rpo_?.racquet_id, navigate, false)
+      );
     }
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [cookies, change, isReturnCustomer]);
+  }, [isReturnCustomer]);
 
   let isVerifiedObj = JSON.parse(localStorage.getItem("_rpe_"));
   let prevStep = 5;

@@ -5,7 +5,7 @@ import { Button } from "web/components";
 import Recaptcha from "web/components/Google-Recaptcha/Recaptcha";
 import "./home.styles.scss";
 import { useDispatch } from "react-redux";
-import { fetchScannedRacquetDetails } from "web/store/Actions/racquetActions";
+import { fetchRacquetDetails } from "web/store/Actions/racquetActions";
 
 function RedirectPage({ t }) {
   const navigate = useNavigate();
@@ -16,12 +16,10 @@ function RedirectPage({ t }) {
 
   const dispatch = useDispatch();
   const redirectUserWithToken = async () => {
-    const type = uuid?.split("-")?.length > 1 ? "uuid" : "id";
     if (isLoggedIn) {
       navigate(`/tasks/details?order=${uuid}`);
     } else {
-      await dispatch(fetchScannedRacquetDetails(uuid, type));
-      navigate(!isLoggedIn && "/order");
+      await dispatch(fetchRacquetDetails(uuid, navigate, true));
     }
   };
 
@@ -69,8 +67,3 @@ function RedirectPage({ t }) {
 }
 
 export default withNamespaces()(RedirectPage);
-
-// http://localhost:3001/code/22b52acb-33fa-474a-82f2-46868b18accc
-
-// /code/22b52acb-33fa-474a-82f2-46868b18aaaa
-// /code/22b52acb-33fa-474a-82f2-46868b18aaaa

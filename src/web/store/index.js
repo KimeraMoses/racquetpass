@@ -6,9 +6,9 @@ import { composeWithDevTools } from "redux-devtools-extension";
 
 function configureState() {
   const middleware = [thunk];
-  // if (process.env.NODE_ENV === "development") {
-  //   middleware.push(createLogger({ collapsed: true }));
-  // }
+  if (process.env.NODE_ENV === "development") {
+    middleware.push(createLogger({ collapsed: true }));
+  }
   let store;
   if (process.env.NODE_ENV === "development") {
     store = createStore(

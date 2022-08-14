@@ -41,7 +41,7 @@ export function ScanSection({
   const fetchRacquet = async (rac_id) => {
     if (qrCode) {
       setIsLoading(true);
-      await dispatch(fetchRacquetDetails(rac_id, true, navigate));
+      await dispatch(fetchRacquetDetails(rac_id, navigate, true));
       scanForward(true);
       setIsLoading(false);
     }

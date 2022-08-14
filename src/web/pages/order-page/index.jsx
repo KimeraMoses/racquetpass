@@ -146,11 +146,20 @@ let OrderPage = ({ t, handleSubmit, change }) => {
       sport: values?.racquetSport,
       owner: values?.ownerName,
     };
+    const EditData = {
+      brand: values?.racquetBrand,
+      model: values?.racquetModel,
+      image_url: values?.racquetImage ? values?.racquetImage : "",
+      mains: mainObj,
+      crosses: crossObj,
+      sport: values?.racquetSport,
+      owner: values?.ownerName,
+    };
     try {
       await dispatch(
         hasRaquet
           ? editRacquetDetails(
-              data,
+              EditData,
               racquet && racquet?.id,
               setNextStep && setStep
             )

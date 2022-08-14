@@ -82,14 +82,15 @@ export const editRaquetsRoute = (id) => ({
 export const getRaquetsRoute = () => ({
   url: `/api/v1/racquets/`,
 });
-// export const getRaquetByQrRoute = (id) => ({
-//   url: `/api/v1/racquets/get-by-code/${id}`,
-// });
-export const getRaquetRoute = (id, isQr) => ({
-  url: isQr
-    ? `/api/v1/racquets/get-by-code/${id}`
-    : `/api/v1/racquets/get-by-value/${id}`,
+
+export const getRaquetRoute = (id) => ({
+  url: `/api/v1/racquets/get-by-value/${id}`,
 });
+// export const getRaquetRoute = (id, isQr) => ({
+//   url: isQr
+//     ? `/api/v1/racquets/get-by-code/${id}`
+//     : `/api/v1/racquets/get-by-value/${id}`,
+// });
 
 export const getStringsRoute = (id) => ({
   url: `/api/v1/catalog/inventory/${id}`,
