@@ -31,18 +31,30 @@ REACT_APP_SITE_KEY=XXXX
 REACT_APP_COUNTRY_CODE=+256
 ```
 
-5- For the project to run properly, ensure that you have installed node version of v16.16.0 and above
+5- For the project to run properly, ensure that you have installed node v16.16.0 or above
 
-6- Install npm modules
+6- a) Install npm modules
 
 ```sh
 npm i
 ```
 
-7- Build the app
+6- b) You can as well simply use a more secure yarn
+
+```sh
+yarn add
+```
+
+7- a) Build the app
 
 ```sh
 npm run build
+```
+
+7- b) Build the app(yarn)
+
+```sh
+yarn run build
 ```
 
 8- Copy the contents `/build` folder to the root of your host with Nginx/Apache and SSL.
