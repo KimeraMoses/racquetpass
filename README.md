@@ -31,20 +31,22 @@ REACT_APP_SITE_KEY=XXXX
 REACT_APP_COUNTRY_CODE=+256
 ```
 
-4- Install npm modules
+5- For the project to run properly, ensure that you have installed node version of v16.16.0 and above
+
+6- Install npm modules
 
 ```sh
 npm i
 ```
 
-5- Build the app
+7- Build the app
 
 ```sh
 npm run build
 ```
 
-6- Copy the contents `/build` folder to the root of your host with Nginx/Apache and SSL.
+8- Copy the contents `/build` folder to the root of your host with Nginx/Apache and SSL.
 
-7- Proceed to setup the API at the _REACT_APP_BASEURL_ if not done already.
+9- Proceed to setup the API at the _REACT_APP_BASEURL_ if not done already.
 
 # End
