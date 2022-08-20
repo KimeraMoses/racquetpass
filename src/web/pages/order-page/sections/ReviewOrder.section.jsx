@@ -16,7 +16,6 @@ import { BackButton } from "web/components/Buttons/BackButton.component";
 import { useSelector } from "react-redux";
 import { useCookies } from "react-cookie";
 import { useEffect } from "react";
-import { useLocation } from "react-router-dom";
 import { fetchShopDetails } from "web/store/Actions/shopActions";
 import { fetchRacquetDetails } from "web/store/Actions/racquetActions";
 import { useDispatch } from "react-redux";
@@ -43,11 +42,8 @@ export function ReviewOrder({
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  function useQuery() {
-    return new URLSearchParams(useLocation().search);
-  }
-  let query = useQuery();
-  const isReturning = query.get("rpc");
+  // const isReturning = query.get("rpc");
+  const isReturning = !!cookies?._rprr_;
 
   useEffect(() => {
     if (cookies?._rpo_ !== undefined) {
@@ -167,7 +163,7 @@ export function ReviewOrder({
     <>
       <div>
         <div className={`review-order-odr max-w-[450px] m-[0_auto]`}>
-          {isReturning === "true" && !isReturnCustomer && (
+          {isReturning && !isReturnCustomer && (
             <div className="bg-[rgba(48,79,254,0.1)] text-[#304FFE] m-2 px-2 py-4  text-center mb-8 rounded-md font-medium">
               <p>
                 We entered in your last used settings. If you're shopping
@@ -177,9 +173,7 @@ export function ReviewOrder({
           )}
           <div className="review-order-odr__heading">
             <BackButton
-              onClick={() =>
-                isReturning !== "true" ? setStep(prevStep) : null
-              }
+              onClick={() => (isReturning ? setStep(prevStep) : null)}
             />
             <Heading customClass="review-order-odr__heading-text">
               {t("odrReviewHeading")}

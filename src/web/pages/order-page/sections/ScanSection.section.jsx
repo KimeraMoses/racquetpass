@@ -12,7 +12,7 @@ import { SubmitButton } from "web/components/Buttons/SubmitButton.component";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchRacquetDetails } from "web/store/Actions/racquetActions";
 import Loader from "web/components/Loader/Loader";
-import {} from "react-redux";
+import { useCookies } from "react-cookie";
 
 export function ScanSection({
   t,
@@ -23,6 +23,7 @@ export function ScanSection({
   setBackFromReview,
   backward,
 }) {
+  const [cookies, setCookie] = useCookies(["_rpo_"]);
   const [qrCode, setQrCode] = useState("");
   const [qrScanner, setQrScanner] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
@@ -41,7 +42,9 @@ export function ScanSection({
   const fetchRacquet = async (rac_id) => {
     if (qrCode) {
       setIsLoading(true);
-      await dispatch(fetchRacquetDetails(rac_id, navigate, true));
+      await dispatch(
+        fetchRacquetDetails(rac_id, navigate, !!cookies?._rpo_ ? false : true)
+      );
       scanForward(true);
       setIsLoading(false);
     }

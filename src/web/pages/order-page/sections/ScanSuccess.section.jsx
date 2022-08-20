@@ -1,5 +1,6 @@
 // Custom Components
 import { useEffect } from "react";
+import { useCookies } from "react-cookie";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 import { Heading, SubHeading, Description, BackButton } from "web/components";
@@ -16,6 +17,7 @@ export function ScanSuccess({
   backFromReview,
   change,
 }) {
+  const [cookies, setCookie] = useCookies(["_rpo_"]);
   const racquet = useSelector((state) => state.racquet?.racquet);
   const hasRaquet = !!useSelector((state) => state.racquet?.racquet?.id);
   useEffect(() => {
@@ -30,6 +32,19 @@ export function ScanSuccess({
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [hasRaquet]);
+
+  const isReturning = !!cookies?._rpo_;
+
+  useEffect(() => {
+    if (hasRaquet && isReturning && racquet.id === cookies?._rpo_?.racquet_id) {
+      setCookie("_rprr_", true, {
+        maxAge: 30, // Will expire after 30 seconds
+      });
+      setStep(6);
+    }
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isReturning, cookies, hasRaquet, racquet]);
 
   const dispatch = useDispatch();
 

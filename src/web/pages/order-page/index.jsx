@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import { withNamespaces } from "react-i18next";
 import { reduxForm } from "redux-form";
 import { useCookies } from "react-cookie";
-import { useNavigate, useLocation } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { StepButton, Progress } from "web/components";
 import {
   ScanSection,
@@ -57,6 +57,13 @@ const phoneValidation = (value) => {
 };
 
 let OrderPage = ({ t, handleSubmit, change }) => {
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const racquet = useSelector((state) => state.racquet?.racquet);
+  const hasRaquet = !!useSelector((state) => state.racquet?.racquet?.id);
+
+  const errors = useSelector((state) => state?.form?.signup?.syncErrors);
+  const values = useSelector((state) => state?.form?.signup?.values);
   const [cookies, setCookie] = useCookies(["_rpo_"]);
   const refRecaptcha = useRef(null);
   const [step, setStep] = useState(0);
@@ -75,27 +82,9 @@ let OrderPage = ({ t, handleSubmit, change }) => {
   const [isLoading, setIsLoading] = useState(false);
   const [isReturnCustomer, setIsReturnCustomer] = useState(false);
 
-  function useQuery() {
-    return new URLSearchParams(useLocation().search);
-  }
-  let query = useQuery();
-  const isReturning = query.get("rpc");
-
-  useEffect(() => {
-    if (isReturning === "true") setStep(6);
-  }, [isReturning]);
-
   useEffect(() => {
     if (backFromReview) setIsReturnCustomer(true);
   }, [backFromReview]);
-
-  const navigate = useNavigate();
-  const dispatch = useDispatch();
-  const racquet = useSelector((state) => state.racquet?.racquet);
-  const hasRaquet = !!useSelector((state) => state.racquet?.racquet?.id);
-
-  const errors = useSelector((state) => state?.form?.signup?.syncErrors);
-  const values = useSelector((state) => state?.form?.signup?.values);
 
   const onSubmitHandler = async (values) => {
     const data = {

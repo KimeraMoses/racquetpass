@@ -4,18 +4,14 @@ import { withNamespaces } from "react-i18next";
 import { Button } from "web/components";
 import Recaptcha from "web/components/Google-Recaptcha/Recaptcha";
 import "./home.styles.scss";
-import { useCookies } from "react-cookie";
 
 function Home({ t }) {
-  const [cookies, setCookie] = useCookies("_rpo_");
   const navigate = useNavigate();
   const refRecaptcha = useRef();
   const links = [
     { path: "#", title: t("homePP") },
     { path: "#", title: t("homeCU") },
   ];
-
-  const isReturning = !!cookies?._rpo_;
 
   return (
     <>
@@ -41,12 +37,7 @@ function Home({ t }) {
             <h1 className="banner-container__heading">{t("homeHeading")}</h1>
           </div>
           <div className="banner-button-container">
-            <Button
-              isDark
-              onClick={() =>
-                navigate(`/order?rpc=${isReturning ? true : false}`)
-              }
-            >
+            <Button isDark onClick={() => navigate(`/order`)}>
               {t("homeNewBtnTxt")}
             </Button>
           </div>
