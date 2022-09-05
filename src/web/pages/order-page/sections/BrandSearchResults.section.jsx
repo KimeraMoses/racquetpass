@@ -87,7 +87,7 @@ export function BrandSearchResults({
             value={searchTerm}
             onChange={userSearchHandler}
             icon="/img/orderpage/search.png"
-            label="Search By Name, City Or State"
+            label="Search strings"
             noLabel
             component={CustomInput}
             setFieldToBeFocused={(input) => {
@@ -128,12 +128,12 @@ export function BrandSearchResults({
                 <SearchCard
                   key={string.id}
                   brand={{
-                    shop_id: string.shop,
-                    string_id: string.id,
-                    tension: string.tension,
-                    name: `${string?.name}(${string.hybrid_type})`,
-                    description: `${string.brand}, ${string.model}`,
-                    price: `$${string.price}`,
+                    shop_id: string?.shop,
+                    string_id: string?.id,
+                    tension: string?.tension,
+                    name: `${string?.brand}(${string?.model})`,
+                    // description: `${string?.brand}, ${string?.model}`,
+                    price: `$${string.price?.toFixed(2)}`,
                     size: string.size,
                   }}
                   main={main}

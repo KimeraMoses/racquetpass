@@ -46,6 +46,7 @@ import RedirectPage from "./home/RedirectPage";
 import OrderDetails from "./order-page/sections/OrderDetails.section";
 import DoneSection from "./order-page/sections/Done.section";
 import "react-toastify/dist/ReactToastify.css";
+import ResetShopPassword from "./inventory/sections/reset-password/index";
 
 function Routers() {
   const { show } = useSelector((state) => state?.drawer);
@@ -77,6 +78,7 @@ function Routers() {
             path="/reset-password/:resetToken"
             element={<ResetPassword />}
           />
+          <Route path="/reset-password" element={<ResetShopPassword />} />
           <Route path="/order" element={<Order />} />
           <Route path="/order/:orderId" element={<OrderDetails />} />
           <Route path="/order/done" element={<DoneSection />} />

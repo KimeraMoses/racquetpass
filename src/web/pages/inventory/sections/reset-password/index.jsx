@@ -7,7 +7,6 @@ import { Heading, CustomInput, SubmitButton } from "web/components";
 import { toast } from "react-toastify";
 import "./index.styles.scss";
 import { BackButton } from "web/components/Buttons/BackButton.component";
-import { resetPassword } from "web/store/Actions/authActions";
 
 const length = new RegExp("^(?=.{8,})");
 const lowerCase = new RegExp("^(?=.*[a-z])");
@@ -19,7 +18,7 @@ function useQuery() {
   return useMemo(() => new URLSearchParams(search), [search]);
 }
 
-let ResetPassword = ({ t, back }) => {
+let ResetShopPassword = ({ t, back }) => {
   const [passwordFieldType, setPasswordFieldType] = useState("password");
   const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
@@ -36,7 +35,7 @@ let ResetPassword = ({ t, back }) => {
 
   const query = useQuery();
   const comingFrom = query.get("comingFrom");
-
+  const user = useSelector((state) => state?.auth?.user);
   const firstName = useSelector(
     (state) => state?.form?.signup?.values?.firstName
   );
@@ -114,8 +113,15 @@ let ResetPassword = ({ t, back }) => {
     }
     // Check if Name exist in password
     if (
-      password?.toLowerCase().indexOf(firstName?.toLowerCase()) === -1 &&
-      password?.toLowerCase().indexOf(lastName?.toLowerCase()) === -1
+      password
+        ?.toLowerCase()
+        .indexOf(user && user?.full_name?.split(" ")[0]?.toLowerCase()) ===
+        -1 &&
+      password
+        ?.toLowerCase()
+        .indexOf(user && user?.full_name?.split(" ")[1]?.toLowerCase()) ===
+        -1 &&
+      password?.toLowerCase().indexOf(user && user?.email?.toLowerCase()) === -1
     ) {
       setPasswordConditions((passwordConditions) => {
         return {
@@ -133,7 +139,7 @@ let ResetPassword = ({ t, back }) => {
     }
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [password, firstName, lastName]);
+  }, [password, firstName, lastName, user]);
 
   const renderBullet = (condition) => {
     if (condition) {
@@ -158,7 +164,7 @@ let ResetPassword = ({ t, back }) => {
   const formSubmitHandler = async () => {
     setIsLoading(true);
     try {
-      await dispatch(resetPassword(newPassword, resetToken));
+      await dispatch(ResetShopPassword(newPassword, resetToken));
       setIsLoading(false);
       navigate("/login");
     } catch (err) {
@@ -307,9 +313,9 @@ let ResetPassword = ({ t, back }) => {
 //   console.log(values);
 // };
 
-ResetPassword = reduxForm({
+ResetShopPassword = reduxForm({
   // a unique name for the form
   form: "create-business-account-4",
-})(ResetPassword);
+})(ResetShopPassword);
 
-export default withNamespaces()(ResetPassword);
+export default withNamespaces()(ResetShopPassword);

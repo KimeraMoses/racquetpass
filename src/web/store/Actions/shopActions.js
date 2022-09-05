@@ -199,11 +199,16 @@ export const getStripeSessionLink = (id) => {
         toast.success("Redirecting to stripe...");
         window.location.replace(res.data.url);
       } catch (error) {
-        toast.error(
-          `${showError(
-            error
-          )}, please contact admin to set subscription for your shop`
-        );
+        if (
+          error?.response?.data?.message?.includes(
+            "shop subscription price not set"
+          )
+        ) {
+          return toast.error(
+            `Shop subscription price not set – please contact admin to subscribe`
+          );
+        }
+        toast.error(showError(error));
       }
     }
   };
@@ -222,6 +227,11 @@ export const getStripeOnBoardingLink = (id) => {
         toast.success("Redirecting to stripe...");
         window.location.replace(res.data.url);
       } catch (error) {
+        if (error?.response?.data?.message?.includes("shop not enabled")) {
+          return toast.error(
+            "Shop not enabled – please contact admin via blue Contact Admin button in Account Status section below"
+          );
+        }
         toast.error(showError(error));
       }
     }
@@ -334,7 +344,7 @@ export const codeVerification = (otp, phone, setStep) => {
     try {
       const { url } = verifyCodeRoute();
       const res = await axios.post(url, { otp, phone: phoneFormater(phone) });
-      toast.success("Phone verified Successfuly");
+      toast.success("Successfully verified your phone number");
       if (res.status === 200) {
         localStorage.setItem("_rpe_", JSON.stringify({ e: phone, isV: true }));
       }

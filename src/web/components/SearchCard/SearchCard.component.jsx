@@ -122,19 +122,14 @@ export function SearchCard({
                       {string?.name}
                     </SubHeading>
                     <SubHeading customClass="search__brand-card-container-content-txt-subheading">
-                      {string?.description}
+                      {string?.in_stock ? "In Stock" : "Out of stock"}
                     </SubHeading>
                   </div>
-                  {string?.in_stock && string?.price && (
-                    <div>
-                      <Description customClass="search__brand-card-container-content-txt-heading">
-                        {string?.in_stock ? "In stock" : "Out of stock"}
-                      </Description>
-                      <Description customClass="search__brand-card-container-content-txt-text">
-                        {string?.price}
-                      </Description>
-                    </div>
-                  )}
+                  <div>
+                    <Description customClass="search__brand-card-container-content-txt-heading">
+                      {string?.price}
+                    </Description>
+                  </div>
                 </div>
               </>
             ) : (

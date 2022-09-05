@@ -73,7 +73,8 @@ export const editBusinessDetails =
     tax,
     country,
     allow_own_strings,
-    address
+    address,
+    is_tax_percentage
   ) =>
   async (dispatch) => {
     const data = {
@@ -86,6 +87,7 @@ export const editBusinessDetails =
       country,
       allow_own_strings,
       address,
+      is_tax_percentage,
     };
     dispatch(setBusinessLoading(true));
     try {

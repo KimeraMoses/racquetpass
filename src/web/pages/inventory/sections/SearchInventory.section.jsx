@@ -43,7 +43,7 @@ export function SearchInventory({ t, setCurrentScreen, setDrawer, change }) {
             <div className="search-inventory__search">
               <CustomInput
                 icon="/img/orderpage/search.png"
-                label="Search Inventory"
+                label="Search strings"
                 noLabel
                 tabIndex="0"
                 onKeyDown={(e) => {
@@ -105,12 +105,11 @@ export function SearchInventory({ t, setCurrentScreen, setDrawer, change }) {
                       change("current_string", string);
                     }}
                     string={{
-                      string_id: string.id,
-                      tension: string.tension,
-                      name: `${string.brand}, ${string.model}, (${string.hybrid_type})`,
-                      description: `${string.hybrid_type}`,
+                      string_id: string?.id,
+                      tension: string?.tension,
+                      name: `${string?.brand} ${string?.model}`,
                       in_stock: string?.in_stock,
-                      price: `$${string.price}`,
+                      price: `$${string.price?.toFixed(2)}`,
                       size: string.size,
                     }}
                     // main={main}
@@ -119,25 +118,8 @@ export function SearchInventory({ t, setCurrentScreen, setDrawer, change }) {
                   />
                 ))
               )}
-              {/* {inventoryData?.length ? (
-                inventoryData.map((item, idx) => {
-                  return (
-                    <Fragment key={idx}>
-                      <SearchCard
-                        string={item}
-                        onClick={() => {
-                          setCurrentScreen("detail");
-                        }}
-                      />
-                    </Fragment>
-                  );
-                })
-              ) : (
-                <div>No Data Found!</div>
-              )} */}
             </div>
             <div className="search-inventory__buttons">
-              {/* <StepButton outlined>{t('profileButtonCSV')}</StepButton> */}
               <StepButton
                 onClick={() => {
                   setCurrentScreen("add");

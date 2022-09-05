@@ -50,11 +50,15 @@ let Inventory = ({ t, change }) => {
     tension: string && string?.tension,
   };
   const [currentScreen, setCurrentScreen] = useState(active);
+  const phoneFormater = (phone) => {
+    const newPhone = phone?.replace("+", "")?.substring(1);
+    return newPhone;
+  };
 
   const shopDetails = {
     shop: shop && shop?.name,
     email: shop && shop?.email,
-    "phone-number": shop && shop?.phone,
+    "phone-number": phoneFormater(shop && shop?.phone),
     "delivery-days": shop && shop?.estimated_delivery_time,
     "labor-price": shop && shop?.labor_price,
     address: shop && shop?.address?.street,
@@ -64,6 +68,7 @@ let Inventory = ({ t, change }) => {
     "zip-code": shop && shop?.address?.zip_code,
     country: shop && shop?.country,
     tax: shop && shop?.tax,
+    isPercentage: shop && shop?.is_tax_percentage,
   };
 
   useEffect(() => {

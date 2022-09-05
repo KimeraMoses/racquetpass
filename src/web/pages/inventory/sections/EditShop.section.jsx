@@ -63,8 +63,11 @@ let EditShop = ({
   hasOwnStrings,
   initialValues,
 }) => {
+  const [isPercentage, setPercentage] = useState(initialValues?.isPercentage);
   const [labor, setLabor] = useState(initialValues["labor-price"]);
-  const [tax, setTax] = useState(initialValues["tax"]);
+  const [tax, setTax] = useState(
+    initialValues["tax"] > 0.0 ? initialValues["tax"] : ""
+  );
   const [delivery, setDelivery] = useState(initialValues["delivery-days"]);
   const [ownStrings, setOwnStrings] = useState(hasOwnStrings);
   const [deliveryError, setDeliveryError] = useState();
@@ -92,14 +95,14 @@ let EditShop = ({
   );
   const errors = useSelector((state) => state?.form?.inventory?.syncErrors);
   const values = useSelector((state) => state?.form?.inventory?.values);
-
   const formSubmitHandler = async () => {
     setIsLoading(true);
     const address = {
       street: values.address,
       city: values.shopcity,
-      state: values["shop-state"],
-      zip_code: parseInt(values["zip-code"]),
+      state: states?.find((state) => state?.value === values["shop-state"])
+        ?.label,
+      zip_code: values["zip-code"],
       apartment: values.apt,
     };
     try {
@@ -114,7 +117,8 @@ let EditShop = ({
           parseFloat(tax),
           values.country,
           ownStrings,
-          address
+          address,
+          isPercentage
         )
       );
       setIsLoading(false);
@@ -164,7 +168,14 @@ let EditShop = ({
                 }
               }}
               customOnBlur={(e) => {
-                change("delivery-days", e?.target?.value);
+                if (e?.target?.value) {
+                  change("delivery-days", e?.target?.value);
+                } else {
+                  setDeliveryError({
+                    error: "This field is required!",
+                    touched: true,
+                  });
+                }
               }}
               meta={deliveryError}
               hidePostFix
@@ -176,45 +187,20 @@ let EditShop = ({
               pattern="[0-9]*"
               title="Non-negative integral number"
             />
-            {/* <CustomInput
-              value={labor}
-              customOnChange={(e) => {
-                const value = e.target.value;
-                if (value.charAt(0) === '$') {
-                  const substr = value?.substring(1);
-                  if (!isNaN(Number(substr))) {
-                    setLabor(`${substr}`);
-                  }
-                } else {
-                  if (!isNaN(Number(value))) {
-                    setLabor(value);
-                  }
-                }
-              }}
-              label="Labor Price"
-              hidePostFix
-              customOnBlur={(e) => {
-                const value = e?.target?.value;
-                if (value?.charAt(0) === '$') {
-                  const substr = value?.substring(1);
-                  setLabor(`$${Number(substr)?.toFixed(2)}`);
-                } else {
-                  setLabor(`$${Number(e?.target?.value).toFixed(2)}`);
-                }
-                change('labor-price', e?.target?.value);
-              }}
-            /> */}
             <CustomCurrencyInput
               value={labor}
               label="Labor Price"
-              // onChange={(e) => setPrice(e.target.value)}
+              name="labor-price"
+              validate={required}
               customOnChange={(value) => {
                 setLabor(value);
               }}
-              onBlur={(e) => change("labor-price", e?.target?.value)}
+              change={change}
+              error="This field is required!"
+              required={true}
             />
           </div>
-          <div className="mt-[12px] text-[10px] text-[#838383] font-semibold">
+          <div className="mt-[12px] mb-[12px] text-[10px] text-[#838383] font-semibold">
             This is how much you charge for the labor of restringing a racquet.
             It will be added to the cost of strings to determine the price of a
             service order.
@@ -223,11 +209,21 @@ let EditShop = ({
           <CustomCurrencyInput
             value={tax}
             label="Tax"
-            // onChange={(e) => setPrice(e.target.value)}
+            name="tax"
+            validate={required}
+            change={change}
+            error="This field is required!"
+            required={true}
             customOnChange={(value) => {
               setTax(value);
             }}
-            onBlur={(e) => change("tax", e?.target?.value)}
+            link={{
+              text: `${
+                isPercentage ? "Switch to dollars" : "Switch to percentage"
+              }`,
+              isPercentage: isPercentage,
+              onClick: () => setPercentage((prevState) => !prevState),
+            }}
           />
           <div className="edit__service-switch flex justify-between mt-[26px]">
             <Description>{t("shopString")}</Description>
@@ -264,6 +260,7 @@ let EditShop = ({
               name="phone-number"
               label="Phone Number"
               value={phoneNumber}
+              validate={required}
             />
           </div>
           <div className="edit__address-heading">
@@ -287,7 +284,7 @@ let EditShop = ({
               name="country"
               label="Country"
               type="text"
-              // validate={required}
+              validate={required}
               component={CustomInput}
             />
             <div className="edit__address-form-city">
@@ -301,8 +298,11 @@ let EditShop = ({
               <CustomSelect
                 name="shop-state"
                 options={states}
+                // value={values && values["shop-state"]}
+                defaultValue={values && values["shop-state"]}
                 label="State"
                 placeholder="Select"
+                validate={required}
                 customOnChange={(option) => {
                   change("shop-state", option?.value);
                 }}

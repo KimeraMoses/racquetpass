@@ -150,7 +150,12 @@ export function ReviewOrder({
     racquet?.mains?.string_id?.shop !== shop?.id ||
     racquet?.crosses?.string_id?.shop !== shop?.id;
 
-  const TotalPrice = mainsPrice + crossesPrice + shop?.labor_price + shop?.tax;
+  let TotalPrice = mainsPrice + crossesPrice + shop?.labor_price;
+  let tax = shop?.tax;
+  if (shop?.is_tax_percentage) {
+    tax = (tax * TotalPrice) / 100.0;
+  }
+  TotalPrice += tax;
 
   const summary = {
     items,
@@ -238,13 +243,13 @@ export function ReviewOrder({
               <Heading customClass="review-order-odr__shop-heading-text">
                 {t("odrRacquet")}
               </Heading>
-              <HeadingButton
+              {/* <HeadingButton
                 text="Change Racquet"
                 onClick={() => {
                   setBackFromReview(true);
                   setStep(1);
                 }}
-              />
+              /> */}
             </div>
             <div className="review-order-odr__shop-card">
               <SearchCard
@@ -252,7 +257,7 @@ export function ReviewOrder({
                   img: "/img/orders/racquet-img.png",
                   name: isFetching
                     ? "Loading..."
-                    : `${values && values?.racquetBrand}, ${
+                    : `${values && values?.racquetBrand}${" "} ${
                         values && values?.racquetModel
                       }`,
                   address: isLoading

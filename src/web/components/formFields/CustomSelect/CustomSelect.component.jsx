@@ -1,10 +1,12 @@
-import { useState } from 'react';
-import Select from 'react-select';
-import './CustomSelect.styles.scss';
+import { useState } from "react";
+import Select from "react-select";
+import "./CustomSelect.styles.scss";
 
 export const CustomSelect = (props) => {
-  const [selectedOption, setSelectedOption] = useState(null);
-
+  const [selectedOption, setSelectedOption] = useState({
+    label: props?.defaultValue,
+    value: props?.defaultValue,
+  });
   const { visited, error } = props?.meta
     ? props?.meta
     : { visited: false, error: false };

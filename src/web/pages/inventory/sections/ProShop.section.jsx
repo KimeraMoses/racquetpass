@@ -62,7 +62,7 @@ export function ProShop({ t, setCurrentScreen, setDrawer }) {
                       ? "Loading..."
                       : shop && shop.labor_price
                       ? `${formatter.format(shop && shop?.labor_price)}`
-                      : "Not Set"}
+                      : "Not set"}
                   </SubHeading>
                 </div>
                 <div className="shop__services-card-inner-text">
@@ -74,7 +74,7 @@ export function ProShop({ t, setCurrentScreen, setDrawer }) {
                       ? "Loading..."
                       : shop && shop?.tax
                       ? `${formatter.format(shop && shop?.tax)}`
-                      : "Not Set"}
+                      : "Not set"}
                   </SubHeading>
                 </div>
                 <div className="shop__services-card-inner-text">
@@ -86,8 +86,8 @@ export function ProShop({ t, setCurrentScreen, setDrawer }) {
                     {isLoading
                       ? "Loading..."
                       : shop?.allow_own_strings
-                      ? "YES"
-                      : "NO"}
+                      ? "Yes"
+                      : "No"}
                   </SubHeading>
                 </div>
               </div>
@@ -135,17 +135,21 @@ export function ProShop({ t, setCurrentScreen, setDrawer }) {
                 {/* {t("orderOpenedShopAddress")} */}
                 {isLoading
                   ? "Loading..."
-                  : `${shop && shop?.address?.street}, ${
+                  : `${shop && shop?.address?.street} ${
                       shop && shop?.address?.apartment
+                        ? `,${shop?.address?.apartment}`
+                        : ""
                     }`}
               </SubHeading>
               <SubHeading customClass="shop__contact-info-inner-txt">
-                {/* {t("orderOpenedShopAddress1")} */}
                 {!shop
                   ? "Loading..."
-                  : `${shop && shop?.address?.state}, ${
-                      shop && shop?.address?.city
-                    }-${shop && shop?.country}`}
+                  : `${shop && shop?.address?.city}, ${
+                      shop && shop?.address?.state
+                    } ${shop && shop?.address?.zip_code}`}
+              </SubHeading>
+              <SubHeading customClass="shop__contact-info-inner-txt">
+                {!shop ? "Loading..." : `${shop && shop?.country}`}
               </SubHeading>
             </div>
             <div className="shop__contact-info-inner">

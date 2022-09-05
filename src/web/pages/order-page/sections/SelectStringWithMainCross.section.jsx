@@ -36,6 +36,7 @@ export function SelectStringWithMainCross({
   const cross = useSelector((state) => state?.form?.signup?.values?.cross);
   const [mainsTension, setMainsTension] = useState(main?.tension);
   const [crossesTension, setCrossesTension] = useState(cross?.tension);
+  const racquet = useSelector((state) => state.racquet?.racquet);
 
   const [modal, setModal] = useState(false);
   const [unit, setUnit] = useState("lbs");
@@ -116,15 +117,7 @@ export function SelectStringWithMainCross({
             />
           </div>
           <div className="select-string-mc__main-info-number">
-            {/* <Field
-              name="mains-tension"
-              label="Tension"
-              type="number"
-              link={{ text: 'Change units to kg', path: '#' }}
-              component={CustomInputNumber}
-            /> */}
             <CustomInputNumber
-              // {...props}
               label="Tension"
               value={mainsTension}
               onChange={(e) => {
@@ -261,8 +254,8 @@ export function SelectStringWithMainCross({
                 options={[
                   { label: "Tennis", value: "Tennis" },
                   { label: "Squash", value: "Squash" },
-                  { label: "Badminton", value: "Badminton" },
-                  { label: "Other", value: "Other" },
+                  // { label: "Badminton", value: "Badminton" },
+                  // { label: "Other", value: "Other" },
                 ]}
               />
               <Field
@@ -309,19 +302,20 @@ export function SelectStringWithMainCross({
                 type="text"
                 component={CustomInput}
               />
-              <Field
+              {/* <Field
                 name="ownerName"
                 label="Racquet Owner"
                 validate={required}
                 type="text"
                 component={CustomInput}
-              />
+              /> */}
               <div className="select-string-odr__recquet-form-pic-box">
                 <FileInput
                   name="racquetImage"
                   label="Picture (optional)"
                   change={change}
                   accept="image/*"
+                  background={racquet?.image_url}
                 />
                 <Description>
                   Adding a picture makes it easy for your stringer to pick out

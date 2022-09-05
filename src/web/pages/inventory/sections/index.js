@@ -6,5 +6,6 @@ export { ProShop } from "./ProShop.section";
 export { RequestChange } from "./RequestChange.section";
 export { CancelRequest } from "./CancelRequest.section";
 export { ItemDetails } from "./ItemDetail.section";
+// export { ResetShopPassword } from "./reset-password/index";
 
 export * from "./Payment";

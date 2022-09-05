@@ -19,9 +19,9 @@ export function ScanSuccess({
 }) {
   const [cookies, setCookie] = useCookies(["_rpo_"]);
   const racquet = useSelector((state) => state.racquet?.racquet);
-  const hasRaquet = !!useSelector((state) => state.racquet?.racquet?.id);
+  const hasRacquet = !!useSelector((state) => state.racquet?.racquet?.id);
   useEffect(() => {
-    if (hasRaquet) {
+    if (hasRacquet) {
       change("racquetId", racquet && racquet?.id);
       change("racquetSport", racquet && racquet?.sport);
       change("racquetBrand", racquet && racquet?.brand);
@@ -31,12 +31,16 @@ export function ScanSuccess({
     localStorage.removeItem("_rpr_");
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [hasRaquet]);
+  }, [hasRacquet]);
 
   const isReturning = !!cookies?._rpo_;
 
   useEffect(() => {
-    if (hasRaquet && isReturning && racquet.id === cookies?._rpo_?.racquet_id) {
+    if (
+      hasRacquet &&
+      isReturning &&
+      racquet.id === cookies?._rpo_?.racquet_id
+    ) {
       setCookie("_rprr_", true, {
         maxAge: 30, // Will expire after 30 seconds
       });
@@ -44,7 +48,7 @@ export function ScanSuccess({
     }
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [isReturning, cookies, hasRaquet, racquet]);
+  }, [isReturning, cookies, hasRacquet, racquet]);
 
   const dispatch = useDispatch();
 
@@ -70,8 +74,8 @@ export function ScanSuccess({
               }}
             />
             <Heading>
-              {!hasRaquet
-                ? "Racquet not found, Start creating your racquet to complete order"
+              {!hasRacquet
+                ? "Successfully scanned a racquet!"
                 : t("scanSuccessHeading")}
             </Heading>
           </div>
@@ -81,26 +85,29 @@ export function ScanSuccess({
               <div className="scan-details-sc__card-continer-content-racquet">
                 <div className="scan-details-sc__card-continer-content-racquet-inner">
                   <img
-                    src="img/orders/bg-success.png"
+                    src={
+                      racquet?.image_url
+                        ? racquet?.image_url
+                        : "img/orders/bg-success.png"
+                    }
                     alt="racquet"
                     className="scan-details-sc__card-continer-content-racquet-img"
                   />
                   <div className="scan-details-sc__card-continer-content-racquet-text">
                     <SubHeading>
-                      {/* {t("scanSuccessTennis")} */}
-                      {!hasRaquet
-                        ? "LET'S CREATE YOUR "
-                        : racquet && racquet.sport?.toUpperCase()}{" "}
-                      RACQUET
+                      {!hasRacquet
+                        ? "UNKNOWN RACQUET TYPE "
+                        : racquet && racquet.sport?.toUpperCase() + " RACQUET"}
                     </SubHeading>
                     <Description>
-                      {racquet && racquet.id}
-                      {/* {t("scanSuccessRacName")} */}
+                      {hasRacquet
+                        ? `${racquet?.brand + " " + racquet?.model}`
+                        : "Unconfigured Racquet"}
                     </Description>
                   </div>
                 </div>
               </div>
-              {hasRaquet && (
+              {hasRacquet && (
                 <div className="scan-details-sc__card-continer-content-inner-card">
                   <div className="scan-details-sc__card-continer-content-inner-card-txt">
                     <div className='scan-details-sc__card-continer-content-inner-card-txt-box"'>
@@ -108,19 +115,12 @@ export function ScanSuccess({
                       {`${racquet && racquet.mains?.string_id?.name}(${
                         racquet && racquet.mains?.string_id?.hybrid_type
                       })`}
-                      {/* <Description>{t("scanSuccessMainsTxt")}</Description> */}
                     </div>
                     <div className='scan-details-sc__card-continer-content-inner-card-txt-box"'>
                       <SubHeading>{t("scanSuccessCrosses")}</SubHeading>
                       {`${racquet && racquet.crosses?.string_id?.name}(${
                         racquet && racquet.crosses?.string_id?.hybrid_type
                       })`}
-                      {/* <Description>{t("scanSuccessCrossesTxt")}</Description> */}
-                    </div>
-                    <div className='scan-details-sc__card-continer-content-inner-card-txt-box"'>
-                      <SubHeading>{t("scanSuccessOwner")}</SubHeading>
-                      {racquet?.owner ? racquet?.owner : "No Name set"}
-                      {/* <Description>{t("scanSuccessOwnerName")}</Description> */}
                     </div>
                   </div>
                   <div className="scan-details-sc__card-continer-content-inner-card-txt">
@@ -140,12 +140,14 @@ export function ScanSuccess({
                 </div>
               )}
               <div>
-                {!hasRaquet && (
+                {!hasRacquet && (
                   <div className="scan-details__card-continer-content-inner-card">
                     <div className="scan-details__card-continer-content-inner-card-txt">
                       <Description>
-                        It looks like this is the first time this racquet has
-                        been scanned.
+                        It looks you haven’t placed an order on this racquet
+                        before. Tap{" "}
+                        {backFromReview ? "“Choose this racquet”" : "“Next”"} to
+                        get started.”
                       </Description>
                     </div>
                   </div>

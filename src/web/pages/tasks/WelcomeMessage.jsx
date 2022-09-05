@@ -53,7 +53,7 @@ const WelcomeMessage = ({ t }) => {
               </p>
               <p className="mt-2 text-sm">
                 <span className="font-semibold">After we meet,</span> we'll send
-                ypu a link to subscribe to RaquetPass. During the meeting, we'll
+                you a link to subscribe to RaquetPass. During the meeting, we'll
                 make all of the following properly configured:
               </p>
             </div>
@@ -84,7 +84,7 @@ const WelcomeMessage = ({ t }) => {
                     ? "Loading..."
                     : shop && shop.labor_price
                     ? `${shop && shop?.labor_price}`
-                    : "Not Set"}
+                    : "Not set"}
                 </SubHeading>
               </div>
             )}
@@ -99,7 +99,7 @@ const WelcomeMessage = ({ t }) => {
                       ? "Loading..."
                       : shop && shop?.tax
                       ? `${shop && shop?.tax}`
-                      : "Not Set"}
+                      : "Not set"}
                   </SubHeading>
                 </>
               )}
@@ -143,13 +143,13 @@ const WelcomeMessage = ({ t }) => {
                 </SubHeading>
                 <div className="flex justify-between items-center">
                   <SubHeading customClass="shop__services-card-inner-text-txt">
-                    Not Set Up
+                    Not set up
                   </SubHeading>
                   <p
                     className="text-semibold text-[#304FFE] text-sm cursor-pointer"
                     onClick={handleOnboarding}
                   >
-                    {isLoading.onboarding ? "Generating link..." : "Set Up Now"}
+                    {isLoading.onboarding ? "Generating link..." : "Set up now"}
                   </p>
                 </div>
               </div>
@@ -200,7 +200,7 @@ const WelcomeMessage = ({ t }) => {
                     ? "Loading..."
                     : shop && shop.labor_price
                     ? `${shop && shop?.labor_price}`
-                    : "Not Set"}
+                    : "Not set"}
                 </SubHeading>
               </div>
             )}
@@ -215,7 +215,7 @@ const WelcomeMessage = ({ t }) => {
                       ? "Loading..."
                       : shop && shop?.tax
                       ? `${shop && shop?.tax}`
-                      : "Not Set"}
+                      : "Not set"}
                   </SubHeading>
                 </>
               )}
@@ -267,7 +267,7 @@ const WelcomeMessage = ({ t }) => {
                   >
                     {isLoading.subscription
                       ? "Generating link..."
-                      : "Subscribe Now"}
+                      : "Subscribe now"}
                   </p>
                 </div>
               </div>
@@ -279,13 +279,15 @@ const WelcomeMessage = ({ t }) => {
                 </SubHeading>
                 <div className="flex justify-between items-center">
                   <SubHeading customClass="shop__services-card-inner-text-txt">
-                    Not Set Up
+                    Not set up
                   </SubHeading>
                   <p
                     className="text-semibold text-[#E40000] text-sm cursor-pointer"
                     onClick={handleOnboarding}
                   >
-                    {isLoading.onboarding ? "Generating link..." : "Set Up Now"}
+                    {isLoading?.onboarding
+                      ? "Generating link..."
+                      : "Set up now"}
                   </p>
                 </div>
               </div>

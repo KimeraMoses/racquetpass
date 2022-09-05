@@ -13,13 +13,13 @@ export const CustomOrderSelect = (props) => {
       ) : (
         <div className="flex items-center justify-between">
           <div className="custom-order-select__label">{props.label}</div>
-          {!props?.value ? (
+          {/* {!props?.value ? (
             <div className="custom-order-select__error text-[#e53935] text-[12px] font-semibold">
               Required
             </div>
           ) : (
             <></>
-          )}
+          )} */}
         </div>
       )}
       <div className="custom-order-select__container">

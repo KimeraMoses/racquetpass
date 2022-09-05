@@ -25,7 +25,9 @@ export const SetupPayment = ({ t, setDrawer }) => {
     if (shop?.enabled) {
       await dispatch(getStripeManagementSessionLink(shopId && shopId));
     } else {
-      toast.error("Please contact admin to enable your shop first");
+      toast.error(
+        "Shop not enabled – please contact admin via blue Contact Admin button in Account Status section below"
+      );
     }
     setIsLoading(false);
   };

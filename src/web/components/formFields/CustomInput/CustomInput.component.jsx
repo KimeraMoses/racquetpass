@@ -1,5 +1,5 @@
-import { Link } from 'react-router-dom';
-import './CustomInput.styles.scss';
+import { Link } from "react-router-dom";
+import "./CustomInput.styles.scss";
 
 export const CustomInput = (props) => {
   const { touched, error } = props?.meta
@@ -35,7 +35,7 @@ export const CustomInput = (props) => {
               props?.switchPasswordShow();
             }}
           >
-            {props?.type === 'password' ? 'Show' : 'Hide'}
+            {props?.type === "password" ? "Show" : "Hide"}
           </button>
         )}
       </div>
@@ -43,7 +43,7 @@ export const CustomInput = (props) => {
         {...props?.input}
         placeholder={props?.placeholder ? props?.placeholder : props?.label}
         className={`custom-input__input ${
-          touched && error ? 'custom-input__input-error' : ''
+          touched && error ? "custom-input__input-error" : ""
         }`}
         onClick={props?.onClick}
         type={props?.type}
@@ -57,7 +57,7 @@ export const CustomInput = (props) => {
           }
         }}
         value={props?.value ? props?.value : props?.input?.value}
-        autoCapitalize={props?.autoCapitalize ? props?.autoCapitalize : 'words'}
+        autoCapitalize={props?.autoCapitalize ? props?.autoCapitalize : "words"}
         tabIndex={props?.tabIndex}
         onKeyDown={props?.onKeyDown}
         min={props?.min}
@@ -80,14 +80,14 @@ export const CustomInput = (props) => {
           props?.icon
             ? {
                 background: `url(${props.icon}) no-repeat scroll 7px 7px`,
-                paddingLeft: '45px',
-                backgroundPosition: '11px 50%',
+                paddingLeft: "45px",
+                backgroundPosition: "11px 50%",
               }
             : {}
         }
       />
-      {/* {props.meta.error && props.meta.touched && (
-        <div className="custom-input__error">{props.meta.error}</div>
+      {/* {props?.meta?.error && props?.meta?.touched && (
+        <div className="custom-input__error">{props?.meta?.error}</div>
       )} */}
     </div>
   );

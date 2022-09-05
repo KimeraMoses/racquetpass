@@ -22,6 +22,14 @@
         color: #304ffe !important;
       }
     }
+    &-switch {
+      font-weight: 600;
+      font-size: 12px;
+      line-height: 18px;
+      font-family: Poppins;
+      color: #304ffe;
+      cursor: pointer;
+    }
     &-error,
     &-show {
       font-weight: 600;

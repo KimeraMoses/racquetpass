@@ -133,7 +133,6 @@ let OrderPage = ({ t, handleSubmit, change }) => {
       mains: mainObj,
       crosses: crossObj,
       sport: values?.racquetSport,
-      owner: values?.ownerName,
     };
     const EditData = {
       brand: values?.racquetBrand,
@@ -142,7 +141,6 @@ let OrderPage = ({ t, handleSubmit, change }) => {
       mains: mainObj,
       crosses: crossObj,
       sport: values?.racquetSport,
-      owner: values?.ownerName,
     };
     try {
       await dispatch(
@@ -389,6 +387,9 @@ let OrderPage = ({ t, handleSubmit, change }) => {
             change={change}
             backFromReview={backFromReview}
             setBackFromReview={setBackFromReview}
+            setMainCross={setMainCross}
+            setMain={setMain}
+            setCross={setCross}
           />
         );
       case "search":
@@ -510,6 +511,12 @@ let OrderPage = ({ t, handleSubmit, change }) => {
     }
   };
 
+  const saveRecievedValues = () => {
+    setCookie("rps", JSON.stringify(values));
+  };
+
+  console.log(cookies?.rps);
+
   return (
     <>
       {step === 7 ||
@@ -549,6 +556,7 @@ let OrderPage = ({ t, handleSubmit, change }) => {
             <div className="order-page__button-container max-w-[450px] w-full mr-[auto] ml-[auto]">
               <StepButton
                 onClick={() => {
+                  saveRecievedValues();
                   if (backFromReview) {
                     if (step === 2 || step === 3) {
                       NewRacquetHandler(false);
@@ -563,7 +571,7 @@ let OrderPage = ({ t, handleSubmit, change }) => {
                   step === 0 ||
                   errors ||
                   (step === 2 && !values?.racquetModel) ||
-                  (step === 2 && !values?.brand?.string_id) ||
+                  (step === 2 && !values?.brand?.string_id && !values?.mains) ||
                   (step === 3 && !values?.mains && !values?.cross) ||
                   (step === 4 &&
                     (!values?.["phone-number"] ||
@@ -582,11 +590,9 @@ let OrderPage = ({ t, handleSubmit, change }) => {
                   : step === 4 && isLoading
                   ? "Sending verfication code..."
                   : step === 5 && isLoading
-                  ? "Verifying code..."
-                  : (step === 2 && isLoading) || (step === 3 && isLoading)
-                  ? "Saving..."
-                  : step === 2 || step === 3
-                  ? "Save Racquet"
+                  ? "Verifying..."
+                  : step === 5
+                  ? " Verify"
                   : t("odrNext")}
               </StepButton>
             </div>

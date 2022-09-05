@@ -53,7 +53,7 @@ export function ItemDetails({ t, setCurrentScreen, change }) {
           <div className="item-details-inventory__txt flex flex-col gap-[4px]">
             <SubHeading>{t("inventoryItemPrice")}</SubHeading>
             <Description>
-              ${string && string.price}&nbsp;{" "}
+              ${string && string?.price?.toFixed(2)}&nbsp;{" "}
               {/* <span className="text-[#8E8E8E]">
                 {t("inventoryItemRSDetail")}
               </span> */}
@@ -68,7 +68,7 @@ export function ItemDetails({ t, setCurrentScreen, change }) {
           <div className="item-details-inventory__txt flex flex-col gap-[4px]">
             <SubHeading>{t("inStock")}</SubHeading>
             <Description>
-              {string && string?.in_stock ? t("inStockTxt") : "NO"}
+              {string && string?.in_stock ? "Yes" : "No"}
             </Description>
           </div>
         </div>

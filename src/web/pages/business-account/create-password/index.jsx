@@ -119,21 +119,27 @@ let CreatePassword = ({ t, back }) => {
       });
     }
     // Check if Name exist in password
-    if (password.includes(firstName) || password.includes(lastName)) {
-      setPasswordConditions((passwordConditions) => {
-        return {
-          ...passwordConditions,
-          noTextFromNameEmail: false,
-        };
-      });
-    } else {
+    if (
+      password?.toLowerCase().indexOf(firstName?.toLowerCase()) === -1 &&
+      password?.toLowerCase().indexOf(lastName?.toLowerCase()) === -1 &&
+      password?.toLowerCase().indexOf(values?.email?.toLowerCase()) === -1
+    ) {
       setPasswordConditions((passwordConditions) => {
         return {
           ...passwordConditions,
           noTextFromNameEmail: true,
         };
       });
+    } else {
+      setPasswordConditions((passwordConditions) => {
+        return {
+          ...passwordConditions,
+          noTextFromNameEmail: false,
+        };
+      });
     }
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [password, firstName, lastName]);
 
   const renderBullet = (condition) => {
@@ -299,7 +305,8 @@ let CreatePassword = ({ t, back }) => {
                     !passwordConditions.oneLowerCase ||
                     !passwordConditions.oneUpperCase ||
                     !passwordConditions.oneNumber ||
-                    !passwordConditions.noTextFromNameEmail
+                    !passwordConditions.noTextFromNameEmail ||
+                    isLoading
                   }
                   className="account-details__form-button-btn"
                 >

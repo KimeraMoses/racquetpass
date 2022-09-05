@@ -41,21 +41,20 @@ export function AddForm({ t, setCurrentScreen, change }) {
 
   const handleShow = () => setShow(!show);
 
-  const formSubmitHandler = async () => {
+  const formSubmitHandler = async (e) => {
+    e.preventDefault();
     setIsLoading(true);
+    const stringName = `${values?.brand} ${values?.model}`;
     try {
       await dispatch(
         createNewString(
-          values?.name,
-          values?.type,
+          stringName,
           values?.brand,
           values?.model,
-          values?.size,
           parseInt(values?.itemPrice),
           shop && shop.id,
           selectedType,
-          check,
-          values?.tension
+          check
         )
       );
       setIsLoading(false);
@@ -78,20 +77,20 @@ export function AddForm({ t, setCurrentScreen, change }) {
             <Heading>{t("profileButtonAddNew")}</Heading>
           </div>
           <div className="item-form__form">
-            <Field
+            {/* <Field
               name="name"
               label="Name"
               type="text"
               validate={required}
               component={CustomInput}
-            />
-            <Field
+            /> */}
+            {/* <Field
               name="type"
               label="Type"
               type="text"
               validate={required}
               component={CustomInput}
-            />
+            /> */}
             <Field
               name="brand"
               label="Brand"
@@ -107,7 +106,7 @@ export function AddForm({ t, setCurrentScreen, change }) {
               component={CustomInput}
             />
             <CustomInput
-              pattern="\d*"
+              // pattern="\d*"
               value={price}
               customOnChange={(e) => {
                 const value = e.target.value;
@@ -195,7 +194,7 @@ export function AddForm({ t, setCurrentScreen, change }) {
                   );
                 })}
               </div>
-              <div className="item-form__half">
+              {/* <div className="item-form__half">
                 <Field
                   name="size"
                   label="Size"
@@ -208,7 +207,7 @@ export function AddForm({ t, setCurrentScreen, change }) {
                   type="number"
                   component={CustomInput}
                 />
-              </div>
+              </div> */}
             </div>
             <div className="item-form__form-switch">
               <Description>In Stock</Description>

@@ -53,8 +53,9 @@ const ThankYou = () => {
       </div>
       <div className="w-full">
         <button
-          className="bg-[#304ffe] rounded-[12px] w-full py-[16px] text-[#fff] text-[18px] font-medium"
+          className="bg-[#304ffe] rounded-[12px] w-full py-[16px] text-[#fff] text-[18px] font-medium disabled:opacity-40 disabled:cursor-auto"
           onClick={formSubmitHandler}
+          disabled={isLoading}
         >
           {isLoading ? "Redirecting..." : "Go to your account"}
         </button>

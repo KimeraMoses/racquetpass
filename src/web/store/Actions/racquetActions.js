@@ -22,9 +22,9 @@ export const createNewRacquet = (data, setStep, change) => async (dispatch) => {
     const res = await axios.post(url, data);
     dispatch(getRacquetSuccess(res.data?.racquet));
     dispatch(setRacquetsLoading(false));
-    toast.success(
-      "Your raquet is created successfuly, You can now proceed with your order "
-    );
+    // toast.success(
+    //   "Your raquet is created successfuly, You can now proceed with your order "
+    // );
     if (setStep) setStep(4);
     if (change) change("racquetId", res?.data.racquet?.id);
   } catch (error) {
@@ -42,9 +42,9 @@ export const editRacquetDetails =
       const res = await axios.patch(url, data);
       dispatch(fetchRacquetDetails(res.data?.racquet?.id, "", false));
       dispatch(setRacquetsLoading(false));
-      toast.success(
-        "Changes to your raquet are saved successfuly, You can now proceed with your order "
-      );
+      // toast.success(
+      //   "Changes to your raquet are saved successfuly, You can now proceed with your order "
+      // );
       if (setStep) setStep(4);
     } catch (error) {
       toast.error(showError(error));
@@ -113,8 +113,8 @@ export const fetchRacquetDetails = (racquet_id, navigate, isQr) => {
           navigate && navigate("/order");
           // SET SCANNED STATE TO SKIP RESCANNING
           isQr && localStorage.setItem("_rpr_", true);
-          return toast.error(
-            "Racquet not found, Please continue with the process to create your own racquet!"
+          return toast.success(
+            "Successfully scanned a racquet! Press next to proceed."
           );
         }
         toast.error("Failed to scan racquet!");
@@ -156,30 +156,16 @@ export const fetchRacquetDetails = (racquet_id, navigate, isQr) => {
 // };
 
 export const createNewString =
-  (
-    name,
-    type,
-    brand,
-    model,
-    size,
-    price,
-    shop,
-    hybrid_type,
-    in_stock,
-    tension
-  ) =>
+  (name, brand, model, price, shop, hybrid_type, in_stock) =>
   async (dispatch) => {
     const data = {
       name,
-      type,
       brand,
       model,
-      size,
       price,
       shop,
       hybrid_type,
       in_stock,
-      tension,
     };
     dispatch(setRacquetsLoading(true));
     try {
@@ -197,26 +183,26 @@ export const editNewString =
   (
     string_id,
     name,
-    type,
+    // type,
     brand,
     model,
     price,
-    size,
-    tension,
+    // size,
+    // tension,
     hybrid_type,
     in_stock
   ) =>
   async (dispatch) => {
     const data = {
       name,
-      type,
+      // type,
       brand,
       model,
       price,
       hybrid_type,
       in_stock,
-      size,
-      tension,
+      // size,
+      // tension,
     };
     if (string_id) {
       dispatch(setRacquetsLoading(true));

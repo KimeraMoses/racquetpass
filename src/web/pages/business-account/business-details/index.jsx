@@ -19,7 +19,7 @@ const required = (value) => (value ? undefined : "This field is required");
 // ZIP Validation
 const zipValidation = (value) => {
   if (value?.length !== 5) {
-    return "Please enter a standard 5 digits zip code";
+    return "Please enter a standard 5-digit zip code";
   } else {
     return undefined;
   }
@@ -90,6 +90,20 @@ let BusinessDetails = ({ t, change }) => {
                   type="text"
                   component={CustomInput}
                   validate={required}
+                />
+                <Field
+                  name="shop-state"
+                  options={states}
+                  label="State"
+                  placeholder="Select"
+                  component={CustomSelect}
+                  // options={[
+                  //   { label: "Brand 1", value: "b1" },
+                  //   { label: "Brand 2", value: "b2" },
+                  //   { label: "Brand 3", value: "b3" },
+                  //   { label: "Brand 4", value: "b4" },
+                  // ]}
+                  showInitials
                 />
                 <CustomSelect
                   name="shop-state"

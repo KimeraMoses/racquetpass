@@ -42,19 +42,21 @@ export function EditForm({ t, setCurrentScreen, change, initialValues }) {
   const handleShowInfo = () => setShowInfo(!showInfo);
   const values = useSelector((state) => state?.form?.inventory?.values);
 
-  const formSubmitHandler = async () => {
+  const formSubmitHandler = async (e) => {
+    e.preventDefault();
     setIsLoading(true);
+    const stringName = `${values["edit-brand"]} ${values["edit-model"]}`;
     try {
       await dispatch(
         editNewString(
           initialValues.string_id,
-          values["edit-name"],
-          values["edit-type"],
+          stringName,
+          // values["edit-type"],
           values["edit-brand"],
           values["edit-model"],
           parseInt(values.itemPrice),
-          values?.size,
-          values?.tension,
+          // values?.size,
+          // values?.tension,
           selectedType,
           check
         )
@@ -151,20 +153,13 @@ export function EditForm({ t, setCurrentScreen, change, initialValues }) {
             <Heading>{t("profileFormEdit")}</Heading>
           </div>
           <div className="edit-form__form">
-            <Field
-              name="edit-name"
-              label="Name"
-              type="text"
-              component={CustomInput}
-              validate={required}
-            />
-            <Field
+            {/* <Field
               name="edit-type"
               label="Type"
               type="text"
               component={CustomInput}
               validate={required}
-            />
+            /> */}
             <Field
               name="edit-brand"
               label="Brand"
@@ -180,7 +175,7 @@ export function EditForm({ t, setCurrentScreen, change, initialValues }) {
               validate={required}
             />
             <CustomInput
-              pattern="\d*"
+              // pattern="\d*"
               value={price}
               customOnChange={(e) => {
                 const value = e.target.value;
@@ -242,7 +237,7 @@ export function EditForm({ t, setCurrentScreen, change, initialValues }) {
                 })}
               </div>
             </div>
-            <div className="item-form__half">
+            {/* <div className="item-form__half">
               <Field
                 name="size"
                 label="Size"
@@ -255,7 +250,7 @@ export function EditForm({ t, setCurrentScreen, change, initialValues }) {
                 type="number"
                 component={CustomInput}
               />
-            </div>
+            </div> */}
             <div className="edit-form__form-switch">
               <Description>In Stock</Description>
               <CustomSwitch handleChange={handleCheck} checked={check} />
