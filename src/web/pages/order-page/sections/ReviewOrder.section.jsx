@@ -106,6 +106,11 @@ export function ReviewOrder({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isReturnCustomer]);
 
+  const isHybrid =
+    racquet?.mains?.string_id?.id === racquet?.crosses?.string_id?.id
+      ? false
+      : true;
+
   let isVerifiedObj = JSON.parse(localStorage.getItem("_rpe_"));
   let prevStep = 5;
   if (isVerifiedObj?.e === values?.email && isVerifiedObj?.isV) {
@@ -123,26 +128,40 @@ export function ReviewOrder({
 
   const items = [
     {
+      heading: "String",
+      isOutOfStock: !racquet?.mains?.string_id?.in_stock,
+      description: `${racquet?.mains?.string_id?.name} ${racquet?.mains?.string_id?.size} G @ ${racquet?.mains?.string_id?.tension} lbs`,
+      price: `$${mainsPrice?.toFixed(2)}`,
+      isToShop: racquet?.mains?.string_id?.shop !== shop?.id,
+      show: !isHybrid,
+    },
+    {
       heading: "Mains",
       isOutOfStock: !racquet?.mains?.string_id?.in_stock,
-      description: `${racquet?.mains?.string_id?.name}(${racquet?.mains?.string_id?.hybrid_type}) ${racquet?.mains?.string_id?.size} G @ ${racquet?.mains?.string_id?.tension} lbs`,
-      price: `$${mainsPrice}`,
+      description: `${racquet?.mains?.string_id?.name} ${racquet?.mains?.string_id?.size} G @ ${racquet?.mains?.string_id?.tension} lbs`,
+      price: `$${mainsPrice?.toFixed(2)}`,
       isToShop: racquet?.mains?.string_id?.shop !== shop?.id,
+      show: isHybrid,
     },
     {
       heading: "Crosses",
       isOutOfStock: !racquet?.crosses?.string_id?.in_stock,
-      description: `${racquet?.crosses?.string_id?.name}(${racquet?.crosses?.string_id?.hybrid_type}) ${racquet?.crosses?.string_id?.size} G @ ${racquet?.crosses?.string_id?.tension} lbs`,
-      price: `$${crossesPrice}`,
+      description: `${racquet?.crosses?.string_id?.name}${racquet?.crosses?.string_id?.size} G @ ${racquet?.crosses?.string_id?.tension} lbs`,
+      price: `$${crossesPrice?.toFixed(2)}`,
       isToShop: racquet?.crosses?.string_id?.shop !== shop?.id,
+      show: isHybrid,
     },
     {
       description: "Labor",
-      price: `$${shop && shop?.labor_price}`,
+      price: `$${shop && shop?.labor_price?.toFixed(2)}`,
+      show: true,
     },
     {
       description: "Tax",
-      price: `$${shop && shop?.tax}`,
+      price: `${shop && shop?.is_tax_percentage ? "" : "$"}${
+        shop && shop?.tax?.toFixed(2)
+      }${shop && shop?.is_tax_percentage ? "%" : ""}`,
+      show: true,
     },
   ];
 
@@ -150,7 +169,12 @@ export function ReviewOrder({
     racquet?.mains?.string_id?.shop !== shop?.id ||
     racquet?.crosses?.string_id?.shop !== shop?.id;
 
-  let TotalPrice = mainsPrice + crossesPrice + shop?.labor_price;
+  let TotalPrice = shop?.labor_price;
+  if (isHybrid) {
+    TotalPrice += mainsPrice + crossesPrice;
+  } else {
+    TotalPrice += mainsPrice;
+  }
   let tax = shop?.tax;
   if (shop?.is_tax_percentage) {
     tax = (tax * TotalPrice) / 100.0;
@@ -159,7 +183,7 @@ export function ReviewOrder({
 
   const summary = {
     items,
-    TotalPrice,
+    TotalPrice: TotalPrice?.toFixed(2),
     mainsPrice,
     crossesPrice,
   };

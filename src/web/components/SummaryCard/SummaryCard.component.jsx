@@ -58,9 +58,12 @@ export function SummaryCard({ summary }) {
                 ${summary && summary?.TotalPrice}
               </SubHeading>
               {summary &&
-                summary?.items.map((item, index) => (
-                  <Item {...item} key={`${item.description}-${index}`} />
-                ))}
+                summary?.items.map(
+                  (item, index) =>
+                    item?.show && (
+                      <Item {...item} key={`${item.description}-${index}`} />
+                    )
+                )}
             </div>
           </div>
         </div>

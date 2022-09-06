@@ -26,6 +26,7 @@ export function BrandSearchResults({
   const { strings: AllStrings, isLoading } = useSelector(
     (state) => state.racquet
   );
+
   const shopId = useSelector((state) => state.shop?.shop?.id);
 
   const dispatch = useDispatch();
@@ -130,11 +131,9 @@ export function BrandSearchResults({
                   brand={{
                     shop_id: string?.shop,
                     string_id: string?.id,
-                    tension: string?.tension,
-                    name: `${string?.brand}(${string?.model})`,
-                    // description: `${string?.brand}, ${string?.model}`,
+                    name: `${string?.name}`,
+                    in_stock: string?.in_stock,
                     price: `$${string.price?.toFixed(2)}`,
-                    size: string.size,
                   }}
                   main={main}
                   cross={cross}

@@ -51,6 +51,11 @@ function OrderDetails({ t }) {
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [orderId]);
+  const isHybrid =
+    order?.racquet?.mains?.string_id?.id ===
+    order?.racquet?.crosses?.string_id?.id
+      ? false
+      : true;
 
   const orderDetails = {
     // done: true,
@@ -64,7 +69,7 @@ function OrderDetails({ t }) {
       order &&
       `${order.delivery_address?.first_name} ${order.delivery_address?.last_name}`,
     phone: order && order?.delivery_address?.phone_number,
-    racquetName: `${order && order?.racquet?.brand}, ${
+    racquetName: `${order && order?.racquet?.brand} ${
       order && order?.racquet?.model
     }`,
     racquetSport: order && order?.racquet?.sport,
@@ -81,49 +86,68 @@ function OrderDetails({ t }) {
 
   const items = [
     {
+      heading: "String",
+      isOutOfStock: order && !order.racquet?.mains?.string_id?.in_stock,
+      description:
+        order &&
+        `${order?.racquet?.mains?.string_id?.name} ${
+          order && order?.racquet?.mains?.string_id?.size
+        } G @ ${order && order?.racquet?.mains?.string_id?.tension} lbs`,
+      price: `$${mainsPrice?.toFixed(2)}`,
+      show: !isHybrid,
+    },
+    {
       heading: "Mains",
       isOutOfStock: order && !order.racquet?.mains?.string_id?.in_stock,
       description:
         order &&
-        `${order?.racquet?.mains?.string_id?.name}(${
-          order?.racquet?.mains?.string_id?.hybrid_type
-        }) ${order && order?.racquet?.mains?.string_id?.size} G @ ${
-          order && order?.racquet?.mains?.string_id?.tension
-        } lbs`,
-      price: `$${mainsPrice}`,
+        `${order?.racquet?.mains?.string_id?.name} ${
+          order && order?.racquet?.mains?.string_id?.size
+        } G @ ${order && order?.racquet?.mains?.string_id?.tension} lbs`,
+      price: `$${mainsPrice?.toFixed(2)}`,
+      show: isHybrid,
     },
     {
       heading: "Crosses",
       isOutOfStock: order && !order.racquet?.crosses?.string_id?.in_stock,
       description:
         order &&
-        `${order?.racquet?.crosses?.string_id?.name}(${
-          order?.racquet?.crosses?.string_id?.hybrid_type
-        }) ${order && order?.racquet?.crosses?.string_id?.size} G @ ${
-          order && order?.racquet?.crosses?.string_id?.tension
-        } lbs`,
-      price: `$${crossesPrice}`,
+        `${order?.racquet?.crosses?.string_id?.name} ${
+          order && order?.racquet?.crosses?.string_id?.size
+        } G @ ${order && order?.racquet?.crosses?.string_id?.tension} lbs`,
+      price: `$${crossesPrice?.toFixed(2)}`,
+      show: isHybrid,
     },
 
     {
       description: "Labor",
-      price: `$${order && order?.delivery_shop?.labor_price}`,
+      price: `$${order && order?.delivery_shop?.labor_price?.toFixed(2)}`,
+      show: true,
     },
     {
       description: "Tax",
-      price: `$${order && order?.delivery_shop?.tax}`,
+      price: `${order && order?.delivery_shop?.is_tax_percentage ? "" : "$"}${
+        order && order?.delivery_shop?.tax?.toFixed(2)
+      }${order && order?.delivery_shop?.is_tax_percentage ? "%" : ""}`,
+      show: true,
     },
   ];
 
-  const TotalPrice =
-    mainsPrice +
-    crossesPrice +
-    order?.delivery_shop?.labor_price +
-    order?.delivery_shop?.tax;
+  // let TotalPrice = order?.delivery_shop?.labor_price;
+  // if (isHybrid) {
+  //   TotalPrice += mainsPrice + crossesPrice;
+  // } else {
+  //   TotalPrice += mainsPrice;
+  // }
+  // let tax = order?.delivery_shop?.tax;
+  // if (order?.delivery_shop?.is_tax_percentage) {
+  //   tax = (tax * TotalPrice) / 100.0;
+  // }
+  // TotalPrice += tax;
 
   const summary = {
     items,
-    TotalPrice,
+    TotalPrice: order?.amount?.toFixed(2),
     mainsPrice,
     crossesPrice,
   };

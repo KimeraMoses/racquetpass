@@ -83,7 +83,7 @@ export const fetchRacquetDetails = (racquet_id, navigate, isQr) => {
                 navigate(`/order/${res.data?.order?.id}?status=pending`);
                 break;
               case "Processing":
-                toast.info("Your order is still under processing");
+                toast.info("Your order is being processed");
                 navigate(`/order/${res.data?.order?.id}?status=processing`);
                 break;
               default:

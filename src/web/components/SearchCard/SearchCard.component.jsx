@@ -100,18 +100,20 @@ export function SearchCard({
               </>
             ) : brand ? (
               <>
-                <div className="search__brand-card-container-content-txt">
+                <div className="search__brand-card-container-content-txt search__brand-card-container-content-txt-string">
                   <div>
                     <SubHeading customClass="search__brand-card-container-content-txt-heading">
                       {brand?.name}
                     </SubHeading>
                     <SubHeading customClass="search__brand-card-container-content-txt-subheading">
-                      {brand?.description}
+                      {brand?.in_stock ? "In Stock" : "Out of stock"}
                     </SubHeading>
                   </div>
-                  <Description customClass="search__brand-card-container-content-txt-text">
-                    {brand?.price}
-                  </Description>
+                  <div>
+                    <Description customClass="search__brand-card-container-content-txt-heading">
+                      {brand?.price}
+                    </Description>
+                  </div>
                 </div>
               </>
             ) : string ? (

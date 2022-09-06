@@ -110,7 +110,7 @@ export function SearchInventory({ t, setCurrentScreen, setDrawer, change }) {
                       name: `${string?.brand} ${string?.model}`,
                       in_stock: string?.in_stock,
                       price: `$${string.price?.toFixed(2)}`,
-                      size: string.size,
+                      // size: string.size,
                     }}
                     // main={main}
                     // cross={cross}

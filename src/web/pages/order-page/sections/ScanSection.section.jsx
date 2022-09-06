@@ -120,8 +120,10 @@ export function ScanSection({
         <div
           className="scan-section__image-container"
           onClick={() => {
-            setQrScanner((qrScanner) => !qrScanner);
-            setPermissionsDenied(false);
+            if (!qrScanner) {
+              setQrScanner((qrScanner) => !qrScanner);
+              setPermissionsDenied(false);
+            }
           }}
         >
           {qrScanner && !permissionsDenied ? (

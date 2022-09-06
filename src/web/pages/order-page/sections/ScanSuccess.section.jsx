@@ -57,6 +57,13 @@ export function ScanSuccess({
     backward();
   };
 
+  console.log(racquet);
+
+  const isHybrid =
+    racquet?.mains?.string_id?.id === racquet?.crosses?.string_id?.id
+      ? false
+      : true;
+
   return (
     <>
       <div className="scan-details-sc max-w-[450px] m-[0_auto]">
@@ -111,17 +118,17 @@ export function ScanSuccess({
                 <div className="scan-details-sc__card-continer-content-inner-card">
                   <div className="scan-details-sc__card-continer-content-inner-card-txt">
                     <div className='scan-details-sc__card-continer-content-inner-card-txt-box"'>
-                      <SubHeading>{t("scanSuccessMains")}</SubHeading>
-                      {`${racquet && racquet.mains?.string_id?.name}(${
-                        racquet && racquet.mains?.string_id?.hybrid_type
-                      })`}
+                      <SubHeading>
+                        Last strung with {isHybrid && "(mains)"}
+                      </SubHeading>
+                      {`${racquet && racquet.mains?.string_id?.name}`}
                     </div>
-                    <div className='scan-details-sc__card-continer-content-inner-card-txt-box"'>
-                      <SubHeading>{t("scanSuccessCrosses")}</SubHeading>
-                      {`${racquet && racquet.crosses?.string_id?.name}(${
-                        racquet && racquet.crosses?.string_id?.hybrid_type
-                      })`}
-                    </div>
+                    {isHybrid && (
+                      <div className='scan-details-sc__card-continer-content-inner-card-txt-box"'>
+                        <SubHeading>{t("scanSuccessCrosses")}</SubHeading>
+                        {`${racquet && racquet.crosses?.string_id?.name}`}
+                      </div>
+                    )}
                   </div>
                   <div className="scan-details-sc__card-continer-content-inner-card-txt">
                     <div className='scan-details-sc__card-continer-content-inner-card-txt-box"'>
@@ -130,12 +137,14 @@ export function ScanSuccess({
                         {racquet && racquet.mains?.tension} lbs
                       </Description>
                     </div>
-                    <div className='scan-details-sc__card-continer-content-inner-card-txt-box"'>
-                      <SubHeading>{t("odrTension")}</SubHeading>
-                      <Description>
-                        {racquet && racquet.crosses?.tension} lbs
-                      </Description>
-                    </div>
+                    {isHybrid && (
+                      <div className='scan-details-sc__card-continer-content-inner-card-txt-box"'>
+                        <SubHeading>{t("odrTension")}</SubHeading>
+                        <Description>
+                          {racquet && racquet.crosses?.tension} lbs
+                        </Description>
+                      </div>
+                    )}
                   </div>
                 </div>
               )}

@@ -13,18 +13,6 @@ import { BackButton } from "web/components/Buttons/BackButton.component";
 import "./Contact.styles.scss";
 
 const required = (value) => (value ? undefined : "Required");
-const requiredEmail = (value) => (value ? undefined : "Email is required");
-const email = (value) => {
-  if (
-    /^(([^<>()[\].,;:\s@"]+(\.[^<>()[\].,;:\s@"]+)*)|(".+"))@(([^<>()[\].,;:\s@"]+\.)+[^<>()[\].,;:\s@"]{2,})$/i.test(
-      value
-    )
-  ) {
-    return undefined;
-  } else {
-    return "Please enter a valid email";
-  }
-};
 
 export function Contact({
   t,
@@ -79,13 +67,6 @@ export function Contact({
             type="text"
             validate={required}
             component={CustomInput}
-          />
-          <Field
-            name="email"
-            label="Email Address"
-            type="email"
-            component={CustomInput}
-            validate={[requiredEmail, email]}
           />
           <CustomPhoneInput
             change={change}

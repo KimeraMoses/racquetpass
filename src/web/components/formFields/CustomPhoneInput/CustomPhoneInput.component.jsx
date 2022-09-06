@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { CustomInput } from "../CustomInput/CustomInput.component";
 
 // Phone Validation
@@ -25,17 +25,17 @@ const phoneValidation = (value) => {
 export const CustomPhoneInput = ({ name, label, value, change, optional }) => {
   const [touched, setTouched] = useState(false);
 
-  useEffect(() => {
-    if (value && value?.length === 10 && !isNaN(Number(value))) {
-      const formattedNumber = `(${value?.substring(0, 3)}) ${value?.substring(
-        3,
-        6
-      )}-${value?.substring(6, 10)}`;
-      change(name, formattedNumber);
-    }
+  // useEffect(() => {
+  //   if (value && value?.length === 10 && !isNaN(Number(value))) {
+  //     const formattedNumber = `(${value?.substring(0, 3)}) ${value?.substring(
+  //       3,
+  //       6
+  //     )}-${value?.substring(6, 10)}`;
+  //     change(name, formattedNumber);
+  //   }
 
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  //   // eslint-disable-next-line react-hooks/exhaustive-deps
+  // }, []);
 
   return (
     <CustomInput
@@ -43,7 +43,7 @@ export const CustomPhoneInput = ({ name, label, value, change, optional }) => {
       label={label}
       value={value}
       type="tel"
-      pattern="\d*"
+      // pattern="\d*"
       placeholder="(323) 323-3323"
       customOnBlur={(e) => {
         setTouched(true);

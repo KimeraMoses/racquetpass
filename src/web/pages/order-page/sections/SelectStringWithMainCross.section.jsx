@@ -178,7 +178,7 @@ export function SelectStringWithMainCross({
               onChange={(e) => {
                 setCrossesTension(e.target.value);
                 const newTension = {
-                  tension: parseInt(e.target.value),
+                  tension: parseInt(e.target.value)?.toFixed(1),
                 };
                 const newCross = { ...cross, ...newTension };
                 change("cross", newCross);
@@ -254,8 +254,6 @@ export function SelectStringWithMainCross({
                 options={[
                   { label: "Tennis", value: "Tennis" },
                   { label: "Squash", value: "Squash" },
-                  // { label: "Badminton", value: "Badminton" },
-                  // { label: "Other", value: "Other" },
                 ]}
               />
               <Field
