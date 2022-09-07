@@ -587,6 +587,8 @@ let OrderPage = ({ t, handleSubmit, change }) => {
                   ? "Change to this racquet"
                   : (step === 4 || step === 2 || step === 3) && backFromReview
                   ? "Save Changes"
+                  : step === 2 || step === 3
+                  ? "Choose this racquet"
                   : step === 4 && isLoading
                   ? "Sending verfication code..."
                   : step === 5 && isLoading

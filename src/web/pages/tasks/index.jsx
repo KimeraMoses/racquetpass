@@ -103,7 +103,7 @@ function Tasks({ t }) {
                     key={order.id}
                     status={order.status}
                     title={`Order #${order.order_number}`}
-                    desc={`${order?.racquet?.model}, ${order?.racquet?.brand}`}
+                    desc={`${order?.racquet?.brand} ${order?.racquet?.model}`}
                     name={
                       order?.delivery_address?.first_name +
                       " " +
@@ -143,44 +143,7 @@ function Tasks({ t }) {
                     key={order.id}
                     status={order.status}
                     title={`Order #${order.order_number}`}
-                    desc={`${order?.racquet?.model}, ${order?.racquet?.brand}`}
-                    name={
-                      order?.delivery_address?.first_name +
-                      " " +
-                      order?.delivery_address?.last_name
-                    }
-                  />
-                );
-              })
-            )}
-          </div>
-
-          <div className="task-row">
-            <p className="tasks-info">Pending &#38; Processing</p>
-            <div className="badge">
-              {isFetching ? 0 : shopOrders ? OtherOrders?.length : 0}
-            </div>
-          </div>
-          <div className="cards-container">
-            {isFetching ? (
-              <TaskCard
-                title={`Loading...`}
-                desc={`Please wait as we get you all the orders here`}
-              />
-            ) : shopOrders && OtherOrders?.length < 1 ? (
-              <TaskCard
-                title={`No Orders recieved yet`}
-                desc={`All your pending and processing orders will appear here`}
-              />
-            ) : (
-              shopOrders &&
-              OtherOrders?.map((order) => {
-                return (
-                  <TaskCard
-                    key={order.id}
-                    status={order.status}
-                    title={`Order #${order.order_number}`}
-                    desc={`${order?.racquet?.model}, ${order?.racquet?.brand}`}
+                    desc={`${order?.racquet?.brand} ${order?.racquet?.model}`}
                     name={
                       order?.delivery_address?.first_name +
                       " " +
@@ -228,7 +191,7 @@ function Tasks({ t }) {
                     key={order.id}
                     status={order.status}
                     title={`Order #${order.order_number}`}
-                    desc={`${order?.racquet?.model}, ${order?.racquet?.brand}`}
+                    desc={`${order?.racquet?.brand} ${order?.racquet?.model}`}
                     name={
                       order?.delivery_address?.first_name +
                       " " +

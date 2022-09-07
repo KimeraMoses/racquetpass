@@ -96,6 +96,7 @@
     }
     .player-details {
       padding-bottom: 20px;
+      margin-top: 20px;
       .title-row {
         padding-bottom: 9px;
         display: flex;
@@ -146,14 +147,14 @@
     border-radius: 12px;
     padding: 19px;
     &__text {
-      font-family: 'Poppins';
+      font-family: "Poppins";
       font-style: normal;
       font-weight: 500;
       font-size: 14px;
       color: #3c3c3c;
     }
     &__undo {
-      font-family: 'Poppins';
+      font-family: "Poppins";
       font-style: normal;
       font-weight: 500;
       font-size: 14px;

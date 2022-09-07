@@ -45,9 +45,7 @@ export const createNewBusiness =
       const { url } = createBusinessRoute();
       const res = await axios.post(url, data);
       dispatch(createNewBusinessSuccess(res.data));
-      toast.success(
-        "Your Account is created successfuly, Please go to settings to complete profile"
-      );
+      toast.success("Your account has been created successfully!");
       dispatch(setBusinessLoading(false));
 
       localStorage.setItem("_rpn_", true);
@@ -97,7 +95,7 @@ export const editBusinessDetails =
       if (res.status === 200) {
         dispatch(setBusinessLoading(false));
         dispatch(fetchShopDetails(Id));
-        toast.success("Changes saved successfuly");
+        toast.success("Changes saved successfully");
       } else {
         toast.error(res?.data?.message);
       }

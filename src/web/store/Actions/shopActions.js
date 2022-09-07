@@ -136,7 +136,7 @@ export const cancelOrder = (orderId, navigate) => {
       const { url } = completeOrderRoute();
       try {
         await axios.post(url, data);
-        toast.success("Order cancelled Successfuly");
+        toast.success("Order cancelled successfully");
         navigate("/order");
       } catch (error) {
         toast.error("Failed to cancel order!");

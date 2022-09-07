@@ -171,7 +171,7 @@ export const createNewString =
     try {
       const { url } = newStringsRoute();
       await axios.post(url, data);
-      toast.success("String created successfuly");
+      toast.success("String created successfully");
       dispatch(setRacquetsLoading(false));
     } catch (error) {
       toast.error(showError(error));
@@ -209,7 +209,7 @@ export const editNewString =
       try {
         const { url } = editStringsRoute(string_id);
         await axios.patch(url, data);
-        toast.success("Changes to string saved Successfuly");
+        toast.success("Changes to string saved successfully");
         dispatch(setRacquetsLoading(false));
       } catch (error) {
         dispatch(setRacquetsLoading(false));
@@ -226,7 +226,7 @@ export const deleteString = (string_id) => {
       try {
         await axios.delete(url);
         dispatch(setRacquetsLoading(false));
-        toast.success("String deleted Successfuly");
+        toast.success("String deleted successfully");
       } catch (error) {
         dispatch(setRacquetsLoading(false));
         toast.error(showError(error));

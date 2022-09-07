@@ -25,7 +25,7 @@ export const login = (data) => {
         getAuthenticatedUser({ user: res.data.user, token: res.data.token })
       );
       SaveTokenInLocalStorage(dispatch, res.data);
-      toast.success("You have logged in successfuly");
+      toast.success("You have logged in successfully");
     } catch (error) {
       dispatch(setUserLoading(false));
       toast.error(showError(error));
@@ -109,7 +109,7 @@ export const resetPassword = (password, resetToken) => {
         dispatch(setUserLoading(false));
         if (res.status === 200) {
           toast.success(
-            "Password changed successfuly, Please login with the new password"
+            "Password changed successfully, Please login with the new password"
           );
         }
       } catch (error) {

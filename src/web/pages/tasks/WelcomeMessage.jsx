@@ -166,11 +166,10 @@ const WelcomeMessage = ({ t }) => {
         <div>
           <div className="shop__services-card-inner pl-4">
             <div className="shop__services-card-heading text-[#E40000]">
-              <Heading>Attention!!</Heading>
+              <Heading>Attention!</Heading>
               <p>
-                Your account is not fully set up to be visible to clients,
-                Please ensure that all the following are fully configured for
-                your shop to show up.
+                Your shop isn’t visible to players. Make sure all of the
+                following are properly configured for your shop to show up.
               </p>
             </div>
 

@@ -91,7 +91,7 @@ let BusinessDetails = ({ t, change }) => {
                   component={CustomInput}
                   validate={required}
                 />
-                <Field
+                {/* <Field
                   name="shop-state"
                   options={states}
                   label="State"
@@ -104,7 +104,7 @@ let BusinessDetails = ({ t, change }) => {
                   //   { label: "Brand 4", value: "b4" },
                   // ]}
                   showInitials
-                />
+                /> */}
                 <CustomSelect
                   name="shop-state"
                   options={states}
