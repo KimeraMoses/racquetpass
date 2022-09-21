@@ -67,7 +67,7 @@ export function ProShop({ t, setCurrentScreen, setDrawer }) {
                       : "Not set"}
                   </SubHeading>
                 </div>
-                <div className="shop__services-card-inner-text">
+                {/* <div className="shop__services-card-inner-text">
                   <SubHeading customClass="shop__services-card-inner-text-heading">
                     {t("shopTaxPriceHeading")}
                   </SubHeading>
@@ -78,7 +78,7 @@ export function ProShop({ t, setCurrentScreen, setDrawer }) {
                       ? `${formatter.format(shop && shop?.tax)}`
                       : "Not set"}
                   </SubHeading>
-                </div>
+                </div> */}
                 <div className="shop__services-card-inner-text">
                   <SubHeading customClass="shop__services-card-inner-text-heading">
                     {t("shopString")}

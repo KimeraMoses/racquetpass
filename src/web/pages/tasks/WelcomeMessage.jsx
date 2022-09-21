@@ -17,6 +17,7 @@ const WelcomeMessage = ({ t }) => {
     onboarding: false,
   });
   const dispatch = useDispatch();
+  console.log(shop);
 
   const handleSubscription = async () => {
     setIsLoading({ ...isLoading, subscription: true });
@@ -74,42 +75,29 @@ const WelcomeMessage = ({ t }) => {
                 </SubHeading>
               </div>
             )}
-            {shop && shop?.labor_price === undefined && (
-              <div className="shop__services-card-inner-text">
-                <SubHeading customClass="shop__services-card-inner-text-heading">
-                  {t("shopLaborPriceHeading")}
-                </SubHeading>
-                <SubHeading customClass="shop__services-card-inner-text-txt">
-                  {isFetching
-                    ? "Loading..."
-                    : shop && shop.labor_price
-                    ? `${shop && shop?.labor_price}`
-                    : "Not set"}
-                </SubHeading>
-              </div>
-            )}
             <div className="shop__services-card-inner-text">
-              {shop && shop?.tax === 0 && (
+              {shop && shop?.labor_price === undefined && (
                 <>
                   <SubHeading customClass="shop__services-card-inner-text-heading">
-                    {t("shopTaxPriceHeading")}
+                    {t("shopLaborPriceHeading")}
                   </SubHeading>
                   <SubHeading customClass="shop__services-card-inner-text-txt">
                     {isFetching
                       ? "Loading..."
-                      : shop && shop?.tax
-                      ? `${shop && shop?.tax}`
+                      : shop && shop.labor_price
+                      ? `${shop && shop?.labor_price}`
                       : "Not set"}
                   </SubHeading>
                 </>
               )}
               {incompleteSetUp && (
-                <p className="text-semibold text-sm">
+                <p className="text-semibold text-[#E40000] text-sm">
+                  Please{" "}
                   <Link
                     to="/inventory?active=proshop"
                     className="text-[#304FFE]"
                   >
-                    Click here
+                    click here
                   </Link>{" "}
                   to edit shop settings and set all the fields above
                 </p>
@@ -189,31 +177,18 @@ const WelcomeMessage = ({ t }) => {
                 </SubHeading>
               </div>
             )}
-            {shop && shop?.labor_price === undefined && (
-              <div className="shop__services-card-inner-text">
-                <SubHeading customClass="shop__services-card-inner-text-heading">
-                  {t("shopLaborPriceHeading")}
-                </SubHeading>
-                <SubHeading customClass="shop__services-card-inner-text-txt">
-                  {isFetching
-                    ? "Loading..."
-                    : shop && shop.labor_price
-                    ? `${shop && shop?.labor_price}`
-                    : "Not set"}
-                </SubHeading>
-              </div>
-            )}
+
             <div className="shop__services-card-inner-text">
-              {shop && shop?.tax === 0 && (
+              {shop && shop?.labor_price === undefined && (
                 <>
                   <SubHeading customClass="shop__services-card-inner-text-heading">
-                    {t("shopTaxPriceHeading")}
+                    {t("shopLaborPriceHeading")}
                   </SubHeading>
                   <SubHeading customClass="shop__services-card-inner-text-txt">
                     {isFetching
                       ? "Loading..."
-                      : shop && shop?.tax
-                      ? `${shop && shop?.tax}`
+                      : shop && shop.labor_price
+                      ? `${shop && shop?.labor_price}`
                       : "Not set"}
                   </SubHeading>
                 </>
@@ -298,7 +273,13 @@ const WelcomeMessage = ({ t }) => {
   };
 
   return (
-    <>{!!isNew ? <NewUserWelcomeMessage /> : <AttentionWelcomeMessage />}</>
+    <>
+      {!!isNew && shop?.appeared_to_clients ? (
+        <AttentionWelcomeMessage />
+      ) : (
+        <NewUserWelcomeMessage />
+      )}
+    </>
   );
 };
 

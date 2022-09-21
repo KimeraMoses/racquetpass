@@ -110,7 +110,7 @@ export const fetchRacquetDetails = (racquet_id, navigate, isQr) => {
                 navigate && navigate("/order-flow/scanned");
                 isQr &&
                   toast.success(
-                    "Racquet found, You can now continue with your order"
+                    "Successfully scanned a racquet! Press “Choose this Racquet” to proceed."
                   );
                 break;
             }
@@ -119,7 +119,7 @@ export const fetchRacquetDetails = (racquet_id, navigate, isQr) => {
             // navigate && navigate("/order");
             isQr &&
               toast.success(
-                "Racquet found, You can now continue with your order"
+                "Successfully scanned a racquet! Press “Start your order now” to proceed."
               );
           }
         }

@@ -15,6 +15,8 @@ import {
 // Styles
 import "./VerifyPhone.styles.scss";
 import { SubmitButton } from "web/components/Buttons/SubmitButton.component";
+import { useEffect } from "react";
+import { getOrderContact } from "web/store/Slices/shopSlice";
 
 const required = (value) => (value ? undefined : "Required");
 
@@ -30,6 +32,22 @@ function VerifyPhone({ t, change }) {
   const location = useLocation();
   const userContacts = useSelector((state) => state?.shop?.contacts);
   const newPhone = localStorage.getItem("_rnc_");
+
+  const order = JSON.parse(localStorage.getItem("_rapo_"));
+
+  useEffect(() => {
+    //LOADING STORED STATE
+    if (order?.contact && Object.keys(order?.contact).length !== 0) {
+      const contactValues = {
+        "first-name": order?.contact["first-name"],
+        "last-name": order?.contact["last-name"],
+        "phone-number": order?.contact["phone-number"],
+      };
+
+      dispatch(getOrderContact(contactValues));
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   //RESEND VERIFICATION CODE
   const sendCodeVericationHandler = async () => {
@@ -58,7 +76,7 @@ function VerifyPhone({ t, change }) {
             ? newPhone
             : userContacts && userContacts["phone-number"],
           navigate,
-          "resend"
+          currentPath === "reverify" ? "resend" : null
         )
       );
       setIsVerifying(false);

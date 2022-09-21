@@ -206,7 +206,7 @@ let EditShop = ({
             service order.
           </div>
 
-          <CustomCurrencyInput
+          {/* <CustomCurrencyInput
             value={tax}
             label="Tax"
             name="tax"
@@ -224,7 +224,7 @@ let EditShop = ({
               isPercentage: isPercentage,
               onClick: () => setPercentage((prevState) => !prevState),
             }}
-          />
+          /> */}
           <div className="edit__service-switch flex justify-between mt-[26px]">
             <Description>{t("shopString")}</Description>
             <CustomSwitch

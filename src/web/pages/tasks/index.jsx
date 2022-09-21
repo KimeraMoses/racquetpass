@@ -60,7 +60,6 @@ function Tasks({ t }) {
         </CustomButton>
       </div>
       {!isFetching && showPromp && <WelcomeMessage />}
-
       <div className="tasks-body">
         <div id="due-tasks">
           <div className="task-row">

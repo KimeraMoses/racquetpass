@@ -240,17 +240,19 @@ function ReviewOrder({ t }) {
   };
 
   const getOrderTaxValue = async () => {
-    const data = {
-      shop_id: shop?.id,
-      amount: TotalPrice,
-    };
-    setTaxing(true);
-    await dispatch(getOrderTax(data, setTax));
-    setTaxing(false);
+    if (shop) {
+      const data = {
+        shop_id: shop?.id,
+        amount: TotalPrice,
+      };
+      setTaxing(true);
+      await dispatch(getOrderTax(data, setTax));
+      setTaxing(false);
+    }
   };
   useEffect(() => {
     getOrderTaxValue();
-  }, [TotalPrice]);
+  }, [TotalPrice, shop]);
 
   const handlePayment = async () => {
     setGenerating(true);
@@ -264,16 +266,11 @@ function ReviewOrder({ t }) {
     setIsCancelling(false);
   };
 
-  console.log("review shop", shop);
-  console.log("review rac", racquet);
-
   useEffect(() => {
     if (orderId && OrderStatus === "pending") {
       dispatch(getOrder(orderId, "", "id"));
     }
   }, [orderId, OrderStatus]);
-
-  console.log("order state", order);
 
   useEffect(() => {
     if (order && orderId && OrderStatus === "pending") {
@@ -441,13 +438,6 @@ function ReviewOrder({ t }) {
               <Heading customClass="review-order-odr__shop-heading-text">
                 {t("odrRacquet")}
               </Heading>
-              {/* <HeadingButton
-                text="Change Racquet"
-                onClick={() => {
-                  setBackFromReview(true);
-                  setStep(1);
-                }}
-              /> */}
             </div>
             <div className="review-order-odr__shop-card">
               <SearchCard
