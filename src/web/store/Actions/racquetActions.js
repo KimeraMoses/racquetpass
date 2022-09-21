@@ -11,22 +11,29 @@ import {
 import {
   getRacquetStrings,
   getRacquetSuccess,
+  setIsHybrid,
   setRacquetsLoading,
+  setStringBrand,
+  setStringCross,
+  setStringMain,
 } from "../Slices/racquetSlice";
 import { toast } from "react-toastify";
+import { createOrder } from "./shopActions";
 
-export const createNewRacquet = (data, setStep, change) => async (dispatch) => {
+export const createNewRacquet = (data, orderValues) => async (dispatch) => {
   dispatch(setRacquetsLoading(true));
+  console.log("here", data);
   try {
     const { url } = newRaquetsRoute();
     const res = await axios.post(url, data);
-    dispatch(getRacquetSuccess(res.data?.racquet));
+    console.log(res);
+    // dispatch(getRacquetSuccess(res.data?.racquet));
+    if (res?.status === 200) {
+      await dispatch(
+        createOrder({ ...orderValues, racquet_id: res?.data?.racquet?.id })
+      );
+    }
     dispatch(setRacquetsLoading(false));
-    // toast.success(
-    //   "Your raquet is created successfuly, You can now proceed with your order "
-    // );
-    if (setStep) setStep(4);
-    if (change) change("racquetId", res?.data.racquet?.id);
   } catch (error) {
     toast.error(showError(error));
     dispatch(setRacquetsLoading(false));
@@ -35,18 +42,26 @@ export const createNewRacquet = (data, setStep, change) => async (dispatch) => {
 
 //EDIT RACQUET DETAILS
 export const editRacquetDetails =
-  (data, rac_id, setStep) => async (dispatch) => {
+  (data, rac_id, orderValues) => async (dispatch) => {
     dispatch(setRacquetsLoading(true));
+    console.log(data);
     try {
       const { url } = editRaquetsRoute(rac_id);
       const res = await axios.patch(url, data);
-      dispatch(fetchRacquetDetails(res.data?.racquet?.id, "", false));
+      if (res?.status === 200) {
+        await dispatch(
+          createOrder({ ...orderValues, racquet_id: res.data?.racquet?.id })
+        );
+      }
+      // dispatch(fetchRacquetDetails(res.data?.racquet?.id, "", false));
       dispatch(setRacquetsLoading(false));
       // toast.success(
       //   "Changes to your raquet are saved successfuly, You can now proceed with your order "
       // );
-      if (setStep) setStep(4);
+      // if (setStep) setStep(4);
+      console.log(res);
     } catch (error) {
+      console.log(error);
       toast.error(showError(error));
       dispatch(setRacquetsLoading(false));
     }
@@ -75,12 +90,16 @@ export const fetchRacquetDetails = (racquet_id, navigate, isQr) => {
       const { url } = getRaquetRoute(racquet_id);
       try {
         const res = await axios.get(url);
+        // console.log("racquet res", res);
+        localStorage.removeItem("_qrc_");
         if (res.status === 200) {
           if (res.data?.order !== undefined) {
             switch (res.data?.order?.status) {
               case "Pending":
                 toast.info("Your order is pending payment");
-                navigate(`/order/${res.data?.order?.id}?status=pending`);
+                navigate(
+                  `/order-flow/review?status=pending&orderId=${res.data?.order?.id}`
+                );
                 break;
               case "Processing":
                 toast.info("Your order is being processed");
@@ -88,7 +107,7 @@ export const fetchRacquetDetails = (racquet_id, navigate, isQr) => {
                 break;
               default:
                 dispatch(getRacquetSuccess(res.data?.racquet));
-                navigate && navigate("/order");
+                navigate && navigate("/order-flow/scanned");
                 isQr &&
                   toast.success(
                     "Racquet found, You can now continue with your order"
@@ -97,7 +116,7 @@ export const fetchRacquetDetails = (racquet_id, navigate, isQr) => {
             }
           } else {
             dispatch(getRacquetSuccess(res.data?.racquet));
-            navigate && navigate("/order");
+            // navigate && navigate("/order");
             isQr &&
               toast.success(
                 "Racquet found, You can now continue with your order"
@@ -105,14 +124,51 @@ export const fetchRacquetDetails = (racquet_id, navigate, isQr) => {
           }
         }
         dispatch(setRacquetsLoading(false));
-        isQr && localStorage.setItem("_rpr_", true);
+        const isHybrid =
+          res.data?.racquet?.crosses?.string_id?.id ===
+          res.data?.racquet?.mains?.string_id?.id
+            ? false
+            : true;
+
+        const stringDetailsMains = {
+          shop: res.data?.racquet?.mains?.string_id?.shop,
+          string_id: res.data?.racquet?.mains?.string_id?.id,
+          name: res.data?.racquet?.mains?.string_id?.name,
+          in_stock: res.data?.racquet?.mains?.string_id?.in_stock,
+          price: res.data?.racquet?.mains?.string_id?.price?.toFixed(2),
+          tension: res.data?.racquet?.mains?.tension.toFixed(2),
+          hybrid_type: res.data?.racquet?.mains?.string_id?.hybrid_type,
+          brand: res.data?.racquet?.mains?.string_id?.brand,
+          model: res.data?.racquet?.mains?.string_id?.model,
+        };
+        const stringDetailsCrosses = {
+          shop: res.data?.racquet?.crosses?.string_id?.shop,
+          string_id: res.data?.racquet?.crosses?.string_id?.id,
+          name: res.data?.racquet?.crosses?.string_id?.name,
+          in_stock: res.data?.racquet?.crosses?.string_id?.in_stock,
+          price: res.data?.racquet?.crosses?.string_id?.price?.toFixed(2),
+          tension: res.data?.racquet?.crosses?.tension.toFixed(2),
+          hybrid_type: res.data?.racquet?.crosses?.string_id?.hybrid_type,
+          brand: res.data?.racquet?.crosses?.string_id?.brand,
+          model: res.data?.racquet?.crosses?.string_id?.model,
+        };
+        if (isHybrid) {
+          dispatch(setIsHybrid(true));
+          dispatch(setStringCross(stringDetailsCrosses));
+          dispatch(setStringMain(stringDetailsMains));
+        } else {
+          dispatch(setIsHybrid(false));
+          dispatch(setStringBrand(stringDetailsMains));
+        }
+        dispatch(getRacquetSuccess(res.data?.racquet));
       } catch (error) {
         dispatch(setRacquetsLoading(false));
         if (error?.response?.status === 404) {
-          isQr && localStorage.setItem("_qrc_", racquet_id);
-          navigate && navigate("/order");
-          // SET SCANNED STATE TO SKIP RESCANNING
-          isQr && localStorage.setItem("_rpr_", true);
+          localStorage.setItem("_qrc_", racquet_id);
+          if (isQr && navigate) {
+            navigate("/order-flow/scanned");
+          }
+          // // SET SCANNED STATE TO SKIP RESCANNING
           return toast.success(
             "Successfully scanned a racquet! Press next to proceed."
           );
@@ -122,38 +178,6 @@ export const fetchRacquetDetails = (racquet_id, navigate, isQr) => {
     }
   };
 };
-
-// FETCH RACQUET USING UUID
-// export const fetchScannedRacquetDetails = (racquet_id, type) => {
-//   return async (dispatch) => {
-//     if (racquet_id) {
-//       dispatch(setRacquetsLoading(true));
-//       const { url } = getRaquetRoute(racquet_id);
-//       try {
-//         const res = await axios.get(url);
-//         console.log(res);
-//         if (res.status === 200) {
-//           dispatch(getRacquetSuccess(res.data?.racquet));
-//           toast.success("Racquet found, You can now continue with your order");
-//         }
-//         dispatch(setRacquetsLoading(false));
-//         // SET SCANNED STATE TO SKIP RESCANNING
-//         localStorage.setItem("_rpr_", true);
-//       } catch (error) {
-//         console.log(error);
-//         dispatch(setRacquetsLoading(false));
-//         // SET SCANNED STATE TO SKIP RESCANNING
-//         localStorage.setItem("_rpr_", true);
-//         localStorage.setItem("_qrc_", racquet_id);
-//         if (error?.response?.status === 404)
-//           return toast.warn(
-//             "Racquet not found, Please continue with the process to create your own racquet!"
-//           );
-//         toast.error("Failed to load racquet details!");
-//       }
-//     }
-//   };
-// };
 
 export const createNewString =
   (name, brand, model, price, shop, hybrid_type, in_stock) =>

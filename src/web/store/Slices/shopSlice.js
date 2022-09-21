@@ -8,12 +8,17 @@ const initialState = {
   isLoading: false,
   isFetching: false,
   message: "",
+  backFromPreview: false,
+  contacts: {},
 };
 
 const shopSlice = createSlice({
   name: "shops",
   initialState,
   reducers: {
+    setBackFromPreview: (state, { payload }) => {
+      state.backFromPreview = payload;
+    },
     setShopLoading: (state, { payload }) => {
       state.isLoading = payload;
     },
@@ -32,6 +37,9 @@ const shopSlice = createSlice({
     getShopOrder: (state, { payload }) => {
       state.order = payload;
     },
+    getOrderContact: (state, { payload }) => {
+      state.contacts = payload;
+    },
   },
 });
 
@@ -44,6 +52,8 @@ export const {
   setShopLoading,
   getAllShopOrders,
   getShopOrder,
+  setBackFromPreview,
+  getOrderContact,
 } = actions;
 
 export default reducer;

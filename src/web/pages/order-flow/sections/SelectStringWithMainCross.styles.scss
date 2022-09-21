@@ -1,0 +1,76 @@
+.select-string-mc {
+  &__heading {
+    display: flex;
+    align-items: center;
+    // justify-content: space-between;
+
+    &-text {
+      max-width: 300px;
+    }
+  }
+  &__text-container {
+    margin-top: 20px;
+  }
+  &__main-info {
+    margin-top: 44px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    &-heading {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+  }
+  &__crosses-info {
+    display: flex;
+    flex-direction: column;
+    margin-top: 40px;
+    gap: 20px;
+    &-heading {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+  }
+  &__hybrid-settings {
+    margin-top: 30px;
+    display: flex;
+    justify-content: space-between;
+    &-text {
+      font-family: Poppins;
+      font-style: normal;
+      font-weight: normal;
+      font-size: 14px;
+      line-height: 21px;
+      display: flex;
+      align-items: center;
+
+      color: #000000;
+    }
+    &-switch {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+  }
+  &__total-price {
+    margin-top: 40px;
+    &-heading {
+      font-family: Poppins;
+      font-style: normal;
+      font-weight: 600;
+      font-size: 12px;
+      line-height: 18px;
+      color: #969696;
+    }
+    &-value {
+      font-family: Poppins;
+      font-style: normal;
+      font-weight: 500;
+      font-size: 18px;
+      line-height: 27px;
+      color: #333333;
+    }
+  }
+}

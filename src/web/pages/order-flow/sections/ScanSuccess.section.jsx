@@ -1,34 +1,35 @@
 // Custom Components
 import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { useCookies } from "react-cookie";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 import { Heading, SubHeading, Description, BackButton } from "web/components";
-import { removeRacquetFromState } from "web/store/Slices/racquetSlice";
-
+import {
+  getRacquetSuccess,
+  removeRacquetFromState,
+} from "web/store/Slices/racquetSlice";
+import { withNamespaces } from "react-i18next";
 // Styles
 import "./ScanSuccess.styles.scss";
+import { reduxForm } from "redux-form";
+import { SubmitButton } from "web/components/Buttons/SubmitButton.component";
+import { setBackFromPreview } from "web/store/Slices/shopSlice";
 
-export function ScanSuccess({
-  t,
-  backward,
-  setStep,
-  setBackFromReview,
-  backFromReview,
-  change,
-}) {
+function ScanSuccess({ t, change }) {
+  const navigate = useNavigate();
   const [cookies, setCookie] = useCookies(["_rpo_"]);
+  const hybrid = useSelector((state) => state.racquet?.hybrid);
+  const backFromReview = useSelector((state) => state?.shop?.backFromPreview);
   const racquet = useSelector((state) => state.racquet?.racquet);
-  const hasRacquet = !!useSelector((state) => state.racquet?.racquet?.id);
+  const hasRacquet = !!useSelector((state) => state.racquet?.racquet?.qr_code);
   useEffect(() => {
     if (hasRacquet) {
       change("racquetId", racquet && racquet?.id);
       change("racquetSport", racquet && racquet?.sport);
       change("racquetBrand", racquet && racquet?.brand);
       change("racquetModel", racquet && racquet?.model);
-      change("ownerName", racquet && racquet?.owner);
     }
-    // localStorage.removeItem("_rpr_");
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [hasRacquet]);
@@ -44,20 +45,21 @@ export function ScanSuccess({
       setCookie("_rprr_", true, {
         maxAge: 30, // Will expire after 30 seconds
       });
-      setStep(6);
+      navigate("/order-flow/review");
     }
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isReturning, cookies, hasRacquet, racquet]);
 
   const dispatch = useDispatch();
+  const isNewRac = !!localStorage.getItem("_qrc_");
+  const order = JSON.parse(localStorage.getItem("_rapo_"));
 
-  const racquetRescanHandler = () => {
-    dispatch(removeRacquetFromState());
-    backward();
-  };
-
-  console.log(racquet);
+  useEffect(() => {
+    if (!hasRacquet && !isNewRac && Object.keys(order?.racquet).length !== 0) {
+      dispatch(getRacquetSuccess(order?.racquet));
+    }
+  }, []);
 
   const isHybrid =
     racquet?.mains?.string_id?.id === racquet?.crosses?.string_id?.id
@@ -72,11 +74,10 @@ export function ScanSuccess({
             <BackButton
               onClick={() => {
                 if (backFromReview) {
-                  setStep(6);
-                  setBackFromReview(false);
+                  dispatch(setBackFromPreview(false));
+                  navigate("/order-flow/review");
                 } else {
-                  backward();
-                  dispatch(removeRacquetFromState());
+                  navigate("/order-flow/scan");
                 }
               }}
             />
@@ -95,7 +96,7 @@ export function ScanSuccess({
                     src={
                       racquet?.image_url
                         ? racquet?.image_url
-                        : "img/orders/bg-success.png"
+                        : "/img/orders/bg-success.png"
                     }
                     alt="racquet"
                     className="scan-details-sc__card-continer-content-racquet-img"
@@ -134,14 +135,18 @@ export function ScanSuccess({
                     <div className='scan-details-sc__card-continer-content-inner-card-txt-box"'>
                       <SubHeading>{t("odrTension")}</SubHeading>
                       <Description>
-                        {racquet && racquet.mains?.tension} lbs
+                        {racquet &&
+                          parseInt(racquet.mains?.tension)?.toFixed(2)}{" "}
+                        lbs
                       </Description>
                     </div>
                     {isHybrid && (
                       <div className='scan-details-sc__card-continer-content-inner-card-txt-box"'>
                         <SubHeading>{t("odrTension")}</SubHeading>
                         <Description>
-                          {racquet && racquet.crosses?.tension} lbs
+                          {racquet &&
+                            parseInt(racquet.crosses?.tension)?.toFixed(2)}{" "}
+                          lbs
                         </Description>
                       </div>
                     )}
@@ -155,8 +160,10 @@ export function ScanSuccess({
                       <Description>
                         It looks you haven’t placed an order on this racquet
                         before. Tap{" "}
-                        {backFromReview ? "“Choose this racquet”" : "“Next”"} to
-                        get started.”
+                        {!hasRacquet
+                          ? "“Start your order now”"
+                          : "“Choose this racquet”"}{" "}
+                        to get started.”
                       </Description>
                     </div>
                   </div>
@@ -164,14 +171,55 @@ export function ScanSuccess({
               </div>
             </div>
           </div>
-          <button
-            className="scan-details-sc__card-continer-content-rescan"
-            onClick={racquetRescanHandler}
-          >
-            {t("ordRescan")}
-          </button>
         </div>
+      </div>
+      <div className="order-page__button-container max-w-[450px] w-full mr-[auto] ml-[auto]">
+        {!hasRacquet && (
+          <div className="mb-2 text-center">Need this racquet restrung?</div>
+        )}
+        <SubmitButton
+          onClick={() => {
+            const repeatCustomer = JSON.parse(localStorage.getItem("_rpr_"));
+            if (
+              !!repeatCustomer?.shop &&
+              racquet?.id === repeatCustomer?.racquet?.id
+            ) {
+              localStorage.setItem("_rapo_", JSON.stringify(repeatCustomer));
+              navigate("/order-flow/review?status=returning");
+            } else {
+              const orderState = {
+                ...order,
+                racquet: racquet,
+                hybrid: hybrid,
+              };
+              localStorage.setItem("_rapo_", JSON.stringify(orderState));
+              navigate("/order/select-shop");
+            }
+          }}
+        >
+          {!hasRacquet ? "Start your order now" : "Choose this racquet"}
+        </SubmitButton>
+        {!hasRacquet && (
+          <div className="mt-2">
+            <SubmitButton
+              outlined
+              onClick={() => {
+                dispatch(setBackFromPreview(true));
+                navigate("/order-flow/scan");
+              }}
+            >
+              Edit Racquet
+            </SubmitButton>
+          </div>
+        )}
       </div>
     </>
   );
 }
+
+ScanSuccess = reduxForm({
+  form: "order-flow-scanned",
+  // onSubmit,
+})(ScanSuccess);
+
+export default withNamespaces()(ScanSuccess);

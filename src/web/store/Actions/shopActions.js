@@ -35,6 +35,8 @@ import {
   setShopFetching,
   getShop,
   getAllShops,
+  getOrderContact,
+  setBackFromPreview,
 } from "../Slices/shopSlice";
 import { toast } from "react-toastify";
 
@@ -136,8 +138,9 @@ export const cancelOrder = (orderId, navigate) => {
       const { url } = completeOrderRoute();
       try {
         await axios.post(url, data);
+        localStorage.removeItem("_rapo_");
         toast.success("Order cancelled successfully");
-        navigate("/order");
+        navigate("/order-flow/scan");
       } catch (error) {
         toast.error("Failed to cancel order!");
       }
@@ -146,18 +149,23 @@ export const cancelOrder = (orderId, navigate) => {
 };
 
 //CREATE ORDER
-export const createOrder = (data, setCookie) => {
+export const createOrder = (data) => {
   return async (dispatch) => {
+    console.log("order data", data);
     if (data) {
       const { url } = createOrdersRoute();
       dispatch(setShopLoading(true));
       try {
         const res = await axios.post(url, data);
-        setCookie("_rpo_", JSON.stringify(data), { path: "/" });
+        // setCookie("_rpo_", JSON.stringify(data), { path: "/" });
+        localStorage.removeItem("_qrc_");
+        const orderLocal = JSON.parse(localStorage.getItem("_rapo_"));
+        localStorage.setItem("_rpr_", JSON.stringify(orderLocal));
         dispatch(setShopLoading(false));
         toast.success("Redirecting to stripe...");
         window.location.replace(res.data.url);
       } catch (error) {
+        console.log(error);
         toast.error("Failed to generate link!");
         dispatch(setShopLoading(false));
       }
@@ -165,6 +173,22 @@ export const createOrder = (data, setCookie) => {
   };
 };
 
+//GET STRIPE TAX
+export const getOrderTax = (data, setTax) => {
+  return async () => {
+    if (data) {
+      try {
+        const res = await axios.post("/api/v1/shops/get-tax", data);
+        console.log(res);
+        if (res?.status === 200) {
+          setTax(res?.data?.tax);
+        }
+      } catch (error) {
+        toast.error(showError(error));
+      }
+    }
+  };
+};
 //GET STRIPE PAYMENT LINK
 export const getStripePaymentLink = (id) => {
   return async () => {
@@ -275,6 +299,24 @@ export const fetchShopDetails = (shopId) => {
   };
 };
 
+//SEND VERIFICATION CODE VERIFICATION CODE
+
+export const resendConfirmation = (orderId) => {
+  return async () => {
+    try {
+      await axios.post("/api/v1/orders/resend-confirmation", {
+        order_id: orderId,
+      });
+      toast.success("Confirmation text sent to your phone");
+    } catch (error) {
+      if (error?.response?.status === 400) {
+        return toast.error("Order not completed");
+      }
+      toast.error("Failed to resend confirmation text!");
+    }
+  };
+};
+
 //SEND ORDER SERVEY
 export const sendSurveyResponse = (data, setShow, setCookie) => {
   return async () => {
@@ -325,13 +367,19 @@ export const sendShopInquiry =
 
 //SEND VERIFICATION CODE VERIFICATION CODE
 
-export const sendVerificationCode = (phone, setStep) => {
-  return async () => {
+export const sendVerificationCode = (phone, navigate, newValues, type) => {
+  return async (dispatch) => {
     try {
       const { url } = sendCodeVerificationRoute();
       await axios.post(url, { phone: phoneFormater(phone) });
       toast.success("Verification code sent to your phone");
-      if (setStep) setStep(5);
+      if (type === "resend") {
+        navigate("/order/reverify");
+        dispatch(setBackFromPreview(true));
+      } else {
+        navigate("/order-flow/verify");
+      }
+      if (newValues) dispatch(getOrderContact(newValues));
     } catch (error) {
       toast.error("Failed to generate verification code!");
     }
@@ -339,8 +387,8 @@ export const sendVerificationCode = (phone, setStep) => {
 };
 
 // VERIFY USER CODE
-export const codeVerification = (otp, phone, setStep) => {
-  return async () => {
+export const codeVerification = (otp, phone, navigate, type) => {
+  return async (dispatch) => {
     try {
       const { url } = verifyCodeRoute();
       const res = await axios.post(url, { otp, phone: phoneFormater(phone) });
@@ -348,8 +396,22 @@ export const codeVerification = (otp, phone, setStep) => {
       if (res.status === 200) {
         localStorage.setItem("_rpe_", JSON.stringify({ e: phone, isV: true }));
       }
-      if (setStep) setStep(6);
+
+      if (type === "resend") {
+        const order = JSON.parse(localStorage.getItem("_rapo_"));
+        const orderState = {
+          ...order,
+          contact: { ...order?.contact, "phone-number": phone },
+        };
+        localStorage.setItem("_rapo_", JSON.stringify(orderState));
+        navigate("/order/done");
+      } else {
+        navigate("/order-flow/review");
+      }
+      dispatch(setBackFromPreview(false));
+      localStorage.removeItem("_rnc_");
     } catch (error) {
+      console.log(error);
       toast.error("Phone verification failed!");
     }
   };

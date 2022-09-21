@@ -47,6 +47,12 @@ import OrderDetails from "./order-page/sections/OrderDetails.section";
 import DoneSection from "./order-page/sections/Done.section";
 import "react-toastify/dist/ReactToastify.css";
 import ResetShopPassword from "./inventory/sections/reset-password/index";
+import OrderFlow from "./order-flow/index";
+
+import BrandSearchResultsSection from "./order-flow/sections/BrandSearchResults.section";
+import ShopSearchResultsSection from "./order-flow/sections/ShopSearchResults.section";
+import DidntGetTextSection from "./order-flow/sections/DidntGetText.section";
+import VerifyPhoneSection from "./order-flow/sections/VerifyPhone.section";
 
 function Routers() {
   const { show } = useSelector((state) => state?.drawer);
@@ -154,11 +160,31 @@ function Routers() {
             element={<ShopSearching />}
           />
           <Route path="/CreateOrder/Submitted" element={<OrderSubmitted />} />
+          <Route path="/order-flow/*" element={<OrderFlow />} />
+          <Route
+            path="/order/select-strings"
+            element={<BrandSearchResultsSection />}
+          />
+          <Route
+            path="/order/select-shop"
+            element={<ShopSearchResultsSection />}
+          />
+          <Route path="/order/resend-text" element={<DidntGetTextSection />} />
+          <Route path="/order/reverify" element={<VerifyPhoneSection />} />
+          {/* <Route path="scan" element={<ScanSectionSection />} />
+            <Route path="scanned" element={<ScanSuccessSection />} />
+            <Route
+              path="select-strings"
+              element={<SelectStringWithMainCrossSection />}
+            /> */}
           {/* <Route
             path="/order-without-account"
             element={<OrderWithoutAccount />}
           /> */}
-          <Route path="/inventory" element={<Inventory />} />
+          <Route
+            path="/inventory"
+            element={!isAuthenticated ? <Navigate to="/" /> : <Inventory />}
+          />
           <Route path="/player-tabs" element={<PlayerTabs />} />
           <Route path="/configure-racquet" element={<ConfigureRacquet />} />
           <Route

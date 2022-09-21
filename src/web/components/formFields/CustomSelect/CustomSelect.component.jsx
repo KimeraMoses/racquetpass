@@ -25,7 +25,8 @@ export const CustomSelect = (props) => {
       <Select
         {...props.input}
         options={props.options}
-        placeholder={props.placeholder ? props.placeholder : props.label}
+        placeholder={<div>Type to search</div>}
+        // placeholder={props.placeholder ? props.placeholder : props.label}
         value={props?.value || selectedOption}
         onBlur={() => {}}
         onChange={(option) => {

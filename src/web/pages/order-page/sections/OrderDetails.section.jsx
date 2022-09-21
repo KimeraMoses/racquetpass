@@ -61,7 +61,7 @@ function OrderDetails({ t }) {
     // done: true,
     expectedPickup: new Date().toDateString(order && order?.due_on),
     shopName: order && order?.delivery_shop?.name,
-    shopAddress: order && order?.delivery_shop?.address.city,
+    shopAddress: `${order?.delivery_shop?.address?.street}, ${order?.delivery_shop?.address?.city}, ${order?.delivery_shop?.address?.state}`,
     orderDate: new Date().toDateString(order && order?.created),
     completionDate: "July 22, 2022",
     orderNumber: order && order?.order_number,
@@ -83,6 +83,7 @@ function OrderDetails({ t }) {
   if (order && order?.racquet?.crosses?.string_id?.hybrid_type === "Reel") {
     crossesPrice = order && order?.racquet?.crosses?.string_id?.price / 2;
   }
+  console.log("order details", order);
 
   const items = [
     {
@@ -90,9 +91,9 @@ function OrderDetails({ t }) {
       isOutOfStock: order && !order.racquet?.mains?.string_id?.in_stock,
       description:
         order &&
-        `${order?.racquet?.mains?.string_id?.name} ${
-          order && order?.racquet?.mains?.string_id?.size
-        } G @ ${order && order?.racquet?.mains?.string_id?.tension} lbs`,
+        `${order?.racquet?.mains?.string_id?.name} @ ${
+          order && order?.racquet?.mains?.tension
+        }lbs`,
       price: `$${mainsPrice?.toFixed(2)}`,
       show: !isHybrid,
     },
@@ -101,9 +102,9 @@ function OrderDetails({ t }) {
       isOutOfStock: order && !order.racquet?.mains?.string_id?.in_stock,
       description:
         order &&
-        `${order?.racquet?.mains?.string_id?.name} ${
-          order && order?.racquet?.mains?.string_id?.size
-        } G @ ${order && order?.racquet?.mains?.string_id?.tension} lbs`,
+        `${order?.racquet?.mains?.string_id?.name} @ ${
+          order && order?.racquet?.mains?.tension
+        }lbs`,
       price: `$${mainsPrice?.toFixed(2)}`,
       show: isHybrid,
     },
@@ -112,9 +113,9 @@ function OrderDetails({ t }) {
       isOutOfStock: order && !order.racquet?.crosses?.string_id?.in_stock,
       description:
         order &&
-        `${order?.racquet?.crosses?.string_id?.name} ${
-          order && order?.racquet?.crosses?.string_id?.size
-        } G @ ${order && order?.racquet?.crosses?.string_id?.tension} lbs`,
+        `${order?.racquet?.crosses?.string_id?.name} @ ${
+          order && order?.racquet?.crosses?.tension
+        }lbs`,
       price: `$${crossesPrice?.toFixed(2)}`,
       show: isHybrid,
     },
@@ -369,33 +370,6 @@ function OrderDetails({ t }) {
               >
                 <SummaryCard summary={summary} />
               </div>
-              {(OrderStatus === "pending" || OrderStatus === "fail") && (
-                <div className="review-order-odr__buttons mt-10">
-                  <p className="text-sm mb-2">
-                    Create new order?{" "}
-                    <span
-                      className={
-                        isCancelling
-                          ? "text-[#E40000] cursor-auto"
-                          : "text-[#304FFE] cursor-pointer"
-                      }
-                      onClick={isCancelling ? null : cancelOrderHanadler}
-                    >
-                      {isCancelling
-                        ? "Cancelling order..."
-                        : "Cancel this order and create new one"}
-                    </span>
-                  </p>
-                  <PaymentButton
-                    className="review-order-odr__buttons-credit"
-                    handleClick={handlePayment}
-                    disabled={isGenerating}
-                    style={{ marginBottom: "40px" }}
-                  >
-                    {isGenerating ? "Generating Payment Link..." : "Pay"}
-                  </PaymentButton>
-                </div>
-              )}
             </div>
           </div>
         </>

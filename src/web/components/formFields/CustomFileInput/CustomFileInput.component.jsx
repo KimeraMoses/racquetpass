@@ -1,9 +1,18 @@
+import { useEffect } from "react";
 import { useState } from "react";
 import "./CustomFileInput.styles.scss";
 
 export const FileInput = (props) => {
   const [image, setImage] = useState("");
-  const [hasImage, setHasImage] = useState(false);
+  const [hasBg, setHasBg] = useState(`${props?.background}`);
+  const [hasImage, setHasImage] = useState(props?.background ? true : false);
+
+  useEffect(() => {
+    if (props?.background && !hasImage) {
+      setHasBg(props?.background);
+      setHasImage(true);
+    }
+  }, [props]);
 
   const handleChange = async (e) => {
     const [file] = e.target.files;
@@ -13,6 +22,7 @@ export const FileInput = (props) => {
     if (props.change) {
       props.change(props?.name, racquetImage);
     }
+    setHasBg(racquetImage);
     setImage(URL.createObjectURL(file));
   };
 
@@ -31,6 +41,7 @@ export const FileInput = (props) => {
   };
   const handleCancel = () => {
     setImage("");
+    setHasBg("");
     if (props.change) {
       props.change(props?.name, "");
     }
@@ -48,8 +59,8 @@ export const FileInput = (props) => {
           htmlFor="upload-photo"
           style={{
             background: `url(${
-              props.background
-                ? props.background
+              hasBg && hasImage
+                ? hasBg
                 : image
                 ? image
                 : "/img/configureRacquet/camera.png"

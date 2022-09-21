@@ -3,11 +3,19 @@ import { useSelector } from "react-redux";
 import { Heading, Description, CustomPhoneInput } from "web/components";
 import { BackButton } from "web/components/Buttons/BackButton.component";
 import { SubmitButton } from "web/components/Buttons/SubmitButton.component";
-
+import { withNamespaces } from "react-i18next";
+import { useNavigate } from "react-router-dom";
 // Styles
 import "./DidntGetText.styles.scss";
+import { reduxForm } from "redux-form";
+import {
+  resendConfirmation,
+  sendVerificationCode,
+} from "web/store/Actions/shopActions";
+import { useDispatch } from "react-redux";
+import { useState } from "react";
 
-const phone = "(123) 456-7890";
+// const phone = "(123) 456-7890";
 
 // Phone Validation
 const formats = "(999) 999-9999|(999)999-9999|999-999-9999|9999999999";
@@ -26,24 +34,47 @@ const phoneValidation = (value) => {
   }
 };
 
-export function DidntGetText({
-  t,
-  backward,
-  change,
-  backFromReview,
-  setStep,
-  setBackFromReview,
-}) {
+function DidntGetText({ t, change, setStep }) {
+  const [isLoading, setIsLoading] = useState(false);
+  const [isSending, setIsSending] = useState(false);
+  const order = useSelector((state) => state?.shop?.order);
   const phoneNumber = useSelector(
-    (state) => state?.form?.signup?.values?.["phone-number"]
+    (state) => state?.form?.text?.values?.["phone-number"]
   );
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  //RESEND VERIFICATION CODE
+  const sendTextHandler = async () => {
+    setIsLoading(true);
+    try {
+      await dispatch(resendConfirmation(order?.id));
+      setIsLoading(false);
+    } catch (error) {
+      setIsLoading(false);
+    }
+  };
+
+  //RESEND VERIFICATION CODE
+  const sendCodeVericationHandler = async () => {
+    setIsSending(true);
+    try {
+      await dispatch(
+        sendVerificationCode(phoneNumber, navigate, null, "resend")
+      );
+      localStorage.setItem("_rnc_", phoneNumber);
+      setIsSending(false);
+    } catch (error) {
+      setIsSending(false);
+    }
+  };
+
   return (
     <>
       <div className="didnt-get-text max-w-[450px] m-[0_auto]">
         <div className="didnt-get-text__heading">
           <BackButton
             onClick={() => {
-              setStep(7);
+              navigate("/order/done");
             }}
           />
           <Heading customClass="didnt-get-text__heading-text">
@@ -52,18 +83,20 @@ export function DidntGetText({
         </div>
         <div className="didnt-get-text__text-container">
           <Description customClass="didnt-get-text__text-container-text">
-            We sent a text to <span className="text-[#304FFE]">{phone}</span>,
-            but something might've gone wrong.
+            We sent a text to{" "}
+            <span className="text-[#304FFE]">
+              {order?.delivery_address?.phone_number}
+            </span>
+            , but something might've gone wrong.
           </Description>
           <div className="mt-[20px]">
             <SubmitButton
               type="button"
+              disabled={isLoading}
               outlined
-              onClick={() => {
-                setStep(7);
-              }}
+              onClick={sendTextHandler}
             >
-              Resend Text
+              {isLoading ? "Sending..." : "Resend Text"}
             </SubmitButton>
           </div>
         </div>
@@ -83,14 +116,23 @@ export function DidntGetText({
           <SubmitButton
             type="button"
             disabled={
-              !phoneNumber || phoneValidation(phoneNumber) !== undefined
+              order?.delivery_address?.phone_number === phoneNumber ||
+              isSending ||
+              !phoneNumber ||
+              phoneValidation(phoneNumber) !== undefined
             }
-            onClick={() => setStep(10)}
+            onClick={sendCodeVericationHandler}
           >
-            Update Phone Number
+            {isSending ? "Sending code..." : "Update Phone Number"}
           </SubmitButton>
         </div>
       </div>
     </>
   );
 }
+DidntGetText = reduxForm({
+  form: "text",
+  // onSubmit,
+})(DidntGetText);
+
+export default withNamespaces()(DidntGetText);

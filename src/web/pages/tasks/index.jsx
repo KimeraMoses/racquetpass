@@ -39,12 +39,6 @@ function Tasks({ t }) {
       )
       .filter((order) => order.status.toLowerCase() === "completed");
 
-  const OtherOrders =
-    shopOrders &&
-    shopOrders?.others?.filter(
-      (order) => order?.status?.toLowerCase() !== "completed"
-    );
-
   const showPromp =
     (shop && shop?.tax === 0) ||
     (shop && shop?.labor_price === undefined) ||

@@ -40,7 +40,7 @@ const Done = ({ t, setStep }) => {
               We've sent you a text confirming your order details.{" "}
               <span
                 className="underline cursor-pointer"
-                onClick={() => setStep(9)}
+                onClick={() => navigate("/order/resend-text")}
               >
                 Didn't get a text?
               </span>

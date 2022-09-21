@@ -6,8 +6,6 @@ export const Progress = ({ steps }) => {
     <div className={`progress ${small ? "progress-small" : ""}`}>
       <div className="max-w-[450px] m-[0_auto] flex items-center">
         {steps.content.map((step, index) => {
-          // console.log(steps?.active);
-          // console.log(step);
           return (
             <>
               <div
@@ -23,12 +21,7 @@ export const Progress = ({ steps }) => {
                 <></>
               ) : (
                 <div className="progress__step-dots" key={step + index}>
-                  <img
-                    src={
-                      small ? "/img/progress-small.png" : "/img/progress.png"
-                    }
-                    alt="progress-dots"
-                  />
+                  <img src={"/img/progress.png"} alt="progress-dots" />
                 </div>
               )}
             </>

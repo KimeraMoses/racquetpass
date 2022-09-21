@@ -3,6 +3,10 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
   racquets: [],
   racquet: {},
+  hybrid: false,
+  brand: {},
+  main: {},
+  cross: {},
   strings: [],
   isLoading: false,
   message: "",
@@ -14,6 +18,9 @@ export const racquetSlice = createSlice({
   reducers: {
     setRacquetsLoading: (state, { payload }) => {
       state.isLoading = payload;
+    },
+    setIsHybrid: (state, { payload }) => {
+      state.hybrid = payload;
     },
     getRacquetsSuccess: (state, { payload }) => {
       state.racquets = payload;
@@ -27,6 +34,21 @@ export const racquetSlice = createSlice({
     removeRacquetFromState: (state) => {
       state.racquet = {};
     },
+    setStringBrand: (state, { payload }) => {
+      state.brand = payload;
+      if (Object.keys(state.main).length === 0) {
+        state.main = payload;
+      }
+      if (Object.keys(state.cross).length === 0) {
+        state.cross = payload;
+      }
+    },
+    setStringMain: (state, { payload }) => {
+      state.main = payload;
+    },
+    setStringCross: (state, { payload }) => {
+      state.cross = payload;
+    },
   },
 });
 const { reducer, actions } = racquetSlice;
@@ -37,6 +59,10 @@ export const {
   getRacquetSuccess,
   getRacquetStrings,
   removeRacquetFromState,
+  setIsHybrid,
+  setStringBrand,
+  setStringCross,
+  setStringMain,
 } = actions;
 
 export default reducer;

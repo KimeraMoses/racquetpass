@@ -37,7 +37,7 @@ function Home({ t }) {
             <h1 className="banner-container__heading">{t("homeHeading")}</h1>
           </div>
           <div className="banner-button-container">
-            <Button isDark onClick={() => navigate(`/order`)}>
+            <Button isDark onClick={() => navigate(`/order-flow/scan`)}>
               {t("homeNewBtnTxt")}
             </Button>
           </div>

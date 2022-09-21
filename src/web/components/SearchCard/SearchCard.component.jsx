@@ -129,7 +129,7 @@ export function SearchCard({
                   </div>
                   <div>
                     <Description customClass="search__brand-card-container-content-txt-heading">
-                      {string?.price}
+                      ${string?.price}
                     </Description>
                   </div>
                 </div>

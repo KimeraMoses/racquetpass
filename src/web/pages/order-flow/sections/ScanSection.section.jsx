@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
-import { Field } from "redux-form";
+import { Field, reduxForm } from "redux-form";
 import BarcodeScannerComponent from "react-qr-barcode-scanner";
 import { Link, useNavigate } from "react-router-dom";
 // Custom Components
 import { Heading, Description, Modal } from "web/components";
-
+import { withNamespaces } from "react-i18next";
 // Styles
 import "./ScanSection.styles.scss";
 import { BackButton } from "web/components/Buttons/BackButton.component";
@@ -13,23 +13,18 @@ import { useDispatch, useSelector } from "react-redux";
 import { fetchRacquetDetails } from "web/store/Actions/racquetActions";
 import Loader from "web/components/Loader/Loader";
 import { useCookies } from "react-cookie";
+import { Button } from "web/components/Buttons/Button.component";
+import { setBackFromPreview } from "web/store/Slices/shopSlice";
+// import Images from "../../../../../public/img/orderpage/"
 
-export function ScanSection({
-  t,
-  scanForward,
-  change,
-  setStep,
-  backFromReview,
-  setBackFromReview,
-  backward,
-}) {
+function ScanSection({ t, change }) {
   const [cookies, setCookie] = useCookies(["_rpo_"]);
   const [qrCode, setQrCode] = useState("");
   const [qrScanner, setQrScanner] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [showModal, setShowModal] = useState(false);
+  const backFromReview = useSelector((state) => state?.shop?.backFromPreview);
   const [permissionsDenied, setPermissionsDenied] = useState(false);
-  const racquetDetails = useSelector((state) => state.racquet.racquet);
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -45,7 +40,7 @@ export function ScanSection({
       await dispatch(
         fetchRacquetDetails(rac_id, navigate, !!cookies?._rpo_ ? false : true)
       );
-      scanForward(true);
+      navigate("/order-flow/scanned");
       setIsLoading(false);
     }
   };
@@ -56,17 +51,14 @@ export function ScanSection({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [qrCode]);
 
-  // useEffect(() => {
-  // if (!!localStorage.getItem("_rpr_")) scanForward(true);
-
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  // }, [racquetDetails]);
-
   useEffect(() => {
     if (qrCode) {
+      setCookie("_rpos_", qrCode);
       change("raquet-details-from-qr", qrCode);
     }
-  }, [qrCode, change, scanForward]);
+  }, [qrCode, change]);
+
+  console.log(qrCode);
 
   return (
     <>
@@ -75,10 +67,10 @@ export function ScanSection({
           <BackButton
             onClick={() => {
               if (backFromReview) {
-                setStep(6);
-                setBackFromReview(false);
+                dispatch(setBackFromPreview(false));
+                navigate("/order-flow/scanned");
               } else {
-                backward();
+                navigate("/");
               }
             }}
           />
@@ -169,19 +161,10 @@ export function ScanSection({
                 </div>
               ) : (
                 <>
-                  <img src="img/orderpage/card.png" alt="scan" />
+                  <img src={"/img/orderpage/card.png"} alt="scan" />
                 </>
               )}
-              <div className="scan-section__image-container-button">
-                {/* <button
-                  className="scan-section__image-container-button-btn"
-                  onClick={() => {
-                    setQrScanner((qrScanner) => !qrScanner);
-                  }}
-                > */}
-                Scan
-                {/* </button> */}
-              </div>
+              <div className="scan-section__image-container-button">Scan</div>
             </>
           )}
         </div>
@@ -192,14 +175,14 @@ export function ScanSection({
         >
           <Description>{t("scanQRDesc")}</Description>
         </div>
-        {backFromReview ? (
-          <div className="mt-[40px]">
-            <SubmitButton disabled>Change to this racquet</SubmitButton>
-          </div>
-        ) : (
-          <></>
-        )}
       </div>
     </>
   );
 }
+
+ScanSection = reduxForm({
+  form: "order-flow-scan",
+  // onSubmit,
+})(ScanSection);
+
+export default withNamespaces()(ScanSection);
