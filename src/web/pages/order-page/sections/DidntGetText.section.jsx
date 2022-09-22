@@ -22,7 +22,7 @@ const phoneValidation = (value) => {
       return undefined;
     }
   } else {
-    return "Please enter a valid phone number.";
+    return "Please enter a valid phone number";
   }
 };
 

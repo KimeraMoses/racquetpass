@@ -85,7 +85,7 @@ function Routers() {
             element={<ResetPassword />}
           />
           <Route path="/reset-password" element={<ResetShopPassword />} />
-          <Route path="/order" element={<Order />} />
+          {/* <Route path="/order" element={<Order />} /> */}
           <Route path="/order/:orderId" element={<OrderDetails />} />
           <Route path="/order/done" element={<DoneSection />} />
           <Route
@@ -142,24 +142,24 @@ function Routers() {
             path="/BusinessAccount/ProfileInfo"
             element={<ProfileInfo />}
           />
-          <Route path="/ServiceOrder/View" element={<ViewServiceOrder />} />
+          {/* <Route path="/ServiceOrder/View" element={<ViewServiceOrder />} />
           <Route path="/ServiceOrder/Details" element={<OrderDetails />} />
           <Route path="/ServiceOrder/Scanned" element={<OrderScanned />} />
           <Route path="/CreateOrder/Locker" element={<CreateOrder />} />
           <Route path="/CreateOrder/Scan" element={<ScanOrder />} />
           <Route path="/CreateOrder/Scanned" element={<ScannedOrder />} />
           <Route path="/CreateOrder/Details" element={<CreateOrderDetails />} />
-          <Route path="/CreateOrder/Payment" element={<CreateOrderPayment />} />
-          <Route
+          <Route path="/CreateOrder/Payment" element={<CreateOrderPayment />} /> */}
+          {/* <Route
             path="/CreateOrder/StringDetails"
             element={<StringDetails />}
-          />
-          <Route path="/CreateOrder/Shop" element={<Shop />} />
-          <Route
+          /> */}
+          {/* <Route path="/CreateOrder/Shop" element={<Shop />} /> */}
+          {/* <Route
             path="/CreateOrder/ShopSearching"
             element={<ShopSearching />}
-          />
-          <Route path="/CreateOrder/Submitted" element={<OrderSubmitted />} />
+          /> */}
+          {/* <Route path="/CreateOrder/Submitted" element={<OrderSubmitted />} /> */}
           <Route path="/order-flow/*" element={<OrderFlow />} />
           <Route
             path="/order/select-strings"
@@ -185,12 +185,12 @@ function Routers() {
             path="/inventory"
             element={!isAuthenticated ? <Navigate to="/" /> : <Inventory />}
           />
-          <Route path="/player-tabs" element={<PlayerTabs />} />
-          <Route path="/configure-racquet" element={<ConfigureRacquet />} />
-          <Route
+          {/* <Route path="/player-tabs" element={<PlayerTabs />} /> */}
+          {/* <Route path="/configure-racquet" element={<ConfigureRacquet />} /> */}
+          {/* <Route
             path="/admin"
-            element={!isAuthenticated ? <Navigate to="/" /> : <AdminWorkflow />}
-          />
+            element={isAuthenticated ? <Navigate to="/" /> : <AdminWorkflow />}
+          /> */}
           <Route path="*" element={<Page404 />} />
         </Routes>
       </Router>

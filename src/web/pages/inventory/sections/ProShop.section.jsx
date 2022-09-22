@@ -136,9 +136,9 @@ export function ProShop({ t, setCurrentScreen, setDrawer }) {
                 {/* {t("orderOpenedShopAddress")} */}
                 {isLoading
                   ? "Loading..."
-                  : `${shop && shop?.address?.street} ${
+                  : `${shop && shop?.address?.street}${
                       shop && shop?.address?.apartment
-                        ? `,${shop?.address?.apartment}`
+                        ? `, ${shop?.address?.apartment}`
                         : ""
                     }`}
               </SubHeading>

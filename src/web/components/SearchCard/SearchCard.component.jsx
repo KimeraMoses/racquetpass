@@ -1,5 +1,5 @@
 // Custom Components
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { SubHeading, Description } from "web/components";
 import { fetchShopDetails } from "web/store/Actions/shopActions";
 
@@ -16,8 +16,8 @@ export function SearchCard({
   cross,
   onClick = () => {},
 }) {
+  const { isLoading } = useSelector((state) => state.racquet);
   const dispatch = useDispatch();
-
   const handleClick = () => {
     // console.log("Selected brand", brand);
     if (shop) {
@@ -129,7 +129,8 @@ export function SearchCard({
                   </div>
                   <div>
                     <Description customClass="search__brand-card-container-content-txt-heading">
-                      ${string?.price}
+                      {isLoading ? "" : "$"}
+                      {string?.price}
                     </Description>
                   </div>
                 </div>

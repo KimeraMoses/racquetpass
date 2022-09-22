@@ -56,7 +56,6 @@ function ReviewOrder({ t }) {
   );
   const { isLoading: isFetching } = useSelector((state) => state.racquet);
   const userContacts = useSelector((state) => state?.shop?.contacts);
-  const values = useSelector((state) => state?.form?.review?.values);
   const racquet = useSelector((state) => state.racquet?.racquet);
   const hasRacquet = !!useSelector((state) => state.racquet?.racquet?.id);
   const shop = useSelector((state) => state.shop?.shop);
@@ -64,8 +63,6 @@ function ReviewOrder({ t }) {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  // const isReturning = query.get("rpc");
-  const isReturning = !!cookies?._rprr_;
   function useQuery() {
     return new URLSearchParams(useLocation().search);
   }
@@ -325,16 +322,18 @@ function ReviewOrder({ t }) {
     }
   }, [order, orderId]);
 
+  console.log("rac", racquet);
+
   return (
     <>
       <div>
-        {OrderStatus && OrderStatus !== "returning" && (
+        {OrderStatus && OrderStatus !== "returning" && OrderStatus !== "saved" && (
           <div
             className={`max-w-[450px] m-[0_auto] ${
               OrderStatus === "fail"
                 ? `text-[#E40000] bg-[#fff0f0]`
                 : ` bg-[#304FFE]/10 text-[#304FFE]`
-            } rounded-md my-2 text-center px-2 py-4`}
+            } rounded-md m-2 text-center px-2 py-4`}
           >
             {OrderStatus === "fail" ? (
               <p>
@@ -356,12 +355,19 @@ function ReviewOrder({ t }) {
           </div>
         )}
         <div className={`review-order-odr max-w-[450px] m-[0_auto]`}>
-          {OrderStatus === "returning" && (
+          {(OrderStatus === "returning" || OrderStatus === "saved") && (
             <div className="bg-[rgba(48,79,254,0.1)] text-[#304FFE] m-2 px-2 py-4  text-center mb-8 rounded-md font-medium">
-              <p>
-                We entered in your last used settings. If you're shopping
-                somewhere new, tap "Change Shop".
-              </p>
+              {OrderStatus === "returning" ? (
+                <p>
+                  We entered in your last used settings. If you're shopping
+                  somewhere new, tap "Change Shop".
+                </p>
+              ) : (
+                <p>
+                  We have retrieved your saved details, tap "Pay and Finish" to
+                  complete your order
+                </p>
+              )}
             </div>
           )}
           <div className="review-order-odr__heading">
@@ -457,6 +463,34 @@ function ReviewOrder({ t }) {
               <HeadingButton
                 text="Change Strings"
                 onClick={() => {
+                  const stringDetailsMains = {
+                    shop: racquet?.mains?.string_id?.shop,
+                    string_id: racquet?.mains?.string_id?.id,
+                    name: racquet?.mains?.string_id?.name,
+                    in_stock: racquet?.mains?.string_id?.in_stock,
+                    price: racquet?.mains?.string_id?.price?.toFixed(2),
+                    tension: racquet?.mains?.tension.toFixed(2),
+                    hybrid_type: racquet?.mains?.string_id?.hybrid_type,
+                    brand: racquet?.mains?.string_id?.brand,
+                    model: racquet?.mains?.string_id?.model,
+                  };
+                  const stringDetailsCrosses = {
+                    shop: racquet?.crosses?.string_id?.shop,
+                    string_id: racquet?.crosses?.string_id?.id,
+                    name: racquet?.crosses?.string_id?.name,
+                    in_stock: racquet?.crosses?.string_id?.in_stock,
+                    price: racquet?.crosses?.string_id?.price?.toFixed(2),
+                    tension: racquet?.crosses?.tension.toFixed(2),
+                    hybrid_type: racquet?.crosses?.string_id?.hybrid_type,
+                    brand: racquet?.crosses?.string_id?.brand,
+                    model: racquet?.crosses?.string_id?.model,
+                  };
+                  if (isHybrid) {
+                    dispatch(setStringCross(stringDetailsCrosses));
+                    dispatch(setStringMain(stringDetailsMains));
+                  } else {
+                    dispatch(setStringBrand(stringDetailsMains));
+                  }
                   dispatch(setBackFromPreview(true));
                   navigate("/order-flow/strings");
                 }}

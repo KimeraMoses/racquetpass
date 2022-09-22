@@ -319,11 +319,6 @@ function SelectString({ t, change }) {
                       alt="down-arrow"
                     />
                   }
-                  // onSelectClick={() => {
-                  //   setMain(true);
-                  //   setCross(false);
-                  //   setMainCross({ current: "search" });
-                  // }}
                   onSelectClick={() =>
                     navigate("/order/select-strings?type=main")
                   }
@@ -376,11 +371,6 @@ function SelectString({ t, change }) {
                     />
                   }
                   value={cross?.name}
-                  // onSelectClick={() => {
-                  //   setMain(false);
-                  //   setCross(true);
-                  //   setMainCross({ current: "search" });
-                  // }}
                   onSelectClick={() =>
                     navigate("/order/select-strings?type=cross")
                   }

@@ -142,7 +142,9 @@ function BrandSearchResults({
                   brand={{
                     shop_id: string?.shop,
                     string_id: string?.id,
-                    name: `${string?.name}`,
+                    name: `${string?.name}${
+                      string?.hybrid ? `(${string?.hybrid_type})` : ""
+                    }`,
                     in_stock: string?.in_stock,
                     price: `$${string.price?.toFixed(2)}`,
                   }}

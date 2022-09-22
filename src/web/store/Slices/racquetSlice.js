@@ -36,12 +36,8 @@ export const racquetSlice = createSlice({
     },
     setStringBrand: (state, { payload }) => {
       state.brand = payload;
-      if (Object.keys(state.main).length === 0) {
-        state.main = payload;
-      }
-      if (Object.keys(state.cross).length === 0) {
-        state.cross = payload;
-      }
+      state.main = payload;
+      state.cross = payload;
     },
     setStringMain: (state, { payload }) => {
       state.main = payload;

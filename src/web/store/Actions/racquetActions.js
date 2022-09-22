@@ -80,7 +80,6 @@ export const fetchRacquetDetails = (racquet_id, navigate, isQr) => {
       const { url } = getRaquetRoute(racquet_id);
       try {
         const res = await axios.get(url);
-        // console.log("racquet res", res);
         localStorage.removeItem("_qrc_");
         if (res.status === 200) {
           if (res.data?.order !== undefined) {

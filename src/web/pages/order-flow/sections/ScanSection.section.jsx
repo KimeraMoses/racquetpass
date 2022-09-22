@@ -37,10 +37,14 @@ function ScanSection({ t, change }) {
   const fetchRacquet = async (rac_id) => {
     if (qrCode) {
       setIsLoading(true);
-      await dispatch(
-        fetchRacquetDetails(rac_id, navigate, !!cookies?._rpo_ ? false : true)
-      );
-      navigate("/order-flow/scanned");
+      await dispatch(fetchRacquetDetails(rac_id, navigate, false));
+      const orderLocal = JSON.parse(localStorage.getItem("_rapo_"));
+      if (!!orderLocal?.shop && qrCode === orderLocal?.racquet?.qr_code) {
+        navigate("/order-flow/review?status=saved");
+      } else {
+        navigate("/order-flow/scanned");
+      }
+
       setIsLoading(false);
     }
   };

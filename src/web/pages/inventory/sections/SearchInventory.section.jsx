@@ -30,6 +30,8 @@ export function SearchInventory({ t, setCurrentScreen, setDrawer, change }) {
     setSearchResults([]);
   }, [isSearching]);
 
+  console.log(FilteredStrings);
+
   return (
     <>
       <div className="search-inventory">
@@ -106,15 +108,12 @@ export function SearchInventory({ t, setCurrentScreen, setDrawer, change }) {
                     }}
                     string={{
                       string_id: string?.id,
-                      tension: string?.tension,
-                      name: `${string?.brand} ${string?.model}`,
+                      name: `${string?.name}${
+                        string?.hybrid ? `(${string?.hybrid_type})` : ""
+                      }`,
                       in_stock: string?.in_stock,
-                      price: `$${string.price?.toFixed(2)}`,
-                      // size: string.size,
+                      price: `${string.price?.toFixed(2)}`,
                     }}
-                    // main={main}
-                    // cross={cross}
-                    // change={change}
                   />
                 ))
               )}

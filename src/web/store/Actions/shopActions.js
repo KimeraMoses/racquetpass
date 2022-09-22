@@ -156,12 +156,12 @@ export const createOrder = (data) => {
       dispatch(setShopLoading(true));
       try {
         const res = await axios.post(url, data);
-        // setCookie("_rpo_", JSON.stringify(data), { path: "/" });
         localStorage.removeItem("_qrc_");
         const orderLocal = JSON.parse(localStorage.getItem("_rapo_"));
         localStorage.setItem("_rpr_", JSON.stringify(orderLocal));
         dispatch(setShopLoading(false));
         toast.success("Redirecting to stripe...");
+        localStorage.removeItem("_rapo_");
         window.location.replace(res.data.url);
       } catch (error) {
         toast.error("Failed to generate link!");

@@ -81,11 +81,7 @@ function ScanSuccess({ t, change }) {
                 }
               }}
             />
-            <Heading>
-              {!hasRacquet
-                ? "Successfully scanned a racquet!"
-                : t("scanSuccessHeading")}
-            </Heading>
+            <Heading>Successfully scanned a racquet!</Heading>
           </div>
 
           <div className="scan-details-sc__card-continer">
@@ -159,11 +155,7 @@ function ScanSuccess({ t, change }) {
                     <div className="scan-details__card-continer-content-inner-card-txt">
                       <Description>
                         It looks you haven’t placed an order on this racquet
-                        before. Tap{" "}
-                        {!hasRacquet
-                          ? "“Start your order now”"
-                          : "“Choose this racquet”"}{" "}
-                        to get started.”
+                        before. Tap “Choose this racquet” to get started.”
                       </Description>
                     </div>
                   </div>
@@ -197,7 +189,7 @@ function ScanSuccess({ t, change }) {
             }
           }}
         >
-          {!hasRacquet ? "Start your order now" : "Choose this racquet"}
+          Choose this racquet
         </SubmitButton>
         {!hasRacquet && (
           <div className="mt-2">

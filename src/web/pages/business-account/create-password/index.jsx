@@ -43,15 +43,17 @@ let CreatePassword = ({ t, back }) => {
     noTextFromNameEmail: false,
   });
 
-  const firstName = useSelector(
-    (state) => state?.form?.signup?.values?.firstName
-  );
-  const lastName = useSelector(
-    (state) => state?.form?.signup?.values?.lastName
-  );
   const values = useSelector(
     (state) => state?.form?.["create-business-account-4"]?.values
   );
+  const firstName = useSelector(
+    (state) => state?.form?.["create-business-account-4"]?.values?.firstName
+  );
+  const lastName = useSelector(
+    (state) => state?.form?.["create-business-account-4"]?.values?.lastName
+  );
+
+  console.log(firstName, lastName);
 
   useEffect(() => {
     // Check if 8 Characters Long

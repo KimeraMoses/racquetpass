@@ -1,10 +1,10 @@
-import { useState } from 'react';
-import { CustomInput } from '../CustomInput/CustomInput.component';
+import { useState } from "react";
+import { CustomInput } from "../CustomInput/CustomInput.component";
 
 // ZIP Validation
 const zipValidation = (value) => {
   if (value?.length !== 5) {
-    return 'Please enter a standard 5 digits zip code';
+    return "Please enter a standard 5-digit zip code";
   } else {
     return undefined;
   }
@@ -36,17 +36,17 @@ export const CustomZIPInput = ({
           (value?.length && (value?.length < 3 || value?.length > 7)),
         error:
           !optional && !value
-            ? 'Field is required'
+            ? "Field is required"
             : zipValidation(value) !== undefined
             ? zipValidation(value)
-            : '',
+            : "",
       }}
       customOnChange={(e) => {
         const value = e?.target?.value;
         if (value?.length > 5) {
           return;
         } else {
-          change('zip-code', value);
+          change("zip-code", value);
         }
       }}
     />
