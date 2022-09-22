@@ -58,8 +58,6 @@ function ScanSection({ t, change }) {
     }
   }, [qrCode, change]);
 
-  console.log(qrCode);
-
   return (
     <>
       <div className="scan-section max-w-[450px] m-[0_auto]">

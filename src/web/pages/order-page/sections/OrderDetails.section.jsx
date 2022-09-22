@@ -29,7 +29,6 @@ function OrderDetails({ t }) {
   const [showSurvey, setShowSurvey] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [isGenerating, setIsGenerating] = useState(false);
-  const [isCancelling, setIsCancelling] = useState(false);
   const order = useSelector((state) => state?.shop?.order);
   const [cookies, setCookie] = useCookies("_rpr_");
   const { orderId } = useParams();
@@ -83,7 +82,6 @@ function OrderDetails({ t }) {
   if (order && order?.racquet?.crosses?.string_id?.hybrid_type === "Reel") {
     crossesPrice = order && order?.racquet?.crosses?.string_id?.price / 2;
   }
-  console.log("order details", order);
 
   const items = [
     {
@@ -130,7 +128,7 @@ function OrderDetails({ t }) {
       price: `${order && order?.delivery_shop?.is_tax_percentage ? "" : "$"}${
         order && order?.delivery_shop?.tax?.toFixed(2)
       }${order && order?.delivery_shop?.is_tax_percentage ? "%" : ""}`,
-      show: true,
+      show: false,
     },
   ];
 
@@ -165,12 +163,6 @@ function OrderDetails({ t }) {
     setIsGenerating(false);
   };
 
-  const cancelOrderHanadler = async () => {
-    setIsCancelling(true);
-    await dispatch(cancelOrder(orderId, navigate));
-    setIsCancelling(false);
-  };
-
   return (
     <div className="px-5">
       {isLoading ? (
@@ -183,7 +175,7 @@ function OrderDetails({ t }) {
             show={
               showSurvey &&
               OrderStatus === "success" &&
-              cookies?._rpr_ !== order?.delivery_address?.email
+              cookies?._rpr_ !== order?.delivery_address?.phone_number
             }
             setShow={setShowSurvey}
             // onExit={}

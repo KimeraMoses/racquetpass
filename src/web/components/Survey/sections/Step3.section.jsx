@@ -27,7 +27,7 @@ const Option = ({ label, description, active, onClick }) => {
 
 export const Step3 = ({ setStep, setShow, setCookie }) => {
   const playerEmail = useSelector(
-    (state) => state.shop?.order?.delivery_address?.email
+    (state) => state.shop?.order?.delivery_address?.phone_number
   );
   const sport = useSelector((state) => state?.shop?.order?.racquet?.sport);
   const [isLoading, setIsLoading] = useState(false);

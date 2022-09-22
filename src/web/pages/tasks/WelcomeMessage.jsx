@@ -17,7 +17,6 @@ const WelcomeMessage = ({ t }) => {
     onboarding: false,
   });
   const dispatch = useDispatch();
-  console.log(shop);
 
   const handleSubscription = async () => {
     setIsLoading({ ...isLoading, subscription: true });
@@ -217,7 +216,7 @@ const WelcomeMessage = ({ t }) => {
                 </SubHeading>
                 <p className="text-semibold text-[#E40000] text-sm">
                   <a
-                    href="mailto:info@racquetpass.com"
+                    href={`mailto:info@racquetpass.com?subject=Unlock Account Request - ${shop?.name}!`}
                     className="text-semibold text-sm text-[#304FFE]"
                   >
                     Contact admin

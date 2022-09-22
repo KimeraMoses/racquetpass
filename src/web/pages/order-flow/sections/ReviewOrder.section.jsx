@@ -107,12 +107,6 @@ function ReviewOrder({ t }) {
       ? false
       : true;
 
-  let isVerifiedObj = JSON.parse(localStorage.getItem("_rpe_"));
-  let prevStep = 5;
-  if (isVerifiedObj?.e === values?.email && isVerifiedObj?.isV) {
-    prevStep = 4;
-  }
-
   let mainsPrice = racquet && parseInt(racquet?.mains?.string_id?.price);
   let crossesPrice = racquet && parseInt(racquet?.crosses?.string_id?.price);
   if (racquet && racquet?.mains?.string_id?.hybrid_type === "Reel") {

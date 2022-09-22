@@ -24,11 +24,7 @@ const OrderFlow = () => {
     location.pathname.lastIndexOf("/") + 1
   );
   const refRecaptcha = useRef(null);
-  const racquet = useSelector((state) => state.racquet?.racquet);
-  const hasRacquet = !!useSelector((state) => state.racquet?.racquet?.id);
-  console.log("racquet", racquet);
 
-  console.log(currentPath);
   useEffect(() => {
     switch (currentPath) {
       case "scan":

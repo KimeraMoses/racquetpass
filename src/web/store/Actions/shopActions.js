@@ -151,7 +151,6 @@ export const cancelOrder = (orderId, navigate) => {
 //CREATE ORDER
 export const createOrder = (data) => {
   return async (dispatch) => {
-    console.log("order data", data);
     if (data) {
       const { url } = createOrdersRoute();
       dispatch(setShopLoading(true));
@@ -165,7 +164,6 @@ export const createOrder = (data) => {
         toast.success("Redirecting to stripe...");
         window.location.replace(res.data.url);
       } catch (error) {
-        console.log(error);
         toast.error("Failed to generate link!");
         dispatch(setShopLoading(false));
       }
@@ -179,12 +177,11 @@ export const getOrderTax = (data, setTax) => {
     if (data) {
       try {
         const res = await axios.post("/api/v1/shops/get-tax", data);
-        console.log(res);
         if (res?.status === 200) {
           setTax(res?.data?.tax);
         }
       } catch (error) {
-        toast.error(showError(error));
+        // toast.error(showError(error));
       }
     }
   };
@@ -411,7 +408,6 @@ export const codeVerification = (otp, phone, navigate, type) => {
       dispatch(setBackFromPreview(false));
       localStorage.removeItem("_rnc_");
     } catch (error) {
-      console.log(error);
       toast.error("Phone verification failed!");
     }
   };

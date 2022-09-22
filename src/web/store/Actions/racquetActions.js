@@ -22,12 +22,9 @@ import { createOrder } from "./shopActions";
 
 export const createNewRacquet = (data, orderValues) => async (dispatch) => {
   dispatch(setRacquetsLoading(true));
-  console.log("here", data);
   try {
     const { url } = newRaquetsRoute();
     const res = await axios.post(url, data);
-    console.log(res);
-    // dispatch(getRacquetSuccess(res.data?.racquet));
     if (res?.status === 200) {
       await dispatch(
         createOrder({ ...orderValues, racquet_id: res?.data?.racquet?.id })
@@ -44,7 +41,6 @@ export const createNewRacquet = (data, orderValues) => async (dispatch) => {
 export const editRacquetDetails =
   (data, rac_id, orderValues) => async (dispatch) => {
     dispatch(setRacquetsLoading(true));
-    console.log(data);
     try {
       const { url } = editRaquetsRoute(rac_id);
       const res = await axios.patch(url, data);
@@ -55,13 +51,7 @@ export const editRacquetDetails =
       }
       // dispatch(fetchRacquetDetails(res.data?.racquet?.id, "", false));
       dispatch(setRacquetsLoading(false));
-      // toast.success(
-      //   "Changes to your raquet are saved successfuly, You can now proceed with your order "
-      // );
-      // if (setStep) setStep(4);
-      console.log(res);
     } catch (error) {
-      console.log(error);
       toast.error(showError(error));
       dispatch(setRacquetsLoading(false));
     }

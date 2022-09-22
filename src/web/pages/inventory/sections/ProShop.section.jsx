@@ -14,7 +14,6 @@ export function ProShop({ t, setCurrentScreen, setDrawer }) {
   const navigate = useNavigate();
   const { shop, isFetching: isLoading } = useSelector((state) => state.shop);
 
-  console.log(shop);
   return (
     <>
       <div className="shop">

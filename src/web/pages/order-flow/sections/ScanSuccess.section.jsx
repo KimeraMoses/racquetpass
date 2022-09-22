@@ -182,7 +182,7 @@ function ScanSuccess({ t, change }) {
             const repeatCustomer = JSON.parse(localStorage.getItem("_rpr_"));
             if (
               !!repeatCustomer?.shop &&
-              racquet?.id === repeatCustomer?.racquet?.id
+              racquet?.qr_code === repeatCustomer?.racquet?.qr_code
             ) {
               localStorage.setItem("_rapo_", JSON.stringify(repeatCustomer));
               navigate("/order-flow/review?status=returning");

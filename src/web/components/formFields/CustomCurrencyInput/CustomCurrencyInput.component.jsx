@@ -4,7 +4,6 @@ import CurrencyInput from "react-currency-input-field";
 import "./CustomCurrencyInput.styles.scss";
 
 export const CustomCurrencyInput = (props) => {
-  console.log(props?.meta);
   const [touched, setTouched] = useState(false);
   return (
     <div className="custom-input-money-amount">

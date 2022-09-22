@@ -208,13 +208,6 @@ function SelectString({ t, change }) {
     setOptions(Options);
   }, [racquetSport]);
 
-  // console.log("brand", brand);
-  // console.log("cross", cross);
-  // console.log("main", main);
-  // console.log("order state", order);
-  console.log("current rac", racquet, values?.racquetBrand);
-  // console.log(mainsTension, crossesTension, brandTension);
-
   return (
     <div>
       <Modal

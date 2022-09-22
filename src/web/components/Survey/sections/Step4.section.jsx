@@ -31,7 +31,7 @@ const Input = ({ label, onChange, placeholder, value, type, error }) => {
 
 export const Step4 = ({ back, setCookie, setShow }) => {
   const playerEmail = useSelector(
-    (state) => state.shop?.order?.delivery_address?.email
+    (state) => state.shop?.order?.delivery_address?.phone_number
   );
   const sport = useSelector((state) => state?.shop?.order?.racquet?.sport);
   const [isLoading, setIsLoading] = useState(false);

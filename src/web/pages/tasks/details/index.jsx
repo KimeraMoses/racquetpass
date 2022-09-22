@@ -21,6 +21,8 @@ function Details({ t }) {
     order && order?.status?.toLowerCase() === "completed" ? true : false;
 
   const [isLoading, setIsLoading] = useState(false);
+  const [clicked, setClicked] = useState(false);
+  const [timer, setTimer] = useState("");
   const [isCompleting, setIsCompleting] = useState(false);
   const dispatch = useDispatch();
 
@@ -40,12 +42,13 @@ function Details({ t }) {
       setIsCompleting(true);
       const data = {
         order_id: order && order.id,
-        action: reverse ? "reverse" : "complete",
+        action: reverse,
       };
       if (data) {
         const { url } = completeOrderRoute();
         try {
           const res = await axios.post(url, data);
+          setClicked(false);
           if (res.status === 200) {
             dispatch(getShopOrder(res.data?.order));
             setIsCompleting(false);
@@ -82,6 +85,25 @@ function Details({ t }) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [orderId]);
 
+  const isHybrid =
+    order?.racquet?.mains?.string_id?.id ===
+    order?.racquet?.crosses?.string_id?.id
+      ? false
+      : true;
+
+  const handleClick = () => {
+    setClicked(true);
+    const timer = setTimeout(() => {
+      dispatch(completeOrder("complete"));
+    }, 15000);
+    setTimer(timer);
+  };
+
+  const cancelOrder = () => {
+    setClicked(false);
+    clearTimeout(timer);
+  };
+
   return (
     <>
       {isLoading ? (
@@ -117,7 +139,7 @@ function Details({ t }) {
                 </div>
                 <div
                   className="text-[#304FFE] text-[18px] font-medium cursor-pointer"
-                  onClick={() => dispatch(completeOrder(true))}
+                  onClick={() => dispatch(completeOrder("reverse"))}
                 >
                   {isCompleting ? "Reopening..." : "Reopen Task"}
                 </div>
@@ -166,58 +188,73 @@ function Details({ t }) {
                 }`}</div>
               </div>
             </div>
-
-            <div className="string-details-details">
-              <div className="font-semibold text-[24px] text-[#3c3c3c]">
-                Desired String Settings
+            {isHybrid ? (
+              <div className="string-details-details">
+                <div className="font-semibold text-[24px] text-[#3c3c3c]">
+                  Desired String Settings
+                </div>
+                <div className="grid grid-cols-[3fr_1fr] mb-[0px]">
+                  <div>
+                    <div className="string-label">
+                      {t("taskScannedMainsHeading")}
+                    </div>
+                    <div className="string-desc-details">
+                      {order &&
+                        `${order?.racquet?.mains?.string_id?.name}(${
+                          order?.racquet?.mains?.string_id?.hybrid_type
+                        }) ${
+                          order && order?.racquet?.mains?.string_id?.size
+                        } G `}
+                    </div>
+                  </div>
+                  <div>
+                    <div className="string-label">Tension</div>
+                    <div className="string-desc-details">{`${
+                      order && order?.racquet?.mains?.string_id?.tension
+                    } lbs`}</div>
+                  </div>
+                  <div>
+                    <div className="string-label">
+                      {t("taskScannedCrossesHeading")}
+                    </div>
+                    <div className="string-desc-details">
+                      {order &&
+                        `${order?.racquet?.crosses?.string_id?.name}(${
+                          order?.racquet?.crosses?.string_id?.hybrid_type
+                        }) ${
+                          order && order?.racquet?.crosses?.string_id?.size
+                        } G `}
+                    </div>
+                  </div>
+                  <div>
+                    <div className="string-label">Tension</div>
+                    <div className="string-desc-details">{`${
+                      order && order?.racquet?.crosses?.string_id?.tension
+                    } lbs`}</div>
+                  </div>
+                </div>
               </div>
-              <div className="grid grid-cols-[3fr_1fr] mb-[0px]">
-                <div>
-                  <div className="string-label">
-                    {t("taskScannedMainsHeading")}
-                  </div>
-                  <div className="string-desc-details">
-                    {order &&
-                      `${order?.racquet?.mains?.string_id?.name}(${
-                        order?.racquet?.mains?.string_id?.hybrid_type
-                      }) ${order && order?.racquet?.mains?.string_id?.size} G `}
-                  </div>
+            ) : (
+              <div className="string-details-details">
+                <div className="font-semibold text-[24px] text-[#3c3c3c]">
+                  Desired String Settings
                 </div>
-                <div>
-                  <div className="string-label">Tension</div>
-                  <div className="string-desc-details">{`${
-                    order && order?.racquet?.mains?.string_id?.tension
-                  } lbs`}</div>
-                </div>
-                {/* <div className="col-span-full text-[12px] text-[#545454] font-medium mt-[5px] mb-[20px]">
-              This player should've brought these strings. Contact them if they
-              forgot to or didn't bring enough.
-            </div> */}
-                <div>
-                  <div className="string-label">
-                    {t("taskScannedCrossesHeading")}
+                <div className="grid grid-cols-[3fr_1fr] mb-[0px]">
+                  <div>
+                    <div className="string-label">Strings</div>
+                    <div className="string-desc-details">
+                      {order && order?.racquet?.mains?.string_id?.name}
+                    </div>
                   </div>
-                  <div className="string-desc-details">
-                    {order &&
-                      `${order?.racquet?.crosses?.string_id?.name}(${
-                        order?.racquet?.crosses?.string_id?.hybrid_type
-                      }) ${
-                        order && order?.racquet?.crosses?.string_id?.size
-                      } G `}
+                  <div>
+                    <div className="string-label">Tension</div>
+                    <div className="string-desc-details">{`${
+                      order && order?.racquet?.mains?.string_id?.tension
+                    }lbs`}</div>
                   </div>
                 </div>
-                <div>
-                  <div className="string-label">Tension</div>
-                  <div className="string-desc-details">{`${
-                    order && order?.racquet?.crosses?.string_id?.tension
-                  } lbs`}</div>
-                </div>
-                {/* <div className="col-span-full text-[12px] text-[#545454] font-medium mt-[5px] mb-[20px]">
-              This player should've brought these strings. Contact them if they
-              forgot to or didn't bring enough.
-            </div> */}
               </div>
-            </div>
+            )}
 
             <div className="player-details">
               <div className="title-row">
@@ -268,7 +305,21 @@ function Details({ t }) {
             </div>
 
             <div>
-              {completed ? (
+              {clicked ? (
+                <div className="completed_alert flex items-center justify-between mt-[40px]">
+                  <p>
+                    Completed task and notified{" "}
+                    {order &&
+                      `${order.delivery_address?.first_name} ${order.delivery_address?.last_name}`}
+                  </p>
+                  <span
+                    className="text-[#304fee] cursor-pointer"
+                    onClick={cancelOrder}
+                  >
+                    Undo
+                  </span>
+                </div>
+              ) : completed ? (
                 <div
                   className="text-[16px] text-[#304fee] font-semibold text-center mt-[40px] cursor-pointer"
                   onClick={() => setShow(true)}
@@ -276,10 +327,7 @@ function Details({ t }) {
                   Tap here if you made a mistake stringing this racquet
                 </div>
               ) : (
-                <SubmitButton
-                  className="mt-[40px]"
-                  onClick={() => dispatch(completeOrder())}
-                >
+                <SubmitButton className="mt-[40px]" onClick={handleClick}>
                   {isCompleting ? "Completing Order..." : "Complete Order"}
                 </SubmitButton>
               )}
