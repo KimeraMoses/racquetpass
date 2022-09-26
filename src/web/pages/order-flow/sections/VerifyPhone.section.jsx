@@ -20,7 +20,7 @@ import { getOrderContact } from "web/store/Slices/shopSlice";
 
 const required = (value) => (value ? undefined : "Required");
 
-function VerifyPhone({ t, change }) {
+let VerifyPhone = ({ t, change }) => {
   const [verification, setVerification] = useState("");
   const backFromReview = useSelector((state) => state?.shop?.backFromPreview);
   const [isLoading, setIsLoading] = useState(false);
@@ -31,7 +31,8 @@ function VerifyPhone({ t, change }) {
   const navigate = useNavigate();
   const location = useLocation();
   const userContacts = useSelector((state) => state?.shop?.contacts);
-  const newPhone = localStorage.getItem("_rnc_");
+  const orderId = useSelector((state) => state?.shop?.order?.id);
+  const newPhone = JSON.parse(localStorage.getItem("_newPhone_"));
 
   const order = JSON.parse(localStorage.getItem("_rapo_"));
 
@@ -55,7 +56,7 @@ function VerifyPhone({ t, change }) {
     try {
       await dispatch(
         sendVerificationCode(
-          currentPath === "reverify"
+          currentPath === "reverify" || !!newPhone
             ? newPhone
             : userContacts && userContacts["phone-number"]
         )
@@ -72,11 +73,10 @@ function VerifyPhone({ t, change }) {
       await dispatch(
         codeVerification(
           verification,
-          currentPath === "reverify"
-            ? newPhone
-            : userContacts && userContacts["phone-number"],
+          newPhone,
           navigate,
-          currentPath === "reverify" ? "resend" : null
+          currentPath === "reverify" ? "resend" : null,
+          orderId ? orderId : null
         )
       );
       setIsVerifying(false);
@@ -144,7 +144,7 @@ function VerifyPhone({ t, change }) {
           <Description customClass="phone-section__text-container-text">
             Please enter the 6 digit verification code that RacquetPass texted
             to{" "}
-            {currentPath === "reverify"
+            {currentPath === "reverify" || !!newPhone
               ? newPhone
               : userContacts && userContacts["phone-number"]}
           </Description>
@@ -170,7 +170,7 @@ function VerifyPhone({ t, change }) {
       </div>
     </>
   );
-}
+};
 
 VerifyPhone = reduxForm({
   form: "vericode",

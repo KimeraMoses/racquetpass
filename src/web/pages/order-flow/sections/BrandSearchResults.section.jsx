@@ -154,7 +154,9 @@ function BrandSearchResults({
                     const stringDetails = {
                       shop: string?.shop,
                       string_id: string?.id,
-                      name: string?.name,
+                      name: `${string?.name} ${
+                        string?.hybrid ? `(${string?.hybrid_type})` : ""
+                      }`,
                       in_stock: string?.in_stock,
                       price: string.price?.toFixed(2),
                       hybrid_type: string?.hybrid_type,

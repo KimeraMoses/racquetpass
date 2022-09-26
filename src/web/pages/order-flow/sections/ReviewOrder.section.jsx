@@ -18,7 +18,6 @@ import { useCookies } from "react-cookie";
 import { useEffect } from "react";
 import {
   cancelOrder,
-  createOrder,
   fetchShopDetails,
   getOrder,
   getOrderTax,
@@ -27,7 +26,6 @@ import {
 import {
   createNewRacquet,
   editRacquetDetails,
-  fetchRacquetDetails,
 } from "web/store/Actions/racquetActions";
 import { useDispatch } from "react-redux";
 import { withNamespaces } from "react-i18next";
@@ -46,7 +44,6 @@ import {
 import { useState } from "react";
 
 function ReviewOrder({ t }) {
-  const [cookies, setCookie] = useCookies("_rpo_");
   const [taxing, setTaxing] = useState(false);
   const [tax, setTax] = useState(0);
   const [generating, setGenerating] = useState(false);
@@ -322,8 +319,6 @@ function ReviewOrder({ t }) {
     }
   }, [order, orderId]);
 
-  console.log("rac", racquet);
-
   return (
     <>
       <div>
@@ -468,8 +463,8 @@ function ReviewOrder({ t }) {
                     string_id: racquet?.mains?.string_id?.id,
                     name: racquet?.mains?.string_id?.name,
                     in_stock: racquet?.mains?.string_id?.in_stock,
-                    price: racquet?.mains?.string_id?.price?.toFixed(2),
-                    tension: racquet?.mains?.tension.toFixed(2),
+                    price: racquet?.mains?.string_id?.price,
+                    tension: racquet?.mains?.tension,
                     hybrid_type: racquet?.mains?.string_id?.hybrid_type,
                     brand: racquet?.mains?.string_id?.brand,
                     model: racquet?.mains?.string_id?.model,
@@ -479,8 +474,8 @@ function ReviewOrder({ t }) {
                     string_id: racquet?.crosses?.string_id?.id,
                     name: racquet?.crosses?.string_id?.name,
                     in_stock: racquet?.crosses?.string_id?.in_stock,
-                    price: racquet?.crosses?.string_id?.price?.toFixed(2),
-                    tension: racquet?.crosses?.tension.toFixed(2),
+                    price: racquet?.crosses?.string_id?.price,
+                    tension: racquet?.crosses?.tension,
                     hybrid_type: racquet?.crosses?.string_id?.hybrid_type,
                     brand: racquet?.crosses?.string_id?.brand,
                     model: racquet?.crosses?.string_id?.model,

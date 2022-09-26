@@ -42,7 +42,7 @@ function Details({ t }) {
       setIsCompleting(true);
       const data = {
         order_id: order && order.id,
-        action: reverse,
+        action: reverse ? "reverse" : "complete",
       };
       if (data) {
         const { url } = completeOrderRoute();
@@ -92,9 +92,30 @@ function Details({ t }) {
       : true;
 
   const handleClick = () => {
+    if (order?.status !== "Processing") {
+      switch (order?.status) {
+        case "Pending":
+          toast.info("Order is still pending payment");
+          break;
+        case "Cancelled":
+          toast.error(
+            `This order was cancelled by ${
+              order &&
+              `${order.delivery_address?.first_name} ${order.delivery_address?.last_name}`
+            }`
+          );
+          break;
+        case "Draft":
+          toast.info("Order is still a Draft");
+          break;
+        default:
+          break;
+      }
+      return;
+    }
     setClicked(true);
     const timer = setTimeout(() => {
-      dispatch(completeOrder("complete"));
+      dispatch(completeOrder());
     }, 15000);
     setTimer(timer);
   };
@@ -178,12 +199,18 @@ function Details({ t }) {
             <div className="racquet-info">
               <img
                 className="img"
-                alt="racquet"
-                src="../img/tasks/racquet.png"
+                alt={`${order && order?.racquet?.brand}, ${
+                  order && order?.racquet?.model
+                }`}
+                src={
+                  order?.racquet?.image_url
+                    ? order?.racquet?.image_url
+                    : "../img/tasks/racquet.png"
+                }
               />
               <div className="brand">
                 <div className="model">{t("taskOpenedBrand")}</div>
-                <div className="title">{`${order && order?.racquet?.brand}, ${
+                <div className="title">{`${order && order?.racquet?.brand} ${
                   order && order?.racquet?.model
                 }`}</div>
               </div>
@@ -199,18 +226,13 @@ function Details({ t }) {
                       {t("taskScannedMainsHeading")}
                     </div>
                     <div className="string-desc-details">
-                      {order &&
-                        `${order?.racquet?.mains?.string_id?.name}(${
-                          order?.racquet?.mains?.string_id?.hybrid_type
-                        }) ${
-                          order && order?.racquet?.mains?.string_id?.size
-                        } G `}
+                      {order && order?.racquet?.mains?.string_id?.name}
                     </div>
                   </div>
                   <div>
                     <div className="string-label">Tension</div>
                     <div className="string-desc-details">{`${
-                      order && order?.racquet?.mains?.string_id?.tension
+                      order && order?.racquet?.mains?.tension
                     } lbs`}</div>
                   </div>
                   <div>
@@ -218,18 +240,13 @@ function Details({ t }) {
                       {t("taskScannedCrossesHeading")}
                     </div>
                     <div className="string-desc-details">
-                      {order &&
-                        `${order?.racquet?.crosses?.string_id?.name}(${
-                          order?.racquet?.crosses?.string_id?.hybrid_type
-                        }) ${
-                          order && order?.racquet?.crosses?.string_id?.size
-                        } G `}
+                      {order && order?.racquet?.crosses?.string_id?.name}
                     </div>
                   </div>
                   <div>
                     <div className="string-label">Tension</div>
                     <div className="string-desc-details">{`${
-                      order && order?.racquet?.crosses?.string_id?.tension
+                      order && order?.racquet?.crosses?.tension
                     } lbs`}</div>
                   </div>
                 </div>
@@ -249,8 +266,8 @@ function Details({ t }) {
                   <div>
                     <div className="string-label">Tension</div>
                     <div className="string-desc-details">{`${
-                      order && order?.racquet?.mains?.string_id?.tension
-                    }lbs`}</div>
+                      order && order?.racquet?.mains?.tension
+                    } lbs`}</div>
                   </div>
                 </div>
               </div>
@@ -298,7 +315,7 @@ function Details({ t }) {
                 <div>
                   <div className="string-label">Price</div>
                   <div className="string-desc-details">
-                    ${order && order?.amount}
+                    ${order && order?.amount?.toFixed(2)}
                   </div>
                 </div>
               </div>

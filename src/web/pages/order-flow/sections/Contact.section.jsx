@@ -79,6 +79,8 @@ function Contact({ t, change, error }) {
 
       dispatch(getOrderContact(contactValues));
     }
+
+    localStorage.removeItem("_newPhone_");
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -93,15 +95,16 @@ function Contact({ t, change, error }) {
       ...order,
       contact: newValues,
     };
-    localStorage.setItem("_rapo_", JSON.stringify(orderState));
     if (backFromReview && phoneNumber === userContacts["phone-number"]) {
       dispatch(setBackFromPreview(false));
       dispatch(getOrderContact(newValues));
+      localStorage.setItem("_rapo_", JSON.stringify(orderState));
       navigate("/order-flow/review");
       return setIsLoading(false);
     }
     if (isVerifiedObj?.e === values["phone-number"] && isVerifiedObj?.isV) {
       dispatch(getOrderContact(newValues));
+      localStorage.setItem("_rapo_", JSON.stringify(orderState));
       navigate("/order-flow/review");
       return setIsLoading(false);
     } else {

@@ -14,6 +14,7 @@ import {
 } from "web/store/Actions/shopActions";
 import { useDispatch } from "react-redux";
 import { useState } from "react";
+import { useEffect } from "react";
 
 // const phone = "(123) 456-7890";
 
@@ -54,6 +55,10 @@ function DidntGetText({ t, change, setStep }) {
     }
   };
 
+  useEffect(() => {
+    localStorage.removeItem("_newPhone_");
+  }, []);
+
   //RESEND VERIFICATION CODE
   const sendCodeVericationHandler = async () => {
     setIsSending(true);
@@ -61,7 +66,6 @@ function DidntGetText({ t, change, setStep }) {
       await dispatch(
         sendVerificationCode(phoneNumber, navigate, null, "resend")
       );
-      localStorage.setItem("_rnc_", phoneNumber);
       setIsSending(false);
     } catch (error) {
       setIsSending(false);

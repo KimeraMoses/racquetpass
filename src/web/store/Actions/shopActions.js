@@ -171,6 +171,23 @@ export const createOrder = (data) => {
   };
 };
 
+//EDIT PHONE NUMBER ORDER
+export const editOrder = (orderId, data) => {
+  return async (dispatch) => {
+    if (data) {
+      dispatch(setShopLoading(true));
+      try {
+        const res = await axios.patch(`/api/v1/orders/${orderId}`, data);
+        if (res?.status === 200) {
+          dispatch(getOrder(orderId, "", "id"));
+        }
+      } catch (error) {
+        dispatch(setShopLoading(false));
+      }
+    }
+  };
+};
+
 //GET STRIPE TAX
 export const getOrderTax = (data, setTax) => {
   return async () => {
@@ -369,6 +386,7 @@ export const sendVerificationCode = (phone, navigate, newValues, type) => {
     try {
       const { url } = sendCodeVerificationRoute();
       await axios.post(url, { phone: phoneFormater(phone) });
+      // console.log(res);
       toast.success("Verification code sent to your phone");
       if (type === "resend") {
         navigate("/order/reverify");
@@ -376,7 +394,10 @@ export const sendVerificationCode = (phone, navigate, newValues, type) => {
       } else {
         navigate("/order-flow/verify");
       }
-      if (newValues) dispatch(getOrderContact(newValues));
+      if (newValues) {
+        localStorage.setItem("newContacts", JSON.stringify(newValues));
+      }
+      localStorage.setItem("_newPhone_", JSON.stringify(phone));
     } catch (error) {
       toast.error("Failed to generate verification code!");
     }
@@ -384,29 +405,38 @@ export const sendVerificationCode = (phone, navigate, newValues, type) => {
 };
 
 // VERIFY USER CODE
-export const codeVerification = (otp, phone, navigate, type) => {
+export const codeVerification = (otp, phone, navigate, type, orderId) => {
   return async (dispatch) => {
+    // console.log(otp, phone);
     try {
       const { url } = verifyCodeRoute();
       const res = await axios.post(url, { otp, phone: phoneFormater(phone) });
       toast.success("Successfully verified your phone number");
+      const order = JSON.parse(localStorage.getItem("_rapo_"));
       if (res.status === 200) {
+        const newValues = JSON.parse(localStorage.getItem("newContacts"));
+        const orderState = {
+          ...order,
+          contact: newValues,
+        };
+
+        localStorage.setItem("_rapo_", JSON.stringify(orderState));
+        if (newValues) {
+          dispatch(getOrderContact(newValues));
+        }
         localStorage.setItem("_rpe_", JSON.stringify({ e: phone, isV: true }));
       }
 
       if (type === "resend") {
-        const order = JSON.parse(localStorage.getItem("_rapo_"));
-        const orderState = {
-          ...order,
-          contact: { ...order?.contact, "phone-number": phone },
-        };
-        localStorage.setItem("_rapo_", JSON.stringify(orderState));
+        const data = { delivery_address: { phone_number: phone } };
+        await dispatch(editOrder(orderId, data));
         navigate("/order/done");
       } else {
         navigate("/order-flow/review");
       }
       dispatch(setBackFromPreview(false));
-      localStorage.removeItem("_rnc_");
+      localStorage.removeItem("_newPhone_");
+      localStorage.removeItem("newContacts");
     } catch (error) {
       toast.error("Phone verification failed!");
     }

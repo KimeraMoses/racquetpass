@@ -75,7 +75,13 @@ function Tasks({ t }) {
           <div className="task-row">
             <p className="tasks-info">{t("taskDueToday")}</p>
             <div className="badge">
-              {isFetching ? 0 : shopOrders ? shopOrders?.dueToday?.length : 0}
+              {isFetching
+                ? 0
+                : shopOrders
+                ? shopOrders?.dueToday?.filter(
+                    (order) => order?.status === "Processing"
+                  ).length
+                : 0}
             </div>
           </div>
           <div className="cards-container">
@@ -84,27 +90,32 @@ function Tasks({ t }) {
                 title={`Loading...`}
                 desc={`Please wait as we get you all the orders here`}
               />
-            ) : shopOrders && shopOrders?.dueToday?.length < 1 ? (
+            ) : shopOrders &&
+              shopOrders?.dueToday?.filter(
+                (order) => order?.status === "Processing"
+              ).length < 1 ? (
               <TaskCard
                 title={`No Orders due today!`}
                 desc={`All orders due today will appear here`}
               />
             ) : (
-              shopOrders?.dueToday?.map((order) => {
-                return (
-                  <TaskCard
-                    key={order.id}
-                    status={order.status}
-                    title={`Order #${order.order_number}`}
-                    desc={`${order?.racquet?.brand} ${order?.racquet?.model}`}
-                    name={
-                      order?.delivery_address?.first_name +
-                      " " +
-                      order?.delivery_address?.last_name
-                    }
-                  />
-                );
-              })
+              shopOrders?.dueToday
+                ?.filter((order) => order?.status === "Processing")
+                .map((order) => {
+                  return (
+                    <TaskCard
+                      key={order.id}
+                      status={order.status}
+                      title={`Order #${order.order_number}`}
+                      desc={`${order?.racquet?.brand} ${order?.racquet?.model}`}
+                      name={
+                        order?.delivery_address?.first_name +
+                        " " +
+                        order?.delivery_address?.last_name
+                      }
+                    />
+                  );
+                })
             )}
           </div>
           <div className="task-row">
@@ -113,7 +124,9 @@ function Tasks({ t }) {
               {isFetching
                 ? 0
                 : shopOrders
-                ? shopOrders?.dueThisWeek?.length
+                ? shopOrders?.dueThisWeek?.filter(
+                    (order) => order?.status === "Processing"
+                  ).length
                 : 0}
             </div>
           </div>
@@ -130,21 +143,23 @@ function Tasks({ t }) {
               />
             ) : (
               shopOrders &&
-              shopOrders?.dueThisWeek?.map((order) => {
-                return (
-                  <TaskCard
-                    key={order.id}
-                    status={order.status}
-                    title={`Order #${order.order_number}`}
-                    desc={`${order?.racquet?.brand} ${order?.racquet?.model}`}
-                    name={
-                      order?.delivery_address?.first_name +
-                      " " +
-                      order?.delivery_address?.last_name
-                    }
-                  />
-                );
-              })
+              shopOrders?.dueThisWeek
+                ?.filter((order) => order?.status === "Processing")
+                .map((order) => {
+                  return (
+                    <TaskCard
+                      key={order.id}
+                      status={order.status}
+                      title={`Order #${order.order_number}`}
+                      desc={`${order?.racquet?.brand} ${order?.racquet?.model}`}
+                      name={
+                        order?.delivery_address?.first_name +
+                        " " +
+                        order?.delivery_address?.last_name
+                      }
+                    />
+                  );
+                })
             )}
           </div>
         </div>

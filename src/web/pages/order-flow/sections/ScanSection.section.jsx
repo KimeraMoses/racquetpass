@@ -8,16 +8,14 @@ import { withNamespaces } from "react-i18next";
 // Styles
 import "./ScanSection.styles.scss";
 import { BackButton } from "web/components/Buttons/BackButton.component";
-import { SubmitButton } from "web/components/Buttons/SubmitButton.component";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchRacquetDetails } from "web/store/Actions/racquetActions";
 import Loader from "web/components/Loader/Loader";
 import { useCookies } from "react-cookie";
-import { Button } from "web/components/Buttons/Button.component";
 import { setBackFromPreview } from "web/store/Slices/shopSlice";
-// import Images from "../../../../../public/img/orderpage/"
+import { removeRacquetFromState } from "web/store/Slices/racquetSlice";
 
-function ScanSection({ t, change }) {
+let ScanSection = ({ t, change }) => {
   const [cookies, setCookie] = useCookies(["_rpo_"]);
   const [qrCode, setQrCode] = useState("");
   const [qrScanner, setQrScanner] = useState(false);
@@ -132,6 +130,7 @@ function ScanSection({ t, change }) {
                 }}
                 onUpdate={(err, result) => {
                   if (result) {
+                    dispatch(removeRacquetFromState());
                     let code = result.text;
                     if (result.text.includes("http")) {
                       const codeWord = result.text.split("/");
@@ -180,7 +179,7 @@ function ScanSection({ t, change }) {
       </div>
     </>
   );
-}
+};
 
 ScanSection = reduxForm({
   form: "order-flow-scan",
