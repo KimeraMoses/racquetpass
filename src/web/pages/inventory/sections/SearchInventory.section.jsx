@@ -30,8 +30,6 @@ export function SearchInventory({ t, setCurrentScreen, setDrawer, change }) {
     setSearchResults([]);
   }, [isSearching]);
 
-  console.log(FilteredStrings);
-
   return (
     <>
       <div className="search-inventory">

@@ -13,10 +13,11 @@ import { fetchEnabledShops } from "web/store/Actions/shopActions";
 import "./ShopSearchResults.styles.scss";
 import { setBackFromPreview } from "web/store/Slices/shopSlice";
 
-function ShopSearchResults({ t, setShopCurrent, setStep, forward, change }) {
+function ShopSearchResults({ t, setShopCurrent, change }) {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const backFromReview = useSelector((state) => state?.shop?.backFromPreview);
+  const normalFlow = useSelector((state) => state?.shop?.normalFlow);
   const [searchTerm, setSearchTerm] = useState("");
   const [searchResults, setSearchResults] = useState([]);
   const { shops, isFetching } = useSelector((state) => state.shop);
@@ -80,6 +81,8 @@ function ShopSearchResults({ t, setShopCurrent, setStep, forward, change }) {
               if (backFromReview) {
                 navigate("/order-flow/review");
                 dispatch(setBackFromPreview(false));
+              } else if (normalFlow) {
+                navigate("/");
               } else {
                 navigate("/order-flow/scanned");
               }
@@ -129,6 +132,8 @@ function ShopSearchResults({ t, setShopCurrent, setStep, forward, change }) {
                     if (backFromReview) {
                       navigate("/order-flow/review");
                       dispatch(setBackFromPreview(false));
+                    } else if (normalFlow) {
+                      navigate("/order-flow/scan");
                     } else {
                       // forward();
                       change("shop", shop?.id);

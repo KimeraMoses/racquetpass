@@ -4,9 +4,12 @@ import { withNamespaces } from "react-i18next";
 import { Button } from "web/components";
 import Recaptcha from "web/components/Google-Recaptcha/Recaptcha";
 import "./home.styles.scss";
+import { setNormalFlow } from "web/store/Slices/shopSlice";
+import { useDispatch } from "react-redux";
 
 function Home({ t }) {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const refRecaptcha = useRef();
   const links = [
     { path: "#", title: t("homePP") },
@@ -37,7 +40,13 @@ function Home({ t }) {
             <h1 className="banner-container__heading">{t("homeHeading")}</h1>
           </div>
           <div className="banner-button-container">
-            <Button isDark onClick={() => navigate(`/order-flow/scan`)}>
+            <Button
+              isDark
+              onClick={() => {
+                dispatch(setNormalFlow(true));
+                navigate(`order/select-shop`);
+              }}
+            >
               {t("homeNewBtnTxt")}
             </Button>
           </div>

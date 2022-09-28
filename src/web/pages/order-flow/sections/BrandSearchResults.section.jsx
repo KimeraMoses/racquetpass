@@ -44,7 +44,6 @@ function BrandSearchResults({
   }
   let query = useQuery();
   const type = query.get("type");
-  console.log(type);
 
   // const screenChange = () => {
   //   if (mainCross?.current === "search") {

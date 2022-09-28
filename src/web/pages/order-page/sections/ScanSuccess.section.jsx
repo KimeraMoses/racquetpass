@@ -57,8 +57,6 @@ export function ScanSuccess({
     backward();
   };
 
-  console.log(racquet);
-
   const isHybrid =
     racquet?.mains?.string_id?.id === racquet?.crosses?.string_id?.id
       ? false

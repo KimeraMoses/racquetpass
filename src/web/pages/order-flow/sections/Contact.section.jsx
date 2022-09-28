@@ -47,6 +47,9 @@ function Contact({ t, change, error }) {
   const dispatch = useDispatch();
   const [isNew, setIsNew] = useState(false);
   const backFromReview = useSelector((state) => state?.shop?.backFromPreview);
+  const reviewArrowSource = useSelector(
+    (state) => state?.shop?.reviewArrowSource
+  );
   const phoneNumber = useSelector(
     (state) => state?.form?.contacts?.values?.["phone-number"]
   );
@@ -139,7 +142,9 @@ function Contact({ t, change, error }) {
         <div className="contact-section-odr__heading">
           <BackButton
             onClick={() => {
-              if (backFromReview) {
+              if (reviewArrowSource && backFromReview) {
+                navigate("/order-flow/strings");
+              } else if (backFromReview) {
                 navigate("/order-flow/review");
                 dispatch(setBackFromPreview(false));
               } else {

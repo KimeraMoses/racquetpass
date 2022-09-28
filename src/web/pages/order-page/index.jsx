@@ -515,8 +515,6 @@ let OrderPage = ({ t, handleSubmit, change }) => {
     setCookie("rps", JSON.stringify(values));
   };
 
-  console.log(cookies?.rps);
-
   return (
     <>
       {step === 7 ||

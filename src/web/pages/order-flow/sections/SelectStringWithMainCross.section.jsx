@@ -49,6 +49,9 @@ const convertPoundsToKilograms = (value, unit) => {
 
 function SelectString({ t, change }) {
   const backFromReview = useSelector((state) => state?.shop?.backFromPreview);
+  const reviewArrowSource = useSelector(
+    (state) => state?.shop?.reviewArrowSource
+  );
   const main = useSelector((state) => state.racquet?.main);
   const cross = useSelector((state) => state.racquet?.cross);
   const brand = useSelector((state) => state.racquet?.brand);
@@ -232,7 +235,9 @@ function SelectString({ t, change }) {
         <div className="select-string-mc__heading justify-start gap-[16px]">
           <BackButton
             onClick={() => {
-              if (backFromReview) {
+              if (reviewArrowSource && backFromReview) {
+                navigate("/order-flow/scanned");
+              } else if (backFromReview) {
                 dispatch(setBackFromPreview(false));
                 navigate("/order-flow/review");
               } else {

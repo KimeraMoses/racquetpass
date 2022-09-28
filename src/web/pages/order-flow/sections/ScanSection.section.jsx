@@ -22,6 +22,7 @@ let ScanSection = ({ t, change }) => {
   const [isLoading, setIsLoading] = useState(false);
   const [showModal, setShowModal] = useState(false);
   const backFromReview = useSelector((state) => state?.shop?.backFromPreview);
+  const normalFlow = useSelector((state) => state?.shop?.normalFlow);
   const [permissionsDenied, setPermissionsDenied] = useState(false);
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -69,6 +70,8 @@ let ScanSection = ({ t, change }) => {
               if (backFromReview) {
                 dispatch(setBackFromPreview(false));
                 navigate("/order-flow/scanned");
+              } else if (normalFlow) {
+                navigate("/order/select-shop");
               } else {
                 navigate("/");
               }

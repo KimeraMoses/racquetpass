@@ -53,8 +53,6 @@ let CreatePassword = ({ t, back }) => {
     (state) => state?.form?.["create-business-account-4"]?.values?.lastName
   );
 
-  console.log(firstName, lastName);
-
   useEffect(() => {
     // Check if 8 Characters Long
     if (length.test(password)) {

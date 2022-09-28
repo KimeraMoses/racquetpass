@@ -19,6 +19,7 @@ import {
 } from "../Slices/racquetSlice";
 import { toast } from "react-toastify";
 import { createOrder } from "./shopActions";
+import { setNormalFlow } from "../Slices/shopSlice";
 
 export const createNewRacquet = (data, orderValues) => async (dispatch) => {
   dispatch(setRacquetsLoading(true));
@@ -150,12 +151,16 @@ export const fetchRacquetDetails = (racquet_id, navigate, isQr) => {
           dispatch(setStringBrand(stringDetailsMains));
         }
         dispatch(getRacquetSuccess(res.data?.racquet));
+        isQr && dispatch(setNormalFlow(false));
       } catch (error) {
         dispatch(setRacquetsLoading(false));
         if (error?.response?.status === 404) {
           localStorage.setItem("_qrc_", racquet_id);
           if (isQr && navigate) {
             navigate("/order-flow/scanned");
+            return toast.success(
+              "Successfully scanned a racquet! Press “Start your order now” to proceed."
+            );
           }
           // // SET SCANNED STATE TO SKIP RESCANNING
           return toast.success(

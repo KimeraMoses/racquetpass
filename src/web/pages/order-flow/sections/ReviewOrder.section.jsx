@@ -32,6 +32,7 @@ import { withNamespaces } from "react-i18next";
 import {
   getOrderContact,
   setBackFromPreview,
+  setReviewArrowSource,
 } from "web/store/Slices/shopSlice";
 import { reduxForm } from "redux-form";
 import {
@@ -94,6 +95,7 @@ function ReviewOrder({ t }) {
 
       dispatch(getOrderContact(contactValues));
     }
+    dispatch(setReviewArrowSource(false));
   }, []);
 
   const isHybrid =
@@ -322,33 +324,36 @@ function ReviewOrder({ t }) {
   return (
     <>
       <div>
-        {OrderStatus && OrderStatus !== "returning" && OrderStatus !== "saved" && (
-          <div
-            className={`max-w-[450px] m-[0_auto] ${
-              OrderStatus === "fail"
-                ? `text-[#E40000] bg-[#fff0f0]`
-                : ` bg-[#304FFE]/10 text-[#304FFE]`
-            } rounded-md m-2 text-center px-2 py-4`}
-          >
-            {OrderStatus === "fail" ? (
-              <p>
-                Transaction for this order has failed, Please try again{" "}
-                <span
-                  className="text-[#304FFE] cursor-pointer"
-                  onClick={handlePayment}
-                >
-                  {generating ? " Generating link... " : " here "}
-                </span>
-                or contact shop for help.
-              </p>
-            ) : OrderStatus === "pending" ? (
-              <p>
-                You have an incomplete order on this racquet, Pay for it first
-                or Cancel it to create new order on the same racquet.
-              </p>
-            ) : null}
-          </div>
-        )}
+        <div className={`review-order-odr max-w-[450px] m-[0_auto]`}>
+          {(OrderStatus && OrderStatus == "fail") ||
+            (OrderStatus === "pending" && (
+              <div
+                className={`max-w-[450px] m-[0_auto] ${
+                  OrderStatus === "fail"
+                    ? `text-[#E40000] bg-[#fff0f0]`
+                    : ` bg-[#304FFE]/10 text-[#304FFE]`
+                } rounded-md m-2 text-center px-2 py-4`}
+              >
+                {OrderStatus === "fail" ? (
+                  <p>
+                    Transaction for this order has failed, Please try again{" "}
+                    <span
+                      className="text-[#304FFE] cursor-pointer"
+                      onClick={handlePayment}
+                    >
+                      {generating ? " Generating link... " : " here "}
+                    </span>
+                    or contact shop for help.
+                  </p>
+                ) : OrderStatus === "pending" ? (
+                  <p>
+                    You have an incomplete order on this racquet, Pay for it
+                    first or Cancel it to create new order on the same racquet.
+                  </p>
+                ) : null}
+              </div>
+            ))}
+        </div>
         <div className={`review-order-odr max-w-[450px] m-[0_auto]`}>
           {(OrderStatus === "returning" || OrderStatus === "saved") && (
             <div className="bg-[rgba(48,79,254,0.1)] text-[#304FFE] m-2 px-2 py-4  text-center mb-8 rounded-md font-medium">
@@ -366,7 +371,13 @@ function ReviewOrder({ t }) {
             </div>
           )}
           <div className="review-order-odr__heading">
-            <BackButton onClick={() => navigate("/order-flow/contacts")} />
+            <BackButton
+              onClick={() => {
+                dispatch(setBackFromPreview(true));
+                dispatch(setReviewArrowSource(true));
+                navigate("/order-flow/contacts");
+              }}
+            />
             <Heading customClass="review-order-odr__heading-text">
               {t("odrReviewHeading")}
             </Heading>
@@ -436,16 +447,18 @@ function ReviewOrder({ t }) {
             </div>
             <div className="review-order-odr__shop-card">
               <SearchCard
-                shop={{
-                  img: "/img/orders/racquet-img.png",
+                raquet={{
+                  img: racquet?.image_url
+                    ? racquet?.image_url
+                    : "/img/orders/racquet-img.png",
                   name: isFetching
                     ? "Loading..."
                     : `${racquet && racquet?.brand}${" "} ${
                         racquet && racquet?.model
                       }`,
-                  address: isLoading
+                  model: isLoading
                     ? "Please hold on as we get you the last racquet used..."
-                    : racquet && racquet?.sport,
+                    : racquet && racquet?.sport + " Racquet",
                 }}
               />
             </div>

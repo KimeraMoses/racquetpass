@@ -5,10 +5,7 @@ import { useCookies } from "react-cookie";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 import { Heading, SubHeading, Description, BackButton } from "web/components";
-import {
-  getRacquetSuccess,
-  removeRacquetFromState,
-} from "web/store/Slices/racquetSlice";
+import { getRacquetSuccess } from "web/store/Slices/racquetSlice";
 import { withNamespaces } from "react-i18next";
 // Styles
 import "./ScanSuccess.styles.scss";
@@ -21,6 +18,7 @@ function ScanSuccess({ t, change }) {
   const [cookies, setCookie] = useCookies(["_rpo_"]);
   const hybrid = useSelector((state) => state.racquet?.hybrid);
   const backFromReview = useSelector((state) => state?.shop?.backFromPreview);
+  const normalFlow = useSelector((state) => state?.shop?.normalFlow);
   const racquet = useSelector((state) => state.racquet?.racquet);
   const hasRacquet = !!useSelector((state) => state.racquet?.racquet?.qr_code);
   useEffect(() => {
@@ -172,12 +170,21 @@ function ScanSuccess({ t, change }) {
         <SubmitButton
           onClick={() => {
             const repeatCustomer = JSON.parse(localStorage.getItem("_rpr_"));
+            if (backFromReview) return navigate("/order-flow/review");
             if (
               !!repeatCustomer?.shop &&
               racquet?.qr_code === repeatCustomer?.racquet?.qr_code
             ) {
               localStorage.setItem("_rapo_", JSON.stringify(repeatCustomer));
               navigate("/order-flow/review?status=returning");
+            } else if (normalFlow) {
+              const orderState = {
+                ...order,
+                racquet: racquet,
+                hybrid: hybrid,
+              };
+              localStorage.setItem("_rapo_", JSON.stringify(orderState));
+              navigate("/order-flow/strings");
             } else {
               const orderState = {
                 ...order,
@@ -189,7 +196,9 @@ function ScanSuccess({ t, change }) {
             }
           }}
         >
-          Choose this racquet
+          {normalFlow || backFromReview
+            ? "Choose this racquet"
+            : "Start your order now"}
         </SubmitButton>
         {!hasRacquet && (
           <div className="mt-2">
