@@ -450,7 +450,7 @@ function ReviewOrder({ t }) {
                 raquet={{
                   img: racquet?.image_url
                     ? racquet?.image_url
-                    : "/img/orders/racquet-img.png",
+                    : "/img/raquet.png",
                   name: isFetching
                     ? "Loading..."
                     : `${racquet && racquet?.brand}${" "} ${

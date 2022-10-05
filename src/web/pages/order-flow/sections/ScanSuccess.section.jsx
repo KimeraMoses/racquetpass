@@ -153,7 +153,11 @@ function ScanSuccess({ t, change }) {
                     <div className="scan-details__card-continer-content-inner-card-txt">
                       <Description>
                         It looks you haven’t placed an order on this racquet
-                        before. Tap “Choose this racquet” to get started.”
+                        before. Tap{" "}
+                        {normalFlow || backFromReview
+                          ? "“Choose this racquet”"
+                          : "“Start your order now”"}
+                        to get started.
                       </Description>
                     </div>
                   </div>

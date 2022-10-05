@@ -235,9 +235,7 @@ function SelectString({ t, change }) {
         <div className="select-string-mc__heading justify-start gap-[16px]">
           <BackButton
             onClick={() => {
-              if (reviewArrowSource && backFromReview) {
-                navigate("/order-flow/scanned");
-              } else if (backFromReview) {
+              if (backFromReview) {
                 dispatch(setBackFromPreview(false));
                 navigate("/order-flow/review");
               } else {

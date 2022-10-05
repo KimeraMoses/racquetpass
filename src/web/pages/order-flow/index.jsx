@@ -16,6 +16,8 @@ import { useRef } from "react";
 
 const OrderFlow = () => {
   const location = useLocation();
+  const backFromReview = useSelector((state) => state?.shop?.backFromPreview);
+  const normalFlow = useSelector((state) => state?.shop?.normalFlow);
   const [steps, setSteps] = useState({
     active: "",
     content: ["QR", "Strings", "Contact", "Review"],
@@ -70,7 +72,12 @@ const OrderFlow = () => {
   }, [currentPath]);
   return (
     <>
-      <Progress steps={steps} />
+      {backFromReview &&
+      (currentPath === "strings" || currentPath === "contacts") ? (
+        <></>
+      ) : (
+        <Progress steps={steps} />
+      )}
       <div className={`order-page`}>
         <Routes>
           <Route path="scan" element={<ScanSectionSection />} />
